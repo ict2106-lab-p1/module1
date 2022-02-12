@@ -3,7 +3,7 @@
 - Run `npm install` 
 
 ## Running
-- `npm run dev`
+- `cd LivingLab.Web && npm run dev`
 - Then, in a separate window: `dotnet watch --project LivingLab.Web`
 
 ## For Production
