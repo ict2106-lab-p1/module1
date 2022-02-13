@@ -1,3 +1,8 @@
+## Creating a new branch
+- `$ git checkout -b <[branch-type]/[branch-name]>`
+- example: `$ git checkout -b feature/manual-logging`
+- example: `$ git checkout -b feature/dashboard`
+
 ## Getting started
 - Have Node >v16
 - Run `npm install` 
