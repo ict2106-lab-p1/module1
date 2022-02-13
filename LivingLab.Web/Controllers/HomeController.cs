@@ -28,6 +28,12 @@ public class HomeController : Controller
         return View("Privacy");
     }
 
+    [Route("example")]
+    public IActionResult ExamplePage()
+    {
+        return View("ExamplePage");
+    }
+
     [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
     public IActionResult Error()
     {
