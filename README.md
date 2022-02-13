@@ -1,7 +1,7 @@
 ## Creating a new branch
-- `$ git checkout -b <[branch-type]/[branch-name]>`
-- example: `$ git checkout -b feature/manual-logging`
-- example: `$ git checkout -b feature/dashboard`
+- `$ git checkout -b <[group-number]-[issue-id]-[feature]>`
+- example: `$ git checkout -b g1-50-file-processing dev`
+- example: `$ git checkout -b g2-100-dashboard dev`
 
 ## Getting started
 - Have Node >v16
