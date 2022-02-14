@@ -1,7 +1,7 @@
 using AutoMapper;
 
-using LivingLab.Domain.Entities;
-using LivingLab.Domain.Interfaces.Repositories;
+using LivingLab.Core.Entities;
+using LivingLab.Core.Interfaces.Repositories;
 using LivingLab.Web.ApiModels;
 
 using Microsoft.AspNetCore.Mvc;

@@ -1,6 +1,6 @@
 using AutoMapper;
 
-using LivingLab.Domain.Entities;
+using LivingLab.Core.Entities;
 using LivingLab.Web.ApiModels;
 
 namespace LivingLab.Web.Mapping;

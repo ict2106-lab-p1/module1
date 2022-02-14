@@ -1,4 +1,4 @@
-namespace LivingLab.Domain.Interfaces.Services;
+namespace LivingLab.Core.Interfaces.Services;
 
 public interface IEmailSender
 {
