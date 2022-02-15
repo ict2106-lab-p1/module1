@@ -1,0 +1,52 @@
+using System.Text;
+
+using LivingLab.Core.Interfaces.Services;
+using LivingLab.Core.Models;
+
+using Microsoft.AspNetCore.Http;
+
+using TinyCsvParser;
+using TinyCsvParser.Mapping;
+
+namespace LivingLab.Infrastructure.Services.CsvParser;
+
+public class EnergyUsageLogCsvParser : IEnergyUsageLogCsvParser
+{
+    public IEnumerable<EnergyUsageCsvModel> Parse(IFormFile file)
+    {
+        var filePath = SaveFile(file);
+        var options = new CsvParserOptions(true, ',');
+        var mapper = new EnergyUsageLogCsvMapper();
+        var parser = new CsvParser<EnergyUsageCsvModel>(options, mapper);
+        var result = parser.ReadFromFile(filePath, Encoding.Default);
+
+        return MapResult(result);
+    }
+    
+    private string SaveFile(IFormFile file)
+    {
+        var filePath = Path.GetTempFileName();
+        using var stream = new FileStream(filePath, FileMode.Create);
+        file.CopyTo(stream);
+        return filePath;
+    }
+
+    private List<EnergyUsageCsvModel> MapResult(ParallelQuery<CsvMappingResult<EnergyUsageCsvModel>> result)
+    {
+        var list = new List<EnergyUsageCsvModel>();
+
+        foreach (var item in result)
+        {
+            list.Add(new EnergyUsageCsvModel
+            {
+                DeviceId = item.Result.DeviceId,
+                DeviceSerialNo = item.Result.DeviceSerialNo,
+                Duration = item.Result.Duration,
+                EnergyUsage = item.Result.EnergyUsage,
+                LoggedDate = item.Result.LoggedDate
+            });
+        }
+
+        return list;
+    }
+}
