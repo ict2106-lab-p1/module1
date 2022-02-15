@@ -1,0 +1,10 @@
+﻿@{
+    ViewData["Title"] = "Manual Log Upload";
+}
+
+<h2 class="font-bold text-3xl text-indigo-900">Manual Log Upload</h2>
+
+<form action="Upload" enctype="multipart/form-data" method="post">
+    <input type="file" name="file" itemtype="csv"/>
+    <input class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" type="submit" value="Upload"/>
+</form>
