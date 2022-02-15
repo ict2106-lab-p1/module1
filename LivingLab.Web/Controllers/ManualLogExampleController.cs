@@ -12,6 +12,12 @@ namespace LivingLab.Web.Controllers
     public class ManualLogExampleController : Controller
     {
         private readonly IEnergyUsageLogCsvParser _csvParser;
+
+        public ManualLogExampleController(IEnergyUsageLogCsvParser csvParser)
+        {
+            _csvParser = csvParser;
+        }
+        
         public IActionResult Index()
         {
             return View();
