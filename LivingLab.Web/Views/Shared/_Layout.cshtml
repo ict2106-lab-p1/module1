@@ -31,8 +31,8 @@
                     <div class="mb-4 px-4 space-y-1">
                         <p class="pl-4 text-sm font-semibold mb-1 uppercase">Test</p>
                         <a class="w-full flex items-center text-sunset-400 h-10 pl-4 hover:bg-gray-200 rounded-lg cursor-pointer"
-                           @*href="#"*@
-                           asp-area="" asp-controller="Home" asp-action="Index">
+                           href="/"
+                           @*asp-area="" asp-controller="Device" asp-action="Index"*@>
                             <svg xmlns="http://www.w3.org/2000/svg" class="h-6 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582-4 8-4s8 1.79 8 4m0 5c0 2.21-3.582 4-8 4s-8-1.79-8-4" />
                             </svg>
@@ -40,13 +40,21 @@
                         </a>
 
                         <a class="w-full flex items-center text-sunset-400 h-10 pl-4 bg-gray-200 hover:bg-gray-200 rounded-lg cursor-pointer"
-                           @*href="#"*@
-                           asp-area="" asp-controller="Home" asp-action="Privacy">
+                           href="/home/privacy"
+                           @*asp-area="" asp-controller="Home" asp-action="Privacy"*@>
                             <svg xmlns="http://www.w3.org/2000/svg" class="h-6 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582-4 8-4s8 1.79 8 4m0 5c0 2.21-3.582 4-8 4s-8-1.79-8-4" />
                             </svg>
                             <span class="text-gray-700">Privacy</span>
                         </a>
+
+                        <a class="w-full flex items-center text-sunset-400 h-10 pl-4  hover:bg-gray-200 rounded-lg cursor-pointer"
+                           href="/device/view">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582-4 8-4s8 1.79 8 4m0 5c0 2.21-3.582 4-8 4s-8-1.79-8-4" />
+                            </svg>
+                            <span class="text-gray-700">View Device</span>
+                        </a>conn
                     </div>
                 </div>
                 @* end sidebar *@
@@ -75,14 +83,16 @@
             </div>
         </div>
     </div>
-    <footer class="border-top footer text-muted">
-        <div class="container">
-            &copy; 2022 - livinglab_main - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-        </div>
-    </footer>
+
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
     @await RenderSectionAsync("Scripts", required: false)
 </body>
+<footer class="border-top footer text-muted">
+    <div class="container">
+        &copy; 2022 - livinglab_main - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+    </div>
+</footer>
+
 </html>

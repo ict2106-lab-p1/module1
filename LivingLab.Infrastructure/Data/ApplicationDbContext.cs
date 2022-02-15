@@ -12,6 +12,13 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
 {
     // Add new DB tables here
     public DbSet<Todo> Todos { get; set; }
+    public DbSet<Accessory> Accessory { get; set; }
+    public DbSet<Device> Device { get; set; }
+    public DbSet<DeviceType> DeviceType { get; set; }
+    public DbSet<Lab> Lab { get; set; }
+    public DbSet<Report> Report { get; set; }
+    public DbSet<AccessoryType> AccessoryType { get; set; }
+
     public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
     {
     }

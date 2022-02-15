@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace LivingLab.Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20220207115124_CreateInitialDB")]
+    [Migration("20220215171537_CreateInitialDB")]
     partial class CreateInitialDB
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -19,7 +19,112 @@ namespace LivingLab.Infrastructure.Migrations
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "6.0.1");
 
-            modelBuilder.Entity("LivingLab.Core.Entities.Identity.ApplicationUser", b =>
+            modelBuilder.Entity("LivingLab.Domain.Entities.Accessory", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("AccessoryTypeId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("LabId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<DateTime>("ValidityDate")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("status")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("AccessoryTypeId");
+
+                    b.HasIndex("LabId");
+
+                    b.ToTable("Accessory");
+                });
+
+            modelBuilder.Entity("LivingLab.Domain.Entities.AccessoryType", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<bool?>("Borrowable")
+                        .IsRequired()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<double?>("Cost")
+                        .IsRequired()
+                        .HasColumnType("REAL");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("AccessoryType");
+                });
+
+            modelBuilder.Entity("LivingLab.Domain.Entities.Device", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("DeviceTypeId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("LabId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<DateTime>("ValidityDate")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("serialNo")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("DeviceTypeId");
+
+                    b.HasIndex("LabId");
+
+                    b.ToTable("Device");
+                });
+
+            modelBuilder.Entity("LivingLab.Domain.Entities.DeviceType", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<double?>("Cost")
+                        .IsRequired()
+                        .HasColumnType("REAL");
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("DeviceType");
+                });
+
+            modelBuilder.Entity("LivingLab.Domain.Entities.Identity.ApplicationUser", b =>
                 {
                     b.Property<string>("Id")
                         .HasColumnType("TEXT");
@@ -39,11 +144,9 @@ namespace LivingLab.Infrastructure.Migrations
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("FirstName")
-                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.Property<string>("LastName")
-                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.Property<bool>("LockoutEnabled")
@@ -91,9 +194,58 @@ namespace LivingLab.Infrastructure.Migrations
                     b.ToTable("Users", (string)null);
                 });
 
-            modelBuilder.Entity("LivingLab.Core.Todo", b =>
+            modelBuilder.Entity("LivingLab.Domain.Entities.Lab", b =>
                 {
-                    b.Property<int>("ID")
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("LabStatus")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Location")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("PersonInCharge")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Lab");
+                });
+
+            modelBuilder.Entity("LivingLab.Domain.Entities.Report", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<DateTime?>("Date")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("DeviceUsage")
+                        .HasColumnType("TEXT");
+
+                    b.Property<int>("LabId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int?>("NoOfHoursLogged")
+                        .HasColumnType("INTEGER");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("LabId");
+
+                    b.ToTable("Report");
+                });
+
+            modelBuilder.Entity("LivingLab.Domain.Entities.Todo", b =>
+                {
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
@@ -105,7 +257,7 @@ namespace LivingLab.Infrastructure.Migrations
                         .IsRequired()
                         .HasColumnType("TEXT");
 
-                    b.HasKey("ID");
+                    b.HasKey("Id");
 
                     b.ToTable("Todos");
                 });
@@ -242,6 +394,55 @@ namespace LivingLab.Infrastructure.Migrations
                     b.ToTable("UserToken", (string)null);
                 });
 
+            modelBuilder.Entity("LivingLab.Domain.Entities.Accessory", b =>
+                {
+                    b.HasOne("LivingLab.Domain.Entities.AccessoryType", "AccessoryType")
+                        .WithMany("Accessories")
+                        .HasForeignKey("AccessoryTypeId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("LivingLab.Domain.Entities.Lab", "Lab")
+                        .WithMany("Accessories")
+                        .HasForeignKey("LabId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("AccessoryType");
+
+                    b.Navigation("Lab");
+                });
+
+            modelBuilder.Entity("LivingLab.Domain.Entities.Device", b =>
+                {
+                    b.HasOne("LivingLab.Domain.Entities.DeviceType", "DeviceType")
+                        .WithMany("Devices")
+                        .HasForeignKey("DeviceTypeId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("LivingLab.Domain.Entities.Lab", "Lab")
+                        .WithMany("Devices")
+                        .HasForeignKey("LabId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("DeviceType");
+
+                    b.Navigation("Lab");
+                });
+
+            modelBuilder.Entity("LivingLab.Domain.Entities.Report", b =>
+                {
+                    b.HasOne("LivingLab.Domain.Entities.Lab", "Lab")
+                        .WithMany("Reports")
+                        .HasForeignKey("LabId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Lab");
+                });
+
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
@@ -253,7 +454,7 @@ namespace LivingLab.Infrastructure.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
                 {
-                    b.HasOne("LivingLab.Core.Entities.Identity.ApplicationUser", null)
+                    b.HasOne("LivingLab.Domain.Entities.Identity.ApplicationUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -262,7 +463,7 @@ namespace LivingLab.Infrastructure.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
                 {
-                    b.HasOne("LivingLab.Core.Entities.Identity.ApplicationUser", null)
+                    b.HasOne("LivingLab.Domain.Entities.Identity.ApplicationUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -277,7 +478,7 @@ namespace LivingLab.Infrastructure.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("LivingLab.Core.Entities.Identity.ApplicationUser", null)
+                    b.HasOne("LivingLab.Domain.Entities.Identity.ApplicationUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -286,11 +487,30 @@ namespace LivingLab.Infrastructure.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
                 {
-                    b.HasOne("LivingLab.Core.Entities.Identity.ApplicationUser", null)
+                    b.HasOne("LivingLab.Domain.Entities.Identity.ApplicationUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("LivingLab.Domain.Entities.AccessoryType", b =>
+                {
+                    b.Navigation("Accessories");
+                });
+
+            modelBuilder.Entity("LivingLab.Domain.Entities.DeviceType", b =>
+                {
+                    b.Navigation("Devices");
+                });
+
+            modelBuilder.Entity("LivingLab.Domain.Entities.Lab", b =>
+                {
+                    b.Navigation("Accessories");
+
+                    b.Navigation("Devices");
+
+                    b.Navigation("Reports");
                 });
 #pragma warning restore 612, 618
         }
