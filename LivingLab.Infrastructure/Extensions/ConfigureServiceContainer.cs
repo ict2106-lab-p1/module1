@@ -29,10 +29,18 @@ public static class ConfigureServiceContainer
     public static void AddTransientServices(this IServiceCollection services)
     {
         services.AddTransient<ITodoRepository, TodoRepository>();
+        services.AddTransient<IAccessoryRepository, AccessoryRepository>();
+        services.AddTransient<IAccessoryTypeRepository, AccessoryTypeRepository>();
+        services.AddTransient<IDeviceRepository, DeviceRepository>();
+        services.AddTransient<IDeviceTypeRepository, DeviceTypeRepository>();
+        services.AddTransient<ILabRepository, LabRepository>();
+        services.AddTransient<IReportRepository, ReportRepository>();
     }
 
     public static void AddScopedServices(this IServiceCollection services)
     {
         // services.AddScoped<ITodoRepository, TodoRepository>();
     }
+
+
 }
