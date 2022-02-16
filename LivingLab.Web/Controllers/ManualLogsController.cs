@@ -1,4 +1,4 @@
-using System.Diagnostics;
+﻿using System.Diagnostics;
 
 using LivingLab.Web.ViewModels;
 
@@ -6,32 +6,30 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace LivingLab.Web.Controllers;
 
-[Route("home")]
-public class HomeController : Controller
+//[Route("ManualLogs")]
+public class ManualLogsController : Controller
 {
-    private readonly ILogger<HomeController> _logger;
+    private readonly ILogger<ManualLogsController> _logger;
 
-    public HomeController(ILogger<HomeController> logger)
+    public ManualLogsController(ILogger<ManualLogsController> logger)
     {
         _logger = logger;
     }
 
-    [Route("/")]
+    //[Route("ManualLogs/")]
     public IActionResult Index()
     {
         return View("Index");
     }
-
-    [Route("privacy")]
-    public IActionResult Privacy()
+    
+    public IActionResult FileUpload()
     {
-        return View("Privacy");
+        return View("FileUpload");
     }
-
-    [Route("/example")]
-    public IActionResult ExamplePage()
+    
+    public IActionResult ManualLogUpload()
     {
-        return View("ExamplePage");
+        return View("ManualLogUpload");
     }
 
     [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
