@@ -1,4 +1,4 @@
-﻿using System.Diagnostics;
+using System.Diagnostics;
 
 using AutoMapper;
 
@@ -32,7 +32,7 @@ public class ManualLogsController : Controller
     {
         return View();
     }
-    
+
     public IActionResult FileUpload()
     {
         return View();
@@ -42,7 +42,7 @@ public class ManualLogsController : Controller
     {
         return View();
     }
-    
+
     [HttpPost]
     public IActionResult Upload(IFormFile file)
     {
@@ -66,7 +66,7 @@ public class ManualLogsController : Controller
         {
             var data = _mapper.Map<List<LogItemViewModel>, List<EnergyUsageLog>>(logs);
             await _repository.BulkInsertAsync(data);
-            
+
             return Ok();
         }
         catch (Exception e)

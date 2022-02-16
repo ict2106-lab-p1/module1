@@ -25,7 +25,7 @@ public class EnergyUsageLogCsvParser : IEnergyUsageLogCsvParser
 
         return MapResult(result);
     }
-    
+
     /**
      * Create a temporary random file.
      */

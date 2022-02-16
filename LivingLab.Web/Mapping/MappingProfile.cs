@@ -5,8 +5,6 @@ using LivingLab.Core.Models;
 using LivingLab.Web.ApiModels;
 using LivingLab.Web.ViewModels;
 
-using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-
 namespace LivingLab.Web.Mapping;
 
 public class MappingProfile : Profile
@@ -23,7 +21,7 @@ public class MappingProfile : Profile
         CreateMap<LogItemViewModel, EnergyUsageCsvModel>();
         CreateMap<LogItemViewModel, EnergyUsageLog>()
             .ForMember(dest => dest.Device,
-                opt => opt.MapFrom(src => new Device{ DeviceSerialNumber = src.DeviceSerialNo}))
+                opt => opt.MapFrom(src => new Device { DeviceSerialNumber = src.DeviceSerialNo }))
             .ForMember(dest => dest.Interval,
                 opt => opt.MapFrom(src => TimeSpan.FromMinutes(src.Interval)));
     }
