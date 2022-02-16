@@ -18,6 +18,7 @@
         <table id="logTable" class="table-auto w-full mt-5">
             <thead>
             <tr>
+                <th>No.</th>
                 <th>@Html.DisplayNameFor(m => m[0].DeviceSerialNo)</th>
                 <th>@Html.DisplayNameFor(m => m[0].EnergyUsage)</th>
                 <th>@Html.DisplayNameFor(m => m[0].Interval)</th>
@@ -26,20 +27,22 @@
             </tr>
             </thead>
             <tbody>
+            @{ var index = 1;}
             @foreach (var log in Model)
             {
                 <tr>
-                    <td class="text-center">@log.DeviceSerialNo</td>
-                    <td><input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" type="number" value="@log.EnergyUsage"/></td>
-                    <td><input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" type="number" value="@log.Interval"/></td>
-                    <td><input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" type="text" value="@log.LoggedDate"/></td>
-                    <td><button class="btn btn-close bg-red-500">Delete</button></td>
+                    <td>@(index++)</td>
+                    <td class="serial-no text-center">@log.DeviceSerialNo</td>
+                    <td><input class="energy shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" type="number" value="@log.EnergyUsage"/></td>
+                    <td><input class="interval shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" type="number" value="@log.Interval"/></td>
+                    <td><input class="logged-date shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" type="text" value="@log.LoggedDate"/></td>
+                    <td><button type="button" class="btn btn-close bg-red-500" data-index="@index">Delete</button></td>
                 </tr>
             }
             </tbody>
         </table>
         <div class="flex justify-between">
-            <input type="submit" value="Save" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded align-end">
+            <input type="submit" id="btnSave" value="Save" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded align-end">
             <button type="button" id="btnAdd" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Add</button>
         </div>
     </form>
