@@ -12,8 +12,6 @@
             type="text/css"/>
     @* Replace the cdn with your style scripts *@
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-        @* <script src="https://cdn.tailwindcss.com?plugins=forms,typography,aspect-ratio,line-clamp"></script> *@
-        <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body>
     <div>
@@ -133,7 +131,6 @@
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
-    <script src="sweetalert2.all.min.js"></script>
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>
