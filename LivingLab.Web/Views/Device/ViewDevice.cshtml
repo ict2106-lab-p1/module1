@@ -21,7 +21,7 @@ ViewData["Title"] = "View Device";
         @foreach (var device in Model.DeviceList) {
         <tr>
             <td> @device.Id </td>
-            <td> @device.ValidityDate </td>
+            <td> @device.ValidityDate.ToString("MM/dd/yyyy") </td>
             <td> @device.serialNo </td>
             <td> @device.DeviceType.Name</td>
             <td> @device.DeviceType.Description </td>
