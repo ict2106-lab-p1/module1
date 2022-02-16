@@ -1,4 +1,4 @@
-@model LivingLab.Web.ViewModels.DeviceViewModel
+﻿@model LivingLab.Web.ViewModels.DeviceViewModel
 
 @{
 ViewData["Title"] = "View Device";
@@ -15,6 +15,8 @@ ViewData["Title"] = "View Device";
             <th>Serial Num</th>
             <th>Cost</th>
             <th>Qty</th>
+            <th></th>
+            <th></th>
         </tr>
     </thead>
     <tbody>
@@ -26,6 +28,8 @@ ViewData["Title"] = "View Device";
                 <td> @device.Serial </td>
                 <td> @device.Cost </td>
                 <td> @device.Qty </td>
+                <td></td>
+                <td></td>
             </tr>
         }
     </tbody>
