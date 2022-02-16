@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace LivingLab.Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20220215171537_CreateInitialDB")]
+    [Migration("20220216122133_CreateInitialDB")]
     partial class CreateInitialDB
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -85,12 +85,12 @@ namespace LivingLab.Infrastructure.Migrations
                     b.Property<int>("LabId")
                         .HasColumnType("INTEGER");
 
-                    b.Property<DateTime>("ValidityDate")
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("serialNo")
+                    b.Property<string>("SerialNo")
                         .IsRequired()
                         .HasColumnType("TEXT");
+
+                    b.Property<DateTime>("ValidityDate")
+                        .HasColumnType("Date");
 
                     b.HasKey("Id");
 
@@ -99,6 +99,48 @@ namespace LivingLab.Infrastructure.Migrations
                     b.HasIndex("LabId");
 
                     b.ToTable("Device");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            DeviceTypeId = 1,
+                            LabId = 1,
+                            SerialNo = "SC1001",
+                            ValidityDate = new DateTime(2020, 10, 10, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 2,
+                            DeviceTypeId = 2,
+                            LabId = 1,
+                            SerialNo = "R1001",
+                            ValidityDate = new DateTime(2020, 10, 11, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 3,
+                            DeviceTypeId = 3,
+                            LabId = 1,
+                            SerialNo = "S1001",
+                            ValidityDate = new DateTime(2020, 9, 9, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 4,
+                            DeviceTypeId = 4,
+                            LabId = 1,
+                            SerialNo = "SL1001",
+                            ValidityDate = new DateTime(2019, 8, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 5,
+                            DeviceTypeId = 5,
+                            LabId = 1,
+                            SerialNo = "VRL1001",
+                            ValidityDate = new DateTime(2019, 7, 3, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        });
                 });
 
             modelBuilder.Entity("LivingLab.Domain.Entities.DeviceType", b =>
@@ -122,6 +164,43 @@ namespace LivingLab.Infrastructure.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("DeviceType");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Cost = 499.0,
+                            Description = "It''s purpose is to detect situation in the laboratory",
+                            Name = "Surveillance Camera"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Cost = 130.0,
+                            Description = "It''s purpose is to detect temperature in the laboratory",
+                            Name = "Temperature Sensor"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Cost = 130.0,
+                            Description = "It''s purpose is to detect humidity in the laboratory",
+                            Name = "Humidity Sensor"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            Cost = 320.0,
+                            Description = "It''s purpose is to detect light in the laboratory",
+                            Name = "Light Sensor"
+                        },
+                        new
+                        {
+                            Id = 5,
+                            Cost = 323.0,
+                            Description = "It is used to control brightness of the lights in the lab",
+                            Name = "VR Light Controls"
+                        });
                 });
 
             modelBuilder.Entity("LivingLab.Domain.Entities.Identity.ApplicationUser", b =>
@@ -215,6 +294,15 @@ namespace LivingLab.Infrastructure.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Lab");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            LabStatus = "Available",
+                            Location = "NYP-SR7C",
+                            PersonInCharge = "David"
+                        });
                 });
 
             modelBuilder.Entity("LivingLab.Domain.Entities.Report", b =>
