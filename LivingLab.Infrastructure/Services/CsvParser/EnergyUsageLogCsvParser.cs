@@ -12,6 +12,9 @@ namespace LivingLab.Infrastructure.Services.CsvParser;
 
 public class EnergyUsageLogCsvParser : IEnergyUsageLogCsvParser
 {
+    /**
+     * Read and process the csv file.
+     */
     public IEnumerable<EnergyUsageCsvModel> Parse(IFormFile file)
     {
         var filePath = SaveFile(file);
@@ -23,6 +26,9 @@ public class EnergyUsageLogCsvParser : IEnergyUsageLogCsvParser
         return MapResult(result);
     }
     
+    /**
+     * Create a temporary random file.
+     */
     private string SaveFile(IFormFile file)
     {
         var filePath = Path.GetTempFileName();
@@ -31,6 +37,9 @@ public class EnergyUsageLogCsvParser : IEnergyUsageLogCsvParser
         return filePath;
     }
 
+    /**
+     * Map processes data to Model.
+     */
     private IEnumerable<EnergyUsageCsvModel> MapResult(ParallelQuery<CsvMappingResult<EnergyUsageCsvModel>> result)
     {
         var list = new List<EnergyUsageCsvModel>();
