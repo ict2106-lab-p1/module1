@@ -57,23 +57,22 @@ function save(e) {
     
     const data = getData();
 
-    $.ajax({
-        url: "/ManualLogs/Save",
-        type: "POST",
-        contentType: "application/json",
-        data: {logs: data},
-        success: function(response) {
-            Swal.fire({
-                title: 'Do you want to add this log?',
-                icon: 'warning',
-                showCancelButton: true,
-                reverseButtons: true,
-                confirmButtonColor: '#363740',
-                cancelButtonColor: '#C0C0C0',
-                confirmButtonText: 'Yes',
-                cancelButtonText: 'No'
-            }).then((result) => {
-                if (result.isConfirmed) {
+    Swal.fire({
+        title: 'Do you want to add this log?',
+        icon: 'warning',
+        showCancelButton: true,
+        reverseButtons: true,
+        confirmButtonColor: '#363740',
+        cancelButtonColor: '#C0C0C0',
+        confirmButtonText: 'Yes',
+        cancelButtonText: 'No'
+    }).then((result) => {
+        if (result.isConfirmed) {
+            $.ajax({
+                url: "/ManualLogs/Save",
+                type: "POST",
+                data: {logs: data},
+                success: function(response) {
                     Swal.fire({
                         title: 'Log Added',
                         icon: 'success',
@@ -92,17 +91,19 @@ function save(e) {
                             window.location.href = "/";
                         }
                     })
+                },
+                error: function(response) {
+                    Swal.fire({
+                        title: "Error!",
+                        text: "Something went wrong!",
+                        type: "error"
+                    })
                 }
-            })
-        },
-        error: function(response) {
-            Swal.fire({
-                title: "Error!",
-                text: "Something went wrong!",
-                type: "error"
-            })
+            });
         }
-    });
+    })
+
+   
 }
 
 /**
@@ -116,16 +117,16 @@ function getData() {
     const $rows = $table.find("tbody > tr");
 
     $rows.each(function () {
-        const deviceCategory = $(this).find("td.deviceCategory").text();
+        const deviceCategory = $(this).find("td.deviceCategory").find(":selected").text();
         const deviceId = $(this).find("td > input.deviceId").val();
+        const energyUsage = $(this).find("td > input.energyUsage").val();
         const interval = $(this).find("td > input.energyUsage").val();
-        const loggedAt = $(this).find("td > input.duration").val();
 
         data.push({
             DeviceCategory: deviceCategory,
-            DeviceId: parseFloat(deviceId),
+            DeviceSerialNo: deviceId,
             Interval: parseFloat(interval),
-            LoggedAt: Date.parse(loggedAt)
+            EnergyUsage: parseFloat(energyUsage)
         })
     })
     return data;

@@ -55,7 +55,7 @@ function save(e) {
             Swal.fire({
                 title: "Success!",
                 text: "Logs saved successfully!",
-                type: "success",
+                icon: "success",
                 confirmButtonColor: '#363740'
             }).then(function() {
                 window.location.href = "/ManualLogs/FileUpload";
@@ -65,7 +65,7 @@ function save(e) {
             Swal.fire({
                 title: "Error!",
                 text: "Something went wrong!",
-                type: "error"
+                icon: "error"
             })
         }
     });
