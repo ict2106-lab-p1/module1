@@ -17,7 +17,14 @@ public class EnergyUsageRepository : Repository<EnergyUsageLog>, IEnergyUsageRep
 
     public async Task BulkInsertAsync(ICollection<EnergyUsageLog> logs)
     {
-        await _context.AddAsync(logs);
+        foreach (var log in logs)
+        {
+            // TODO: Change to repo method
+            log.Device = await _context.Devices.FirstOrDefaultAsync(d => d.DeviceSerialNumber == log.Device.DeviceSerialNumber);
+            log.Lab = await _context.Labs.FirstOrDefaultAsync(l => l.Id == 1); 
+            await _context.AddAsync(log);
+        }
+
         await _context.SaveChangesAsync();
     }
 

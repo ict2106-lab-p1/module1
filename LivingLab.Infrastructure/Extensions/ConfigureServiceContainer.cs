@@ -31,6 +31,7 @@ public static class ConfigureServiceContainer
     public static void AddTransientServices(this IServiceCollection services)
     {
         services.AddTransient<ITodoRepository, TodoRepository>();
+        services.AddTransient<IEnergyUsageRepository, EnergyUsageRepository>();
         services.AddTransient<IEnergyUsageLogCsvParser, EnergyUsageLogCsvParser>();
     }
 

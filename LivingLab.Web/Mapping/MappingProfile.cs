@@ -22,7 +22,9 @@ public class MappingProfile : Profile
         CreateMap<TodoDTO, Todo>();
         CreateMap<LogItemViewModel, EnergyUsageCsvModel>();
         CreateMap<LogItemViewModel, EnergyUsageLog>()
+            .ForMember(dest => dest.Device,
+                opt => opt.MapFrom(src => new Device{ DeviceSerialNumber = src.DeviceSerialNo}))
             .ForMember(dest => dest.Interval,
-            opt => opt.MapFrom(src => TimeSpan.FromMinutes(src.Interval)));
+                opt => opt.MapFrom(src => TimeSpan.FromMinutes(src.Interval)));
     }
 }

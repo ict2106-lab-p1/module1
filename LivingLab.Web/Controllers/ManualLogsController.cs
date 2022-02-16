@@ -3,6 +3,7 @@
 using AutoMapper;
 
 using LivingLab.Core.Entities;
+using LivingLab.Core.Interfaces.Repositories;
 using LivingLab.Core.Interfaces.Services;
 using LivingLab.Core.Models;
 using LivingLab.Web.ViewModels;
@@ -17,12 +18,14 @@ public class ManualLogsController : Controller
     private readonly ILogger<ManualLogsController> _logger;
     private readonly IEnergyUsageLogCsvParser _csvParser;
     // TODO: Add dependency injection for service/repository
+    private readonly IEnergyUsageRepository _repository;
 
-    public ManualLogsController(IMapper mapper, ILogger<ManualLogsController> logger, IEnergyUsageLogCsvParser csvParser)
+    public ManualLogsController(IMapper mapper, ILogger<ManualLogsController> logger, IEnergyUsageLogCsvParser csvParser, IEnergyUsageRepository repository)
     {
         _mapper = mapper;
         _logger = logger;
         _csvParser = csvParser;
+        _repository = repository;
     }
 
     public IActionResult Index()
@@ -57,13 +60,12 @@ public class ManualLogsController : Controller
     }
 
     [HttpPost]
-    public IActionResult Save(List<LogItemViewModel> logs)
+    public async Task<IActionResult> Save(List<LogItemViewModel> logs)
     {
         try
         {
             var data = _mapper.Map<List<LogItemViewModel>, List<EnergyUsageLog>>(logs);
-            
-            // TODO: Save to database
+            await _repository.BulkInsertAsync(data);
             
             return Ok();
         }
@@ -72,7 +74,6 @@ public class ManualLogsController : Controller
             _logger.LogError(e.Message);
             return Error();
         }
-       
     }
 
     [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
