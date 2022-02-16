@@ -69,7 +69,8 @@ public class ManualLogsController : Controller
         try
         {
             var data = _mapper.Map<List<LogItemViewModel>, List<EnergyUsageLog>>(logs);
-            var loggedUser = await _userManager.GetUserAsync(User);
+            // var loggedUser = await _userManager.GetUserAsync(User);
+            var loggedUser = DummyUser.INSTANCE;
             await _repository.BulkInsertAsyncByUser(data, loggedUser);
 
             return Ok();
