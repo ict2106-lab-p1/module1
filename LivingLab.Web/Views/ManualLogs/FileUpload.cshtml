@@ -4,13 +4,13 @@
     ViewData["Title"] = "File Log Upload";
 }
 
-<h2 class="font-bold text-3xl text-indigo-900">File Log Upload</h2>
+<h2 class="font-bold text-3xl text-slate-900">File Log Upload</h2>
 
 <div class="flex justify-center">
     <div class="bg-white relative rounded-lg p-8 sm:p-12 shadow-lg">
         <form asp-action="Upload" enctype="multipart/form-data" method="post" id ="fileuploadform">
             <input type="file" name="file" itemtype="csv"/>
-            <button type="submit" id="btn-submit" class="bg-indigo-900 hover:bg-indigo-700 text-white font-bold py-2 px-4 rounded trigger-swal">
+            <button type="submit" id="btn-submit" class="bg-slate-900 hover:bg-slate-700 text-white font-bold py-2 px-4 rounded trigger-swal">
                 Upload
             </button>
         </form>
@@ -55,8 +55,8 @@
         </div>
         <br/>
         <div class="flex justify-between">
-            <input type="submit" id="btnSave" value="Save" class="bg-indigo-900 hover:bg-indigo-700 text-white font-bold py-2 px-4 rounded trigger-swal align-end">
-            <button type="button" id="btnAdd" class="bg-indigo-900 hover:bg-indigo-700 text-white font-bold py-2 px-4 rounded trigger-swal">Add</button>
+            <input type="submit" id="btnSave" value="Save" class="bg-slate-900 hover:bg-slate-700 text-white font-bold py-2 px-4 rounded trigger-swal align-end">
+            <button type="button" id="btnAdd" class="bg-slate-900 hover:bg-slate-700 text-white font-bold py-2 px-4 rounded trigger-swal">Add</button>
         </div>
     </form>
 }

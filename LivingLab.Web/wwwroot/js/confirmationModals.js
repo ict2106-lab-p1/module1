@@ -11,7 +11,7 @@ function showAlert() {
         inputPlaceholder: 'Upload Type',
         showCancelButton: true,
         reverseButtons: true,
-        confirmButtonColor: '#312E81',
+        confirmButtonColor: '#363740',
         cancelButtonColor: '#C0C0C0',
         confirmButtonText: 'Submit',
     }).then(function (result) {
@@ -29,7 +29,7 @@ function addLogAlert() {
         icon: 'warning',
         showCancelButton: true,
         reverseButtons: true,
-        confirmButtonColor: '#312E81',
+        confirmButtonColor: '#363740',
         cancelButtonColor: '#C0C0C0',
         confirmButtonText: 'Yes',
         cancelButtonText: 'No'
@@ -40,7 +40,7 @@ function addLogAlert() {
                 icon: 'success',
                 showDenyButton: true,
                 reverseButtons: true,
-                confirmButtonColor: '#312E81',
+                confirmButtonColor: '#363740',
                 denyButtonColor: '#C0C0C0',
                 confirmButtonText: 'Add New Logs',
                 denyButtonText: 'Back to Dashboard'
@@ -99,7 +99,7 @@ $(document).on('click', '#btn-submit', function(e) {
         icon: 'success',
         showDenyButton: true,
         reverseButtons: true,
-        confirmButtonColor: '#312E81',
+        confirmButtonColor: '#363740',
         denyButtonColor: '#C0C0C0',
         confirmButtonText: 'Proceed',
         denyButtonText: 'Upload New File'

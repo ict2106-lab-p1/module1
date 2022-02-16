@@ -68,7 +68,7 @@ function save(e) {
                 icon: 'warning',
                 showCancelButton: true,
                 reverseButtons: true,
-                confirmButtonColor: '#312E81',
+                confirmButtonColor: '#363740',
                 cancelButtonColor: '#C0C0C0',
                 confirmButtonText: 'Yes',
                 cancelButtonText: 'No'
@@ -79,7 +79,7 @@ function save(e) {
                         icon: 'success',
                         showDenyButton: true,
                         reverseButtons: true,
-                        confirmButtonColor: '#312E81',
+                        confirmButtonColor: '#363740',
                         denyButtonColor: '#C0C0C0',
                         confirmButtonText: 'Add New Logs',
                         denyButtonText: 'Back to Dashboard'

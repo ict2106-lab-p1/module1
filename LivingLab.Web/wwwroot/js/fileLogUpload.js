@@ -56,7 +56,8 @@ function save(e) {
             Swal.fire({
                 title: "Success!",
                 text: "Logs saved successfully!",
-                type: "success"
+                type: "success",
+                confirmButtonColor: '#363740'
             }).then(function() {
                 window.location.href = "/ManualLogs/FileUpload";
             })
