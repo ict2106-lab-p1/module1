@@ -46,11 +46,10 @@ function deleteRow() {
 function save(e) {
     e.preventDefault();
     const data = getData();
-    
+    console.log(data);
     $.ajax({
         url: "/ManualLogs/Save",
         type: "POST",
-        contentType: "application/json", 
         data: {logs: data},
         success: function(response) {
             Swal.fire({
