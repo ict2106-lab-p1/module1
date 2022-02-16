@@ -1,11 +1,15 @@
-﻿using System.Diagnostics;
+using System.Diagnostics;
 
 using AutoMapper;
 
+using LivingLab.Core.Entities;
+using LivingLab.Core.Entities.Identity;
+using LivingLab.Core.Interfaces.Repositories;
 using LivingLab.Core.Interfaces.Services;
 using LivingLab.Core.Models;
 using LivingLab.Web.ViewModels;
 
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
 namespace LivingLab.Web.Controllers;
@@ -16,19 +20,23 @@ public class ManualLogsController : Controller
     private readonly ILogger<ManualLogsController> _logger;
     private readonly IEnergyUsageLogCsvParser _csvParser;
     // TODO: Add dependency injection for service/repository
+    private readonly IEnergyUsageRepository _repository;
+    private readonly UserManager<ApplicationUser> _userManager;
 
-    public ManualLogsController(IMapper mapper, ILogger<ManualLogsController> logger, IEnergyUsageLogCsvParser csvParser)
+    public ManualLogsController(IMapper mapper, ILogger<ManualLogsController> logger, IEnergyUsageLogCsvParser csvParser, IEnergyUsageRepository repository, UserManager<ApplicationUser> userManager)
     {
         _mapper = mapper;
         _logger = logger;
         _csvParser = csvParser;
+        _repository = repository;
+        _userManager = userManager;
     }
 
     public IActionResult Index()
     {
         return View();
     }
-    
+
     public IActionResult FileUpload()
     {
         return View();
@@ -38,20 +46,40 @@ public class ManualLogsController : Controller
     {
         return View();
     }
-    
+
     [HttpPost]
     public IActionResult Upload(IFormFile file)
     {
-        var logs = _csvParser.Parse(file).ToList();
-        var logItemsViewModel = _mapper.Map<List<EnergyUsageCsvModel>, List<LogItemViewModel>>(logs);
-        return View(nameof(FileUpload), logItemsViewModel);
+        try
+        {
+            var logs = _csvParser.Parse(file).ToList();
+            var logItemsViewModel = _mapper.Map<List<EnergyUsageCsvModel>, List<LogItemViewModel>>(logs);
+            return View(nameof(FileUpload), logItemsViewModel);
+        }
+        catch (Exception e)
+        {
+            _logger.LogError(e.Message);
+            return View(nameof(FileUpload));
+        }
     }
 
     [HttpPost]
-    public IActionResult Save(List<LogItemViewModel> logs)
+    public async Task<IActionResult> Save(List<LogItemViewModel> logs)
     {
-        // TODO: Save to database
-        return Ok();
+        try
+        {
+            var data = _mapper.Map<List<LogItemViewModel>, List<EnergyUsageLog>>(logs);
+            // var loggedUser = await _userManager.GetUserAsync(User);
+            var loggedUser = DummyUser.INSTANCE;
+            await _repository.BulkInsertAsyncByUser(data, loggedUser);
+
+            return Ok();
+        }
+        catch (Exception e)
+        {
+            _logger.LogError(e.Message);
+            return Error();
+        }
     }
 
     [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
