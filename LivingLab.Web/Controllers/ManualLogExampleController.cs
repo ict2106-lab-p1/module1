@@ -3,7 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
+using AutoMapper;
+
 using LivingLab.Core.Interfaces.Services;
+using LivingLab.Core.Models;
+using LivingLab.Web.ViewModels;
 
 using Microsoft.AspNetCore.Mvc;
 
@@ -11,10 +15,12 @@ namespace LivingLab.Web.Controllers
 {
     public class ManualLogExampleController : Controller
     {
+        private readonly IMapper _mapper;
         private readonly IEnergyUsageLogCsvParser _csvParser;
 
-        public ManualLogExampleController(IEnergyUsageLogCsvParser csvParser)
+        public ManualLogExampleController(IMapper mapper, IEnergyUsageLogCsvParser csvParser)
         {
+            _mapper = mapper;
             _csvParser = csvParser;
         }
         
@@ -26,8 +32,9 @@ namespace LivingLab.Web.Controllers
         [HttpPost]
         public IActionResult Upload(IFormFile file)
         {
-            var result = _csvParser.Parse(file).ToList();
-            return View(nameof(Index), result);
+            var logs = _csvParser.Parse(file).ToList();
+            var logItemsViewModel = _mapper.Map<List<EnergyUsageCsvModel>, List<LogItemViewModel>>(logs);
+            return View(nameof(Index), logItemsViewModel);
         }
 
         [HttpPost]

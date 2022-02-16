@@ -4,5 +4,5 @@ namespace LivingLab.Web.ViewModels;
 
 public class ManualLogViewModel
 {
-    private List<EnergyUsageCsvModel> Logs { get; set; }
+    public List<LogItemViewModel> Logs { get; set; }
 }

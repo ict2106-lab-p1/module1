@@ -31,7 +31,7 @@ public class EnergyUsageLogCsvParser : IEnergyUsageLogCsvParser
         return filePath;
     }
 
-    private List<EnergyUsageCsvModel> MapResult(ParallelQuery<CsvMappingResult<EnergyUsageCsvModel>> result)
+    private IEnumerable<EnergyUsageCsvModel> MapResult(ParallelQuery<CsvMappingResult<EnergyUsageCsvModel>> result)
     {
         var list = new List<EnergyUsageCsvModel>();
 
@@ -39,9 +39,8 @@ public class EnergyUsageLogCsvParser : IEnergyUsageLogCsvParser
         {
             list.Add(new EnergyUsageCsvModel
             {
-                DeviceId = item.Result.DeviceId,
                 DeviceSerialNo = item.Result.DeviceSerialNo,
-                Duration = item.Result.Duration,
+                Interval = item.Result.Interval,
                 EnergyUsage = item.Result.EnergyUsage,
                 LoggedDate = item.Result.LoggedDate
             });
