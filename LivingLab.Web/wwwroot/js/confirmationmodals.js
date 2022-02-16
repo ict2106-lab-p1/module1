@@ -45,7 +45,7 @@ function addLogAlert() {
             }).then((result) => {
                 if (result.isConfirmed) {
                     /*redirects to add new logs page (subject to changes)*/
-                    window.location.href = "ManualLogs/ManualLogUpload";
+                    window.location.href = "ManualLogUpload";
                 } else if (result.isDenied) {
                     /*redirects to dashboard page (subject to changes)*/
                     window.location.href = "/";

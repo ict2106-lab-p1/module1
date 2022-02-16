@@ -25,27 +25,27 @@
     @* Device ID *@
     <div class="form-group">
         <label for="deviceId">Device ID</label>
-        <input type="text" class="form-control" id="deviceId" placeholder="Enter Device Serial Number" required>
+        <input type="text" class="form-control" id="deviceId" placeholder="Enter Device Serial Number" >
     </div>
     
     @* Energy Usage *@
     <div class="form-group">
         <label for="energyUsage">Energy Usage</label>
-        <input type="number" class="form-control" id="energyUsage" placeholder="Enter Energy Usage (J)" required>
+        <input type="number" class="form-control" id="energyUsage" placeholder="Enter Energy Usage (J)" >
     </div>
     
     @* Duration *@
     <div class="form-group">
         <label for="duration">Duration</label>
-        <input type="number" class="form-control" id="duration" placeholder="Enter Duration (min)" required>
+        <input type="number" class="form-control" id="duration" placeholder="Enter Duration (min)" >
     </div>
     
     @* <input class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" type="submit" value="Submit"/> *@
-    <button onclick="addLogAlert()" type="submit" class="bg-indigo-900 hover:bg-indigo-700 text-white font-bold py-2 px-4 rounded trigger-swal">Submit Logs</button>
+    <button onclick="performValidation()" type="submit" class="bg-indigo-900 hover:bg-indigo-700 text-white font-bold py-2 px-4 rounded trigger-swal">Submit Logs</button>
 </form>
 
 @section Scripts
 {
-    @* <script src="~/js/manuallogvalidation.js"></script> *@
-    <script src="js/confirmationmodals.js"></script>
+    <script src="~/js/manuallogvalidation.js"></script>
+    <script src="~/js/confirmationmodals.js"></script>
 }
