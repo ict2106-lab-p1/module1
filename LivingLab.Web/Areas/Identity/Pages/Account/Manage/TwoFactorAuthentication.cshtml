@@ -47,15 +47,18 @@
             <a asp-page="./GenerateRecoveryCodes" class="btn btn-primary">Reset recovery codes</a>
         }
 
-        <h4>Authenticator app</h4>
+        <h4 class="font-semibold text-2xl">Authenticator App</h4>
         @if (!Model.HasAuthenticator)
         {
             <a id="enable-authenticator" asp-page="./EnableAuthenticator" class="btn btn-primary">Add authenticator app</a>
         }
         else
         {
-            <a id="enable-authenticator" asp-page="./EnableAuthenticator" class="btn btn-primary">Set up authenticator app</a>
-            <a id="reset-authenticator" asp-page="./ResetAuthenticator" class="btn btn-primary">Reset authenticator app</a>
+            <div class="mt-4">
+                 <a id="enable-authenticator" asp-page="./EnableAuthenticator" class="bw-4/12 h-14  text-2xl text-white bg-gray-700 hover:bg-gray-800 focus:ring-4 focus:ring-gray-300 font-medium  rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2">Set up authenticator app</a>
+                 <a id="reset-authenticator" asp-page="./ResetAuthenticator" class="w-4/12 h-14  text-2xl text-white bg-gray-700 hover:bg-gray-800 focus:ring-4 focus:ring-gray-300 font-medium  rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2">Reset authenticator app</a>
+            </div>
+           
         }
     }
     else

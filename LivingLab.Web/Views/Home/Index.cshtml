@@ -11,8 +11,8 @@
 
 @if (SignInManager.IsSignedIn(User))
 {
-    <div class="m-0">
-        <div class="header sticky">
+    <div class="m-0 overflow-hidden 	">
+        <div class="header sticky ">
             <h1 class="text-4xl text-gray-600 font-semibold  ">Dashboard</h1>
         </div>
         <div class=" flex justify-evenly ">
@@ -74,47 +74,68 @@
             <div class="   w-4/12 py-12 px-12 bg-white shadow-lg rounded-lg my-4 mr-4">
                 <h2 class="text-xl text-gray-600 font-semibold float-left ">Energy Usage Graph</h2>
             </div>
-            <div class="   w-4/12 py-12 px-12 bg-white shadow-lg rounded-lg my-4 mr-4">
-                <h2 class="text-xl text-gray-600 font-semibold float-left ">Energy Usage Graph</h2></div>
+           
         </div>
 
-        <table class="table table-striped w-10/12 mt-8 ">
-            <thead>
-            <tr>
-                <th scope="col">#ID</th>
-                <th scope="col">Location</th>
-                <th scope="col">In-Charge</th>
-                <th scope="col">Status</th>
-                <th scope="col">View Profile</th>
+        <div class="flex flex-col">
+          <div class="overflow-x-auto sm:-mx-6 lg:-mx-8 ">
+            <div class="py-2 inline-block w-4/5  sm:px-6 lg:px-8 ">
+              <div class="overflow-hidden">
+                <table class="min-w-full bg-white p-24">
+                  <thead class="border-b">
+                    <tr>
+                      <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
+                        #ID
+                      </th>
+                      <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
+                        Email
+                      </th>
+                      <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
+                        Faculty
+                      </th>
+                      <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
+                        Lab Access
+                      </th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr class="border-b">
+                      <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">1</td>
+                      <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+                        Mark
+                      </td>
+                        <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+                            Otto
+                        </td>
+                        <td><button class="mx-2 my-2 bg-gray-700 transition duration-150 ease-in-out hover:bg-indigo-600 rounded text-white px-6 py-2 text-xs focus:outline-none focus:ring-2 focus:ring-offset-2  focus:ring-indigo-600">View Profile</button>
 
-            </tr>
-            </thead>
-            <tbody>
-            <tr>
-                <th scope="row">1</th>
-                <td>Mark</td>
-                <td>Otto</td>
-                <td>Otto</td>
-                <td><button class="mx-2 my-2 bg-gray-700 transition duration-150 ease-in-out hover:bg-indigo-600 rounded text-white px-6 py-2 text-xs focus:outline-none focus:ring-2 focus:ring-offset-2  focus:ring-indigo-600">View Profile</button>
-                </td>
-            </tr>
-            <tr>
-                <th scope="row">2</th>
-                <td>Mark</td>
-                <td>Otto</td>
-                <td>Otto</td>
-                <td><button class="mx-2 my-2 bg-gray-700 transition duration-150 ease-in-out hover:bg-indigo-600 rounded text-white px-6 py-2 text-xs focus:outline-none focus:ring-2 focus:ring-offset-2  focus:ring-indigo-600">View Profile</button></td>
-            </tr>
-            <tr>
-                <th scope="row">3</th>
-                <td>Mark</td>
-                <td>Otto</td>
-                <td>Otto</td>
-                <td><button class="mx-2 my-2 bg-gray-700 transition duration-150 ease-in-out hover:bg-indigo-600 rounded text-white px-6 py-2 text-xs focus:outline-none focus:ring-2 focus:ring-offset-2  focus:ring-indigo-600">View Profile</button>
-                </td>
-            </tr>
-            </tbody>
-        </table>
+                    </tr>
+                    <tr class="bg-white border-b">
+                      <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">2</td>
+                      <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+                        Jacob
+                      </td>
+                      <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+                        Thornton
+                      </td>
+                        <td><button class="mx-2 my-2 bg-gray-700 transition duration-150 ease-in-out hover:bg-indigo-600 rounded text-white px-6 py-2 text-xs focus:outline-none focus:ring-2 focus:ring-offset-2  focus:ring-indigo-600">View Profile</button>
+                    </tr>
+                    <tr class="bg-white border-b">
+                      <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">3</td>
+                      <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+                        Larry
+                      </td>
+                        <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+                            Wild
+                        </td>
+                        <td><button class="mx-2 my-2 bg-gray-700 transition duration-150 ease-in-out hover:bg-indigo-600 rounded text-white px-6 py-2 text-xs focus:outline-none focus:ring-2 focus:ring-offset-2  focus:ring-indigo-600">View Profile</button>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
 
     </div>
 
