@@ -1,4 +1,5 @@
 using LivingLab.Core.Entities;
+using LivingLab.Core.Entities.Identity;
 using LivingLab.Core.Interfaces.Repositories;
 using LivingLab.Infrastructure.Data;
 
@@ -28,6 +29,12 @@ public class EnergyUsageRepository : Repository<EnergyUsageLog>, IEnergyUsageRep
         await _context.SaveChangesAsync();
     }
 
+    public async Task BulkInsertAsyncByUser(ICollection<EnergyUsageLog> logs, ApplicationUser loggedBy)
+    {
+        logs.ToList().ForEach(log => log.LoggedBy = loggedBy);
+        await BulkInsertAsync(logs);
+    }
+
     public async Task<List<EnergyUsageLog>> GetUsageByDeviceId(int id)
     {
         var logsForDevice = await _context.EnergyUsageLogs
@@ -50,5 +57,18 @@ public class EnergyUsageRepository : Repository<EnergyUsageLog>, IEnergyUsageRep
             .Where(log => log.Lab!.Id == id)
             .ToListAsync();
         return logsForLab;
+    }
+
+    public Task<List<EnergyUsageLog>> GetUsageByUser(ApplicationUser? user)
+    {
+        if(user == null) {
+            return _context.EnergyUsageLogs
+                .Where(log => log.LoggedBy != null)
+                .ToListAsync();
+        } else {
+            return _context.EnergyUsageLogs
+                .Where(log => log.LoggedBy != null && log.LoggedBy.Equals(user))
+                .ToListAsync();
+        }
     }
 }

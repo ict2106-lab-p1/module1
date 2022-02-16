@@ -3,11 +3,13 @@ using System.Diagnostics;
 using AutoMapper;
 
 using LivingLab.Core.Entities;
+using LivingLab.Core.Entities.Identity;
 using LivingLab.Core.Interfaces.Repositories;
 using LivingLab.Core.Interfaces.Services;
 using LivingLab.Core.Models;
 using LivingLab.Web.ViewModels;
 
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
 namespace LivingLab.Web.Controllers;
@@ -19,13 +21,15 @@ public class ManualLogsController : Controller
     private readonly IEnergyUsageLogCsvParser _csvParser;
     // TODO: Add dependency injection for service/repository
     private readonly IEnergyUsageRepository _repository;
+    private readonly UserManager<ApplicationUser> _userManager;
 
-    public ManualLogsController(IMapper mapper, ILogger<ManualLogsController> logger, IEnergyUsageLogCsvParser csvParser, IEnergyUsageRepository repository)
+    public ManualLogsController(IMapper mapper, ILogger<ManualLogsController> logger, IEnergyUsageLogCsvParser csvParser, IEnergyUsageRepository repository, UserManager<ApplicationUser> userManager)
     {
         _mapper = mapper;
         _logger = logger;
         _csvParser = csvParser;
         _repository = repository;
+        _userManager = userManager;
     }
 
     public IActionResult Index()
@@ -65,7 +69,8 @@ public class ManualLogsController : Controller
         try
         {
             var data = _mapper.Map<List<LogItemViewModel>, List<EnergyUsageLog>>(logs);
-            await _repository.BulkInsertAsync(data);
+            var loggedUser = await _userManager.GetUserAsync(User);
+            await _repository.BulkInsertAsyncByUser(data, loggedUser);
 
             return Ok();
         }
