@@ -2,6 +2,7 @@
 
 using AutoMapper;
 
+using LivingLab.Core.Entities;
 using LivingLab.Core.Interfaces.Services;
 using LivingLab.Core.Models;
 using LivingLab.Web.ViewModels;
@@ -42,16 +43,36 @@ public class ManualLogsController : Controller
     [HttpPost]
     public IActionResult Upload(IFormFile file)
     {
-        var logs = _csvParser.Parse(file).ToList();
-        var logItemsViewModel = _mapper.Map<List<EnergyUsageCsvModel>, List<LogItemViewModel>>(logs);
-        return View(nameof(FileUpload), logItemsViewModel);
+        try
+        {
+            var logs = _csvParser.Parse(file).ToList();
+            var logItemsViewModel = _mapper.Map<List<EnergyUsageCsvModel>, List<LogItemViewModel>>(logs);
+            return View(nameof(FileUpload), logItemsViewModel);
+        }
+        catch (Exception e)
+        {
+            _logger.LogError(e.Message);
+            return View(nameof(FileUpload));
+        }
     }
 
     [HttpPost]
     public IActionResult Save(List<LogItemViewModel> logs)
     {
-        // TODO: Save to database
-        return Ok();
+        try
+        {
+            var data = _mapper.Map<List<LogItemViewModel>, List<EnergyUsageLog>>(logs);
+            
+            // TODO: Save to database
+            
+            return Ok();
+        }
+        catch (Exception e)
+        {
+            _logger.LogError(e.Message);
+            return Error();
+        }
+       
     }
 
     [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

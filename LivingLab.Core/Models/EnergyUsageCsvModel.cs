@@ -6,7 +6,7 @@ public class EnergyUsageCsvModel
 
     public double EnergyUsage { get; set; }
 
-    public double Interval { get; set; }
+    public int Interval { get; set; }
 
     public DateTime LoggedDate { get; set; }
 }
