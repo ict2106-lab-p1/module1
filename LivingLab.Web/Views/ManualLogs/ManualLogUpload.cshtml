@@ -1,0 +1,51 @@
+﻿@{
+    ViewData["Title"] = "Manual Log Upload";
+}
+
+<h2 class="font-bold text-3xl text-indigo-900">Manual Log Upload</h2>
+
+@* Display error message *@
+<div id="error"></div>
+
+@* <form id ="form" action="Upload" enctype="multipart/form-data" method="post"> *@
+<form id ="form">
+    @* Device Category *@
+    <div class="form-group">
+        <label for="deviceCategory">Device Category</label>
+        <select class="form-control" id="deviceCategory">
+            <option>Microprocessors</option>
+            <option>AR/VR Devices</option>
+            <option>Smart Sensors</option>
+            <option>Robotics</option>
+            <option>Meters and Monitoring Systems</option>
+            <option>Others</option>
+        </select>
+    </div>
+    
+    @* Device ID *@
+    <div class="form-group">
+        <label for="deviceId">Device ID</label>
+        <input type="text" class="form-control" id="deviceId" placeholder="Enter Device Serial Number" >
+    </div>
+    
+    @* Energy Usage *@
+    <div class="form-group">
+        <label for="energyUsage">Energy Usage</label>
+        <input type="number" class="form-control" id="energyUsage" placeholder="Enter Energy Usage (J)" >
+    </div>
+    
+    @* Duration *@
+    <div class="form-group">
+        <label for="duration">Duration</label>
+        <input type="number" class="form-control" id="duration" placeholder="Enter Duration (min)" >
+    </div>
+    
+    @* <input class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" type="submit" value="Submit"/> *@
+    <button onclick="performValidation()" type="submit" class="bg-indigo-900 hover:bg-indigo-700 text-white font-bold py-2 px-4 rounded trigger-swal">Submit Logs</button>
+</form>
+
+@section Scripts
+{
+    <script src="~/js/manualLogValidation.js"></script>
+    <script src="~/js/confirmationModals.js"></script>
+}

@@ -30,4 +30,8 @@
     <ProjectReference Include="..\LivingLab.Infrastructure\LivingLab.Infrastructure.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <_ContentIncludedByDefault Remove="Views\ManualLogExample\Index.cshtml" />
+  </ItemGroup>
+
 </Project>

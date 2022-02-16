@@ -28,7 +28,7 @@ public class HomeController : Controller
         return View("Privacy");
     }
 
-    [Route("example")]
+    [Route("/example")]
     public IActionResult ExamplePage()
     {
         return View("ExamplePage");
