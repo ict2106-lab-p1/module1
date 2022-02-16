@@ -32,22 +32,22 @@
 
                            @if (SignInManager.IsSignedIn(User)) {
                                <div class="mb-4 px-4 space-y-1 text-white">
-
-                               <form  class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
-                                   <button  type="submit" class="nav-link btn btn-link text-dark px-4 ">Log Out</button> </form>
-                               <a class="w-full h-12 flex items-center hover:bg-gray-600  active:bg-gray-500 focus:outline-none focus:ring focus:ring-gray-300 rounded-lg"
+                                   <a class="w-full h-12 flex items-center hover:bg-gray-600  active:bg-gray-500 focus:outline-none focus:ring focus:ring-gray-300 rounded-lg"
                                   @*href="#"*@
                                   asp-area="" asp-controller="Home" asp-action="Index">
                                    <span class="px-4">Home</span>
                                </a>
 
-                               <a class="w-full h-12 flex items-center hover:bg-gray-600  active:bg-gray-500 focus:outline-none focus:ring focus:ring-gray-300 rounded-lg"
-                                  @*href="#"*@
-                                  asp-area="" asp-controller="Home" asp-action="Privacy">
+                                   <a class="w-full h-12 flex items-center hover:bg-gray-600  active:bg-gray-500 focus:outline-none focus:ring focus:ring-gray-300 rounded-lg"
+                                      @*href="#"*@
+                                      asp-area="" asp-controller="Home" asp-action="Privacy">
 
-                                   <span class="px-4">Privacy</span>
-                               </a>
-                                      </div>                
+                                       <span class="px-4">Privacy</span>
+                                   </a>
+                                   <form  class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
+                                   <button  type="submit" class="nav-link btn btn-link text-dark px-4 ">Log Out</button> </form>
+                                   </div>   
+                               
                            }  
                 </div>
                 @* end sidebar *@
