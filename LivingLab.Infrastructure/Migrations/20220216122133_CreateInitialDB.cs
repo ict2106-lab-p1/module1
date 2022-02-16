@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
@@ -144,7 +144,7 @@ namespace LivingLab.Infrastructure.Migrations
                 {
                     Id = table.Column<int>(type: "INTEGER", nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
-                    ValidityDate = table.Column<DateTime>(type: "TEXT", nullable: false),
+                    ValidityDate = table.Column<DateTime>(type: "Date", nullable: false),
                     SerialNo = table.Column<string>(type: "TEXT", nullable: false),
                     LabId = table.Column<int>(type: "INTEGER", nullable: false),
                     DeviceTypeId = table.Column<int>(type: "INTEGER", nullable: false)
@@ -293,6 +293,61 @@ namespace LivingLab.Infrastructure.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
+
+            migrationBuilder.InsertData(
+                table: "DeviceType",
+                columns: new[] { "Id", "Cost", "Description", "Name" },
+                values: new object[] { 1, 499.0, "It''s purpose is to detect situation in the laboratory", "Surveillance Camera" });
+
+            migrationBuilder.InsertData(
+                table: "DeviceType",
+                columns: new[] { "Id", "Cost", "Description", "Name" },
+                values: new object[] { 2, 130.0, "It''s purpose is to detect temperature in the laboratory", "Temperature Sensor" });
+
+            migrationBuilder.InsertData(
+                table: "DeviceType",
+                columns: new[] { "Id", "Cost", "Description", "Name" },
+                values: new object[] { 3, 130.0, "It''s purpose is to detect humidity in the laboratory", "Humidity Sensor" });
+
+            migrationBuilder.InsertData(
+                table: "DeviceType",
+                columns: new[] { "Id", "Cost", "Description", "Name" },
+                values: new object[] { 4, 320.0, "It''s purpose is to detect light in the laboratory", "Light Sensor" });
+
+            migrationBuilder.InsertData(
+                table: "DeviceType",
+                columns: new[] { "Id", "Cost", "Description", "Name" },
+                values: new object[] { 5, 323.0, "It is used to control brightness of the lights in the lab", "VR Light Controls" });
+
+            migrationBuilder.InsertData(
+                table: "Lab",
+                columns: new[] { "Id", "LabStatus", "Location", "PersonInCharge" },
+                values: new object[] { 1, "Available", "NYP-SR7C", "David" });
+
+            migrationBuilder.InsertData(
+                table: "Device",
+                columns: new[] { "Id", "DeviceTypeId", "LabId", "SerialNo", "ValidityDate" },
+                values: new object[] { 1, 1, 1, "SC1001", new DateTime(2020, 10, 10, 0, 0, 0, 0, DateTimeKind.Unspecified) });
+
+            migrationBuilder.InsertData(
+                table: "Device",
+                columns: new[] { "Id", "DeviceTypeId", "LabId", "SerialNo", "ValidityDate" },
+                values: new object[] { 2, 2, 1, "R1001", new DateTime(2020, 10, 11, 0, 0, 0, 0, DateTimeKind.Unspecified) });
+
+            migrationBuilder.InsertData(
+                table: "Device",
+                columns: new[] { "Id", "DeviceTypeId", "LabId", "SerialNo", "ValidityDate" },
+                values: new object[] { 3, 3, 1, "S1001", new DateTime(2020, 9, 9, 0, 0, 0, 0, DateTimeKind.Unspecified) });
+
+            migrationBuilder.InsertData(
+                table: "Device",
+                columns: new[] { "Id", "DeviceTypeId", "LabId", "SerialNo", "ValidityDate" },
+                values: new object[] { 4, 4, 1, "SL1001", new DateTime(2019, 8, 1, 0, 0, 0, 0, DateTimeKind.Unspecified) });
+
+            migrationBuilder.InsertData(
+                table: "Device",
+                columns: new[] { "Id", "DeviceTypeId", "LabId", "SerialNo", "ValidityDate" },
+                values: new object[] { 5, 5, 1, "VRL1001", new DateTime(2019, 7, 3, 0, 0, 0, 0, DateTimeKind.Unspecified) });
 
             migrationBuilder.CreateIndex(
                 name: "IX_Accessory_AccessoryTypeId",

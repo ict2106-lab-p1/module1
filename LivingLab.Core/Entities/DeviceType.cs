@@ -10,5 +10,10 @@ public class DeviceType : BaseEntity
     public string? Description { get; set; }
     [Required]
     public double? Cost { get; set; }
-    public List<Device> Devices { get; set; }
+    public List<Device>? Devices { get; set; }
+
+    public static implicit operator DeviceType(int v)
+    {
+        throw new NotImplementedException();
+    }
 }
