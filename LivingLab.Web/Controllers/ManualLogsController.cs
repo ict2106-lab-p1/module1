@@ -39,6 +39,12 @@ public class ManualLogsController : Controller
         return View();
     }
     
+    public IActionResult test()
+    {
+        return View();
+    }
+    
+    
     [HttpPost]
     public IActionResult Upload(IFormFile file)
     {

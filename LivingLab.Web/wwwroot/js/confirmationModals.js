@@ -1,3 +1,5 @@
+const form = document.getElementById('fileuploadform')
+
 function showAlert() {
     Swal.fire({
         title: 'Select Upload Type',
@@ -55,23 +57,58 @@ function addLogAlert() {
     })
 }
 
+/*
 function fileUploadedAlert() {
     Swal.fire({
-        title: 'File Uploaded',
+        title: 'File Submitted',
         icon: 'success',
         showDenyButton: true,
         reverseButtons: true,
         confirmButtonColor: '#312E81',
         denyButtonColor: '#C0C0C0',
-        confirmButtonText: 'My Logs',
-        denyButtonText: 'Back to Dashboard'
+        confirmButtonText: 'Proceed',
+        denyButtonText: 'Upload New File'
     }).then((result) => {
         if (result.isConfirmed) {
             /*redirects to view my logs page (subject to changes)*/
-            window.location.href = "ManualLogs/ManualLogUpload";
+            //window.location.href = "ManualLogUpload";
+          /*  $('#form').submit();
         } else if (result.isDenied) {
-            /*redirects to dashboard page (subject to changes)*/
-            window.location.href = "/";
+            /*redirects to add new file page (subject to changes)*/
+          /*  window.location.href = "FileUpload";
         }
     })
-}
+}*/
+
+/*function openfileUploadedAlert() {
+    form.addEventListener('submit', (e) => {
+        e.preventDefault()
+        fileUploadedAlert()
+    })
+}*/
+
+
+
+
+
+
+$(document).on('click', '#btn-submit', function(e) {
+    e.preventDefault();
+    Swal.fire({
+        title: 'File Submitted',
+        icon: 'success',
+        showDenyButton: true,
+        reverseButtons: true,
+        confirmButtonColor: '#312E81',
+        denyButtonColor: '#C0C0C0',
+        confirmButtonText: 'Proceed',
+        denyButtonText: 'Upload New File'
+    }).then(function (result) {
+        if (result.isConfirmed) {
+            $('#fileuploadform').submit();
+        } else if (result.isDenied) {
+            /*redirects to add new file page (subject to changes)*/
+            window.location.href = "FileUpload";
+        }
+    });
+});

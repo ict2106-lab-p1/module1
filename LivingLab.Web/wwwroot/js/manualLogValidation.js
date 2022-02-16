@@ -27,10 +27,7 @@ function performValidation()
 
             // check errorElement
             errorElement.innerText = messages.join(', ') // to separate error elements from each other
-        } else {
-            e.preventDefault();
-            addLogAlert()
-        }
+        } 
     })
     
 }
