@@ -12,6 +12,9 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
 {
     // Add new DB tables here
     public DbSet<Todo> Todos { get; set; }
+    public DbSet<Lab> Labs { get; set; }
+    public DbSet<Device> Devices { get; set; }
+    public DbSet<EnergyUsageLog> EnergyUsageLogs { get; set; }
     public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
     {
     }
