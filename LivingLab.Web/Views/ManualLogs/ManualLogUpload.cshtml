@@ -5,7 +5,7 @@
 <h2 class="font-bold text-3xl text-indigo-900">Manual Log Upload</h2>
 
 @* Display error message *@
-<div id="error"></div>
+<div id="error" class="text-red-600"></div>
 
 @* <form id ="form" action="Upload" enctype="multipart/form-data" method="post"> *@
 
@@ -18,15 +18,15 @@
                     <tr>
                         <th class="px-6 py-2 text-xs text-gray-500">No.</th>
                         <th class="px-6 py-2 text-xs text-gray-500">Device Category</th>
-                        <th class="px-6 py-2 text-xs text-gray-500">Device ID</th>
+                        <th class="px-6 py-2 text-xs text-gray-500">Device Serial Number</th>
                         <th class="px-6 py-2 text-xs text-gray-500">Energy Usage (J)</th>
-                        <th class="px-6 py-2 text-xs text-gray-500">Duration (min)</th>
+                        <th class="px-6 py-2 text-xs text-gray-500">Interval (min)</th>
                         <th></th>
                     </tr>
                     </thead>
                     <tbody class="bg-white">
                     @{ var index = 1;}
-                    <tr class="whitespace-nowrap">
+                    <tr class="whitespace-nowrap mb-2">
                         <td class="text-center">@index</td>
                         <td class="deviceCategory text-center shadow appearance-none border text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
                             <select>
@@ -38,10 +38,10 @@
                                 <option>Others</option>
                             </select>
                         </td>
-                        <td><input class="deviceId text-center shadow appearance-none border w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="deviceId" type="text" placeholder="Enter Device ID" /></td>
-                        <td><input class="energyUsage text-center shadow appearance-none border w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" type="number" value="energyUsage" placeholder="Enter Energy Usage (J)" required/></td>
-                        <td><input class="duration text-center shadow appearance-none border w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" type="number" value="duration" placeholder="Enter Duration (min)" required/></td>
-                        <td><button type="button" class="delete px-4 py-1 text-sm text-white bg-red-400 rounded">Delete</button></td>
+                        <td><input class="deviceId text-center shadow appearance-none border w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" name="Serial Number" id="deviceId" type="text" placeholder="Enter Device Serial No." /></td>
+                        <td><input class="energyUsage text-center shadow appearance-none border w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" name="Energy Usage" type="number" value="energyUsage" placeholder="Enter Energy Usage (J)" required/></td>
+                        <td><input class="duration text-center shadow appearance-none border w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" name="Interval" type="number" value="duration" placeholder="Enter Interval (min)" required/></td>
+                        <td><button type="button" class="delete px-4 py-1 text-lg text-white bg-red-400 rounded">Delete</button></td>
                     </tr>
                     </tbody>
                 </table>
@@ -60,5 +60,5 @@
 {
     <script src="~/js/manualLogValidation.js"></script>
     <script src="~/js/manualLogUpload.js"></script>
-    <script src="~/js/confirmationModals.js"></script>
+    @* <script src="~/js/confirmationModals.js"></script> *@
 }

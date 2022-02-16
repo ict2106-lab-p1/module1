@@ -10,10 +10,10 @@
                             <option>Others</option>
                         </select>
                     </td>
-                    <td><input class="deviceId text-center shadow appearance-none border w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" type="text" value="" placeholder="Enter Device ID" /></td>
-                    <td><input class="energyUsage text-center shadow appearance-none border w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" type="number" value="" placeholder="Enter Energy Usage (J)" required/></td>
-                    <td><input class="duration text-center shadow appearance-none border w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" type="number" value="" placeholder="Enter Duration (min)" required/></td>
-                    <td><button type="button" class="delete px-4 py-1 text-sm text-white bg-red-400 rounded" data-index="{index}">Delete</button></td>
+                    <td><input class="deviceId text-center shadow appearance-none border w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" name="Serial Number" id="deviceId" type="text" placeholder="Enter Device Serial No." /></td>
+                        <td><input class="energyUsage text-center shadow appearance-none border w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" name="Energy Usage" type="number" value="energyUsage" placeholder="Enter Energy Usage (J)" required/></td>
+                        <td><input class="duration text-center shadow appearance-none border w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" name="Interval" type="number" value="duration" placeholder="Enter Interval (min)" required/></td>
+                        <td><button type="button" class="delete px-4 py-1 text-lg text-white bg-red-400 rounded" data-index="{index}">Delete</button></td>
                 </tr>`;
 
 /**
@@ -53,7 +53,8 @@ function deleteRow() {
  */
 function save(e) {
     e.preventDefault();
-    performValidation();
+    if (validate() === false) return
+    
     const data = getData();
 
     $.ajax({

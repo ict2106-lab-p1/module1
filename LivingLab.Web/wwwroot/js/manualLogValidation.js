@@ -1,35 +1,43 @@
 // // run your script after entire web is generated
 // document.addEventListener("DOMContentLoaded", function() {}
 
-const deviceId = document.getElementById('deviceId')
-const duration = document.getElementById('duration')
-const form = document.getElementById('form')
-const errorElement = document.getElementById('error')
-
-function performValidation()
-{
-    form.addEventListener('submit', (e) => {
-
-        // list to store the error messages
-        let messages = []
-
-        // validation
-        // if device ID field is an empty string or user did not pass in any device Id
-        if (deviceId.value === '' || deviceId.value == null) {
-            // send the error message
-            messages.push('Device ID is required')
-            console.log('No Device ID retrieved')
-        }
-
-        // if there is error, prevent the form from submitting
-        if (messages.length > 0) {
-            e.preventDefault()
-
-            // check errorElement
-            errorElement.innerText = messages.join(', ') // to separate error elements from each other
-        } 
-    })
+/**
+ * Validate fields
+ * 
+ * @returns true if all fields are valid, false otherwise
+ */
+function validate() {
+    const $deviceId = $(".deviceId");
+    const $energyUsage = $(".energyUsage");
+    const $duration = $(".duration");
+    const $errorElement = $("#error");
+    let messages = [];
     
+    checkEmpty($deviceId, messages);
+    checkEmpty($energyUsage, messages);
+    checkEmpty($duration, messages);
+    
+    if (messages.length > 0) {
+        $errorElement.html(messages.join("</br>"));
+        return false;
+    }
+    
+    return true
 }
 
-
+/**
+ * Check if all inputs are empty or null
+ * 
+ * @param $inputs
+ * @param messages
+ */
+function checkEmpty($inputs, messages) {
+    $inputs.each(function() {
+        if ($(this).val() === '' || $(this).val() === null){
+            const text = $(this).attr('name') + ' is required';
+            if (messages.indexOf(text) === -1) {
+                messages.push(text);
+            }
+        }
+    });
+}

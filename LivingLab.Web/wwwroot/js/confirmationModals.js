@@ -1,4 +1,4 @@
-const form = document.getElementById('fileuploadform')
+// const form = document.getElementById('fileuploadform')
 
 function showAlert() {
     Swal.fire({
