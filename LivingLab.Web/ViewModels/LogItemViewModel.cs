@@ -4,6 +4,8 @@ namespace LivingLab.Web.ViewModels;
 
 public class LogItemViewModel
 {
+    public string? DeviceCategory { get; set; }
+    
     [Display(Name = "Device Serial Number")]
     public string? DeviceSerialNo { get; set; }
 
