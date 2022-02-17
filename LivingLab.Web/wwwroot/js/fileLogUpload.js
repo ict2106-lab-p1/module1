@@ -3,7 +3,7 @@ const template = `<tr class="whitespace-nowrap">
                     <td class="serial-no text-center">{deviceSerialNumber}</td>
                     <td><input class="energy text-center shadow appearance-none border w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" type="number" value="" required/></td>
                     <td><input class="interval text-center shadow appearance-none border w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" type="number" value="" required/></td>
-                    <td><input class="logged-date text-center shadow appearance-none border w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" type="text" value="" required/></td>
+                    <td><input class="logged-date text-center shadow appearance-none border w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" type="datetime-local" value="" required/></td>
                     <td><button type="button" class="delete px-4 py-1 text-sm text-white bg-red-400 rounded" data-index="{index}">Delete</button></td>
                 </tr>`;
 
@@ -91,7 +91,7 @@ function getData() {
             DeviceSerialNo: serialNumber,
             EnergyUsage: parseFloat(energyUsage),
             Interval: parseFloat(interval),
-            LoggedDate: Date.parse(loggedAt)
+            LoggedDate: loggedAt
         })
     })
     return data;
