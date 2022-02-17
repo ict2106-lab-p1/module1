@@ -10,12 +10,14 @@ function validate() {
     const $deviceId = $(".deviceId");
     const $energyUsage = $(".energyUsage");
     const $duration = $(".duration");
+    const $loggedAt = $(".loggedAt");
     const $errorElement = $("#error");
     let messages = [];
     
     checkEmpty($deviceId, messages);
     checkEmpty($energyUsage, messages);
     checkEmpty($duration, messages);
+    checkEmpty($loggedAt, messages);
     
     if (messages.length > 0) {
         $errorElement.html(messages.join("</br>"));

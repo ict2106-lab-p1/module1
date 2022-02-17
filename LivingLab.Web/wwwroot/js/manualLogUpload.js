@@ -13,7 +13,8 @@
                     <td><input class="deviceId text-center shadow appearance-none border w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" name="Serial Number" id="deviceId" type="text" placeholder="Enter Device Serial No." /></td>
                         <td><input class="energyUsage text-center shadow appearance-none border w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" name="Energy Usage" type="number" value="energyUsage" placeholder="Enter Energy Usage (J)" required/></td>
                         <td><input class="duration text-center shadow appearance-none border w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" name="Interval" type="number" value="duration" placeholder="Enter Interval (min)" required/></td>
-                        <td><button type="button" class="delete px-4 py-1 text-lg text-white bg-red-400 rounded" data-index="{index}">Delete</button></td>
+                        <td><input class="loggedAt text-center shadow appearance-none border w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" name="Logged At" type="datetime-local" value="loggedAt" placeholder="Enter Logged At Datetime" required/></td>
+                        <td><button type="button" class="delete m-2 px-4 py-1 text-lg text-white bg-red-400 rounded" data-index="{index}">Delete</button></td>
                 </tr>`;
 
 /**
@@ -121,12 +122,14 @@ function getData() {
         const deviceId = $(this).find("td > input.deviceId").val();
         const energyUsage = $(this).find("td > input.energyUsage").val();
         const interval = $(this).find("td > input.energyUsage").val();
+        const loggedAt = $(this).find("td > input.loggedAt").val();
 
         data.push({
             DeviceCategory: deviceCategory,
             DeviceSerialNo: deviceId,
             Interval: parseFloat(interval),
-            EnergyUsage: parseFloat(energyUsage)
+            EnergyUsage: parseFloat(energyUsage),
+            LoggedDate: loggedAt
         })
     })
     return data;
