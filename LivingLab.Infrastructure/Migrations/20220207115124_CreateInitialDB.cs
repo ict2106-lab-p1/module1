@@ -29,8 +29,7 @@ public partial class CreateInitialDB : Migration
             {
                 ID = table.Column<int>(type: "INTEGER", nullable: false)
                     .Annotation("Sqlite:Autoincrement", true),
-                Title = table.Column<string>(type: "TEXT", nullable: false),
-                Description = table.Column<string>(type: "TEXT", nullable: false)
+                OTP = table.Column<string>(type: "TEXT", nullable: false)
             },
             constraints: table =>
             {

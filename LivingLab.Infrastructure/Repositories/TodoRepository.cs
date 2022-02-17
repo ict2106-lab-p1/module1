@@ -18,7 +18,7 @@ public class TodoRepository : Repository<Todo>, ITodoRepository
     public async Task<string?> GetTodoTitle(int id)
     {
         var todo = await _context.Todos.FirstOrDefaultAsync(t => t.ID == id);
-        return todo?.Title;
+        return todo?.OTP;
     }
 
 }
