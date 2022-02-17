@@ -48,7 +48,8 @@ public class SMSAuthenticationModel : PageModel
 
     private async Task LoadAsync(ApplicationUser user)
     {
-        var phoneNumber = await _userManager.GetPhoneNumberAsync(user);
+        var userperson = await _userManager.GetUserAsync(User);
+        var phoneNumber = await _userManager.GetPhoneNumberAsync(userperson);
 
         PhoneNumber = phoneNumber;
     }
@@ -67,18 +68,18 @@ public class SMSAuthenticationModel : PageModel
     public async Task<IActionResult> OnPostAsync()
     {
         var user = await _userManager.GetUserAsync(User);
+        var phoneNumber = await _userManager.GetPhoneNumberAsync(user);
         
         if (user == null)
         {
             return NotFound($"Unable to load user with ID '{_userManager.GetUserId(User)}'.");
         }
         
-        var phoneNumber = await _userManager.GetPhoneNumberAsync(user);
         OTP = new Random().Next(100000,999999);
-           
+        if(PhoneNumber!= phoneNumber){
             
-            TwilioClient.Init(twilioAccountSid, twilioAuthToken);
-         string toPhoneNumber = "+65"+PhoneNumber;
+        TwilioClient.Init(twilioAccountSid, twilioAuthToken);
+        string toPhoneNumber = "+65"+PhoneNumber;
         var message = MessageResource.Create(
             messagingServiceSid: twilioMessagingServiceSid,
             body: "Your OTP is " + OTP.ToString(),
@@ -98,8 +99,7 @@ public class SMSAuthenticationModel : PageModel
     
         
         await _signInManager.RefreshSignInAsync(user);
-        
+        }
         return Page();
-        
     }
 }
