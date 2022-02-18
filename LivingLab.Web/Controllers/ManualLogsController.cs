@@ -19,7 +19,6 @@ public class ManualLogsController : Controller
     private readonly IMapper _mapper;
     private readonly ILogger<ManualLogsController> _logger;
     private readonly IEnergyUsageLogCsvParser _csvParser;
-    // TODO: Add dependency injection for service/repository
     private readonly IEnergyUsageRepository _repository;
     private readonly UserManager<ApplicationUser> _userManager;
 
