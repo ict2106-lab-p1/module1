@@ -7,7 +7,7 @@ This document describes the workflow, conventions and best practices to follow w
 This is the `main/master` branch for this repository. It is named like this to avoid confusion when integrating with other modules into the main repository. Do not commit directly to this branch. Branch protection rules have been setup to prevent this from happening. Only PRs from `dev` should be merged into this branch. 
 
 #### `dev`  
-This is the default branch for all development work. Completed features will merged here first. Commits to this branch should be made via PRs as well. 
+This is the default branch for all development work. Completed features will be merged here first. Commits to this branch should be made via PRs as well. 
 
 ## Creating a new Feature branch
 All new features should be created as a new branch. Feature branches should branch off `dev` first.
@@ -15,7 +15,7 @@ All new features should be created as a new branch. Feature branches should bran
 The name of the branch should follow this pattern:
 - `<group number>-<issue number>-<feature name>`  
 - group number just need to be prefixed with a `g` followed by your group number
-- all feature branches MUST have an issue created in the Github Project Board
+- all feature branches MUST have an issue created in your Github Project Board
 - all text should be lowercase and separated by dashes `-`
 
 #### Example of feature branch creation: 
@@ -30,9 +30,9 @@ After you are done writing your code:
   - add a `fix:` to a commit message if you are fixing an issue
   - add a `feat:` to a commit message if you are featuring a new feature
 - Push your commit to the repo with `git push` or `git push -u origin <branch name` if Github have not tracked your branch
-- Encouraged to do small commits regularly 
+- Encouraged to perform small commits regularly 
 
-When committing, it is a good practice to review every line of code that you commit. Craft your commit such that each commit only contains one change. This will allow you to easily review the commit history and identify the cause of a bug.
+When committing, it is a good practice to review every line of code that you commit. Craft your commit such that each commit only contains one change. This allows you to easily review the commit history and identify the cause of a bug.
 
 #### Example of a commit:
 ```
