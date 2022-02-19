@@ -1,6 +1,7 @@
 Refer to WORKFLOW.md for instructions on the development flow.
 
 ## Getting started
+- Download .NET Core 6.0
 - Have Node >v 16
 - Run `npm install` 
 
