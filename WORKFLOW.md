@@ -39,7 +39,7 @@ git add .
 git commit -m "git commit -m "#50 fix: null check before accessing file object"
 git push
 ```
-
+[Refer to: Git Commit Conventions](https://www.freecodecamp.org/news/writing-good-commit-messages-a-practical-guide/)
 ## Merging to `dev`
 Once you are done with your feature:
 - get the latest changes from `dev` by doing `git pull origin dev`
