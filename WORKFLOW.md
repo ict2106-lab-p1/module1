@@ -1,6 +1,6 @@
 # Development Workflow Guide
 
-This document describes the workflow, conventions and best practices to follow with regard to Git.
+This document describes the workflow, conventions and best practices to follow with regards to Git.
 
 ## Default Branches
 #### `mod2`   
