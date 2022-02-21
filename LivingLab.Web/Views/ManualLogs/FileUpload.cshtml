@@ -6,11 +6,11 @@
 
 <h2 class="font-bold text-3xl text-slate-900">File Log Upload</h2>
 
-<div class="flex justify-center">
-    <div class="bg-white relative rounded-lg p-8 sm:p-12 shadow-lg">
+<div class="flex">
+    <div class="md:m-auto md:mt-5 bg-white relative rounded-lg p-8 sm:p-12 shadow-lg">
         <form asp-action="Upload" enctype="multipart/form-data" method="post" id ="fileuploadform">
             <input type="file" name="file" itemtype="csv"/>
-            <button type="submit" id="btn-submit" class="bg-slate-900 hover:bg-slate-700 text-white font-bold py-2 px-4 rounded trigger-swal">
+            <button type="submit" id="btn-submit" class="bg-dark hover:bg-slate-700 text-white font-bold py-2 px-4 rounded trigger-swal">
                 Upload
             </button>
         </form>
@@ -21,42 +21,35 @@
 {
     <input id="deviceSerialNumber" hidden value="@Model[0].DeviceSerialNo"/>
     <form asp-action="Save" method="post">
-        <div class="flex flex-col">
-            <div class="w-full">
-                <div class="border-b border-gray-200 shadow">
-                    <table id="logTable" class="table-auto w-full mt-5">
-                        <thead class="bg-gray-50">
-                        <tr>
-                            <th class="px-6 py-2 text-xs text-gray-500">No.</th>
-                            <th class="px-6 py-2 text-xs text-gray-500">@Html.DisplayNameFor(m => m[0].DeviceSerialNo)</th>
-                            <th class="px-6 py-2 text-xs text-gray-500">@Html.DisplayNameFor(m => m[0].EnergyUsage)</th>
-                            <th class="px-6 py-2 text-xs text-gray-500">@Html.DisplayNameFor(m => m[0].Interval)</th>
-                            <th class="px-6 py-2 text-xs text-gray-500">@Html.DisplayNameFor(m => m[0].LoggedDate)</th>
-                            <th></th>
-                        </tr>
-                        </thead>
-                        <tbody class="bg-white">
-                        @{ var index = 1;}
-                        @foreach (var log in Model)
-                        {
-                            <tr class="whitespace-nowrap">
-                                <td class="text-center">@index</td>
-                                <td class="serial-no text-center">@log.DeviceSerialNo</td>
-                                <td><input class="energy text-center shadow appearance-none border w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" type="number" value="@log.EnergyUsage" required/></td>
-                                <td><input class="interval text-center shadow appearance-none border w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" type="number" value="@log.Interval" required/></td>
-                                <td><input class="logged-date text-center shadow appearance-none border w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" type="datetime-local" value="@log.LoggedDate.ToString("yyyy-MM-dd HH:mm:ss").Replace(' ','T')" required/></td>
-                                <td><button type="button" class="delete px-4 py-1 text-sm text-white bg-red-400 rounded" data-index="@(index++)">Delete</button></td>
-                            </tr>
-                        }
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </div>
-        <br/>
-        <div class="flex justify-between">
-            <input type="submit" id="btnSave" value="Save" class="bg-slate-900 hover:bg-slate-700 text-white font-bold py-2 px-4 rounded trigger-swal align-end">
-            <button type="button" id="btnAdd" class="bg-slate-900 hover:bg-slate-700 text-white font-bold py-2 px-4 rounded trigger-swal">Add</button>
+            <table id="logTable" class="w-full flex flex-row flex-no-wrap table md:table-auto mt-10 rounded-lg border-gray-200 shadow border-separate">
+                <thead class="bg-gray-100">
+                <tr>
+                    <th class="p-3 text-md text-center text-gray-500">No.</th>
+                    <th class="p-3 text-md text-center text-gray-500">@Html.DisplayNameFor(m => m[0].DeviceSerialNo)</th>
+                    <th class="p-3 text-md text-center text-gray-500">@Html.DisplayNameFor(m => m[0].EnergyUsage)</th>
+                    <th class="p-3 text-md text-center text-gray-500">@Html.DisplayNameFor(m => m[0].Interval)</th>
+                    <th class="p-3 text-md text-center text-gray-500">@Html.DisplayNameFor(m => m[0].LoggedDate)</th>
+                    <th class="p-3 text-md text-center text-gray-500"></th>
+                </tr>
+                </thead>
+                <tbody class="bg-white">
+                @{ var index = 1;}
+                @foreach (var log in Model)
+                {
+                    <tr class="whitespace-nowrap">
+                        <td class="text-center">@index</td>
+                        <td class="serial-no text-center">@log.DeviceSerialNo</td>
+                        <td><input class="energy text-center shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" type="number" value="@log.EnergyUsage" required/></td>
+                        <td><input class="interval text-center shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" type="number" value="@log.Interval" required/></td>
+                        <td><input class="logged-date text-center shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" type="datetime-local" value="@log.LoggedDate.ToString("yyyy-MM-dd HH:mm:ss").Replace(' ','T')" required/></td>
+                        <td><button type="button" class="delete px-4 py-2 text-sm text-white bg-red-400 rounded" data-index="@(index++)">Delete</button></td>
+                    </tr>
+                }
+                </tbody>
+            </table>
+        <div class="flex justify-between mt-5">
+            <input type="submit" id="btnSave" value="Save" class="bg-dark hover:bg-slate-700 text-white font-bold py-2 px-4 rounded trigger-swal align-end">
+            <button type="button" id="btnAdd" class="bg-dark hover:bg-slate-700 text-white font-bold py-2 px-4 rounded trigger-swal">Add</button>
         </div>
     </form>
 }

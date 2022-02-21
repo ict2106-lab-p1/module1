@@ -33,19 +33,18 @@
     
     <!-- sidebar -->
     <div
-        class="side-bar w-64 lg:block bg-dark space-y-6 py-7 px-2 absolute inset-y-0 left-0 transform -translate-x-full md:relative md:translate-x-0 transition duration-200 ease-in-out">
+        class="z-100 side-bar w-60 lg:block bg-dark space-y-6 py-7 px-2 absolute inset-y-0 left-0 transform -translate-x-full md:relative md:translate-x-0 transition duration-200 ease-in-out">
         <div
             class="w-full flex px-4 pr-6 my-auto items-center justify-start ">
-            <img src="images/logo.png" class="h-12 w-12"/>
+            <img src="/images/logo.png" class="h-12 w-12"/>
             <a class="font-semibold text-2xl text-gray-400 pl-4" asp-action="Index" asp-controller="Home">
                 Living Lab
             </a>
         </div>
         <ul class="relative">
-            
             <li class="relative">
                 <a
-                    class="@Html.ActiveClass("Home", "Index") mt-14 w-full flex items-center hover:text-gray-700 h-10 pl-4 hover:bg-highlight cursor-pointer transition duration-300 ease-in-out"
+                    class="@Html.ActiveClass("Home", "Index") hover:translate-x-2 transition-transform ease-in duration-300 mt-14 hover:translate-x-2 transition-transform ease-in duration-300 w-full flex items-center hover:text-gray-700 h-10 pl-4 hover:bg-highlight cursor-pointer"
                     asp-action="Index" asp-controller="Home">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-6 mr-2" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                         <rect x="2" y="2" width="20" height="8" rx="2" ry="2"></rect>
@@ -63,7 +62,7 @@
                 <hr class="mt-2 mb-4 border-gray-600"/>
                 <li class="relative">
                     <a
-                        class="@Html.ActiveClass("", "") w-full flex items-center hover:text-gray-700 h-10 pl-4 hover:bg-highlight cursor-pointer transition duration-300 ease-in-out"
+                        class="@Html.ActiveClass("", "") hover:translate-x-2 transition-transform ease-in duration-300 w-full flex items-center hover:text-gray-700 h-10 pl-4 hover:bg-highlight cursor-pointer"
                         asp-action="" asp-controller="">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-6 mr-2" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                             <path d="M21.21 15.89A10 10 0 1 1 8 2.83"></path>
@@ -74,7 +73,7 @@
                 </li>
                 <li class="relative">
                     <a
-                        class="@Html.ActiveClass("", "") w-full flex items-center hover:text-gray-700 h-10 pl-4 hover:bg-highlight cursor-pointer transition duration-300 ease-in-out"
+                        class="@Html.ActiveClass("", "") hover:translate-x-2 transition-transform ease-in duration-300 w-full flex items-center hover:text-gray-700 h-10 pl-4 hover:bg-highlight cursor-pointer"
                         asp-action="" asp-controller="">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-6 mr-2" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                             <path d="M21.21 15.89A10 10 0 1 1 8 2.83"></path>
@@ -91,7 +90,7 @@
                 <hr class="mt-2 mb-4 border-gray-600"/>
                 <li class="relative">
                     <a
-                        class="@Html.ActiveClass("", "") w-full flex items-center hover:text-gray-700 h-10 pl-4 hover:bg-highlight cursor-pointer transition duration-300 ease-in-out"
+                        class="@Html.ActiveClass("", "") hover:translate-x-2 transition-transform ease-in duration-300 w-full flex items-center hover:text-gray-700 h-10 pl-4 hover:bg-highlight cursor-pointer"
                         asp-action="" asp-controller="">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-6 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582-4 8-4s8 1.79 8 4m0 5c0 2.21-3.582 4-8 4s-8-1.79-8-4"/>
@@ -101,7 +100,7 @@
                 </li>
                 <li class="relative">
                     <a
-                        class="@Html.ActiveClass("ManualLogs", "Index") w-full flex items-center hover:text-gray-700 h-10 pl-4 hover:bg-highlight cursor-pointer transition duration-300 ease-in-out"
+                        class="@Html.ActiveClass("ManualLogs", "Index") hover:translate-x-2 transition-transform ease-in duration-300 w-full flex items-center hover:text-gray-700 h-10 pl-4 hover:bg-highlight cursor-pointer"
                         asp-action="Index" asp-controller="ManualLogs">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-6 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582-4 8-4s8 1.79 8 4m0 5c0 2.21-3.582 4-8 4s-8-1.79-8-4"/>
@@ -117,7 +116,7 @@
                 <hr class="mt-2 mb-4 border-gray-600"/>
                 <li class="relative">
                     <a
-                        class="@Html.ActiveClass("", "") w-full flex items-center hover:text-gray-700 h-10 pl-4 hover:bg-highlight cursor-pointer transition duration-300 ease-in-out"
+                        class="@Html.ActiveClass("", "") hover:translate-x-2 transition-transform ease-in duration-300 w-full flex items-center hover:text-gray-700 h-10 pl-4 hover:bg-highlight cursor-pointer"
                         asp-action="" asp-controller="">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-6 mr-2" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                             <path d="M22 17H2a3 3 0 0 0 3-3V9a7 7 0 0 1 14 0v5a3 3 0 0 0 3 3zm-8.27 4a2 2 0 0 1-3.46 0"></path>
@@ -127,7 +126,7 @@
                 </li>
                 <li class="relative">
                     <a
-                        class="@Html.ActiveClass("", "") w-full flex items-center hover:text-gray-700 h-10 pl-4 hover:bg-highlight cursor-pointer transition duration-300 ease-in-out"
+                        class="@Html.ActiveClass("", "") hover:translate-x-2 transition-transform ease-in duration-300 w-full flex items-center hover:text-gray-700 h-10 pl-4 hover:bg-highlight cursor-pointer"
                         asp-action="" asp-controller="">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-6 mr-2" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                             <circle cx="12" cy="12" r="3"></circle>
@@ -143,7 +142,7 @@
     <!-- end sidebar -->
 
     <!-- start content -->
-    <div id="main-content" class="flex-1 p-6 bg-gray-100 bg-gray-100 min-h-screen">
+    <div id="main-content" class="flex-1 px-20 py-10 bg-gray-100 min-h-screen">
         @RenderBody()
     </div>
     <!-- end content -->

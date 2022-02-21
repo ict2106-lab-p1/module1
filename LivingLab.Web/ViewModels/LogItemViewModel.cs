@@ -6,7 +6,7 @@ public class LogItemViewModel
 {
     public string? DeviceCategory { get; set; }
     
-    [Display(Name = "Device Serial Number")]
+    [Display(Name = "Serial No.")]
     public string? DeviceSerialNo { get; set; }
 
     [Display(Name = "Energy Usage")]

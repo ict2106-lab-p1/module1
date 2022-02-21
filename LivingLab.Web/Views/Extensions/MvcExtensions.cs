@@ -11,7 +11,8 @@ public static class MvcExtensions
         var routeAction = routeData.Values["action"].ToString();
         var routeController = routeData.Values["controller"].ToString();
 
-        var returnActive = (routeController == controllers && routeAction == actions) ? cssClass : "text-gray-400";
+        // var returnActive = (routeController == controllers && routeAction == actions) ? cssClass : "text-gray-400";
+        var returnActive = routeController == controllers ? cssClass : "text-gray-400";
 
         return returnActive;
     }
