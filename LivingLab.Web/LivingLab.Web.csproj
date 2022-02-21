@@ -27,6 +27,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\LivingLab.Core\LivingLab.Core.csproj" />
     <ProjectReference Include="..\LivingLab.Infrastructure\LivingLab.Infrastructure.csproj" />
   </ItemGroup>
 
