@@ -40,32 +40,6 @@
 {
     <input id="deviceSerialNumber" hidden value="@Model[0].DeviceSerialNo"/>
     <form id="fileUploadForm" class="mt-5" asp-action="Save" method="post">
-        @* <table id="logTable" class="w-full flex flex-row flex-no-wrap table table-zebra table-compact mt-10 rounded-lg shadow"> *@
-        @*     <thead class="bg-gray-100"> *@
-        @*     <tr> *@
-        @*         <th class="p-3 text-md text-center text-gray-500">No.</th> *@
-        @*         <th class="p-3 text-md text-center text-gray-500">@Html.DisplayNameFor(m => m[0].DeviceSerialNo)</th> *@
-        @*         <th class="p-3 text-md text-center text-gray-500">@Html.DisplayNameFor(m => m[0].EnergyUsage)</th> *@
-        @*         <th class="p-3 text-md text-center text-gray-500">@Html.DisplayNameFor(m => m[0].Interval)</th> *@
-        @*         <th class="p-3 text-md text-center text-gray-500">@Html.DisplayNameFor(m => m[0].LoggedDate)</th> *@
-        @*         <th class="p-3 text-md text-center text-gray-500"></th> *@
-        @*     </tr> *@
-        @*     </thead> *@
-        @*     <tbody class="bg-white"> *@
-        @*     @{ var index = 1;} *@
-        @*     @foreach (var log in Model) *@
-        @*     { *@
-        @*         <tr class="whitespace-nowrap"> *@
-        @*             <td class="text-center">@index</td> *@
-        @*             <td class="serial-no text-center">@log.DeviceSerialNo</td> *@
-        @*             <td><input class="energy input input-bordered w-full max-w-xs" type="number" value="@log.EnergyUsage" required/></td> *@
-        @*             <td><input class="interval input input-bordered w-full max-w-xs" type="number" value="@log.Interval" required/></td> *@
-        @*             <td><input class="logged-date input input-bordered w-full max-w-xs" type="datetime-local" value="@log.LoggedDate.ToString("yyyy-MM-dd HH:mm:ss").Replace(' ','T')" required/></td> *@
-        @*             <td><button type="button" class="delete px-4 py-2 text-sm text-white bg-red-400 rounded" data-index="@(index++)">Delete</button></td> *@
-        @*         </tr> *@
-        @*     } *@
-        @*     </tbody> *@
-        @* </table> *@
         @{ var index = 1; }
         @foreach (var log in Model)
         {
