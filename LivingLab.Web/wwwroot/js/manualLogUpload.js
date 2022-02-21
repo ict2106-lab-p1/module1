@@ -10,7 +10,7 @@
                 <div class="flex flex-col lg:flex-row justify-between space-y-2 lg:space-x-3">
                     <div class="flex flex-row lg:flex-col justify-center space-x-2 lg:space-y-2">
                         <h3 class="text-center text-gray-600 m-auto lg:m-0">Device Category</h3>
-                        <select class="select w-full max-w-xs select-bordered">
+                        <select class="deviceCategory select w-full max-w-xs select-bordered">
                             <option>Microprocessors</option>
                             <option>AR/VR Devices</option>
                             <option>Smart Sensors</option>
@@ -54,7 +54,7 @@ $(document).ready(function (){
 function appendRow() {
     const $form = $("#manualLogForm");
     
-    if ($form.find("div.log-div".length === 0))
+    if ($form.find("div.log-div").length === 0)
         $form.prepend(template);
     else 
         $form.find("div.log-div:last").after(template);
@@ -124,26 +124,24 @@ function save(e) {
             });
         }
     })
-
-   
 }
 
 /**
- * Retrieve values from each row in the table.
+ * Retrieve values from each row in the form.
  *
  * @returns Array of objects containing the data.
  */
 function getData() {
     let data = [];
-    const $table = $("#logTable");
-    const $rows = $table.find("tbody > tr");
+    const $form = $("#manualLogForm");
+    const $rows = $form.find("div.log-div");
 
     $rows.each(function () {
-        const deviceCategory = $(this).find("td.deviceCategory").find(":selected").text();
-        const deviceId = $(this).find("td > input.deviceId").val();
-        const energyUsage = $(this).find("td > input.energyUsage").val();
-        const interval = $(this).find("td > input.energyUsage").val();
-        const loggedAt = $(this).find("td > input.loggedAt").val();
+        const deviceCategory = $(this).find("select.deviceCategory").find(":selected").text();
+        const deviceId = $(this).find("input.deviceId").val();
+        const energyUsage = $(this).find("input.energyUsage").val();
+        const interval = $(this).find("input.duration").val();
+        const loggedAt = $(this).find("input.loggedAt").val();
 
         data.push({
             DeviceCategory: deviceCategory,
