@@ -39,33 +39,65 @@
 @if (Model?.Count > 0)
 {
     <input id="deviceSerialNumber" hidden value="@Model[0].DeviceSerialNo"/>
-    <form asp-action="Save" method="post">
-            <table id="logTable" class="w-full flex flex-row flex-no-wrap table md:table-auto mt-10 rounded-lg border-gray-200 shadow border-separate">
-                <thead class="bg-gray-100">
-                <tr>
-                    <th class="p-3 text-md text-center text-gray-500">No.</th>
-                    <th class="p-3 text-md text-center text-gray-500">@Html.DisplayNameFor(m => m[0].DeviceSerialNo)</th>
-                    <th class="p-3 text-md text-center text-gray-500">@Html.DisplayNameFor(m => m[0].EnergyUsage)</th>
-                    <th class="p-3 text-md text-center text-gray-500">@Html.DisplayNameFor(m => m[0].Interval)</th>
-                    <th class="p-3 text-md text-center text-gray-500">@Html.DisplayNameFor(m => m[0].LoggedDate)</th>
-                    <th class="p-3 text-md text-center text-gray-500"></th>
-                </tr>
-                </thead>
-                <tbody class="bg-white">
-                @{ var index = 1;}
-                @foreach (var log in Model)
-                {
-                    <tr class="whitespace-nowrap">
-                        <td class="text-center">@index</td>
-                        <td class="serial-no text-center">@log.DeviceSerialNo</td>
-                        <td><input class="energy text-center shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" type="number" value="@log.EnergyUsage" required/></td>
-                        <td><input class="interval text-center shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" type="number" value="@log.Interval" required/></td>
-                        <td><input class="logged-date text-center shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" type="datetime-local" value="@log.LoggedDate.ToString("yyyy-MM-dd HH:mm:ss").Replace(' ','T')" required/></td>
-                        <td><button type="button" class="delete px-4 py-2 text-sm text-white bg-red-400 rounded" data-index="@(index++)">Delete</button></td>
-                    </tr>
-                }
-                </tbody>
-            </table>
+    <form id="fileUploadForm" class="mt-5" asp-action="Save" method="post">
+        @* <table id="logTable" class="w-full flex flex-row flex-no-wrap table table-zebra table-compact mt-10 rounded-lg shadow"> *@
+        @*     <thead class="bg-gray-100"> *@
+        @*     <tr> *@
+        @*         <th class="p-3 text-md text-center text-gray-500">No.</th> *@
+        @*         <th class="p-3 text-md text-center text-gray-500">@Html.DisplayNameFor(m => m[0].DeviceSerialNo)</th> *@
+        @*         <th class="p-3 text-md text-center text-gray-500">@Html.DisplayNameFor(m => m[0].EnergyUsage)</th> *@
+        @*         <th class="p-3 text-md text-center text-gray-500">@Html.DisplayNameFor(m => m[0].Interval)</th> *@
+        @*         <th class="p-3 text-md text-center text-gray-500">@Html.DisplayNameFor(m => m[0].LoggedDate)</th> *@
+        @*         <th class="p-3 text-md text-center text-gray-500"></th> *@
+        @*     </tr> *@
+        @*     </thead> *@
+        @*     <tbody class="bg-white"> *@
+        @*     @{ var index = 1;} *@
+        @*     @foreach (var log in Model) *@
+        @*     { *@
+        @*         <tr class="whitespace-nowrap"> *@
+        @*             <td class="text-center">@index</td> *@
+        @*             <td class="serial-no text-center">@log.DeviceSerialNo</td> *@
+        @*             <td><input class="energy input input-bordered w-full max-w-xs" type="number" value="@log.EnergyUsage" required/></td> *@
+        @*             <td><input class="interval input input-bordered w-full max-w-xs" type="number" value="@log.Interval" required/></td> *@
+        @*             <td><input class="logged-date input input-bordered w-full max-w-xs" type="datetime-local" value="@log.LoggedDate.ToString("yyyy-MM-dd HH:mm:ss").Replace(' ','T')" required/></td> *@
+        @*             <td><button type="button" class="delete px-4 py-2 text-sm text-white bg-red-400 rounded" data-index="@(index++)">Delete</button></td> *@
+        @*         </tr> *@
+        @*     } *@
+        @*     </tbody> *@
+        @* </table> *@
+        @{ var index = 1; }
+        @foreach (var log in Model)
+        {
+            <div class="log-div mt-5 flex flex-col bg-white p-5 shadow-lg rounded gap-4">
+                <div class="flex justify-between mb-3">
+                    <span class="serial-no font-bold text-center">@log.DeviceSerialNo</span>
+                    <div class="justify-end">
+                        <button type="button" class="delete text-red-500 hover:bg-red-100 hover:scale-125 rounded-full p-2 ease-in-out duration-500">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="inherit" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <line x1="18" y1="6" x2="6" y2="18"></line>
+                                <line x1="6" y1="6" x2="18" y2="18"></line>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+                <div class="flex flex-col lg:flex-row justify-between space-y-2 lg:space-x-3">
+                    <div class="flex flex-row lg:flex-col justify-center space-x-2 lg:space-y-2">
+                        <h3 class="text-center text-gray-600 m-auto lg:m-0">Energy Usage (J)</h3>
+                        <input class="energyUsage input input-bordered w-full max-w-xs" name="Energy Usage" type="number" value="@log.EnergyUsage" placeholder="Enter Energy Usage (J)" required/>
+                    </div>
+                    <div class="flex flex-row lg:flex-col justify-center space-x-2 lg:space-y-2">
+                        <h3 class="text-center text-gray-600 m-auto lg:m-0">Duration (min)</h3>
+                        <input class="duration input input-bordered w-full max-w-xs" name="Interval" type="number" value="@log.Interval" placeholder="Enter Interval (min)" required/>
+                    </div>
+                    <div class="flex flex-row lg:flex-col justify-center space-x-2 lg:space-y-2">
+                        <h3 class="text-center text-gray-600 m-auto lg:m-0">Logged At</h3>
+                        <input class="loggedAt input input-bordered w-full max-w-xs" name="Logged At" type="datetime-local" value="@log.LoggedDate.ToString("yyyy-MM-dd HH:mm:ss").Replace(' ', 'T')" placeholder="Enter Logged At Datetime" required/>
+                    </div>
+                </div>
+            </div>
+        }
+       
         <div class="flex justify-between mt-5">
             <input type="submit" id="btnSave" value="Save" class="bg-dark hover:bg-slate-700 text-white font-bold py-2 px-4 rounded trigger-swal align-end">
             <button type="button" id="btnAdd" class="bg-dark hover:bg-slate-700 text-white font-bold py-2 px-4 rounded trigger-swal">Add</button>
