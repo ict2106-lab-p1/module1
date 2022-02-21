@@ -1,6 +1,6 @@
 ﻿const template = `<div class="log-div mt-5 flex flex-col bg-white p-5 shadow-lg rounded gap-4">
                     <div class="flex justify-end">
-                        <button type="button" class="delete text-dark hover:bg-gray-100 hover:scale-125 rounded-full p-2 ease-in-out duration-500">
+                        <button type="button" class="delete text-red-500 hover:bg-red-100 hover:scale-125 rounded-full p-2 ease-in-out duration-500">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="inherit" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                                 <line x1="18" y1="6" x2="6" y2="18"></line>
                                 <line x1="6" y1="6" x2="18" y2="18"></line>
@@ -29,7 +29,7 @@
                     </div>
                     <div class="flex flex-row lg:flex-col justify-center space-x-2 lg:space-y-2">
                         <h3 class="text-center text-gray-600 m-auto lg:m-0">Duration (min)</h3>
-                        <input class="duration input input-bordered w-full max-w-xs" name="Interval" type="number" value="duration" placeholder="Enter Interval (min)" required/>
+                        <input class="interval input input-bordered w-full max-w-xs" name="Interval" type="number" value="interval" placeholder="Enter Interval (min)" required/>
                     </div>
                     <div class="flex flex-row lg:flex-col justify-center space-x-2 lg:space-y-2">
                         <h3 class="text-center text-gray-600 m-auto lg:m-0">Logged At</h3>
@@ -140,7 +140,7 @@ function getData() {
         const deviceCategory = $(this).find("select.deviceCategory").find(":selected").text();
         const deviceId = $(this).find("input.deviceId").val();
         const energyUsage = $(this).find("input.energyUsage").val();
-        const interval = $(this).find("input.duration").val();
+        const interval = $(this).find("input.interval").val();
         const loggedAt = $(this).find("input.loggedAt").val();
 
         data.push({

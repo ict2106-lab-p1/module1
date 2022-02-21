@@ -16,8 +16,8 @@ const template = `<div class="log-div mt-5 flex flex-col bg-white p-5 shadow-lg 
                             <input class="energyUsage input input-bordered w-full max-w-xs" name="Energy Usage" type="number" value="" placeholder="Enter Energy Usage (J)" required/>
                         </div>
                         <div class="flex flex-row lg:flex-col justify-center space-x-2 lg:space-y-2">
-                            <h3 class="text-center text-gray-600 m-auto lg:m-0">Duration (min)</h3>
-                            <input class="duration input input-bordered w-full max-w-xs" name="Interval" type="number" value="" placeholder="Enter Interval (min)" required/>
+                            <h3 class="text-center text-gray-600 m-auto lg:m-0">Interval (min)</h3>
+                            <input class="interval input input-bordered w-full max-w-xs" name="Interval" type="number" value="" placeholder="Enter Interval (min)" required/>
                         </div>
                         <div class="flex flex-row lg:flex-col justify-center space-x-2 lg:space-y-2">
                             <h3 class="text-center text-gray-600 m-auto lg:m-0">Logged At</h3>
@@ -104,7 +104,7 @@ function getData() {
     
     $rows.each(function () {
         const energyUsage = $(this).find("input.energyUsage").val();
-        const interval = $(this).find("input.duration").val();
+        const interval = $(this).find("input.interval").val();
         const loggedAt = $(this).find("input.loggedAt").val();
 
         data.push({
