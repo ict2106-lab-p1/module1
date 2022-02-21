@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Mvc.Rendering;
 
-namespace LivingLab.Web.Views.Extensions;
+namespace LivingLab.Web.Extensions;
 
 public static class MvcExtensions
 {
