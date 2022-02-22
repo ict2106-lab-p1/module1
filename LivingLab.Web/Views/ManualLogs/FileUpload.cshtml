@@ -38,45 +38,47 @@
 
 @if (Model?.Count > 0)
 {
-    <input id="deviceSerialNumber" hidden value="@Model[0].DeviceSerialNo"/>
-    <form id="fileUploadForm" class="mt-5" asp-action="Save" method="post">
-        @{ var index = 1; }
-        @foreach (var log in Model)
-        {
-            <div class="log-div mt-5 flex flex-col bg-white p-5 shadow-lg rounded gap-4">
-                <div class="flex justify-between mb-3">
-                    <span class="serial-no font-bold text-center">@log.DeviceSerialNo</span>
-                    <div class="justify-end">
-                        <button type="button" class="delete text-red-500 hover:bg-red-100 hover:scale-125 rounded-full p-2 ease-in-out duration-500">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="inherit" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                <line x1="18" y1="6" x2="6" y2="18"></line>
-                                <line x1="6" y1="6" x2="18" y2="18"></line>
-                            </svg>
-                        </button>
+    <div class="flex justify-center">
+        <input id="deviceSerialNumber" hidden value="@Model[0].DeviceSerialNo"/>
+        <form id="fileUploadForm" class="mt-5" asp-action="Save" method="post">
+            @{ var index = 1; }
+            @foreach (var log in Model)
+            {
+                <div class="log-div max-w-3xl mt-5 flex flex-col bg-white p-5 shadow-lg rounded gap-4">
+                    <div class="flex justify-between mb-3">
+                        <span class="serial-no font-bold text-center">@log.DeviceSerialNo</span>
+                        <div class="justify-end">
+                            <button type="button" class="delete text-red-500 hover:bg-red-100 hover:scale-125 rounded-full p-2 ease-in-out duration-500">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="inherit" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <line x1="18" y1="6" x2="6" y2="18"></line>
+                                    <line x1="6" y1="6" x2="18" y2="18"></line>
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="flex flex-col lg:flex-row justify-center space-y-2 lg:space-x-3">
+                        <div class="flex flex-row lg:flex-col justify-center space-x-2 lg:space-y-2">
+                            <h3 class="text-center text-gray-600 m-auto lg:m-0">Energy Usage (J)</h3>
+                            <input class="energyUsage input input-bordered w-full max-w-xs" name="Energy Usage" type="number" value="@log.EnergyUsage" placeholder="Enter Energy Usage (J)" required/>
+                        </div>
+                        <div class="flex flex-row lg:flex-col justify-center space-x-2 lg:space-y-2">
+                            <h3 class="text-center text-gray-600 m-auto lg:m-0">Interval (min)</h3>
+                            <input class="interval input input-bordered w-full max-w-xs" name="Interval" type="number" value="@log.Interval" placeholder="Enter Interval (min)" required/>
+                        </div>
+                        <div class="flex flex-row lg:flex-col justify-center space-x-2 lg:space-y-2">
+                            <h3 class="text-center text-gray-600 m-auto lg:m-0">Logged At</h3>
+                            <input class="loggedAt input input-bordered w-full max-w-xs" name="Logged At" type="datetime-local" value="@log.LoggedDate.ToString("yyyy-MM-dd HH:mm:ss").Replace(' ', 'T')" placeholder="Enter Logged At Datetime" required/>
+                        </div>
                     </div>
                 </div>
-                <div class="flex flex-col lg:flex-row justify-between space-y-2 lg:space-x-3">
-                    <div class="flex flex-row lg:flex-col justify-center space-x-2 lg:space-y-2">
-                        <h3 class="text-center text-gray-600 m-auto lg:m-0">Energy Usage (J)</h3>
-                        <input class="energyUsage input input-bordered w-full max-w-xs" name="Energy Usage" type="number" value="@log.EnergyUsage" placeholder="Enter Energy Usage (J)" required/>
-                    </div>
-                    <div class="flex flex-row lg:flex-col justify-center space-x-2 lg:space-y-2">
-                        <h3 class="text-center text-gray-600 m-auto lg:m-0">Interval (min)</h3>
-                        <input class="interval input input-bordered w-full max-w-xs" name="Interval" type="number" value="@log.Interval" placeholder="Enter Interval (min)" required/>
-                    </div>
-                    <div class="flex flex-row lg:flex-col justify-center space-x-2 lg:space-y-2">
-                        <h3 class="text-center text-gray-600 m-auto lg:m-0">Logged At</h3>
-                        <input class="loggedAt input input-bordered w-full max-w-xs" name="Logged At" type="datetime-local" value="@log.LoggedDate.ToString("yyyy-MM-dd HH:mm:ss").Replace(' ', 'T')" placeholder="Enter Logged At Datetime" required/>
-                    </div>
-                </div>
+            }
+           
+            <div class="flex justify-between mt-5">
+                <input type="submit" id="btnSave" value="Save" class="bg-dark hover:bg-slate-700 text-white font-bold py-2 px-4 rounded trigger-swal align-end">
+                <button type="button" id="btnAdd" class="bg-dark hover:bg-slate-700 text-white font-bold py-2 px-4 rounded trigger-swal">Add</button>
             </div>
-        }
-       
-        <div class="flex justify-between mt-5">
-            <input type="submit" id="btnSave" value="Save" class="bg-dark hover:bg-slate-700 text-white font-bold py-2 px-4 rounded trigger-swal align-end">
-            <button type="button" id="btnAdd" class="bg-dark hover:bg-slate-700 text-white font-bold py-2 px-4 rounded trigger-swal">Add</button>
-        </div>
-    </form>
+        </form>
+    </div>
 }
 
 @section Scripts
