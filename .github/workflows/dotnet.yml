@@ -2,9 +2,15 @@ name: .NET
 
 on:
   push:
-    branches: [ mod2, dev, release/** ]
+    branches:
+      - mod2
+      - dev
+      - release/**
   pull_request:
-    branches: [ mod2, dev, release/** ]
+    branches: 
+      - mod2
+      - dev
+      - release/**
 
 jobs:
   build:
