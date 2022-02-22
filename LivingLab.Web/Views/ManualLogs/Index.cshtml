@@ -2,16 +2,17 @@
     ViewData["Title"] = "Manual Log Upload";
 }
 
-<h2 class="font-bold text-3xl text-black">Manual Log Upload</h2>
+<div class="flex justify-between">
+    <h2 class="font-bold text-3xl text-black">My Logs</h2>
+    <button onclick="showAlert()" class="bg-dark hover:bg-slate-700 text-white font-bold py-1 px-4 rounded-full trigger-swal">Upload Logs</button>
+</div>
 <br/>
 <section class="mx-auto pb-10">
-    <img class="mx-auto" src="/Women Power Mobile.png" alt="screenshot" >
+    <img class="mx-auto" src="/images/Women Power Mobile.png" alt="screenshot" >
 </section>
-<h3 class="font-bold text-2xl text-black text-center">Upload the logs through file upload or manual input.</h3>
+<h3 class="text-2xl text-gray-800 text-center">You do not have any uploaded logs.</h3>
+<p class="text-lg text-gray-800 text-center">All uploaded logs will appear here.</p>
 <br/>
-<div class="text-center">
-    <button onclick="showAlert()" class="bg-slate-900 hover:bg-slate-700 text-white font-bold py-2 px-4 rounded trigger-swal">Upload Logs</button>
-</div>
 
 
 @section Scripts

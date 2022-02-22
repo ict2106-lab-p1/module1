@@ -1,4 +1,5 @@
-﻿<!DOCTYPE html>
+﻿@using LivingLab.Web.Extensions
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -12,123 +13,145 @@
             type="text/css"/>
     @* Replace the cdn with your style scripts *@
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body>
-    <div>
-        <div class="leading-normal tracking-normal" id="main-body">
-            <div class="flex flex-wrap">
-                @* sidebar *@
-                <div
-                    class="w-1/2 md:w-1/3 lg:w-64 fixed md:top-0 md:left-0 h-screen lg:block bg-slate-900 border-r z-30"
-                    id="main-nav">
-                    <div
-                        class="w-full h-20 flex px-4 pr-6 mt-24 lg:mt-8 items-center justify-center mb-8">
-                        <a href="#">
-                            @* logo here *@
-                            <img
-                                class="font-semibold text-3xl text-blue-400 pl-4 h-24"
-                                @* src="" *@
-                                alt="logo"/>
-                        </a>
-                    </div>
     
-                    <div class="mb-4 px-4 space-y-1">
-                        <ul class="relative">
-                            <!--
-                            <p class="pl-4 text-sm font-semibold mb-1 uppercase">Test</p>
-                            -->
-                            <a
-                                class="w-full flex items-center text-sunset-400 h-10 pl-4 hover:bg-white rounded-lg cursor-pointer"
-                                href="#">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582-4 8-4s8 1.79 8 4m0 5c0 2.21-3.582 4-8 4s-8-1.79-8-4"/>
-                                </svg>
-                                <span class="text-slate-50 hover:text-black">Dashboard</span>
-                            </a>
+<div id="main-body" class="relative min-h-screen md:flex">
+    <!--Navbar-->
+    <div class="absolute w-full h-16 bg-dark top-0 z-0 hidden md:block"></div>
+    <!--Navbar end-->
     
-                            <a
-                                class="w-full flex items-center text-sunset-400 h-10 pl-4 bg-white hover:bg-white rounded-lg cursor-pointer"
-                                href="#">
-                                <span class="text-black hover:text-black">Compare Data</span>
-                            </a>
-                        
-                            <a
-                                class="w-full flex items-center text-sunset-400 h-10 pl-4 hover:bg-white rounded-lg cursor-pointer"
-                                href="#">
-                                <span class="text-slate-50 hover:text-black">Account Management</span>
-                            </a>
-                        
-                            <a
-                                class="w-full flex items-center text-sunset-400 h-10 pl-4 hover:bg-white rounded-lg cursor-pointer"
-                                asp-area="" asp-controller="ManualLogs" asp-action="Index"
-                                >
-                                <span class="text-slate-50 hover:text-black">Data Logging</span>
-                            </a>
-                        
-                            <a
-                                class="w-full flex items-center text-sunset-400 h-10 pl-4 hover:bg-white rounded-lg cursor-pointer"
-                                href="#">
-                                <span class="text-slate-50 hover:text-black">My Logs</span>
-                            </a>
-                        
-                            <li class="relative" id="sidenavEx1">
-                                <a
-                                    class="w-full flex items-center text-sunset-400 h-10 pl-4 hover:bg-white rounded-lg cursor-pointer"
-                                    href="#">
-                                    <span class="text-slate-50 hover:text-black">Settings</span>
-                                    <svg aria-hidden="true" focusable="false" data-prefix="fas" class="w-3 h-3 ml-auto" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
-                                        <path fill="currentColor" d="M207.029 381.476L12.686 187.132c-9.373-9.373-9.373-24.569 0-33.941l22.667-22.667c9.357-9.357 24.522-9.375 33.901-.04L224 284.505l154.745-154.021c9.379-9.335 24.544-9.317 33.901.04l22.667 22.667c9.373 9.373 9.373 24.569 0 33.941L240.971 381.476c-9.373 9.372-24.569 9.372-33.942 0z"></path>
-                                    </svg>
-                                </a>
-                                <ul class="relative accordion-collapse collapse" id="collapseSidenavEx1" aria-labelledby="sidenavEx1" data-bs-parent="#sidenavExample">
-                                    <li class="relative">
-                                        <a href="#!" class="flex items-center text-sunset-400 pl-12 pr-6 h-10 overflow-hidden text-slate-50 text-ellipsis whitespace-nowrap rounded-lg hover:bg-white hover:text-black transition duration-300 ease-in-out" data-mdb-ripple="true" data-mdb-ripple-color="dark">Notification</a>
-                                    </li>
-                                </ul>
-                            </li>
-                        </ul>
+    <!-- mobile menu -->
+    <div class="bg-dark text-gray-100 flex justify-between md:hidden">
+        <a class="block p-4 font-semibold text-2xl text-gray-400 " asp-action="Index" asp-controller="Home">
+            Living Lab
+        </a>
 
-                        <div class="col-span-1 h-96 flex flex-col justify-between">
-                            <button
-                                class="bg-transparent hover:bg-red-500 text-red-700 font-semibold hover:text-white py-2 px-4 border border-red-500 hover:border-transparent rounded shadow">
-                                Logout
-                            </button>
-                        </div>
-                        
-                    </div>
-                </div>
-                
-                @* end sidebar *@
-    
-                <div
-                    class="w-full bg-gray-100 pl-0 lg:pl-64 min-h-screen"
-                    id="main-content">
-                    @* navbar start *@
-                    <div class="sticky top-0 z-100">
-                        <div
-                            class="w-full h-20 px-6 bg-slate-900 border-b flex items-center justify-between">
-    
-                            <!-- right navbar -->
-                            <div class="flex items-center relative">
-                            <!--
-                            <button
-                                class="bg-transparent hover:bg-red-500 text-red-700 font-semibold hover:text-white py-2 px-4 border border-red-500 hover:border-transparent rounded shadow">
-                                Logout
-                            </button>
-                            -->
-                            </div>
-                        </div>
-                    </div>
-                    @* navbar end *@
-    
-                    <div class="p-6 bg-gray-100 mb-20 h-auto">
-                        @RenderBody()
-                    </div>
-                </div>
-            </div>
-        </div>
+        <button class="mobile-menu-button p-4 focus:outline-none focus:bg-gray-700">
+            <svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+            </svg>
+        </button>
     </div>
+    <!-- mobile menu end -->
+
+    <!-- sidebar -->
+    <div
+        class="z-100 side-bar w-60 lg:block bg-dark space-y-6 py-7 px-2 absolute inset-y-0 left-0 transform -translate-x-full md:relative md:translate-x-0 transition duration-200 ease-in-out">
+        <div
+            class="w-full flex px-4 pr-6 my-auto items-center justify-start ">
+            <img src="/images/logo.png" class="h-12 w-12"/>
+            <a class="font-semibold text-2xl text-gray-400 pl-4" asp-action="Index" asp-controller="Home">
+                Living Lab
+            </a>
+        </div>
+        <ul class="relative">
+            <li class="@Html.ActiveClass("Home", "Index") relative hover:bg-highlight hover:text-gray-700 ease-in duration-300">
+                <a
+                    class="mt-14 hover:translate-x-2 transition-transform ease-in duration-300 w-full flex items-center h-10 pl-4 cursor-pointer"
+                    asp-controller="Home" asp-action="Index">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 mr-2" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <rect x="2" y="2" width="20" height="8" rx="2" ry="2"></rect>
+                        <rect x="2" y="14" width="20" height="8" rx="2" ry="2"></rect>
+                        <line x1="6" y1="6" x2="6.01" y2="6"></line>
+                        <line x1="6" y1="18" x2="6.01" y2="18"></line>
+                    </svg>
+                    <span>Dashboard</span>
+                </a>
+            </li>
+
+            <!--All Labs-->
+            <div class="mt-16">
+                <span class="text-gray-400 px-5">All Labs</span>
+                <hr class="mt-2 mb-4 border-gray-600"/>
+                <li class="@Html.ActiveClass("", "") relative hover:bg-highlight hover:text-gray-700 ease-in duration-300">
+                    <a
+                        class="hover:translate-x-2 transition-transform ease-in duration-300 w-full flex items-center h-10 pl-4 cursor-pointer"
+                        asp-controller="" asp-action="">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 mr-2" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M21.21 15.89A10 10 0 1 1 8 2.83"></path>
+                            <path d="M22 12A10 10 0 0 0 12 2v10z"></path>
+                        </svg>
+                        <span>SIT-LAB1A</span>
+                    </a>
+                </li>
+                <li class="@Html.ActiveClass("", "") relative hover:bg-highlight hover:text-gray-700 ease-in duration-300">
+                    <a
+                        class="hover:translate-x-2 transition-transform ease-in duration-300 w-full flex items-center h-10 pl-4 cursor-pointer"
+                        asp-controller="" asp-action="">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 mr-2" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M21.21 15.89A10 10 0 1 1 8 2.83"></path>
+                            <path d="M22 12A10 10 0 0 0 12 2v10z"></path>
+                        </svg>
+                        <span>SIT-LAB2A</span>
+                    </a>
+                </li>
+            </div>
+            <!--All Labs End-->
+            <!--Logs-->
+            <div class="mt-16">
+                <span class="text-gray-400 px-5">Logs</span>
+                <hr class="mt-2 mb-4 border-gray-600"/>
+                <li class="@Html.ActiveClass("", "") relative hover:bg-highlight hover:text-gray-700 ease-in duration-300">
+                    <a
+                        class="hover:translate-x-2 transition-transform ease-in duration-300 w-full flex items-center h-10 pl-4 cursor-pointer"
+                        asp-controller="" asp-action="">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582-4 8-4s8 1.79 8 4m0 5c0 2.21-3.582 4-8 4s-8-1.79-8-4"/>
+                        </svg>
+                        <span>Automatic Logging</span>
+                    </a>
+                </li>
+                <li class="@Html.ActiveClass("ManualLogs", "Index") relative hover:bg-highlight hover:text-gray-700 ease-in duration-300">
+                    <a
+                        class="hover:translate-x-2 transition-transform ease-in duration-300 w-full flex items-center h-10 pl-4 cursor-pointer"
+                        asp-controller="ManualLogs" asp-action="Index">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582-4 8-4s8 1.79 8 4m0 5c0 2.21-3.582 4-8 4s-8-1.79-8-4"/>
+                        </svg>
+                        <span>My Logs</span>
+                    </a>
+                </li>
+            </div>
+            <!--Logs End-->
+            <!--Settings-->
+            <div class="mt-16">
+                <span class="text-gray-400 px-5">Settings</span>
+                <hr class="mt-2 mb-4 border-gray-600"/>
+                <li class="@Html.ActiveClass("", "") relative hover:bg-highlight hover:text-gray-700 ease-in duration-300">
+                    <a
+                        class="hover:translate-x-2 transition-transform ease-in duration-300 w-full flex items-center h-10 pl-4 cursor-pointer"
+                        asp-controller="" asp-action="">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 mr-2" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M22 17H2a3 3 0 0 0 3-3V9a7 7 0 0 1 14 0v5a3 3 0 0 0 3 3zm-8.27 4a2 2 0 0 1-3.46 0"></path>
+                        </svg>
+                        <span>Notifications</span>
+                    </a>
+                </li>
+                <li class="@Html.ActiveClass("", "") relative hover:bg-highlight hover:text-gray-700 ease-in duration-300">
+                    <a
+                        class="hover:translate-x-2 transition-transform ease-in duration-300 w-full flex items-center h-10 pl-4 cursor-pointer"
+                        asp-controller="" asp-action="">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 mr-2" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="12" cy="12" r="3"></circle>
+                            <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
+                        </svg>
+                        <span>Device Settings</span>
+                    </a>
+                </li>
+            </div>
+            <!--Settings End-->
+        </ul>
+    </div>
+    <!-- end sidebar -->
+
+    <!-- start content -->
+    <div id="main-content" class="flex-1 mt-16 px-20 py-10 bg-gray-100 min-h-screen">
+        @RenderBody()
+    </div>
+    <!-- end content -->
+</div>
+
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>

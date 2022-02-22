@@ -2,7 +2,7 @@
 
 function showAlert() {
     Swal.fire({
-        title: 'Select Upload Type',
+        title: 'Choose Upload Type',
         input: 'select',
         inputOptions: {
             uploadfiles: 'Upload File',

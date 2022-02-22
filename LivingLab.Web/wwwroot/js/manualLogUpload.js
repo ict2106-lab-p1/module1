@@ -1,7 +1,16 @@
-﻿const template = `<tr class="whitespace-nowrap">
-                    <td class="text-center">{index}</td>
-                    <td class="deviceCategory text-center shadow appearance-none border text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
-                        <select>
+﻿const template = `<div class="log-div mt-5 flex flex-col bg-white p-5 shadow-lg rounded gap-4">
+                    <div class="flex justify-end">
+                        <button type="button" class="delete text-red-500 hover:bg-red-100 hover:scale-125 rounded-full p-2 ease-in-out duration-500">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="inherit" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <line x1="18" y1="6" x2="6" y2="18"></line>
+                                <line x1="6" y1="6" x2="18" y2="18"></line>
+                            </svg>
+                        </button>
+                    </div>
+                <div class="flex flex-col lg:flex-row justify-between space-y-2 lg:space-x-3">
+                    <div class="flex flex-row lg:flex-col justify-center space-x-2 lg:space-y-2">
+                        <h3 class="text-center text-gray-600 m-auto lg:m-0">Device Category</h3>
+                        <select class="deviceCategory select w-full max-w-xs select-bordered">
                             <option>Microprocessors</option>
                             <option>AR/VR Devices</option>
                             <option>Smart Sensors</option>
@@ -9,13 +18,25 @@
                             <option>Meters and Monitoring Systems</option>
                             <option>Others</option>
                         </select>
-                    </td>
-                    <td><input class="deviceId text-center shadow appearance-none border w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" name="Serial Number" id="deviceId" type="text" placeholder="Enter Device Serial No." /></td>
-                        <td><input class="energyUsage text-center shadow appearance-none border w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" name="Energy Usage" type="number" value="energyUsage" placeholder="Enter Energy Usage (J)" required/></td>
-                        <td><input class="duration text-center shadow appearance-none border w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" name="Interval" type="number" value="duration" placeholder="Enter Interval (min)" required/></td>
-                        <td><input class="loggedAt text-center shadow appearance-none border w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" name="Logged At" type="datetime-local" value="loggedAt" placeholder="Enter Logged At Datetime" required/></td>
-                        <td><button type="button" class="delete m-2 px-4 py-1 text-lg text-white bg-red-400 rounded" data-index="{index}">Delete</button></td>
-                </tr>`;
+                    </div>
+                    <div class="flex flex-row lg:flex-col justify-center space-x-2 lg:space-y-2">
+                        <h3 class="text-center text-gray-600 m-auto lg:m-0">Serial No.</h3>
+                        <input class="deviceId input input-bordered w-full max-w-xs" name="Serial Number" id="deviceId" type="text" placeholder="Enter Device Serial No." />
+                    </div>
+                    <div class="flex flex-row lg:flex-col justify-center space-x-2 lg:space-y-2">
+                        <h3 class="text-center text-gray-600 m-auto lg:m-0">Energy Usage (J)</h3>
+                        <input class="energyUsage input input-bordered w-full max-w-xs" name="Energy Usage" type="number" value="energyUsage" placeholder="Enter Energy Usage (J)" required/>
+                    </div>
+                    <div class="flex flex-row lg:flex-col justify-center space-x-2 lg:space-y-2">
+                        <h3 class="text-center text-gray-600 m-auto lg:m-0">Duration (min)</h3>
+                        <input class="interval input input-bordered w-full max-w-xs" name="Interval" type="number" value="interval" placeholder="Enter Interval (min)" required/>
+                    </div>
+                    <div class="flex flex-row lg:flex-col justify-center space-x-2 lg:space-y-2">
+                        <h3 class="text-center text-gray-600 m-auto lg:m-0">Logged At</h3>
+                        <input class="loggedAt input input-bordered w-full max-w-xs" name="Logged At" type="datetime-local" value="loggedAt" placeholder="Enter Logged At Datetime" required/>
+                    </div>
+                </div>
+                </div>`
 
 /**
  * When DOM is ready for JS code to execute.
@@ -28,11 +49,15 @@ $(document).ready(function (){
 })
 
 /**
- * Appends a row of input at the bottom of the table.
+ * Appends a new div for input.
  */
 function appendRow() {
-    const index = $("#logTable tbody tr").length + 1;
-    $("#logTable tr:last").after(template.replaceAll("{index}", index));
+    const $form = $("#manualLogForm");
+    
+    if ($form.find("div.log-div").length === 0)
+        $form.prepend(template);
+    else 
+        $form.find("div.log-div:last").after(template);
 }
 
 /**
@@ -40,11 +65,7 @@ function appendRow() {
  * and update the row number accordingly.
  */
 function deleteRow() {
-    $(this).closest("tr").remove();
-
-    $("#logTable tbody tr").each(function(i) {
-        $(this).find("td:first").text(i + 1);
-    })
+    $(this).closest("div.log-div").remove();
 }
 
 /**
@@ -103,26 +124,24 @@ function save(e) {
             });
         }
     })
-
-   
 }
 
 /**
- * Retrieve values from each row in the table.
+ * Retrieve values from each row in the form.
  *
  * @returns Array of objects containing the data.
  */
 function getData() {
     let data = [];
-    const $table = $("#logTable");
-    const $rows = $table.find("tbody > tr");
+    const $form = $("#manualLogForm");
+    const $rows = $form.find("div.log-div");
 
     $rows.each(function () {
-        const deviceCategory = $(this).find("td.deviceCategory").find(":selected").text();
-        const deviceId = $(this).find("td > input.deviceId").val();
-        const energyUsage = $(this).find("td > input.energyUsage").val();
-        const interval = $(this).find("td > input.energyUsage").val();
-        const loggedAt = $(this).find("td > input.loggedAt").val();
+        const deviceCategory = $(this).find("select.deviceCategory").find(":selected").text();
+        const deviceId = $(this).find("input.deviceId").val();
+        const energyUsage = $(this).find("input.energyUsage").val();
+        const interval = $(this).find("input.interval").val();
+        const loggedAt = $(this).find("input.loggedAt").val();
 
         data.push({
             DeviceCategory: deviceCategory,
