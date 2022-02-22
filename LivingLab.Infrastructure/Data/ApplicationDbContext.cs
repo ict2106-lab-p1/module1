@@ -31,6 +31,8 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
 
         // More info: https://docs.microsoft.com/en-us/ef/core/modeling/
         new TodoConfiguration().Configure(modelBuilder.Entity<Todo>());
+        // new EnergyUsageLogConfiguration().Configure(modelBuilder.Entity<EnergyUsageLog>());
+        new NotificationsConfiguration().Configure(modelBuilder.Entity<ApplicationUser>());
 
         // Rename ASP.NET Identity tables
         modelBuilder.Entity<ApplicationUser>(e => e.ToTable("Users"));
