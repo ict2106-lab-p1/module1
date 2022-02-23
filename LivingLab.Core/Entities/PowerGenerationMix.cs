@@ -9,4 +9,6 @@ public class PowerGenerationMix: BaseEntity
     public double PercentContribution { get; set; }
     [Required]
     public double CO2PerUnitEnergy { get; set; }
+    [Required]
+    public DateTime LastUpdated { get; set; }
 }
