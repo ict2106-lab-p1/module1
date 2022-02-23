@@ -3,6 +3,7 @@ using System;
 using LivingLab.Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,61 +11,13 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace LivingLab.Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220216160804_SeedLabs")]
+    partial class SeedLabs
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "6.0.1");
-
-            modelBuilder.Entity("ApplicationUserEmailLog", b =>
-                {
-                    b.Property<int>("NotificationEmailsId")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<string>("UsersId")
-                        .HasColumnType("TEXT");
-
-                    b.HasKey("NotificationEmailsId", "UsersId");
-
-                    b.HasIndex("UsersId");
-
-                    b.ToTable("ApplicationUserEmailLog");
-                });
-
-            modelBuilder.Entity("ApplicationUserSmsLog", b =>
-                {
-                    b.Property<int>("NotificationSmsesId")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<string>("UsersId")
-                        .HasColumnType("TEXT");
-
-                    b.HasKey("NotificationSmsesId", "UsersId");
-
-                    b.HasIndex("UsersId");
-
-                    b.ToTable("ApplicationUserSmsLog");
-                });
-
-            modelBuilder.Entity("LivingLab.Core.Entities.CarbonFootprintEstimation", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
-
-                    b.Property<double>("CO2Emission")
-                        .HasColumnType("REAL");
-
-                    b.Property<int>("EnergyUsageLogId")
-                        .HasColumnType("INTEGER");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("EnergyUsageLogId");
-
-                    b.ToTable("CarbonFootprintEstimations");
-                });
 
             modelBuilder.Entity("LivingLab.Core.Entities.Device", b =>
                 {
@@ -160,31 +113,6 @@ namespace LivingLab.Infrastructure.Migrations
                         });
                 });
 
-            modelBuilder.Entity("LivingLab.Core.Entities.EmailLog", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
-
-                    b.Property<DateTime>("LoggedDate")
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("Message")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
-
-                    b.Property<int>("Status")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<string>("Subject")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("EmailLogs");
-                });
-
             modelBuilder.Entity("LivingLab.Core.Entities.EnergyUsageLog", b =>
                 {
                     b.Property<int>("Id")
@@ -198,7 +126,8 @@ namespace LivingLab.Infrastructure.Migrations
                         .IsRequired()
                         .HasColumnType("REAL");
 
-                    b.Property<TimeSpan>("Interval")
+                    b.Property<TimeSpan?>("Interval")
+                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.Property<int>("LabId")
@@ -207,7 +136,8 @@ namespace LivingLab.Infrastructure.Migrations
                     b.Property<string>("LoggedById")
                         .HasColumnType("TEXT");
 
-                    b.Property<DateTime>("LoggedDate")
+                    b.Property<DateTime?>("LoggedDate")
+                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.HasKey("Id");
@@ -219,33 +149,6 @@ namespace LivingLab.Infrastructure.Migrations
                     b.HasIndex("LoggedById");
 
                     b.ToTable("EnergyUsageLogs");
-                });
-
-            modelBuilder.Entity("LivingLab.Core.Entities.EnergyUsagePredictionLog", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int>("DeviceId")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<double>("EstimatedUsage")
-                        .HasColumnType("REAL");
-
-                    b.Property<int>("LabId")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<DateTime>("LoggedDate")
-                        .HasColumnType("TEXT");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("DeviceId");
-
-                    b.HasIndex("LabId");
-
-                    b.ToTable("EnergyUsagePredictions");
                 });
 
             modelBuilder.Entity("LivingLab.Core.Entities.Identity.ApplicationUser", b =>
@@ -324,7 +227,8 @@ namespace LivingLab.Infrastructure.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
-                    b.Property<double>("Area")
+                    b.Property<double?>("Area")
+                        .IsRequired()
                         .HasColumnType("REAL");
 
                     b.HasKey("Id");
@@ -352,51 +256,6 @@ namespace LivingLab.Infrastructure.Migrations
                             Id = 4,
                             Area = 12.0
                         });
-                });
-
-            modelBuilder.Entity("LivingLab.Core.Entities.PowerGenerationMix", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
-
-                    b.Property<double>("CO2PerUnitEnergy")
-                        .HasColumnType("REAL");
-
-                    b.Property<string>("FuelName")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
-
-                    b.Property<DateTime>("LastUpdated")
-                        .HasColumnType("TEXT");
-
-                    b.Property<double>("PercentContribution")
-                        .HasColumnType("REAL");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("PowerGenerationMix");
-                });
-
-            modelBuilder.Entity("LivingLab.Core.Entities.SmsLog", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
-
-                    b.Property<DateTime>("LoggedDate")
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("Message")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
-
-                    b.Property<int>("Status")
-                        .HasColumnType("INTEGER");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("SmsLogs");
                 });
 
             modelBuilder.Entity("LivingLab.Core.Entities.Todo", b =>
@@ -550,47 +409,6 @@ namespace LivingLab.Infrastructure.Migrations
                     b.ToTable("UserToken", (string)null);
                 });
 
-            modelBuilder.Entity("ApplicationUserEmailLog", b =>
-                {
-                    b.HasOne("LivingLab.Core.Entities.EmailLog", null)
-                        .WithMany()
-                        .HasForeignKey("NotificationEmailsId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("LivingLab.Core.Entities.Identity.ApplicationUser", null)
-                        .WithMany()
-                        .HasForeignKey("UsersId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("ApplicationUserSmsLog", b =>
-                {
-                    b.HasOne("LivingLab.Core.Entities.SmsLog", null)
-                        .WithMany()
-                        .HasForeignKey("NotificationSmsesId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("LivingLab.Core.Entities.Identity.ApplicationUser", null)
-                        .WithMany()
-                        .HasForeignKey("UsersId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("LivingLab.Core.Entities.CarbonFootprintEstimation", b =>
-                {
-                    b.HasOne("LivingLab.Core.Entities.EnergyUsageLog", "EnergyUsageLog")
-                        .WithMany()
-                        .HasForeignKey("EnergyUsageLogId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("EnergyUsageLog");
-                });
-
             modelBuilder.Entity("LivingLab.Core.Entities.EnergyUsageLog", b =>
                 {
                     b.HasOne("LivingLab.Core.Entities.Device", "Device")
@@ -614,25 +432,6 @@ namespace LivingLab.Infrastructure.Migrations
                     b.Navigation("Lab");
 
                     b.Navigation("LoggedBy");
-                });
-
-            modelBuilder.Entity("LivingLab.Core.Entities.EnergyUsagePredictionLog", b =>
-                {
-                    b.HasOne("LivingLab.Core.Entities.Device", "Device")
-                        .WithMany()
-                        .HasForeignKey("DeviceId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("LivingLab.Core.Entities.Lab", "Lab")
-                        .WithMany()
-                        .HasForeignKey("LabId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Device");
-
-                    b.Navigation("Lab");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

@@ -42,5 +42,7 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
         modelBuilder.Entity<IdentityUserLogin<string>>().ToTable("UserLogin");
         modelBuilder.Entity<IdentityRoleClaim<string>>().ToTable("RoleClaim");
         modelBuilder.Entity<IdentityUserToken<string>>().ToTable("UserToken");
+
+        modelBuilder.Seed();
     }
 }

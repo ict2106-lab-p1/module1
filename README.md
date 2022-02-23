@@ -1,10 +1,8 @@
-## Creating a new branch (from dev branch)
-- `$ git checkout -b <[group-number]-[issue-id]-[feature]> dev`
-- example: `$ git checkout -b g1-50-file-processing dev`
-- example: `$ git checkout -b g2-100-dashboard dev`
+Refer to WORKFLOW.md for instructions on the development flow.
 
 ## Getting started
-- Have Node >v16
+- Download .NET Core 6.0
+- Have Node >v 16
 - Run `npm install` 
 
 ## Running

@@ -1,7 +1,7 @@
 using System.ComponentModel.DataAnnotations;
 
 namespace LivingLab.Core.Entities;
-public class Device: BaseEntity
+public class Device : BaseEntity
 {
     [Required]
     public string DeviceSerialNumber { get; set; } = null!;

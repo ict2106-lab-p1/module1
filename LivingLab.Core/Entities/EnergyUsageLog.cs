@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 using LivingLab.Core.Entities.Identity;
 
 namespace LivingLab.Core.Entities;
-public class EnergyUsageLog: BaseEntity
+public class EnergyUsageLog : BaseEntity
 {
     [Required]
     public double? EnergyUsage { get; set; }
