@@ -98,12 +98,14 @@ namespace LivingLab.Infrastructure.Migrations
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Message")
+                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.Property<int>("Status")
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("Subject")
+                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.HasKey("Id");
@@ -124,8 +126,7 @@ namespace LivingLab.Infrastructure.Migrations
                         .IsRequired()
                         .HasColumnType("REAL");
 
-                    b.Property<TimeSpan?>("Interval")
-                        .IsRequired()
+                    b.Property<TimeSpan>("Interval")
                         .HasColumnType("TEXT");
 
                     b.Property<int>("LabId")
@@ -134,8 +135,7 @@ namespace LivingLab.Infrastructure.Migrations
                     b.Property<string>("LoggedById")
                         .HasColumnType("TEXT");
 
-                    b.Property<DateTime?>("LoggedDate")
-                        .IsRequired()
+                    b.Property<DateTime>("LoggedDate")
                         .HasColumnType("TEXT");
 
                     b.HasKey("Id");
@@ -158,15 +158,13 @@ namespace LivingLab.Infrastructure.Migrations
                     b.Property<int>("DeviceId")
                         .HasColumnType("INTEGER");
 
-                    b.Property<double?>("EstimatedUsage")
-                        .IsRequired()
+                    b.Property<double>("EstimatedUsage")
                         .HasColumnType("REAL");
 
                     b.Property<int>("LabId")
                         .HasColumnType("INTEGER");
 
-                    b.Property<DateTime?>("LoggedDate")
-                        .IsRequired()
+                    b.Property<DateTime>("LoggedDate")
                         .HasColumnType("TEXT");
 
                     b.HasKey("Id");
@@ -254,8 +252,7 @@ namespace LivingLab.Infrastructure.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
-                    b.Property<double?>("Area")
-                        .IsRequired()
+                    b.Property<double>("Area")
                         .HasColumnType("REAL");
 
                     b.HasKey("Id");
@@ -276,6 +273,9 @@ namespace LivingLab.Infrastructure.Migrations
                         .IsRequired()
                         .HasColumnType("TEXT");
 
+                    b.Property<DateTime>("LastUpdated")
+                        .HasColumnType("TEXT");
+
                     b.Property<double>("PercentContribution")
                         .HasColumnType("REAL");
 
@@ -294,6 +294,7 @@ namespace LivingLab.Infrastructure.Migrations
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Message")
+                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.Property<int>("Status")

@@ -35,8 +35,8 @@ namespace LivingLab.Infrastructure.Migrations
                 {
                     Id = table.Column<int>(type: "INTEGER", nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
-                    Message = table.Column<string>(type: "TEXT", nullable: true),
-                    Subject = table.Column<string>(type: "TEXT", nullable: true),
+                    Message = table.Column<string>(type: "TEXT", nullable: false),
+                    Subject = table.Column<string>(type: "TEXT", nullable: false),
                     Status = table.Column<int>(type: "INTEGER", nullable: false),
                     LoggedDate = table.Column<DateTime>(type: "TEXT", nullable: false)
                 },
@@ -81,7 +81,8 @@ namespace LivingLab.Infrastructure.Migrations
                         .Annotation("Sqlite:Autoincrement", true),
                     FuelName = table.Column<string>(type: "TEXT", nullable: false),
                     PercentContribution = table.Column<double>(type: "REAL", nullable: false),
-                    CO2PerUnitEnergy = table.Column<double>(type: "REAL", nullable: false)
+                    CO2PerUnitEnergy = table.Column<double>(type: "REAL", nullable: false),
+                    LastUpdated = table.Column<DateTime>(type: "TEXT", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -94,7 +95,7 @@ namespace LivingLab.Infrastructure.Migrations
                 {
                     Id = table.Column<int>(type: "INTEGER", nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
-                    Message = table.Column<string>(type: "TEXT", nullable: true),
+                    Message = table.Column<string>(type: "TEXT", nullable: false),
                     Status = table.Column<int>(type: "INTEGER", nullable: false),
                     LoggedDate = table.Column<DateTime>(type: "TEXT", nullable: false)
                 },
