@@ -4,5 +4,5 @@ namespace LivingLab.Core.Entities;
 public class Lab : BaseEntity
 {
     [Required]
-    public double? Area { get; set; }
+    public double Area { get; set; }
 }
