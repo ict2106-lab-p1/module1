@@ -1,7 +1,6 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
 @layer components {
     .z-100 {
         z-index: 100;
@@ -10,12 +9,12 @@
 
 body {
     font-family: "Nunito Sans", sans-serif;
-    @apply bg-gray-100;
+    @apply bg-inherit;
 }
 
-    body::-webkit-scrollbar {
-        display: none;
-    }
+body::-webkit-scrollbar {
+    display: none;
+}
 
 .overlay {
     position: relative;
