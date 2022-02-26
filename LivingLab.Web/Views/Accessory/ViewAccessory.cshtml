@@ -1,0 +1,39 @@
+@model LivingLab.Web.ViewModels.ViewAccessoryViewModel
+
+@{
+ViewData["Title"] = "Manage Accessory";
+}
+
+<h1 class="text-2xl"> Manage Accessory</h1>
+<h2 class="text-lg"> NYP-SR7C </h2>
+
+<table id="table_id" class="display">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Description</th>
+            <th>Cost</th>
+            <th>Validity Date</th>
+            <th>Status</th>
+            <th>Borrowable</th>
+            <th></th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var accessory in Model.AccessoryList) {
+            <tr>
+                <td> @accessory.Id </td>
+                <td> @accessory.AccessoryType.Name </td>
+                <td> @accessory.AccessoryType.Description </td>
+                <td> @accessory.AccessoryType.Cost </td>
+                <td> @accessory.ValidityDate.ToString("MM/dd/yyyy")  </td>
+                <td> @accessory.status</td>
+                <td> @accessory.AccessoryType.Borrowable</td>
+                <td></td>
+                <td></td>
+            </tr>
+        }
+    </tbody>
+</table>
