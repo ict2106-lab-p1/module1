@@ -20,6 +20,16 @@ body::-webkit-scrollbar {
     position: relative;
 }
 
+.btn {
+    @apply font-bold py-2 px-4 rounded;
+}
+.btn-blue {
+    @apply bg-denim-600 text-white;
+}
+.btn-blue:hover {
+    @apply bg-blue-700;
+}
+
 @media only screen and (max-width: 1023px) {
     .overlay:after {
         content: " ";
