@@ -1,39 +1,53 @@
 ﻿@model LivingLab.Web.ViewModels.ViewDeviceViewModel
 
 @{
-ViewData["Title"] = "Manage Device";
+    ViewData["Title"] = "Manage Device";
 }
 
-<h1 class="text-2xl"> Manage Devices</h1>
-<h2 class="text-lg"> NYP-SR7C </h2>
+<div class="grid grid-cols-2 mb-2">
+    <div>
+        <h3 class="text-lg"> NYP-SR7C </h3>
+        <h1 class="text-2xl"> Manage Devices</h1>
+
+    </div>
+
+    <div class="justify-self-end">
+        <button id="btn_addDevice" class="btn-primary py-2 px-4 rounded shadow">
+            Add Device
+        </button>
+    </div>
+</div>
+<hr class="mb-4"/>
+
 
 <table id="table_id" class="display">
     <thead>
-        <tr>
-            <th>ID</th>
-            <th>Name</th>
-            <th>Description</th>
-            <th>Serial Num</th>
-            <th>Cost</th>
-            <th>LastUpdated</th>
-            <th>Qty</th>
-            <th></th>
-            <th></th>
-        </tr>
+    <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Description</th>
+        <th>Serial Num</th>
+        <th>Cost</th>
+        <th>LastUpdated</th>
+        <th>Qty</th>
+        <th></th>
+        <th></th>
+    </tr>
     </thead>
     <tbody>
-        @foreach (var device in Model.DeviceList) {
-            <tr>
-                <td> @device.Id </td>
-                <td> @device.DeviceType.Name </td>
-                <td> @device.DeviceType.Description </td>
-                <td> @device.serialNo </td>
-                <td> @device.DeviceType.Cost </td>
-                <td> @device.ValidityDate.ToString("MM/dd/yyyy")  </td>
-                <td> 1 </td>
-                <td></td>
-                <td></td>
-            </tr>
-        }
+    @foreach (var device in Model.DeviceList)
+    {
+        <tr>
+            <td> @device.Id </td>
+            <td> @device.DeviceType.Name </td>
+            <td> @device.DeviceType.Description </td>
+            <td> @device.serialNo </td>
+            <td> @device.DeviceType.Cost </td>
+            <td> @device.ValidityDate.ToString("MM/dd/yyyy") </td>
+            <td> 1 </td>
+            <td></td>
+            <td></td>
+        </tr>
+    }
     </tbody>
 </table>
