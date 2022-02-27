@@ -28,13 +28,6 @@ public class HomeController : Controller
         return View("Privacy");
     }
 
-   [Route("ViewDevice")]
-    public IActionResult ViewDevice()
-    {
-        return View("ViewDevice");
-    }
-
-
 
     [Route("example")]
     public IActionResult ExamplePage()
