@@ -9,5 +9,5 @@ public class AccessoryViewModel
     public DateTime ValidityDate { get; set; }
 
     public Lab? Lab { get; set; }
-    public AccessoryType AccessoryType { get; set; }
+    public AccessoryType? AccessoryType { get; set; }
 }
