@@ -27,5 +27,11 @@ public class MappingProfile : Profile
 
         // ViewModel/ApiModel to Domain
         CreateMap<DeviceViewModel, Device>();
+
+        // Domain to ViewModel/ApiModel (Accessory)
+        CreateMap<Accessory, AccessoryViewModel>();
+
+        // ViewModel/ApiModel to Domain (Accessory)
+        CreateMap<AccessoryViewModel, Accessory>();
     }
 }
