@@ -21,5 +21,12 @@ public class DeviceRepository : Repository<Device>, IDeviceRepository
         List<Device> devices = await _context.Device.Include(d => d.DeviceType).ToListAsync();
         return devices;
     }
+    
+    public async Task<Device> GetDeviceDetails(int id)
+    {
+        // retrieve device db together with device type details using include to join entities
+        List<Device> devices = await _context.Device.Include(d => d.DeviceType).ToListAsync();
+        return devices[id];
+    }
 
 }

@@ -3,3 +3,7 @@
 @tailwind utilities;
 
 .dataTables_wrapper .myfilter .dataTables_filter{float:left}
+
+#overlay {
+    z-index: 999;
+}

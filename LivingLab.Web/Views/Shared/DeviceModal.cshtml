@@ -1,57 +1,8 @@
-﻿@model LivingLab.Web.ViewModels.ViewDeviceViewModel
+@model LivingLab.Web.ViewModels.DeviceViewModel
 
 @{
-    ViewData["Title"] = "Manage Device";
+    ViewData["Title"] = "Add/Edit Device";
 }
-
-<link rel="Stylesheet" href="~/css/viewDevice.css" type="text/css" xmlns="http://www.w3.org/1999/html"/>
-
-<div class="grid grid-cols-2 mb-2">
-    <div>
-        <h3 class="text-lg"> NYP-SR7C </h3>
-        <h1 class="text-2xl"> Manage Devices</h1>
-
-    </div>
-
-    <div class="justify-self-end">
-        <button id="addDeviceBtn" class="bg-purple-500 hover:bg-purple-700 text-white font-bold py-2 px-8 rounded">
-            Add device
-        </button>
-    </div>
-</div>
-<hr class="mb-4"/>
-
-<table id="table_id" class="display">
-    <thead>
-    <tr>
-        <th>ID</th>
-        <th>Name</th>
-        <th>Description</th>
-        <th>Serial Num</th>
-        <th>Cost</th>
-        <th>Last Updated</th>
-        <th>Qty</th>
-        <th></th>
-        <th></th>
-    </tr>
-    </thead>
-    <tbody>
-    @foreach (var device in Model.DeviceList)
-    {
-        <tr>
-            <td> @device.Id </td>
-            <td> @device.DeviceType.Name </td>
-            <td> @device.DeviceType.Description </td>
-            <td> @device.SerialNo </td>
-            <td> @device.DeviceType.Cost </td>
-            <td> @device.ValidityDate.ToString("MM/dd/yyyy") </td>
-            <td> 1 </td>
-            <td data-id="@device.Id"> </td>
-            <td data-id="@device.Id"> </td>
-        </tr>
-    }
-    </tbody>
-</table>
 
 <div class="bg-black bg-opacity-50 absolute inset-0 hidden justify-center items-center" id="overlay">
     <div class="bg-white max-w-lg py-4 px-4 rounded shadow-xl text-gray-800">
@@ -155,26 +106,3 @@
         </div>
     </div>
 </div>
-
-<script>
-    window.addEventListener('DOMContentLoaded', () =>{
-        const overlay = document.querySelector('#overlay')
-        const addBtn = document.querySelector('#addDeviceBtn')
-        const closeBtn = document.querySelector('#close-modal')
-
-        const toggleModal = () => {
-            overlay.classList.toggle('hidden')
-            overlay.classList.toggle('flex')
-        }
-
-        addBtn.addEventListener('click', toggleModal)
-
-        closeBtn.addEventListener('click', toggleModal)
-    })
-</script>
-
-
-@section Scripts
-{
-    <script src="~/js/viewDevice.js"></script>
-}

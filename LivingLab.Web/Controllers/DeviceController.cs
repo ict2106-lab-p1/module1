@@ -38,6 +38,22 @@ public class DeviceController : Controller
         viewDevices.DeviceList = devices;
         return View("ViewDevice", viewDevices);
     }
+    
+    [Route("view/{id}")]
+    public async Task<IActionResult> EditDevice(int id)
+    { 
+        //retrieve data from db
+        Device device = await _deviceRepository.GetDeviceDetails(id);
+        DeviceViewModel Device = _mapper.Map<Device, DeviceViewModel> (device);
+        Console.WriteLine(Device.Id);
+        Console.WriteLine(Device.DeviceType.Name);
+        Console.WriteLine(Device.DeviceType.Description);
+        Console.WriteLine(Device.DeviceType.Cost);
+        Console.WriteLine(Device.SerialNo);
+        
+
+        return View("DeviceDetails", Device);
+    }
 
     [HttpGet]
     public async Task<IActionResult> GetAll()

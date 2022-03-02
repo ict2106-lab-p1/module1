@@ -17,4 +17,7 @@ public class Device : BaseEntity
     public int DeviceTypeId { get; set; }
     public Lab? Lab { get; set; }
     public DeviceType? DeviceType { get; set; }
+    
+
+    // public string? Status { get; set; }
 }
