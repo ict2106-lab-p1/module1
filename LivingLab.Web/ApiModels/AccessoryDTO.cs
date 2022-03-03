@@ -11,4 +11,6 @@ public class AccessoryDTO
 
     public Lab Lab { get; set; }
     public AccessoryType AccessoryType { get; set; }
+
+    public int Quantity { get; set; }
 }

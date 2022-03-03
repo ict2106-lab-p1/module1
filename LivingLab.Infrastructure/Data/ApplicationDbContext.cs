@@ -72,14 +72,16 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
 
         // Accessory and Accessory Types
         modelBuilder.Entity<AccessoryType>().HasData(
-        new { Id = 1, Name = "Camera", Cost = 499.0, Borrowable = true, Description = "It''s purpose is to capture images and videos" },
-        new { Id = 2, Name = "Ultrasonic Sensor", Borrowable = true, Cost = 1.0, Description = "It''s purpose is to detect obstacles"},
-        new { Id = 3, Name = "Humidity Sensor", Borrowable = true, Cost = 3.0, Description = "It''s purpose is to detect humidity in the environment"},
-        new { Id = 4, Name = "Water pressure Sensor", Borrowable = true, Cost = 7.0, Description = "It''s purpose is to detect water pressure"},
-        new { Id = 5, Name = "IR Sensor", Borrowable = true, Cost = 2.0, Description = "It is used to switch on the lights in the lab"},
-        new { Id = 6, Name = "Proximity Sensor", Borrowable = true, Cost = 14.0, Description = "It''s purpose is to detect proximity of an obstacle"},
-        new { Id = 7, Name = "LED Lights", Borrowable = false, Cost = 10.0, Description = "It''s purpose is to emit light"},
-        new { Id = 8, Name = "Buzzer", Borrowable = true, Cost = 1.0, Description = "It''s purpose is to emit sound from the device"}
+        new { Id = 1, Name = "Camera", Borrowable = true, Type = "devices" ,Description = "It''s purpose is to capture images and videos" },
+        new { Id = 2, Name = "Ultrasonic Sensor", Borrowable = true, Type = "sensor", Description = "It''s purpose is to detect obstacles"},
+        new { Id = 3, Name = "Humidity Sensor", Borrowable = true, Type = "sensor", Description = "It''s purpose is to detect humidity in the environment"},
+        new { Id = 4, Name = "3D Printers", Borrowable = true, Type = "sensor", Description = "It''s purpose is to detect water pressure"},
+        new { Id = 5, Name = "Laptops", Borrowable = true, Type = "devices", Description = "It is used to switch on the lights in the lab"},
+        new { Id = 6, Name = "Computers", Borrowable = true, Type = "sensor", Description = "It''s purpose is to detect proximity of an obstacle"},
+        new { Id = 7, Name = "Handyman toolkits", Borrowable = false, Type = "sensor", Description = "It''s purpose is to emit light"},
+        new { Id = 8, Name = "Speaker", Borrowable = true, Type = "Audio Signal Device", Description = "It''s purpose is to emit sound from the device"},
+        new { Id = 9, Name = "Keyboard", Borrowable = false, Type = "peripheral", Description = "It''s purpose is to detect temperature in the environment"},
+        new { Id = 10, Name = "Mouse", Borrowable = false, Type = "peripheral", Description = "It''s purpose is to detect temperature in the environment"}
         );
 
         modelBuilder.Entity<Accessory>(entity => {
@@ -92,22 +94,26 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
         });
 
         modelBuilder.Entity<Accessory>().HasData(
-                new { Id = 1, status = "Available", ValidityDate = new DateTime(2024,10,10),  LabId = 1, AccessoryTypeId = 1},
-                new { Id = 2, status = "Borrowed", ValidityDate = new DateTime(2024,10,14),  LabId = 1, AccessoryTypeId = 1},
-                new { Id = 3, status = "Available", ValidityDate = new DateTime(2024,10,17),  LabId = 1, AccessoryTypeId = 2},
-                new { Id = 4, status = "Available", ValidityDate = new DateTime(2024,10,21), LabId = 1, AccessoryTypeId = 2},
-                new { Id = 5, status = "Borrowed", ValidityDate = new DateTime(2024,9,9), LabId = 1, AccessoryTypeId = 3},
-                new { Id = 6, status = "Available", ValidityDate = new DateTime(2024,9,5),  LabId = 1, AccessoryTypeId = 3},
-                new { Id = 7, status = "Available", ValidityDate = new DateTime(2024,8,1),  LabId = 1, AccessoryTypeId = 4},
-                new { Id = 8, status = "Borrowed", ValidityDate = new DateTime(2024,8,10),  LabId = 1, AccessoryTypeId = 4},
-                new { Id = 9, status = "Available", ValidityDate = new DateTime(2024,7,3),  LabId = 1, AccessoryTypeId = 5},
-                new { Id = 10, status = "Borrowed", ValidityDate = new DateTime(2024,6,24),  LabId = 1, AccessoryTypeId = 5},
-                new { Id = 11, status = "Available", ValidityDate = new DateTime(2024,7,25),  LabId = 1, AccessoryTypeId = 6},
-                new { Id = 12, status = "Available", ValidityDate = new DateTime(2024,4,3),  LabId = 1, AccessoryTypeId = 6},
-                new { Id = 13, status = "Borrowed", ValidityDate = new DateTime(2024,7,19),  LabId = 1, AccessoryTypeId = 7},
-                new { Id = 14, status = "Brrowed", ValidityDate = new DateTime(2024,12,14),  LabId = 1, AccessoryTypeId = 7},
-                new { Id = 15, status = "Available", ValidityDate = new DateTime(2024,11,12),  LabId = 1, AccessoryTypeId = 8},
-                new { Id = 16, status = "Available", ValidityDate = new DateTime(2024,7,3),  LabId = 1, AccessoryTypeId = 8}
+                new { Id = 1, Status = "Available", ValidityDate = new DateTime(2024,10,10),  LabId = 1, AccessoryTypeId = 1, Quantity = 2},
+                new { Id = 2, Status = "Borrowed", ValidityDate = new DateTime(2024,10,14),  LabId = 1, AccessoryTypeId = 1, Quantity = 2},
+                new { Id = 3, Status = "Available", ValidityDate = new DateTime(2024,10,17),  LabId = 1, AccessoryTypeId = 2, Quantity = 2},
+                new { Id = 4, Status = "Available", ValidityDate = new DateTime(2024,10,21), LabId = 1, AccessoryTypeId = 2, Quantity = 2},
+                new { Id = 5, Status = "Borrowed", ValidityDate = new DateTime(2024,9,9), LabId = 1, AccessoryTypeId = 3, Quantity = 2},
+                new { Id = 6, Status = "Available", ValidityDate = new DateTime(2024,9,5),  LabId = 1, AccessoryTypeId = 3, Quantity = 2},
+                new { Id = 7, Status = "Available", ValidityDate = new DateTime(2024,8,1),  LabId = 1, AccessoryTypeId = 4, Quantity = 2},
+                new { Id = 8, Status = "Borrowed", ValidityDate = new DateTime(2024,8,10),  LabId = 1, AccessoryTypeId = 4, Quantity = 2},
+                new { Id = 9, Status = "Available", ValidityDate = new DateTime(2024,7,3),  LabId = 1, AccessoryTypeId = 5, Quantity = 2},
+                new { Id = 10, Status = "Borrowed", ValidityDate = new DateTime(2024,6,24),  LabId = 1, AccessoryTypeId = 5, Quantity = 2},
+                new { Id = 11, Status = "Available", ValidityDate = new DateTime(2024,7,25),  LabId = 1, AccessoryTypeId = 6, Quantity = 2},
+                new { Id = 12, Status = "Available", ValidityDate = new DateTime(2024,4,3),  LabId = 1, AccessoryTypeId = 6, Quantity = 2},
+                new { Id = 13, Status = "Borrowed", ValidityDate = new DateTime(2024,7,19),  LabId = 1, AccessoryTypeId = 7, Quantity = 2},
+                new { Id = 14, Status = "Borrowed", ValidityDate = new DateTime(2024,12,14),  LabId = 1, AccessoryTypeId = 7, Quantity = 2},
+                new { Id = 15, Status = "Available", ValidityDate = new DateTime(2024,11,12),  LabId = 1, AccessoryTypeId = 8, Quantity = 2},
+                new { Id = 16, Status = "Available", ValidityDate = new DateTime(2024,7,3),  LabId = 1, AccessoryTypeId = 8, Quantity = 2},
+                new { Id = 17, Status = "Borrowed", ValidityDate = new DateTime(2024,7,3),  LabId = 1, AccessoryTypeId = 9, Quantity = 2},
+                new { Id = 18, Status = "Borrowed", ValidityDate = new DateTime(2024,7,3),  LabId = 1, AccessoryTypeId = 9, Quantity = 2},
+                new { Id = 19, Status = "Borrowed", ValidityDate = new DateTime(2024,7,3),  LabId = 1, AccessoryTypeId = 10, Quantity = 2},
+                new { Id = 20, Status = "Borrowed", ValidityDate = new DateTime(2024,7,3),  LabId = 1, AccessoryTypeId = 10, Quantity = 2}
         );
 
     }

@@ -1,18 +1,18 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+
 namespace LivingLab.Domain.Entities;
 
 public class Accessory : BaseEntity
-{
+{   
     [Required]
-    public string? status { get; set; }
-
-
+    public string? Status { get; set; }
     [Required]
     [DataType(DataType.Date)]
     [Column(TypeName="Date")]
     public DateTime ValidityDate { get; set; }
-
+    [Required]
+    public int Quantity { get; set; }
     [Required]
     public int LabId { get; set; }
     [Required]
