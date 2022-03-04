@@ -32,9 +32,8 @@ public static class ConfigureServiceContainer
         services.AddTransient<IAccessoryRepository, AccessoryRepository>();
         services.AddTransient<IAccessoryTypeRepository, AccessoryTypeRepository>();
         services.AddTransient<IDeviceRepository, DeviceRepository>();
-        services.AddTransient<IDeviceTypeRepository, DeviceTypeRepository>();
         services.AddTransient<ILabRepository, LabRepository>();
-        services.AddTransient<IReportRepository, ReportRepository>();
+        services.AddTransient<ILoggingRepository, LoggingRepository>();
     }
 
     public static void AddScopedServices(this IServiceCollection services)

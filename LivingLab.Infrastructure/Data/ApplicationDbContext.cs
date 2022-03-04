@@ -17,7 +17,7 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     public DbSet<Device> Device { get; set; }
     // public DbSet<DeviceType> DeviceType { get; set; }
     public DbSet<Lab> Lab { get; set; }
-    public DbSet<Report> Report { get; set; }
+    public DbSet<Logging> Logging { get; set; }
     public DbSet<AccessoryType> AccessoryType { get; set; }
 
     public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
@@ -70,14 +70,14 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
 
         // Accessory and Accessory Types
         modelBuilder.Entity<AccessoryType>().HasData(
-                new { Id = 1, Type = "Camera", Borrowable = true, Name = "Sony A7 IV", Description = "It''s purpose is to capture images and videos" },
-                new { Id = 2, Type = "Ultrasonic Sensor", Borrowable = true, Name = "MA300D1-1", Cost = 1.0, Description = "It''s purpose is to detect obstacles"},
-                new { Id = 3, Type = "Humidity Sensor", Borrowable = true, Name = "DHT22", Cost = 3.0, Description = "It''s purpose is to detect humidity in the environment"},
-                new { Id = 4, Type = "Water pressure Sensor", Borrowable = true, Name = "LEFOO LFT2000W", Cost = 7.0, Description = "It''s purpose is to detect water pressure"},
-                new { Id = 5, Type = "IR Sensor", Borrowable = true, Name = "RM1802", Cost = 2.0, Description = "It is used to switch on the lights in the lab"},
-                new { Id = 6, Type = "Proximity Sensor", Borrowable = true, Name = "HC-SR04", Cost = 14.0, Description = "It''s purpose is to detect proximity of an obstacle"},
-                new { Id = 7, Type = "LED Lights", Borrowable = false, Name = "EDGELEC 4Pin LED Diodes", Cost = 10.0, Description = "It''s purpose is to emit light"},
-                new { Id = 8, Type = "Buzzer", Borrowable = true, Name = "TMB09A05", Cost = 1.0, Description = "It''s purpose is to emit sound from the device"}
+                new { Id = 1, Type = "Camera", Borrowable = true, Name = "Sony A7 IV", Description = "Its purpose is to capture images and videos" },
+                new { Id = 2, Type = "Ultrasonic Sensor", Borrowable = true, Name = "MA300D1-1", Description = "Its purpose is to detect obstacles"},
+                new { Id = 3, Type = "Humidity Sensor", Borrowable = true, Name = "DHT22", Description = "Its purpose is to detect humidity in the environment"},
+                new { Id = 4, Type = "Water pressure Sensor", Borrowable = true, Name = "LEFOO LFT2000W", Description = "Its purpose is to detect water pressure"},
+                new { Id = 5, Type = "IR Sensor", Borrowable = true, Name = "RM1802", Description = "It is used to switch on the lights in the lab"},
+                new { Id = 6, Type = "Proximity Sensor", Borrowable = true, Name = "HC-SR04", Description = "Its purpose is to detect proximity of an obstacle"},
+                new { Id = 7, Type = "LED Lights", Borrowable = false, Name = "EDGELEC 4Pin LED Diodes", Description = "Its purpose is to emit light"},
+                new { Id = 8, Type = "Buzzer", Borrowable = true, Name = "TMB09A05", Description = "Its purpose is to emit sound from the device"}
         );
 
         modelBuilder.Entity<Accessory>(entity => {
@@ -90,22 +90,22 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
         });
 
         modelBuilder.Entity<Accessory>().HasData(
-                new { Id = 1, status = "Available", LastUpdated = new DateTime(2021,10,10),  LabId = 1, AccessoryTypeId = 1},
-                new { Id = 2, status = "Borrowed", LastUpdated = new DateTime(2021,10,14),  LabId = 1, AccessoryTypeId = 1, LabUserId = 1, DueDate = new DateTime(2021,10,14)},
-                new { Id = 3, status = "Available", LastUpdated = new DateTime(2021,10,17),  LabId = 1, AccessoryTypeId = 2},
-                new { Id = 4, status = "Available", LastUpdated = new DateTime(2021,10,21), LabId = 1, AccessoryTypeId = 2},
-                new { Id = 5, status = "Borrowed", LastUpdated = new DateTime(2021,9,9), LabId = 1, AccessoryTypeId = 3, LabUserId = 2, DueDate = new DateTime(2021,9,9)},
-                new { Id = 6, status = "Available", LastUpdated = new DateTime(2021,9,5),  LabId = 1, AccessoryTypeId = 3},
-                new { Id = 7, status = "Available", LastUpdated = new DateTime(2021,8,1),  LabId = 1, AccessoryTypeId = 4},
-                new { Id = 8, status = "Borrowed", LastUpdated = new DateTime(2021,8,10),  LabId = 1, AccessoryTypeId = 4, LabUserId = 3, DueDate = new DateTime(2021,9,5)},
-                new { Id = 9, status = "Available", LastUpdated = new DateTime(2021,7,3),  LabId = 1, AccessoryTypeId = 5},
-                new { Id = 10, status = "Borrowed", LastUpdated = new DateTime(2021,6,24),  LabId = 1, AccessoryTypeId = 5, LabUserId = 4, DueDate = new DateTime(2021,10,14)},
-                new { Id = 11, status = "Available", LastUpdated = new DateTime(2021,7,25),  LabId = 1, AccessoryTypeId = 6},
-                new { Id = 12, status = "Available", LastUpdated = new DateTime(2021,4,3),  LabId = 1, AccessoryTypeId = 6},
-                new { Id = 13, status = "Borrowed", LastUpdated = new DateTime(2021,7,19),  LabId = 1, AccessoryTypeId = 7, LabUserId = 5, DueDate = new DateTime(2021,7,19)},
-                new { Id = 14, status = "Borrowed", LastUpdated = new DateTime(2021,12,14),  LabId = 1, AccessoryTypeId = 7, LabUserId = 6, DueDate = new DateTime(2021,12,14)},
-                new { Id = 15, status = "Available", LastUpdated = new DateTime(2021,11,12),  LabId = 1, AccessoryTypeId = 8},
-                new { Id = 16, status = "Available", LastUpdated = new DateTime(2021,7,3),  LabId = 1, AccessoryTypeId = 8}
+                new { Id = 1, Status = "Available", LastUpdated = new DateTime(2021,10,10),  LabId = 1, AccessoryTypeId = 1},
+                new { Id = 2, Status = "Borrowed", LastUpdated = new DateTime(2021,10,14),  LabId = 1, AccessoryTypeId = 1, LabUserId = 1, DueDate = new DateTime(2022,10,14) },
+                new { Id = 3, Status = "Available", LastUpdated = new DateTime(2021,10,17),  LabId = 1, AccessoryTypeId = 2},
+                new { Id = 4, Status = "Available", LastUpdated = new DateTime(2021,10,21), LabId = 1, AccessoryTypeId = 2},
+                new { Id = 5, Status = "Borrowed", LastUpdated = new DateTime(2021,9,9), LabId = 1, AccessoryTypeId = 3, LabUserId = 2, DueDate = new DateTime(2022,9,9) },
+                new { Id = 6, Status = "Available", LastUpdated = new DateTime(2021,9,5),  LabId = 1, AccessoryTypeId = 3},
+                new { Id = 7, Status = "Available", LastUpdated = new DateTime(2021,8,1),  LabId = 1, AccessoryTypeId = 4},
+                new { Id = 8, Status = "Borrowed", LastUpdated = new DateTime(2021,8,10),  LabId = 1, AccessoryTypeId = 4, LabUserId = 3, DueDate = new DateTime(2022,9,5) },
+                new { Id = 9, Status = "Available", LastUpdated = new DateTime(2021,7,3),  LabId = 1, AccessoryTypeId = 5},
+                new { Id = 10, Status = "Borrowed", LastUpdated = new DateTime(2021,6,24),  LabId = 1, AccessoryTypeId = 5, LabUserId = 4, DueDate = new DateTime(2022,10,14) },
+                new { Id = 11, Status = "Available", LastUpdated = new DateTime(2021,7,25),  LabId = 1, AccessoryTypeId = 6},
+                new { Id = 12, Status = "Available", LastUpdated = new DateTime(2021,4,3),  LabId = 1, AccessoryTypeId = 6},
+                new { Id = 13, Status = "Borrowed", LastUpdated = new DateTime(2021,7,19),  LabId = 1, AccessoryTypeId = 7, LabUserId = 5, DueDate = new DateTime(2022,7,19) },
+                new { Id = 14, Status = "Borrowed", LastUpdated = new DateTime(2021,12,14),  LabId = 1, AccessoryTypeId = 7, LabUserId = 6, DueDate = new DateTime(2022,12,14) },
+                new { Id = 15, Status = "Available", LastUpdated = new DateTime(2021,11,12),  LabId = 1, AccessoryTypeId = 8},
+                new { Id = 16, Status = "Available", LastUpdated = new DateTime(2021,7,3),  LabId = 1, AccessoryTypeId = 8}
         );
 
     }

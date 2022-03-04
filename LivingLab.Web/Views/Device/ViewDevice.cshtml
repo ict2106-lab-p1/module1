@@ -28,7 +28,6 @@
         <th>Name</th>
         <th>Description</th>
         <th>Serial Num</th>
-        <th>Cost</th>
         <th>Last Updated</th>
         <th>Qty</th>
         <th></th>
@@ -40,11 +39,10 @@
     {
         <tr>
             <td> @device.Id </td>
-            <td> @device.DeviceType.Name </td>
-            <td> @device.DeviceType.Description </td>
-            <td> @device.serialNo </td>
-            <td> @device.DeviceType.Cost </td>
-            <td> @device.ValidityDate.ToString("MM/dd/yyyy") </td>
+            <td> @device.Name </td>
+            <td> @device.Description </td>
+            <td> @device.SerialNo </td>
+            <td> @device.LastUpdated.ToString("MM/dd/yyyy") </td>
             <td> 1 </td>
             <td></td>
             <td></td>

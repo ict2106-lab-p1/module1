@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace LivingLab.Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20220228101146_CreateInitialDB")]
+    [Migration("20220304181441_CreateInitialDB")]
     partial class CreateInitialDB
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -28,13 +28,19 @@ namespace LivingLab.Infrastructure.Migrations
                     b.Property<int>("AccessoryTypeId")
                         .HasColumnType("INTEGER");
 
+                    b.Property<DateTime?>("DueDate")
+                        .HasColumnType("Date");
+
                     b.Property<int>("LabId")
                         .HasColumnType("INTEGER");
 
-                    b.Property<DateTime>("ValidityDate")
+                    b.Property<int?>("LabUserId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<DateTime>("LastUpdated")
                         .HasColumnType("Date");
 
-                    b.Property<string>("status")
+                    b.Property<string>("Status")
                         .IsRequired()
                         .HasColumnType("TEXT");
 
@@ -52,128 +58,140 @@ namespace LivingLab.Infrastructure.Migrations
                             Id = 1,
                             AccessoryTypeId = 1,
                             LabId = 1,
-                            ValidityDate = new DateTime(2024, 10, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            status = "Available"
+                            LastUpdated = new DateTime(2021, 10, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Status = "Available"
                         },
                         new
                         {
                             Id = 2,
                             AccessoryTypeId = 1,
+                            DueDate = new DateTime(2022, 10, 14, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             LabId = 1,
-                            ValidityDate = new DateTime(2024, 10, 14, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            status = "Borrowed"
+                            LabUserId = 1,
+                            LastUpdated = new DateTime(2021, 10, 14, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Status = "Borrowed"
                         },
                         new
                         {
                             Id = 3,
                             AccessoryTypeId = 2,
                             LabId = 1,
-                            ValidityDate = new DateTime(2024, 10, 17, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            status = "Available"
+                            LastUpdated = new DateTime(2021, 10, 17, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Status = "Available"
                         },
                         new
                         {
                             Id = 4,
                             AccessoryTypeId = 2,
                             LabId = 1,
-                            ValidityDate = new DateTime(2024, 10, 21, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            status = "Available"
+                            LastUpdated = new DateTime(2021, 10, 21, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Status = "Available"
                         },
                         new
                         {
                             Id = 5,
                             AccessoryTypeId = 3,
+                            DueDate = new DateTime(2022, 9, 9, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             LabId = 1,
-                            ValidityDate = new DateTime(2024, 9, 9, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            status = "Borrowed"
+                            LabUserId = 2,
+                            LastUpdated = new DateTime(2021, 9, 9, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Status = "Borrowed"
                         },
                         new
                         {
                             Id = 6,
                             AccessoryTypeId = 3,
                             LabId = 1,
-                            ValidityDate = new DateTime(2024, 9, 5, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            status = "Available"
+                            LastUpdated = new DateTime(2021, 9, 5, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Status = "Available"
                         },
                         new
                         {
                             Id = 7,
                             AccessoryTypeId = 4,
                             LabId = 1,
-                            ValidityDate = new DateTime(2024, 8, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            status = "Available"
+                            LastUpdated = new DateTime(2021, 8, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Status = "Available"
                         },
                         new
                         {
                             Id = 8,
                             AccessoryTypeId = 4,
+                            DueDate = new DateTime(2022, 9, 5, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             LabId = 1,
-                            ValidityDate = new DateTime(2024, 8, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            status = "Borrowed"
+                            LabUserId = 3,
+                            LastUpdated = new DateTime(2021, 8, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Status = "Borrowed"
                         },
                         new
                         {
                             Id = 9,
                             AccessoryTypeId = 5,
                             LabId = 1,
-                            ValidityDate = new DateTime(2024, 7, 3, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            status = "Available"
+                            LastUpdated = new DateTime(2021, 7, 3, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Status = "Available"
                         },
                         new
                         {
                             Id = 10,
                             AccessoryTypeId = 5,
+                            DueDate = new DateTime(2022, 10, 14, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             LabId = 1,
-                            ValidityDate = new DateTime(2024, 6, 24, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            status = "Borrowed"
+                            LabUserId = 4,
+                            LastUpdated = new DateTime(2021, 6, 24, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Status = "Borrowed"
                         },
                         new
                         {
                             Id = 11,
                             AccessoryTypeId = 6,
                             LabId = 1,
-                            ValidityDate = new DateTime(2024, 7, 25, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            status = "Available"
+                            LastUpdated = new DateTime(2021, 7, 25, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Status = "Available"
                         },
                         new
                         {
                             Id = 12,
                             AccessoryTypeId = 6,
                             LabId = 1,
-                            ValidityDate = new DateTime(2024, 4, 3, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            status = "Available"
+                            LastUpdated = new DateTime(2021, 4, 3, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Status = "Available"
                         },
                         new
                         {
                             Id = 13,
                             AccessoryTypeId = 7,
+                            DueDate = new DateTime(2022, 7, 19, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             LabId = 1,
-                            ValidityDate = new DateTime(2024, 7, 19, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            status = "Borrowed"
+                            LabUserId = 5,
+                            LastUpdated = new DateTime(2021, 7, 19, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Status = "Borrowed"
                         },
                         new
                         {
                             Id = 14,
                             AccessoryTypeId = 7,
+                            DueDate = new DateTime(2022, 12, 14, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             LabId = 1,
-                            ValidityDate = new DateTime(2024, 12, 14, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            status = "Brrowed"
+                            LabUserId = 6,
+                            LastUpdated = new DateTime(2021, 12, 14, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Status = "Borrowed"
                         },
                         new
                         {
                             Id = 15,
                             AccessoryTypeId = 8,
                             LabId = 1,
-                            ValidityDate = new DateTime(2024, 11, 12, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            status = "Available"
+                            LastUpdated = new DateTime(2021, 11, 12, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Status = "Available"
                         },
                         new
                         {
                             Id = 16,
                             AccessoryTypeId = 8,
                             LabId = 1,
-                            ValidityDate = new DateTime(2024, 7, 3, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            status = "Available"
+                            LastUpdated = new DateTime(2021, 7, 3, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Status = "Available"
                         });
                 });
 
@@ -186,13 +204,14 @@ namespace LivingLab.Infrastructure.Migrations
                     b.Property<bool>("Borrowable")
                         .HasColumnType("INTEGER");
 
-                    b.Property<double>("Cost")
-                        .HasColumnType("REAL");
-
                     b.Property<string>("Description")
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Type")
                         .IsRequired()
                         .HasColumnType("TEXT");
 
@@ -205,65 +224,65 @@ namespace LivingLab.Infrastructure.Migrations
                         {
                             Id = 1,
                             Borrowable = true,
-                            Cost = 499.0,
-                            Description = "It''s purpose is to capture images and videos",
-                            Name = "Camera"
+                            Description = "Its purpose is to capture images and videos",
+                            Name = "Sony A7 IV",
+                            Type = "Camera"
                         },
                         new
                         {
                             Id = 2,
                             Borrowable = true,
-                            Cost = 1.0,
-                            Description = "It''s purpose is to detect obstacles",
-                            Name = "Ultrasonic Sensor"
+                            Description = "Its purpose is to detect obstacles",
+                            Name = "MA300D1-1",
+                            Type = "Ultrasonic Sensor"
                         },
                         new
                         {
                             Id = 3,
                             Borrowable = true,
-                            Cost = 3.0,
-                            Description = "It''s purpose is to detect humidity in the environment",
-                            Name = "Humidity Sensor"
+                            Description = "Its purpose is to detect humidity in the environment",
+                            Name = "DHT22",
+                            Type = "Humidity Sensor"
                         },
                         new
                         {
                             Id = 4,
                             Borrowable = true,
-                            Cost = 7.0,
-                            Description = "It''s purpose is to detect water pressure",
-                            Name = "Water pressure Sensor"
+                            Description = "Its purpose is to detect water pressure",
+                            Name = "LEFOO LFT2000W",
+                            Type = "Water pressure Sensor"
                         },
                         new
                         {
                             Id = 5,
                             Borrowable = true,
-                            Cost = 2.0,
                             Description = "It is used to switch on the lights in the lab",
-                            Name = "IR Sensor"
+                            Name = "RM1802",
+                            Type = "IR Sensor"
                         },
                         new
                         {
                             Id = 6,
                             Borrowable = true,
-                            Cost = 14.0,
-                            Description = "It''s purpose is to detect proximity of an obstacle",
-                            Name = "Proximity Sensor"
+                            Description = "Its purpose is to detect proximity of an obstacle",
+                            Name = "HC-SR04",
+                            Type = "Proximity Sensor"
                         },
                         new
                         {
                             Id = 7,
                             Borrowable = false,
-                            Cost = 10.0,
-                            Description = "It''s purpose is to emit light",
-                            Name = "LED Lights"
+                            Description = "Its purpose is to emit light",
+                            Name = "EDGELEC 4Pin LED Diodes",
+                            Type = "LED Lights"
                         },
                         new
                         {
                             Id = 8,
                             Borrowable = true,
-                            Cost = 1.0,
-                            Description = "It''s purpose is to emit sound from the device",
-                            Name = "Buzzer"
+                            Description = "Its purpose is to emit sound from the device",
+                            Name = "TMB09A05",
+                            Type = "Buzzer"
                         });
                 });
 
@@ -273,22 +292,29 @@ namespace LivingLab.Infrastructure.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
-                    b.Property<int>("DeviceTypeId")
-                        .HasColumnType("INTEGER");
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
 
                     b.Property<int>("LabId")
                         .HasColumnType("INTEGER");
+
+                    b.Property<DateTime>("LastUpdated")
+                        .HasColumnType("Date");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
 
                     b.Property<string>("SerialNo")
                         .IsRequired()
                         .HasColumnType("TEXT");
 
-                    b.Property<DateTime>("ValidityDate")
-                        .HasColumnType("Date");
+                    b.Property<string>("Status")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("DeviceTypeId");
 
                     b.HasIndex("LabId");
 
@@ -298,102 +324,52 @@ namespace LivingLab.Infrastructure.Migrations
                         new
                         {
                             Id = 1,
-                            DeviceTypeId = 1,
+                            Description = "Its purpose is to detect situation in the laboratory",
                             LabId = 1,
+                            LastUpdated = new DateTime(2020, 10, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Name = "Surveillance Camera",
                             SerialNo = "SC1001",
-                            ValidityDate = new DateTime(2020, 10, 10, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                            Status = "Available"
                         },
                         new
                         {
                             Id = 2,
-                            DeviceTypeId = 2,
+                            Description = "Its purpose is to detect temperature in the laboratory",
                             LabId = 1,
+                            LastUpdated = new DateTime(2020, 10, 11, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Name = "Temperature Sensor",
                             SerialNo = "R1001",
-                            ValidityDate = new DateTime(2020, 10, 11, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                            Status = "Available"
                         },
                         new
                         {
                             Id = 3,
-                            DeviceTypeId = 3,
+                            Description = "Its purpose is to detect humidity in the laboratory",
                             LabId = 1,
+                            LastUpdated = new DateTime(2020, 9, 9, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Name = "Humidity Sensor",
                             SerialNo = "S1001",
-                            ValidityDate = new DateTime(2020, 9, 9, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                            Status = "Available"
                         },
                         new
                         {
                             Id = 4,
-                            DeviceTypeId = 4,
+                            Description = "Its purpose is to detect light in the laboratory",
                             LabId = 1,
+                            LastUpdated = new DateTime(2019, 8, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Name = "Light Sensor",
                             SerialNo = "SL1001",
-                            ValidityDate = new DateTime(2019, 8, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                            Status = "Available"
                         },
                         new
                         {
                             Id = 5,
-                            DeviceTypeId = 5,
-                            LabId = 1,
-                            SerialNo = "VRL1001",
-                            ValidityDate = new DateTime(2019, 7, 3, 0, 0, 0, 0, DateTimeKind.Unspecified)
-                        });
-                });
-
-            modelBuilder.Entity("LivingLab.Domain.Entities.DeviceType", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
-
-                    b.Property<double?>("Cost")
-                        .IsRequired()
-                        .HasColumnType("REAL");
-
-                    b.Property<string>("Description")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("DeviceType");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Cost = 499.0,
-                            Description = "It''s purpose is to detect situation in the laboratory",
-                            Name = "Surveillance Camera"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            Cost = 130.0,
-                            Description = "It''s purpose is to detect temperature in the laboratory",
-                            Name = "Temperature Sensor"
-                        },
-                        new
-                        {
-                            Id = 3,
-                            Cost = 130.0,
-                            Description = "It''s purpose is to detect humidity in the laboratory",
-                            Name = "Humidity Sensor"
-                        },
-                        new
-                        {
-                            Id = 4,
-                            Cost = 320.0,
-                            Description = "It''s purpose is to detect light in the laboratory",
-                            Name = "Light Sensor"
-                        },
-                        new
-                        {
-                            Id = 5,
-                            Cost = 323.0,
                             Description = "It is used to control brightness of the lights in the lab",
-                            Name = "VR Light Controls"
+                            LabId = 1,
+                            LastUpdated = new DateTime(2019, 7, 3, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Name = "VR Light Controls",
+                            SerialNo = "VRL1001",
+                            Status = "Unavailable"
                         });
                 });
 
@@ -499,17 +475,17 @@ namespace LivingLab.Infrastructure.Migrations
                         });
                 });
 
-            modelBuilder.Entity("LivingLab.Domain.Entities.Report", b =>
+            modelBuilder.Entity("LivingLab.Domain.Entities.Logging", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
-                    b.Property<DateTime?>("Date")
-                        .IsRequired()
+                    b.Property<string>("DataUploaded")
                         .HasColumnType("TEXT");
 
-                    b.Property<string>("DeviceUsage")
+                    b.Property<DateTime?>("Date")
+                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.Property<int>("LabId")
@@ -522,7 +498,7 @@ namespace LivingLab.Infrastructure.Migrations
 
                     b.HasIndex("LabId");
 
-                    b.ToTable("Report");
+                    b.ToTable("Logging");
                 });
 
             modelBuilder.Entity("LivingLab.Domain.Entities.Todo", b =>
@@ -697,27 +673,19 @@ namespace LivingLab.Infrastructure.Migrations
 
             modelBuilder.Entity("LivingLab.Domain.Entities.Device", b =>
                 {
-                    b.HasOne("LivingLab.Domain.Entities.DeviceType", "DeviceType")
-                        .WithMany("Devices")
-                        .HasForeignKey("DeviceTypeId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("LivingLab.Domain.Entities.Lab", "Lab")
                         .WithMany("Devices")
                         .HasForeignKey("LabId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("DeviceType");
-
                     b.Navigation("Lab");
                 });
 
-            modelBuilder.Entity("LivingLab.Domain.Entities.Report", b =>
+            modelBuilder.Entity("LivingLab.Domain.Entities.Logging", b =>
                 {
                     b.HasOne("LivingLab.Domain.Entities.Lab", "Lab")
-                        .WithMany("Reports")
+                        .WithMany("Logs")
                         .HasForeignKey("LabId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -781,18 +749,13 @@ namespace LivingLab.Infrastructure.Migrations
                     b.Navigation("Accessories");
                 });
 
-            modelBuilder.Entity("LivingLab.Domain.Entities.DeviceType", b =>
-                {
-                    b.Navigation("Devices");
-                });
-
             modelBuilder.Entity("LivingLab.Domain.Entities.Lab", b =>
                 {
                     b.Navigation("Accessories");
 
                     b.Navigation("Devices");
 
-                    b.Navigation("Reports");
+                    b.Navigation("Logs");
                 });
 #pragma warning restore 612, 618
         }

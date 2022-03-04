@@ -7,7 +7,7 @@ public class AccessoryType : BaseEntity
     [Required]
     public string Name { get; set; }
     [Required]
-    public double Cost { get; set; }
+    public string Type { get; set; }
 
     [Required]
     public bool Borrowable { get; set; }
