@@ -9,6 +9,47 @@ namespace LivingLab.Infrastructure.Migrations
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
+            // Accessory
+            migrationBuilder.CreateTable(
+                name: "Accessory",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    AccessoryTypeId = table.Column<int>(type: "INTEGER", nullable: false),
+                    Status = table.Column<string>(type: "TEXT", nullable: false),
+                    LastUpdated = table.Column<DateTime>(type: "Date", nullable: false),
+                    LabId = table.Column<int>(type: "INTEGER", nullable: false),
+                    // LabUserId to be linked to account table
+                    // Used to indicate the user that borrowed the accessory
+                    LabUserId = table.Column<int>(type: "INTEGER", nullable: true),
+                    DueDate = table.Column<DateTime>(type: "Date", nullable: true),
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Accessory", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Accessory_Lab_LabId",
+                        column: x => x.LabId,
+                        principalTable: "Lab",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Accessory_AccessoryType_AccessoryTypeId",
+                        column: x => x.AccessoryTypeId,
+                        principalTable: "AccessoryType",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    // LabUserId to be linked to account table
+                    // table.ForeignKey(
+                    //     name: "FK_Accessory_Account_LabUserId",
+                    //     column: x => x.LabUserId,
+                    //     principalTable: "Account",
+                    //     principalColumn: "Id",
+                    //     onDelete: ReferentialAction.Cascade);
+                });
+            
+            // AccessoryType
             migrationBuilder.CreateTable(
                 name: "AccessoryType",
                 columns: table => new
@@ -16,7 +57,7 @@ namespace LivingLab.Infrastructure.Migrations
                     Id = table.Column<int>(type: "INTEGER", nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
                     Name = table.Column<string>(type: "TEXT", nullable: false),
-                    Cost = table.Column<double>(type: "REAL", nullable: false),
+                    Type = table.Column<string>(type: "TEXT", nullable: false),
                     Borrowable = table.Column<bool>(type: "INTEGER", nullable: false),
                     Description = table.Column<string>(type: "TEXT", nullable: true)
                 },
@@ -25,21 +66,32 @@ namespace LivingLab.Infrastructure.Migrations
                     table.PrimaryKey("PK_AccessoryType", x => x.Id);
                 });
 
+            // Device
             migrationBuilder.CreateTable(
-                name: "DeviceType",
+                name: "Device",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "INTEGER", nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
+                    LastUpdated = table.Column<DateTime>(type: "Date", nullable: false),
+                    SerialNo = table.Column<string>(type: "TEXT", nullable: false),
+                    LabId = table.Column<int>(type: "INTEGER", nullable: false),
+                    Status = table.Column<string>(type: "TEXT", nullable: false),
                     Name = table.Column<string>(type: "TEXT", nullable: false),
-                    Description = table.Column<string>(type: "TEXT", nullable: false),
-                    Cost = table.Column<double>(type: "REAL", nullable: false)
+                    Description = table.Column<string>(type: "TEXT", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_DeviceType", x => x.Id);
+                    table.PrimaryKey("PK_Device", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Device_Lab_LabId",
+                        column: x => x.LabId,
+                        principalTable: "Lab",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
-
+            
+            // Lab
             migrationBuilder.CreateTable(
                 name: "Lab",
                 columns: table => new
@@ -54,35 +106,32 @@ namespace LivingLab.Infrastructure.Migrations
                 {
                     table.PrimaryKey("PK_Lab", x => x.Id);
                 });
-
+            
+            // Logging
             migrationBuilder.CreateTable(
-                name: "Role",
-                columns: table => new
-                {
-                    Id = table.Column<string>(type: "TEXT", nullable: false),
-                    Name = table.Column<string>(type: "TEXT", maxLength: 256, nullable: true),
-                    NormalizedName = table.Column<string>(type: "TEXT", maxLength: 256, nullable: true),
-                    ConcurrencyStamp = table.Column<string>(type: "TEXT", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Role", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Todos",
+                name: "Report",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "INTEGER", nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
-                    Title = table.Column<string>(type: "TEXT", nullable: false),
-                    Description = table.Column<string>(type: "TEXT", nullable: false)
+                    Date = table.Column<DateTime>(type: "TEXT", nullable: false),
+                    NoOfHoursLogged = table.Column<int>(type: "INTEGER", nullable: true),
+                    DataUploaded = table.Column<string>(type: "TEXT", nullable: true),
+                    LabId = table.Column<int>(type: "INTEGER", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Todos", x => x.Id);
+                    table.PrimaryKey("PK_Report", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Report_Lab_LabId",
+                        column: x => x.LabId,
+                        principalTable: "Lab",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
-
+            
+            
+            // Misc tables for login
             migrationBuilder.CreateTable(
                 name: "Users",
                 columns: table => new
@@ -109,106 +158,7 @@ namespace LivingLab.Infrastructure.Migrations
                 {
                     table.PrimaryKey("PK_Users", x => x.Id);
                 });
-
-            migrationBuilder.CreateTable(
-                name: "Accessory",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "INTEGER", nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
-                    status = table.Column<string>(type: "TEXT", nullable: false),
-                    ValidityDate = table.Column<DateTime>(type: "Date", nullable: false),
-                    LabId = table.Column<int>(type: "INTEGER", nullable: false),
-                    AccessoryTypeId = table.Column<int>(type: "INTEGER", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Accessory", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Accessory_AccessoryType_AccessoryTypeId",
-                        column: x => x.AccessoryTypeId,
-                        principalTable: "AccessoryType",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_Accessory_Lab_LabId",
-                        column: x => x.LabId,
-                        principalTable: "Lab",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Device",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "INTEGER", nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
-                    ValidityDate = table.Column<DateTime>(type: "Date", nullable: false),
-                    SerialNo = table.Column<string>(type: "TEXT", nullable: false),
-                    LabId = table.Column<int>(type: "INTEGER", nullable: false),
-                    DeviceTypeId = table.Column<int>(type: "INTEGER", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Device", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Device_DeviceType_DeviceTypeId",
-                        column: x => x.DeviceTypeId,
-                        principalTable: "DeviceType",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_Device_Lab_LabId",
-                        column: x => x.LabId,
-                        principalTable: "Lab",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Report",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "INTEGER", nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
-                    Date = table.Column<DateTime>(type: "TEXT", nullable: false),
-                    NoOfHoursLogged = table.Column<int>(type: "INTEGER", nullable: true),
-                    DeviceUsage = table.Column<string>(type: "TEXT", nullable: true),
-                    LabId = table.Column<int>(type: "INTEGER", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Report", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Report_Lab_LabId",
-                        column: x => x.LabId,
-                        principalTable: "Lab",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "RoleClaim",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "INTEGER", nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
-                    RoleId = table.Column<string>(type: "TEXT", nullable: false),
-                    ClaimType = table.Column<string>(type: "TEXT", nullable: true),
-                    ClaimValue = table.Column<string>(type: "TEXT", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_RoleClaim", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_RoleClaim_Role_RoleId",
-                        column: x => x.RoleId,
-                        principalTable: "Role",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
+            
             migrationBuilder.CreateTable(
                 name: "UserClaim",
                 columns: table => new
@@ -294,70 +244,94 @@ namespace LivingLab.Infrastructure.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
-            migrationBuilder.InsertData(
-                table: "AccessoryType",
-                columns: new[] { "Id", "Borrowable", "Cost", "Description", "Name" },
-                values: new object[] { 1, true, 499.0, "It''s purpose is to capture images and videos", "Camera" });
+            migrationBuilder.CreateTable(
+                name: "Role",
+                columns: table => new
+                {
+                    Id = table.Column<string>(type: "TEXT", nullable: false),
+                    Name = table.Column<string>(type: "TEXT", maxLength: 256, nullable: true),
+                    NormalizedName = table.Column<string>(type: "TEXT", maxLength: 256, nullable: true),
+                    ConcurrencyStamp = table.Column<string>(type: "TEXT", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Role", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "RoleClaim",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    RoleId = table.Column<string>(type: "TEXT", nullable: false),
+                    ClaimType = table.Column<string>(type: "TEXT", nullable: true),
+                    ClaimValue = table.Column<string>(type: "TEXT", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_RoleClaim", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_RoleClaim_Role_RoleId",
+                        column: x => x.RoleId,
+                        principalTable: "Role",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Todos",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    Title = table.Column<string>(type: "TEXT", nullable: false),
+                    Description = table.Column<string>(type: "TEXT", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Todos", x => x.Id);
+                });
 
             migrationBuilder.InsertData(
                 table: "AccessoryType",
-                columns: new[] { "Id", "Borrowable", "Cost", "Description", "Name" },
-                values: new object[] { 2, true, 1.0, "It''s purpose is to detect obstacles", "Ultrasonic Sensor" });
+                columns: new[] { "Id", "Borrowable", "Type", "Description", "Name" },
+                values: new object[] { 1, true, "Camera", "It''s purpose is to capture images and videos", "Sony A7 IV" });
 
             migrationBuilder.InsertData(
                 table: "AccessoryType",
-                columns: new[] { "Id", "Borrowable", "Cost", "Description", "Name" },
-                values: new object[] { 3, true, 3.0, "It''s purpose is to detect humidity in the environment", "Humidity Sensor" });
+                columns: new[] { "Id", "Borrowable", "Type", "Description", "Name" },
+                values: new object[] { 2, true, "Ultrasonic Sensor", "It''s purpose is to detect obstacles", "MA300D1-1" });
 
             migrationBuilder.InsertData(
                 table: "AccessoryType",
-                columns: new[] { "Id", "Borrowable", "Cost", "Description", "Name" },
-                values: new object[] { 4, true, 7.0, "It''s purpose is to detect water pressure", "Water pressure Sensor" });
+                columns: new[] { "Id", "Borrowable", "Type", "Description", "Name" },
+                values: new object[] { 3, true, "Humidity Sensor", "It''s purpose is to detect humidity in the environment", "DHT22" });
 
             migrationBuilder.InsertData(
                 table: "AccessoryType",
-                columns: new[] { "Id", "Borrowable", "Cost", "Description", "Name" },
-                values: new object[] { 5, true, 2.0, "It is used to switch on the lights in the lab", "IR Sensor" });
+                columns: new[] { "Id", "Borrowable", "Type", "Description", "Name" },
+                values: new object[] { 4, true, "Water pressure Sensor", "It''s purpose is to detect water pressure", "LEFOO LFT2000W" });
 
             migrationBuilder.InsertData(
                 table: "AccessoryType",
-                columns: new[] { "Id", "Borrowable", "Cost", "Description", "Name" },
-                values: new object[] { 6, true, 14.0, "It''s purpose is to detect proximity of an obstacle", "Proximity Sensor" });
+                columns: new[] { "Id", "Borrowable", "Type", "Description", "Name" },
+                values: new object[] { 5, true, "IR Sensor", "It is used to switch on the lights in the lab", "RM1802" });
 
             migrationBuilder.InsertData(
                 table: "AccessoryType",
-                columns: new[] { "Id", "Borrowable", "Cost", "Description", "Name" },
-                values: new object[] { 7, false, 10.0, "It''s purpose is to emit light", "LED Lights" });
+                columns: new[] { "Id", "Borrowable", "Type", "Description", "Name" },
+                values: new object[] { 6, true, "Proximity Sensor", "It''s purpose is to detect proximity of an obstacle", "HC-SR04" });
 
             migrationBuilder.InsertData(
                 table: "AccessoryType",
-                columns: new[] { "Id", "Borrowable", "Cost", "Description", "Name" },
-                values: new object[] { 8, true, 1.0, "It''s purpose is to emit sound from the device", "Buzzer" });
+                columns: new[] { "Id", "Borrowable", "Type", "Description", "Name" },
+                values: new object[] { 7, false, "LED Lights", "It''s purpose is to emit light", "EDGELEC 4Pin LED Diodes" });
 
             migrationBuilder.InsertData(
-                table: "DeviceType",
-                columns: new[] { "Id", "Cost", "Description", "Name" },
-                values: new object[] { 1, 499.0, "It''s purpose is to detect situation in the laboratory", "Surveillance Camera" });
-
-            migrationBuilder.InsertData(
-                table: "DeviceType",
-                columns: new[] { "Id", "Cost", "Description", "Name" },
-                values: new object[] { 2, 130.0, "It''s purpose is to detect temperature in the laboratory", "Temperature Sensor" });
-
-            migrationBuilder.InsertData(
-                table: "DeviceType",
-                columns: new[] { "Id", "Cost", "Description", "Name" },
-                values: new object[] { 3, 130.0, "It''s purpose is to detect humidity in the laboratory", "Humidity Sensor" });
-
-            migrationBuilder.InsertData(
-                table: "DeviceType",
-                columns: new[] { "Id", "Cost", "Description", "Name" },
-                values: new object[] { 4, 320.0, "It''s purpose is to detect light in the laboratory", "Light Sensor" });
-
-            migrationBuilder.InsertData(
-                table: "DeviceType",
-                columns: new[] { "Id", "Cost", "Description", "Name" },
-                values: new object[] { 5, 323.0, "It is used to control brightness of the lights in the lab", "VR Light Controls" });
+                table: "AccessoryType",
+                columns: new[] { "Id", "Borrowable", "Type", "Description", "Name" },
+                values: new object[] { 8, true, "Buzzer", "It''s purpose is to emit sound from the device", "TMB09A05" });
 
             migrationBuilder.InsertData(
                 table: "Lab",
@@ -366,108 +340,108 @@ namespace LivingLab.Infrastructure.Migrations
 
             migrationBuilder.InsertData(
                 table: "Accessory",
-                columns: new[] { "Id", "AccessoryTypeId", "LabId", "ValidityDate", "status" },
-                values: new object[] { 1, 1, 1, new DateTime(2024, 10, 10, 0, 0, 0, 0, DateTimeKind.Unspecified), "Available" });
+                columns: new[] { "Id", "AccessoryTypeId", "LabId", "LastUpdated", "Status" },
+                values: new object[] { 1, 1, 1, new DateTime(2021, 10, 10, 0, 0, 0, 0, DateTimeKind.Unspecified), "Available" });
 
             migrationBuilder.InsertData(
                 table: "Accessory",
-                columns: new[] { "Id", "AccessoryTypeId", "LabId", "ValidityDate", "status" },
-                values: new object[] { 2, 1, 1, new DateTime(2024, 10, 14, 0, 0, 0, 0, DateTimeKind.Unspecified), "Borrowed" });
+                columns: new[] { "Id", "AccessoryTypeId", "LabId", "LastUpdated", "Status", "LabUserId", "DueDate" },
+                values: new object[] { 2, 1, 1, new DateTime(2021, 10, 14, 0, 0, 0, 0, DateTimeKind.Unspecified), "Borrowed", 1, new DateTime(2022, 10, 14, 0, 0, 0, 0, DateTimeKind.Unspecified) });
 
             migrationBuilder.InsertData(
                 table: "Accessory",
-                columns: new[] { "Id", "AccessoryTypeId", "LabId", "ValidityDate", "status" },
-                values: new object[] { 3, 2, 1, new DateTime(2024, 10, 17, 0, 0, 0, 0, DateTimeKind.Unspecified), "Available" });
+                columns: new[] { "Id", "AccessoryTypeId", "LabId", "LastUpdated", "Status"},
+                values: new object[] { 3, 2, 1, new DateTime(2021, 10, 17, 0, 0, 0, 0, DateTimeKind.Unspecified), "Available" });
 
             migrationBuilder.InsertData(
                 table: "Accessory",
-                columns: new[] { "Id", "AccessoryTypeId", "LabId", "ValidityDate", "status" },
-                values: new object[] { 4, 2, 1, new DateTime(2024, 10, 21, 0, 0, 0, 0, DateTimeKind.Unspecified), "Available" });
+                columns: new[] { "Id", "AccessoryTypeId", "LabId", "LastUpdated", "Status"},
+                values: new object[] { 4, 2, 1, new DateTime(2021, 10, 21, 0, 0, 0, 0, DateTimeKind.Unspecified), "Available" });
 
             migrationBuilder.InsertData(
                 table: "Accessory",
-                columns: new[] { "Id", "AccessoryTypeId", "LabId", "ValidityDate", "status" },
-                values: new object[] { 5, 3, 1, new DateTime(2024, 9, 9, 0, 0, 0, 0, DateTimeKind.Unspecified), "Borrowed" });
+                columns: new[] { "Id", "AccessoryTypeId", "LabId", "LastUpdated", "Status", "LabUserId", "DueDate" },
+                values: new object[] { 5, 3, 1, new DateTime(2021, 9, 9, 0, 0, 0, 0, DateTimeKind.Unspecified), "Borrowed", 2, new DateTime(2022, 9, 9, 0, 0, 0, 0, DateTimeKind.Unspecified) });
 
             migrationBuilder.InsertData(
                 table: "Accessory",
-                columns: new[] { "Id", "AccessoryTypeId", "LabId", "ValidityDate", "status" },
-                values: new object[] { 6, 3, 1, new DateTime(2024, 9, 5, 0, 0, 0, 0, DateTimeKind.Unspecified), "Available" });
+                columns: new[] { "Id", "AccessoryTypeId", "LabId", "LastUpdated", "Status" },
+                values: new object[] { 6, 3, 1, new DateTime(2021, 9, 5, 0, 0, 0, 0, DateTimeKind.Unspecified), "Available" });
 
             migrationBuilder.InsertData(
                 table: "Accessory",
-                columns: new[] { "Id", "AccessoryTypeId", "LabId", "ValidityDate", "status" },
-                values: new object[] { 7, 4, 1, new DateTime(2024, 8, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Available" });
+                columns: new[] { "Id", "AccessoryTypeId", "LabId", "LastUpdated", "Status" },
+                values: new object[] { 7, 4, 1, new DateTime(2021, 8, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Available" });
 
             migrationBuilder.InsertData(
                 table: "Accessory",
-                columns: new[] { "Id", "AccessoryTypeId", "LabId", "ValidityDate", "status" },
-                values: new object[] { 8, 4, 1, new DateTime(2024, 8, 10, 0, 0, 0, 0, DateTimeKind.Unspecified), "Borrowed" });
+                columns: new[] { "Id", "AccessoryTypeId", "LabId", "LastUpdated", "Status", "LabUserId", "DueDate" },
+                values: new object[] { 8, 4, 1, new DateTime(2021, 8, 10, 0, 0, 0, 0, DateTimeKind.Unspecified), "Borrowed", 3, new DateTime(2022, 8, 10, 0, 0, 0, 0, DateTimeKind.Unspecified)});
 
             migrationBuilder.InsertData(
                 table: "Accessory",
-                columns: new[] { "Id", "AccessoryTypeId", "LabId", "ValidityDate", "status" },
-                values: new object[] { 9, 5, 1, new DateTime(2024, 7, 3, 0, 0, 0, 0, DateTimeKind.Unspecified), "Available" });
+                columns: new[] { "Id", "AccessoryTypeId", "LabId", "LastUpdated", "Status" },
+                values: new object[] { 9, 5, 1, new DateTime(2021, 7, 3, 0, 0, 0, 0, DateTimeKind.Unspecified), "Available" });
 
             migrationBuilder.InsertData(
                 table: "Accessory",
-                columns: new[] { "Id", "AccessoryTypeId", "LabId", "ValidityDate", "status" },
-                values: new object[] { 10, 5, 1, new DateTime(2024, 6, 24, 0, 0, 0, 0, DateTimeKind.Unspecified), "Borrowed" });
+                columns: new[] { "Id", "AccessoryTypeId", "LabId", "LastUpdated", "Status", "LabUserId", "DueDate" },
+                values: new object[] { 10, 5, 1, new DateTime(2021, 6, 24, 0, 0, 0, 0, DateTimeKind.Unspecified), "Borrowed", 4, new DateTime(2022, 6, 24, 0, 0, 0, 0, DateTimeKind.Unspecified) });
 
             migrationBuilder.InsertData(
                 table: "Accessory",
-                columns: new[] { "Id", "AccessoryTypeId", "LabId", "ValidityDate", "status" },
-                values: new object[] { 11, 6, 1, new DateTime(2024, 7, 25, 0, 0, 0, 0, DateTimeKind.Unspecified), "Available" });
+                columns: new[] { "Id", "AccessoryTypeId", "LabId", "LastUpdated", "Status" },
+                values: new object[] { 11, 6, 1, new DateTime(2021, 7, 25, 0, 0, 0, 0, DateTimeKind.Unspecified), "Available" });
 
             migrationBuilder.InsertData(
                 table: "Accessory",
-                columns: new[] { "Id", "AccessoryTypeId", "LabId", "ValidityDate", "status" },
-                values: new object[] { 12, 6, 1, new DateTime(2024, 4, 3, 0, 0, 0, 0, DateTimeKind.Unspecified), "Available" });
+                columns: new[] { "Id", "AccessoryTypeId", "LabId", "LastUpdated", "Status" },
+                values: new object[] { 12, 6, 1, new DateTime(2021, 4, 3, 0, 0, 0, 0, DateTimeKind.Unspecified), "Available" });
 
             migrationBuilder.InsertData(
                 table: "Accessory",
-                columns: new[] { "Id", "AccessoryTypeId", "LabId", "ValidityDate", "status" },
-                values: new object[] { 13, 7, 1, new DateTime(2024, 7, 19, 0, 0, 0, 0, DateTimeKind.Unspecified), "Borrowed" });
+                columns: new[] { "Id", "AccessoryTypeId", "LabId", "LastUpdated", "Status", "LabUserId", "DueDate" },
+                values: new object[] { 13, 7, 1, new DateTime(2021, 7, 19, 0, 0, 0, 0, DateTimeKind.Unspecified), "Borrowed", 5, new DateTime(2022, 7, 19, 0, 0, 0, 0, DateTimeKind.Unspecified) });
 
             migrationBuilder.InsertData(
                 table: "Accessory",
-                columns: new[] { "Id", "AccessoryTypeId", "LabId", "ValidityDate", "status" },
-                values: new object[] { 14, 7, 1, new DateTime(2024, 12, 14, 0, 0, 0, 0, DateTimeKind.Unspecified), "Brrowed" });
+                columns: new[] { "Id", "AccessoryTypeId", "LabId", "LastUpdated", "Status", "LabUserId", "DueDate" },
+                values: new object[] { 14, 7, 1, new DateTime(2021, 12, 14, 0, 0, 0, 0, DateTimeKind.Unspecified), "Borrowed", 6, new DateTime(2022, 12, 14, 0, 0, 0, 0, DateTimeKind.Unspecified) });
 
             migrationBuilder.InsertData(
                 table: "Accessory",
-                columns: new[] { "Id", "AccessoryTypeId", "LabId", "ValidityDate", "status" },
-                values: new object[] { 15, 8, 1, new DateTime(2024, 11, 12, 0, 0, 0, 0, DateTimeKind.Unspecified), "Available" });
+                columns: new[] { "Id", "AccessoryTypeId", "LabId", "LastUpdated", "Status" },
+                values: new object[] { 15, 8, 1, new DateTime(2021, 11, 12, 0, 0, 0, 0, DateTimeKind.Unspecified), "Available" });
 
             migrationBuilder.InsertData(
                 table: "Accessory",
-                columns: new[] { "Id", "AccessoryTypeId", "LabId", "ValidityDate", "status" },
-                values: new object[] { 16, 8, 1, new DateTime(2024, 7, 3, 0, 0, 0, 0, DateTimeKind.Unspecified), "Available" });
+                columns: new[] { "Id", "AccessoryTypeId", "LabId", "LastUpdated", "Status" },
+                values: new object[] { 16, 8, 1, new DateTime(2021, 7, 3, 0, 0, 0, 0, DateTimeKind.Unspecified), "Available" });
+ 
+            migrationBuilder.InsertData(
+                table: "Device",
+                columns: new[] { "Id", "DeviceTypeId", "LabId", "SerialNo", "LastUpdated", "Status", "Name", "Description" },
+                values: new object[] { 1, 1, 1, "SC1001", new DateTime(2020, 10, 10, 0, 0, 0, 0, DateTimeKind.Unspecified), "Available", "Surveillance Camera", "Its purpose is to detect situation in the laboratory" });
 
             migrationBuilder.InsertData(
                 table: "Device",
-                columns: new[] { "Id", "DeviceTypeId", "LabId", "SerialNo", "ValidityDate" },
-                values: new object[] { 1, 1, 1, "SC1001", new DateTime(2020, 10, 10, 0, 0, 0, 0, DateTimeKind.Unspecified) });
+                columns: new[] { "Id", "DeviceTypeId", "LabId", "SerialNo", "LastUpdated", "Status", "Name", "Description" },
+                values: new object[] { 2, 2, 1, "R1001", new DateTime(2020, 10, 11, 0, 0, 0, 0, DateTimeKind.Unspecified), "Available", "Temperature Sensor", "Its purpose is to detect temperature in the laboratory" });
 
             migrationBuilder.InsertData(
                 table: "Device",
-                columns: new[] { "Id", "DeviceTypeId", "LabId", "SerialNo", "ValidityDate" },
-                values: new object[] { 2, 2, 1, "R1001", new DateTime(2020, 10, 11, 0, 0, 0, 0, DateTimeKind.Unspecified) });
+                columns: new[] { "Id", "DeviceTypeId", "LabId", "SerialNo", "LastUpdated", "Status", "Name", "Description" },
+                values: new object[] { 3, 3, 1, "S1001", new DateTime(2020, 9, 9, 0, 0, 0, 0, DateTimeKind.Unspecified), "Available", "Humidity Sensor", "Its purpose is to detect humidity in the laboratory" });
 
             migrationBuilder.InsertData(
                 table: "Device",
-                columns: new[] { "Id", "DeviceTypeId", "LabId", "SerialNo", "ValidityDate" },
-                values: new object[] { 3, 3, 1, "S1001", new DateTime(2020, 9, 9, 0, 0, 0, 0, DateTimeKind.Unspecified) });
+                columns: new[] { "Id", "DeviceTypeId", "LabId", "SerialNo", "LastUpdated", "Status", "Name", "Description" },
+                values: new object[] { 4, 4, 1, "SL1001", new DateTime(2019, 8, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Available" ,"Light Sensor", "Its purpose is to detect light in the laboratory" });
 
             migrationBuilder.InsertData(
                 table: "Device",
-                columns: new[] { "Id", "DeviceTypeId", "LabId", "SerialNo", "ValidityDate" },
-                values: new object[] { 4, 4, 1, "SL1001", new DateTime(2019, 8, 1, 0, 0, 0, 0, DateTimeKind.Unspecified) });
-
-            migrationBuilder.InsertData(
-                table: "Device",
-                columns: new[] { "Id", "DeviceTypeId", "LabId", "SerialNo", "ValidityDate" },
-                values: new object[] { 5, 5, 1, "VRL1001", new DateTime(2019, 7, 3, 0, 0, 0, 0, DateTimeKind.Unspecified) });
+                columns: new[] { "Id", "DeviceTypeId", "LabId", "SerialNo", "LastUpdated", "Status", "Name", "Description" },
+                values: new object[] { 5, 5, 1, "VRL1001", new DateTime(2019, 7, 3, 0, 0, 0, 0, DateTimeKind.Unspecified), "Unavailable", "VR Light Controls", "It is used to control brightness of the lights in the lab"});
 
             migrationBuilder.CreateIndex(
                 name: "IX_Accessory_AccessoryTypeId",
