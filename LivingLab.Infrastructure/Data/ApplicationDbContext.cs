@@ -61,11 +61,11 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
         });
 
         modelBuilder.Entity<Device>().HasData(
-                new { Id = 1, LastUpdated = new DateTime(2020,10,10), SerialNo = "SC1001", LabId = 1, Status="Available", Name = "Surveillance Camera", Description = "Its purpose is to detect situation in the laboratory"},
-                new { Id = 2, LastUpdated = new DateTime(2020,10,11), SerialNo = "R1001", LabId = 1, Status="Available", Name = "Temperature Sensor", Description = "Its purpose is to detect temperature in the laboratory"},
-                new { Id = 3, LastUpdated = new DateTime(2020,9,9), SerialNo = "S1001", LabId = 1, Status="Available", Name = "Humidity Sensor", Description = "Its purpose is to detect humidity in the laboratory"},
-                new { Id = 4, LastUpdated = new DateTime(2019,8,1), SerialNo = "SL1001", LabId = 1, Status="Available",  Name = "Light Sensor", Description = "Its purpose is to detect light in the laboratory"},
-                new { Id = 5, LastUpdated = new DateTime(2019,7,3), SerialNo = "VRL1001", LabId = 1, Status="Unavailable", Name = "VR Light Controls", Description = "It is used to control brightness of the lights in the lab"}
+                new { Id = 1, LastUpdated = new DateTime(2020,10,10), SerialNo = "SC1001", LabId = 1, Status="Available", Type = "Surveillance Camera", Description = "Its purpose is to detect situation in the laboratory"},
+                new { Id = 2, LastUpdated = new DateTime(2020,10,11), SerialNo = "R1001", LabId = 1, Status="Available", Type = "Temperature Sensor", Description = "Its purpose is to detect temperature in the laboratory"},
+                new { Id = 3, LastUpdated = new DateTime(2020,9,9), SerialNo = "S1001", LabId = 1, Status="Available", Type = "Humidity Sensor", Description = "Its purpose is to detect humidity in the laboratory"},
+                new { Id = 4, LastUpdated = new DateTime(2019,8,1), SerialNo = "SL1001", LabId = 1, Status="Available",  Type = "Light Sensor", Description = "Its purpose is to detect light in the laboratory"},
+                new { Id = 5, LastUpdated = new DateTime(2019,7,3), SerialNo = "VRL1001", LabId = 1, Status="Unavailable", Type = "VR Light Controls", Description = "It is used to control brightness of the lights in the lab"}
         );
 
         // Accessory and Accessory Types

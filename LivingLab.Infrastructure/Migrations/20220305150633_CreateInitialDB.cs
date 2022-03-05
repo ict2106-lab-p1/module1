@@ -135,7 +135,7 @@ namespace LivingLab.Infrastructure.Migrations
                     SerialNo = table.Column<string>(type: "TEXT", nullable: false),
                     LabId = table.Column<int>(type: "INTEGER", nullable: false),
                     Status = table.Column<string>(type: "TEXT", nullable: false),
-                    Name = table.Column<string>(type: "TEXT", nullable: false),
+                    Type = table.Column<string>(type: "TEXT", nullable: false),
                     Description = table.Column<string>(type: "TEXT", nullable: false)
                 },
                 constraints: table =>
@@ -404,28 +404,28 @@ namespace LivingLab.Infrastructure.Migrations
 
             migrationBuilder.InsertData(
                 table: "Device",
-                columns: new[] { "Id", "Description", "LabId", "LastUpdated", "Name", "SerialNo", "Status" },
-                values: new object[] { 1, "Its purpose is to detect situation in the laboratory", 1, new DateTime(2020, 10, 10, 0, 0, 0, 0, DateTimeKind.Unspecified), "Surveillance Camera", "SC1001", "Available" });
+                columns: new[] { "Id", "Description", "LabId", "LastUpdated", "SerialNo", "Status", "Type" },
+                values: new object[] { 1, "Its purpose is to detect situation in the laboratory", 1, new DateTime(2020, 10, 10, 0, 0, 0, 0, DateTimeKind.Unspecified), "SC1001", "Available", "Surveillance Camera" });
 
             migrationBuilder.InsertData(
                 table: "Device",
-                columns: new[] { "Id", "Description", "LabId", "LastUpdated", "Name", "SerialNo", "Status" },
-                values: new object[] { 2, "Its purpose is to detect temperature in the laboratory", 1, new DateTime(2020, 10, 11, 0, 0, 0, 0, DateTimeKind.Unspecified), "Temperature Sensor", "R1001", "Available" });
+                columns: new[] { "Id", "Description", "LabId", "LastUpdated", "SerialNo", "Status", "Type" },
+                values: new object[] { 2, "Its purpose is to detect temperature in the laboratory", 1, new DateTime(2020, 10, 11, 0, 0, 0, 0, DateTimeKind.Unspecified), "R1001", "Available", "Temperature Sensor" });
 
             migrationBuilder.InsertData(
                 table: "Device",
-                columns: new[] { "Id", "Description", "LabId", "LastUpdated", "Name", "SerialNo", "Status" },
-                values: new object[] { 3, "Its purpose is to detect humidity in the laboratory", 1, new DateTime(2020, 9, 9, 0, 0, 0, 0, DateTimeKind.Unspecified), "Humidity Sensor", "S1001", "Available" });
+                columns: new[] { "Id", "Description", "LabId", "LastUpdated", "SerialNo", "Status", "Type" },
+                values: new object[] { 3, "Its purpose is to detect humidity in the laboratory", 1, new DateTime(2020, 9, 9, 0, 0, 0, 0, DateTimeKind.Unspecified), "S1001", "Available", "Humidity Sensor" });
 
             migrationBuilder.InsertData(
                 table: "Device",
-                columns: new[] { "Id", "Description", "LabId", "LastUpdated", "Name", "SerialNo", "Status" },
-                values: new object[] { 4, "Its purpose is to detect light in the laboratory", 1, new DateTime(2019, 8, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Light Sensor", "SL1001", "Available" });
+                columns: new[] { "Id", "Description", "LabId", "LastUpdated", "SerialNo", "Status", "Type" },
+                values: new object[] { 4, "Its purpose is to detect light in the laboratory", 1, new DateTime(2019, 8, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "SL1001", "Available", "Light Sensor" });
 
             migrationBuilder.InsertData(
                 table: "Device",
-                columns: new[] { "Id", "Description", "LabId", "LastUpdated", "Name", "SerialNo", "Status" },
-                values: new object[] { 5, "It is used to control brightness of the lights in the lab", 1, new DateTime(2019, 7, 3, 0, 0, 0, 0, DateTimeKind.Unspecified), "VR Light Controls", "VRL1001", "Unavailable" });
+                columns: new[] { "Id", "Description", "LabId", "LastUpdated", "SerialNo", "Status", "Type" },
+                values: new object[] { 5, "It is used to control brightness of the lights in the lab", 1, new DateTime(2019, 7, 3, 0, 0, 0, 0, DateTimeKind.Unspecified), "VRL1001", "Unavailable", "VR Light Controls" });
 
             migrationBuilder.CreateIndex(
                 name: "IX_Accessory_AccessoryTypeId",

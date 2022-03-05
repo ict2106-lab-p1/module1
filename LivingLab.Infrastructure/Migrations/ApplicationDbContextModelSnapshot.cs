@@ -300,15 +300,15 @@ namespace LivingLab.Infrastructure.Migrations
                     b.Property<DateTime>("LastUpdated")
                         .HasColumnType("Date");
 
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
-
                     b.Property<string>("SerialNo")
                         .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Status")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Type")
                         .IsRequired()
                         .HasColumnType("TEXT");
 
@@ -325,9 +325,9 @@ namespace LivingLab.Infrastructure.Migrations
                             Description = "Its purpose is to detect situation in the laboratory",
                             LabId = 1,
                             LastUpdated = new DateTime(2020, 10, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "Surveillance Camera",
                             SerialNo = "SC1001",
-                            Status = "Available"
+                            Status = "Available",
+                            Type = "Surveillance Camera"
                         },
                         new
                         {
@@ -335,9 +335,9 @@ namespace LivingLab.Infrastructure.Migrations
                             Description = "Its purpose is to detect temperature in the laboratory",
                             LabId = 1,
                             LastUpdated = new DateTime(2020, 10, 11, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "Temperature Sensor",
                             SerialNo = "R1001",
-                            Status = "Available"
+                            Status = "Available",
+                            Type = "Temperature Sensor"
                         },
                         new
                         {
@@ -345,9 +345,9 @@ namespace LivingLab.Infrastructure.Migrations
                             Description = "Its purpose is to detect humidity in the laboratory",
                             LabId = 1,
                             LastUpdated = new DateTime(2020, 9, 9, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "Humidity Sensor",
                             SerialNo = "S1001",
-                            Status = "Available"
+                            Status = "Available",
+                            Type = "Humidity Sensor"
                         },
                         new
                         {
@@ -355,9 +355,9 @@ namespace LivingLab.Infrastructure.Migrations
                             Description = "Its purpose is to detect light in the laboratory",
                             LabId = 1,
                             LastUpdated = new DateTime(2019, 8, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "Light Sensor",
                             SerialNo = "SL1001",
-                            Status = "Available"
+                            Status = "Available",
+                            Type = "Light Sensor"
                         },
                         new
                         {
@@ -365,9 +365,9 @@ namespace LivingLab.Infrastructure.Migrations
                             Description = "It is used to control brightness of the lights in the lab",
                             LabId = 1,
                             LastUpdated = new DateTime(2019, 7, 3, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "VR Light Controls",
                             SerialNo = "VRL1001",
-                            Status = "Unavailable"
+                            Status = "Unavailable",
+                            Type = "VR Light Controls"
                         });
                 });
 
