@@ -3,6 +3,7 @@ using System;
 using LivingLab.Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace LivingLab.Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220223081349_CreateMod2DBv2")]
+    partial class CreateMod2DBv2
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "6.0.1");
@@ -86,78 +88,6 @@ namespace LivingLab.Infrastructure.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Devices");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            DeviceSerialNumber = "DEVICE-3390",
-                            EnergyUsageThreshold = 5619.0,
-                            Type = "SmartSensor"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            DeviceSerialNumber = "DEVICE-6049",
-                            EnergyUsageThreshold = 1392.0,
-                            Type = "SmartSensor"
-                        },
-                        new
-                        {
-                            Id = 3,
-                            DeviceSerialNumber = "DEVICE-1598",
-                            EnergyUsageThreshold = 1514.0,
-                            Type = "SmartSensor"
-                        },
-                        new
-                        {
-                            Id = 4,
-                            DeviceSerialNumber = "DEVICE-1232",
-                            EnergyUsageThreshold = 1490.0,
-                            Type = "SmartSensor"
-                        },
-                        new
-                        {
-                            Id = 5,
-                            DeviceSerialNumber = "DEVICE-1123",
-                            EnergyUsageThreshold = 2082.0,
-                            Type = "SmartSensor"
-                        },
-                        new
-                        {
-                            Id = 6,
-                            DeviceSerialNumber = "DEVICE-8987",
-                            EnergyUsageThreshold = 8112.0,
-                            Type = "SmartSensor"
-                        },
-                        new
-                        {
-                            Id = 7,
-                            DeviceSerialNumber = "DEVICE-2435",
-                            EnergyUsageThreshold = 3956.0,
-                            Type = "SmartSensor"
-                        },
-                        new
-                        {
-                            Id = 8,
-                            DeviceSerialNumber = "DEVICE-1234",
-                            EnergyUsageThreshold = 4877.0,
-                            Type = "SmartSensor"
-                        },
-                        new
-                        {
-                            Id = 9,
-                            DeviceSerialNumber = "DEVICE-5423",
-                            EnergyUsageThreshold = 6933.0,
-                            Type = "SmartSensor"
-                        },
-                        new
-                        {
-                            Id = 10,
-                            DeviceSerialNumber = "DEVICE-7452",
-                            EnergyUsageThreshold = 2700.0,
-                            Type = "SmartSensor"
-                        });
                 });
 
             modelBuilder.Entity("LivingLab.Core.Entities.EmailLog", b =>
@@ -330,28 +260,6 @@ namespace LivingLab.Infrastructure.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Labs");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Area = 12.0
-                        },
-                        new
-                        {
-                            Id = 2,
-                            Area = 12.0
-                        },
-                        new
-                        {
-                            Id = 3,
-                            Area = 12.0
-                        },
-                        new
-                        {
-                            Id = 4,
-                            Area = 12.0
-                        });
                 });
 
             modelBuilder.Entity("LivingLab.Core.Entities.PowerGenerationMix", b =>

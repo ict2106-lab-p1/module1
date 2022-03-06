@@ -15,6 +15,12 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     public DbSet<Lab> Labs { get; set; }
     public DbSet<Device> Devices { get; set; }
     public DbSet<EnergyUsageLog> EnergyUsageLogs { get; set; }
+    public DbSet<EnergyUsagePredictionLog> EnergyUsagePredictions { get; set; }
+    public DbSet<PowerGenerationMix> PowerGenerationMix { get; set; }
+    public DbSet<CarbonFootprintEstimation> CarbonFootprintEstimations { get; set; }
+    public DbSet<SmsLog> SmsLogs { get; set; }
+    public DbSet<EmailLog> EmailLogs { get; set; }
+
     public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
     {
     }
@@ -25,6 +31,8 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
 
         // More info: https://docs.microsoft.com/en-us/ef/core/modeling/
         new TodoConfiguration().Configure(modelBuilder.Entity<Todo>());
+        // new EnergyUsageLogConfiguration().Configure(modelBuilder.Entity<EnergyUsageLog>());
+        new NotificationsConfiguration().Configure(modelBuilder.Entity<ApplicationUser>());
 
         // Rename ASP.NET Identity tables
         modelBuilder.Entity<ApplicationUser>(e => e.ToTable("Users"));
