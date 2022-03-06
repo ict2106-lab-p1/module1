@@ -4,7 +4,7 @@ namespace LivingLab.Web.Extensions;
 
 public static class MvcExtensions
 {
-    public static string ActiveClass(this IHtmlHelper htmlHelper, string controllers, string actions, string cssClass = "text-gray-700 bg-highlight")
+    public static string ActiveClass(this IHtmlHelper htmlHelper, string controllers, string actions, string cssClass = "text-gray-700 bg-white")
     {
         var routeData = htmlHelper.ViewContext.RouteData;
 
