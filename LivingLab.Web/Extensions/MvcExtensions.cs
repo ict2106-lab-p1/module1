@@ -8,8 +8,8 @@ public static class MvcExtensions
     {
         var routeData = htmlHelper.ViewContext.RouteData;
 
-        var routeAction = routeData.Values["action"].ToString();
-        var routeController = routeData.Values["controller"].ToString();
+        var routeAction = routeData.Values["action"]?.ToString();
+        var routeController = routeData.Values["controller"]?.ToString();
 
         var returnActive = routeController == controllers ? cssClass : "text-gray-400";
 
