@@ -1,3 +1,5 @@
+using LivingLab.Core.Entities;
+
 namespace LivingLab.Web.ViewModels;
     
 using LivingLab.Domain.Entities;

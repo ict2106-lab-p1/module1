@@ -1,4 +1,4 @@
-namespace LivingLab.Domain.Interfaces.Repositories;
+namespace LivingLab.Core.Interfaces.Repositories;
 
 public interface IRepository<T> where T : class
 {

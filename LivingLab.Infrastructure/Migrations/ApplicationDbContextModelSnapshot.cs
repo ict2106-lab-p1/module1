@@ -17,7 +17,7 @@ namespace LivingLab.Infrastructure.Migrations
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "6.0.1");
 
-            modelBuilder.Entity("LivingLab.Domain.Entities.Accessory", b =>
+            modelBuilder.Entity("LivingLab.Core.Entities.Accessory", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -193,7 +193,7 @@ namespace LivingLab.Infrastructure.Migrations
                         });
                 });
 
-            modelBuilder.Entity("LivingLab.Domain.Entities.AccessoryType", b =>
+            modelBuilder.Entity("LivingLab.Core.Entities.AccessoryType", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -284,7 +284,7 @@ namespace LivingLab.Infrastructure.Migrations
                         });
                 });
 
-            modelBuilder.Entity("LivingLab.Domain.Entities.Device", b =>
+            modelBuilder.Entity("LivingLab.Core.Entities.Device", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -307,6 +307,9 @@ namespace LivingLab.Infrastructure.Migrations
                     b.Property<string>("Status")
                         .IsRequired()
                         .HasColumnType("TEXT");
+
+                    b.Property<double?>("Threshold")
+                        .HasColumnType("REAL");
 
                     b.Property<string>("Type")
                         .IsRequired()
@@ -371,7 +374,7 @@ namespace LivingLab.Infrastructure.Migrations
                         });
                 });
 
-            modelBuilder.Entity("LivingLab.Domain.Entities.Identity.ApplicationUser", b =>
+            modelBuilder.Entity("LivingLab.Core.Entities.Identity.ApplicationUser", b =>
                 {
                     b.Property<string>("Id")
                         .HasColumnType("TEXT");
@@ -441,7 +444,7 @@ namespace LivingLab.Infrastructure.Migrations
                     b.ToTable("Users", (string)null);
                 });
 
-            modelBuilder.Entity("LivingLab.Domain.Entities.Lab", b =>
+            modelBuilder.Entity("LivingLab.Core.Entities.Lab", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -473,7 +476,7 @@ namespace LivingLab.Infrastructure.Migrations
                         });
                 });
 
-            modelBuilder.Entity("LivingLab.Domain.Entities.Logging", b =>
+            modelBuilder.Entity("LivingLab.Core.Entities.Logging", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -499,7 +502,7 @@ namespace LivingLab.Infrastructure.Migrations
                     b.ToTable("Logging");
                 });
 
-            modelBuilder.Entity("LivingLab.Domain.Entities.Todo", b =>
+            modelBuilder.Entity("LivingLab.Core.Entities.Todo", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -510,7 +513,6 @@ namespace LivingLab.Infrastructure.Migrations
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Title")
-                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.HasKey("Id");
@@ -650,15 +652,15 @@ namespace LivingLab.Infrastructure.Migrations
                     b.ToTable("UserToken", (string)null);
                 });
 
-            modelBuilder.Entity("LivingLab.Domain.Entities.Accessory", b =>
+            modelBuilder.Entity("LivingLab.Core.Entities.Accessory", b =>
                 {
-                    b.HasOne("LivingLab.Domain.Entities.AccessoryType", "AccessoryType")
+                    b.HasOne("LivingLab.Core.Entities.AccessoryType", "AccessoryType")
                         .WithMany("Accessories")
                         .HasForeignKey("AccessoryTypeId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("LivingLab.Domain.Entities.Lab", "Lab")
+                    b.HasOne("LivingLab.Core.Entities.Lab", "Lab")
                         .WithMany("Accessories")
                         .HasForeignKey("LabId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -669,9 +671,9 @@ namespace LivingLab.Infrastructure.Migrations
                     b.Navigation("Lab");
                 });
 
-            modelBuilder.Entity("LivingLab.Domain.Entities.Device", b =>
+            modelBuilder.Entity("LivingLab.Core.Entities.Device", b =>
                 {
-                    b.HasOne("LivingLab.Domain.Entities.Lab", "Lab")
+                    b.HasOne("LivingLab.Core.Entities.Lab", "Lab")
                         .WithMany("Devices")
                         .HasForeignKey("LabId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -680,9 +682,9 @@ namespace LivingLab.Infrastructure.Migrations
                     b.Navigation("Lab");
                 });
 
-            modelBuilder.Entity("LivingLab.Domain.Entities.Logging", b =>
+            modelBuilder.Entity("LivingLab.Core.Entities.Logging", b =>
                 {
-                    b.HasOne("LivingLab.Domain.Entities.Lab", "Lab")
+                    b.HasOne("LivingLab.Core.Entities.Lab", "Lab")
                         .WithMany("Logs")
                         .HasForeignKey("LabId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -702,7 +704,7 @@ namespace LivingLab.Infrastructure.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
                 {
-                    b.HasOne("LivingLab.Domain.Entities.Identity.ApplicationUser", null)
+                    b.HasOne("LivingLab.Core.Entities.Identity.ApplicationUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -711,7 +713,7 @@ namespace LivingLab.Infrastructure.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
                 {
-                    b.HasOne("LivingLab.Domain.Entities.Identity.ApplicationUser", null)
+                    b.HasOne("LivingLab.Core.Entities.Identity.ApplicationUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -726,7 +728,7 @@ namespace LivingLab.Infrastructure.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("LivingLab.Domain.Entities.Identity.ApplicationUser", null)
+                    b.HasOne("LivingLab.Core.Entities.Identity.ApplicationUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -735,19 +737,19 @@ namespace LivingLab.Infrastructure.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
                 {
-                    b.HasOne("LivingLab.Domain.Entities.Identity.ApplicationUser", null)
+                    b.HasOne("LivingLab.Core.Entities.Identity.ApplicationUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("LivingLab.Domain.Entities.AccessoryType", b =>
+            modelBuilder.Entity("LivingLab.Core.Entities.AccessoryType", b =>
                 {
                     b.Navigation("Accessories");
                 });
 
-            modelBuilder.Entity("LivingLab.Domain.Entities.Lab", b =>
+            modelBuilder.Entity("LivingLab.Core.Entities.Lab", b =>
                 {
                     b.Navigation("Accessories");
 

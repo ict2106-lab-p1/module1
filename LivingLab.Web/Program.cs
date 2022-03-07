@@ -1,5 +1,6 @@
 using LivingLab.Infrastructure;
-using LivingLab.Infrastructure.Extensions;
+using LivingLab.Infrastructure.Configuration;
+using LivingLab.Web.Configuration;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -8,8 +9,8 @@ var connectionString = builder.Configuration.GetConnectionString("DefaultConnect
 builder.Services.AddDbContext(connectionString);
 builder.Services.ConfigurePasswordPolicy();
 builder.Services.AddIdentities();
-builder.Services.AddTransientServices();
-builder.Services.AddScopedServices();
+builder.Services.AddCoreServices();
+builder.Services.AddWebServices();
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 builder.Services.AddControllersWithViews();
