@@ -1,4 +1,4 @@
-using LivingLab.Domain.Interfaces.Services;
+using LivingLab.Core.Interfaces.Services;
 
 namespace LivingLab.Infrastructure.Services;
 

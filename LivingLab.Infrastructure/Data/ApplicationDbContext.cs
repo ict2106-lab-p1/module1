@@ -1,5 +1,5 @@
-using LivingLab.Domain.Entities;
-using LivingLab.Domain.Entities.Identity;
+using LivingLab.Core.Entities;
+using LivingLab.Core.Entities.Identity;
 using LivingLab.Infrastructure.Data.Config;
 
 using Microsoft.AspNetCore.Identity;
