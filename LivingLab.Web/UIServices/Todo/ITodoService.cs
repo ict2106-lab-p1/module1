@@ -1,6 +1,6 @@
 using LivingLab.Web.Models.DTOs.Todo;
 
-namespace LivingLab.Web.Services.Todo;
+namespace LivingLab.Web.UIServices.Todo;
 
 public interface ITodoService
 {

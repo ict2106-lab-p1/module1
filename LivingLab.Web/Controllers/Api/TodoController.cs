@@ -1,5 +1,5 @@
 using LivingLab.Web.Models.DTOs.Todo;
-using LivingLab.Web.Services.Todo;
+using LivingLab.Web.UIServices.Todo;
 
 using Microsoft.AspNetCore.Mvc;
 

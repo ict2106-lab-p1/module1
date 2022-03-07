@@ -1,6 +1,6 @@
 using LivingLab.Core.Interfaces.Notifications;
 
-namespace LivingLab.Infrastructure.Services;
+namespace LivingLab.Infrastructure.InfraServices;
 
 public class EmailNotifier : IEmailNotifier
 {

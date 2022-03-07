@@ -1,4 +1,4 @@
-using LivingLab.Web.Services.Todo;
+using LivingLab.Web.UIServices.Todo;
 
 namespace LivingLab.Web.Configuration;
 
