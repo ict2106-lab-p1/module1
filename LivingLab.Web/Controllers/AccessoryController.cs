@@ -22,8 +22,8 @@ public class AccessoryController : Controller
         _accessoryRepository = accessoryRepository;
     }
 
-    [Route("view")]
-    public async Task<IActionResult> ViewAccessory()
+    [Route("details")]
+    public async Task<IActionResult> ViewAccessoryDetails()
     {
         //retrieve data from db
         List<Accessory> accessoryList = await _accessoryRepository.GetAccessoryWithAccessoryType();
@@ -34,7 +34,13 @@ public class AccessoryController : Controller
         //add list of accessory view model to the view accessory view model
         ViewAccessoryViewModel viewAccessories = new ViewAccessoryViewModel();
         viewAccessories.AccessoryList = accessories;
-        return View("ViewAccessory", viewAccessories);
+        return View("ViewAccessoryDetails", viewAccessories);
+    }
+    
+    [Route("type")]
+    public IActionResult ViewAccessoryType()
+    {
+        return View("ViewAccessoryType");
     }
 
     [HttpGet]
