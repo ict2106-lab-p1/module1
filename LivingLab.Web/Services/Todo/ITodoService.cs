@@ -1,9 +1,7 @@
 using LivingLab.Web.Models.DTOs.Todo;
 
 namespace LivingLab.Web.Services.Todo;
-/// <summary>
-/// This is the service that handles the todo list.
-/// </summary>
+
 public interface ITodoService
 {
     Task<List<TodoDTO>> GetAllTodosAsync();

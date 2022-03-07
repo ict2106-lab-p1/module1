@@ -4,7 +4,10 @@ using LivingLab.Core.Interfaces.Repositories;
 using LivingLab.Web.Models.DTOs.Todo;
 
 namespace LivingLab.Web.Services.Todo;
-
+/// <summary>
+/// This is a UI-specific service so it belongs in the Web project.
+/// It does not contain any business logic and works with UI-specific types (view models and DTOs).
+/// </summary>
 public class TodoService : ITodoService
 {
     private readonly IMapper _mapper;
