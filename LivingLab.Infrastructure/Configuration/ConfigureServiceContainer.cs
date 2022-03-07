@@ -6,7 +6,7 @@ using LivingLab.Infrastructure.Repositories;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace LivingLab.Infrastructure.Extensions;
+namespace LivingLab.Infrastructure.Configuration;
 
 public static class ConfigureServiceContainer
 {
@@ -26,13 +26,32 @@ public static class ConfigureServiceContainer
             .AddEntityFrameworkStores<ApplicationDbContext>()
             .AddDefaultTokenProviders();
 
-    public static void AddTransientServices(this IServiceCollection services)
+    public static IServiceCollection AddCoreServices(this IServiceCollection services)
+    {
+        AddTransientServices(services);
+        AddScopedServices(services);
+        AddSingletonServices(services);
+        return services;
+    }
+    
+    private static IServiceCollection AddTransientServices(this IServiceCollection services)
     {
         services.AddTransient<ITodoRepository, TodoRepository>();
+        
+        return services;
     }
 
-    public static void AddScopedServices(this IServiceCollection services)
+    private static IServiceCollection AddScopedServices(this IServiceCollection services)
     {
         // services.AddScoped<ITodoRepository, TodoRepository>();
+
+        return services;
+    }
+    
+    private static IServiceCollection AddSingletonServices(this IServiceCollection services)
+    {
+        // services.AddSingleton<ITodoRepository, TodoRepository>();
+
+        return services;
     }
 }
