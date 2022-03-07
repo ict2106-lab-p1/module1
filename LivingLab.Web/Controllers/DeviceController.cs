@@ -28,7 +28,7 @@ public class DeviceController : Controller
     public async Task<IActionResult> ViewDevice()
     { 
         //retrieve data from db
-        List<Device> deviceList = await _deviceRepository.GetDeviceWithDeviceType();
+        List<Device> deviceList = await _deviceRepository.GetAllAsync();
         
         //map entity model to view model
         List<DeviceViewModel> devices = _mapper.Map<List<Device>, List<DeviceViewModel>> (deviceList);
@@ -42,7 +42,7 @@ public class DeviceController : Controller
     [HttpGet]
     public async Task<IActionResult> GetAll()
     {
-        List<Device> deviceList = await _deviceRepository.GetDeviceWithDeviceType();
+        List<Device> deviceList = await _deviceRepository.GetAllAsync();
         return Ok(deviceList);
     }
 

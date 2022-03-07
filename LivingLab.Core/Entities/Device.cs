@@ -8,13 +8,14 @@ public class Device : BaseEntity
     [Required]
     [DataType(DataType.Date)]
     [Column(TypeName="Date")]
-    public DateTime ValidityDate { get; set; }
+    public DateTime LastUpdated { get; set; }
     [Required]
     public string? SerialNo { get; set; }
     [Required]
-    public int LabId { get; set; }
-    [Required]
-    public int DeviceTypeId { get; set; }
     public Lab? Lab { get; set; }
-    public DeviceType? DeviceType { get; set; }
+    [Required]
+    public string Status { get; set; }
+    [Required]
+    public string Type { get; set; }
+    public string Description { get; set; }
 }

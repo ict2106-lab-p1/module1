@@ -6,11 +6,11 @@ using Microsoft.EntityFrameworkCore;
 
 namespace LivingLab.Infrastructure.Repositories;
 
-public class ReportRepository : Repository<Report>, IReportRepository
+public class LoggingRepository : Repository<Logging>, ILoggingRepository
 {
     private readonly ApplicationDbContext _context;
 
-    public ReportRepository(ApplicationDbContext context) : base(context)
+    public LoggingRepository(ApplicationDbContext context) : base(context)
     {
         _context = context;
     }

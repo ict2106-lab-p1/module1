@@ -5,6 +5,7 @@ using LivingLab.Infrastructure.Data.Config;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.VisualBasic;
 
 namespace LivingLab.Infrastructure.Data;
 
@@ -14,9 +15,9 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     public DbSet<Todo> Todos { get; set; }
     public DbSet<Accessory> Accessory { get; set; }
     public DbSet<Device> Device { get; set; }
-    public DbSet<DeviceType> DeviceType { get; set; }
+    // public DbSet<DeviceType> DeviceType { get; set; }
     public DbSet<Lab> Lab { get; set; }
-    public DbSet<Report> Report { get; set; }
+    public DbSet<Logging> Logging { get; set; }
     public DbSet<AccessoryType> AccessoryType { get; set; }
 
     public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
@@ -45,43 +46,38 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
         new { Id = 1, Location = "NYP-SR7C", PersonInCharge = "David", LabStatus ="Available"}
         );
 
-        modelBuilder.Entity<DeviceType>().HasData(
-        new { Id = 1, Name = "Surveillance Camera", Description = "It''s purpose is to detect situation in the laboratory", Cost = 499.0 },
-        new { Id = 2, Name = "Temperature Sensor", Description = "It''s purpose is to detect temperature in the laboratory", Cost = 130.0 },
-        new { Id = 3, Name = "Humidity Sensor", Description = "It''s purpose is to detect humidity in the laboratory", Cost = 130.0 },
-        new { Id = 4, Name = "Light Sensor", Description = "It''s purpose is to detect light in the laboratory", Cost = 320.0 },
-        new { Id = 5, Name = "VR Light Controls", Description = "It is used to control brightness of the lights in the lab", Cost = 323.0 }
-        );
+        // modelBuilder.Entity<DeviceType>().HasData(
+        // new { Id = 1, Name = "Surveillance Camera", Description = "It''s purpose is to detect situation in the laboratory", Cost = 499.0 },
+        // new { Id = 2, Name = "Temperature Sensor", Description = "It''s purpose is to detect temperature in the laboratory", Cost = 130.0 },
+        // new { Id = 3, Name = "Humidity Sensor", Description = "It''s purpose is to detect humidity in the laboratory", Cost = 130.0 },
+        // new { Id = 4, Name = "Light Sensor", Description = "It''s purpose is to detect light in the laboratory", Cost = 320.0 },
+        // new { Id = 5, Name = "VR Light Controls", Description = "It is used to control brightness of the lights in the lab", Cost = 323.0 }
+        // );
 
         modelBuilder.Entity<Device>(entity => { 
                 entity.HasOne(d => d.Lab)
                 .WithMany(l => l.Devices)
                 .HasForeignKey("LabId");
-                entity.HasOne(d => d.DeviceType)
-                .WithMany(l => l.Devices)
-                .HasForeignKey("DeviceTypeId");
         });
 
         modelBuilder.Entity<Device>().HasData(
-                new { Id = 1, ValidityDate = new DateTime(2020,10,10), SerialNo = "SC1001", LabId = 1, DeviceTypeId = 1},
-                new { Id = 2, ValidityDate = new DateTime(2020,10,11), SerialNo = "R1001", LabId = 1, DeviceTypeId = 2},
-                new { Id = 3, ValidityDate = new DateTime(2020,9,9), SerialNo = "S1001", LabId = 1, DeviceTypeId = 3},
-                new { Id = 4, ValidityDate = new DateTime(2019,8,1), SerialNo = "SL1001", LabId = 1, DeviceTypeId = 4},
-                new { Id = 5, ValidityDate = new DateTime(2019,7,3), SerialNo = "VRL1001", LabId = 1, DeviceTypeId = 5}
+                new { Id = 1, LastUpdated = new DateTime(2020,10,10), SerialNo = "SC1001", LabId = 1, Status="Available", Type = "Surveillance Camera", Description = "Its purpose is to detect situation in the laboratory"},
+                new { Id = 2, LastUpdated = new DateTime(2020,10,11), SerialNo = "R1001", LabId = 1, Status="Available", Type = "Temperature Sensor", Description = "Its purpose is to detect temperature in the laboratory"},
+                new { Id = 3, LastUpdated = new DateTime(2020,9,9), SerialNo = "S1001", LabId = 1, Status="Available", Type = "Humidity Sensor", Description = "Its purpose is to detect humidity in the laboratory"},
+                new { Id = 4, LastUpdated = new DateTime(2019,8,1), SerialNo = "SL1001", LabId = 1, Status="Available",  Type = "Light Sensor", Description = "Its purpose is to detect light in the laboratory"},
+                new { Id = 5, LastUpdated = new DateTime(2019,7,3), SerialNo = "VRL1001", LabId = 1, Status="Unavailable", Type = "VR Light Controls", Description = "It is used to control brightness of the lights in the lab"}
         );
 
         // Accessory and Accessory Types
         modelBuilder.Entity<AccessoryType>().HasData(
-        new { Id = 1, Name = "Camera", Borrowable = true, Type = "devices" ,Description = "It''s purpose is to capture images and videos" },
-        new { Id = 2, Name = "Ultrasonic Sensor", Borrowable = true, Type = "sensor", Description = "It''s purpose is to detect obstacles"},
-        new { Id = 3, Name = "Humidity Sensor", Borrowable = true, Type = "sensor", Description = "It''s purpose is to detect humidity in the environment"},
-        new { Id = 4, Name = "3D Printers", Borrowable = true, Type = "sensor", Description = "It''s purpose is to detect water pressure"},
-        new { Id = 5, Name = "Laptops", Borrowable = true, Type = "devices", Description = "It is used to switch on the lights in the lab"},
-        new { Id = 6, Name = "Computers", Borrowable = true, Type = "sensor", Description = "It''s purpose is to detect proximity of an obstacle"},
-        new { Id = 7, Name = "Handyman toolkits", Borrowable = false, Type = "sensor", Description = "It''s purpose is to emit light"},
-        new { Id = 8, Name = "Speaker", Borrowable = true, Type = "Audio Signal Device", Description = "It''s purpose is to emit sound from the device"},
-        new { Id = 9, Name = "Keyboard", Borrowable = false, Type = "peripheral", Description = "It''s purpose is to detect temperature in the environment"},
-        new { Id = 10, Name = "Mouse", Borrowable = false, Type = "peripheral", Description = "It''s purpose is to detect temperature in the environment"}
+                new { Id = 1, Type = "Camera", Borrowable = true, Name = "Sony A7 IV", Description = "Its purpose is to capture images and videos" },
+                new { Id = 2, Type = "Ultrasonic Sensor", Borrowable = true, Name = "MA300D1-1", Description = "Its purpose is to detect obstacles"},
+                new { Id = 3, Type = "Humidity Sensor", Borrowable = true, Name = "DHT22", Description = "Its purpose is to detect humidity in the environment"},
+                new { Id = 4, Type = "Water pressure Sensor", Borrowable = true, Name = "LEFOO LFT2000W", Description = "Its purpose is to detect water pressure"},
+                new { Id = 5, Type = "IR Sensor", Borrowable = true, Name = "RM1802", Description = "It is used to switch on the lights in the lab"},
+                new { Id = 6, Type = "Proximity Sensor", Borrowable = true, Name = "HC-SR04", Description = "Its purpose is to detect proximity of an obstacle"},
+                new { Id = 7, Type = "LED Lights", Borrowable = false, Name = "EDGELEC 4Pin LED Diodes", Description = "Its purpose is to emit light"},
+                new { Id = 8, Type = "Buzzer", Borrowable = true, Name = "TMB09A05", Description = "Its purpose is to emit sound from the device"}
         );
 
         modelBuilder.Entity<Accessory>(entity => {
@@ -94,26 +90,22 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
         });
 
         modelBuilder.Entity<Accessory>().HasData(
-                new { Id = 1, Status = "Available", ValidityDate = new DateTime(2024,10,10),  LabId = 1, AccessoryTypeId = 1, Quantity = 2},
-                new { Id = 2, Status = "Borrowed", ValidityDate = new DateTime(2024,10,14),  LabId = 1, AccessoryTypeId = 1, Quantity = 2},
-                new { Id = 3, Status = "Available", ValidityDate = new DateTime(2024,10,17),  LabId = 1, AccessoryTypeId = 2, Quantity = 2},
-                new { Id = 4, Status = "Available", ValidityDate = new DateTime(2024,10,21), LabId = 1, AccessoryTypeId = 2, Quantity = 2},
-                new { Id = 5, Status = "Borrowed", ValidityDate = new DateTime(2024,9,9), LabId = 1, AccessoryTypeId = 3, Quantity = 2},
-                new { Id = 6, Status = "Available", ValidityDate = new DateTime(2024,9,5),  LabId = 1, AccessoryTypeId = 3, Quantity = 2},
-                new { Id = 7, Status = "Available", ValidityDate = new DateTime(2024,8,1),  LabId = 1, AccessoryTypeId = 4, Quantity = 2},
-                new { Id = 8, Status = "Borrowed", ValidityDate = new DateTime(2024,8,10),  LabId = 1, AccessoryTypeId = 4, Quantity = 2},
-                new { Id = 9, Status = "Available", ValidityDate = new DateTime(2024,7,3),  LabId = 1, AccessoryTypeId = 5, Quantity = 2},
-                new { Id = 10, Status = "Borrowed", ValidityDate = new DateTime(2024,6,24),  LabId = 1, AccessoryTypeId = 5, Quantity = 2},
-                new { Id = 11, Status = "Available", ValidityDate = new DateTime(2024,7,25),  LabId = 1, AccessoryTypeId = 6, Quantity = 2},
-                new { Id = 12, Status = "Available", ValidityDate = new DateTime(2024,4,3),  LabId = 1, AccessoryTypeId = 6, Quantity = 2},
-                new { Id = 13, Status = "Borrowed", ValidityDate = new DateTime(2024,7,19),  LabId = 1, AccessoryTypeId = 7, Quantity = 2},
-                new { Id = 14, Status = "Borrowed", ValidityDate = new DateTime(2024,12,14),  LabId = 1, AccessoryTypeId = 7, Quantity = 2},
-                new { Id = 15, Status = "Available", ValidityDate = new DateTime(2024,11,12),  LabId = 1, AccessoryTypeId = 8, Quantity = 2},
-                new { Id = 16, Status = "Available", ValidityDate = new DateTime(2024,7,3),  LabId = 1, AccessoryTypeId = 8, Quantity = 2},
-                new { Id = 17, Status = "Borrowed", ValidityDate = new DateTime(2024,7,3),  LabId = 1, AccessoryTypeId = 9, Quantity = 2},
-                new { Id = 18, Status = "Borrowed", ValidityDate = new DateTime(2024,7,3),  LabId = 1, AccessoryTypeId = 9, Quantity = 2},
-                new { Id = 19, Status = "Borrowed", ValidityDate = new DateTime(2024,7,3),  LabId = 1, AccessoryTypeId = 10, Quantity = 2},
-                new { Id = 20, Status = "Borrowed", ValidityDate = new DateTime(2024,7,3),  LabId = 1, AccessoryTypeId = 10, Quantity = 2}
+                new { Id = 1, Status = "Available", LastUpdated = new DateTime(2021,10,10),  LabId = 1, AccessoryTypeId = 1},
+                new { Id = 2, Status = "Borrowed", LastUpdated = new DateTime(2021,10,14),  LabId = 1, AccessoryTypeId = 1, LabUserId = 1, DueDate = new DateTime(2022,10,14) },
+                new { Id = 3, Status = "Available", LastUpdated = new DateTime(2021,10,17),  LabId = 1, AccessoryTypeId = 2},
+                new { Id = 4, Status = "Available", LastUpdated = new DateTime(2021,10,21), LabId = 1, AccessoryTypeId = 2},
+                new { Id = 5, Status = "Borrowed", LastUpdated = new DateTime(2021,9,9), LabId = 1, AccessoryTypeId = 3, LabUserId = 2, DueDate = new DateTime(2022,9,9) },
+                new { Id = 6, Status = "Available", LastUpdated = new DateTime(2021,9,5),  LabId = 1, AccessoryTypeId = 3},
+                new { Id = 7, Status = "Available", LastUpdated = new DateTime(2021,8,1),  LabId = 1, AccessoryTypeId = 4},
+                new { Id = 8, Status = "Borrowed", LastUpdated = new DateTime(2021,8,10),  LabId = 1, AccessoryTypeId = 4, LabUserId = 3, DueDate = new DateTime(2022,9,5) },
+                new { Id = 9, Status = "Available", LastUpdated = new DateTime(2021,7,3),  LabId = 1, AccessoryTypeId = 5},
+                new { Id = 10, Status = "Borrowed", LastUpdated = new DateTime(2021,6,24),  LabId = 1, AccessoryTypeId = 5, LabUserId = 4, DueDate = new DateTime(2022,10,14) },
+                new { Id = 11, Status = "Available", LastUpdated = new DateTime(2021,7,25),  LabId = 1, AccessoryTypeId = 6},
+                new { Id = 12, Status = "Available", LastUpdated = new DateTime(2021,4,3),  LabId = 1, AccessoryTypeId = 6},
+                new { Id = 13, Status = "Borrowed", LastUpdated = new DateTime(2021,7,19),  LabId = 1, AccessoryTypeId = 7, LabUserId = 5, DueDate = new DateTime(2022,7,19) },
+                new { Id = 14, Status = "Borrowed", LastUpdated = new DateTime(2021,12,14),  LabId = 1, AccessoryTypeId = 7, LabUserId = 6, DueDate = new DateTime(2022,12,14) },
+                new { Id = 15, Status = "Available", LastUpdated = new DateTime(2021,11,12),  LabId = 1, AccessoryTypeId = 8},
+                new { Id = 16, Status = "Available", LastUpdated = new DateTime(2021,7,3),  LabId = 1, AccessoryTypeId = 8}
         );
 
     }

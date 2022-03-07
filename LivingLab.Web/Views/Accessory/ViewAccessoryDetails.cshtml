@@ -24,7 +24,6 @@ ViewData["Title"] = "Manage Accessory";
             <th>ID</th>
             <th>Name</th>
             <th>Description</th>
-            <th>Type</th>
             <th>Validity Date</th>
             <th>Status</th>
             <th>Borrowable</th>
@@ -39,11 +38,9 @@ ViewData["Title"] = "Manage Accessory";
                 <td> @accessory.Id </td>
                 <td> @accessory.AccessoryType.Name </td>
                 <td> @accessory.AccessoryType.Description </td>
-                <td> @accessory.AccessoryType.Type </td>
-                <td> @accessory.ValidityDate.ToString("dd/MM/yyyy")  </td>
+                <td> @accessory.LastUpdated.ToString("MM/dd/yyyy")  </td>
                 <td> @accessory.Status</td>
-                <td> @accessory.AccessoryType?.Borrowable</td>
-                <td> @accessory.Quantity</td>
+                <td> @accessory.AccessoryType.Borrowable</td>
                 <td></td>
                 <td></td>
             </tr>
