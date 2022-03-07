@@ -1,7 +1,7 @@
 using AutoMapper;
 
 using LivingLab.Core.Entities;
-using LivingLab.Web.ApiModels;
+using LivingLab.Web.Models.DTOs.Todo;
 
 namespace LivingLab.Web.Mapping;
 

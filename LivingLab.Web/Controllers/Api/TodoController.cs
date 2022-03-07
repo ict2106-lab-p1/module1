@@ -1,50 +1,44 @@
-using AutoMapper;
-
-using LivingLab.Core.Entities;
-using LivingLab.Core.Interfaces.Repositories;
-using LivingLab.Web.ApiModels;
+using LivingLab.Web.Models.DTOs.Todo;
+using LivingLab.Web.Services.Todo;
 
 using Microsoft.AspNetCore.Mvc;
 
-namespace LivingLab.Web.ApiControllers;
+namespace LivingLab.Web.Controllers.Api;
 
 public class TodoController : BaseApiController
 {
-    private readonly IMapper _mapper;
-    private readonly ITodoRepository _todoRepository;
-
-    public TodoController(ITodoRepository todoRepository, IMapper mapper)
+    private readonly ITodoService _todoService;
+    public TodoController(ITodoService todoService)
     {
-        _mapper = mapper;
-        _todoRepository = todoRepository;
+        _todoService = todoService;
     }
 
     // GET: api/Todo
     [HttpGet]
-    public IActionResult GetAll()
+    public async Task<IActionResult> GetAll()
     {
-        return Ok(_todoRepository.GetAllAsync());
+        return Ok(await _todoService.GetAllTodosAsync());
     }
 
     // GET: api/Todo/5
     [HttpGet("{id:int}")]
     public IActionResult Get(int id)
     {
-        return Ok(_todoRepository.GetByIdAsync(id));
+        return Ok(_todoService.GetTodoAsync(id));
     }
 
     // POST: api/Todo
     [HttpPost]
-    public async Task<IActionResult> Post(TodoDTO.CreateTodoDTO todo)
+    public async Task<IActionResult> Post(CreateTodoDTO todo)
     {
-        // Can replace with auto mappers in the future
-        var newTodo = _mapper.Map<TodoDTO.CreateTodoDTO, Todo>(todo);
-
-        var createdTodo = await _todoRepository.AddAsync(newTodo);
-
-        var result = _mapper.Map<Todo, TodoDTO>(createdTodo);
-
-        return Ok(result);
+        try
+        {
+            return Ok(await _todoService.CreateTodoAsync(todo));
+        }
+        catch (Exception e)
+        {
+            return BadRequest(e.Message);
+        }
     }
 
 }

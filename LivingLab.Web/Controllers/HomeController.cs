@@ -1,6 +1,6 @@
 using System.Diagnostics;
 
-using LivingLab.Web.ViewModels;
+using LivingLab.Web.Models.ViewModels;
 
 using Microsoft.AspNetCore.Mvc;
 

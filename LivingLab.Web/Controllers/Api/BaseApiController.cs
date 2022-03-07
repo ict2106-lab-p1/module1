@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 
-namespace LivingLab.Web.ApiControllers;
+namespace LivingLab.Web.Controllers.Api;
 
 [Route("api/[controller]")]
 [ApiController]
