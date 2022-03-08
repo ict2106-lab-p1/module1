@@ -84,5 +84,11 @@ public static class DataSeeder
                 new { Id = 15, Status = "Available", LastUpdated = new DateTime(2021,11,12),  LabId = 1, AccessoryTypeId = 8},
                 new { Id = 16, Status = "Available", LastUpdated = new DateTime(2021,7,3),  LabId = 1, AccessoryTypeId = 8}
         );
+
+        modelBuilder.Entity<SessionStats>().HasData(
+                new { Id = 1, Date = new DateTime(2021,7,3), LoginTime = new DateTime(2021, 7, 3, 9,0,0), LogoutTime = new DateTime(2021, 7, 3, 12,0,0), DataUploaded= 58.0, LabId=1},
+                new { Id = 2, Date = new DateTime(2021,7,4), LoginTime = new DateTime(2021, 7, 4, 10,0,0), LogoutTime = new DateTime(2021, 7, 4, 15,0,0), DataUploaded= 64.0, LabId=1},
+                new { Id = 3, Date = new DateTime(2021,7,5), LoginTime = new DateTime(2021, 7, 5, 13,0,0), LogoutTime = new DateTime(2021, 7, 5, 18,0,0), DataUploaded= 128.0, LabId=1}
+        );
     }
 }

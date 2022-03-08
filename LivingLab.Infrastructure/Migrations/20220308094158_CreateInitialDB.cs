@@ -136,7 +136,7 @@ namespace LivingLab.Infrastructure.Migrations
                     LabId = table.Column<int>(type: "INTEGER", nullable: false),
                     Status = table.Column<string>(type: "TEXT", nullable: false),
                     Type = table.Column<string>(type: "TEXT", nullable: false),
-                    Description = table.Column<string>(type: "TEXT", nullable: false),
+                    Description = table.Column<string>(type: "TEXT", nullable: true),
                     Threshold = table.Column<double>(type: "REAL", nullable: true)
                 },
                 constraints: table =>
@@ -151,21 +151,22 @@ namespace LivingLab.Infrastructure.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Logging",
+                name: "SessionStats",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "INTEGER", nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
                     Date = table.Column<DateTime>(type: "TEXT", nullable: false),
-                    NoOfHoursLogged = table.Column<int>(type: "INTEGER", nullable: true),
-                    DataUploaded = table.Column<string>(type: "TEXT", nullable: true),
+                    LoginTime = table.Column<DateTime>(type: "TEXT", nullable: false),
+                    LogoutTime = table.Column<DateTime>(type: "TEXT", nullable: false),
+                    DataUploaded = table.Column<double>(type: "REAL", nullable: true),
                     LabId = table.Column<int>(type: "INTEGER", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Logging", x => x.Id);
+                    table.PrimaryKey("PK_SessionStats", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Logging_Lab_LabId",
+                        name: "FK_SessionStats_Lab_LabId",
                         column: x => x.LabId,
                         principalTable: "Lab",
                         principalColumn: "Id",
@@ -428,6 +429,21 @@ namespace LivingLab.Infrastructure.Migrations
                 columns: new[] { "Id", "Description", "LabId", "LastUpdated", "SerialNo", "Status", "Threshold", "Type" },
                 values: new object[] { 5, "It is used to control brightness of the lights in the lab", 1, new DateTime(2019, 7, 3, 0, 0, 0, 0, DateTimeKind.Unspecified), "VRL1001", "Unavailable", null, "VR Light Controls" });
 
+            migrationBuilder.InsertData(
+                table: "SessionStats",
+                columns: new[] { "Id", "DataUploaded", "Date", "LabId", "LoginTime", "LogoutTime" },
+                values: new object[] { 1, 58.0, new DateTime(2021, 7, 3, 0, 0, 0, 0, DateTimeKind.Unspecified), 1, new DateTime(2021, 7, 3, 9, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2021, 7, 3, 12, 0, 0, 0, DateTimeKind.Unspecified) });
+
+            migrationBuilder.InsertData(
+                table: "SessionStats",
+                columns: new[] { "Id", "DataUploaded", "Date", "LabId", "LoginTime", "LogoutTime" },
+                values: new object[] { 2, 64.0, new DateTime(2021, 7, 4, 0, 0, 0, 0, DateTimeKind.Unspecified), 1, new DateTime(2021, 7, 4, 10, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2021, 7, 4, 15, 0, 0, 0, DateTimeKind.Unspecified) });
+
+            migrationBuilder.InsertData(
+                table: "SessionStats",
+                columns: new[] { "Id", "DataUploaded", "Date", "LabId", "LoginTime", "LogoutTime" },
+                values: new object[] { 3, 128.0, new DateTime(2021, 7, 5, 0, 0, 0, 0, DateTimeKind.Unspecified), 1, new DateTime(2021, 7, 5, 13, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2021, 7, 5, 18, 0, 0, 0, DateTimeKind.Unspecified) });
+
             migrationBuilder.CreateIndex(
                 name: "IX_Accessory_AccessoryTypeId",
                 table: "Accessory",
@@ -444,11 +460,6 @@ namespace LivingLab.Infrastructure.Migrations
                 column: "LabId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Logging_LabId",
-                table: "Logging",
-                column: "LabId");
-
-            migrationBuilder.CreateIndex(
                 name: "RoleNameIndex",
                 table: "Role",
                 column: "NormalizedName",
@@ -458,6 +469,11 @@ namespace LivingLab.Infrastructure.Migrations
                 name: "IX_RoleClaim_RoleId",
                 table: "RoleClaim",
                 column: "RoleId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_SessionStats_LabId",
+                table: "SessionStats",
+                column: "LabId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_UserClaim_UserId",
@@ -495,10 +511,10 @@ namespace LivingLab.Infrastructure.Migrations
                 name: "Device");
 
             migrationBuilder.DropTable(
-                name: "Logging");
+                name: "RoleClaim");
 
             migrationBuilder.DropTable(
-                name: "RoleClaim");
+                name: "SessionStats");
 
             migrationBuilder.DropTable(
                 name: "Todos");

@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace LivingLab.Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20220307180754_CreateInitialDB")]
+    [Migration("20220308094158_CreateInitialDB")]
     partial class CreateInitialDB
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -293,7 +293,6 @@ namespace LivingLab.Infrastructure.Migrations
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("Description")
-                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.Property<int>("LabId")
@@ -478,14 +477,14 @@ namespace LivingLab.Infrastructure.Migrations
                         });
                 });
 
-            modelBuilder.Entity("LivingLab.Core.Entities.Logging", b =>
+            modelBuilder.Entity("LivingLab.Core.Entities.SessionStats", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
-                    b.Property<string>("DataUploaded")
-                        .HasColumnType("TEXT");
+                    b.Property<double?>("DataUploaded")
+                        .HasColumnType("REAL");
 
                     b.Property<DateTime?>("Date")
                         .IsRequired()
@@ -494,14 +493,48 @@ namespace LivingLab.Infrastructure.Migrations
                     b.Property<int>("LabId")
                         .HasColumnType("INTEGER");
 
-                    b.Property<int?>("NoOfHoursLogged")
-                        .HasColumnType("INTEGER");
+                    b.Property<DateTime?>("LoginTime")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<DateTime?>("LogoutTime")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
 
                     b.HasKey("Id");
 
                     b.HasIndex("LabId");
 
-                    b.ToTable("Logging");
+                    b.ToTable("SessionStats");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            DataUploaded = 58.0,
+                            Date = new DateTime(2021, 7, 3, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            LabId = 1,
+                            LoginTime = new DateTime(2021, 7, 3, 9, 0, 0, 0, DateTimeKind.Unspecified),
+                            LogoutTime = new DateTime(2021, 7, 3, 12, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 2,
+                            DataUploaded = 64.0,
+                            Date = new DateTime(2021, 7, 4, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            LabId = 1,
+                            LoginTime = new DateTime(2021, 7, 4, 10, 0, 0, 0, DateTimeKind.Unspecified),
+                            LogoutTime = new DateTime(2021, 7, 4, 15, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 3,
+                            DataUploaded = 128.0,
+                            Date = new DateTime(2021, 7, 5, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            LabId = 1,
+                            LoginTime = new DateTime(2021, 7, 5, 13, 0, 0, 0, DateTimeKind.Unspecified),
+                            LogoutTime = new DateTime(2021, 7, 5, 18, 0, 0, 0, DateTimeKind.Unspecified)
+                        });
                 });
 
             modelBuilder.Entity("LivingLab.Core.Entities.Todo", b =>
@@ -684,7 +717,7 @@ namespace LivingLab.Infrastructure.Migrations
                     b.Navigation("Lab");
                 });
 
-            modelBuilder.Entity("LivingLab.Core.Entities.Logging", b =>
+            modelBuilder.Entity("LivingLab.Core.Entities.SessionStats", b =>
                 {
                     b.HasOne("LivingLab.Core.Entities.Lab", "Lab")
                         .WithMany("Logs")

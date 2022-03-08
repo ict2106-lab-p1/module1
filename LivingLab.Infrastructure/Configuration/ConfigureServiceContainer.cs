@@ -41,7 +41,7 @@ public static class ConfigureServiceContainer
         services.AddTransient<IAccessoryTypeRepository, AccessoryTypeRepository>();
         services.AddTransient<IDeviceRepository, DeviceRepository>();
         services.AddTransient<ILabRepository, LabRepository>();
-        services.AddTransient<ILoggingRepository, LoggingRepository>();
+        services.AddTransient<ISessionStatsRepository, SessionStatsRepository>();
         
         return services;
     }
