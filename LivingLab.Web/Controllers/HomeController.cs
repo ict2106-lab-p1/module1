@@ -1,6 +1,6 @@
 using System.Diagnostics;
 
-using LivingLab.Web.ViewModels;
+using LivingLab.Web.Models.ViewModels;
 
 using Microsoft.AspNetCore.Mvc;
 
@@ -26,6 +26,13 @@ public class HomeController : Controller
     public IActionResult Privacy()
     {
         return View("Privacy");
+    }
+
+
+    [Route("example")]
+    public IActionResult ExamplePage()
+    {
+        return View("ExamplePage");
     }
 
     [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

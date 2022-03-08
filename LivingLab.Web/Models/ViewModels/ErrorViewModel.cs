@@ -1,4 +1,4 @@
-namespace LivingLab.Web.ViewModels;
+namespace LivingLab.Web.Models.ViewModels;
 
 public class ErrorViewModel
 {

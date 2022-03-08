@@ -1,5 +1,5 @@
-using LivingLab.Domain.Entities;
-using LivingLab.Domain.Interfaces.Repositories;
+using LivingLab.Core.Entities;
+using LivingLab.Core.Interfaces.Repositories;
 using LivingLab.Infrastructure.Data;
 
 using Microsoft.EntityFrameworkCore;
@@ -17,7 +17,7 @@ public class TodoRepository : Repository<Todo>, ITodoRepository
 
     public async Task<string?> GetTodoTitle(int id)
     {
-        var todo = await _context.Todos.FirstOrDefaultAsync(t => t.ID == id);
+        var todo = await _context.Todos.FirstOrDefaultAsync(t => t.Id == id);
         return todo?.Title;
     }
 

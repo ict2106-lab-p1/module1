@@ -1,10 +1,11 @@
-using LivingLab.Domain.Entities;
-using LivingLab.Domain.Entities.Identity;
+using LivingLab.Core.Entities;
+using LivingLab.Core.Entities.Identity;
 using LivingLab.Infrastructure.Data.Config;
 
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.VisualBasic;
 
 namespace LivingLab.Infrastructure.Data;
 
@@ -12,6 +13,13 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
 {
     // Add new DB tables here
     public DbSet<Todo> Todos { get; set; }
+    public DbSet<Accessory> Accessory { get; set; }
+    public DbSet<Device> Device { get; set; }
+    // public DbSet<DeviceType> DeviceType { get; set; }
+    public DbSet<Lab> Lab { get; set; }
+    public DbSet<Logging> Logging { get; set; }
+    public DbSet<AccessoryType> AccessoryType { get; set; }
+
     public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
     {
     }
@@ -31,5 +39,8 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
         modelBuilder.Entity<IdentityUserLogin<string>>().ToTable("UserLogin");
         modelBuilder.Entity<IdentityRoleClaim<string>>().ToTable("RoleClaim");
         modelBuilder.Entity<IdentityUserToken<string>>().ToTable("UserToken");
+
+        modelBuilder.Seed();
     }
+
 }

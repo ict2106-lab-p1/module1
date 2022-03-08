@@ -1,22 +1,25 @@
-## Getting started
+## Installation
+### Minimum System Requirements
 - Have Node >v16
-- Run `npm install` 
+- Have ASP .NET 6
 
-## Running
-- `npm run dev`
-- Then, in a separate window: `dotnet watch --project LivingLab.Web`
+### Steps
+1. Run `npm install` in /LivingLab.Web to install dependencies
+2. Install ef tools if they aren't already present with `dotnet tool install --global dotnet-ef`
+3. Run `dotnet ef migrations add CreateInitialDB -s LivingLab.Web -p LivingLab.Infrastructure` to create the initial DB
+4. Run `dotnet ef database update -s LivingLab.Web -p LivingLab.Infrastructure` to populate the DB
+5. Run project with the commands in the 'Running' section
 
-## For Production
-- `npm run prod`
+## Running the project
+1. Run `npm run dev` in /LivingLab.Web
+2. Then, in a separate terminal, run `dotnet watch --project LivingLab.Web` from the root folder 
 
-## Format
-`dotnet format --severity warn`
 
-## Migrations 
-**skip this part if no changes to db.  
+## Updates to DB 
+### Migrations
 `dotnet ef migrations add CreateInitialDB -s LivingLab.Web -p LivingLab.Infrastructure`
 
-## DB
+### Populating / Update Values
 `dotnet ef database update -s LivingLab.Web -p LivingLab.Infrastructure`
 
 ## Structure
@@ -65,23 +68,18 @@ It's output will be stored at `webroot/dist/site.css`, where it will be referenc
 Running `npm run dev` will start tailwindcli in "watch" mode. Any changes you make will automatically be reflected.
 
 #### prod
-Running `npm run dev` will start tailwindcli in build mode. In addition to compiling your `index.css`, the resulting output will be minified as well.
+Running `npm run prod` will start tailwindcli in build mode. In addition to compiling your `index.css`, the resulting output will be minified as well.
 
 ### Nullable warnings
 It's "safe" to ignore warnings on startup about nullables. These are scaffolded from a template. Feel free to correct them. See https://docs.microsoft.com/en-us/dotnet/csharp/nullable-references.
 
-### Database
-Install ef tools if they aren't already present.
-`dotnet tool install --global dotnet-ef`
 
 #### Run migrations
 - `dotnet ef database update -s LivingLab.Web -p LivingLab.Infrastructure`
-
 Alternatively, run the web app and let dotnet run migrations automatically. If you encounter an exception page, click on "Run migrations" and refresh.
 
 #### Clean state
-Remove `livinglab.sqlite`, rerun migrations.
-
+- Remove `livinglab.sqlite`, rerun migrations.
 ---
 
 Credits: Thanks Percy for setting up the MVC skeleton + Tailwind integration.
