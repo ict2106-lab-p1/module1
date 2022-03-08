@@ -1,4 +1,4 @@
-﻿@model LivingLab.Web.ViewModels.ViewDeviceViewModel
+﻿@model LivingLab.Web.ViewModels.DeviceTypeViewModel
 
 @{
     ViewData["Title"] = "Manage Device";
@@ -24,30 +24,26 @@
 <table id="table_id" class="display">
     <thead>
     <tr>
-        <th>ID</th>
         <th>Name</th>
-        <th>Description</th>
-        <th>Serial Num</th>
-        <th>Last Updated</th>
-        <th></th>
+        <th>Qty</th>
         <th></th>
     </tr>
     </thead>
     <tbody>
-    @foreach (var device in Model.DeviceList)
+    @foreach (var device in Model.ViewDeviceTypeDtos)
     {
         <tr>
-            <td>@device.Id</td>
             <td>@device.Type</td>
-            <td>@device.Description</td>
-            <td>@device.SerialNo</td>
-            <td>@device.LastUpdated.ToString("MM/dd/yyyy")</td>
-            <td></td>
+            <td>@device.Quantity</td>
             <td></td>
         </tr>
     }
     </tbody>
 </table>
+
+<form asp-controller="Device" asp-action="ViewAll" method="post" name="postDeviceType">
+    <input type="hidden" name="deviceType"/>
+</form>
 
 <div class="bg-black bg-opacity-50 absolute inset-0 hidden justify-center items-center" id="overlay">
     <div class="bg-white max-w-lg py-4 px-4 rounded shadow-xl text-gray-800">
@@ -144,7 +140,7 @@
                         Cancel
                     </button>
                     <button class="bg-purple-500 hover:bg-purple-700 text-white font-bold py-2 px-4 rounded" type="submit">
-                      Add
+                        Add
                     </button>
                 </div>
             </form>
@@ -173,5 +169,5 @@
 
 @section Scripts
 {
-    <script src="~/js/viewDevice.js"></script>
+    <script src="~/js/viewDeviceType.js"></script>
 }
