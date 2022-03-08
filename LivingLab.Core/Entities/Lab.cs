@@ -1,6 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 
-namespace LivingLab.Domain.Entities;
+namespace LivingLab.Core.Entities;
 
 public class Lab : BaseEntity
 {

@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Identity;
 
-namespace LivingLab.Domain.Entities.Identity;
+namespace LivingLab.Core.Entities.Identity;
 
 public class ApplicationUser : IdentityUser
 {

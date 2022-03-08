@@ -1,4 +1,4 @@
-using LivingLab.Domain.Entities;
+using LivingLab.Core.Entities;
 
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;

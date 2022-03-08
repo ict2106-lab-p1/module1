@@ -7,7 +7,7 @@ using System.Security.Claims;
 using System.Text;
 using System.Text.Encodings.Web;
 
-using LivingLab.Domain.Entities.Identity;
+using LivingLab.Core.Entities.Identity;
 
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;

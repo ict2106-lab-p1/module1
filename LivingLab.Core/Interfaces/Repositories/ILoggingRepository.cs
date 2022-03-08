@@ -1,6 +1,6 @@
-using LivingLab.Domain.Entities;
+using LivingLab.Core.Entities;
 
-namespace LivingLab.Domain.Interfaces.Repositories;
+namespace LivingLab.Core.Interfaces.Repositories;
 
 public interface ILoggingRepository : IRepository<Logging>
 {

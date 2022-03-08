@@ -4,7 +4,7 @@
 
 using System.ComponentModel.DataAnnotations;
 
-using LivingLab.Domain.Entities.Identity;
+using LivingLab.Core.Entities.Identity;
 
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
