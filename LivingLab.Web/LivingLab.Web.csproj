@@ -30,4 +30,8 @@
     <ProjectReference Include="..\LivingLab.Infrastructure\LivingLab.Infrastructure.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Models\DTOs\Device" />
+  </ItemGroup>
+
 </Project>

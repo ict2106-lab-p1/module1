@@ -17,10 +17,10 @@ public class AccessoryServices : IAccessoryService
         _accessoryRepository = accessoryRepository;
     }
 
-    public async Task<ViewAccessoryViewModel> viewAccessory()
+    public async Task<ViewAccessoryViewModel> viewAccessory(string accessoryType)
     {
         //retrieve data from db
-        List<Accessory> accessoryList = await _accessoryRepository.GetAccessoryWithAccessoryType();
+        List<Accessory> accessoryList = await _accessoryRepository.GetAccessoryWithAccessoryType(accessoryType);
 
         //map entity model to view model
         List<AccessoryViewModel> accessories = _mapper.Map<List<Accessory>, List<AccessoryViewModel>>(accessoryList);
@@ -29,6 +29,14 @@ public class AccessoryServices : IAccessoryService
         ViewAccessoryViewModel viewAccessories = new ViewAccessoryViewModel();
         viewAccessories.AccessoryList = accessories;
         return viewAccessories;
+    }
+    
+    public async Task<AccessoryTypeViewModel> viewAccessoryType()
+    {
+        List<Core.ViewAccessoryTypeDTO> viewAccessoryTypeDtos = await _accessoryRepository.GetAccessoryType();
+        AccessoryTypeViewModel accessoryTypeViewModel = new AccessoryTypeViewModel();
+        accessoryTypeViewModel.ViewAccessoryTypeDtos = viewAccessoryTypeDtos;
+        return accessoryTypeViewModel;
     }
     
 }

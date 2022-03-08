@@ -1,6 +1,5 @@
 namespace LivingLab.Web.ViewModels;
     
-using LivingLab.Domain.Entities;
 public class DeviceViewModel
 {
     public int Id { get; set; }

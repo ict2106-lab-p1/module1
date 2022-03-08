@@ -16,10 +16,10 @@ public class DeviceService : IDeviceService
         _mapper = mapper;
     }
 
-    public async Task<ViewDeviceViewModel> viewDevice()
+    public async Task<ViewDeviceViewModel> viewDevice(string deviceType)
     {
         //retrieve data from db
-        List<Core.Entities.Device> deviceList = await _deviceRepository.GetAllAsync();
+        List<Core.Entities.Device> deviceList = await _deviceRepository.GetAllDevicesByType(deviceType);
                 
         //map entity model to view model
         List<DeviceViewModel> devices = _mapper.Map<List<Core.Entities.Device>, List<DeviceViewModel>> (deviceList);
@@ -28,6 +28,14 @@ public class DeviceService : IDeviceService
         ViewDeviceViewModel viewDevices = new ViewDeviceViewModel();
         viewDevices.DeviceList = devices;
         return viewDevices;
+    }
+
+    public async Task<DeviceTypeViewModel> viewDeviceType()
+    {
+        List<Core.ViewDeviceTypeDTO> viewDeviceTypeDtos = await _deviceRepository.GetViewDeviceType();
+        DeviceTypeViewModel deviceTypeViewModel = new DeviceTypeViewModel();
+        deviceTypeViewModel.ViewDeviceTypeDtos = viewDeviceTypeDtos;
+        return deviceTypeViewModel;
     }
     
 }
