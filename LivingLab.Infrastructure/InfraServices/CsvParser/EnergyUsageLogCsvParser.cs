@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Http;
 using TinyCsvParser;
 using TinyCsvParser.Mapping;
 
-namespace LivingLab.Infrastructure.Services.CsvParser;
+namespace LivingLab.Infrastructure.InfraServices.CsvParser;
 
 public class EnergyUsageLogCsvParser : IEnergyUsageLogCsvParser
 {

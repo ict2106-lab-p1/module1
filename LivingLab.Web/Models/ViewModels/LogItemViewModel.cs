@@ -1,6 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 
-namespace LivingLab.Web.ViewModels;
+namespace LivingLab.Web.Models.ViewModels;
 
 public class LogItemViewModel
 {

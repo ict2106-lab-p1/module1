@@ -1,34 +1,21 @@
 using System.Diagnostics;
 
-using AutoMapper;
+using LivingLab.Web.Models.ViewModels;
+using LivingLab.Web.UIServices.ManualLogs;
 
-using LivingLab.Core.Entities;
-using LivingLab.Core.Entities.Identity;
-using LivingLab.Core.Interfaces.Repositories;
-using LivingLab.Core.Interfaces.Services;
-using LivingLab.Core.Models;
-using LivingLab.Web.ViewModels;
-
-using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
 namespace LivingLab.Web.Controllers;
 
 public class ManualLogsController : Controller
 {
-    private readonly IMapper _mapper;
+    private readonly IManualLogService _manualLogService;
     private readonly ILogger<ManualLogsController> _logger;
-    private readonly IEnergyUsageLogCsvParser _csvParser;
-    private readonly IEnergyUsageRepository _repository;
-    private readonly UserManager<ApplicationUser> _userManager;
 
-    public ManualLogsController(IMapper mapper, ILogger<ManualLogsController> logger, IEnergyUsageLogCsvParser csvParser, IEnergyUsageRepository repository, UserManager<ApplicationUser> userManager)
+    public ManualLogsController(IManualLogService manualLogService, ILogger<ManualLogsController> logger)
     {
-        _mapper = mapper;
+        _manualLogService = manualLogService;
         _logger = logger;
-        _csvParser = csvParser;
-        _repository = repository;
-        _userManager = userManager;
     }
 
     public IActionResult Index()
@@ -51,9 +38,8 @@ public class ManualLogsController : Controller
     {
         try
         {
-            var logs = _csvParser.Parse(file).ToList();
-            var logItemsViewModel = _mapper.Map<List<EnergyUsageCsvModel>, List<LogItemViewModel>>(logs);
-            return View(nameof(FileUpload), logItemsViewModel);
+            var viewModel = _manualLogService.UploadLogs(file);
+            return View(nameof(FileUpload), viewModel);
         }
         catch (Exception e)
         {
@@ -67,12 +53,7 @@ public class ManualLogsController : Controller
     {
         try
         {
-            var data = _mapper.Map<List<LogItemViewModel>, List<EnergyUsageLog>>(logs);
-            // var loggedUser = await _userManager.GetUserAsync(User);
-            var loggedUser = DummyUser.INSTANCE;
-            await _repository.BulkInsertAsync(data);
-            // await _repository.BulkInsertAsyncByUser(data, loggedUser);
-
+            await _manualLogService.SaveLogs(logs);
             return Ok();
         }
         catch (Exception e)
