@@ -1,6 +1,7 @@
 using System.Diagnostics;
 
 using LivingLab.Web.Models.ViewModels;
+// using LivingLab.Web.ViewModels;
 
 using Microsoft.AspNetCore.Mvc;
 
@@ -27,14 +28,57 @@ public class HomeController : Controller
     {
         return View("Privacy");
     }
-
-
-    [Route("example")]
-    public IActionResult ExamplePage()
+    
+    [Route("booking")]
+    public IActionResult Booking()
     {
-        return View("ExamplePage");
+        return View("Appointment");
+    }
+    
+    [Route("manageUsers")]
+    public IActionResult ManageUsers()
+    {
+        return View("ManageUsers");
+    }
+    
+    [Route("manageLabBookings")]
+    public IActionResult ManageLabBookings()
+    {
+        return View("ManageLabBooking");
     }
 
+    
+    [Route("manageLabUsers")]
+    public IActionResult ManageLabUsers()
+    {
+        return View("ManageLabUsers");
+    }
+
+    [Route("createLabAccount")]
+    public IActionResult CreateLabAccount()
+    {
+        return View("CreateLabAccount");
+    }
+
+    [Route("createLabTechAccount")]
+    public IActionResult CreateLabTechAccount()
+    {
+        return View("CreateLabTechAccount");
+    }
+    
+    
+
+    [Route("labProfile")]
+    public IActionResult LabProfile()
+    {
+        return View("LabProfile");
+    }
+    
+    [Route("SMSAuth")]
+    public IActionResult SMSAuth()
+    {
+        return View("SMSAuth");
+    }
     [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
     public IActionResult Error()
     {
