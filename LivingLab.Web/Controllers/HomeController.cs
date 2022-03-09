@@ -1,6 +1,8 @@
 using System.Diagnostics;
 
 using LivingLab.Web.Models.ViewModels;
+
+using Microsoft.AspNetCore.Authorization;
 // using LivingLab.Web.ViewModels;
 
 using Microsoft.AspNetCore.Mvc;
@@ -20,6 +22,7 @@ public class HomeController : Controller
     [Route("/")]
     public IActionResult Index()
     {
+        HttpContext.Session.SetInt32("UserID", 1);
         return View("Index");
     }
 
@@ -29,56 +32,31 @@ public class HomeController : Controller
         return View("Privacy");
     }
     
-    [Route("booking")]
-    public IActionResult Booking()
+    // [HttpPost]
+    // public IActionResult SetSession()
+    // {
+    //     //Set value in Session object.
+    //     HttpContext.Session.SetString("Name", "Mudassar Khan");
+    //
+    //     return RedirectToAction("Index");
+    // }
+    // [HttpPost]
+    // public IActionResult DeleteSession()
+    // {
+    //     //Delete the Session object.
+    //     HttpContext.Session.Remove("UserID");
+    //     
+    //     return RedirectToAction("Index");
+    //     
+    // }
+    [Route("Logout")]
+    public IActionResult Logout()
     {
-        return View("Appointment");
-    }
-    
-    [Route("manageUsers")]
-    public IActionResult ManageUsers()
-    {
-        return View("ManageUsers");
-    }
-    
-    [Route("manageLabBookings")]
-    public IActionResult ManageLabBookings()
-    {
-        return View("ManageLabBooking");
-    }
-
-    
-    [Route("manageLabUsers")]
-    public IActionResult ManageLabUsers()
-    {
-        return View("ManageLabUsers");
-    }
-
-    [Route("createLabAccount")]
-    public IActionResult CreateLabAccount()
-    {
-        return View("CreateLabAccount");
+        //Delete the Session object.
+        HttpContext.Session.Clear();
+        return View("Index");
     }
 
-    [Route("createLabTechAccount")]
-    public IActionResult CreateLabTechAccount()
-    {
-        return View("CreateLabTechAccount");
-    }
-    
-    
-
-    [Route("labProfile")]
-    public IActionResult LabProfile()
-    {
-        return View("LabProfile");
-    }
-    
-    [Route("SMSAuth")]
-    public IActionResult SMSAuth()
-    {
-        return View("SMSAuth");
-    }
     [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
     public IActionResult Error()
     {

@@ -64,7 +64,7 @@
                         </div>
                         <!--BOX LINK-->
                         <div class="mt-8 mb-0 h-12 bg-slate-600 flex justify-center items-center hover:bg-black  w-full rounded-b-xl">
-                            <button class="text-white rounded text-xl font-bold">
+                            <button id="submit-btn" class="text-white rounded text-xl font-bold">
                                 Submit
                             </button>
                         </div>
@@ -83,28 +83,27 @@
     
         let btn = document.getElementById("2FA-btn");
         
-        let close = document.getElementById("close-btn");
+        let closebtn = document.getElementById("close-btn");
     
-        let button = document.getElementById("ok-btn");
+        let submitbtn = document.getElementById("submit-btn");
     // We want the modal to open when the Open button is clicked
         btn.onclick = function() {
         modal.style.display = "block";
         }
         // We want the modal to close when the OK button is clicked
-        button.onclick = function() {
+        closebtn.onclick = function() {
         modal.style.display = "none";
         }
-        close.onclick = function (){
-            modal.style.display = "none";
-            }
+        
+        // We want the modal to close when the OK button is clicked
+                submitbtn.onclick = function() {
+                modal.style.display = "none";
+                }
+
         
     // We want the modal to open when the Open button is clicked
         btn.onclick = function() {
         modal.style.display = "block";
-        }
-        // We want the modal to close when the OK button is clicked
-        button.onclick = function() {
-        modal.style.display = "none";
         }
      // The modal will close when the user clicks anywhere outside the modal
         window.onclick = function(event) {
