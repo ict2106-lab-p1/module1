@@ -15,4 +15,6 @@ public class Todo : BaseEntity
     // customize the database column.
     [Required] 
     public string Description { get; set; }
+    [Required]
+    public string OTP {get; set; }
 }

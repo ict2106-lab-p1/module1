@@ -38,4 +38,12 @@ app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
 app.MapRazorPages();
+app.MapPost("/sms", () => {
+   var response = @"
+       <Response>
+           <Message>Hello from a .NET Minimal API!</Message>
+       </Response>";
+
+   return Results.Text(response, "application/xml");
+});
 app.Run();

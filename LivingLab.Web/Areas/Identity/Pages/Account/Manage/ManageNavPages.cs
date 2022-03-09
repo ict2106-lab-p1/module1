@@ -16,6 +16,15 @@ public static class ManageNavPages
     ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
     ///     directly from your code. This API may change or be removed in future releases.
     /// </summary>
+
+    public static string VerifyCode => "VerifyCode";
+
+    public static string SMSAuthentication => "SMS";
+
+    /// <summary>
+    ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
+    ///     directly from your code. This API may change or be removed in future releases.
+    /// </summary>
     public static string Index => "Index";
 
     /// <summary>
@@ -64,12 +73,22 @@ public static class ManageNavPages
     ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
     ///     directly from your code. This API may change or be removed in future releases.
     /// </summary>
+
+    public static string SMSNavClass(ViewContext viewContext) => PageNavClass(viewContext, SMSAuthentication);
     public static string IndexNavClass(ViewContext viewContext) => PageNavClass(viewContext, Index);
 
     /// <summary>
     ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
     ///     directly from your code. This API may change or be removed in future releases.
     /// </summary>
+
+    public static string CodeNavClass(ViewContext viewContext) => PageNavClass(viewContext, VerifyCode);
+
+    /// <summary>
+    ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
+    ///     directly from your code. This API may change or be removed in future releases.
+    /// </summary>
+
     public static string EmailNavClass(ViewContext viewContext) => PageNavClass(viewContext, Email);
 
     /// <summary>
