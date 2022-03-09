@@ -1,3 +1,4 @@
+using LivingLab.Core.DomainServices;
 using LivingLab.Core.Entities.Identity;
 using LivingLab.Core.Interfaces.Repositories;
 using LivingLab.Core.Interfaces.Services;
@@ -41,10 +42,14 @@ public static class ConfigureServiceContainer
         services.AddTransient<ITodoRepository, TodoRepository>();
         services.AddTransient<IEnergyUsageRepository, EnergyUsageRepository>();
         services.AddTransient<IEnergyUsageLogCsvParser, EnergyUsageLogCsvParser>();
+        services.AddTransient<IEnergyUsageService, EnergyUsageService>();
+        services.AddTransient<IEmailRepository, EmailRepository>();
+        services.AddTransient<ISmsRepository, SmsRepository>();
+        services.AddTransient<IPowerGenerationMixRepository, PowerGenerationMixRepository>();
 
         return services;
     }
-
+    
     private static IServiceCollection AddScopedServices(this IServiceCollection services)
     {
         // services.AddScoped<ITodoRepository, TodoRepository>();

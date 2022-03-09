@@ -13,4 +13,8 @@ public interface IEnergyUsageRepository : IRepository<EnergyUsageLog>
     Task<List<EnergyUsageLog>> GetUsageByUser(ApplicationUser? user);
     Task BulkInsertAsync(ICollection<EnergyUsageLog> logs);
     Task BulkInsertAsyncByUser(ICollection<EnergyUsageLog> logs, ApplicationUser loggedBy);
+    Task<List<EnergyUsageLog>> GetDeviceEnergyUsageByDateTime(DateTime start, DateTime end);
+    Task<List<EnergyUsageLog>> GetDistinctDeviceEnergyUsage();
+    Task<List<EnergyUsageLog>> GetDistinctLabEnergyUsage();
+    Task<List<EnergyUsageLog>> GetAllDeviceByLab();
 }

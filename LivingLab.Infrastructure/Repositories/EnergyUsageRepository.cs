@@ -35,6 +35,26 @@ public class EnergyUsageRepository : Repository<EnergyUsageLog>, IEnergyUsageRep
         await BulkInsertAsync(logs);
     }
 
+    public Task<List<EnergyUsageLog>> GetDeviceEnergyUsageByDateTime(DateTime start, DateTime end)
+    {
+        throw new NotImplementedException();
+    }
+
+    public Task<List<EnergyUsageLog>> GetDistinctDeviceEnergyUsage()
+    {
+        throw new NotImplementedException();
+    }
+
+    public Task<List<EnergyUsageLog>> GetDistinctLabEnergyUsage()
+    {
+        throw new NotImplementedException();
+    }
+
+    public Task<List<EnergyUsageLog>> GetAllDeviceByLab()
+    {
+        throw new NotImplementedException();
+    }
+
     public async Task<List<EnergyUsageLog>> GetUsageByDeviceId(int id)
     {
         var logsForDevice = await _context.EnergyUsageLogs

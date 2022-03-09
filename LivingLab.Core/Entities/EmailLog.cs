@@ -1,9 +1,8 @@
-using System.ComponentModel.DataAnnotations;
-
 using LivingLab.Core.Entities.Identity;
 using LivingLab.Core.Enums;
 
 namespace LivingLab.Core.Entities;
+
 public class EmailLog: BaseEntity
 {
     public string Message { get; set; } = "";
