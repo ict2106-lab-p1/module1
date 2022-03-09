@@ -1,6 +1,5 @@
-namespace LivingLab.Web.ViewModels;
-    
-using LivingLab.Domain.Entities;
+namespace LivingLab.Web.Models.ViewModels.Accessory; 
+
 public class ViewAccessoryViewModel
 { 
     public List<AccessoryViewModel> AccessoryList { get; set; }

@@ -1,10 +1,8 @@
 using System.Diagnostics;
 
-using LivingLab.Web.ViewModels;
-
-
 using Microsoft.AspNetCore.Mvc;
 using LivingLab.Web.Models.ViewModels;
+using LivingLab.Web.Models.ViewModels.Device;
 using LivingLab.Web.UIServices.Device;
 
 namespace LivingLab.Web.Controllers;

@@ -1,4 +1,4 @@
-using LivingLab.Web.ViewModels;
+using LivingLab.Web.Models.ViewModels.Device;
 
 namespace LivingLab.Web.UIServices.Device;
 

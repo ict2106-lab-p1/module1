@@ -1,10 +1,9 @@
 using AutoMapper;
 
-using LivingLab.Core.Entities;
 using LivingLab.Core.Interfaces.Repositories;
-using LivingLab.Web.ViewModels;
+using LivingLab.Web.Models.ViewModels.Accessory;
 
-namespace LivingLab.Web.UIServices.Device;
+namespace LivingLab.Web.UIServices.Accessory;
 
 public class AccessoryServices : IAccessoryService
 {
@@ -20,10 +19,10 @@ public class AccessoryServices : IAccessoryService
     public async Task<ViewAccessoryViewModel> viewAccessory()
     {
         //retrieve data from db
-        List<Accessory> accessoryList = await _accessoryRepository.GetAccessoryWithAccessoryType();
+        List<Core.Entities.Accessory> accessoryList = await _accessoryRepository.GetAccessoryWithAccessoryType();
 
         //map entity model to view model
-        List<AccessoryViewModel> accessories = _mapper.Map<List<Accessory>, List<AccessoryViewModel>>(accessoryList);
+        List<AccessoryViewModel> accessories = _mapper.Map<List<Core.Entities.Accessory>, List<AccessoryViewModel>>(accessoryList);
 
         //add list of accessory view model to the view accessory view model
         ViewAccessoryViewModel viewAccessories = new ViewAccessoryViewModel();

@@ -179,7 +179,7 @@ public class EnableAuthenticatorModel : PageModel
         return string.Format(
             CultureInfo.InvariantCulture,
             AuthenticatorUriFormat,
-            _urlEncoder.Encode("Living Lab"),
+            _urlEncoder.Encode("Living Labs"),
             _urlEncoder.Encode(email),
             unformattedKey);
     }

@@ -1,36 +1,41 @@
-namespace LivingLab.Domain.Entities.Identity;
-
 using System.ComponentModel.DataAnnotations;
 
-public class Booking : BaseEntity
+using LivingLab.Core.Entities.Identity;
+
+namespace LivingLab.Core.Entities;
+
+public class Booking
 {
-    [Required]
-    [DataType(DataType.Text)]
-    public string? bookingId { get; set; }
+    [Key]
+    public int BookingId { get; set; }
 
     [Required]
     [DataType(DataType.Time)]
-    public string? startTime { get; set; }
+    public string? StartTime { get; set; }
     
     [Required]
     [DataType(DataType.Time)]
-    public string? endTime { get; set; }
+    public string? EndTime { get; set; }
     
     [Required]
     [DataType(DataType.Date)]
-    public string? startDate { get; set; }
+    public string? StartDate { get; set; }
     
     [Required]
     [DataType(DataType.Date)]
-    public string? endDate { get; set; }
+    public string? EndDate { get; set; }
+    
+    public string? Description { get; set; }
     
     [Required]
-    [DataType(DataType.Text)]
-    public string? labId { get; set; }
+    public int LabId { get; set; }
+    
+    public Lab? Lab { get; set; }
 
     [Required]
-    [DataType(DataType.Text)]
-    public string? userId { get; set; }
+    public string UserId { get; set; }
     
+    public ApplicationUser? ApplicationUser { get; set; }
+
 }
 

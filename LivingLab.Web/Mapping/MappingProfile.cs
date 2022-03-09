@@ -1,8 +1,10 @@
 using AutoMapper;
 
-using LivingLab.Web.ViewModels;
 using LivingLab.Core.Entities;
+using LivingLab.Web.Models.DTOs.ModelP1_5;
 using LivingLab.Web.Models.DTOs.Todo;
+using LivingLab.Web.Models.ViewModels.Accessory;
+using LivingLab.Web.Models.ViewModels.Device;
 
 namespace LivingLab.Web.Mapping;
 
@@ -21,6 +23,12 @@ public class MappingProfile : Profile
 
         //// ViewModel/ApiModel to Domain
         //CreateMap<List<DeviceViewModel>, List<Device>>();
+        
+        // Domain to ViewModel/ApiModel
+        CreateMap<Booking, BookingDTO>();
+
+        // ViewModel/ApiModel to Domain
+        CreateMap<BookingDTO, Booking>();
 
         // Domain to ViewModel/ApiModel
         CreateMap<Device, DeviceViewModel>();
@@ -33,5 +41,8 @@ public class MappingProfile : Profile
 
         // ViewModel/ApiModel to Domain (Accessory)
         CreateMap<AccessoryViewModel, Accessory>();
+        
+        CreateMap<AccessoryViewModel, Accessory>();
+        
     }
 }

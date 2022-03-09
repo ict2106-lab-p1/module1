@@ -1,14 +1,29 @@
-using LivingLab.Core.Entities;
-
 using System.ComponentModel.DataAnnotations;
 
-namespace LivingLab.Domain.Entities;
+using LivingLab.Core.Entities.Identity;
 
-public class Lab : BaseEntity
+namespace LivingLab.Core.Entities;
+
+public class Lab
 {
-    [Required] public string? Location { get; set; }
-    [Required] public string? PersonInCharge { get; set; }
-    [Required] public string? LabStatus { get; set; }
+    [Key]
+    public int LabId { get; set; }
+    
+    [Required]
+    public string? LabLocation { get; set; }
+    
+    [Required]
+    public string? LabStatus { get; set; }
+    
+    public string? LabInCharge { get; set; }
+    
+    [Required]
+    public int? Capacity { get; set; }
+
+    public List<Booking> Bookings { get; set; }
+    
+    public ApplicationUser ApplicationUser { get; set; }
+    
     public List<Logging>? Logs { get; set; }
     public List<Accessory>? Accessories { get; set; }
 
