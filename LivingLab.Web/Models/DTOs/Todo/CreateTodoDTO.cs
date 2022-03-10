@@ -2,7 +2,7 @@ using Microsoft.Build.Framework;
 
 namespace LivingLab.Web.Models.DTOs.Todo;
 
-public struct CreateTodoDTO
+public class CreateTodoDTO
 {
     [Required]
     public string Title { get; set; }

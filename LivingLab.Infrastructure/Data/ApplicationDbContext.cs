@@ -13,20 +13,19 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
 {
     // Add new DB tables here
     public DbSet<Todo> Todos { get; set; }
-    public DbSet<Accessory> Accessory { get; set; }
-    public DbSet<Device> Device { get; set; }
-    // public DbSet<DeviceType> DeviceType { get; set; }
-    public DbSet<Lab> Lab { get; set; }
-    public DbSet<SessionStats> SessionStats { get; set; }
-    public DbSet<AccessoryType> AccessoryType { get; set; }
-    
-    /***
-     * P1-5 Database sets to call from repository
-     */
     public DbSet<Lab> Labs { get; set; }
+    public DbSet<Device> Devices { get; set; }
+    public DbSet<EnergyUsageLog> EnergyUsageLogs { get; set; }
+    public DbSet<EnergyUsagePredictionLog> EnergyUsagePredictions { get; set; }
+    public DbSet<PowerGenerationMix> PowerGenerationMix { get; set; }
+    public DbSet<CarbonFootprintEstimation> CarbonFootprintEstimations { get; set; }
+    public DbSet<SmsLog> SmsLogs { get; set; }
+    public DbSet<EmailLog> EmailLogs { get; set; }
+    public DbSet<Accessory> Accessories { get; set; }
+    public DbSet<SessionStats> SessionStats { get; set; }
+    public DbSet<AccessoryType> AccessoryTypes { get; set; }
     public DbSet<Booking> Bookings { get; set; }
     public DbSet<LabAccess> LabAccesses { get; set; }
-    
 
     public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
     {
@@ -37,7 +36,14 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
         base.OnModelCreating(modelBuilder);
 
         // More info: https://docs.microsoft.com/en-us/ef/core/modeling/
-        new TodoConfiguration().Configure(modelBuilder.Entity<Todo>());
+        new TodoConfig().Configure(modelBuilder.Entity<Todo>());
+        // new EnergyUsageLogConfiguration().Configure(modelBuilder.Entity<EnergyUsageLog>());
+        new NotificationsConfig().Configure(modelBuilder.Entity<ApplicationUser>());
+        new AccessoryConfig().Configure(modelBuilder.Entity<Accessory>());
+        new BookingConfig().Configure(modelBuilder.Entity<Booking>());
+        new DeviceConfig().Configure(modelBuilder.Entity<Device>());
+        new LabAccessConfig().Configure(modelBuilder.Entity<LabAccess>());
+        new LabConfig().Configure(modelBuilder.Entity<Lab>());
 
         // Rename ASP.NET Identity tables
         modelBuilder.Entity<ApplicationUser>(e => e.ToTable("Users"));
@@ -47,42 +53,6 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
         modelBuilder.Entity<IdentityUserLogin<string>>().ToTable("UserLogin");
         modelBuilder.Entity<IdentityRoleClaim<string>>().ToTable("RoleClaim");
         modelBuilder.Entity<IdentityUserToken<string>>().ToTable("UserToken");
-        
-        modelBuilder.Entity<Booking>(entity =>
-        {
-            entity.ToTable("Booking");
-            entity.HasOne(b => b.Lab)
-                .WithMany(l => l.Bookings)
-                .HasForeignKey("LabId")
-                .HasPrincipalKey("LabId");
-            entity.HasOne(b => b.ApplicationUser)
-                .WithMany(a => a.Bookings)
-                .HasForeignKey(b=>b.UserId)
-                .HasPrincipalKey(a=>a.Id);
-        });
-
-        modelBuilder.Entity<Lab>(entity =>
-        {
-            entity.ToTable("Labs");
-            entity.HasOne(l => l.ApplicationUser)
-                .WithMany(a => a.Labs)
-                .HasForeignKey(l=>l.LabInCharge)
-                .HasPrincipalKey(a=>a.Id);
-        });
-        
-        modelBuilder.Entity<LabAccess>(entity =>
-        {
-            entity.ToTable("LabAccess");
-            entity.HasKey(l => new {l.UserId, l.LabId});
-            entity.HasOne(l => l.ApplicationUser)
-                .WithMany(a => a.LabAccesses)
-                .HasForeignKey(l=>l.UserId)
-                .HasPrincipalKey(a=>a.Id);
-            entity.HasOne(l => l.ApplicationUser)
-                .WithMany(a => a.LabAccesses)
-                .HasForeignKey(l=>l.InitiatorId)
-                .HasPrincipalKey(a=>a.Id);
-        });
 
         modelBuilder.Seed();
     }

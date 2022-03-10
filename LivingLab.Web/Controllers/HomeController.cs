@@ -3,7 +3,6 @@ using System.Diagnostics;
 using LivingLab.Web.Models.ViewModels;
 
 using Microsoft.AspNetCore.Authorization;
-// using LivingLab.Web.ViewModels;
 
 using Microsoft.AspNetCore.Mvc;
 
@@ -32,8 +31,14 @@ public class HomeController : Controller
     {
         return View("Privacy");
     }
-    
-    
+
+
+
+    [Route("/example")]
+    public IActionResult ExamplePage()
+    {
+        return View("ExamplePage");
+    }
 
     [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
     public IActionResult Error()
