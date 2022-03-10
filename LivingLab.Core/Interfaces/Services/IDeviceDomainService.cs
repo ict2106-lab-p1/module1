@@ -5,8 +5,8 @@ namespace LivingLab.Core.Interfaces.Services;
 /// <remarks>
 /// Author: Team P1-3
 /// </remarks>
-public interface IAccessoryDomainService
+public interface IDeviceDomainService
 {
-    Task<List<Accessory>> ViewAccessory(string accessoryType);
-    Task<List<ViewAccessoryTypeDTO>> ViewAccessoryType();
+    Task<List<Device>> ViewDevice(string deviceType);
+    Task<List<ViewDeviceTypeDTO>> ViewDeviceType();
 }

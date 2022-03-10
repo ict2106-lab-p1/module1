@@ -8,7 +8,9 @@ using LivingLab.Web.Models.ViewModels.Device;
 using LivingLab.Web.UIServices.Device;
 
 namespace LivingLab.Web.Controllers;
-
+/// <remarks>
+/// Author: Team P1-3
+/// </remarks>
 [Route("Device")]
 public class DeviceController : Controller
 {
@@ -25,15 +27,15 @@ public class DeviceController : Controller
     [HttpPost("ViewAll")]
     public async Task<IActionResult> ViewAll(string deviceType)
     {
-        ViewDeviceViewModel viewDevices = await _deviceService.viewDevice(deviceType);
+        ViewDeviceViewModel viewDevices = await _deviceService.ViewDevice(deviceType);
         return View("ViewDevice", viewDevices);
     }
     
     [Route("viewType")]
     public async Task<IActionResult> viewType()
     {
-        DeviceTypeViewModel deviceTypeViewModel = await _deviceService.viewDeviceType();
-        return View("ViewDeviceType", deviceTypeViewModel);
+        ViewDeviceTypeViewModel viewDeviceTypeViewModel = await _deviceService.ViewDeviceType();
+        return View("ViewDeviceType", viewDeviceTypeViewModel);
     }
 
     // [HttpGet]

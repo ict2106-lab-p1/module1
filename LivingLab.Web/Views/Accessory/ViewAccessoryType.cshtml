@@ -1,5 +1,7 @@
-@model LivingLab.Web.Models.ViewModels.Accessory.AccessoryTypeViewModel
-
+@model LivingLab.Web.Models.ViewModels.Accessory.ViewAccessoryTypeViewModel
+@* <remarks> *@
+@* Author: Team P1-3 *@
+@* </remarks> *@
 @{
 ViewData["Title"] = "Manage Accessory";
 }
@@ -27,7 +29,7 @@ ViewData["Title"] = "Manage Accessory";
     </tr>
     </thead>
     <tbody>
-    @foreach (var accessory in Model.ViewAccessoryTypeDtos) {
+    @foreach (var accessory in Model.accessoryTypeList) {
         <tr>
             <td>@accessory.Type</td>
             <td>@accessory.Quantity</td>

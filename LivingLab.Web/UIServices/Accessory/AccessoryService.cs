@@ -5,7 +5,9 @@ using LivingLab.Core.Interfaces.Services;
 using LivingLab.Web.Models.ViewModels.Accessory;
 
 namespace LivingLab.Web.UIServices.Accessory;
-
+/// <remarks>
+/// Author: Team P1-3
+/// </remarks>
 public class AccessoryServices : IAccessoryService
 {
     private readonly IMapper _mapper;
@@ -17,7 +19,7 @@ public class AccessoryServices : IAccessoryService
         _accessoryDomainService = accessoryDomainService;
     }
 
-    public async Task<ViewAccessoryViewModel> viewAccessory(string accessoryType)
+    public async Task<ViewAccessoryViewModel> ViewAccessory(string accessoryType)
     {
         //retrieve data from db
         List<Core.Entities.Accessory> accessoryList = await _accessoryDomainService.ViewAccessory(accessoryType);
@@ -31,14 +33,12 @@ public class AccessoryServices : IAccessoryService
             AccessoryList = accessories
         };
     }
-    
-    public async Task<AccessoryTypeViewModel> viewAccessoryType()
+
+    public async Task<ViewAccessoryTypeViewModel> ViewAccessoryType()
     {
         List<ViewAccessoryTypeDTO> viewAccessoryTypeDtos = await _accessoryDomainService.ViewAccessoryType();
-        return new AccessoryTypeViewModel
-        {
-            ViewAccessoryTypeDtos = viewAccessoryTypeDtos
-        };
+        List<AccessoryTypeViewModel> accessoryTypeViewModels =
+            _mapper.Map<List<ViewAccessoryTypeDTO>, List<AccessoryTypeViewModel>>(viewAccessoryTypeDtos);
+        return new ViewAccessoryTypeViewModel {accessoryTypeList = accessoryTypeViewModels};
     }
-    
 }

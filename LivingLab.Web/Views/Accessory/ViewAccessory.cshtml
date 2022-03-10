@@ -1,3 +1,6 @@
+@* <remarks> *@
+@* Author: Team P1-3 *@
+@* </remarks> *@
 @model LivingLab.Web.Models.ViewModels.Accessory.ViewAccessoryViewModel
 
 @{
@@ -45,7 +48,7 @@ ViewData["Title"] = "Manage Accessory";
                 <td>@accessory.Status</td>
                 <td>@accessory.AccessoryType.Borrowable</td>
                 <td>@accessory.LabUserId</td>
-                <td>@accessory.DueDate</td>
+                <td>@accessory.DueDate?.ToString("MM/dd/yyyy")</td>
                 <td></td>
                 <td></td>
             </tr>

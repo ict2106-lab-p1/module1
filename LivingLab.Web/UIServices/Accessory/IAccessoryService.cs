@@ -1,9 +1,11 @@
 using LivingLab.Web.Models.ViewModels.Accessory;
 
 namespace LivingLab.Web.UIServices.Accessory;
-
+/// <remarks>
+/// Author: Team P1-3
+/// </remarks>
 public interface IAccessoryService
 {
-    Task<ViewAccessoryViewModel> viewAccessory(string accessoryType);
-    Task<AccessoryTypeViewModel> viewAccessoryType();
+    Task<ViewAccessoryViewModel> ViewAccessory(string accessoryType);
+    Task<ViewAccessoryTypeViewModel> ViewAccessoryType();
 }

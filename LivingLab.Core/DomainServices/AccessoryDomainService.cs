@@ -4,7 +4,9 @@ using LivingLab.Core.Interfaces.Repositories;
 using LivingLab.Core.Interfaces.Services;
 
 namespace LivingLab.Core.DomainServices;
-
+/// <remarks>
+/// Author: Team P1-3
+/// </remarks>
 public class AccessoryDomainService : IAccessoryDomainService
 {
     private readonly IAccessoryRepository _accessoryRepository;
