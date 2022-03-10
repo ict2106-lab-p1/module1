@@ -12,7 +12,6 @@ public class TodoService : ITodoService
 {
     private readonly IMapper _mapper;
     private readonly ITodoDomainService _todoDomainService;
-
     public TodoService(IMapper mapper, ITodoDomainService todoDomainService)
     {
         _mapper = mapper;

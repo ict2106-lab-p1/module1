@@ -5,5 +5,5 @@ namespace LivingLab.Core.Interfaces.Notifications;
 /// </remarks>
 public interface IEmailNotifier : INotifier
 {
-    
+
 }

@@ -1,4 +1,5 @@
 using LivingLab.Web.Models.ViewModels;
+using LivingLab.Web.Models.ViewModels.Device;
 
 namespace LivingLab.Web.Models.DTOs;
 

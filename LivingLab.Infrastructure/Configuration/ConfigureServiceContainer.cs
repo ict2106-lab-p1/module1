@@ -1,5 +1,4 @@
 using LivingLab.Core.DomainServices;
-
 using LivingLab.Core.Entities.Identity;
 using LivingLab.Core.Interfaces.Repositories;
 using LivingLab.Core.Interfaces.Services;
@@ -47,7 +46,11 @@ public static class ConfigureServiceContainer
         services.AddTransient<ISmsRepository, SmsRepository>();
         services.AddTransient<IEmailRepository, EmailRepository>();
         services.AddTransient<IPowerGenerationMixRepository, PowerGenerationMixRepository>();
-        
+        services.AddTransient<IAccessoryRepository, AccessoryRepository>();
+        services.AddTransient<IAccessoryTypeRepository, AccessoryTypeRepository>();
+        services.AddTransient<IDeviceRepository, DeviceRepository>();
+        services.AddTransient<ISessionStatsRepository, SessionStatsRepository>();
+
         // Services
         services.AddTransient<ITodoDomainService, TodoDomainService>();
         services.AddTransient<IEnergyUsageLogCsvParser, EnergyUsageLogCsvParser>();
@@ -55,7 +58,10 @@ public static class ConfigureServiceContainer
         services.AddTransient<IEnergyUsageService, EnergyUsageService>();
         services.AddTransient<IManualLogDomainService, ManualLogDomainService>();
         services.AddTransient<INotificationDomainService, NotificationDomainService>();
+        services.AddTransient<IDeviceDomainService, DeviceDomainService>();
+        services.AddTransient<IAccessoryDomainService, AccessoryDomainService>();
         services.AddTransient<IEnergyLogDomainService, EnergyLogDomainService>();
+
 
         return services;
     }
@@ -66,7 +72,6 @@ public static class ConfigureServiceContainer
 
         return services;
     }
-
     private static IServiceCollection AddSingletonServices(this IServiceCollection services)
     {
         // services.AddSingleton<ITodoRepository, TodoRepository>();

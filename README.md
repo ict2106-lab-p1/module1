@@ -14,17 +14,16 @@ Refer to WORKFLOW.md for instructions on the development flow.
 - `cd LivingLab.Web && npm run dev`
 - Then, in a separate window: `dotnet watch --project LivingLab.Web`
 
-## For Production
-- `npm run prod`
+## Running the project
+1. Run `npm run dev` in /LivingLab.Web
+2. Then, in a separate terminal, run `dotnet watch --project LivingLab.Web` from the root folder 
 
-## Format
-`dotnet format --severity warn`
 
-## Migrations 
-**skip this part if no changes to db.  
+## Updates to DB 
+### Migrations
 `dotnet ef migrations add CreateInitialDB -s LivingLab.Web -p LivingLab.Infrastructure`
 
-## DB
+### Populating / Update Values
 `dotnet ef database update -s LivingLab.Web -p LivingLab.Infrastructure`
 
 ## Structure
@@ -73,18 +72,14 @@ It's output will be stored at `webroot/dist/site.css`, where it will be referenc
 Running `npm run dev` will start tailwindcli in "watch" mode. Any changes you make will automatically be reflected.
 
 #### prod
-Running `npm run dev` will start tailwindcli in build mode. In addition to compiling your `index.css`, the resulting output will be minified as well.
+Running `npm run prod` will start tailwindcli in build mode. In addition to compiling your `index.css`, the resulting output will be minified as well.
 
 ### Nullable warnings
 It's "safe" to ignore warnings on startup about nullables. These are scaffolded from a template. Feel free to correct them. See https://docs.microsoft.com/en-us/dotnet/csharp/nullable-references.
 
-### Database
-Install ef tools if they aren't already present.
-`dotnet tool install --global dotnet-ef`
 
 #### Run migrations
 - `dotnet ef database update -s LivingLab.Web -p LivingLab.Infrastructure`
-
 Alternatively, run the web app and let dotnet run migrations automatically. If you encounter an exception page, click on "Run migrations" and refresh.
 
 #### Clean state
@@ -93,7 +88,6 @@ Remove `livinglab.sqlite`, rerun migrations.
 ## Github ID
 ### P1-01 Student ID & Name & Github ID
 - 2002437 Han Yi hanyi97
-- 2002866 Hui Shan Huishan99
 - 2002362 Jia Jia jiajiatan
 - 2002288 Mary Michelle mmichelle1
 - 2001868 Yong Zheng PixlRainbow

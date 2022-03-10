@@ -1,3 +1,5 @@
+using System.ComponentModel.DataAnnotations;
+
 using Microsoft.AspNetCore.Identity;
 
 namespace LivingLab.Core.Entities.Identity;
@@ -13,4 +15,11 @@ public class ApplicationUser : IdentityUser
     // so they have been made private
     private List<EmailLog> NotificationEmails { get; set; } = new List<EmailLog>();
     private List<SmsLog> NotificationSmses { get; set; } = new List<SmsLog>();
+    public string? AuthenticationType { get; set; }
+    [DataType(DataType.DateTime)]
+    public DateTime SMSExpiry { get; set; }
+    public string? UserFaculty { get; set; }
+    public List<Booking> Bookings { get; set; }
+    public List<Lab> Labs { get; set; }
+    public List<LabAccess> LabAccesses { get; set; }
 }

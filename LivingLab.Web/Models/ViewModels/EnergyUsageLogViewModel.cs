@@ -1,4 +1,5 @@
 using LivingLab.Core.Entities.Identity;
+using LivingLab.Web.Models.ViewModels.Device;
 
 namespace LivingLab.Web.Models.ViewModels;
 
