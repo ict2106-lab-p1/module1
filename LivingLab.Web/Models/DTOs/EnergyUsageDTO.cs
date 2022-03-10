@@ -2,6 +2,9 @@ using LivingLab.Web.Models.ViewModels;
 
 namespace LivingLab.Web.Models.DTOs;
 
+/// <remarks>
+/// Author: Team P1-1
+/// </remarks>
 public class EnergyUsageDTO
 {
     public double EnergyUsage { get; set; }

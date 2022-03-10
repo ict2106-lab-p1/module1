@@ -2,6 +2,9 @@ using LivingLab.Core.Entities.Identity;
 
 namespace LivingLab.Web.Models.ViewModels;
 
+/// <remarks>
+/// Author: Team P1-1
+/// </remarks>
 public class EnergyUsageLogViewModel
 {
     public double EnergyUsage { get; set; }

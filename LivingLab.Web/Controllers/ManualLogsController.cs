@@ -7,6 +7,9 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace LivingLab.Web.Controllers;
 
+/// <remarks>
+/// Author: Team P1-1
+/// </remarks>
 public class ManualLogsController : Controller
 {
     private readonly IManualLogService _manualLogService;

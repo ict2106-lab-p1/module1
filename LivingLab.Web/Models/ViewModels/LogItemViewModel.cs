@@ -2,6 +2,9 @@ using System.ComponentModel.DataAnnotations;
 
 namespace LivingLab.Web.Models.ViewModels;
 
+/// <remarks>
+/// Author: Team P1-1
+/// </remarks>
 public class LogItemViewModel
 {
     public string? DeviceCategory { get; set; }
