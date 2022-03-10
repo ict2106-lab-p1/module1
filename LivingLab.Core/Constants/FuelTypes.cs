@@ -1,5 +1,8 @@
 namespace LivingLab.Core.Constants;
 
+/// <remarks>
+/// Author: Team P1-1
+/// </remarks>
 public static class FuelTypes
 {
     public const string FUEL_OIL = "PetroleumProducts";

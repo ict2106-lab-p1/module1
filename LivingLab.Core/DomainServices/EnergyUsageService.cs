@@ -3,6 +3,9 @@ using LivingLab.Core.Interfaces.Services;
 
 namespace LivingLab.Core.DomainServices;
 
+/// <remarks>
+/// Author: Team P1-1
+/// </remarks>
 public class EnergyUsageService : IEnergyUsageService
 {
     public Task LogUsage(EnergyUsageLog log)

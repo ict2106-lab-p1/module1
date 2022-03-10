@@ -8,6 +8,9 @@ using Microsoft.AspNetCore.Http;
 
 namespace LivingLab.Core.DomainServices;
 
+/// <remarks>
+/// Author: Team P1-1
+/// </remarks>
 public class ManualLogDomainService : IManualLogDomainService
 {
     private readonly IEnergyUsageLogCsvParser _csvParser;

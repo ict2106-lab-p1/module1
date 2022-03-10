@@ -3,6 +3,10 @@ using System.ComponentModel.DataAnnotations;
 using LivingLab.Core.Entities.Identity;
 
 namespace LivingLab.Core.Entities;
+
+/// <remarks>
+/// Author: Team P1-1
+/// </remarks>
 public class EnergyUsageLog : BaseEntity
 {
     [Required]
