@@ -1,0 +1,65 @@
+﻿@{
+    ViewData["Title"] = "Manual Log Upload";
+}
+
+<h2 class="font-bold text-3xl text-slate-900 ">Manual Log Upload</h2>
+
+@* Display error message *@
+<div id="error" class="text-red-600"></div>
+
+<form class="mt-5" asp-action="Save" method="post" id="manualLogForm">
+    <!--Log Input-->
+    <div class="log-div mt-5 flex flex-col bg-white p-5 shadow-lg rounded gap-4">
+        <div class="flex justify-end">
+            <button type="button" class="delete  text-red-500 hover:bg-red-100 hover:scale-125 rounded-full p-2 ease-in-out duration-500">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="inherit" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="18" y1="6" x2="6" y2="18"></line>
+                    <line x1="6" y1="6" x2="18" y2="18"></line>
+                </svg>
+            </button>
+        </div>
+        <div class="flex flex-col lg:flex-row justify-between space-y-2 lg:space-x-3">
+            <div class="flex flex-row lg:flex-col justify-center space-x-2 lg:space-y-2">
+                <h3 class="text-center text-gray-600 m-auto lg:m-0">Device Category</h3>
+                <select class="deviceCategory select w-full max-w-xs select-bordered">
+                    <option>Microprocessors</option>
+                    <option>AR/VR Devices</option>
+                    <option>Smart Sensors</option>
+                    <option>Robotics</option>
+                    <option>Meters and Monitoring Systems</option>
+                    <option>Others</option>
+                </select>
+            </div>
+            <div class="flex flex-row lg:flex-col justify-center space-x-2 lg:space-y-2">
+                <h3 class="text-center text-gray-600 m-auto lg:m-0">Serial No.</h3>
+                <input class="deviceId input input-bordered w-full max-w-xs" name="Serial Number" id="deviceId" type="text" placeholder="Enter Device Serial No."/>
+            </div>
+            <div class="flex flex-row lg:flex-col justify-center space-x-2 lg:space-y-2">
+                <h3 class="text-center text-gray-600 m-auto lg:m-0">Energy Usage (J)</h3>
+                <input class="energyUsage input input-bordered w-full max-w-xs" name="Energy Usage" type="number" value="energyUsage" placeholder="Enter Energy Usage (J)" required/>
+            </div>
+            <div class="flex flex-row lg:flex-col justify-center space-x-2 lg:space-y-2">
+                <h3 class="text-center text-gray-600 m-auto lg:m-0">Interval (min)</h3>
+                <input class="interval input input-bordered w-full max-w-xs" name="Interval" type="number" value="duration" placeholder="Enter Interval (min)" required/>
+            </div>
+            <div class="flex flex-row lg:flex-col justify-center space-x-2 lg:space-y-2">
+                <h3 class="text-center text-gray-600 m-auto lg:m-0">Logged At</h3>
+                <input class="loggedAt input input-bordered w-full max-w-xs" name="Logged At" type="datetime-local" value="loggedAt" placeholder="Enter Logged At Datetime" required/>
+            </div>
+        </div>
+    </div>
+    <!--Log Input End-->
+    <!--Buttons-->
+    <div class="flex justify-between mt-5">
+        <input type="submit" id="btnSave" value="Upload Logs" class="bg-slate-900 hover:bg-slate-700 text-white font-bold py-2 px-4 rounded trigger-swal align-end">
+        <button type="button" id="btnAdd" class="bg-slate-900 hover:bg-slate-700 text-white font-bold py-2 px-4 rounded trigger-swal">Add</button>
+    </div>
+    <!--Button End-->
+</form>
+
+
+@section Scripts
+{
+    <script src="~/js/manualLogValidation.js"></script>
+    <script src="~/js/manualLogUpload.js"></script>
+}
