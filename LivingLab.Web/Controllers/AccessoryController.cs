@@ -1,13 +1,15 @@
 using System.Diagnostics;
 
-using LivingLab.Web.ViewModels;
-
 using Microsoft.AspNetCore.Mvc;
 using LivingLab.Web.Models.ViewModels;
+using LivingLab.Web.Models.ViewModels.Accessory;
+using LivingLab.Web.UIServices.Accessory;
 using LivingLab.Web.UIServices.Device;
 
 namespace LivingLab.Web.Controllers;
-
+/// <remarks>
+/// Author: Team P1-3
+/// </remarks>
 [Route("Accessory")]
 public class AccessoryController : Controller
 {
@@ -24,7 +26,7 @@ public class AccessoryController : Controller
     [HttpPost("ViewAccessory")]
     public async Task<IActionResult> ViewAccessory(string accessoryType)
     {
-        ViewAccessoryViewModel viewAccessories = await _accessoryService.viewAccessory(accessoryType);
+        ViewAccessoryViewModel viewAccessories = await _accessoryService.ViewAccessory(accessoryType);
         return View("ViewAccessory", viewAccessories);
     }
     
@@ -32,7 +34,7 @@ public class AccessoryController : Controller
     [Route("ViewAccessoryType")]
     public async Task<IActionResult> ViewAccessoryType()
     {
-        AccessoryTypeViewModel viewAccessories = await _accessoryService.viewAccessoryType();
+        ViewAccessoryTypeViewModel viewAccessories = await _accessoryService.ViewAccessoryType();
         return View("ViewAccessoryType", viewAccessories);
     }
 

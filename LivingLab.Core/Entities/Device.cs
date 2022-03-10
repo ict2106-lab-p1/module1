@@ -2,13 +2,17 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace LivingLab.Core.Entities;
-
+/// <remarks>
+/// Author: Team P1-3
+/// </remarks>
 public class Device : BaseEntity
 {
     [Required]
     [DataType(DataType.Date)]
     [Column(TypeName="Date")]
     public DateTime LastUpdated { get; set; }
+    [Required]
+    public string Name { get; set; }
     [Required]
     public string? SerialNo { get; set; }
     [Required]

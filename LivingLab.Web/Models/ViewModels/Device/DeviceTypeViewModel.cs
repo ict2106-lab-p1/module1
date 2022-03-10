@@ -1,6 +1,9 @@
-namespace LivingLab.Web.ViewModels;
-
+namespace LivingLab.Web.Models.ViewModels.Device;
+/// <remarks>
+/// Author: Team P1-3
+/// </remarks>
 public class DeviceTypeViewModel
 {
-    public List<Core.ViewDeviceTypeDTO> ViewDeviceTypeDtos { get; set; }
+    public string Type { get; set; }
+    public int Quantity { get; set; }
 }
