@@ -34,11 +34,7 @@
   </ItemGroup>
 
   <ItemGroup>
-<<<<<<< HEAD
     <_ContentIncludedByDefault Remove="Views\ManualLogExample\Index.cshtml" />
-=======
-    <Folder Include="Models\DTOs\Device" />
->>>>>>> e90249168d4bcb9fce4bbd09def560c9e7bc34e9
   </ItemGroup>
 
 </Project>

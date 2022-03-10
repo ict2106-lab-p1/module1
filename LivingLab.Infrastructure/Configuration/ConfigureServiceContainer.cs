@@ -3,11 +3,8 @@ using LivingLab.Core.Entities.Identity;
 using LivingLab.Core.Interfaces.Repositories;
 using LivingLab.Core.Interfaces.Services;
 using LivingLab.Infrastructure.Data;
-<<<<<<< HEAD
 using LivingLab.Infrastructure.InfraServices;
 using LivingLab.Infrastructure.InfraServices.CsvParser;
-=======
->>>>>>> e90249168d4bcb9fce4bbd09def560c9e7bc34e9
 using LivingLab.Infrastructure.Repositories;
 
 using Microsoft.AspNetCore.Identity;
@@ -40,7 +37,6 @@ public static class ConfigureServiceContainer
         AddSingletonServices(services);
         return services;
     }
-<<<<<<< HEAD
 
     private static IServiceCollection AddTransientServices(this IServiceCollection services)
     {
@@ -50,17 +46,10 @@ public static class ConfigureServiceContainer
         services.AddTransient<ISmsRepository, SmsRepository>();
         services.AddTransient<IEmailRepository, EmailRepository>();
         services.AddTransient<IPowerGenerationMixRepository, PowerGenerationMixRepository>();
-=======
-    
-    private static IServiceCollection AddTransientServices(this IServiceCollection services)
-    {
-        services.AddTransient<ITodoRepository, TodoRepository>();
->>>>>>> e90249168d4bcb9fce4bbd09def560c9e7bc34e9
         services.AddTransient<IAccessoryRepository, AccessoryRepository>();
         services.AddTransient<IAccessoryTypeRepository, AccessoryTypeRepository>();
         services.AddTransient<IDeviceRepository, DeviceRepository>();
         services.AddTransient<ISessionStatsRepository, SessionStatsRepository>();
-<<<<<<< HEAD
 
         // Services
         services.AddTransient<ITodoDomainService, TodoDomainService>();
@@ -74,12 +63,6 @@ public static class ConfigureServiceContainer
         services.AddTransient<IEnergyLogDomainService, EnergyLogDomainService>();
 
 
-=======
-        services.AddTransient<IAccessoryDomainService, AccessoryDomainService>();
-        services.AddTransient<IDeviceDomainService, DeviceDomainService>();
-        services.AddTransient<ITodoDomainService, TodoDomainService>();
-        
->>>>>>> e90249168d4bcb9fce4bbd09def560c9e7bc34e9
         return services;
     }
 
@@ -89,10 +72,6 @@ public static class ConfigureServiceContainer
 
         return services;
     }
-<<<<<<< HEAD
-=======
-    
->>>>>>> e90249168d4bcb9fce4bbd09def560c9e7bc34e9
     private static IServiceCollection AddSingletonServices(this IServiceCollection services)
     {
         // services.AddSingleton<ITodoRepository, TodoRepository>();

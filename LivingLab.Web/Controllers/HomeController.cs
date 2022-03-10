@@ -1,12 +1,6 @@
 using System.Diagnostics;
 
 using LivingLab.Web.Models.ViewModels;
-<<<<<<< HEAD
-=======
-
-using Microsoft.AspNetCore.Authorization;
-// using LivingLab.Web.ViewModels;
->>>>>>> e90249168d4bcb9fce4bbd09def560c9e7bc34e9
 
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -57,7 +51,6 @@ public class HomeController : Controller
     // }
     [Route("Logout")]
     public IActionResult Logout()
-<<<<<<< HEAD
     {
         //Delete the Session object.
         HttpContext.Session.Clear();
@@ -68,8 +61,6 @@ public class HomeController : Controller
 
     [Route("/example")]
     public IActionResult ExamplePage()
-=======
->>>>>>> e90249168d4bcb9fce4bbd09def560c9e7bc34e9
     {
         //Delete the Session object.
         HttpContext.Session.Clear();

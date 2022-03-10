@@ -1,5 +1,9 @@
 /* <remarks>*/
+
+
 /* Author: Team P1-3*/
+
+
 /* </remarks>*/
 
 @tailwind base;
@@ -12,75 +16,68 @@
 }
 
 @layer components {
-  .z-100 {
-    z-index: 100;
-  }
+    .z-100 {
+        z-index: 100;
+    }
 }
 
 body {
-<<<<<<< HEAD
-  font-family: "Nunito Sans", sans-serif;
-  @apply bg-gray-100;
-}
-
-body::-webkit-scrollbar {
-  display: none;
-=======
     font-family: "Nunito Sans", sans-serif;
-    @apply bg-inherit;
+    @apply bg-gray-100;
 }
 
 body::-webkit-scrollbar {
     display: none;
->>>>>>> e90249168d4bcb9fce4bbd09def560c9e7bc34e9
 }
 
 .overlay {
-  position: relative;
+    position: relative;
 }
 
 td:not(:last-child) {
-  border-bottom: 0;
+    border-bottom: 0;
 }
 
 th:not(:last-child) {
-  border-bottom: 2px solid rgba(0, 0, 0, 0.1);
+    border-bottom: 2px solid rgba(0, 0, 0, 0.1);
 }
 
 .btn {
-  @apply font-bold py-2 px-4 rounded;
+    @apply font-bold py-2 px-4 rounded;
 }
+
 .btn-blue {
-  @apply bg-denim-600 text-white;
+    @apply bg-denim-600 text-white;
 }
+
 .btn-blue:hover {
-  @apply bg-blue-700;
+    @apply bg-blue-700;
 }
 
 @media only screen and (max-width: 1023px) {
-  .overlay:after {
-    content: " ";
-    z-index: 29;
-    display: block;
-    height: 100%;
-    top: 80px;
-    left: 0;
-    right: 0;
-    background: rgba(0, 0, 0, 0.5);
-    pointer-events: none;
-    position: fixed;
-  }
+    .overlay:after {
+        content: " ";
+        z-index: 29;
+        display: block;
+        height: 100%;
+        top: 80px;
+        left: 0;
+        right: 0;
+        background: rgba(0, 0, 0, 0.5);
+        pointer-events: none;
+        position: fixed;
+    }
 }
 
 @media (min-width: 768px) {
-  table {
-    display: inline-table !important;
-  }
-
-  thead tr:not(:first-child) {
-    display: none;
-  }
+    table {
+        display: inline-table !important;
+    }
+    thead tr:not(:first-child) {
+        display: none;
+    }
 }
+
 .btn-blue:hover {
     @apply bg-blue-700;
 }
@@ -88,9 +85,11 @@ th:not(:last-child) {
 .btn {
     @apply font-bold py-2 px-4 rounded;
 }
+
 .btn-blue {
     @apply bg-denim-600 text-white;
 }
+
 .btn-blue:hover {
     @apply bg-blue-700;
 }
