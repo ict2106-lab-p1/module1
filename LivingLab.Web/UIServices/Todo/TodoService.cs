@@ -1,6 +1,6 @@
 using AutoMapper;
 
-using LivingLab.Core.Interfaces.Repositories;
+using LivingLab.Core.Interfaces.Services;
 using LivingLab.Web.Models.DTOs.Todo;
 
 namespace LivingLab.Web.UIServices.Todo;
@@ -11,23 +11,23 @@ namespace LivingLab.Web.UIServices.Todo;
 public class TodoService : ITodoService
 {
     private readonly IMapper _mapper;
-    private readonly ITodoRepository _todoRepository;
-    
-    public TodoService(IMapper mapper, ITodoRepository todoRepository)
+    private readonly ITodoDomainService _todoDomainService;
+
+    public TodoService(IMapper mapper, ITodoDomainService todoDomainService)
     {
         _mapper = mapper;
-        _todoRepository = todoRepository;
+        _todoDomainService = todoDomainService;
     }
 
-    public async Task<List<TodoDTO>>  GetAllTodosAsync()
+    public async Task<List<TodoDTO>> GetAllTodosAsync()
     {
-        var todos = await _todoRepository.GetAllAsync();
+        var todos = await _todoDomainService.GetAllTodosAsync();
         return _mapper.Map<List<Core.Entities.Todo>, List<TodoDTO>>(todos);
     }
 
     public async Task<TodoDTO> GetTodoAsync(int id)
     {
-        var todo = await _todoRepository.GetByIdAsync(id);
+        var todo = await _todoDomainService.GetTodoAsync(id);
         return _mapper.Map<Core.Entities.Todo, TodoDTO>(todo);
     }
 
@@ -35,7 +35,7 @@ public class TodoService : ITodoService
     {
         var newTodo = _mapper.Map<CreateTodoDTO, Core.Entities.Todo>(todo);
 
-        var createdTodo = await _todoRepository.AddAsync(newTodo);
+        var createdTodo = await _todoDomainService.CreateTodoAsync(newTodo);
 
         return _mapper.Map<Core.Entities.Todo, TodoDTO>(createdTodo);
     }
