@@ -46,6 +46,7 @@ public static class ConfigureServiceContainer
         services.AddTransient<ISessionStatsRepository, SessionStatsRepository>();
         services.AddTransient<IAccessoryDomainService, AccessoryDomainService>();
         services.AddTransient<IDeviceDomainService, DeviceDomainService>();
+        services.AddTransient<ITodoDomainService, TodoDomainService>();
         
         return services;
     }
