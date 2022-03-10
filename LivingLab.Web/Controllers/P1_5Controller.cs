@@ -11,6 +11,10 @@ using Microsoft.AspNetCore.Mvc;
 /// <remarks>
 /// Author: Team P1-5
 /// </remarks>
+<<<<<<< HEAD
+=======
+[Authorize(Policy = "LoggedIn")]
+>>>>>>> e90249168d4bcb9fce4bbd09def560c9e7bc34e9
 [Route("p1_5/")]
 public class P1_5Controller : Controller
 {

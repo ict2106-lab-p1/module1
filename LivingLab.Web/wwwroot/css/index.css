@@ -18,12 +18,21 @@
 }
 
 body {
+<<<<<<< HEAD
   font-family: "Nunito Sans", sans-serif;
   @apply bg-gray-100;
 }
 
 body::-webkit-scrollbar {
   display: none;
+=======
+    font-family: "Nunito Sans", sans-serif;
+    @apply bg-inherit;
+}
+
+body::-webkit-scrollbar {
+    display: none;
+>>>>>>> e90249168d4bcb9fce4bbd09def560c9e7bc34e9
 }
 
 .overlay {
@@ -71,6 +80,16 @@ th:not(:last-child) {
   thead tr:not(:first-child) {
     display: none;
   }
+}
+.btn-blue:hover {
+    @apply bg-blue-700;
+}
+
+.btn {
+    @apply font-bold py-2 px-4 rounded;
+}
+.btn-blue {
+    @apply bg-denim-600 text-white;
 }
 .btn-blue:hover {
     @apply bg-blue-700;
