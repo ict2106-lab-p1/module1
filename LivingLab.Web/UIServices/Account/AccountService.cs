@@ -10,6 +10,9 @@ namespace LivingLab.Web.UIServices.Account;
 /// This is a UI-specific service so it belongs in the Web project.
 /// It does not contain any business logic and works with UI-specific types (view models and DTOs).
 /// </summary>
+/// <remarks>
+/// Author: Team P1-5
+/// </remarks>
 public class AccountService : IAccountService
 {
     private readonly IMapper _mapper;

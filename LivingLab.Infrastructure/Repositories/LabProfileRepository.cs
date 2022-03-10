@@ -3,7 +3,9 @@ using LivingLab.Core.Interfaces.Repositories;
 using LivingLab.Infrastructure.Data;
 
 namespace LivingLab.Infrastructure.Repositories;
-
+/// <remarks>
+/// Author: Team P1-5
+/// </remarks>
 public class LabProfileRepository
     : Repository<Lab>, ILabProfileRepository
 {

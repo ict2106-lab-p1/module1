@@ -25,9 +25,9 @@ public static class DataSeeder
         // );
         
         modelBuilder.Entity<ApplicationUser>().HasData(
-            new { Id = "UserId1", UserId=1, FirstName = "David", LastName="Cheng", PhoneNumber="96878607", Email="David@gmail.com", TwoFactorEnabled= false , AuthenticationType="None", PasswordHash="testtesttest", SMSExpiry="08/03/2022 15:47:42", UserFaculty="ICT", AccessFailedCount = 0 , LockoutEnabled = true, EmailConfirmed = false, PhoneNumberConfirmed = false},
-            new { Id = "UserId2", UserId =2, FirstName = "Carlton", LastName="Foo", PhoneNumber="12341234", Email="henry@gmail.com", TwoFactorEnabled= false , AuthenticationType="None", PasswordHash="testtesttest", SMSExpiry="08/03/2022 15:47:42", UserFaculty="SE" , AccessFailedCount = 0, LockoutEnabled = true, EmailConfirmed = false, PhoneNumberConfirmed = false},
-            new { Id = "UserId3", UserId=3, FirstName = "Hou Liang", LastName="Yip", PhoneNumber="80808080", Email="houliang@gmail.com", TwoFactorEnabled= false , AuthenticationType="None", PasswordHash="testtesttest", SMSExpiry="08/03/2022 15:47:42", UserFaculty="SE", AccessFailedCount = 0, LockoutEnabled= true, EmailConfirmed = false, PhoneNumberConfirmed = false}
+            new { Id = "UserId1", UserId=1, FirstName = "David", LastName="Cheng", PhoneNumber="96878607", Email="David@gmail.com", TwoFactorEnabled= false , AuthenticationType="None", PasswordHash="testtesttest", SMSExpiry=new DateTime(2022,7,19, hour: 12, minute: 00, second:00 ), UserFaculty="ICT", AccessFailedCount = 0 , LockoutEnabled = true, EmailConfirmed = false, PhoneNumberConfirmed = false},
+            new { Id = "UserId2", UserId =2, FirstName = "Carlton", LastName="Foo", PhoneNumber="12341234", Email="henry@gmail.com", TwoFactorEnabled= false , AuthenticationType="None", PasswordHash="testtesttest", SMSExpiry=new DateTime(2022,7,19, hour: 12, minute: 00, second:00 ), UserFaculty="SE" , AccessFailedCount = 0, LockoutEnabled = true, EmailConfirmed = false, PhoneNumberConfirmed = false},
+            new { Id = "UserId3", UserId=3, FirstName = "Hou Liang", LastName="Yip", PhoneNumber="80808080", Email="houliang@gmail.com", TwoFactorEnabled= false , AuthenticationType="None", PasswordHash="testtesttest", SMSExpiry=new DateTime(2022,7,19, hour: 12, minute: 00, second:00 ), UserFaculty="SE", AccessFailedCount = 0, LockoutEnabled= true, EmailConfirmed = false, PhoneNumberConfirmed = false}
         );
         
         modelBuilder.Entity<Lab>().HasData(
@@ -39,7 +39,7 @@ public static class DataSeeder
         );
         
         modelBuilder.Entity<Booking>().HasData(
-            new { BookingId = 1, StartTime = "15:47:42", EndTime = "15:47:42", StartDate ="08/03/2022", EndDate = "08/03/2022", LabId = 1, UserId="UserId3"}
+            new { BookingId = 1, StartDateTime = new DateTime(2022,7,19, hour: 10, minute: 00, second:00 ), EndDateTime = new DateTime(2022,7,19, hour: 12, minute: 00, second:00 ), LabId = 1, UserId="UserId3"}
         );
 
         // modelBuilder.Entity<DeviceType>().HasData(

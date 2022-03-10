@@ -2,10 +2,10 @@ using LivingLab.Core.Entities.Identity;
 using LivingLab.Core.Interfaces.Repositories;
 using LivingLab.Infrastructure.Data;
 
-using Microsoft.EntityFrameworkCore;
-
 namespace LivingLab.Infrastructure.Repositories;
-
+/// <remarks>
+/// Author: Team P1-5
+/// </remarks>
 public class AccountRepository : Repository<ApplicationUser>, IAccountRepository
 {
     private readonly ApplicationDbContext _context;

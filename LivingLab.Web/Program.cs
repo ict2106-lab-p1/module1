@@ -6,6 +6,9 @@ using LivingLab.Web.Controllers;
 
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http.Features;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
+using LivingLab.Infrastructure.Data;
 
 var builder = WebApplication.CreateBuilder(args);
 

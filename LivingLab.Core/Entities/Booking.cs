@@ -3,28 +3,22 @@ using System.ComponentModel.DataAnnotations;
 using LivingLab.Core.Entities.Identity;
 
 namespace LivingLab.Core.Entities;
-
+/// <remarks>
+/// Author: Team P1-5
+/// </remarks>
 public class Booking
 {
     [Key]
     public int BookingId { get; set; }
 
     [Required]
-    [DataType(DataType.Time)]
-    public string? StartTime { get; set; }
+    [DataType(DataType.DateTime)]
+    public DateTime StartDateTime { get; set; }
     
     [Required]
-    [DataType(DataType.Time)]
-    public string? EndTime { get; set; }
-    
-    [Required]
-    [DataType(DataType.Date)]
-    public string? StartDate { get; set; }
-    
-    [Required]
-    [DataType(DataType.Date)]
-    public string? EndDate { get; set; }
-    
+    [DataType(DataType.DateTime)]
+    public DateTime EndDateTime { get; set; }
+
     public string? Description { get; set; }
     
     [Required]

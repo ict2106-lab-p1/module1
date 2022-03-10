@@ -3,7 +3,9 @@ using System.ComponentModel.DataAnnotations;
 using LivingLab.Core.Entities.Identity;
 
 namespace LivingLab.Core.Entities;
-
+/// <remarks>
+/// Author: Team P1-5
+/// </remarks>
 public class LabAccess
 {
     [Required]

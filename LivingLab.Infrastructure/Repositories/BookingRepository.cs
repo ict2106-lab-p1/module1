@@ -4,8 +4,9 @@ using LivingLab.Core.Entities;
 using LivingLab.Core.Interfaces.Repositories;
 using LivingLab.Infrastructure.Data;
 
-using Microsoft.EntityFrameworkCore;
-
+/// <remarks>
+/// Author: Team P1-5
+/// </remarks>
 public class BookingRepository : Repository<Booking>, IBookingRepository
 {
     private readonly ApplicationDbContext _context;
