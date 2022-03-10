@@ -33,9 +33,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <_ContentIncludedByDefault Remove="Areas\Identity\Pages\_ValidationScriptsPartial.cshtml" />
-    <_ContentIncludedByDefault Remove="Areas\Identity\Pages\_ViewImports.cshtml" />
-    <_ContentIncludedByDefault Remove="Areas\Identity\Pages\_ViewStart.cshtml" />
+    <Folder Include="Models\DTOs\Device" />
   </ItemGroup>
 
 </Project>

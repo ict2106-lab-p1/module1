@@ -1,6 +1,7 @@
 using AutoMapper;
 
 using LivingLab.Core.Entities;
+using LivingLab.Core.Entities.DTO;
 using LivingLab.Web.Models.DTOs.Todo;
 using LivingLab.Web.Models.ViewModels.Accessory;
 using LivingLab.Web.Models.ViewModels.Device;
@@ -34,8 +35,9 @@ public class MappingProfile : Profile
 
         // ViewModel/ApiModel to Domain (Accessory)
         CreateMap<AccessoryViewModel, Accessory>();
+
+        CreateMap<ViewDeviceTypeDTO, DeviceTypeViewModel>();
         
-        CreateMap<AccessoryViewModel, Accessory>();
-        
+        CreateMap<ViewAccessoryTypeDTO, AccessoryTypeViewModel>();
     }
 }

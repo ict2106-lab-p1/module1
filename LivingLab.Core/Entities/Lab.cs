@@ -26,7 +26,7 @@ public class Lab
     
     public ApplicationUser ApplicationUser { get; set; }
     
-    public List<Logging>? Logs { get; set; }
+    public List<SessionStats>? Logs { get; set; }
     public List<Accessory>? Accessories { get; set; }
 
     public List<Device>? Devices { get; set; }

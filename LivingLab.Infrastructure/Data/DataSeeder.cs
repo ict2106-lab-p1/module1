@@ -57,11 +57,11 @@ public static class DataSeeder
         });
 
         modelBuilder.Entity<Device>().HasData(
-                new { Id = 1, LastUpdated = new DateTime(2020,10,10), SerialNo = "SC1001", LabId = 1, Status="Available", Type = "Surveillance Camera", Description = "Its purpose is to detect situation in the laboratory"},
-                new { Id = 2, LastUpdated = new DateTime(2020,10,11), SerialNo = "R1001", LabId = 1, Status="Available", Type = "Temperature Sensor", Description = "Its purpose is to detect temperature in the laboratory"},
-                new { Id = 3, LastUpdated = new DateTime(2020,9,9), SerialNo = "S1001", LabId = 1, Status="Available", Type = "Humidity Sensor", Description = "Its purpose is to detect humidity in the laboratory"},
-                new { Id = 4, LastUpdated = new DateTime(2019,8,1), SerialNo = "SL1001", LabId = 1, Status="Available",  Type = "Light Sensor", Description = "Its purpose is to detect light in the laboratory"},
-                new { Id = 5, LastUpdated = new DateTime(2019,7,3), SerialNo = "VRL1001", LabId = 1, Status="Unavailable", Type = "VR Light Controls", Description = "It is used to control brightness of the lights in the lab"}
+                new { Id = 1, Name="Surveillance Camera", LastUpdated = new DateTime(2020,10,10), SerialNo = "SC1001", LabId = 1, Status="Available", Type = "Surveillance Camera", Description = "Its purpose is to detect situation in the laboratory"},
+                new { Id = 2, Name="Temperature Sensor",LastUpdated = new DateTime(2020,10,11), SerialNo = "R1001", LabId = 1, Status="Available", Type = "Temperature Sensor", Description = "Its purpose is to detect temperature in the laboratory"},
+                new { Id = 3, Name="Humidity Sensor",LastUpdated = new DateTime(2020,9,9), SerialNo = "S1001", LabId = 1, Status="Available", Type = "Humidity Sensor", Description = "Its purpose is to detect humidity in the laboratory"},
+                new { Id = 4, Name="Light Sensor", LastUpdated = new DateTime(2019,8,1), SerialNo = "SL1001", LabId = 1, Status="Available",  Type = "Light Sensor", Description = "Its purpose is to detect light in the laboratory"},
+                new { Id = 5, Name="VR Light Controls", LastUpdated = new DateTime(2019,7,3), SerialNo = "VRL1001", LabId = 1, Status="Unavailable", Type = "VR Light Controls", Description = "It is used to control brightness of the lights in the lab"}
         );
 
         // Accessory and Accessory Types
@@ -104,6 +104,12 @@ public static class DataSeeder
                 new { Id = 14, Status = "Borrowed", LastUpdated = new DateTime(2021,12,14),  LabId = 1, AccessoryTypeId = 7, LabUserId = "user1", DueDate = new DateTime(2022,12,14) },
                 new { Id = 15, Status = "Available", LastUpdated = new DateTime(2021,11,12),  LabId = 1, AccessoryTypeId = 8},
                 new { Id = 16, Status = "Available", LastUpdated = new DateTime(2021,7,3),  LabId = 1, AccessoryTypeId = 8}
+        );
+
+        modelBuilder.Entity<SessionStats>().HasData(
+                new { Id = 1, Date = new DateTime(2021,7,3), LoginTime = new DateTime(2021, 7, 3, 9,0,0), LogoutTime = new DateTime(2021, 7, 3, 12,0,0), DataUploaded= 58.0, LabId=1},
+                new { Id = 2, Date = new DateTime(2021,7,4), LoginTime = new DateTime(2021, 7, 4, 10,0,0), LogoutTime = new DateTime(2021, 7, 4, 15,0,0), DataUploaded= 64.0, LabId=1},
+                new { Id = 3, Date = new DateTime(2021,7,5), LoginTime = new DateTime(2021, 7, 5, 13,0,0), LogoutTime = new DateTime(2021, 7, 5, 18,0,0), DataUploaded= 128.0, LabId=1}
         );
     }
 }

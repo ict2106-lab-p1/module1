@@ -16,7 +16,8 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     public DbSet<Accessory> Accessory { get; set; }
     public DbSet<Device> Device { get; set; }
     // public DbSet<DeviceType> DeviceType { get; set; }
-    public DbSet<Logging> Logging { get; set; }
+    public DbSet<Lab> Lab { get; set; }
+    public DbSet<SessionStats> SessionStats { get; set; }
     public DbSet<AccessoryType> AccessoryType { get; set; }
     
     /***

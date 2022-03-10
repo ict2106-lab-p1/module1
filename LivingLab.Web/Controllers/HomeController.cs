@@ -8,7 +8,9 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace LivingLab.Web.Controllers;
-
+/// <remarks>
+/// Author: Team P1-3
+/// </remarks>
 [Route("home")]
 public class HomeController : Controller
 {

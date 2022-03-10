@@ -1,8 +1,7 @@
+@model LivingLab.Web.Models.ViewModels.Accessory.ViewAccessoryTypeViewModel
 @* <remarks> *@
 @* Author: Team P1-3 *@
 @* </remarks> *@
-@model LivingLab.Web.Models.ViewModels.Accessory.ViewAccessoryViewModel
-
 @{
 ViewData["Title"] = "Manage Accessory";
 }
@@ -23,38 +22,26 @@ ViewData["Title"] = "Manage Accessory";
 
 <table id="table_id" class="display">
     <thead>
-        <tr>
-            <th>ID</th>
-            <th>Name</th>
-            <th>Type</th>
-            <th>Description</th>
-            <th>Last Updated</th>
-            <th>Status</th>
-            <th>Borrowable</th>
-            <th>Borrowed By</th>
-            <th>DueDate</th>
-            <th></th>
-            <th></th>
-        </tr>
+    <tr>
+        <th>Name</th>
+        <th>Quantity</th>
+        <th></th>
+    </tr>
     </thead>
     <tbody>
-        @foreach (var accessory in Model.AccessoryList) {
-            <tr>
-                <td>@accessory.Id</td>
-                <td>@accessory.AccessoryType.Name</td>
-                <td>@accessory.AccessoryType.Type</td>
-                <td>@accessory.AccessoryType.Description</td>
-                <td>@accessory.LastUpdated.ToString("MM/dd/yyyy")</td>
-                <td>@accessory.Status</td>
-                <td>@accessory.AccessoryType.Borrowable</td>
-                <td>@accessory.LabUserId</td>
-                <td>@accessory.DueDate?.ToString("MM/dd/yyyy")</td>
-                <td></td>
-                <td></td>
-            </tr>
-        }
+    @foreach (var accessory in Model.accessoryTypeList) {
+        <tr>
+            <td>@accessory.Type</td>
+            <td>@accessory.Quantity</td>
+            <td></td>
+        </tr>
+    }
     </tbody>
 </table>
+
+<form asp-controller="Accessory" asp-action="ViewAccessory" method="post" name="postAccessoryType">
+    <input type="hidden" name="accessoryType"/>
+</form>
 
 <div class="bg-black bg-opacity-50 absolute inset-0 hidden justify-center items-center" id="overlay">
     <div class="bg-gray-200 max-w-sm py-2 px-3 rounded shadow-xl text-gray-800">
@@ -95,5 +82,5 @@ ViewData["Title"] = "Manage Accessory";
 </script>
 
 @section Scripts {
-     <script src="~/js/viewAccessory.js"></script>
+     <script src="~/js/viewAccessoryType.js"></script>
 }
