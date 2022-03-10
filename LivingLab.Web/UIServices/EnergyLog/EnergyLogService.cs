@@ -3,6 +3,9 @@ using LivingLab.Core.Interfaces.Services;
 
 namespace LivingLab.Web.UIServices.EnergyLog;
 
+/// <remarks>
+/// Author: Team P1-1
+/// </remarks>
 public class EnergyLogService : IEnergyLogService
 {
     private readonly IEnergyLogDomainService _energyLogDomainService;

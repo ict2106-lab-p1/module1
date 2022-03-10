@@ -1,6 +1,10 @@
 using System.ComponentModel.DataAnnotations;
 
 namespace LivingLab.Core.Entities;
+
+/// <remarks>
+/// Author: Team P1-1
+/// </remarks>
 public class CarbonFootprintEstimation: BaseEntity
 {
     [Required] // in kilograms of CO2 equivalent

@@ -7,6 +7,9 @@ using LivingLab.Web.Models.ViewModels;
 
 namespace LivingLab.Web.UIServices.ManualLogs;
 
+/// <remarks>
+/// Author: Team P1-1
+/// </remarks>
 public class ManualLogService : IManualLogService
 {
     private readonly IMapper _mapper;

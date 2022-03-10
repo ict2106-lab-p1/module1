@@ -3,6 +3,9 @@ using LivingLab.Core.Interfaces.Repositories;
 
 namespace LivingLab.Infrastructure.Repositories;
 
+/// <remarks>
+/// Author: Team P1-1
+/// </remarks>
 public class SmsRepository : ISmsRepository
 {
     public Task<List<SmsLog>> GetSmsByStatus(string status)

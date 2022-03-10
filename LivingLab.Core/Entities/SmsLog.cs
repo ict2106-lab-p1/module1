@@ -4,6 +4,9 @@ using LivingLab.Core.Enums;
 
 namespace LivingLab.Core.Entities;
 
+/// <remarks>
+/// Author: Team P1-1
+/// </remarks>
 public class SmsLog: BaseEntity
 {
     public string Message { get; set; } = "";

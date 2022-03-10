@@ -3,6 +3,9 @@ using LivingLab.Core.Entities.Identity;
 
 namespace LivingLab.Core.Interfaces.Repositories;
 
+/// <remarks>
+/// Author: Team P1-1
+/// </remarks>
 public interface IEnergyUsageRepository : IRepository<EnergyUsageLog>
 {
     Task<List<EnergyUsageLog>> GetUsageByDeviceId(int id);

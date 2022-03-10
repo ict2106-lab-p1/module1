@@ -1,5 +1,8 @@
 namespace LivingLab.Core.Models;
 
+/// <remarks>
+/// Author: Team P1-1
+/// </remarks>
 public class EnergyUsageCsvModel
 {
     public string? DeviceSerialNo { get; set; }
