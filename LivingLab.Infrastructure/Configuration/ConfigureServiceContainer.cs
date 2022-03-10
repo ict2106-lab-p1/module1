@@ -1,5 +1,7 @@
+using LivingLab.Core.DomainServices;
 using LivingLab.Core.Entities.Identity;
 using LivingLab.Core.Interfaces.Repositories;
+using LivingLab.Core.Interfaces.Services;
 using LivingLab.Infrastructure.Data;
 using LivingLab.Infrastructure.Repositories;
 
@@ -37,6 +39,7 @@ public static class ConfigureServiceContainer
     private static IServiceCollection AddTransientServices(this IServiceCollection services)
     {
         services.AddTransient<ITodoRepository, TodoRepository>();
+        services.AddTransient<ITodoDomainService, TodoDomainService>();
         
         return services;
     }
