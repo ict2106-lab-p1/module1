@@ -1,3 +1,4 @@
+using LivingLab.Web.UIServices.EnergyUsageAnalysisServices;
 using LivingLab.Web.UIServices.ManualLogs;
 using LivingLab.Web.UIServices.Todo;
 
@@ -21,6 +22,7 @@ public static class ConfigureWebServices
     {
         services.AddTransient<ITodoService, TodoService>();
         services.AddTransient<IManualLogService, ManualLogService>();
+        services.AddTransient<IExportToCSVService, ExportToCSVService>();
         
         return services;
     }

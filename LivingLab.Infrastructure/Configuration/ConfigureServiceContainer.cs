@@ -3,6 +3,7 @@ using LivingLab.Core.Entities.Identity;
 using LivingLab.Core.Interfaces.Repositories;
 using LivingLab.Core.Interfaces.Services;
 using LivingLab.Infrastructure.Data;
+using LivingLab.Infrastructure.InfraServices;
 using LivingLab.Infrastructure.InfraServices.CsvParser;
 using LivingLab.Infrastructure.Repositories;
 
@@ -42,6 +43,7 @@ public static class ConfigureServiceContainer
         services.AddTransient<ITodoRepository, TodoRepository>();
         services.AddTransient<IEnergyUsageRepository, EnergyUsageRepository>();
         services.AddTransient<IEnergyUsageLogCsvParser, EnergyUsageLogCsvParser>();
+        services.AddTransient<IExportData, ExportData>();
         services.AddTransient<IEnergyUsageService, EnergyUsageService>();
         services.AddTransient<IEmailRepository, EmailRepository>();
         services.AddTransient<ISmsRepository, SmsRepository>();

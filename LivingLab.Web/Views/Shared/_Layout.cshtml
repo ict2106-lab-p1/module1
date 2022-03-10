@@ -46,7 +46,7 @@
             </a>
         </div>
         <ul class="relative">
-            <li class="@Html.ActiveClass("Home", "Index") relative hover:bg-highlight hover:text-gray-700 ease-in duration-300">
+            <li class="@Html.ActiveClass("", "") relative hover:bg-highlight hover:text-gray-700 ease-in duration-300">
                 <a
                     class="mt-14 hover:translate-x-2 transition-transform ease-in duration-300 w-full flex items-center h-10 pl-4 cursor-pointer"
                     asp-controller="Home" asp-action="Index">
@@ -59,6 +59,32 @@
                     <span>Dashboard</span>
                 </a>
             </li>
+            <!--Dashboard Team 2-->
+            <div class="mt-16">
+                <span class="text-gray-400 px-5">Dashboard</span>
+                <hr class="mt-2 mb-4 border-gray-600"/>
+                <li class="@Html.ActiveClass("", "") relative hover:bg-highlight hover:text-gray-700 ease-in duration-300">
+                    <a
+                        class="hover:translate-x-2 transition-transform ease-in duration-300 w-full flex items-center h-10 pl-4 cursor-pointer"
+                        asp-controller="EnergyUsageAnalysis" asp-action="Index">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582-4 8-4s8 1.79 8 4m0 5c0 2.21-3.582 4-8 4s-8-1.79-8-4"/>
+                        </svg>
+                        <span>Analysis</span>
+                    </a>
+                </li>
+                <li class="@Html.ActiveClass("", "") relative hover:bg-highlight hover:text-gray-700 ease-in duration-300">
+                    <a
+                        class="hover:translate-x-2 transition-transform ease-in duration-300 w-full flex items-center h-10 pl-4 cursor-pointer"
+                        asp-controller="EnergyUsageAnalysis" asp-action="GetAll">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582-4 8-4s8 1.79 8 4m0 5c0 2.21-3.582 4-8 4s-8-1.79-8-4"/>
+                        </svg>
+                        <span>Comparison</span>
+                    </a>
+                </li>
+            </div>
+            <!--Dashboard Team2 End-->
 
             <!--All Labs-->
             <div class="mt-16">
