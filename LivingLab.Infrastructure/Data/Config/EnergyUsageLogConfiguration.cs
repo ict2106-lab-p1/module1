@@ -6,6 +6,9 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace LivingLab.Infrastructure.Data.Config;
 
+/// <remarks>
+/// Author: Team P1-1
+/// </remarks>
 public class EnergyUsageLogConfiguration : IEntityTypeConfiguration<EnergyUsageLog>
 {
     public void Configure(EntityTypeBuilder<EnergyUsageLog> builder)

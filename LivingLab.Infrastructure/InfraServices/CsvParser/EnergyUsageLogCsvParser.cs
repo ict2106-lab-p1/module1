@@ -10,6 +10,9 @@ using TinyCsvParser.Mapping;
 
 namespace LivingLab.Infrastructure.InfraServices.CsvParser;
 
+/// <remarks>
+/// Author: Team P1-1
+/// </remarks>
 public class EnergyUsageLogCsvParser : IEnergyUsageLogCsvParser
 {
     /**

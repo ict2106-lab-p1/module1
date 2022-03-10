@@ -7,6 +7,9 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace LivingLab.Infrastructure.Data.Config;
 
+/// <remarks>
+/// Author: Team P1-1
+/// </remarks>
 public class NotificationsConfiguration : IEntityTypeConfiguration<ApplicationUser>
 {
     // this is needed to force EF to recognize many-to-many relationship
