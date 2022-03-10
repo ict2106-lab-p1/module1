@@ -3,12 +3,18 @@ name: .NET
 on:
   push:
     branches:
+      - main
+      - mod1
       - mod2
+      - mod3
       - dev
       - release/**
   pull_request:
-    branches: 
+    branches:
+      - main
+      - mod1
       - mod2
+      - mod3
       - dev
       - release/**
 
