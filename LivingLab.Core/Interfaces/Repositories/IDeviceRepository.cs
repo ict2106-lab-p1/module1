@@ -1,4 +1,5 @@
 using LivingLab.Core.Entities;
+using LivingLab.Core.Entities.DTO;
 
 namespace LivingLab.Core.Interfaces.Repositories;
 

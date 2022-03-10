@@ -1,6 +1,6 @@
-using LivingLab.Web.ViewModels;
+using LivingLab.Web.Models.ViewModels.Accessory;
 
-namespace LivingLab.Web.UIServices.Device;
+namespace LivingLab.Web.UIServices.Accessory;
 
 public interface IAccessoryService
 {

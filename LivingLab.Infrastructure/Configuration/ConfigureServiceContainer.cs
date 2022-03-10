@@ -1,5 +1,7 @@
+using LivingLab.Core.DomainServices;
 using LivingLab.Core.Entities.Identity;
 using LivingLab.Core.Interfaces.Repositories;
+using LivingLab.Core.Interfaces.Services;
 using LivingLab.Infrastructure.Data;
 using LivingLab.Infrastructure.Repositories;
 
@@ -42,6 +44,7 @@ public static class ConfigureServiceContainer
         services.AddTransient<IDeviceRepository, DeviceRepository>();
         services.AddTransient<ILabRepository, LabRepository>();
         services.AddTransient<ISessionStatsRepository, SessionStatsRepository>();
+        services.AddTransient<IAccessoryDomainService, AccessoryDomainService>();
         
         return services;
     }

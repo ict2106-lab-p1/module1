@@ -1,8 +1,6 @@
 using LivingLab.Core.Entities;
 
-namespace LivingLab.Web.ViewModels;
-    
-using LivingLab.Domain.Entities;
+namespace LivingLab.Web.Models.ViewModels.Accessory; 
 
 public class AccessoryViewModel
 {

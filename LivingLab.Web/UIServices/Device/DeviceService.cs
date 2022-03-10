@@ -1,7 +1,8 @@
 using AutoMapper;
 
+using LivingLab.Core.Entities.DTO;
 using LivingLab.Core.Interfaces.Repositories;
-using LivingLab.Web.ViewModels;
+using LivingLab.Web.Models.ViewModels.Device;
 
 namespace LivingLab.Web.UIServices.Device;
 
@@ -32,7 +33,7 @@ public class DeviceService : IDeviceService
 
     public async Task<DeviceTypeViewModel> viewDeviceType()
     {
-        List<Core.ViewDeviceTypeDTO> viewDeviceTypeDtos = await _deviceRepository.GetViewDeviceType();
+        List<ViewDeviceTypeDTO> viewDeviceTypeDtos = await _deviceRepository.GetViewDeviceType();
         DeviceTypeViewModel deviceTypeViewModel = new DeviceTypeViewModel();
         deviceTypeViewModel.ViewDeviceTypeDtos = viewDeviceTypeDtos;
         return deviceTypeViewModel;

@@ -1,4 +1,5 @@
 using LivingLab.Core.Entities;
+using LivingLab.Core.Entities.DTO;
 using LivingLab.Core.Interfaces.Repositories;
 using LivingLab.Infrastructure.Data;
 
@@ -25,16 +26,16 @@ public class AccessoryRepository : Repository<Accessory>, IAccessoryRepository
     }
    
 
-    public async Task<List<Core.ViewAccessoryTypeDTO>> GetAccessoryType()
+    public async Task<List<ViewAccessoryTypeDTO>> GetAccessoryType()
     {
         var accessoryGroup = await _context.Accessory.Include(a => a.AccessoryType)
             .GroupBy(t => t.AccessoryType!.Type)
             .Select(t=> new{Key = t.Key, Count = t.Count()})
             .ToListAsync();
-        List<Core.ViewAccessoryTypeDTO> accessoryTypeDtos = new List<Core.ViewAccessoryTypeDTO>();
+        List<ViewAccessoryTypeDTO> accessoryTypeDtos = new List<ViewAccessoryTypeDTO>();
         foreach (var group in accessoryGroup)
         {
-            Core.ViewAccessoryTypeDTO accessoryTypeDto = new Core.ViewAccessoryTypeDTO();
+            ViewAccessoryTypeDTO accessoryTypeDto = new ViewAccessoryTypeDTO();
             accessoryTypeDto.Type = group.Key;
             accessoryTypeDto.Quantity = group.Count;
             accessoryTypeDtos.Add(accessoryTypeDto);

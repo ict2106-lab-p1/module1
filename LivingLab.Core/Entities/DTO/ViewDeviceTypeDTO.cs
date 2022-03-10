@@ -1,4 +1,4 @@
-namespace LivingLab.Core;
+namespace LivingLab.Core.Entities.DTO;
 
 public class ViewDeviceTypeDTO
 {

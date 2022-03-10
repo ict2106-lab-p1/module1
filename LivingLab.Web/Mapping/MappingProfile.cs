@@ -1,8 +1,9 @@
 using AutoMapper;
 
-using LivingLab.Web.ViewModels;
 using LivingLab.Core.Entities;
 using LivingLab.Web.Models.DTOs.Todo;
+using LivingLab.Web.Models.ViewModels.Accessory;
+using LivingLab.Web.Models.ViewModels.Device;
 
 namespace LivingLab.Web.Mapping;
 
