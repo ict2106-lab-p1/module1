@@ -1,4 +1,4 @@
-namespace LivingLab.Domain.Enums;
+namespace LivingLab.Core.Enums;
 
 public enum Roles
 {

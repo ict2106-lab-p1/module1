@@ -1,8 +1,9 @@
-using LivingLab.Domain.Entities;
+using LivingLab.Core.Entities;
 
-namespace LivingLab.Domain.Interfaces.Repositories;
+namespace LivingLab.Core.Interfaces.Repositories;
 
 public interface IAccessoryRepository : IRepository<Accessory>
 {
-    Task<List<Accessory>> GetAccessoryWithAccessoryType();
+    Task<List<Accessory>> GetAccessoryWithAccessoryType(string accessoryType);
+    Task<List<ViewAccessoryTypeDTO>> GetAccessoryType();
 }

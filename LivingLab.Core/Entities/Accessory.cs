@@ -1,7 +1,7 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace LivingLab.Domain.Entities;
+namespace LivingLab.Core.Entities;
 
 public class Accessory : BaseEntity
 {   

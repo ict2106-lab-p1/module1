@@ -1,6 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 
-namespace LivingLab.Domain.Entities;
+namespace LivingLab.Core.Entities;
 
 public class Lab : BaseEntity
 {
@@ -10,7 +10,7 @@ public class Lab : BaseEntity
     public string? PersonInCharge { get; set; }
     [Required]
     public string? LabStatus { get; set; }
-    public List<Logging>? Logs { get; set; }
+    public List<SessionStats>? Logs { get; set; }
     public List<Accessory>? Accessories { get; set; }
     public List<Device>? Devices { get; set; }
 }

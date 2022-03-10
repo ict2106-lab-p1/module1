@@ -1,7 +1,7 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace LivingLab.Domain.Entities;
+namespace LivingLab.Core.Entities;
 
 public class Device : BaseEntity
 {
@@ -19,5 +19,6 @@ public class Device : BaseEntity
     public string Status { get; set; }
     [Required]
     public string Type { get; set; }
-    public string Description { get; set; }
+    public string? Description { get; set; }
+    public double? Threshold { get; set; } 
 }

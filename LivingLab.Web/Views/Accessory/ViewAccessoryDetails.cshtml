@@ -23,10 +23,13 @@ ViewData["Title"] = "Manage Accessory";
         <tr>
             <th>ID</th>
             <th>Name</th>
+            <th>Type</th>
             <th>Description</th>
-            <th>Validity Date</th>
+            <th>Last Updated</th>
             <th>Status</th>
             <th>Borrowable</th>
+            <th>Borrowed By</th>
+            <th>DueDate</th>
             <th></th>
             <th></th>
         </tr>
@@ -34,12 +37,15 @@ ViewData["Title"] = "Manage Accessory";
     <tbody>
         @foreach (var accessory in Model.AccessoryList) {
             <tr>
-                <td> @accessory.Id </td>
-                <td> @accessory.AccessoryType.Name </td>
-                <td> @accessory.AccessoryType.Description </td>
-                <td> @accessory.LastUpdated.ToString("MM/dd/yyyy")  </td>
-                <td> @accessory.Status</td>
-                <td> @accessory.AccessoryType.Borrowable</td>
+                <td>@accessory.Id</td>
+                <td>@accessory.AccessoryType.Name</td>
+                <td>@accessory.AccessoryType.Type</td>
+                <td>@accessory.AccessoryType.Description</td>
+                <td>@accessory.LastUpdated.ToString("MM/dd/yyyy")</td>
+                <td>@accessory.Status</td>
+                <td>@accessory.AccessoryType.Borrowable</td>
+                <td>@accessory.LabUserId</td>
+                <td>@accessory.DueDate</td>
                 <td></td>
                 <td></td>
             </tr>
