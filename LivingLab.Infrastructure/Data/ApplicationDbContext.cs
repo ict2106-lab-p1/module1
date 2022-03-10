@@ -5,6 +5,7 @@ using LivingLab.Infrastructure.Data.Config;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.VisualBasic;
 
 namespace LivingLab.Infrastructure.Data;
 
@@ -12,6 +13,20 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
 {
     // Add new DB tables here
     public DbSet<Todo> Todos { get; set; }
+    public DbSet<Lab> Labs { get; set; }
+    public DbSet<Device> Devices { get; set; }
+    public DbSet<EnergyUsageLog> EnergyUsageLogs { get; set; }
+    public DbSet<EnergyUsagePredictionLog> EnergyUsagePredictions { get; set; }
+    public DbSet<PowerGenerationMix> PowerGenerationMix { get; set; }
+    public DbSet<CarbonFootprintEstimation> CarbonFootprintEstimations { get; set; }
+    public DbSet<SmsLog> SmsLogs { get; set; }
+    public DbSet<EmailLog> EmailLogs { get; set; }
+    public DbSet<Accessory> Accessories { get; set; }
+    public DbSet<SessionStats> SessionStats { get; set; }
+    public DbSet<AccessoryType> AccessoryTypes { get; set; }
+    public DbSet<Booking> Bookings { get; set; }
+    public DbSet<LabAccess> LabAccesses { get; set; }
+
     public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
     {
     }
@@ -21,7 +36,14 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
         base.OnModelCreating(modelBuilder);
 
         // More info: https://docs.microsoft.com/en-us/ef/core/modeling/
-        new TodoConfiguration().Configure(modelBuilder.Entity<Todo>());
+        new TodoConfig().Configure(modelBuilder.Entity<Todo>());
+        // new EnergyUsageLogConfiguration().Configure(modelBuilder.Entity<EnergyUsageLog>());
+        new NotificationsConfig().Configure(modelBuilder.Entity<ApplicationUser>());
+        new AccessoryConfig().Configure(modelBuilder.Entity<Accessory>());
+        new BookingConfig().Configure(modelBuilder.Entity<Booking>());
+        new DeviceConfig().Configure(modelBuilder.Entity<Device>());
+        new LabAccessConfig().Configure(modelBuilder.Entity<LabAccess>());
+        new LabConfig().Configure(modelBuilder.Entity<Lab>());
 
         // Rename ASP.NET Identity tables
         modelBuilder.Entity<ApplicationUser>(e => e.ToTable("Users"));
@@ -31,7 +53,8 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
         modelBuilder.Entity<IdentityUserLogin<string>>().ToTable("UserLogin");
         modelBuilder.Entity<IdentityRoleClaim<string>>().ToTable("RoleClaim");
         modelBuilder.Entity<IdentityUserToken<string>>().ToTable("UserToken");
-        
+
         modelBuilder.Seed();
     }
+
 }

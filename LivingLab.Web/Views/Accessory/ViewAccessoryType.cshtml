@@ -1,0 +1,86 @@
+@model LivingLab.Web.Models.ViewModels.Accessory.ViewAccessoryTypeViewModel
+@* <remarks> *@
+@* Author: Team P1-3 *@
+@* </remarks> *@
+@{
+ViewData["Title"] = "Manage Accessory";
+}
+<link rel="Stylesheet" href="~/css/viewAccessory.css" type="text/css"/>
+
+
+<div class="flex justify-between my-8">
+    <div>
+        <h1 class="text-2xl"> Manage Accessory</h1>
+        <h2 class="text-lg"> NYP-SR7C </h2>
+    </div>
+    <div class="-mb-10">
+        <button id="addAccessoryBtn" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline my-8" type="button">
+            Add Accessory
+        </button>
+    </div>
+</div>
+
+<table id="table_id" class="display">
+    <thead>
+    <tr>
+        <th>Name</th>
+        <th>Quantity</th>
+        <th></th>
+    </tr>
+    </thead>
+    <tbody>
+    @foreach (var accessory in Model.accessoryTypeList) {
+        <tr>
+            <td>@accessory.Type</td>
+            <td>@accessory.Quantity</td>
+            <td></td>
+        </tr>
+    }
+    </tbody>
+</table>
+
+<form asp-controller="Accessory" asp-action="ViewAccessory" method="post" name="postAccessoryType">
+    <input type="hidden" name="accessoryType"/>
+</form>
+
+<div class="bg-black bg-opacity-50 absolute inset-0 hidden justify-center items-center" id="overlay">
+    <div class="bg-gray-200 max-w-sm py-2 px-3 rounded shadow-xl text-gray-800">
+        <div class="flex justify-between items-center">
+            <h4 class="text-lg font-bold">Add Accessory</h4>
+            <svg class="h-6 w-6 cursor-pointer p-1 hover:bg-gray-300 rounded-full" id="close-modal" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd"
+                      d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
+                      clip-rule="evenodd">
+                </path>
+            </svg>
+        </div>
+        <div class="mt-2 text-sm">
+            <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Maiores, sunt.</p>
+        </div>
+        <div class="mt-3 flex justify-end space-x-3">
+            <button id="closeBtn"  class="px-3 py-1 rounded hover:bg-blue-300 hover:bg-opacity-50 hover:text-blue-900">Cancel</button>
+            <button class="px-3 py-1 bg-blue-800 text-gray-200 hover:bg-blue-600 rounded">Add</button>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+            window.addEventListener('DOMContentLoaded', () =>{
+                const overlay = document.querySelector('#overlay')
+                const addBtn = document.querySelector('#addAccessoryBtn')
+                const closeBtn = document.querySelector('#close-modal')
+    
+                const toggleModal = () => {
+                    overlay.classList.toggle('hidden')
+                    overlay.classList.toggle('flex')
+                }
+    
+                addBtn.addEventListener('click', toggleModal)
+                closeBtn.addEventListener('click', toggleModal)
+        })
+    
+    </script>
+    
+     <script src="~/js/viewAccessoryType.js"></script>
+}
