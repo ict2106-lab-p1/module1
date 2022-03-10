@@ -1,7 +1,10 @@
+/* <remarks>*/
+/* Author: Team P1-3*/
+/* </remarks>*/
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
 @layer components {
     .z-100 {
         z-index: 100;
@@ -10,15 +13,25 @@
 
 body {
     font-family: "Nunito Sans", sans-serif;
-    @apply bg-gray-100;
+    @apply bg-inherit;
 }
 
-    body::-webkit-scrollbar {
-        display: none;
-    }
+body::-webkit-scrollbar {
+    display: none;
+}
 
 .overlay {
     position: relative;
+}
+
+.btn {
+    @apply font-bold py-2 px-4 rounded;
+}
+.btn-blue {
+    @apply bg-denim-600 text-white;
+}
+.btn-blue:hover {
+    @apply bg-blue-700;
 }
 
 @media only screen and (max-width: 1023px) {

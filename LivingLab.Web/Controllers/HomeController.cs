@@ -1,11 +1,16 @@
 using System.Diagnostics;
 
-using LivingLab.Web.ViewModels;
+using LivingLab.Web.Models.ViewModels;
+
+using Microsoft.AspNetCore.Authorization;
+// using LivingLab.Web.ViewModels;
 
 using Microsoft.AspNetCore.Mvc;
 
 namespace LivingLab.Web.Controllers;
-
+/// <remarks>
+/// Author: Team P1-3
+/// </remarks>
 [Route("home")]
 public class HomeController : Controller
 {
@@ -19,6 +24,7 @@ public class HomeController : Controller
     [Route("/")]
     public IActionResult Index()
     {
+        HttpContext.Session.SetInt32("UserID", 1);
         return View("Index");
     }
 
@@ -27,11 +33,30 @@ public class HomeController : Controller
     {
         return View("Privacy");
     }
-
-    [Route("example")]
-    public IActionResult ExamplePage()
+    
+    // [HttpPost]
+    // public IActionResult SetSession()
+    // {
+    //     //Set value in Session object.
+    //     HttpContext.Session.SetString("Name", "Mudassar Khan");
+    //
+    //     return RedirectToAction("Index");
+    // }
+    // [HttpPost]
+    // public IActionResult DeleteSession()
+    // {
+    //     //Delete the Session object.
+    //     HttpContext.Session.Remove("UserID");
+    //     
+    //     return RedirectToAction("Index");
+    //     
+    // }
+    [Route("Logout")]
+    public IActionResult Logout()
     {
-        return View("ExamplePage");
+        //Delete the Session object.
+        HttpContext.Session.Clear();
+        return View("Index");
     }
 
     [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
