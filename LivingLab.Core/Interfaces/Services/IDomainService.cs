@@ -9,4 +9,8 @@ namespace LivingLab.Core.Interfaces.Services;
 /// </remarks>
 public class IDomainService
 {
+<<<<<<< HEAD
+=======
+    
+>>>>>>> e90249168d4bcb9fce4bbd09def560c9e7bc34e9
 }

@@ -12,13 +12,21 @@ public class TodoService : ITodoService
 {
     private readonly IMapper _mapper;
     private readonly ITodoDomainService _todoDomainService;
+<<<<<<< HEAD
+=======
+    
+>>>>>>> e90249168d4bcb9fce4bbd09def560c9e7bc34e9
     public TodoService(IMapper mapper, ITodoDomainService todoDomainService)
     {
         _mapper = mapper;
         _todoDomainService = todoDomainService;
     }
 
+<<<<<<< HEAD
     public async Task<List<TodoDTO>> GetAllTodosAsync()
+=======
+    public async Task<List<TodoDTO>>  GetAllTodosAsync()
+>>>>>>> e90249168d4bcb9fce4bbd09def560c9e7bc34e9
     {
         var todos = await _todoDomainService.GetAllTodosAsync();
         return _mapper.Map<List<Core.Entities.Todo>, List<TodoDTO>>(todos);

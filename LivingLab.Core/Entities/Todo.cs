@@ -9,6 +9,7 @@ public class Todo : BaseEntity
 {
     // To mark a property as nullable, add the '?' after the type.
     public string? Title { get; set; }
+<<<<<<< HEAD
     // To mark a property as required you can use the [Required] attribute.
     // There are other annotations that you can use such as [ColumnName] and [MaxLength] if you can to 
     // customize the database column.
@@ -16,4 +17,14 @@ public class Todo : BaseEntity
     public string Description { get; set; }
     [Required]
     public string OTP { get; set; }
+=======
+    
+    // To mark a property as required you can use the [Required] attribute.
+    // There are other annotations that you can use such as [ColumnName] and [MaxLength] if you can to 
+    // customize the database column.
+    [Required] 
+    public string Description { get; set; }
+    [Required]
+    public string OTP {get; set; }
+>>>>>>> e90249168d4bcb9fce4bbd09def560c9e7bc34e9
 }
