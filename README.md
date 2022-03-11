@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 Refer to WORKFLOW.md for instructions on the development flow.
 
 ## Development Workflow
@@ -13,6 +14,19 @@ Refer to WORKFLOW.md for instructions on the development flow.
 ## Running
 - `cd LivingLab.Web && npm run dev`
 - Then, in a separate window: `dotnet watch --project LivingLab.Web`
+=======
+## Installation
+### Minimum System Requirements
+- Have Node >v16
+- Have ASP .NET 6
+
+### Steps
+1. Run `npm install` in /LivingLab.Web to install dependencies
+2. Install ef tools if they aren't already present with `dotnet tool install --global dotnet-ef`
+3. Run `dotnet ef migrations add CreateInitialDB -s LivingLab.Web -p LivingLab.Infrastructure` to create the initial DB
+4. Run `dotnet ef database update -s LivingLab.Web -p LivingLab.Infrastructure` to populate the DB
+5. Run project with the commands in the 'Running' section
+>>>>>>> e90249168d4bcb9fce4bbd09def560c9e7bc34e9
 
 ## Running the project
 1. Run `npm run dev` in /LivingLab.Web
@@ -83,19 +97,36 @@ It's "safe" to ignore warnings on startup about nullables. These are scaffolded 
 Alternatively, run the web app and let dotnet run migrations automatically. If you encounter an exception page, click on "Run migrations" and refresh.
 
 #### Clean state
+<<<<<<< HEAD
 Remove `livinglab.sqlite`, rerun migrations.
+
 
 ## Github ID
 ### P1-01 Student ID & Name & Github ID
-- 2002437 Han Yi hanyi97
-- 2002362 Jia Jia jiajiatan
-- 2002288 Mary Michelle mmichelle1
-- 2001868 Yong Zheng PixlRainbow
+- 2002437 | Han Yi | hanyi97
+- 2002362 | Jia Jia | jiajiatan
+- 2002288 | Mary Michelle | mmichelle1
+- 2001868 | Yong Zheng | PixlRainbow
 ### P1-02 Student ID & Name & Github ID
-- 2000522 Chen Dong Don-Whis
-- 2002230 Joey Chua 170joeychua
-- 2000990 Lee Wei Jie Guthixo
-- 2001631 Hong Ying HongYing222
+- 2000522 | Chen Dong | Don-Whis
+- 2002230 | Joey Chua | 170joeychua
+- 2000990 | Lee Wei Jie | Guthixo
+- 2001631 | Hong Ying | HongYing222
+### P1-03 Student ID & Name & Github ID
+- 2001206 | Chua Sheng Yu | shengyu98
+- 2002220 | Angelene Joshna | angelenejoshna
+- 2002262 | Tan Hui Xuan Vanna | thxcvanna
+- 2002226 | Eddie Tan DeJun | EddieTanDJ
+- 2000621 | Carlton Anthoni Foo | CarltonFoo
+### P1-05 Student ID & Name & Github ID
+- 2001317 | Ang Cai Ting Celine | celineangct
+- 2002795 | Belle Sim | bellesim
+- 2002820 | Gou Hang | gouhang26
+- 2001476 | Kai Siang | kaisiang419
+- 2000721 | Yip Hou Liang | SageSG
+=======
+- Remove `livinglab.sqlite`, rerun migrations.
+>>>>>>> e90249168d4bcb9fce4bbd09def560c9e7bc34e9
 ---
 
 Credits: Thanks Percy for setting up the MVC skeleton + Tailwind integration.
