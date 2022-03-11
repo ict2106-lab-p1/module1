@@ -1,14 +1,18 @@
-## Installation
-### Minimum System Requirements
-- Have Node >v16
-- Have ASP .NET 6
+Refer to WORKFLOW.md for instructions on the development flow.
 
-### Steps
-1. Run `npm install` in /LivingLab.Web to install dependencies
-2. Install ef tools if they aren't already present with `dotnet tool install --global dotnet-ef`
-3. Run `dotnet ef migrations add CreateInitialDB -s LivingLab.Web -p LivingLab.Infrastructure` to create the initial DB
-4. Run `dotnet ef database update -s LivingLab.Web -p LivingLab.Infrastructure` to populate the DB
-5. Run project with the commands in the 'Running' section
+## Development Workflow
+```master```: Only codes that are ready to deploy will be merged here
+<br>
+```dev```: This is where completed features are being merged
+
+## Getting started
+- Download .NET Core 6.0
+- Have Node >v 16
+- Run `npm install` 
+
+## Running
+- `cd LivingLab.Web && npm run dev`
+- Then, in a separate window: `dotnet watch --project LivingLab.Web`
 
 ## Running the project
 1. Run `npm run dev` in /LivingLab.Web
@@ -79,7 +83,19 @@ It's "safe" to ignore warnings on startup about nullables. These are scaffolded 
 Alternatively, run the web app and let dotnet run migrations automatically. If you encounter an exception page, click on "Run migrations" and refresh.
 
 #### Clean state
-- Remove `livinglab.sqlite`, rerun migrations.
+Remove `livinglab.sqlite`, rerun migrations.
+
+## Github ID
+### P1-01 Student ID & Name & Github ID
+- 2002437 Han Yi hanyi97
+- 2002362 Jia Jia jiajiatan
+- 2002288 Mary Michelle mmichelle1
+- 2001868 Yong Zheng PixlRainbow
+### P1-02 Student ID & Name & Github ID
+- 2000522 Chen Dong Don-Whis
+- 2002230 Joey Chua 170joeychua
+- 2000990 Lee Wei Jie Guthixo
+- 2001631 Hong Ying HongYing222
 ---
 
 Credits: Thanks Percy for setting up the MVC skeleton + Tailwind integration.

@@ -29,13 +29,12 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\LivingLab.Core\LivingLab.Core.csproj" />
     <ProjectReference Include="..\LivingLab.Infrastructure\LivingLab.Infrastructure.csproj" />
   </ItemGroup>
 
   <ItemGroup>
-    <_ContentIncludedByDefault Remove="Areas\Identity\Pages\_ValidationScriptsPartial.cshtml" />
-    <_ContentIncludedByDefault Remove="Areas\Identity\Pages\_ViewImports.cshtml" />
-    <_ContentIncludedByDefault Remove="Areas\Identity\Pages\_ViewStart.cshtml" />
+    <_ContentIncludedByDefault Remove="Views\ManualLogExample\Index.cshtml" />
   </ItemGroup>
 
 </Project>

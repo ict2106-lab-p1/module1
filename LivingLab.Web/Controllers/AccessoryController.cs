@@ -7,8 +7,10 @@ using LivingLab.Web.UIServices.Accessory;
 using LivingLab.Web.UIServices.Device;
 
 namespace LivingLab.Web.Controllers;
-
-[Route("accessory")]
+/// <remarks>
+/// Author: Team P1-3
+/// </remarks>
+[Route("Accessory")]
 public class AccessoryController : Controller
 {
     private readonly ILogger<AccessoryController> _logger;
@@ -20,11 +22,20 @@ public class AccessoryController : Controller
         _accessoryService = accessoryService;
     }
 
-    [Route("view")]
-    public async Task<IActionResult> ViewAccessory()
+    // detailed view
+    [HttpPost("ViewAccessory")]
+    public async Task<IActionResult> ViewAccessory(string accessoryType)
     {
-        ViewAccessoryViewModel viewAccessories = await _accessoryService.viewAccessory();
+        ViewAccessoryViewModel viewAccessories = await _accessoryService.ViewAccessory(accessoryType);
         return View("ViewAccessory", viewAccessories);
+    }
+    
+    // high level view
+    [Route("ViewAccessoryType")]
+    public async Task<IActionResult> ViewAccessoryType()
+    {
+        ViewAccessoryTypeViewModel viewAccessories = await _accessoryService.ViewAccessoryType();
+        return View("ViewAccessoryType", viewAccessories);
     }
 
     // [HttpGet]

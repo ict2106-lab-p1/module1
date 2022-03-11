@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace LivingLab.Infrastructure.Data.Config;
 
-public class TodoConfiguration : IEntityTypeConfiguration<Todo>
+public class TodoConfig : IEntityTypeConfiguration<Todo>
 {
     public void Configure(EntityTypeBuilder<Todo> builder)
     {

@@ -6,8 +6,10 @@ using LivingLab.Web.Models.ViewModels.Device;
 using LivingLab.Web.UIServices.Device;
 
 namespace LivingLab.Web.Controllers;
-
-[Route("device")]
+/// <remarks>
+/// Author: Team P1-3
+/// </remarks>
+[Route("Device")]
 public class DeviceController : Controller
 {
     private readonly ILogger<DeviceController> _logger;
@@ -20,11 +22,18 @@ public class DeviceController : Controller
         _deviceService = deviceService;
     }
 
-    [Route("view")]
-    public async Task<IActionResult> ViewDevice()
+    [HttpPost("ViewAll")]
+    public async Task<IActionResult> ViewAll(string deviceType)
     {
-        ViewDeviceViewModel viewDevices = await _deviceService.viewDevice();
+        ViewDeviceViewModel viewDevices = await _deviceService.ViewDevice(deviceType);
         return View("ViewDevice", viewDevices);
+    }
+    
+    [Route("ViewType")]
+    public async Task<IActionResult> ViewType()
+    {
+        ViewDeviceTypeViewModel viewDeviceTypeViewModel = await _deviceService.ViewDeviceType();
+        return View("ViewDeviceType", viewDeviceTypeViewModel);
     }
 
     // [HttpGet]

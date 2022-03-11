@@ -1,5 +1,7 @@
 ﻿@model LivingLab.Web.Models.ViewModels.Device.ViewDeviceViewModel
-
+@* <remarks> *@
+@*  Author: Team P1-3 *@
+@*  </remarks> *@
 @{
     ViewData["Title"] = "Manage Device";
 }
@@ -29,7 +31,6 @@
         <th>Description</th>
         <th>Serial Num</th>
         <th>Last Updated</th>
-        <th>Qty</th>
         <th></th>
         <th></th>
     </tr>
@@ -38,12 +39,11 @@
     @foreach (var device in Model.DeviceList)
     {
         <tr>
-            <td> @device.Id </td>
-            <td> @device.Type </td>
-            <td> @device.Description </td>
-            <td> @device.SerialNo </td>
-            <td> @device.LastUpdated.ToString("MM/dd/yyyy") </td>
-            <td> 1 </td>
+            <td>@device.Id</td>
+            <td>@device.Type</td>
+            <td>@device.Description</td>
+            <td>@device.SerialNo</td>
+            <td>@device.LastUpdated.ToString("MM/dd/yyyy")</td>
             <td></td>
             <td></td>
         </tr>
@@ -159,17 +159,13 @@
             const overlay = document.querySelector('#overlay')
             const addBtn = document.querySelector('#addDeviceBtn')
             const closeBtn = document.querySelector('#close-modal')
-
             const toggleModal = () => {
                 overlay.classList.toggle('hidden')
                 overlay.classList.toggle('flex')
             }
-
             addBtn.addEventListener('click', toggleModal)
-
             closeBtn.addEventListener('click', toggleModal)
         })
-
     </script>
 
 
