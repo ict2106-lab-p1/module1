@@ -1,7 +1,5 @@
 using System.Diagnostics;
 
-using LivingLab.Core;
-
 using Microsoft.AspNetCore.Mvc;
 using LivingLab.Web.Models.ViewModels;
 using LivingLab.Web.Models.ViewModels.Device;
@@ -31,8 +29,8 @@ public class DeviceController : Controller
         return View("ViewDevice", viewDevices);
     }
     
-    [Route("viewType")]
-    public async Task<IActionResult> viewType()
+    [Route("ViewType")]
+    public async Task<IActionResult> ViewType()
     {
         ViewDeviceTypeViewModel viewDeviceTypeViewModel = await _deviceService.ViewDeviceType();
         return View("ViewDeviceType", viewDeviceTypeViewModel);

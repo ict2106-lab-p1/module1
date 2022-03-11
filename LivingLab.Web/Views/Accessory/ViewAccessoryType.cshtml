@@ -64,23 +64,23 @@ ViewData["Title"] = "Manage Accessory";
     </div>
 </div>
 
-<script>
-        window.addEventListener('DOMContentLoaded', () =>{
-            const overlay = document.querySelector('#overlay')
-            const addBtn = document.querySelector('#addAccessoryBtn')
-            const closeBtn = document.querySelector('#close-modal')
-
-            const toggleModal = () => {
-                overlay.classList.toggle('hidden')
-                overlay.classList.toggle('flex')
-            }
-
-            addBtn.addEventListener('click', toggleModal)
-            closeBtn.addEventListener('click', toggleModal)
-    })
-
-</script>
-
 @section Scripts {
+    <script>
+            window.addEventListener('DOMContentLoaded', () =>{
+                const overlay = document.querySelector('#overlay')
+                const addBtn = document.querySelector('#addAccessoryBtn')
+                const closeBtn = document.querySelector('#close-modal')
+    
+                const toggleModal = () => {
+                    overlay.classList.toggle('hidden')
+                    overlay.classList.toggle('flex')
+                }
+    
+                addBtn.addEventListener('click', toggleModal)
+                closeBtn.addEventListener('click', toggleModal)
+        })
+    
+    </script>
+    
      <script src="~/js/viewAccessoryType.js"></script>
 }

@@ -82,16 +82,13 @@ ViewData["Title"] = "Manage Accessory";
             const overlay = document.querySelector('#overlay')
             const addBtn = document.querySelector('#addAccessoryBtn')
             const closeBtn = document.querySelector('#close-modal')
-
             const toggleModal = () => {
                 overlay.classList.toggle('hidden')
                 overlay.classList.toggle('flex')
             }
-
             addBtn.addEventListener('click', toggleModal)
             closeBtn.addEventListener('click', toggleModal)
     })
-
 </script>
 
 @section Scripts {

@@ -1,6 +1,15 @@
+<<<<<<< HEAD
 /* <remarks>*/
 /* Author: Team P1-3*/
 /* </remarks>*/
+=======
+<<<<<<< HEAD
+=======
+/* <remarks>*/
+/* Author: Team P1-3*/
+/* </remarks>*/
+>>>>>>> 4f569f71aca95cc09aaf5194b1cceb48469aca27
+>>>>>>> 3d64fa4b85c1b58aac10fae2546f38264f8ae577
 $(document).ready(function () {
     //$('#table_id').DataTable();
     var table = $('#table_id').DataTable({
