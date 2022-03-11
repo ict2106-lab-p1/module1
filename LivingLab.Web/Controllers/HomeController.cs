@@ -1,7 +1,7 @@
 using System.Diagnostics;
 
 using LivingLab.Web.Models.ViewModels;
-
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -62,7 +62,9 @@ public class HomeController : Controller
     [Route("/example")]
     public IActionResult ExamplePage()
     {
-        return View("ExamplePage");
+        //Delete the Session object.
+        HttpContext.Session.Clear();
+        return View("Index");
     }
 
     [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

@@ -8,7 +8,11 @@
     </PropertyGroup>
 
     <ItemGroup>
+<<<<<<< HEAD
       <PackageReference Include="Microsoft.AspNetCore.Http" Version="2.2.2" />
+=======
+      <PackageReference Include="Microsoft.AspNetCore.Http.Extensions" Version="2.2.0" />
+>>>>>>> e90249168d4bcb9fce4bbd09def560c9e7bc34e9
       <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="6.0.1" />
       <PackageReference Include="Twilio" Version="5.71.0" />
     </ItemGroup>
