@@ -9,5 +9,4 @@ namespace LivingLab.Core.Interfaces.Services;
 /// </remarks>
 public class IDomainService
 {
-    
 }

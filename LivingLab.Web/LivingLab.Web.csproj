@@ -29,11 +29,12 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\LivingLab.Core\LivingLab.Core.csproj" />
     <ProjectReference Include="..\LivingLab.Infrastructure\LivingLab.Infrastructure.csproj" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Models\DTOs\Device" />
+    <_ContentIncludedByDefault Remove="Views\ManualLogExample\Index.cshtml" />
   </ItemGroup>
 
 </Project>

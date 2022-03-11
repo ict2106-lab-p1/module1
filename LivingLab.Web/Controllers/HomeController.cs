@@ -3,8 +3,6 @@ using System.Diagnostics;
 using LivingLab.Web.Models.ViewModels;
 
 using Microsoft.AspNetCore.Authorization;
-// using LivingLab.Web.ViewModels;
-
 using Microsoft.AspNetCore.Mvc;
 
 namespace LivingLab.Web.Controllers;
@@ -53,6 +51,16 @@ public class HomeController : Controller
     // }
     [Route("Logout")]
     public IActionResult Logout()
+    {
+        //Delete the Session object.
+        HttpContext.Session.Clear();
+        return View("Index");
+    }
+
+
+
+    [Route("/example")]
+    public IActionResult ExamplePage()
     {
         //Delete the Session object.
         HttpContext.Session.Clear();

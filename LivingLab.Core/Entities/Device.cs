@@ -9,11 +9,7 @@ public class Device : BaseEntity
 {
     [Required]
     [DataType(DataType.Date)]
-    [Column(TypeName="Date")]
     public DateTime LastUpdated { get; set; }
-    [Required]
-    public string Name { get; set; }
-    [Required]
     public string? SerialNo { get; set; }
     [Required]
     public Lab? Lab { get; set; }
@@ -22,5 +18,5 @@ public class Device : BaseEntity
     [Required]
     public string Type { get; set; }
     public string? Description { get; set; }
-    public double? Threshold { get; set; } 
+    public double? Threshold { get; set; }
 }
