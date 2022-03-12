@@ -24,4 +24,14 @@ public class DeviceDomainService : IDeviceDomainService
     {
         return _deviceRepository.GetViewDeviceType();
     }
+    
+    public Task<Device> ViewDeviceDetails(int id)
+    {
+        return _deviceRepository.GetDeviceDetails(id);
+    }
+    
+    public Task<Device> EditDeviceDetails(Device editedDevice)
+    {
+        return _deviceRepository.EditDeviceDetails(editedDevice);
+    }
 }

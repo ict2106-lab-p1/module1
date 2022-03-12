@@ -1,7 +1,6 @@
 using AutoMapper;
 
 using LivingLab.Core.Entities.DTO;
-using LivingLab.Core.Interfaces.Repositories;
 using LivingLab.Core.Interfaces.Services;
 using LivingLab.Web.Models.ViewModels.Device;
 
@@ -43,6 +42,32 @@ public class DeviceService : IDeviceService
         ViewDeviceTypeViewModel deviceTypeViewModel = new ViewDeviceTypeViewModel();
         deviceTypeViewModel.ViewDeviceTypeDtos = deviceList;
         return deviceTypeViewModel;
+    }
+    
+    public async Task<DeviceViewModel> ViewDeviceDetails(int id)
+    {
+        //retrieve data from db
+        Core.Entities.Device device = await _deviceDomainService.ViewDeviceDetails(id);
+        DeviceViewModel deviceVM = _mapper.Map<Core.Entities.Device, DeviceViewModel> (device);
+        return deviceVM;
+    }
+    
+    public async Task<DeviceViewModel> EditDevice(int id, String serialNo, String name, String type, String desc, String status, Double threshold)
+    {
+        //retrieve data from db
+        DeviceViewModel editDeviceVM = new DeviceViewModel {
+            Id = id, 
+            SerialNo = serialNo, 
+            Name = name, 
+            Type = type,
+            Description = desc,
+            Status = status,
+            Threshold = threshold
+        };
+        Core.Entities.Device editDevice = _mapper.Map<DeviceViewModel, Core.Entities.Device> (editDeviceVM);
+        await _deviceDomainService.EditDeviceDetails(editDevice);
+        
+        return editDeviceVM;
     }
     
 }

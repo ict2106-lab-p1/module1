@@ -1,5 +1,7 @@
 using System.Diagnostics;
 
+using LivingLab.Core.Entities;
+
 using Microsoft.AspNetCore.Mvc;
 using LivingLab.Web.Models.ViewModels;
 using LivingLab.Web.Models.ViewModels.Device;
@@ -14,35 +16,44 @@ public class DeviceController : Controller
 {
     private readonly ILogger<DeviceController> _logger;
     private readonly IDeviceService _deviceService;
-
-
+    
     public DeviceController(ILogger<DeviceController> logger, IDeviceService deviceService)
     {
         _logger = logger;
         _deviceService = deviceService;
     }
 
-    [HttpPost("ViewAll")]
+    [HttpPost("View")]
     public async Task<IActionResult> ViewAll(string deviceType)
     {
         ViewDeviceViewModel viewDevices = await _deviceService.ViewDevice(deviceType);
         return View("ViewDevice", viewDevices);
     }
     
-    [Route("view/{id}")]
-    public async Task<IActionResult> EditDevice(int id)
+    [Route("View/{id}")]
+    public async Task<IActionResult> ViewDeviceDetails(int id)
     { 
         //retrieve data from db
-        Device device = await _deviceRepository.GetDeviceDetails(id);
-        DeviceViewModel Device = _mapper.Map<Device, DeviceViewModel> (device);
-        Console.WriteLine(Device.Id);
-        Console.WriteLine(Device.DeviceType.Name);
-        Console.WriteLine(Device.DeviceType.Description);
-        Console.WriteLine(Device.DeviceType.Cost);
-        Console.WriteLine(Device.SerialNo);
-        
+        DeviceViewModel device = await _deviceService.ViewDeviceDetails(id);
+        Console.WriteLine(device.Id);
+        Console.WriteLine(device.SerialNo);
+        Console.WriteLine(device.Name);
+        Console.WriteLine(device.Type);
+        Console.WriteLine(device.Description);
+        Console.WriteLine(device.Status);
+        Console.WriteLine(device.Threshold);
 
-        return View("DeviceDetails", Device);
+        return View("DeviceDetails", device);
+    }
+    
+    [HttpPost]
+    public async Task<IActionResult> EditDevice(int id, String serialNo, String name, String type, String desc, String status, Double threshold)
+    {
+        await _deviceService.EditDevice(id, serialNo, name, type, desc, status, threshold);
+        
+        // Temp - To display ViewAll after editing
+        ViewDeviceViewModel viewDevices = await _deviceService.ViewDevice(type);
+        return View("ViewDevice", viewDevices);
     }
 
     [Route("ViewType")]
