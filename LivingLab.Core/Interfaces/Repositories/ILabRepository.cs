@@ -1,7 +1,9 @@
-using LivingLab.Domain.Entities;
+using LivingLab.Core.Entities;
 
-namespace LivingLab.Domain.Interfaces.Repositories;
-
+namespace LivingLab.Core.Interfaces.Repositories;
+/// <remarks>
+/// Author: Team P1-3
+/// </remarks>
 public interface ILabRepository : IRepository<Lab>
 {
 }

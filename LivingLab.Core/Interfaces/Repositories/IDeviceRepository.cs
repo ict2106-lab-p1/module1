@@ -1,9 +1,12 @@
-using LivingLab.Domain.Entities;
+using LivingLab.Core.Entities;
+using LivingLab.Core.Entities.DTO;
 
-namespace LivingLab.Domain.Interfaces.Repositories;
-
+namespace LivingLab.Core.Interfaces.Repositories;
+/// <remarks>
+/// Author: Team P1-3
+/// </remarks>
 public interface IDeviceRepository : IRepository<Device>
 {
-    Task<List<Device>> GetDeviceWithDeviceType();
-    Task<Device> GetDeviceDetails(int id);
+    Task<List<ViewDeviceTypeDTO>> GetViewDeviceType();
+    Task<List<Device>> GetAllDevicesByType(string deviceType);
 }

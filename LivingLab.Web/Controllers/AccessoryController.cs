@@ -1,48 +1,49 @@
 using System.Diagnostics;
 
-using LivingLab.Web.ViewModels;
-using LivingLab.Domain.Entities;
-using LivingLab.Domain.Interfaces.Repositories;
 using Microsoft.AspNetCore.Mvc;
-using AutoMapper;
+using LivingLab.Web.Models.ViewModels;
+using LivingLab.Web.Models.ViewModels.Accessory;
+using LivingLab.Web.UIServices.Accessory;
+using LivingLab.Web.UIServices.Device;
 
 namespace LivingLab.Web.Controllers;
-
-[Route("accessory")]
+/// <remarks>
+/// Author: Team P1-3
+/// </remarks>
+[Route("Accessory")]
 public class AccessoryController : Controller
 {
     private readonly ILogger<AccessoryController> _logger;
-    private readonly IMapper _mapper;
-    private readonly IAccessoryRepository _accessoryRepository;
+    private readonly IAccessoryService _accessoryService;
 
-    public AccessoryController(ILogger<AccessoryController> logger, IMapper mapper, IAccessoryRepository accessoryRepository)
+    public AccessoryController(ILogger<AccessoryController> logger, IAccessoryService accessoryService)
     {
         _logger = logger;
-        _mapper = mapper;
-        _accessoryRepository = accessoryRepository;
+        _accessoryService = accessoryService;
     }
 
-    [Route("view")]
-    public async Task<IActionResult> ViewAccessory()
+    // detailed view
+    [HttpPost("ViewAccessory")]
+    public async Task<IActionResult> ViewAccessory(string accessoryType)
     {
-        //retrieve data from db
-        List<Accessory> accessoryList = await _accessoryRepository.GetAccessoryWithAccessoryType();
-
-        //map entity model to view model
-        List<AccessoryViewModel> accessories = _mapper.Map<List<Accessory>, List<AccessoryViewModel>>(accessoryList);
-
-        //add list of accessory view model to the view accessory view model
-        ViewAccessoryViewModel viewAccessories = new ViewAccessoryViewModel();
-        viewAccessories.AccessoryList = accessories;
+        ViewAccessoryViewModel viewAccessories = await _accessoryService.ViewAccessory(accessoryType);
         return View("ViewAccessory", viewAccessories);
     }
-
-    [HttpGet]
-    public async Task<IActionResult> GetAll()
+    
+    // high level view
+    [Route("ViewAccessoryType")]
+    public async Task<IActionResult> ViewAccessoryType()
     {
-        List<Accessory> accessoryList = await _accessoryRepository.GetAccessoryWithAccessoryType();
-        return Ok(accessoryList);
+        ViewAccessoryTypeViewModel viewAccessories = await _accessoryService.ViewAccessoryType();
+        return View("ViewAccessoryType", viewAccessories);
     }
+
+    // [HttpGet]
+    // public async Task<IActionResult> GetAll()
+    // {
+    //     List<Accessory> accessoryList = await _accessoryRepository.GetAccessoryWithAccessoryType();
+    //     return Ok(accessoryList);
+    // }
 
     [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
     public IActionResult Error()

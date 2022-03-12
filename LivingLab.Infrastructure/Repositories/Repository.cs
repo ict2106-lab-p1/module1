@@ -1,10 +1,13 @@
-using LivingLab.Domain.Interfaces.Repositories;
+using LivingLab.Core.Interfaces.Repositories;
 using LivingLab.Infrastructure.Data;
 
 using Microsoft.EntityFrameworkCore;
 
 namespace LivingLab.Infrastructure.Repositories;
 
+/// <remarks>
+/// Author: Team P1-1
+/// </remarks>
 public class Repository<T> : IRepository<T> where T : class
 {
     private readonly ApplicationDbContext _context;

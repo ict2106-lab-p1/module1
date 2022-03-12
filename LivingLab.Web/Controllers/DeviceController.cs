@@ -1,41 +1,31 @@
 using System.Diagnostics;
 
-using LivingLab.Web.ViewModels;
-
-using LivingLab.Domain.Entities;
-using LivingLab.Domain.Interfaces.Repositories;
 using Microsoft.AspNetCore.Mvc;
-using AutoMapper;
+using LivingLab.Web.Models.ViewModels;
+using LivingLab.Web.Models.ViewModels.Device;
+using LivingLab.Web.UIServices.Device;
 
 namespace LivingLab.Web.Controllers;
-
-[Route("device")]
+/// <remarks>
+/// Author: Team P1-3
+/// </remarks>
+[Route("Device")]
 public class DeviceController : Controller
 {
     private readonly ILogger<DeviceController> _logger;
-    private readonly  IMapper _mapper;
-    private readonly IDeviceRepository _deviceRepository;
+    private readonly IDeviceService _deviceService;
 
 
-    public DeviceController(ILogger<DeviceController> logger, IMapper mapper, IDeviceRepository deviceRepository)
+    public DeviceController(ILogger<DeviceController> logger, IDeviceService deviceService)
     {
         _logger = logger;
-        _mapper = mapper;
-        _deviceRepository = deviceRepository;
+        _deviceService = deviceService;
     }
 
-    [Route("view")]
-    public async Task<IActionResult> ViewDevice()
-    { 
-        //retrieve data from db
-        List<Device> deviceList = await _deviceRepository.GetDeviceWithDeviceType();
-        
-        //map entity model to view model
-        List<DeviceViewModel> devices = _mapper.Map<List<Device>, List<DeviceViewModel>> (deviceList);
-        
-        //add list of device view model to the view device view model
-        ViewDeviceViewModel viewDevices = new ViewDeviceViewModel();
-        viewDevices.DeviceList = devices;
+    [HttpPost("ViewAll")]
+    public async Task<IActionResult> ViewAll(string deviceType)
+    {
+        ViewDeviceViewModel viewDevices = await _deviceService.ViewDevice(deviceType);
         return View("ViewDevice", viewDevices);
     }
     
@@ -55,12 +45,19 @@ public class DeviceController : Controller
         return View("DeviceDetails", Device);
     }
 
-    [HttpGet]
-    public async Task<IActionResult> GetAll()
+    [Route("ViewType")]
+    public async Task<IActionResult> ViewType()
     {
-        List<Device> deviceList = await _deviceRepository.GetDeviceWithDeviceType();
-        return Ok(deviceList);
+        ViewDeviceTypeViewModel viewDeviceTypeViewModel = await _deviceService.ViewDeviceType();
+        return View("ViewDeviceType", viewDeviceTypeViewModel);
     }
+
+    // [HttpGet]
+    // public async Task<IActionResult> GetAll()
+    // {
+    //     List<Device> deviceList = await _deviceRepository.GetAllAsync();
+    //     return Ok(deviceList);
+    // }
 
     [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
     public IActionResult Error()

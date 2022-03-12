@@ -1,13 +1,15 @@
 using System.ComponentModel.DataAnnotations;
 
-namespace LivingLab.Domain.Entities;
-
+namespace LivingLab.Core.Entities;
+/// <remarks>
+/// Author: Team P1-3
+/// </remarks>
 public class AccessoryType : BaseEntity
 {
     [Required]
     public string Name { get; set; }
     [Required]
-    public double Cost { get; set; }
+    public string Type { get; set; }
 
     [Required]
     public bool Borrowable { get; set; }

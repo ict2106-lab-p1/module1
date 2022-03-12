@@ -2,10 +2,7 @@ const defaultTheme = require("tailwindcss/defaultTheme");
 const colors = require("tailwindcss/colors");
 
 module.exports = {
-    content: [
-        './Pages/**/*.cshtml',
-        './Views/**/*.cshtml',
-    ],
+    content: ["./Pages/**/*.cshtml", "./Views/**/*.cshtml"],
 
     safelist: [
         "w-64",
@@ -29,6 +26,8 @@ module.exports = {
     theme: {
         extend: {
             colors: {
+                dark: "#363740",
+                highlight: "#9FA2B4",
                 brand: "#FFC523",
                 olive: {
                     50: "#faf9f0",
@@ -168,10 +167,7 @@ module.exports = {
         },
     },
 
-    plugins: [
-        require("@tailwindcss/forms"),
-        require("daisyui"),
-    ],
+    plugins: [require("@tailwindcss/forms"), require("daisyui")],
 
     daisyui: {
         themes: false,
