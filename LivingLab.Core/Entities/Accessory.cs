@@ -21,8 +21,8 @@ public class Accessory : BaseEntity
 
     public AccessoryType? AccessoryType { get; set; }
     
-    public int? LabUserId { get; set; }
-    
+    public string? LabUserId { get; set; }
+
     [DataType(DataType.Date)]
     [Column(TypeName="Date")]
     public DateTime? DueDate { get; set; }
