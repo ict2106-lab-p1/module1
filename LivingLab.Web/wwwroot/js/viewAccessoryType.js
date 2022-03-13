@@ -37,8 +37,8 @@ $(document).ready(function () {
             $this = $(this);
             var dtRow = $this.parents('tr');
             console.log(dtRow[0].cells[0].innerHTML)
-            // document.postAccessoryType.accessoryType.value = dtRow[0].cells[0].innerHTML;
-            // document.postAccessoryType.submit();
+            document.postAccessoryType.accessoryType.value = dtRow[0].cells[0].innerHTML;
+            document.postAccessoryType.submit();
         })
     })
 

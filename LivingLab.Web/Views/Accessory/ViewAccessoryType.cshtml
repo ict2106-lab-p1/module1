@@ -8,17 +8,19 @@ ViewData["Title"] = "Manage Accessory";
 <link rel="Stylesheet" href="~/css/viewAccessory.css" type="text/css"/>
 
 
-<div class="flex justify-between my-8">
+<div class="grid grid-cols-2 mb-2">
     <div>
+        <h3 class="text-lg"> NYP-SR7C </h3>
         <h1 class="text-2xl"> Manage Accessory</h1>
-        <h2 class="text-lg"> NYP-SR7C </h2>
     </div>
-    <div class="-mb-10">
-        <button id="addAccessoryBtn" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline my-8" type="button">
+    <div class="justify-self-end">
+        <button id="addAccessoryBtn" class="bg-purple-500 hover:bg-purple-700 text-white font-bold py-2 px-8 rounded" type="button">
             Add Accessory
         </button>
     </div>
 </div>
+<hr class="mb-4"/>
+
 <div class= "container my-12 mx-auto px-4 md:px-12">
         <div class= "flex flex-wrap -mx-1 lg:-mx-4">
         @foreach (var accessory in Model.accessoryTypeList)
@@ -77,11 +79,9 @@ ViewData["Title"] = "Manage Accessory";
                     overlay.classList.toggle('flex')
                 }
                 const viewwMoreEventHandler = () => {
-                    console.log("View More");
+                    console.log("View More Accessory");
                     var accessoryType = event.target.parentElement.parentElement.firstElementChild.textContent;
                     console.log(accessoryType);
-                    // Check the data tyoe of the accessoryType
-                    console.log(typeof(accessoryType));
                     document.postAccessoryType.accessoryType.value = accessoryType
                     document.postAccessoryType.submit();
                 }
