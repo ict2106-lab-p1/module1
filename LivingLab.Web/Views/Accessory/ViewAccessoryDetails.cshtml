@@ -1,4 +1,7 @@
-@model LivingLab.Web.ViewModels.ViewAccessoryViewModel
+@* <remarks> *@
+@* Author: Team P1-3 *@
+@* </remarks> *@
+@model LivingLab.Web.Models.ViewModels.Accessory.ViewAccessoryViewModel
 
 @{
 ViewData["Title"] = "Manage Accessory";
@@ -45,7 +48,7 @@ ViewData["Title"] = "Manage Accessory";
                 <td>@accessory.Status</td>
                 <td>@accessory.AccessoryType.Borrowable</td>
                 <td>@accessory.LabUserId</td>
-                <td>@accessory.DueDate</td>
+                <td>@accessory.DueDate?.ToString("MM/dd/yyyy")</td>
                 <td></td>
                 <td></td>
             </tr>
@@ -79,16 +82,13 @@ ViewData["Title"] = "Manage Accessory";
             const overlay = document.querySelector('#overlay')
             const addBtn = document.querySelector('#addAccessoryBtn')
             const closeBtn = document.querySelector('#close-modal')
-
             const toggleModal = () => {
                 overlay.classList.toggle('hidden')
                 overlay.classList.toggle('flex')
             }
-
             addBtn.addEventListener('click', toggleModal)
             closeBtn.addEventListener('click', toggleModal)
     })
-
 </script>
 
 @section Scripts {

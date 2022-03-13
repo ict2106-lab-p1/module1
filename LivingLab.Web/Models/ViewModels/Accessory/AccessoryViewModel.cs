@@ -1,9 +1,9 @@
 using LivingLab.Core.Entities;
 
-namespace LivingLab.Web.ViewModels;
-    
-using LivingLab.Domain.Entities;
-
+namespace LivingLab.Web.Models.ViewModels.Accessory; 
+/// <remarks>
+/// Author: Team P1-3
+/// </remarks>
 public class AccessoryViewModel
 {
     public int Id { get; set; }

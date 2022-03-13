@@ -1,5 +1,7 @@
-@model LivingLab.Web.ViewModels.AccessoryTypeViewModel
-
+@model LivingLab.Web.Models.ViewModels.Accessory.ViewAccessoryTypeViewModel
+@* <remarks> *@
+@* Author: Team P1-3 *@
+@* </remarks> *@
 @{
 ViewData["Title"] = "Manage Accessory";
 }
@@ -63,23 +65,6 @@ ViewData["Title"] = "Manage Accessory";
     </div>
 </div>
 
-<script>
-        window.addEventListener('DOMContentLoaded', () =>{
-            const overlay = document.querySelector('#overlay')
-            const addBtn = document.querySelector('#addAccessoryBtn')
-            const closeBtn = document.querySelector('#close-modal')
-
-            const toggleModal = () => {
-                overlay.classList.toggle('hidden')
-                overlay.classList.toggle('flex')
-            }
-
-            addBtn.addEventListener('click', toggleModal)
-            closeBtn.addEventListener('click', toggleModal)
-    })
-
-</script>
-
 @section Scripts {
     <script>
             window.addEventListener('DOMContentLoaded', () =>{
@@ -87,7 +72,6 @@ ViewData["Title"] = "Manage Accessory";
                 const addBtn = document.querySelector('#addAccessoryBtn')
                 const closeBtn = document.querySelector('#close-modal')
                 const viewMoreBtns = document.querySelectorAll('#viewMoreBtn')
-    
                 const toggleModal = () => {
                     overlay.classList.toggle('hidden')
                     overlay.classList.toggle('flex')
@@ -105,12 +89,8 @@ ViewData["Title"] = "Manage Accessory";
                 addBtn.addEventListener('click', toggleModal)
                 closeBtn.addEventListener('click', toggleModal)
                 viewMoreBtns.forEach(btn => btn.addEventListener('click', viewwMoreEventHandler))
-
-                
         })
-
-    
     </script>
-
     <script src="~/js/viewAccessoryType.js"></script>
 }
+

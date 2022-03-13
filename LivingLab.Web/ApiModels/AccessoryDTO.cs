@@ -1,9 +1,7 @@
 
 using LivingLab.Core.Entities;
 
-namespace LivingLab.Domain.Entities;
-using Microsoft.Build.Framework;
-
+namespace LivingLab.Web.ApiModels;
 
 public class AccessoryDTO
 {

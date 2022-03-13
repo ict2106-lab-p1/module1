@@ -1,4 +1,5 @@
 using LivingLab.Core.Entities;
+using LivingLab.Core.Entities.DTO;
 using LivingLab.Core.Interfaces.Repositories;
 using LivingLab.Infrastructure.Data;
 
@@ -14,13 +15,13 @@ public class DeviceRepository : Repository<Device>, IDeviceRepository
     {
         _context = context;
     }
-    public async Task<List<Core.ViewDeviceTypeDTO>> GetViewDeviceType()
+    public async Task<List<ViewDeviceTypeDTO>> GetViewDeviceType()
     {
-        var deviceGroup = await _context.Device.GroupBy(t => t.Type).Select(t=> new{Key = t.Key, Count = t.Count()}).ToListAsync();
-        List<Core.ViewDeviceTypeDTO> deviceTypeDtos = new List<Core.ViewDeviceTypeDTO>();
+        var deviceGroup = await _context.Devices.GroupBy(t => t.Type).Select(t=> new{Key = t.Key, Count = t.Count()}).ToListAsync();
+        List<ViewDeviceTypeDTO> deviceTypeDtos = new List<ViewDeviceTypeDTO>();
         foreach (var group in deviceGroup)
         {
-            Core.ViewDeviceTypeDTO deviceTypeDto = new Core.ViewDeviceTypeDTO();
+            ViewDeviceTypeDTO deviceTypeDto = new ViewDeviceTypeDTO();
             deviceTypeDto.Type = group.Key;
             deviceTypeDto.Quantity = group.Count;
             deviceTypeDtos.Add(deviceTypeDto);
@@ -31,7 +32,7 @@ public class DeviceRepository : Repository<Device>, IDeviceRepository
 
     public async Task<List<Device>> GetAllDevicesByType(string deviceType)
     {
-        List<Device> deviceList = await _context.Device.Where(t => deviceType.Contains(t.Type)).ToListAsync();
+        List<Device> deviceList = await _context.Devices.Where(t => deviceType.Contains(t.Type)).ToListAsync();
         return deviceList;
     }
 }
