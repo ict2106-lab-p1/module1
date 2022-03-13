@@ -23,25 +23,26 @@
 </div>
 <hr class="mb-4"/>
 
-<table id="table_id" class="display">
-    <thead>
-    <tr>
-        <th>Name</th>
-        <th>Qty</th>
-        <th></th>
-    </tr>
-    </thead>
-    <tbody>
-    @foreach (var device in Model.ViewDeviceTypeDtos)
-    {
-        <tr>
-            <td>@device.Type</td>
-            <td>@device.Quantity</td>
-            <td></td>
-        </tr>
-    }
-    </tbody>
-</table>
+<div class= "container my-12 mx-auto px-4 md:px-12">
+        <div class= "flex flex-wrap -mx-1 lg:-mx-4">
+        @foreach (var device in Model.ViewDeviceTypeDtos)
+        {
+            <div class="card w-96 bg-base-200 shadow-xl m-12">
+                <figure>
+                    <img src="https://ak.picdn.net/shutterstock/videos/3820817/thumb/1.jpg?ip=x480"
+                            alt="">
+                </figure>
+                <div class="card-body items-center text-center">
+                    <h2 class="card-title">@device.Type</h2>
+                    <p>Quantity: @device.Quantity</p>
+                    <div class="card-actions text-center">
+                        <button id="viewMoreBtn" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline my-8 viewMoreBtn" type="button">View More</button>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
 
 <form asp-controller="Device" asp-action="ViewAll" method="post" name="postDeviceType">
     <input type="hidden" name="deviceType"/>
@@ -157,6 +158,7 @@
                 const overlay = document.querySelector('#overlay')
                 const addBtn = document.querySelector('#addDeviceBtn')
                 const closeBtn = document.querySelector('#close-modal')
+                const viewMoreBtns = document.querySelectorAll('#viewMoreBtn')
     
                 const toggleModal = () => {
                     overlay.classList.toggle('hidden')
@@ -166,7 +168,19 @@
                 addBtn.addEventListener('click', toggleModal)
     
                 closeBtn.addEventListener('click', toggleModal)
+                
+                 const viewwMoreEventHandler = () => {
+                    console.log("View More Device");
+                    var deviceType = event.target.parentElement.parentElement.firstElementChild.textContent;
+                    console.log(deviceType)      
+                    document.postDeviceType.deviceType.value = deviceType
+                    document.postDeviceType.submit();
+                }
+
+                viewMoreBtns.forEach(btn => btn.addEventListener('click', viewwMoreEventHandler))
             })
+
+            
     
     </script>
     

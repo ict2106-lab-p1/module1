@@ -8,36 +8,39 @@ ViewData["Title"] = "Manage Accessory";
 <link rel="Stylesheet" href="~/css/viewAccessory.css" type="text/css"/>
 
 
-<div class="flex justify-between my-8">
+<div class="grid grid-cols-2 mb-2">
     <div>
+        <h3 class="text-lg"> NYP-SR7C </h3>
         <h1 class="text-2xl"> Manage Accessory</h1>
-        <h2 class="text-lg"> NYP-SR7C </h2>
     </div>
-    <div class="-mb-10">
-        <button id="addAccessoryBtn" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline my-8" type="button">
+    <div class="justify-self-end">
+        <button id="addAccessoryBtn" class="bg-purple-500 hover:bg-purple-700 text-white font-bold py-2 px-8 rounded" type="button">
             Add Accessory
         </button>
     </div>
 </div>
+<hr class="mb-4"/>
 
-<table id="table_id" class="display">
-    <thead>
-    <tr>
-        <th>Name</th>
-        <th>Quantity</th>
-        <th></th>
-    </tr>
-    </thead>
-    <tbody>
-    @foreach (var accessory in Model.accessoryTypeList) {
-        <tr>
-            <td>@accessory.Type</td>
-            <td>@accessory.Quantity</td>
-            <td></td>
-        </tr>
-    }
-    </tbody>
-</table>
+<div class= "container my-12 mx-auto px-4 md:px-12">
+        <div class= "flex flex-wrap -mx-1 lg:-mx-4">
+        @foreach (var accessory in Model.accessoryTypeList)
+        {
+            <div class="card w-96 bg-base-200 shadow-xl m-12">
+                <figure>
+                    <img src="https://ak.picdn.net/shutterstock/videos/3820817/thumb/1.jpg?ip=x480"
+                            alt="">
+                </figure>
+                <div class="card-body items-center text-center">
+                    <h2 class="card-title">@accessory.Type</h2>
+                    <p>Quantity: @accessory.Quantity</p>
+                    <div class="card-actions text-center">
+                        <button id="viewMoreBtn" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline my-8 viewMoreBtn" type="button">View More</button>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
 
 <form asp-controller="Accessory" asp-action="ViewAccessory" method="post" name="postAccessoryType">
     <input type="hidden" name="accessoryType"/>
@@ -59,7 +62,7 @@ ViewData["Title"] = "Manage Accessory";
         </div>
         <div class="mt-3 flex justify-end space-x-3">
             <button id="closeBtn"  class="px-3 py-1 rounded hover:bg-blue-300 hover:bg-opacity-50 hover:text-blue-900">Cancel</button>
-            <button class="px-3 py-1 bg-blue-800 text-gray-200 hover:bg-blue-600 rounded">Add</button>
+            <button class=" px-3 py-1 bg-blue-800 text-gray-200 hover:bg-blue-600 rounded">Add</button>
         </div>
     </div>
 </div>
@@ -70,17 +73,24 @@ ViewData["Title"] = "Manage Accessory";
                 const overlay = document.querySelector('#overlay')
                 const addBtn = document.querySelector('#addAccessoryBtn')
                 const closeBtn = document.querySelector('#close-modal')
-    
+                const viewMoreBtns = document.querySelectorAll('#viewMoreBtn')
                 const toggleModal = () => {
                     overlay.classList.toggle('hidden')
                     overlay.classList.toggle('flex')
                 }
-    
+                const viewwMoreEventHandler = () => {
+                    console.log("View More Accessory");
+                    var accessoryType = event.target.parentElement.parentElement.firstElementChild.textContent;
+                    console.log(accessoryType);
+                    document.postAccessoryType.accessoryType.value = accessoryType
+                    document.postAccessoryType.submit();
+                }
+
                 addBtn.addEventListener('click', toggleModal)
                 closeBtn.addEventListener('click', toggleModal)
+                viewMoreBtns.forEach(btn => btn.addEventListener('click', viewwMoreEventHandler))
         })
-    
     </script>
-    
-     <script src="~/js/viewAccessoryType.js"></script>
+    <script src="~/js/viewAccessoryType.js"></script>
 }
+

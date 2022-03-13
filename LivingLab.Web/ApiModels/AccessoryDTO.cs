@@ -11,6 +11,6 @@ public class AccessoryDTO
     public int AccessoryTypeId { get; set; }
     public Lab? Lab { get; set; }
     public AccessoryType? AccessoryType { get; set; }
-    public int LabUserId { get; set; }
+    public string? LabUserId { get; set; }
     public DateTime DueDate { get; set; }
 }
