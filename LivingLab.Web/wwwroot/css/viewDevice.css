@@ -16,3 +16,8 @@
 #overlay {
     z-index: 999;
 }
+
+.disabled {
+    pointer-events:none;
+    background:grey;
+}

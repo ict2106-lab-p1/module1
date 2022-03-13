@@ -1,15 +1,7 @@
-<<<<<<< HEAD
 /* <remarks>*/
 /* Author: Team P1-3*/
 /* </remarks>*/
-=======
-<<<<<<< HEAD
-=======
-/* <remarks>*/
-/* Author: Team P1-3*/
-/* </remarks>*/
->>>>>>> 4f569f71aca95cc09aaf5194b1cceb48469aca27
->>>>>>> 3d64fa4b85c1b58aac10fae2546f38264f8ae577
+
 $(document).ready(function () {
     //$('#table_id').DataTable();
     var table = $('#table_id').DataTable({
@@ -34,7 +26,7 @@ $(document).ready(function () {
             {
                 "targets": -2,
                 "data": null,
-                "defaultContent": "<button class='hover:bg-sunset-400 font-large rounded-lg text-sm px-5 py-2.5 '><i class='bi bi-pencil'></i></button>"
+                "defaultContent": "<button onclick=\"window.location.href='/Device/View/'+parentElement.getAttribute('data-id');\" class='hover:bg-sunset-400 font-large rounded-lg text-sm px-5 py-2.5 '><i class='bi bi-pencil'></i></button>"
                 //"defaultContent": "<button class='text-white bg-gradient-to-br from-purple-600 to-blue-500 hover:bg-gradient-to-bl focus:ring-4 focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2'>Edit</i></button>"
             },
             {

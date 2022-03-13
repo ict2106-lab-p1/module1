@@ -52,22 +52,13 @@ public class DeviceService : IDeviceService
         return deviceVM;
     }
     
-    public async Task<DeviceViewModel> EditDevice(int id, String serialNo, String name, String type, String desc, String status, Double threshold)
+    public async Task<DeviceViewModel> EditDevice(DeviceViewModel deviceViewModel)
     {
         //retrieve data from db
-        DeviceViewModel editDeviceVM = new DeviceViewModel {
-            Id = id, 
-            SerialNo = serialNo, 
-            Name = name, 
-            Type = type,
-            Description = desc,
-            Status = status,
-            Threshold = threshold
-        };
-        Core.Entities.Device editDevice = _mapper.Map<DeviceViewModel, Core.Entities.Device> (editDeviceVM);
+        Core.Entities.Device editDevice = _mapper.Map<DeviceViewModel, Core.Entities.Device> (deviceViewModel);
         await _deviceDomainService.EditDeviceDetails(editDevice);
         
-        return editDeviceVM;
+        return deviceViewModel;
     }
     
 }

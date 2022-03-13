@@ -45,21 +45,23 @@ public class DeviceRepository : Repository<Device>, IDeviceRepository
     
     public async Task<Device> EditDeviceDetails(Device editedDevice)
     {
+        Console.WriteLine("REPOID" + editedDevice.Id);
         // retrieve device db together with device type details using include to join entities
         Device currentDevice = (await _context.Devices.SingleOrDefaultAsync(d => d.Id == editedDevice.Id))!;
+        Console.WriteLine("INSIDE DEVICE REPO");
         currentDevice.SerialNo = editedDevice.SerialNo;
         currentDevice.Name = editedDevice.Name;
         currentDevice.Type = editedDevice.Type;
         currentDevice.Description = editedDevice.Description;
         currentDevice.Status = editedDevice.Status;
         currentDevice.Threshold = editedDevice.Threshold;
-        Console.WriteLine("INSIDE DEVICE REPO");
-        Console.WriteLine(currentDevice.SerialNo);
-        Console.WriteLine(currentDevice.Name);
-        Console.WriteLine(currentDevice.Type);
-        Console.WriteLine(currentDevice.Description);
-        Console.WriteLine(currentDevice.Status);
-        Console.WriteLine(currentDevice.Threshold);
+        
+        // Console.WriteLine(currentDevice.SerialNo);
+        // Console.WriteLine(currentDevice.Name);
+        // Console.WriteLine(currentDevice.Type);
+        // Console.WriteLine(currentDevice.Description);
+        // Console.WriteLine(currentDevice.Status);
+        // Console.WriteLine(currentDevice.Threshold);
         await _context.SaveChangesAsync();
             
         return editedDevice;

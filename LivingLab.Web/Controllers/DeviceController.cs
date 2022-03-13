@@ -23,7 +23,7 @@ public class DeviceController : Controller
         _deviceService = deviceService;
     }
 
-    [HttpPost("View")]
+    [Route("View")]
     public async Task<IActionResult> ViewAll(string deviceType)
     {
         ViewDeviceViewModel viewDevices = await _deviceService.ViewDevice(deviceType);
@@ -35,24 +35,24 @@ public class DeviceController : Controller
     { 
         //retrieve data from db
         DeviceViewModel device = await _deviceService.ViewDeviceDetails(id);
-        Console.WriteLine(device.Id);
-        Console.WriteLine(device.SerialNo);
-        Console.WriteLine(device.Name);
-        Console.WriteLine(device.Type);
-        Console.WriteLine(device.Description);
-        Console.WriteLine(device.Status);
-        Console.WriteLine(device.Threshold);
 
         return View("DeviceDetails", device);
     }
     
     [HttpPost]
-    public async Task<IActionResult> EditDevice(int id, String serialNo, String name, String type, String desc, String status, Double threshold)
+    public async Task<IActionResult> EditDevice(DeviceViewModel deviceViewModel)
     {
-        await _deviceService.EditDevice(id, serialNo, name, type, desc, status, threshold);
+        Console.WriteLine("id: " + deviceViewModel.Id);
+        Console.WriteLine("serialNo: " + deviceViewModel.SerialNo);
+        Console.WriteLine("name: " + deviceViewModel.Name);
+        Console.WriteLine("type: " + deviceViewModel.Type);
+        Console.WriteLine("desc: " + deviceViewModel.Description);
+        Console.WriteLine("status: " + deviceViewModel.Status);
+        Console.WriteLine("threshold: " + deviceViewModel.Threshold);
+        await _deviceService.EditDevice(deviceViewModel);
         
         // Temp - To display ViewAll after editing
-        ViewDeviceViewModel viewDevices = await _deviceService.ViewDevice(type);
+        ViewDeviceViewModel viewDevices = await _deviceService.ViewDevice(deviceViewModel.Type);
         return View("ViewDevice", viewDevices);
     }
 

@@ -10,6 +10,5 @@ public interface IDeviceService
     Task<ViewDeviceTypeViewModel> ViewDeviceType();
     Task<DeviceViewModel> ViewDeviceDetails(int id);
 
-    Task<DeviceViewModel> EditDevice(int id, String serialNo, String name, String type, String desc, String status,
-        Double threshold);
+    Task<DeviceViewModel> EditDevice(DeviceViewModel deviceViewModel);
 }
