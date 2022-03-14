@@ -53,6 +53,7 @@ public class DeviceRepository : Repository<Device>, IDeviceRepository
         currentDevice.Description = editedDevice.Description;
         currentDevice.Status = editedDevice.Status;
         currentDevice.Threshold = editedDevice.Threshold;
+        currentDevice.LastUpdated = DateTime.Today;
         await _context.SaveChangesAsync();
             
         return editedDevice;
