@@ -6,7 +6,7 @@ namespace LivingLab.Core.Entities;
 /// Author: Team P1-3
 /// </remarks>
 public class Accessory : BaseEntity
-{
+{   
     [Required]
     public string? Status { get; set; }
 
