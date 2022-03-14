@@ -8,4 +8,7 @@ public interface IDeviceService
 {
     Task<ViewDeviceViewModel> ViewDevice(string deviceType);
     Task<ViewDeviceTypeViewModel> ViewDeviceType();
+    Task<DeviceViewModel> ViewDeviceDetails(int id);
+
+    Task<DeviceViewModel> EditDevice(DeviceViewModel deviceViewModel);
 }

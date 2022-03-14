@@ -1,7 +1,6 @@
 /* <remarks>*/
 /* Author: Team P1-3*/
 /* </remarks>*/
-
 $(document).ready(function () {
 
     var table = $('#table_id').DataTable({

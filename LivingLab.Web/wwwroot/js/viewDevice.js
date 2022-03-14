@@ -26,9 +26,8 @@ $(document).ready(function () {
             {
                 "targets": -2,
                 "data": null,
-                "defaultContent": "<button class='hover:bg-sunset-400 font-large rounded-lg text-sm px-5 py-2.5'><svg xmlns=\"http://www.w3.org/2000/svg\" class=\"h-5 w-5\" viewBox=\"0 0 20 20\" fill=\"currentColor\">\n" +
-                "  <path d=\"M13.586 3.586a2 2 0 112.828 2.828l-.793.793-2.828-2.828.793-.793zM11.379 5.793L3 14.172V17h2.828l8.38-8.379-2.83-2.828z\" />\n" +
-                "</svg></button>"
+                // onclick="window.location.href='/Device/View/'+parentElement.getAttribute('data-id');"
+                "defaultContent": "<button class='hover:bg-sunset-400 font-large rounded-lg text-sm px-5 py-2.5 editBtn'><svg xmlns=\"http://www.w3.org/2000/svg\" class=\"h-5 w-5\" viewBox=\"0 0 20 20\" fill=\"currentColor\"> <path d=\"M13.586 3.586a2 2 0 112.828 2.828l-.793.793-2.828-2.828.793-.793zM11.379 5.793L3 14.172V17h2.828l8.38-8.379-2.83-2.828z\" /> </svg></button>"
                 //"defaultContent": "<button class='text-white bg-gradient-to-br from-purple-600 to-blue-500 hover:bg-gradient-to-bl focus:ring-4 focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2'>Edit</i></button>"
             },
             {
@@ -41,4 +40,40 @@ $(document).ready(function () {
             }],
         "bInfo": false
     });
+    
+    const addOverlay = document.querySelector('#addOverlay')
+    const addBtn = document.querySelector('#addDeviceBtn')
+    const closeAddBtn = document.querySelector('.closeAddModal')
+    const toggleAddModal = () => {
+        addOverlay.classList.toggle('hidden')
+        addOverlay.classList.toggle('flex')
+    }
+    addBtn.addEventListener('click', toggleAddModal)
+    closeAddBtn.addEventListener('click', toggleAddModal)
+
+    const editOverlay = document.querySelector('#editOverlay')
+    const editBtn = document.querySelector('.editDeviceBtn')
+    const closeEditBtn = document.querySelector('.closeEditModal')
+    const toggleEditModal = () => {
+        editOverlay.classList.toggle('hidden')
+        editOverlay.classList.toggle('flex')
+    }
+    editBtn.addEventListener('click', toggleEditModal)
+    closeEditBtn.addEventListener('click', toggleEditModal)
+    
+    editBtn.addEventListener('click', clickEdit)
+
 });
+
+function clickEdit() {
+    $.get('/Device/View/'+this.getAttribute('data-id'),  // url
+    function (data, textStatus, jqXHR) {  // success callback
+        document.getElementById("grid-device-id").value = data.id
+        document.getElementById("grid-serialnum").value = data.serialNo
+        document.getElementById("grid-name").value = data.name
+        document.getElementById("grid-device-type").value = data.type
+        document.getElementById("grid-desc").value = data.description
+        document.getElementById("grid-status").value = data.status
+        document.getElementById("grid-threshold").value = data.threshold
+    });
+}

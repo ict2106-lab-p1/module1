@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace LivingLab.Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20220311111010_CreateInitialDB")]
+    [Migration("20220312100222_CreateInitialDB")]
     partial class CreateInitialDB
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
