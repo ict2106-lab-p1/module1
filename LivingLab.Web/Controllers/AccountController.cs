@@ -13,11 +13,12 @@ namespace LivingLab.Web.Controllers;
 public class AccountController: Controller
 {
     private readonly IAccountService _accountService;
-    public AccountController(IAccountService accountService)
-    {
-        _accountService = accountService;
-    }
-    
+    // public AccountController(IAccountService accountService)
+    // {
+    //     _accountService = accountService;
+    // }
+    //
+    [Route("Index")]
     public IActionResult Index()
     {
         return View("Index");    
