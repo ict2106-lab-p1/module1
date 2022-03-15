@@ -34,4 +34,8 @@ public class DeviceDomainService : IDeviceDomainService
     {
         return _deviceRepository.EditDeviceDetails(editedDevice);
     }
+    public Task<Device> DeleteDevice(Device deletedDevice)
+    {
+        return _deviceRepository.DeleteDevice(deletedDevice);
+    }
 }
