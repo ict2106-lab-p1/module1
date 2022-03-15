@@ -1,5 +1,6 @@
 using LivingLab.Core.Entities;
 using LivingLab.Core.Entities.DTO;
+using LivingLab.Core.Entities.DTO.Accessory;
 using LivingLab.Core.Interfaces.Repositories;
 using LivingLab.Infrastructure.Data;
 
@@ -14,6 +15,13 @@ public class AccessoryRepository : Repository<Accessory>, IAccessoryRepository
     public AccessoryRepository(ApplicationDbContext context) : base(context)
     {
         _context = context;
+    }
+    
+    public async Task<List<Accessory>> GetAccessoryList()
+    {
+        // retrieve accessory table together with accessory type details using include to join entities 
+        List<Accessory> accessories = await _context.Accessories.Include(a => a.AccessoryType).ToListAsync();
+        return accessories;
     }
 
     public async Task<List<Accessory>> GetAccessoryWithAccessoryType(string accessoryType)
@@ -42,6 +50,12 @@ public class AccessoryRepository : Repository<Accessory>, IAccessoryRepository
         }
         
         return accessoryTypeDtos;
+    }
+    
+    public async Task<Accessory> GetLastRow()
+    {
+        var accessory = await _context.Accessories.OrderByDescending(a => a.Id).FirstOrDefaultAsync();
+        return accessory;
     }
 
 }

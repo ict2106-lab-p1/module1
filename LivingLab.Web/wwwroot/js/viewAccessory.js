@@ -40,4 +40,23 @@ $(document).ready(function () {
             }],
         "bInfo": false
     });
+    const overlay = document.querySelector('#overlay')
+    const addBtn = document.querySelector('#addAccessoryBtn')
+    const closeBtn = document.querySelector('#close-modal')
+    const toggleModal = () => {
+        overlay.classList.toggle('hidden')
+        overlay.classList.toggle('flex')
+    }
+    addBtn.addEventListener('click', toggleModal)
+    closeBtn.addEventListener('click', toggleModal)
+    $('#AccessoryTypeId').change(function(){
+        console.log('click')
+        var selectedValue = jQuery(this).val()
+        if (selectedValue === "Others")
+        {
+            $("#forNewType").removeClass('hidden')
+        } else {
+            $("#forNewType").addClass('hidden')
+        }
+    })    
 });

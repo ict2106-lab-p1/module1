@@ -6,5 +6,5 @@ namespace LivingLab.Web.Models.ViewModels.Accessory;
 /// </remarks>
 public class ViewAccessoryTypeViewModel
 {
-    public List<AccessoryTypeViewModel> accessoryTypeList { get; set; }
+    public List<OverallAccessoryTypeViewModel> accessoryTypeList { get; set; }
 }

@@ -8,4 +8,5 @@ public interface IAccessoryService
 {
     Task<ViewAccessoryViewModel> ViewAccessory(string accessoryType);
     Task<ViewAccessoryTypeViewModel> ViewAccessoryType();
+    Task<ViewAccessoryViewModel> AddAccessory(ViewAccessoryViewModel viewModelInput);
 }

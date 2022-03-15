@@ -37,6 +37,21 @@ public class AccessoryController : Controller
         ViewAccessoryTypeViewModel viewAccessories = await _accessoryService.ViewAccessoryType();
         return View("ViewAccessoryType", viewAccessories);
     }
+    
+    // public async Task<AddAccessoryViewModel> AddDeviceDetails()
+    // { 
+    //     //retrieve data from db
+    //     AddAccessoryViewModel accessoryViewModel = await _accessoryService.AddAccessoryDetails();
+    //
+    //     return accessoryViewModel;
+    // }
+    
+    [HttpPost]
+    public async Task<IActionResult> CreateAccessory(ViewAccessoryViewModel viewModel)
+    {
+        await _accessoryService.AddAccessory(viewModel);
+        return RedirectToAction("ViewAccessoryType");
+    }
 
     // [HttpGet]
     // public async Task<IActionResult> GetAll()
