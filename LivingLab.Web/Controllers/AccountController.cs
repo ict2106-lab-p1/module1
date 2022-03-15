@@ -19,9 +19,16 @@ public class AccountController: Controller
         _accountService = accountService;
     }
     
+    // [Route("Index")]
+    //
+    // public async Task<IActionResult> Index()
+    // // public AccountController(IAccountService accountService)
+    // // {
+    // //     _accountService = accountService;
+    // // }
+    // //
     [Route("Index")]
-
-    public async Task<IActionResult> Index()
+    public IActionResult Index()
     {
         return View("Index");    
     }
