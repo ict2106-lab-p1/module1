@@ -58,4 +58,15 @@ public class DeviceRepository : Repository<Device>, IDeviceRepository
             
         return editedDevice;
     }
+    
+    public async Task<Device> DeleteDevice(Device deleteDevice)
+    {
+        // retrieve device db together with device type details using include to join entities
+        Device currentDevice = (await _context.Devices.SingleOrDefaultAsync(d => d.Id == deleteDevice.Id))!;
+        _context.Devices.Remove(currentDevice);
+        await _context.SaveChangesAsync();
+        Console.WriteLine("Delete Succ");
+            
+        return deleteDevice;
+    }
 }

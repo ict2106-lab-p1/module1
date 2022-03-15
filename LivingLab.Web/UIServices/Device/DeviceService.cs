@@ -61,4 +61,13 @@ public class DeviceService : IDeviceService
         return deviceViewModel;
     }
     
+    public async Task<DeviceViewModel> DeleteDevice(DeviceViewModel deviceViewModel)
+    {
+        //retrieve data from db
+        Core.Entities.Device deleteDevice = _mapper.Map<DeviceViewModel, Core.Entities.Device> (deviceViewModel);
+        await _deviceDomainService.DeleteDevice(deleteDevice);
+        
+        return deviceViewModel;
+    }
+    
 }

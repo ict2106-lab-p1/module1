@@ -11,4 +11,5 @@ public interface IDeviceDomainService
     Task<List<ViewDeviceTypeDTO>> ViewDeviceType();
     Task<Device> ViewDeviceDetails(int id);
     Task<Device> EditDeviceDetails(Device editedDevice);
+    Task<Device> DeleteDevice(Device deleteDevice);
 }
