@@ -7,13 +7,23 @@ namespace LivingLab.Web.Controllers;
 /// <remarks>
 /// Author: Team P1-5
 /// </remarks>
-public class AccountController: BaseApiController
+///
+/// 
+
+public class AccountController: Controller
 {
     private readonly IAccountService _accountService;
     public AccountController(IAccountService accountService)
     {
         _accountService = accountService;
     }
+    
+    public IActionResult Index()
+    {
+        return View("Index");    
+    }
+   
+
 
     // // GET: api/Account
     // [HttpGet]

@@ -5,7 +5,7 @@ namespace LivingLab.Web.Controllers;
 /// <remarks>
 /// Author: Team P1-5
 /// </remarks>
-public class LabBookingController: BaseApiController
+public class  LabBookingController: BaseApiController
 {
     private readonly IAccountService _accountService;
     public LabBookingController(IAccountService accountService)

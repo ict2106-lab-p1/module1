@@ -27,12 +27,12 @@ public class P1_5Controller : Controller
         return View("Appointment");
     }
     
-    [Authorize]
-    [Route("manageUsers")]
-    public IActionResult ManageUsers()
-    {
-        return View("ManageUsers");
-    }
+    // [Authorize]
+    // [Route("manageUsers")]
+    // public IActionResult ManageUsers()
+    // {
+    //     return View("ManageUsers");
+    // }
     
     [Route("manageLabBookings")]
     public IActionResult ManageLabBookings()
