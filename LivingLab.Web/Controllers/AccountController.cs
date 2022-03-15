@@ -10,6 +10,7 @@ namespace LivingLab.Web.Controllers;
 ///
 /// 
 
+[Route("Account")]
 public class AccountController: Controller
 {
     private readonly IAccountService _accountService;
@@ -18,7 +19,9 @@ public class AccountController: Controller
         _accountService = accountService;
     }
     
-    public IActionResult Index()
+    [Route("Index")]
+
+    public async Task<IActionResult> Index()
     {
         return View("Index");    
     }
