@@ -41,6 +41,7 @@ $(document).ready(function () {
         "bInfo": false
     });
     
+    // Add Overlay
     const addOverlay = document.querySelector('#addOverlay')
     const addBtn = document.querySelector('#addDeviceBtn')
     const closeAddBtn = document.querySelector('.closeAddModal')
@@ -51,22 +52,38 @@ $(document).ready(function () {
     addBtn.addEventListener('click', toggleAddModal)
     closeAddBtn.addEventListener('click', toggleAddModal)
 
+    // Edit Overlay
     const editOverlay = document.querySelector('#editOverlay')
-    const editBtn = document.querySelector('.editDeviceBtn')
-    const closeEditBtn = document.querySelector('.closeEditModal')
     const toggleEditModal = () => {
         editOverlay.classList.toggle('hidden')
         editOverlay.classList.toggle('flex')
     }
-    editBtn.addEventListener('click', toggleEditModal)
-    closeEditBtn.addEventListener('click', toggleEditModal)
-    
-    editBtn.addEventListener('click', clickEdit)
+    $(document).on('click', '.closeEditModal', function () {
+        toggleEditModal()
+    });
+    $(document).on('click', '.editDeviceBtn', function () {
+        clickEdit(this)
+        toggleEditModal()
+    });
+
+    // Delete Overlay
+    const deleteOverlay = document.querySelector('#deleteOverlay')
+    const toggleDeleteModal = () => {
+        deleteOverlay.classList.toggle('hidden')
+        deleteOverlay.classList.toggle('flex')
+    }
+    $(document).on('click', '.closeDeleteModal', function () {
+        toggleDeleteModal()
+    });
+    $(document).on('click', '.deleteDeviceBtn', function () {
+        clickDelete(this)
+        toggleDeleteModal()
+    });
 
 });
 
-function clickEdit() {
-    $.get('/Device/View/'+this.getAttribute('data-id'),  // url
+function clickEdit(e) {
+    $.get('/Device/View/'+e.getAttribute('data-id'),  // url
     function (data, textStatus, jqXHR) {  // success callback
         document.getElementById("grid-device-id").value = data.id
         document.getElementById("grid-serialnum").value = data.serialNo
@@ -77,3 +94,20 @@ function clickEdit() {
         document.getElementById("grid-threshold").value = data.threshold
     });
 }
+
+function clickDelete(e) {
+    $.get('/Device/View/'+e.getAttribute('data-id'),  // url
+    function (data, textStatus, jqXHR) {  // success callback
+        document.getElementById("del-device-id").value = data.id
+        document.getElementById("deviceName").innerHTML = data.name
+        document.getElementById("del-device-name").value = data.name
+    });
+}
+
+$("#del-cfm").on('input', function() {
+    if (this.value === $("#deviceName").text()) {
+        $("#delBtn").removeClass('disabled')
+    } else {
+        $("#delBtn").addClass('disabled')
+    }
+});

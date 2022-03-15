@@ -48,8 +48,10 @@ public class DeviceController : Controller
     }
     
     [HttpPost("View/Edit")]
-    public async Task<ViewResult> EditDevice(DeviceViewModel editedDevice)
+    public async Task<IActionResult> EditDevice(DeviceViewModel editedDevice)
     {
+        Console.WriteLine("DEVID: "+ editedDevice.Id);
+        Console.WriteLine("DEVTYPE: "+ editedDevice.Type);
         await _deviceService.EditDevice(editedDevice);
 
         // Temp - To display ViewAll after editing
@@ -58,7 +60,7 @@ public class DeviceController : Controller
     }
     
     [HttpPost("View/Add")]
-    public async Task<ViewResult> AddDevice(DeviceViewModel addedDevice)
+    public async Task<IActionResult> AddDevice(DeviceViewModel addedDevice)
     {
         // await _deviceService.EditDevice(editedDevice);
         
@@ -66,7 +68,16 @@ public class DeviceController : Controller
         ViewDeviceViewModel viewDevices = await _deviceService.ViewDevice(addedDevice.Type);
         return View("ViewDevice", viewDevices);
     }
-
+    
+    [HttpPost("View/Delete")]
+    public async Task<IActionResult> DeleteDevice(DeviceViewModel deleteDevice)
+    {
+        await _deviceService.DeleteDevice(deleteDevice); 
+        
+        // Temp - To display ViewAll after editing
+        ViewDeviceViewModel viewDevices = await _deviceService.ViewDevice(deleteDevice.Type);
+        return View("ViewDevice", viewDevices);
+    }
 
     // [HttpGet]
     // public async Task<IActionResult> GetAll()
