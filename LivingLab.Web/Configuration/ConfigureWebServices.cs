@@ -3,6 +3,7 @@ using LivingLab.Web.UIServices.ManualLogs;
 using LivingLab.Web.UIServices.Accessory;
 using LivingLab.Web.UIServices.Device;
 using LivingLab.Web.UIServices.Todo;
+using LivingLab.Web.UIServices.UserManagement;
 
 namespace LivingLab.Web.Configuration;
 
@@ -27,6 +28,8 @@ public static class ConfigureWebServices
         services.AddTransient<IExportToCSVService, ExportToCSVService>();
         services.AddTransient<IDeviceService, DeviceService>();
         services.AddTransient<IAccessoryService, AccessoryServices>();
+        services.AddTransient<IUserManagementService, UserManagementService>();
+
 
         return services;
     }

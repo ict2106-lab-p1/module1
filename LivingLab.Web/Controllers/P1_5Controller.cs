@@ -35,14 +35,14 @@ public class P1_5Controller : Controller
         return View("Appointment");
     }
     
-    // [Authorize]
-    // [Route("manageUsers")]
-    // public IActionResult ManageUsers()
-    // {
-    //     return View("ManageUsers");
-    // }
+    [Authorize]
+    [Route("manageUsers")]
+    public IActionResult ManageUsers()
+    {
+        return View("ManageUsers");
+    }
     [Route("manageLabUsers")]
-
+    
     public async Task<IActionResult> ManageLabUsers()
     {
         ViewUserManagementViewModel viewUserManagementViewModel = await _userManagementService.GetAllAccounts();
@@ -55,13 +55,13 @@ public class P1_5Controller : Controller
         return View("ManageLabBooking");
     }
 
-    //
-    // [Route("manageLabUsers")]
-    // public IActionResult ManageLabUsers()
-    // {
-    //     return View("ManageLabUsers");
-    // }
-    //
+    
+    [Route("manageLabUsers")]
+    public IActionResult ManageLabUsers()
+    {
+        return View("ManageLabUsers");
+    }
+    
 
     [Route("createLabAccount")]
     public IActionResult CreateLabAccount()

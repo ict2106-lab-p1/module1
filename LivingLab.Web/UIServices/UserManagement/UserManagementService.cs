@@ -1,14 +1,12 @@
 using AutoMapper;
 
+using LivingLab.Core.Entities;
 using LivingLab.Core.Entities.DTO;
 using LivingLab.Core.Entities.Identity;
 using LivingLab.Core.Interfaces.Repositories;
 using LivingLab.Core.Interfaces.Services;
 using LivingLab.Web.Models.DTOs.Todo;
-using LivingLab.Web.Models.ViewModels.Accessory;
-using LivingLab.Web.Models.ViewModels.Device;
 using LivingLab.Web.Models.ViewModels.UserManagement;
-using LivingLab.Web.UIServices.Todo;
 
 namespace LivingLab.Web.UIServices.UserManagement;
 /// <summary>
@@ -31,10 +29,11 @@ public class UserManagementService : IUserManagementService
 
     public async Task<ViewUserManagementViewModel> GetAllAccounts()
     {
-        List<ViewAccountsDTO> viewAccountDtos = await _accountDomainService.ViewAccounts();
+        //get account service 
+        List<User> viewAccountDtos = await _accountDomainService.ViewAccounts();
         //map viewDeviceTypeDto to deviceTypeViewModel
         List<UserManagementViewModel> allUserList =
-            _mapper.Map<List<ViewAccountsDTO>, List<UserManagementViewModel>>(viewAccountDtos);
+            _mapper.Map<List<User>, List<UserManagementViewModel>>(viewAccountDtos);
         ViewUserManagementViewModel accountViewModel = new ViewUserManagementViewModel();
         accountViewModel.userList = allUserList;
         return accountViewModel;

@@ -1,3 +1,4 @@
+using LivingLab.Core.Entities;
 using LivingLab.Core.Entities.DTO;
 using LivingLab.Core.Entities.Identity;
 using LivingLab.Core.Interfaces.Repositories;
@@ -15,12 +16,14 @@ public class AccountDomainService: IAccountDomainService
 {
     public readonly IAccountRepository _accountRepository;
     
+    //initialise repository 
     public AccountDomainService(IAccountRepository accountRepository)
     {
         _accountRepository = accountRepository;
     }
     
-    public Task<List<ViewAccountsDTO>> ViewAccounts()
+    
+    public Task<List<User>> ViewAccounts()
     {
         return _accountRepository.GetAllAccount();
     } 

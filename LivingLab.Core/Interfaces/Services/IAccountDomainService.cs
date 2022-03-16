@@ -1,3 +1,4 @@
+using LivingLab.Core.Entities;
 using LivingLab.Core.Entities.DTO;
 using LivingLab.Core.Entities.Identity;
 using LivingLab.Core.Interfaces.Repositories;
@@ -13,6 +14,6 @@ namespace LivingLab.Core.Interfaces.Services;
 public interface IAccountDomainService
 
 {
-    Task<List<ViewAccountsDTO>> ViewAccounts();
+    Task<List<User>> ViewAccounts();
 
 }
