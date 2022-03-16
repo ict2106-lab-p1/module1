@@ -73,6 +73,20 @@ $(document).ready(function () {
     })
 
 
+    // Edit Overlay
+    const editOverlay = document.querySelector('#editOverlay')
+    const toggleEditModal = () => {
+        editOverlay.classList.toggle('hidden')
+        editOverlay.classList.toggle('flex')
+    }
+    $(document).on('click', '.close-edit-modal', function () {
+        toggleEditModal()
+    });
+    $(document).on('click', '.editAccessoryBtn', function () {
+        clickEdit(this)
+        toggleEditModal()
+    });
+
     // Delete Overlay
     const deleteOverlay = document.querySelector('#deleteOverlay')
     const toggleDeleteModal = () => {
@@ -82,7 +96,7 @@ $(document).ready(function () {
     $(document).on('click', '.closeDeleteModal', function () {
         toggleDeleteModal()
     });
-    $(document).on('click', '.deleteDeviceBtn', function () {
+    $(document).on('click', '.deleteAccessoryBtn', function () {
         clickDelete(this)
         toggleDeleteModal()
     });
@@ -91,7 +105,7 @@ $(document).ready(function () {
 });
 
 function clickAdd(e) {
-    $.get('/Accessory/AddDeviceDetails',
+    $.get('/Accessory/AddAccessoryDetails',
         function (data) {
             document.getElementById("accessoryId").value = data.accessory.id + 1
             var accessoryTypeDDL = document.getElementById("accessoryType")
@@ -110,17 +124,33 @@ function clickAdd(e) {
         })
 }
 
-function clickDelete(e) {
-    $.get('/Accessory/View/' + e.getAttribute('data-id'),  // url
+function clickEdit(e) {
+    $.get('/Accessory/GetEditDetails/'+e.getAttribute('data-id'),  // url
         function (data, textStatus, jqXHR) {  // success callback
-            document.getElementById("del-accessory-id").value = data.id
-            document.getElementById("accessoryName").innerHTML = data.name
-            document.getElementById("del-accessory-name").value = data.name
+            console.log("Device data returned: " , data)
+            // document.getElementById("grid-device-id").value = data.id
+            // document.getElementById("grid-serialnum").value = data.serialNo
+            // document.getElementById("grid-name").value = data.name
+            // document.getElementById("grid-device-type").value = data.type
+            // document.getElementById("grid-desc").value = data.description
+            // document.getElementById("grid-status").value = data.status
+            // document.getElementById("grid-threshold").value = data.threshold
         });
 }
 
+function clickDelete(e) {
+    $.get('/Accessory/GetDeleteDetails/' + e.getAttribute('data-id'),  // url
+        function (data, textStatus, jqXHR) {  // success callback
+            console.log(document.getElementById("accessoryName"))
+            document.getElementById("del-accessory-id").value = data.id
+            document.getElementById("accessory-name").innerHTML = data.accessoryType.name
+            document.getElementById("del-accessory-name").value = data.accessoryType.name
+            document.getElementById("del-accessory-type").value = data.accessoryType.type
+        });
+}
 $("#del-cfm").on('input', function () {
-    if (this.value === $("#deviceName").text()) {
+    console.log($("#del-cfm").val)
+    if (this.value === $("#accessory-name").text()) {
         $("#delBtn").removeClass('disabled')
     } else {
         $("#delBtn").addClass('disabled')

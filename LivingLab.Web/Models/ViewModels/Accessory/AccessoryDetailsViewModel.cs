@@ -1,6 +1,6 @@
 namespace LivingLab.Web.Models.ViewModels.Accessory;
 
-public class AddAccessoryDetailsViewModel
+public class AccessoryDetailsViewModel
 {    
     public string? NewAccessoryType { get; set; }
     public string? BorrowableValue { get; set; }

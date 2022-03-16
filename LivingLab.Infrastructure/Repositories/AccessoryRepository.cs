@@ -25,7 +25,12 @@ public class AccessoryRepository : Repository<Accessory>, IAccessoryRepository
             .ToListAsync();
         return accessories;
     }
-   
+
+    public async Task<Accessory> GetAccessory(int id)
+    {
+        return (await _context.Accessories.Include(a => a.AccessoryType).SingleOrDefaultAsync(a => a.Id == id))!;
+    }
+
 
     public async Task<List<ViewAccessoryTypeDTO>> GetAccessoryType()
     {

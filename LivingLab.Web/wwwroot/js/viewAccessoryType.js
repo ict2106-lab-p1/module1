@@ -45,7 +45,7 @@ $(document).ready(function () {
 });
 
 function clickAdd(e) {
-    $.get('/Accessory/AddDeviceDetails',
+    $.get('/Accessory/AddAccessoryDetails',
         function (data) {
             document.getElementById("accessoryId").value = data.accessory.id + 1
             var accessoryTypeDDL = document.getElementById("accessoryType")
