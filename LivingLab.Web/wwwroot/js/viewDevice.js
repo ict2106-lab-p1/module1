@@ -51,7 +51,10 @@ $(document).ready(function () {
     }
     addBtn.addEventListener('click', toggleAddModal)
     closeAddBtn.addEventListener('click', toggleAddModal)
-
+    $(document).on('click', "#cancelBtn", function () {
+        toggleAddModal()
+    })
+    
     // Edit Overlay
     const editOverlay = document.querySelector('#editOverlay')
     const toggleEditModal = () => {
@@ -82,9 +85,28 @@ $(document).ready(function () {
 
 });
 
+function clickAdd(e) {
+    $.get('/Accessory/AddDeviceDetails',
+        function (data) {
+            document.getElementById("accessoryId").value = data.accessory.id + 1
+            var accessoryTypeDDL = document.getElementById("accessoryType")
+            for(var i=0; i < data.accessoryTypes.length; i++){
+                var element = document.createElement("option")
+                element.textContent = data.accessoryTypes[i].type
+                element.value = data.accessoryTypes[i].id
+                accessoryTypeDDL.appendChild(element)
+            }
+            var last = document.createElement("option")
+            last.textContent = "Others"
+            last.value = "Others"
+            accessoryTypeDDL.appendChild(last)
+        })
+}
+
 function clickEdit(e) {
     $.get('/Device/View/'+e.getAttribute('data-id'),  // url
     function (data, textStatus, jqXHR) {  // success callback
+        console.log("Device data returned: " , data)
         document.getElementById("grid-device-id").value = data.id
         document.getElementById("grid-serialnum").value = data.serialNo
         document.getElementById("grid-name").value = data.name

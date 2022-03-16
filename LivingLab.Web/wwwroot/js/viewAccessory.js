@@ -4,32 +4,32 @@
 $(document).ready(function () {
 
     var table = $('#table_id').DataTable({
-        "dom": "<'ui stackable grid'"+
-            "<'row'"+
-            "<'myfilter'f>"+
-            ">"+
-            "<'row dt-table'"+
-            "<'sixteen wide column'tr>"+
-            ">"+
-            "<'row'"+
-            "<'seven wide column'i>"+
-            "<'eight wide column'l>"+
-            "<'left aligned nine wide column'p>"+
-            ">"+
+        "dom": "<'ui stackable grid'" +
+            "<'row'" +
+            "<'myfilter'f>" +
+            ">" +
+            "<'row dt-table'" +
+            "<'sixteen wide column'tr>" +
+            ">" +
+            "<'row'" +
+            "<'seven wide column'i>" +
+            "<'eight wide column'l>" +
+            "<'left aligned nine wide column'p>" +
+            ">" +
             ">",
         "columnDefs": [
             {
-                "targets" : "_all", 
-                "className" : "dt-center"
+                "targets": "_all",
+                "className": "dt-center"
             },
             {
-            "targets": -2,
-            "data": null,
-            "defaultContent": "<button class='hover:bg-sunset-400 font-large rounded-lg text-sm px-5 py-2.5'><svg xmlns=\"http://www.w3.org/2000/svg\" class=\"h-5 w-5\" viewBox=\"0 0 20 20\" fill=\"currentColor\">\n" +
-                "  <path d=\"M13.586 3.586a2 2 0 112.828 2.828l-.793.793-2.828-2.828.793-.793zM11.379 5.793L3 14.172V17h2.828l8.38-8.379-2.83-2.828z\" />\n" +
-                "</svg></button>"
-            //"defaultContent": "<button class='text-white bg-gradient-to-br from-purple-600 to-blue-500 hover:bg-gradient-to-bl focus:ring-4 focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2'>Edit</i></button>"
-        },
+                "targets": -2,
+                "data": null,
+                "defaultContent": "<button class='hover:bg-sunset-400 font-large rounded-lg text-sm px-5 py-2.5'><svg xmlns=\"http://www.w3.org/2000/svg\" class=\"h-5 w-5\" viewBox=\"0 0 20 20\" fill=\"currentColor\">\n" +
+                    "  <path d=\"M13.586 3.586a2 2 0 112.828 2.828l-.793.793-2.828-2.828.793-.793zM11.379 5.793L3 14.172V17h2.828l8.38-8.379-2.83-2.828z\" />\n" +
+                    "</svg></button>"
+                //"defaultContent": "<button class='text-white bg-gradient-to-br from-purple-600 to-blue-500 hover:bg-gradient-to-bl focus:ring-4 focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2'>Edit</i></button>"
+            },
             {
                 "targets": -1,
                 "data": null,
@@ -40,4 +40,89 @@ $(document).ready(function () {
             }],
         "bInfo": false
     });
+
+    //Add Overlay
+    const overlay = document.querySelector('#overlay')
+    const addBtn = document.querySelector('#addAccessoryBtn')
+    const closeBtn = document.querySelector('#close-modal')
+    const toggleModal = () => {
+        console.log('click')
+        overlay.classList.toggle('hidden')
+        overlay.classList.toggle('flex')
+    }
+
+    $(document).on('click', '#close-modal', function () {
+        toggleModal()
+    });
+    $(document).on('click', '#addAccessoryBtn', function () {
+        clickAdd(this)
+        toggleModal()
+    })
+    $(document).on('click', "#cancelBtn", function () {
+        toggleModal()
+    })
+
+    $('#accessoryType').change(function () {
+        console.log('click')
+        var selectedValue = jQuery(this).val()
+        if (selectedValue === "Others") {
+            $("#forNewType").removeClass('hidden')
+        } else {
+            $("#forNewType").addClass('hidden')
+        }
+    })
+
+
+    // Delete Overlay
+    const deleteOverlay = document.querySelector('#deleteOverlay')
+    const toggleDeleteModal = () => {
+        deleteOverlay.classList.toggle('hidden')
+        deleteOverlay.classList.toggle('flex')
+    }
+    $(document).on('click', '.closeDeleteModal', function () {
+        toggleDeleteModal()
+    });
+    $(document).on('click', '.deleteDeviceBtn', function () {
+        clickDelete(this)
+        toggleDeleteModal()
+    });
+
+
 });
+
+function clickAdd(e) {
+    $.get('/Accessory/AddDeviceDetails',
+        function (data) {
+            document.getElementById("accessoryId").value = data.accessory.id + 1
+            var accessoryTypeDDL = document.getElementById("accessoryType")
+            if (accessoryTypeDDL.length === 0) {
+                for (var i = 0; i < data.accessoryTypes.length; i++) {
+                    var element = document.createElement("option")
+                    element.textContent = data.accessoryTypes[i].type
+                    element.value = data.accessoryTypes[i].id
+                    accessoryTypeDDL.appendChild(element)
+                }
+                var last = document.createElement("option")
+                last.textContent = "Others"
+                last.value = "Others"
+                accessoryTypeDDL.appendChild(last)
+            }
+        })
+}
+
+function clickDelete(e) {
+    $.get('/Accessory/View/' + e.getAttribute('data-id'),  // url
+        function (data, textStatus, jqXHR) {  // success callback
+            document.getElementById("del-accessory-id").value = data.id
+            document.getElementById("accessoryName").innerHTML = data.name
+            document.getElementById("del-accessory-name").value = data.name
+        });
+}
+
+$("#del-cfm").on('input', function () {
+    if (this.value === $("#deviceName").text()) {
+        $("#delBtn").removeClass('disabled')
+    } else {
+        $("#delBtn").addClass('disabled')
+    }
+})

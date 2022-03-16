@@ -1,4 +1,4 @@
-namespace LivingLab.Core.Entities.DTO;
+namespace LivingLab.Core.Entities.DTO.Device;
 /// <remarks>
 /// Author: Team P1-3
 /// </remarks>
