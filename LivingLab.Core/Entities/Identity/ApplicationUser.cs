@@ -7,8 +7,12 @@ namespace LivingLab.Core.Entities.Identity;
 public class ApplicationUser : IdentityUser
 {
     // Add additional profile data for application users by adding properties to this class
+    public new string?  Id { get; set; }
+
     public string? FirstName { get; set; }
     public string? LastName { get; set; }
+    public new string? Email { get; set; }
+
     // NotificationEmails and NotificationSMS references are required
     // to force Entity Framework to recognize the many-to-many relationship
     // but based on our design, applicationuser should not hold reference to notification messages

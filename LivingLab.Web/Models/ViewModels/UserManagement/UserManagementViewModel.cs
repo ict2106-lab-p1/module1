@@ -12,9 +12,10 @@ namespace LivingLab.Web.Models.ViewModels.UserManagement;
 /// </remarks>
 public class UserManagementViewModel
 {
-  
+    public string? Id { get; set; }
     public string? FirstName { get; set; }
     public string? LastName { get; set; }
+    public string? Email { get; set; }
     private List<EmailLog> NotificationEmails { get; set; } = new List<EmailLog>();
     private List<SmsLog> NotificationSmses { get; set; } = new List<SmsLog>();
     public string? AuthenticationType { get; set; }
