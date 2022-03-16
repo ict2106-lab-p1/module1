@@ -61,6 +61,7 @@ public static class ConfigureServiceContainer
         services.AddTransient<IDeviceDomainService, DeviceDomainService>();
         services.AddTransient<IAccessoryDomainService, AccessoryDomainService>();
         services.AddTransient<IEnergyLogDomainService, EnergyLogDomainService>();
+        services.AddTransient<ISessionStatsDomainService, SessionStatsDomainService>();
 
 
         return services;

@@ -7,6 +7,7 @@ using LivingLab.Web.Models.DTOs.Todo;
 using LivingLab.Web.Models.ViewModels;
 using LivingLab.Web.Models.ViewModels.Accessory;
 using LivingLab.Web.Models.ViewModels.Device;
+using LivingLab.Web.Models.ViewModels.SessionStats;
 
 namespace LivingLab.Web.Mapping;
 
@@ -20,6 +21,7 @@ public class MappingProfile : Profile
         CreateMap<EnergyUsageLog, LogItemViewModel>();
         CreateMap<Device, DeviceViewModel>();
         CreateMap<Accessory, AccessoryViewModel>();
+        CreateMap<SessionStats, SessionStatsViewModel>();
         CreateMap<ViewDeviceTypeDTO, DeviceTypeViewModel>();
         CreateMap<ViewAccessoryTypeDTO, AccessoryTypeViewModel>();
         
