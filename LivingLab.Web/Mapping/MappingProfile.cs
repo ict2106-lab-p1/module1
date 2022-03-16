@@ -2,6 +2,7 @@ using AutoMapper;
 
 using LivingLab.Core.Entities;
 using LivingLab.Core.Entities.DTO;
+using LivingLab.Core.Entities.Identity;
 using LivingLab.Core.Models;
 using LivingLab.Web.Models.DTOs.Todo;
 using LivingLab.Web.Models.ViewModels;
@@ -23,7 +24,8 @@ public class MappingProfile : Profile
         CreateMap<Accessory, AccessoryViewModel>();
         CreateMap<ViewDeviceTypeDTO, DeviceTypeViewModel>();
         CreateMap<ViewAccessoryTypeDTO, AccessoryTypeViewModel>();
-        CreateMap<ViewAccountsDTO, UserManagementViewModel>();
+        CreateMap<ApplicationUser, UserManagementViewModel>();
+
 
         
         
@@ -37,9 +39,7 @@ public class MappingProfile : Profile
                 opt => opt.MapFrom(src => TimeSpan.FromMinutes(src.Interval)));
         CreateMap<DeviceViewModel, Device>();
         CreateMap<AccessoryViewModel, Accessory>();
-
-
-        CreateMap<UserManagementViewModel, User>();
+        CreateMap<UserManagementViewModel, ApplicationUser>();
 
     }
 }

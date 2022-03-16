@@ -30,10 +30,10 @@ public class UserManagementService : IUserManagementService
     public async Task<ViewUserManagementViewModel> GetAllAccounts()
     {
         //get account service 
-        List<User> viewAccountDtos = await _accountDomainService.ViewAccounts();
+        List<ApplicationUser> viewAccountDtos = await _accountDomainService.ViewAccounts();
         //map viewDeviceTypeDto to deviceTypeViewModel
         List<UserManagementViewModel> allUserList =
-            _mapper.Map<List<User>, List<UserManagementViewModel>>(viewAccountDtos);
+            _mapper.Map<List<ApplicationUser>, List<UserManagementViewModel>>(viewAccountDtos);
         ViewUserManagementViewModel accountViewModel = new ViewUserManagementViewModel();
         accountViewModel.userList = allUserList;
         return accountViewModel;

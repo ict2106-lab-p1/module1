@@ -23,7 +23,7 @@ public class AccountDomainService: IAccountDomainService
     }
     
     
-    public Task<List<User>> ViewAccounts()
+    public Task<List<ApplicationUser>> ViewAccounts()
     {
         return _accountRepository.GetAllAccount();
     } 

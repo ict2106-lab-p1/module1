@@ -10,7 +10,7 @@ namespace LivingLab.Infrastructure.Repositories;
 /// <remarks>
 /// Author: Team P1-5
 /// </remarks>
-public class AccountRepository : Repository<User>, IAccountRepository
+public class AccountRepository : Repository<ApplicationUser>, IAccountRepository
 {
     private readonly ApplicationDbContext _context;
 
@@ -20,7 +20,7 @@ public class AccountRepository : Repository<User>, IAccountRepository
     }
     
     //Get all user accounts
-    public async Task<List<User>> GetAllAccount()
+    public async Task<List<ApplicationUser>> GetAllAccount()
     {
         // var accountGroup = await _context.Users.Include(a => a.Faculty)
         //     .GroupBy(t => t.Faculty!)

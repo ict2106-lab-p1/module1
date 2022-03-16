@@ -1,4 +1,5 @@
 using LivingLab.Web.Controllers.Api;
+using LivingLab.Web.Models.ViewModels.UserManagement;
 using LivingLab.Web.UIServices.UserManagement;
 
 using Microsoft.AspNetCore.Mvc;
@@ -13,17 +14,20 @@ namespace LivingLab.Web.Controllers;
 [Route("userManagement")]
 public class UserManagementController : Controller
 {
+    private readonly ILogger<UserManagementController> _logger;
     private readonly IUserManagementService _userManagementService;
-    public UserManagementController(IUserManagementService userManagementService)
+    public UserManagementController(ILogger<UserManagementController> logger, IUserManagementService userManagementService)
     {
+        _logger = logger;
         _userManagementService = userManagementService;
     }
     
 
     [Route("index")]
-    public IActionResult UserBookings()
+    public async Task<IActionResult> UserBookings()
     {
-        return View("Index");    
+        ViewUserManagementViewModel viewUserManagementViewModel = await _userManagementService.GetAllAccounts();
+        return View("Index", viewUserManagementViewModel); 
     }
    
 

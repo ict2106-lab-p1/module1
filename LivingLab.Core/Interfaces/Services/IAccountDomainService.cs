@@ -14,6 +14,6 @@ namespace LivingLab.Core.Interfaces.Services;
 public interface IAccountDomainService
 
 {
-    Task<List<User>> ViewAccounts();
+    Task<List<ApplicationUser>> ViewAccounts();
 
 }
