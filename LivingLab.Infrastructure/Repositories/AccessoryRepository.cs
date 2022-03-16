@@ -16,13 +16,6 @@ public class AccessoryRepository : Repository<Accessory>, IAccessoryRepository
     {
         _context = context;
     }
-    
-    public async Task<List<Accessory>> GetAccessoryList()
-    {
-        // retrieve accessory table together with accessory type details using include to join entities 
-        List<Accessory> accessories = await _context.Accessories.Include(a => a.AccessoryType).ToListAsync();
-        return accessories;
-    }
 
     public async Task<List<Accessory>> GetAccessoryWithAccessoryType(string accessoryType)
     {
@@ -57,5 +50,13 @@ public class AccessoryRepository : Repository<Accessory>, IAccessoryRepository
         var accessory = await _context.Accessories.OrderByDescending(a => a.Id).FirstOrDefaultAsync();
         return accessory;
     }
-
+    public async Task<Accessory> DeleteAccessory(Accessory deleteAccessory)
+    {
+        // retrieve accessory db together with accessory type details using include to join entities
+        Accessory currentAccessory = (await _context.Accessories.SingleOrDefaultAsync(d => d.Id == deleteAccessory.Id))!;
+        _context.Accessories.Remove(currentAccessory);
+        await _context.SaveChangesAsync();
+        Console.WriteLine("Delete Succ");
+        return deleteAccessory;
+    }
 }

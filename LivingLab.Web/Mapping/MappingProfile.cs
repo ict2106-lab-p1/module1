@@ -25,6 +25,7 @@ public class MappingProfile : Profile
         CreateMap<ViewDeviceTypeDTO, DeviceTypeViewModel>();
         CreateMap<ViewAccessoryTypeDTO, OverallAccessoryTypeViewModel>();
         CreateMap<AccessoryType, AccessoryTypeViewModel>();
+        CreateMap<AddAccessoryDetailsDTO, AddAccessoryDetailsViewModel>();
         
         
         // ViewModel/ApiModel to Domain

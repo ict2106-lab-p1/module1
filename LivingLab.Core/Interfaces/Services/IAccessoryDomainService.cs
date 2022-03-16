@@ -10,9 +10,8 @@ public interface IAccessoryDomainService
 {
     Task<List<Accessory>> ViewAccessory(string accessoryType);
     Task<List<ViewAccessoryTypeDTO>> ViewAccessoryType();
-    
-    Task<List<AccessoryType>> GetAllAsyncAccessoryType();
-    Task<Accessory> GetAccessoryLastRow();
 
-    public Task<Accessory> AddAccessory(Accessory accessory);
+    Task<Accessory> AddAccessory(Accessory accessory);
+    Task<Accessory> DeleteAccessory(Accessory deleteAccessory);
+    Task<AddAccessoryDetailsDTO> AddAccessoryDetails();
 }

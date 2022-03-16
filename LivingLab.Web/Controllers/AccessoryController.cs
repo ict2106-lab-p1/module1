@@ -4,7 +4,6 @@ using Microsoft.AspNetCore.Mvc;
 using LivingLab.Web.Models.ViewModels;
 using LivingLab.Web.Models.ViewModels.Accessory;
 using LivingLab.Web.UIServices.Accessory;
-using LivingLab.Web.UIServices.Device;
 
 namespace LivingLab.Web.Controllers;
 /// <remarks>
@@ -38,27 +37,31 @@ public class AccessoryController : Controller
         return View("ViewAccessoryType", viewAccessories);
     }
     
-    // public async Task<AddAccessoryViewModel> AddDeviceDetails()
-    // { 
-    //     //retrieve data from db
-    //     AddAccessoryViewModel accessoryViewModel = await _accessoryService.AddAccessoryDetails();
-    //
-    //     return accessoryViewModel;
-    // }
+    
+    [Route("AddDeviceDetails")]
+    public async Task<AddAccessoryDetailsViewModel> AddDeviceDetails()
+    { 
+        //retrieve data from db
+        AddAccessoryDetailsViewModel accessoryDetails = await _accessoryService.AddAccessoryDetails();
+        return accessoryDetails;
+    }
     
     [HttpPost]
-    public async Task<IActionResult> CreateAccessory(ViewAccessoryViewModel viewModel)
+    public async Task<IActionResult> CreateAccessory(AddAccessoryDetailsViewModel viewModel)
     {
         await _accessoryService.AddAccessory(viewModel);
         return RedirectToAction("ViewAccessoryType");
     }
-
-    // [HttpGet]
-    // public async Task<IActionResult> GetAll()
-    // {
-    //     List<Accessory> accessoryList = await _accessoryRepository.GetAccessoryWithAccessoryType();
-    //     return Ok(accessoryList);
-    // }
+    
+    [HttpPost("View/Delete")]
+    public async Task<IActionResult> DeleteAccessory(AccessoryViewModel deleteAccessory)
+    {
+        await _accessoryService.DeleteAccessory(deleteAccessory); 
+        
+        // Temp - To display ViewAll after editing
+        ViewAccessoryViewModel viewAcceesory = await _accessoryService.ViewAccessory(deleteAccessory.AccessoryType.Type);
+        return View("ViewAccessory", viewAcceesory);
+    }
 
     [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
     public IActionResult Error()

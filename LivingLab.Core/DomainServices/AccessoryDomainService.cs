@@ -37,11 +37,26 @@ public class AccessoryDomainService : IAccessoryDomainService
     {
         return _accessoryRepository.GetLastRow();
     }
+    
+    public async Task<AddAccessoryDetailsDTO> AddAccessoryDetails()
+    {
+        Accessory accessory = await _accessoryRepository.GetLastRow();
+        List<AccessoryType> accessoryTypeList = await _accessoryTypeRepository.GetAllAsync();
+        return new AddAccessoryDetailsDTO
+        {
+            Accessory = accessory, AccessoryTypes = accessoryTypeList
+        };
+    }
 
     public async Task<Accessory> AddAccessory(Accessory accessory)
     {
         await _accessoryRepository.AddAsync(accessory);
         
         return accessory;
+    }
+    
+    public Task<Accessory> DeleteAccessory(Accessory deletedAccessory)
+    {
+        return _accessoryRepository.DeleteAccessory(deletedAccessory);
     }
 }
