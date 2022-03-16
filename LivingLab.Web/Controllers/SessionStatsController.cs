@@ -9,7 +9,7 @@ using Microsoft.AspNetCore.Mvc;
 /// Author: Team P1-3
 /// </remarks>
 
-[Route("Logging")]
+[Route("SessionStats")]
 public class SessionStatsController : Controller
 {
     private readonly ILogger<SessionStatsController> _logger;
@@ -21,7 +21,6 @@ public class SessionStatsController : Controller
         _sessionStatsService = sessionStatsService;
     }
     
-    [Route("View")]
     public async Task<IActionResult> ViewSessionStats()
     {
         ViewSessionStatsViewModel viewSessionStats = await _sessionStatsService.ViewSessionStats();
