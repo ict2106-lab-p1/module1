@@ -1,3 +1,6 @@
+using LivingLab.Web.Models.ViewModels.UserManagement;
+using LivingLab.Web.UIServices.UserManagement;
+
 using Microsoft.AspNetCore.Authorization;
 
 namespace LivingLab.Web.Controllers;
@@ -14,13 +17,18 @@ using Microsoft.AspNetCore.Mvc;
 [Route("p1_5/")]
 public class P1_5Controller : Controller
 {
-    private readonly ILogger<HomeController> _logger;
+    private readonly ILogger<P1_5Controller> _logger;
+    private readonly IUserManagementService _userManagementService;
 
-    public P1_5Controller(ILogger<HomeController> logger)
+    
+    
+    public P1_5Controller(ILogger<P1_5Controller> logger, IUserManagementService userManagementService)
     {
         _logger = logger;
-    }
+        _userManagementService = userManagementService;
 
+    }
+ 
     [Route("booking")]
     public IActionResult Booking()
     {
@@ -33,6 +41,13 @@ public class P1_5Controller : Controller
     // {
     //     return View("ManageUsers");
     // }
+    [Route("manageLabUsers")]
+
+    public async Task<IActionResult> ManageLabUsers()
+    {
+        ViewUserManagementViewModel viewUserManagementViewModel = await _userManagementService.GetAllAccounts();
+        return View("ManageLabUsers", viewUserManagementViewModel);
+    } 
     
     [Route("manageLabBookings")]
     public IActionResult ManageLabBookings()
@@ -40,19 +55,20 @@ public class P1_5Controller : Controller
         return View("ManageLabBooking");
     }
 
-    
-    [Route("manageLabUsers")]
-    public IActionResult ManageLabUsers()
-    {
-        return View("ManageLabUsers");
-    }
+    //
+    // [Route("manageLabUsers")]
+    // public IActionResult ManageLabUsers()
+    // {
+    //     return View("ManageLabUsers");
+    // }
+    //
 
     [Route("createLabAccount")]
     public IActionResult CreateLabAccount()
     {
         return View("CreateLabAccount");
     }
-
+    
     [Route("createLabTechAccount")]
     public IActionResult CreateLabTechAccount()
     {
@@ -60,7 +76,7 @@ public class P1_5Controller : Controller
     }
     
     
-
+    
     [Route("labProfile")]
     public IActionResult LabProfile()
     {

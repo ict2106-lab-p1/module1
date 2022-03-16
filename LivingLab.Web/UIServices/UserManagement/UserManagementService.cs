@@ -1,0 +1,58 @@
+using AutoMapper;
+
+using LivingLab.Core.Entities.DTO;
+using LivingLab.Core.Entities.Identity;
+using LivingLab.Core.Interfaces.Repositories;
+using LivingLab.Core.Interfaces.Services;
+using LivingLab.Web.Models.DTOs.Todo;
+using LivingLab.Web.Models.ViewModels.Accessory;
+using LivingLab.Web.Models.ViewModels.Device;
+using LivingLab.Web.Models.ViewModels.UserManagement;
+using LivingLab.Web.UIServices.Todo;
+
+namespace LivingLab.Web.UIServices.UserManagement;
+/// <summary>
+/// This is a UI-specific service so it belongs in the Web project.
+/// It does not contain any business logic and works with UI-specific types (view models and DTOs).
+/// </summary>
+/// <remarks>
+/// Author: Team P1-5
+/// </remarks>
+public class UserManagementService : IUserManagementService
+{
+    private readonly IMapper _mapper;
+    private readonly IAccountDomainService _accountDomainService;
+    
+    public UserManagementService(IMapper mapper, IAccountDomainService accountDomainService)
+    {
+        _mapper = mapper;
+        _accountDomainService = accountDomainService;
+    }
+
+    public async Task<ViewUserManagementViewModel> GetAllAccounts()
+    {
+        List<ViewAccountsDTO> viewAccountDtos = await _accountDomainService.ViewAccounts();
+        //map viewDeviceTypeDto to deviceTypeViewModel
+        List<UserManagementViewModel> allUserList =
+            _mapper.Map<List<ViewAccountsDTO>, List<UserManagementViewModel>>(viewAccountDtos);
+        ViewUserManagementViewModel accountViewModel = new ViewUserManagementViewModel();
+        accountViewModel.userList = allUserList;
+        return accountViewModel;
+    }
+    
+
+    public async Task<ApplicationUser> GetAccount(string userId)
+    {
+        throw new NotImplementedException();
+    }
+
+    public async Task<ApplicationUser> AddAccount(ApplicationUser user)
+    {
+        throw new NotImplementedException();
+    }
+
+    public async Task<int> DeleteAccount(string userId)
+    {
+        throw new NotImplementedException();
+    }
+}

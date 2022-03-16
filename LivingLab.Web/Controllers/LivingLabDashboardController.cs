@@ -1,5 +1,5 @@
 using LivingLab.Web.Controllers.Api;
-using LivingLab.Web.UIServices.Account;
+using LivingLab.Web.UIServices.UserManagement;
 
 namespace LivingLab.Web.Controllers;
 /// <remarks>
@@ -7,8 +7,8 @@ namespace LivingLab.Web.Controllers;
 /// </remarks>
 public class LivingLabDashboardController: BaseApiController
 {
-    private readonly IAccountService _accountService;
-    public LivingLabDashboardController(IAccountService accountService)
+    private readonly IUserManagementService _accountService;
+    public LivingLabDashboardController(IUserManagementService accountService)
     {
         _accountService = accountService;
     }

@@ -32,7 +32,8 @@ public class DeviceRepository : Repository<Device>, IDeviceRepository
 
     public async Task<List<Device>> GetAllDevicesByType(string deviceType)
     {
-        List<Device> deviceList = await _context.Devices.Where(t => deviceType.Contains(t.Type)).ToListAsync();
+        List<Device> deviceList;
+        deviceList = await _context.Devices.Where(t => deviceType.Contains(t.Type)).ToListAsync();
         return deviceList;
     }
 }

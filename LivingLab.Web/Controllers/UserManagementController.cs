@@ -1,5 +1,5 @@
 using LivingLab.Web.Controllers.Api;
-using LivingLab.Web.UIServices.Account;
+using LivingLab.Web.UIServices.UserManagement;
 
 using Microsoft.AspNetCore.Mvc;
 
@@ -10,25 +10,18 @@ namespace LivingLab.Web.Controllers;
 ///
 /// 
 
-[Route("Account")]
-public class AccountController: Controller
+[Route("userManagement")]
+public class UserManagementController : Controller
 {
-    private readonly IAccountService _accountService;
-    public AccountController(IAccountService accountService)
+    private readonly IUserManagementService _userManagementService;
+    public UserManagementController(IUserManagementService userManagementService)
     {
-        _accountService = accountService;
+        _userManagementService = userManagementService;
     }
     
-    // [Route("Index")]
-    //
-    // public async Task<IActionResult> Index()
-    // // public AccountController(IAccountService accountService)
-    // // {
-    // //     _accountService = accountService;
-    // // }
-    // //
-    [Route("Index")]
-    public IActionResult Index()
+
+    [Route("index")]
+    public IActionResult UserBookings()
     {
         return View("Index");    
     }

@@ -1,3 +1,7 @@
+using LivingLab.Core.Entities.DTO;
+using LivingLab.Core.Entities.Identity;
+using LivingLab.Core.Interfaces.Repositories;
+
 namespace LivingLab.Core.Interfaces.Services;
 /// <summary>
 /// Interfaces for the domain services should
@@ -6,7 +10,9 @@ namespace LivingLab.Core.Interfaces.Services;
 /// <remarks>
 /// Author: Team P1-5
 /// </remarks>
-public class IAccountDomainService
+public interface IAccountDomainService
+
 {
-    
+    Task<List<ViewAccountsDTO>> ViewAccounts();
+
 }

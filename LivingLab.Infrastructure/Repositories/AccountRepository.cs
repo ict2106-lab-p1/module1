@@ -1,12 +1,16 @@
+using LivingLab.Core.Entities;
+using LivingLab.Core.Entities.DTO;
 using LivingLab.Core.Entities.Identity;
 using LivingLab.Core.Interfaces.Repositories;
 using LivingLab.Infrastructure.Data;
+
+using Microsoft.EntityFrameworkCore;
 
 namespace LivingLab.Infrastructure.Repositories;
 /// <remarks>
 /// Author: Team P1-5
 /// </remarks>
-public class AccountRepository : Repository<ApplicationUser>, IAccountRepository
+public class AccountRepository : Repository<User>, IAccountRepository
 {
     private readonly ApplicationDbContext _context;
 
@@ -14,24 +18,39 @@ public class AccountRepository : Repository<ApplicationUser>, IAccountRepository
     {
         _context = context;
     }
-
-    public async Task<List<ApplicationUser>?> GetAllAccount()
+    
+    //Get all user accounts
+    public async Task<List<ViewAccountsDTO>> GetAllAccount()
     {
-        throw new NotImplementedException();
+        // var accountGroup = await _context.Users.GroupBy(t => t.Faculty).Select(t=> new{Key = t.Key, Count = t.Count()}).ToListAsync();
+        
+        var accountGroup = await _context.Users.Include(a => a.Faculty)
+            .GroupBy(t => t.Faculty!)
+            .Select(t=> new{Key = t.Key, Count = t.Count()})
+            .ToListAsync();
+        List<ViewAccountsDTO> accountDtos = new List<ViewAccountsDTO>();
+        foreach (var group in accountGroup)
+        {
+            ViewAccountsDTO accountDto = new ViewAccountsDTO();
+            accountDto.Faculty = group.Key;
+            accountDto.Id = group.Count;
+            accountDtos.Add(accountDto);
+        }
+        return accountDtos;
     }
 
-    public async Task<ApplicationUser?> GetAccount(string userId)
-    {
-        throw new NotImplementedException();
-    }
-
-    public async Task<ApplicationUser?> AddAccount(ApplicationUser user)
-    {
-        throw new NotImplementedException();
-    }
-
-    public async Task<int> DeleteAccount(string userId)
-    {
-        throw new NotImplementedException();
-    }
+    // public async Task<ApplicationUser?> GetAccount(string userId)
+    // {
+    //     throw new NotImplementedException();
+    // }
+    //
+    // public async Task<ApplicationUser?> AddAccount(ApplicationUser user)
+    // {
+    //     throw new NotImplementedException();
+    // }
+    //
+    // public async Task<int> DeleteAccount(string userId)
+    // {
+    //     throw new NotImplementedException();
+    // }
 }
