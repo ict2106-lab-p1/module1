@@ -11,6 +11,7 @@ public interface IAccessoryRepository : IRepository<Accessory>
     Task<List<Accessory>> GetAccessoryWithAccessoryType(string accessoryType);
     Task<List<ViewAccessoryTypeDTO>> GetAccessoryType();
     Task<Accessory> GetLastRow();
+    Task<AccessoryDetailsDTO> EditAccessory(AccessoryDetailsDTO accessoryDetailsDto);
     Task<Accessory> DeleteAccessory(Accessory deletedAccessory);
     Task<Accessory> GetAccessory(int id);
 }

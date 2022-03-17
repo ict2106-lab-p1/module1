@@ -4,64 +4,66 @@
     ViewData["Title"] = "Accessory Details";
 }
 
-
-<div class="flex flex-wrap -mx-3 mb-2">
-    <div class="w-full px-3">
-        <label class="tracking-wide text-gray-700 text-xs font-bold mb-2" for="accessoryId">
-            Accessory Id
-        </label>
-        <input class="appearance-none block w-full bg-gray-100 text-gray-700 border border-gray-300 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="accessoryId" name="Accessory.Id" type="text" disabled>
-    </div>
-</div>
 <div class="flex flex-wrap -mx-3 mb-6">
     <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
-        <label class="tracking-wide text-gray-700 text-xs font-bold mb-2" for="accessoryType">
+        <label class="tracking-wide text-gray-700 text-xs font-bold mb-2" for="editAccessoryId">
+            Accessory Id
+        </label>
+        <input class="appearance-none block w-full bg-gray-100 text-gray-700 border border-gray-300 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="editAccessoryId" name="editAccessoryId" type="number">
+
+    </div>
+    <div class="w-full md:w-1/2 px-3">
+        <label class="tracking-wide text-gray-700 text-xs font-bold mb-2" for="editAccessoryType">
             Accessory Type
         </label>
         <div class="relative">
 
-            <select class="block appearance-none w-full bg-white text-gray-900 border border-gray-200 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="accessoryType" name="Accessory.AccessoryType.Id">
+            <select class="block appearance-none w-full bg-white text-gray-900 border border-gray-200 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="editAccessoryType" name="Accessory.AccessoryType.Id">
             </select>
         </div>
     </div>
-    <div class="w-full md:w-1/2 px-3">
-        <label class="tracking-wide text-gray-700 text-xs font-bold mb-2" for="accessoryName">
-            Accessory Name
-        </label>
-        <input class="appearance-none block w-full bg-white text-gray-900 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="accessoryName" name="Accessory.AccessoryType.Name" type="text">
-    </div>
 </div>
+
 <div class="flex flex-wrap -mx-3 mb-6">
     <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
-        <label class="tracking-wide text-gray-700 text-xs font-bold mb-2" for="edit-description">
-            Description
+        <label class="tracking-wide text-gray-700 text-xs font-bold mb-2" for="editAccessoryName">
+            Accessory Name
         </label>
-        <input class="appearance-none block w-full bg-white text-gray-900 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="edit-description" type="text" name="Accessory.AccessoryType.Description">
+        <input class="appearance-none block w-full bg-white text-gray-900 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="editAccessoryName" name="Accessory.AccessoryType.Name" type="text">
+
     </div>
     <div class="w-full md:w-1/2 px-3">
-        <label class="tracking-wide text-gray-700 text-xs font-bold mb-2" for="edit-Status">
+        <label class="tracking-wide text-gray-700 text-xs font-bold mb-2" for="editStatus">
             Status
         </label>
         <div class="relative">
-            <input class="appearance-none block w-full bg-white text-gray-900 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="edit-Status" name="Accessory.Status" type="text">
+            <input class="appearance-none block w-full bg-white text-gray-900 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="editStatus" name="Accessory.Status" type="text">
         </div>
     </div>
+</div>
 
+<div class="flex flex-wrap -mx-3 mb-2">
+    <div class="w-full px-3">
+        <label class="tracking-wide text-gray-700 text-xs font-bold mb-2" for="editDescription">
+            Description
+        </label>
+        <input class="appearance-none block w-full bg-white text-gray-900 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="editDescription" type="text" name="Accessory.AccessoryType.Description">
+    </div>
 </div>
 
 <div class="flex flex-wrap -mx-3 mb-6">
     <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
-        <label class="tracking-wide text-gray-700 text-xs font-bold mb-2" for="edit-dueDate">
+        <label class="tracking-wide text-gray-700 text-xs font-bold mb-2" for="editDueDate">
             Due Date
         </label>
-        <input class="appearance-none block w-full bg-white text-gray-900 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="edit-dueDate" type="text" name="Accessory.DueDate">
+        <input class="appearance-none block w-full bg-white text-gray-900 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="editDueDate" type="text" name="Accessory.DueDate">
     </div>
     <div class="w-full md:w-1/2 px-3">
-        <label class="tracking-wide text-gray-700 text-xs font-bold mb-2" for="edit-labUser">
+        <label class="tracking-wide text-gray-700 text-xs font-bold mb-2" for="editLabUser">
             Borrowed By
         </label>
         <div class="relative">
-            <select class="block appearance-none w-full bg-white text-gray-900 border border-gray-200  py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="edit-labUser" name="Accessory.LabUserId">
+            <select class="block appearance-none w-full bg-white text-gray-900 border border-gray-200  py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="editLabUser" name="Accessory.LabUserId">
                 <option value="0">Tom</option>
                 <option value="1">Samy</option>
             </select>
@@ -69,3 +71,6 @@
     </div>
 
 </div>
+
+<input type="hidden" id="AccessoryId" name="Accessory.Id"/>
+<input type="hidden" id="AccessoryType" name="Accessory.AccessoryType.Type"/>

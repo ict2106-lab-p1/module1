@@ -64,4 +64,16 @@ public class AccessoryRepository : Repository<Accessory>, IAccessoryRepository
         Console.WriteLine("Delete Succ");
         return deleteAccessory;
     }
+
+    public async Task<AccessoryDetailsDTO> EditAccessory(AccessoryDetailsDTO accessoryDetailsDto)
+    {
+        Accessory accessory = (_context.Accessories.Include(d => d.AccessoryType)
+            .SingleOrDefault(d => d.Id == accessoryDetailsDto.Accessory.Id))!;
+        accessory.AccessoryType.Name = accessoryDetailsDto.Accessory.AccessoryType.Name;
+        accessory.AccessoryType.Type = accessoryDetailsDto.Accessory.AccessoryType.Type;
+        accessory.AccessoryType.Borrowable = accessoryDetailsDto.BorrowableValue == "1";
+        accessory.DueDate = accessoryDetailsDto.Accessory.DueDate;
+        await _context.SaveChangesAsync();
+        return accessoryDetailsDto;
+    }
 }

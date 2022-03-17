@@ -108,9 +108,12 @@ public class AccessoryServices : IAccessoryService
         return viewAccessoryViewModel;
     }
 
-    public async Task<AccessoryViewModel> EditAccessory(AccessoryDetailsViewModel viewModelInput)
+    public async Task<AccessoryDetailsViewModel> EditAccessory(AccessoryDetailsViewModel viewModelInput)
     {
-        return new AccessoryViewModel();
+        AccessoryDetailsDTO accessoryDetailsDto =
+            _mapper.Map<AccessoryDetailsViewModel, AccessoryDetailsDTO>(viewModelInput);
+        await _accessoryDomainService.EditAccessory(accessoryDetailsDto);
+        return viewModelInput;
     }
 
     public async Task<AccessoryViewModel> DeleteAccessory(AccessoryViewModel deleteAccessory)

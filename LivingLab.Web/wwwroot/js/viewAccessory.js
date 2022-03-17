@@ -79,7 +79,7 @@ $(document).ready(function () {
         editOverlay.classList.toggle('hidden')
         editOverlay.classList.toggle('flex')
     }
-    $(document).on('click', '.close-edit-modal', function () {
+    $(document).on('click', '.closeEditModal', function () {
         toggleEditModal()
     });
     $(document).on('click', '.editAccessoryBtn', function () {
@@ -128,13 +128,31 @@ function clickEdit(e) {
     $.get('/Accessory/GetEditDetails/'+e.getAttribute('data-id'),  // url
         function (data, textStatus, jqXHR) {  // success callback
             console.log("Device data returned: " , data)
-            // document.getElementById("grid-device-id").value = data.id
-            // document.getElementById("grid-serialnum").value = data.serialNo
-            // document.getElementById("grid-name").value = data.name
-            // document.getElementById("grid-device-type").value = data.type
-            // document.getElementById("grid-desc").value = data.description
-            // document.getElementById("grid-status").value = data.status
-            // document.getElementById("grid-threshold").value = data.threshold
+            document.getElementById("editAccessoryId").value = data.accessory.id
+            document.getElementById("AccessoryId").value = data.accessory.id
+            var accessoryTypeDDL = document.getElementById("editAccessoryType")
+            if (accessoryTypeDDL.length === 0) {
+                // populate the dropdown list
+                for (var i = 0; i < data.accessoryTypes.length; i++) {
+                    var element = document.createElement("option")
+                    element.textContent = data.accessoryTypes[i].type
+                    element.value = data.accessoryTypes[i].id
+                    accessoryTypeDDL.appendChild(element)
+                }
+            }
+            // set the selected value to specific type
+            for (var option of accessoryTypeDDL.options){
+                console.log(data.accessory.accessoryTypeId)
+                if (option.value == data.accessory.accessoryTypeId){
+                    option.selected = true;
+                }
+            }
+            document.getElementById("AccessoryType").value = accessoryTypeDDL.options[accessoryTypeDDL.selectedIndex].textContent
+            document.getElementById("editAccessoryName").value = data.accessory.accessoryType.name
+            document.getElementById("editDescription").value = data.accessory.accessoryType.description
+            document.getElementById("editStatus").value = data.accessory.status
+            document.getElementById("editDueDate").value = data.accessory.dueDate
+            document.getElementById("editLabUser").value = data.accessory.labUserId
         });
 }
 

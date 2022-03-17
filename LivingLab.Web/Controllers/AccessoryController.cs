@@ -9,7 +9,7 @@ namespace LivingLab.Web.Controllers;
 /// <remarks>
 /// Author: Team P1-3
 /// </remarks>
-[Route("Accessory")]
+[Route("/Accessory")]
 public class AccessoryController : Controller
 {
     private readonly ILogger<AccessoryController> _logger;
@@ -61,14 +61,14 @@ public class AccessoryController : Controller
         return accessoryViewModel;
     }
     
-    [HttpPost]
+    [HttpPost("CreateAccessory")]
     public async Task<IActionResult> CreateAccessory(AccessoryDetailsViewModel viewModel)
     {
         await _accessoryService.AddAccessory(viewModel);
         return RedirectToAction("ViewAccessoryType");
     }
     
-    [HttpPost]
+    [HttpPost("EditAccessory")]
     public async Task<IActionResult> EditAccessory(AccessoryDetailsViewModel viewModel)
     {
         await _accessoryService.EditAccessory(viewModel);
