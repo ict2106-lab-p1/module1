@@ -37,12 +37,27 @@ public class AccessoryDomainService : IAccessoryDomainService
     {
         return _accessoryRepository.GetLastRow();
     }
+
+    public Task<Accessory> GetAccessory(int id)
+    {
+        return _accessoryRepository.GetAccessory(id);
+    }
     
-    public async Task<AddAccessoryDetailsDTO> AddAccessoryDetails()
+    public async Task<AccessoryDetailsDTO> AddAccessoryDetails()
     {
         Accessory accessory = await _accessoryRepository.GetLastRow();
         List<AccessoryType> accessoryTypeList = await _accessoryTypeRepository.GetAllAsync();
-        return new AddAccessoryDetailsDTO
+        return new AccessoryDetailsDTO
+        {
+            Accessory = accessory, AccessoryTypes = accessoryTypeList
+        };
+    }
+
+    public async Task<AccessoryDetailsDTO> EditAccessoryDetails(int id)
+    {
+        Accessory accessory = await _accessoryRepository.GetAccessory(id);
+        List<AccessoryType> accessoryTypeList = await _accessoryTypeRepository.GetAllAsync();
+        return new AccessoryDetailsDTO
         {
             Accessory = accessory, AccessoryTypes = accessoryTypeList
         };
@@ -54,6 +69,8 @@ public class AccessoryDomainService : IAccessoryDomainService
         
         return accessory;
     }
+    
+    
     
     public Task<Accessory> DeleteAccessory(Accessory deletedAccessory)
     {

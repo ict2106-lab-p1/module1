@@ -13,5 +13,7 @@ public interface IAccessoryDomainService
 
     Task<Accessory> AddAccessory(Accessory accessory);
     Task<Accessory> DeleteAccessory(Accessory deleteAccessory);
-    Task<AddAccessoryDetailsDTO> AddAccessoryDetails();
+    Task<AccessoryDetailsDTO> AddAccessoryDetails();
+    Task<Accessory> GetAccessory(int id);
+    Task<AccessoryDetailsDTO> EditAccessoryDetails(int id);
 }

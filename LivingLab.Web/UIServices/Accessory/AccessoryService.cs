@@ -37,28 +37,49 @@ public class AccessoryServices : IAccessoryService
     {
         List<ViewAccessoryTypeDTO> viewAccessoryTypeDtos = await _accessoryDomainService.ViewAccessoryType();
         List<OverallAccessoryTypeViewModel> accessoryTypeViewModels =
-            _mapper.Map<List<ViewAccessoryTypeDTO>, List<OverallAccessoryTypeViewModel>>(viewAccessoryTypeDtos);      ViewAccessoryTypeViewModel viewAccessoryTypeViewModel = new ViewAccessoryTypeViewModel();
+            _mapper.Map<List<ViewAccessoryTypeDTO>, List<OverallAccessoryTypeViewModel>>(viewAccessoryTypeDtos);
+        ViewAccessoryTypeViewModel viewAccessoryTypeViewModel = new ViewAccessoryTypeViewModel();
         return new ViewAccessoryTypeViewModel {accessoryTypeList = accessoryTypeViewModels};
     }
 
-    public async Task<AddAccessoryDetailsViewModel> AddAccessoryDetails()
+    public async Task<AccessoryViewModel> GetAccessory(int id)
+    {
+        Core.Entities.Accessory accessory = await _accessoryDomainService.GetAccessory(id);
+        AccessoryViewModel accessoryViewModel = _mapper.Map<Core.Entities.Accessory, AccessoryViewModel>(accessory);
+        return accessoryViewModel;
+    }
+
+    public async Task<AccessoryDetailsViewModel> AddAccessoryDetails()
     {
         //retrieve data from db
-        AddAccessoryDetailsDTO accessoryDetails = await _accessoryDomainService.AddAccessoryDetails();
+        AccessoryDetailsDTO accessoryDetails = await _accessoryDomainService.AddAccessoryDetails();
         AccessoryViewModel accessory =
             _mapper.Map<Core.Entities.Accessory, AccessoryViewModel>(accessoryDetails.Accessory);
         List<AccessoryTypeViewModel> accessoryTypeList =
             _mapper.Map<List<Core.Entities.AccessoryType>, List<AccessoryTypeViewModel>>(
                 accessoryDetails.AccessoryTypes);
-        AddAccessoryDetailsViewModel deviceVM =
-            _mapper.Map<AddAccessoryDetailsDTO, AddAccessoryDetailsViewModel>(accessoryDetails);
-        return new AddAccessoryDetailsViewModel {Accessory = accessory, AccessoryTypes = accessoryTypeList};
+        AccessoryDetailsViewModel accessoryVM =
+            _mapper.Map<AccessoryDetailsDTO, AccessoryDetailsViewModel>(accessoryDetails);
+        return new AccessoryDetailsViewModel {Accessory = accessory, AccessoryTypes = accessoryTypeList};
     }
 
-    public async Task<ViewAccessoryViewModel> AddAccessory(AddAccessoryDetailsViewModel viewModelInput)
+    public async Task<AccessoryDetailsViewModel> EditAccessoryDetails(int id)
     {
-        
-        AddAccessoryDetailsViewModel addAccessoryDetails = viewModelInput;
+        //retrieve data from db
+        AccessoryDetailsDTO accessoryDetails = await _accessoryDomainService.EditAccessoryDetails(id);
+        AccessoryViewModel accessory =
+            _mapper.Map<Core.Entities.Accessory, AccessoryViewModel>(accessoryDetails.Accessory);
+        List<AccessoryTypeViewModel> accessoryTypeList =
+            _mapper.Map<List<Core.Entities.AccessoryType>, List<AccessoryTypeViewModel>>(
+                accessoryDetails.AccessoryTypes);
+        AccessoryDetailsViewModel accessoryVM =
+            _mapper.Map<AccessoryDetailsDTO, AccessoryDetailsViewModel>(accessoryDetails);
+        return new AccessoryDetailsViewModel {Accessory = accessory, AccessoryTypes = accessoryTypeList};
+    }
+
+    public async Task<ViewAccessoryViewModel> AddAccessory(AccessoryDetailsViewModel viewModelInput)
+    {
+        AccessoryDetailsViewModel addAccessoryDetails = viewModelInput;
         ViewAccessoryViewModel viewAccessoryViewModel = new ViewAccessoryViewModel();
         AccessoryViewModel accessoryVM = new AccessoryViewModel();
         // Add new accessory Type
@@ -85,6 +106,11 @@ public class AccessoryServices : IAccessoryService
         await _accessoryDomainService.AddAccessory(newAccessory);
 
         return viewAccessoryViewModel;
+    }
+
+    public async Task<AccessoryViewModel> EditAccessory(AccessoryDetailsViewModel viewModelInput)
+    {
+        return new AccessoryViewModel();
     }
 
     public async Task<AccessoryViewModel> DeleteAccessory(AccessoryViewModel deleteAccessory)

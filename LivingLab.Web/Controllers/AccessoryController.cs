@@ -38,18 +38,40 @@ public class AccessoryController : Controller
     }
     
     
-    [Route("AddDeviceDetails")]
-    public async Task<AddAccessoryDetailsViewModel> AddDeviceDetails()
+    [Route("AddAccessoryDetails")]
+    public async Task<AccessoryDetailsViewModel> AddAccessoryDetails()
     { 
         //retrieve data from db
-        AddAccessoryDetailsViewModel accessoryDetails = await _accessoryService.AddAccessoryDetails();
+        AccessoryDetailsViewModel accessoryDetails = await _accessoryService.AddAccessoryDetails();
         return accessoryDetails;
     }
     
+    [Route("GetEditDetails/{id}")]
+    public async Task<AccessoryDetailsViewModel> EditAccessoryDetails(int id)
+    { 
+        //retrieve data from db
+        AccessoryDetailsViewModel accessoryDetails = await _accessoryService.EditAccessoryDetails(id);
+        return accessoryDetails;
+    }
+
+    [Route("GetDeleteDetails/{id}")]
+    public async Task<AccessoryViewModel> GetDeleteDetails(int id)
+    {
+        AccessoryViewModel accessoryViewModel = await _accessoryService.GetAccessory(id);
+        return accessoryViewModel;
+    }
+    
     [HttpPost]
-    public async Task<IActionResult> CreateAccessory(AddAccessoryDetailsViewModel viewModel)
+    public async Task<IActionResult> CreateAccessory(AccessoryDetailsViewModel viewModel)
     {
         await _accessoryService.AddAccessory(viewModel);
+        return RedirectToAction("ViewAccessoryType");
+    }
+    
+    [HttpPost]
+    public async Task<IActionResult> EditAccessory(AccessoryDetailsViewModel viewModel)
+    {
+        await _accessoryService.EditAccessory(viewModel);
         return RedirectToAction("ViewAccessoryType");
     }
     
@@ -59,8 +81,8 @@ public class AccessoryController : Controller
         await _accessoryService.DeleteAccessory(deleteAccessory); 
         
         // Temp - To display ViewAll after editing
-        ViewAccessoryViewModel viewAcceesory = await _accessoryService.ViewAccessory(deleteAccessory.AccessoryType.Type);
-        return View("ViewAccessory", viewAcceesory);
+        ViewAccessoryViewModel viewAccessory = await _accessoryService.ViewAccessory(deleteAccessory.AccessoryType.Type);
+        return View("ViewAccessory", viewAccessory);
     }
 
     [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

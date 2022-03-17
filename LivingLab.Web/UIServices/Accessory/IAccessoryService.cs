@@ -8,10 +8,15 @@ public interface IAccessoryService
 {
     Task<ViewAccessoryViewModel> ViewAccessory(string accessoryType);
     Task<ViewAccessoryTypeViewModel> ViewAccessoryType();
-    Task<ViewAccessoryViewModel> AddAccessory(AddAccessoryDetailsViewModel viewModelInput);
+    Task<ViewAccessoryViewModel> AddAccessory(AccessoryDetailsViewModel viewModelInput);
 
     Task<AccessoryViewModel> DeleteAccessory(AccessoryViewModel deleteAccessory);
 
-    Task<AddAccessoryDetailsViewModel> AddAccessoryDetails();
+    Task<AccessoryDetailsViewModel> AddAccessoryDetails();
+    Task<AccessoryViewModel> GetAccessory(int id);
+
+    Task<AccessoryViewModel> EditAccessory(AccessoryDetailsViewModel viewModelInput);
+
+    Task<AccessoryDetailsViewModel> EditAccessoryDetails(int id);
 
 }
