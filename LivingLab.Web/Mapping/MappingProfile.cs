@@ -26,6 +26,8 @@ public class MappingProfile : Profile
         CreateMap<ViewAccessoryTypeDTO, OverallAccessoryTypeViewModel>();
         CreateMap<AccessoryType, AccessoryTypeViewModel>();
         CreateMap<AccessoryDetailsDTO, AccessoryDetailsViewModel>();
+        CreateMap<ViewAccessoryTypeDTO, AccessoryTypeViewModel>();
+        CreateMap<ViewDeviceTypeDTO, DeviceTypeViewModel>();
         
         
         // ViewModel/ApiModel to Domain
@@ -38,9 +40,7 @@ public class MappingProfile : Profile
                 opt => opt.MapFrom(src => TimeSpan.FromMinutes(src.Interval)));
         CreateMap<DeviceViewModel, Device>();
         CreateMap<AccessoryViewModel, Accessory>();
-
-        CreateMap<ViewDeviceTypeDTO, DeviceTypeViewModel>();
-        
-        CreateMap<ViewAccessoryTypeDTO, AccessoryTypeViewModel>();
+        CreateMap<AccessoryTypeViewModel, ViewAccessoryTypeDTO>();
+        CreateMap<AccessoryDetailsViewModel, AccessoryDetailsDTO>();
     }
 }

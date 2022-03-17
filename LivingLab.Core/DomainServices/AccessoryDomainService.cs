@@ -42,6 +42,11 @@ public class AccessoryDomainService : IAccessoryDomainService
     {
         return _accessoryRepository.GetAccessory(id);
     }
+
+    public async Task<AccessoryDetailsDTO> EditAccessory(AccessoryDetailsDTO accessoryDetailsDto)
+    {
+        return await _accessoryRepository.EditAccessory(accessoryDetailsDto);
+    }
     
     public async Task<AccessoryDetailsDTO> AddAccessoryDetails()
     {
