@@ -37,11 +37,22 @@ public class DeviceController : Controller
         return View("ViewDevice", viewDevices);
     }
     
+    
     [Route("View/{id}")]
     public async Task<DeviceViewModel> ViewDeviceDetails(int id)
     { 
         //retrieve data from db
         DeviceViewModel device = await _deviceService.ViewDeviceDetails(id);
+
+        return device;
+        // return View("_DeviceDetails", device);
+    }
+    
+    [Route("ViewAddDetails")]
+    public async Task<DeviceViewModel> ViewAddDetails()
+    { 
+        //retrieve data from db
+        DeviceViewModel device = await _deviceService.ViewAddDetails();
 
         return device;
         // return View("_DeviceDetails", device);
@@ -62,9 +73,7 @@ public class DeviceController : Controller
     [HttpPost("View/Add")]
     public async Task<IActionResult> AddDevice(DeviceViewModel addedDevice)
     {
-        // await _deviceService.EditDevice(editedDevice);
-        
-        // Temp - To display ViewAll after editing
+        await _deviceService.AddDevice(addedDevice);
         ViewDeviceViewModel viewDevices = await _deviceService.ViewDevice(addedDevice.Type);
         return View("ViewDevice", viewDevices);
     }

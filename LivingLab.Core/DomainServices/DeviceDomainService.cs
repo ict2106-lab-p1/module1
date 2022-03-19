@@ -30,7 +30,14 @@ public class DeviceDomainService : IDeviceDomainService
     {
         return _deviceRepository.GetDeviceDetails(id);
     }
-    
+    public Task<Device> GetDeviceLastRow()
+    {
+        return _deviceRepository.GetLastRow();
+    }
+    public Task<Device> AddDevice(Device addedDevice)
+    {
+        return _deviceRepository.AddDevice(addedDevice);
+    }
     public Task<Device> EditDeviceDetails(Device editedDevice)
     {
         return _deviceRepository.EditDeviceDetails(editedDevice);

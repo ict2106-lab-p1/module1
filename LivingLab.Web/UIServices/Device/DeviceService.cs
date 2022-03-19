@@ -53,6 +53,23 @@ public class DeviceService : IDeviceService
         return deviceVM;
     }
     
+    public async Task<DeviceViewModel> AddDevice(DeviceViewModel deviceViewModel)
+    {
+        //retrieve data from db
+        Core.Entities.Device addDevice = _mapper.Map<DeviceViewModel, Core.Entities.Device> (deviceViewModel);
+        await _deviceDomainService.AddDevice(addDevice);
+        return deviceViewModel;
+    }
+    
+    public async Task<DeviceViewModel> ViewAddDetails()
+    {
+        //retrieve data from db
+        Core.Entities.Device device = await _deviceDomainService.GetDeviceLastRow();
+        DeviceViewModel deviceVM = _mapper.Map<Core.Entities.Device, DeviceViewModel> (device);
+        return deviceVM;
+    }
+    
+    
     public async Task<DeviceViewModel> EditDevice(DeviceViewModel deviceViewModel)
     {
         //retrieve data from db
