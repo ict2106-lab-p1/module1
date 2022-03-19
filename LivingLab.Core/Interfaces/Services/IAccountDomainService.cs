@@ -15,5 +15,7 @@ public interface IAccountDomainService
 
 {
     Task<List<ApplicationUser>> ViewAccounts();
+    Task<ApplicationUser> DeleteAccount(ApplicationUser deletedUser);
+
 
 }

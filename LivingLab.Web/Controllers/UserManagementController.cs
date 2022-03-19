@@ -29,8 +29,16 @@ public class UserManagementController : Controller
         ViewUserManagementViewModel viewUserManagementViewModel = await _userManagementService.GetAllAccounts();
         return View("Index", viewUserManagementViewModel); 
     }
-   
 
+    [HttpPost("View/Delete")]
+    public async Task<IActionResult> DeleteUser(UserManagementViewModel deleteAccount)
+    {
+        await _userManagementService.DeleteAccount(deleteAccount); 
+        
+        // ViewUserManagementViewModel viewAccounts =  await _userManagementService.DeleteAccount(deleteAccount); 
+
+        return View("Index");
+    }
 
     // // GET: api/Account
     // [HttpGet]

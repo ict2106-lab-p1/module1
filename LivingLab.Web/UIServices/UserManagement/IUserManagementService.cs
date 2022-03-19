@@ -8,4 +8,6 @@ namespace LivingLab.Web.UIServices.UserManagement;
 public interface IUserManagementService
 {
     Task<ViewUserManagementViewModel> GetAllAccounts();
+    Task<UserManagementViewModel> DeleteAccount(UserManagementViewModel userViewModel);
+
 }

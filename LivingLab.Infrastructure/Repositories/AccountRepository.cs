@@ -1,3 +1,5 @@
+using System.Net.Mime;
+
 using LivingLab.Core.Entities;
 using LivingLab.Core.Entities.DTO;
 using LivingLab.Core.Entities.Identity;
@@ -22,24 +24,11 @@ public class AccountRepository : Repository<ApplicationUser>, IAccountRepository
     //Get all user accounts
     public async Task<List<ApplicationUser>> GetAllAccount()
     {
-        // var accountGroup = await _context.Users.Include(a => a.Faculty)
-        //     .GroupBy(t => t.Faculty!)
-        //     .Select(t=> new{Key = t.Key, Count = t.Count()})
-        //     .ToListAsync();
-        //retrieve users from database
         var accountGroup = await _context.Users.ToListAsync();
-        //only call required entity to display table
-        // List<ViewAccountsDTO> accountDtos = new List<ViewAccountsDTO>();
-        // foreach (var group in accountGroup)
-        // {
-        //     ViewAccountsDTO accountDto = new ViewAccountsDTO();
-        //     accountDto.Faculty = group.Key;
-        //     accountDto.Id = group.Count;
-        //     accountDtos.Add(accountDto);
-        // }
         return accountGroup;
     }
 
+    
     // public async Task<ApplicationUser?> GetAccount(string userId)
     // {
     //     throw new NotImplementedException();
@@ -50,8 +39,14 @@ public class AccountRepository : Repository<ApplicationUser>, IAccountRepository
     //     throw new NotImplementedException();
     // }
     //
-    // public async Task<int> DeleteAccount(string userId)
-    // {
-    //     throw new NotImplementedException();
-    // }
+    public async Task<ApplicationUser> DeleteAccount(ApplicationUser deleteUser)
+    {
+        // retrieve device db together with device type details using include to join entities
+        ApplicationUser currentUser = (await _context.Users.SingleOrDefaultAsync(d => d.Id == deleteUser.Id))!;
+        _context.Users.Remove(currentUser);
+        await _context.SaveChangesAsync();
+        Console.WriteLine("Delete Succ");
+            
+        return deleteUser;    
+    }
 }

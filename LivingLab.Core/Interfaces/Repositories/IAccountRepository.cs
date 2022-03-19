@@ -12,4 +12,6 @@ public interface IAccountRepository : IRepository<ApplicationUser>
     // Task<ApplicationUser?> GetAccount(string userId);
     // Task<ApplicationUser?> AddAccount(ApplicationUser user);
     // Task<int> DeleteAccount(string userId);
+    Task<ApplicationUser> DeleteAccount(ApplicationUser user);
+
 }

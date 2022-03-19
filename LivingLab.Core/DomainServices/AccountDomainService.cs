@@ -27,4 +27,8 @@ public class AccountDomainService: IAccountDomainService
     {
         return _accountRepository.GetAllAccount();
     } 
+    public Task<ApplicationUser> DeleteAccount(ApplicationUser deletedUser)
+    {
+        return _accountRepository.DeleteAccount(deletedUser);
+    } 
 }

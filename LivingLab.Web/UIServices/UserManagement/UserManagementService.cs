@@ -39,7 +39,15 @@ public class UserManagementService : IUserManagementService
         return accountViewModel;
     }
     
-
+    public async Task<UserManagementViewModel> DeleteAccount(UserManagementViewModel userViewModel)
+    {
+        //retrieve data from db
+        ApplicationUser deleteAccount = _mapper.Map<UserManagementViewModel, ApplicationUser> (userViewModel);
+        await _accountDomainService.DeleteAccount(deleteAccount);
+        
+        return userViewModel;    
+        
+    }
     public async Task<ApplicationUser> GetAccount(string userId)
     {
         throw new NotImplementedException();
@@ -50,8 +58,5 @@ public class UserManagementService : IUserManagementService
         throw new NotImplementedException();
     }
 
-    public async Task<int> DeleteAccount(string userId)
-    {
-        throw new NotImplementedException();
-    }
+   
 }
