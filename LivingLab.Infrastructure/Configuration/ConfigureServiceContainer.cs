@@ -51,6 +51,8 @@ public static class ConfigureServiceContainer
         services.AddTransient<IDeviceRepository, DeviceRepository>();
         services.AddTransient<ISessionStatsRepository, SessionStatsRepository>();
 
+        services.AddTransient<IAccountRepository, AccountRepository>();
+
         // Services
         services.AddTransient<ITodoDomainService, TodoDomainService>();
         services.AddTransient<IEnergyUsageLogCsvParser, EnergyUsageLogCsvParser>();
@@ -61,6 +63,8 @@ public static class ConfigureServiceContainer
         services.AddTransient<IDeviceDomainService, DeviceDomainService>();
         services.AddTransient<IAccessoryDomainService, AccessoryDomainService>();
         services.AddTransient<IEnergyLogDomainService, EnergyLogDomainService>();
+
+        services.AddTransient<IAccountDomainService, AccountDomainService>();
 
 
         return services;

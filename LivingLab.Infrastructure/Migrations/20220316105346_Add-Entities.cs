@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace LivingLab.Infrastructure.Migrations
 {
-    public partial class CreateInitialDB : Migration
+    public partial class AddEntities : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -109,6 +109,7 @@ namespace LivingLab.Infrastructure.Migrations
                     FirstName = table.Column<string>(type: "TEXT", nullable: true),
                     LastName = table.Column<string>(type: "TEXT", nullable: true),
                     AuthenticationType = table.Column<string>(type: "TEXT", nullable: true),
+                    OTP = table.Column<int>(type: "INTEGER", nullable: true),
                     SMSExpiry = table.Column<DateTime>(type: "TEXT", nullable: false),
                     UserFaculty = table.Column<string>(type: "TEXT", nullable: true),
                     UserName = table.Column<string>(type: "TEXT", maxLength: 256, nullable: true),
@@ -558,18 +559,18 @@ namespace LivingLab.Infrastructure.Migrations
 
             migrationBuilder.InsertData(
                 table: "Users",
-                columns: new[] { "Id", "AccessFailedCount", "AuthenticationType", "ConcurrencyStamp", "Email", "EmailConfirmed", "FirstName", "LastName", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SMSExpiry", "SecurityStamp", "TwoFactorEnabled", "UserFaculty", "UserName" },
-                values: new object[] { "UserId1", 0, "None", null, "David@gmail.com", false, "David", "Cheng", true, null, null, null, "testtesttest", "96878607", false, new DateTime(2022, 7, 19, 12, 0, 0, 0, DateTimeKind.Unspecified), null, false, "ICT", null });
+                columns: new[] { "Id", "AccessFailedCount", "AuthenticationType", "ConcurrencyStamp", "Email", "EmailConfirmed", "FirstName", "LastName", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "OTP", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SMSExpiry", "SecurityStamp", "TwoFactorEnabled", "UserFaculty", "UserName" },
+                values: new object[] { "UserId1", 0, "None", null, "David@gmail.com", false, "David", "Cheng", true, null, null, null, null, "testtesttest", "96878607", false, new DateTime(2022, 7, 19, 12, 0, 0, 0, DateTimeKind.Unspecified), null, false, "ICT", null });
 
             migrationBuilder.InsertData(
                 table: "Users",
-                columns: new[] { "Id", "AccessFailedCount", "AuthenticationType", "ConcurrencyStamp", "Email", "EmailConfirmed", "FirstName", "LastName", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SMSExpiry", "SecurityStamp", "TwoFactorEnabled", "UserFaculty", "UserName" },
-                values: new object[] { "UserId2", 0, "None", null, "henry@gmail.com", false, "Carlton", "Foo", true, null, null, null, "testtesttest", "12341234", false, new DateTime(2022, 7, 19, 12, 0, 0, 0, DateTimeKind.Unspecified), null, false, "SE", null });
+                columns: new[] { "Id", "AccessFailedCount", "AuthenticationType", "ConcurrencyStamp", "Email", "EmailConfirmed", "FirstName", "LastName", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "OTP", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SMSExpiry", "SecurityStamp", "TwoFactorEnabled", "UserFaculty", "UserName" },
+                values: new object[] { "UserId2", 0, "None", null, "henry@gmail.com", false, "Carlton", "Foo", true, null, null, null, null, "testtesttest", "12341234", false, new DateTime(2022, 7, 19, 12, 0, 0, 0, DateTimeKind.Unspecified), null, false, "SE", null });
 
             migrationBuilder.InsertData(
                 table: "Users",
-                columns: new[] { "Id", "AccessFailedCount", "AuthenticationType", "ConcurrencyStamp", "Email", "EmailConfirmed", "FirstName", "LastName", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SMSExpiry", "SecurityStamp", "TwoFactorEnabled", "UserFaculty", "UserName" },
-                values: new object[] { "UserId3", 0, "None", null, "houliang@gmail.com", false, "Hou Liang", "Yip", true, null, null, null, "testtesttest", "80808080", false, new DateTime(2022, 7, 19, 12, 0, 0, 0, DateTimeKind.Unspecified), null, false, "SE", null });
+                columns: new[] { "Id", "AccessFailedCount", "AuthenticationType", "ConcurrencyStamp", "Email", "EmailConfirmed", "FirstName", "LastName", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "OTP", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SMSExpiry", "SecurityStamp", "TwoFactorEnabled", "UserFaculty", "UserName" },
+                values: new object[] { "UserId3", 0, "None", null, "houliang@gmail.com", false, "Hou Liang", "Yip", true, null, null, null, null, "testtesttest", "80808080", false, new DateTime(2022, 7, 19, 12, 0, 0, 0, DateTimeKind.Unspecified), null, false, "SE", null });
 
             migrationBuilder.InsertData(
                 table: "LabAccess",

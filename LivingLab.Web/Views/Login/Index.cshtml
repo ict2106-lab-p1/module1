@@ -1,10 +1,7 @@
-﻿@page
-@model LoginModel
+@model LivingLab.Web.Models.ViewModels.Login.LoginViewModel
 @{
-    ViewData["Title"] = "Log in";
+    ViewData["Title"] = "Login";
 }
-
-<h1>@ViewData["Title"]</h1>
 
 <div class="row">
     <div class="col-md-4 text-center">
@@ -14,25 +11,25 @@
                 @* <div asp-validation-summary="ModelOnly" class="text-danger"></div> *@
                 <div class="form-floating">
                     <div class="flex justify-evenly mt-24">
-                        <input asp-for="Input.Email" class="form-control block w-4/12 h-12 px-4 py-1 text-base font-semibold bg-slate-600/10 bg-clip-padding border border-solid border-slate-600/10
+                        <input asp-for="Email" class="form-control block w-4/12 h-12 px-4 py-1 text-base font-semibold bg-slate-600/10 bg-clip-padding border border-solid border-slate-600/10
                               rounded-lg transition  ease-in-out m-0 focus:bg-slate-600/10 focus:border-slate-600 focus:outline-none" placeholder="Email" autocomplete="username" aria-required="true"/>
                     </div>
-                    <span asp-validation-for="Input.Email" class="text-sm text-red-500"></span>
+                    <span asp-validation-for="Email" class="text-sm text-red-500"></span>
                 </div>
                 
                 <div class="form-floating">
                     <div class="flex justify-evenly mt-8">
-                        <input asp-for="Input.Password" class="block w-4/12 h-12 px-4 py-1 text-base font-semibold bg-slate-600/10 bg-clip-padding border border-solid border-slate-600/10
+                        <input asp-for="Password" class="block w-4/12 h-12 px-4 py-1 text-base font-semibold bg-slate-600/10 bg-clip-padding border border-solid border-slate-600/10
                             rounded-lg transition ease-in-out m-0 focus:bg-slate-600/10 focus:border-slate-600 focus:outline-none" placeholder="Password" autocomplete="current-password" aria-required="true"/>
                     </div>
-                    <span asp-validation-for="Input.Password" class="text-sm text-red-500"></span>
+                    <span asp-validation-for="Password" class="text-sm text-red-500"></span>
                 </div>
                 
                 <div class="flex justify-center mt-4">
                     <div class="block w-4/12">
                         <div class="flex justify-between whitespace-nowrap">
-                            <label asp-for="Input.RememberMe" class="form-label font-semibold">
-                                    <input class="form-check-input rounded" asp-for="Input.RememberMe"/>
+                            <label asp-for="RememberMe" class="form-label font-semibold">
+                                    <input class="form-check-input rounded" asp-for="RememberMe"/>
                                     @* @Html.DisplayNameFor(m => m.Input.RememberMe) *@
                                     Remember Me?
                                 </label>

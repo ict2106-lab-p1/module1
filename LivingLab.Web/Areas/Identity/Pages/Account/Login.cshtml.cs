@@ -116,7 +116,8 @@ namespace LivingLab.Web.Areas.Identity.Pages.Account
                 if (result.Succeeded)
                 {
                     _logger.LogInformation("User logged in.");
-                    return LocalRedirect(returnUrl);
+                    return RedirectToAction("VerifyCode", "P1_5");
+                    
                 }
                 if (result.RequiresTwoFactor)
                 {

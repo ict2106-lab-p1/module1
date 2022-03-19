@@ -15,32 +15,6 @@ public class AccountController: BaseApiController
         _accountService = accountService;
     }
 
-    // // GET: api/Account
-    // [HttpGet]
-    // public async Task<IActionResult> GetAllAccount()
-    // {
-    //     return Ok(await _accountService.());
-    // }
-
-    // // GET: api/Account/"User1"
-    // [HttpGet("{userId:string}")]
-    // public IActionResult Get(string userId)
-    // {
-    //     return Ok(_todoService.GetTodoAsync(id));
-    // }
-    //
-    // // POST: api/Todo
-    // [HttpPost]
-    // public async Task<IActionResult> Post(CreateTodoDTO todo)
-    // {
-    //     try
-    //     {
-    //         return Ok(await _todoService.CreateTodoAsync(todo));
-    //     }
-    //     catch (Exception e)
-    //     {
-    //         return BadRequest(e.Message);
-    //     }
-    // }
+    
     
 }

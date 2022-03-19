@@ -1,11 +1,10 @@
 @* /// <remarks> *@
 @* /// Author: Team P1-5 *@
 @* /// </remarks> *@
-@model LivingLab.Web.Models.ViewModels.Login.LoginViewModel
-
+@model LivingLab.Web.Models.ViewModels.Login.VerifyViewModel
 @{
     ViewData["Title"] = "Verify Login";
-    }
+}
 
 <div class="row">
     <div class="col-md-4 text-center">
@@ -15,20 +14,23 @@
                 @* <div asp-validation-summary="ModelOnly" class="text-danger"></div> *@
                 <div class="form-floating">
                     <div class="flex justify-evenly mt-24">
-                        <input class="form-control block w-4/12 h-12 px-4 py-1 text-base font-semibold bg-slate-600/10 bg-clip-padding border border-solid border-slate-600/10
+                        <input asp-for="OTP" class="form-control block w-4/12 h-12 px-4 py-1 text-base font-semibold bg-slate-600/10 bg-clip-padding border border-solid border-slate-600/10
                               rounded-lg transition  ease-in-out m-0 focus:bg-slate-600/10 focus:border-slate-600 focus:outline-none" placeholder="Verification OTP" autocomplete="false" aria-required="true"/>
                     </div>
                     <span class="text-sm text-red-500"></span>
                 </div>
-                
-                <div class = "mt-16">
+
+                <div class="mt-16">
                     @* <button id="verify-submit" type="submit" class="w-4/12 h8 text-base text-white bg-gray-700 hover:bg-gray-800 focus:ring-4 focus:ring-gray-300 font-medium  rounded-md text-sm px-5 py-2.5 text-center">Verify</button> *@
-                    <button id="verify-submit" type="submit" class="w-4/12 h8 text-base text-white bg-gray-700 hover:bg-gray-800 focus:ring-4 focus:ring-gray-300 font-medium  rounded-md text-sm px-5 py-2.5 text-center"><a asp-controller="Home" asp-action="Index">Verify Code</a>
+                    <button id="verify-submit" type="submit" class="w-4/12 h8 text-base text-white bg-gray-700 hover:bg-gray-800 focus:ring-4 focus:ring-gray-300 font-medium  rounded-md text-sm px-5 py-2.5 text-center">
+                        <a asp-controller="Login" asp-action="VerifyCode">Verify Code</a>
                     </button>
                 </div>
-                
+            </form>
+            <form method="post">
                 <div class="mt-4">
-                    <button class="w-4/12 h8 text-base text-white bg-gray-700 hover:bg-gray-800 focus:ring-4 focus:ring-gray-300 font-medium rounded-md text-sm px-5 py-2.5 text-center"><a asp-controller="P1_5" asp-action="ResetCode">Re-send Code</a>
+                    <button type="submit" class="w-4/12 h8 text-base text-white bg-gray-700 hover:bg-gray-800 focus:ring-4 focus:ring-gray-300 font-medium rounded-md text-sm px-5 py-2.5 text-center">
+                        <a asp-controller="Login" asp-action="NewCode">Re-send Code</a>
                     </button>
                 </div>
             </form>
@@ -37,5 +39,5 @@
 </div>
 
 @section Scripts {
-    <partial name="_ValidationScriptsPartial" />
+    <partial name="_ValidationScriptsPartial"/>
 }

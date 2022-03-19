@@ -1,3 +1,5 @@
+using System.Net;
+
 using LivingLab.Infrastructure;
 using LivingLab.Infrastructure.Configuration;
 using LivingLab.Web;
@@ -76,6 +78,17 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 app.UseSession();
 app.UseRouting();
+
+app.UseStatusCodePages(async context => {
+    var request = context.HttpContext.Request;
+    var response = context.HttpContext.Response;
+
+    if (response.StatusCode == (int)HttpStatusCode.Unauthorized)
+
+    {
+        response.Redirect("/Identity/Account/Login");
+    }
+});
 
 app.UseAuthentication();
 app.UseAuthorization();

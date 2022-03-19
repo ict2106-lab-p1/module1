@@ -1,6 +1,7 @@
 using LivingLab.Web.UIServices.EnergyUsageAnalysisServices;
 using LivingLab.Web.UIServices.ManualLogs;
 using LivingLab.Web.UIServices.Accessory;
+using LivingLab.Web.UIServices.Account;
 using LivingLab.Web.UIServices.Device;
 using LivingLab.Web.UIServices.Todo;
 
@@ -27,16 +28,20 @@ public static class ConfigureWebServices
         services.AddTransient<IExportToCSVService, ExportToCSVService>();
         services.AddTransient<IDeviceService, DeviceService>();
         services.AddTransient<IAccessoryService, AccessoryServices>();
+        // Add application services.
+        services.AddTransient<IAccountService, AccountService>();
 
         return services;
     }
 
     private static IServiceCollection AddWebScopedServices(this IServiceCollection services)
     {
+        services.AddScoped<IAccountService, AccountService>();
         return services;
     }
     private static IServiceCollection AddWebSingletonServices(this IServiceCollection services)
     {
+        services.AddTransient<IAccountService, AccountService>();
         return services;
     }
 }
