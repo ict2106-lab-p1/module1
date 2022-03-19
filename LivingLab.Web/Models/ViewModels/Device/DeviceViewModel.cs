@@ -12,5 +12,7 @@ public class DeviceViewModel
     public string Status { get; set; }
     public string Type { get; set; }
     public string Description { get; set; }
-    public double Threshold { get; set; } 
+    public double Threshold { get; set; }
+    
+    /*public List<DeviceTypeViewModel> ViewDeviceTypeDtos { get; set; }*/
 }

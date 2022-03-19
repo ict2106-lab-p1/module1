@@ -45,13 +45,21 @@ $(document).ready(function () {
     const addOverlay = document.querySelector('#addOverlay')
     const addBtn = document.querySelector('#addDeviceBtn')
     const closeAddBtn = document.querySelector('.closeAddModal')
+    
     const toggleAddModal = () => {
         addOverlay.classList.toggle('hidden')
         addOverlay.classList.toggle('flex')
     }
-    addBtn.addEventListener('click', toggleAddModal)
     closeAddBtn.addEventListener('click', toggleAddModal)
+    
     $(document).on('click', "#cancelBtn", function () {
+        toggleAddModal()
+    })
+    $(document).on('click', "#addSubmitbtn", function () {
+        toggleAddModal()
+    })
+    $(document).on('click', "#addDeviceBtn", function () {
+        clickAdd(this)
         toggleAddModal()
     })
     
@@ -82,25 +90,29 @@ $(document).ready(function () {
         clickDelete(this)
         toggleDeleteModal()
     });
-
 });
 
 function clickAdd(e) {
-    $.get('/Accessory/AddDeviceDetails',
+    $.get('/Device/ViewAddDetails',
         function (data) {
-            document.getElementById("accessoryId").value = data.accessory.id + 1
-            var accessoryTypeDDL = document.getElementById("accessoryType")
-            for(var i=0; i < data.accessoryTypes.length; i++){
-                var element = document.createElement("option")
-                element.textContent = data.accessoryTypes[i].type
-                element.value = data.accessoryTypes[i].id
-                accessoryTypeDDL.appendChild(element)
-            }
-            var last = document.createElement("option")
-            last.textContent = "Others"
-            last.value = "Others"
-            accessoryTypeDDL.appendChild(last)
+            console.log("ViewAddDetails: " + data)
+            console.log("Last row Id: " + data.id)
+            document.getElementById("add-device-id").value = data.id + 1
         })
+/*
+    $.get('/Device/ViewType',
+        function (data) {
+            console.log("View all: " + data)
+            var deviceTypeDDL = document.getElementById("add-device-type")
+            if (deviceTypeDDL.length === 0) {
+                for (var i = 0; i < data.type.length; i++) {
+                    var element = document.createElement("option")
+                    element.textContent = data.type
+                    element.value = data.type
+                    deviceTypeDDL.appendChild(element)
+                }
+            }
+        })*/
 }
 
 function clickEdit(e) {

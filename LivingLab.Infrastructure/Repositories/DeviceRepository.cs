@@ -43,6 +43,21 @@ public class DeviceRepository : Repository<Device>, IDeviceRepository
         Device device = (await _context.Devices.SingleOrDefaultAsync(d => d.Id == id))!;
         return device;
     }
+    public async Task<Device> GetLastRow()
+    {
+        var device = await _context.Devices.OrderByDescending(d => d.Id).FirstOrDefaultAsync();
+        return device;
+    }
+    
+    public async Task<Device> AddDevice(Device addedDevice)
+    {
+        addedDevice.LabId = 1;
+        // add to database
+        addedDevice.LastUpdated = DateTime.Today;
+        _context.Devices.Add(addedDevice);
+        await _context.SaveChangesAsync();
+        return addedDevice;
+    }
     
     public async Task<Device> EditDeviceDetails(Device editedDevice)
     {
