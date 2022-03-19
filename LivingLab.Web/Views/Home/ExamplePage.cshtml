@@ -1,188 +1,38 @@
 @* your model imports/calls go here as per usual *@
-
-<div class="flex">
-    <div class="flex-grow">
-        <p class="text-4xl pb-3 flex items-center font-black">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-8 pr-2" viewBox="0 0 20 20" fill="currentColor">
-                <path d="M4 3a2 2 0 100 4h12a2 2 0 100-4H4z" />
-                <path fill-rule="evenodd"
-                    d="M3 8h14v7a2 2 0 01-2 2H5a2 2 0 01-2-2V8zm5 3a1 1 0 011-1h2a1 1 0 110 2H9a1 1 0 01-1-1z"
-                    clip-rule="evenodd" />
-            </svg>
-            Origin/Destinations
-        </p>
-        <div class="btn-group no-animation pb-2">
-            <span class="btn btn-xs bg-blush-500 border-0 hover:bg-blush-500 cursor-default">Available</span>
-            <span class="btn btn-xs border-0 cursor-default">30254</span>
-        </div>
-    </div>
+<div xmlns="http://www.w3.org/1999/html">
+    <p class="text-3xl pb-2 font-black">
+        Styling Sample
+    </p>
+    <a href="https://daisyui.com/components/">
+        <button class="btn-link">https://daisyui.com/components/</button>
+        <p class="mb-4">Theme in use: <strong>Corporate</strong> (under tailwindconfig.js)</p>
+    </a>
 </div>
-<div class="flex flex-wrap -mx-3 mb-20">
-    <div class="w-full px-3">
-        <div class="overflow-x-auto">
-            <table class="table w-full">
-                <thead>
-                    <tr>
-                        <th>Year/Month</th>
-                        <th>Day Type</th>
-                        <th>Hour</th>
-                        <th>Origin</th>
-                        <th>Destination</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>2020-08</td>
-                        <td>WEEKENDS/HOLIDAY</td>
-                        <td>8</td>
-                        <td class="underline cursor-pointer">
-                            <a href="#">
-                                Bef Wilkinson Rd
-                            </a>
-                        </td>
-                        <td class="underline cursor-pointer">
-                            <a href="#">
-                                Opp One Amber
-                            </a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>2020-08</td>
-                        <td>WEEKENDS/HOLIDAY</td>
-                        <td>22</td>
-                        <td class="underline cursor-pointer">
-                            <a href="#">
-                                KAMPONG BAHRU TER
-                            </a>
-                        </td>
-                        <td class="underline cursor-pointer">
-                            <a href="#">
-                                Blk 78
-                            </a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>2020-08</td>
-                        <td>WEEKENDS/HOLIDAY</td>
-                        <td>12</td>
-                        <td class="underline cursor-pointer">
-                            <a href="#">
-                                Opp Blk 461
-                            </a>
-                        </td>
-                        <td class="underline cursor-pointer">
-                            <a href="#">
-                                Wisma AUPE
-                            </a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>2020-08</td>
-                        <td>WEEKDAY</td>
-                        <td>17</td>
-                        <td class="underline cursor-pointer">
-                            <a href="#">
-                                Neptune Ct
-                            </a>
-                        </td>
-                        <td class="underline cursor-pointer">
-                            <a href="#">
-                                Opp Daikin S'pore
-                            </a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>2020-08</td>
-                        <td>WEEKENDS/HOLIDAY</td>
-                        <td>17</td>
-                        <td class="underline cursor-pointer">
-                            <a href="#">
-                                Neptune Ct
-                            </a>
-                        </td>
-                        <td class="underline cursor-pointer">
-                            <a href="#">
-                                Opp Daikin S'pore
-                            </a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>2020-08</td>
-                        <td>WEEKDAY</td>
-                        <td>7</td>
-                        <td class="underline cursor-pointer">
-                            <a href="#">
-                                Pusara Aman Mque
-                            </a>
-                        </td>
-                        <td class="underline cursor-pointer">
-                            <a href="#">
-                                Choa Chu Kang Int
-                            </a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>2020-08</td>
-                        <td>WEEKENDS/HOLIDAY</td>
-                        <td>10</td>
-                        <td class="underline cursor-pointer">
-                            <a href="#">
-                                Opp Blk 461
-                            </a>
-                        </td>
-                        <td class="underline cursor-pointer">
-                            <a href="#">
-                                Blk 17
-                            </a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>2020-08</td>
-                        <td>WEEKDAY</td>
-                        <td>10</td>
-                        <td class="underline cursor-pointer">
-                            <a href="#">
-                                Opp Blk 461
-                            </a>
-                        </td>
-                        <td class="underline cursor-pointer">
-                            <a href="#">
-                                Blk 17
-                            </a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>2020-08</td>
-                        <td>WEEKENDS/HOLIDAY</td>
-                        <td>15</td>
-                        <td class="underline cursor-pointer">
-                            <a href="#">
-                                Opp Yeo's Bldg
-                            </a>
-                        </td>
-                        <td class="underline cursor-pointer">
-                            <a href="#">
-                                The Interlace
-                            </a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>2020-08</td>
-                        <td>WEEKENDS/HOLIDAY</td>
-                        <td>15</td>
-                        <td class="underline cursor-pointer">
-                            <a href="#">
-                                Tampines Int
-                            </a>
-                        </td>
-                        <td class="underline cursor-pointer">
-                            <a href="#">
-                                Mjd Kassim
-                            </a>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-    </div>
+
+<div class="mb-8">
+    <p class="text-2xl pb-3 font-black">
+        Buttons
+    </p>
+    <p class="mb-1 font-bold">Primary Button (Higher level CTAs/Modals)</p>
+    <p class="my-2">btn btn-primary</p>
+    <button class="btn btn-primary"> Add new device</button>
+
+    <p class="mt-8 mb-1 font-bold">Secondary Button (View more/secondary level CTAs)</p>
+    <p class="my-2">btn btn-outline btn-primary</p>
+    <button class="btn btn-outline btn-primary"> View more</button>
+
+    <p class="mt-8 mb-1 font-bold">Disabled Button (Disabled state)</p>
+    <p class="my-2">btn btn-disabled</p>
+    <button class="btn btn-disabled"> Disabled</button>
+
+    <p class="mt-8 mb-1 font-bold">Ghost Button (Cancel in modals)</p>
+    <p class="my-2">btn btn-ghost</p>
+    <button class="btn btn-ghost"> Cancel</button>
+
+</div>
+
+<div>
+    <p class="text-2xl pb-3 font-black">
+    Modals (Taiwind Modals)
+    <p>Refer to Add Device modals <br> ../Device/ViewType -> 'Add Device'</p>
 </div>

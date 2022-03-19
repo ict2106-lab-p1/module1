@@ -17,8 +17,8 @@
     </div>
 
     <div class="justify-self-end">
-        <button id="addDeviceBtn" class="bg-purple-500 hover:bg-purple-700 text-white font-bold py-2 px-8 rounded">
-            Add device
+        <button id="addDeviceBtn" class="btn btn-primary font-bold rounded">
+            Add new device
         </button>
     </div>
 </div>
@@ -28,7 +28,7 @@
         <div class= "flex flex-wrap -mx-1 lg:-mx-4">
         @foreach (var device in Model.ViewDeviceTypeDtos)
         {
-            <div class="card w-64 bg-base-200 shadow-xl m-4">
+            <div class="card w-64 bg-base-100 shadow-xl m-4">
                 <figure>
                     <img src="https://ak.picdn.net/shutterstock/videos/3820817/thumb/1.jpg?ip=x480"
                             alt="">
@@ -37,7 +37,7 @@
                     <h2 class="card-title">@device.Type</h2>
                     <p>Quantity: @device.Quantity</p>
                     <div class="card-actions text-center">
-                        <button id="viewMoreBtn" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline mt-4 mb-2 viewMoreBtn" type="button">View More</button>
+                        <button id="viewMoreBtn" class="btn btn-outline btn-primary mt-2 viewMoreBtn" type="button">View More</button>
                     </div>
                 </div>
             </div>
