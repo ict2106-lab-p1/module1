@@ -3,6 +3,7 @@ using LivingLab.Web.UIServices.ManualLogs;
 using LivingLab.Web.UIServices.Accessory;
 using LivingLab.Web.UIServices.Account;
 using LivingLab.Web.UIServices.Device;
+using LivingLab.Web.UIServices.NotificationManagement;
 using LivingLab.Web.UIServices.Todo;
 
 namespace LivingLab.Web.Configuration;
@@ -30,6 +31,7 @@ public static class ConfigureWebServices
         services.AddTransient<IAccessoryService, AccessoryServices>();
         // Add application services.
         services.AddTransient<IAccountService, AccountService>();
+        services.AddTransient<INotificationManagementService, NotificationManagementService>();
 
         return services;
     }

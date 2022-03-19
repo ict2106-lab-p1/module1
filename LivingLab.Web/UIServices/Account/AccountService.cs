@@ -6,6 +6,7 @@ using LivingLab.Core.Interfaces.Repositories;
 using LivingLab.Core.Interfaces.Services;
 using LivingLab.Web.Models.DTOs.Todo;
 using LivingLab.Web.Models.ViewModels.Login;
+using LivingLab.Web.UIServices.NotificationManagement;
 using LivingLab.Web.UIServices.Todo;
 
 using Microsoft.AspNetCore.Identity;
@@ -24,7 +25,7 @@ public class AccountService : IAccountService
     private readonly SignInManager<ApplicationUser> _signInManager;
     private readonly ILogger<AccountService> _logger;
     
-    public AccountService(ILogger<AccountService> logger, SignInManager<ApplicationUser> signInManager, IAccountDomainService accountDomainService)
+    public AccountService( ILogger<AccountService> logger, SignInManager<ApplicationUser> signInManager, IAccountDomainService accountDomainService)
     {
         _signInManager = signInManager;
         _accountDomainService = accountDomainService;

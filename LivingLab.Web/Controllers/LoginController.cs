@@ -5,6 +5,7 @@ using LivingLab.Core.Entities.Identity;
 using LivingLab.Web.Models.ViewModels;
 using LivingLab.Web.Models.ViewModels.Login;
 using LivingLab.Web.UIServices.Account;
+using LivingLab.Web.UIServices.NotificationManagement;
 
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
@@ -23,13 +24,15 @@ public class LoginController : Controller
     private readonly IAccountService _accountService;
     private readonly SignInManager<ApplicationUser> _signInManager;
     private readonly UserManager<ApplicationUser> _userManager;
+    private readonly INotificationManagementService _notif;
 
-    public LoginController(ILogger<LoginController> logger, IAccountService accountService, SignInManager<ApplicationUser> signInManager, UserManager<ApplicationUser> userManager)
+    public LoginController(INotificationManagementService notif, ILogger<LoginController> logger, IAccountService accountService, SignInManager<ApplicationUser> signInManager, UserManager<ApplicationUser> userManager)
     {
         _logger = logger;
         _accountService = accountService;
         _signInManager = signInManager;
         _userManager = userManager;
+        _notif = notif;
 
     }
 
@@ -48,10 +51,10 @@ public class LoginController : Controller
     
     [HttpPost]
     [Route("VerifyCode")]
-    public async Task<RedirectToActionResult> VerifyCode(VerifyViewModel userDetails)
+    public async Task<RedirectToActionResult> VerifyCode(VerifyViewModel inputDetails)
     {
         ApplicationUser user = await _userManager.GetUserAsync(User);
-        var result = await _accountService.VerifyCode(user.Id, userDetails);
+        var result = await _accountService.VerifyCode(user.Id, inputDetails);
         if (result)
         {
             _logger.LogInformation("HENRY SUCCESS");
@@ -74,6 +77,7 @@ public class LoginController : Controller
         if (result)
         {
             _logger.LogInformation("HENRY CHANGE CODE");
+            await _notif.SendTextToPhone(user);
             return RedirectToAction("VerifyCode", "Login");
         }
         else
@@ -101,8 +105,8 @@ public class LoginController : Controller
                 {
                     _logger.LogInformation("Go to Verify Code");
                     ApplicationUser user = await _userManager.GetUserAsync(User);
-                    _logger.LogInformation(user.Id);
                     await _accountService.GenerateCode(user);
+                    await _notif.SendTextToPhone(user);
                     return RedirectToAction("VerifyCode", "Login");
                 }
                 else
@@ -114,6 +118,7 @@ public class LoginController : Controller
             catch (Exception e)
             {
                 _logger.LogInformation("Failed to login");
+                return View(userDetails);
             }
         }
         
