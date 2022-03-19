@@ -21,11 +21,22 @@ public class AccountDomainService: IAccountDomainService
     {
         _accountRepository = accountRepository;
     }
-    
-    
+
     public Task<List<ApplicationUser>> ViewAccounts()
     {
         return _accountRepository.GetAllAccount();
+    } 
+ 
+    
+    public Task<ApplicationUser> ViewAccountDetails(string id)
+    {
+        return _accountRepository.GetAccountDetails(id);
+    }
+
+
+    public Task<ApplicationUser> EditAccount(ApplicationUser editAccount)
+    {
+        return _accountRepository.EditUserDetail(editAccount);
     } 
     public Task<ApplicationUser> DeleteAccount(ApplicationUser deletedUser)
     {

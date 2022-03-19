@@ -27,7 +27,12 @@ public class AccountRepository : Repository<ApplicationUser>, IAccountRepository
         var accountGroup = await _context.Users.ToListAsync();
         return accountGroup;
     }
-
+    public async Task<ApplicationUser> GetAccountDetails(string id)
+    {
+        // retrieve device db together with device type details using include to join entities
+        ApplicationUser user = (await _context.Users.SingleOrDefaultAsync(d => d.Id == id))!;
+        return user;
+    }
     
     // public async Task<ApplicationUser?> GetAccount(string userId)
     // {

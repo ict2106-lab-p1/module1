@@ -39,6 +39,23 @@ public class UserManagementService : IUserManagementService
         return accountViewModel;
     }
     
+    public async Task<UserManagementViewModel> ViewUserDetails(string id)
+    {
+        //retrieve data from db
+        ApplicationUser user = await _accountDomainService.ViewAccountDetails(id);
+        UserManagementViewModel userVM = _mapper.Map< ApplicationUser, UserManagementViewModel> (user);
+        return userVM;
+    }
+
+    public async Task<UserManagementViewModel> EditAccount(UserManagementViewModel userViewModel)
+    {
+        //retrieve data from db
+        ApplicationUser editAccount = _mapper.Map<UserManagementViewModel, ApplicationUser> (userViewModel);
+        await _accountDomainService.EditAccount(editAccount);
+        
+        return userViewModel;    
+        
+    }
     public async Task<UserManagementViewModel> DeleteAccount(UserManagementViewModel userViewModel)
     {
         //retrieve data from db
@@ -48,15 +65,4 @@ public class UserManagementService : IUserManagementService
         return userViewModel;    
         
     }
-    public async Task<ApplicationUser> GetAccount(string userId)
-    {
-        throw new NotImplementedException();
-    }
-
-    public async Task<ApplicationUser> AddAccount(ApplicationUser user)
-    {
-        throw new NotImplementedException();
-    }
-
-   
 }

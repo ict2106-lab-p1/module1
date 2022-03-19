@@ -15,6 +15,10 @@ public interface IAccountDomainService
 
 {
     Task<List<ApplicationUser>> ViewAccounts();
+    Task<ApplicationUser> ViewAccountDetails(string id);
+
+    Task<ApplicationUser> EditAccount(ApplicationUser editAccount);
+
     Task<ApplicationUser> DeleteAccount(ApplicationUser deletedUser);
 
 
