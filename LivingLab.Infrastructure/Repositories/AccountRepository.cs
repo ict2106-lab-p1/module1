@@ -39,13 +39,28 @@ public class AccountRepository : Repository<ApplicationUser>, IAccountRepository
     //     throw new NotImplementedException();
     // }
     //
+    
+    public async Task<ApplicationUser> EditUserDetail(ApplicationUser editUser)
+    {
+        ApplicationUser currentUser = (await _context.Users.SingleOrDefaultAsync(d => d.Id == editUser.Id))!;
+        currentUser.FirstName = editUser.FirstName;
+        currentUser.LastName = editUser.LastName;
+        currentUser.Email = editUser.Email;
+        currentUser.UserFaculty  = editUser.UserFaculty;
+        currentUser.LabAccesses  = editUser.LabAccesses;
+        currentUser.PhoneNumber = editUser.PhoneNumber;
+        currentUser.PasswordHash = editUser.PasswordHash;
+        await _context.SaveChangesAsync();
+            
+        return editUser;
+    }
     public async Task<ApplicationUser> DeleteAccount(ApplicationUser deleteUser)
     {
-        // retrieve device db together with device type details using include to join entities
+        //getting users entity 
         ApplicationUser currentUser = (await _context.Users.SingleOrDefaultAsync(d => d.Id == deleteUser.Id))!;
         _context.Users.Remove(currentUser);
         await _context.SaveChangesAsync();
-        Console.WriteLine("Delete Succ");
+        Console.WriteLine("Delete successful");
             
         return deleteUser;    
     }
