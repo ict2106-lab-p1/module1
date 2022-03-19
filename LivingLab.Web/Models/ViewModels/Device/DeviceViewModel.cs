@@ -13,6 +13,10 @@ public class DeviceViewModel
     public string Type { get; set; }
     public string Description { get; set; }
     public double Threshold { get; set; }
+
+    public string? ReviewStatus { get; set; }
+    
+    public string? ReviewedBy { get; set; }
     
     /*public List<DeviceTypeViewModel> ViewDeviceTypeDtos { get; set; }*/
 }
