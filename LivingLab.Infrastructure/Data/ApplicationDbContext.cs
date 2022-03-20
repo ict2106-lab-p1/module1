@@ -55,6 +55,24 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
         modelBuilder.Entity<IdentityUserToken<string>>().ToTable("UserToken");
 
         modelBuilder.Seed();
+
+        modelBuilder.Entity<Device>(entity =>
+        {
+            entity.HasOne(d => d.Lab)
+            .WithMany(l => l.Devices)
+            .HasForeignKey("LabId");
+        });
+
+        modelBuilder.Entity<Accessory>(entity =>
+        {
+            entity.HasOne(a => a.Lab)
+            .WithMany(l => l.Accessories)
+            .HasForeignKey("LabId");
+            entity.HasOne(a => a.AccessoryType)
+            .WithMany(l => l.Accessories)
+            .HasForeignKey("AccessoryTypeId");
+        });
+
     }
 
 }

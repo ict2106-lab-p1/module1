@@ -38,13 +38,13 @@ public class HomeController : Controller
     {
         return View("Privacy");
     }
-    
+
     [Route("Logout")]
     public IActionResult Logout()
     {
         //Delete the Session object.
-         HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
-         _signInManager.SignOutAsync();
+        HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
+        _signInManager.SignOutAsync();
         HttpContext.Response.Cookies.Delete(".AspNetCore.Cookies");
         return RedirectToAction("Index");
     }
@@ -54,8 +54,8 @@ public class HomeController : Controller
     {
         return View("ExamplePage");
     }
-    
- 
+
+
 
     [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
     public IActionResult Error()

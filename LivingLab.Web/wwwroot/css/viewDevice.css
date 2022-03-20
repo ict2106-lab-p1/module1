@@ -1,8 +1,6 @@
 /* <remarks>*/
 
-
 /* Author: Team P1-3*/
-
 
 /* </remarks>*/
 
@@ -10,14 +8,14 @@
 @tailwind components;
 @tailwind utilities;
 .dataTables_wrapper .myfilter .dataTables_filter {
-    float: left
+  float: left;
 }
 
 #overlay {
-    z-index: 999;
+  z-index: 999;
 }
 
 .disabled {
-    pointer-events: none;
-    background: grey;
+  pointer-events: none;
+  background: grey;
 }

@@ -38,9 +38,25 @@ public class EnergyUsageRepository : Repository<EnergyUsageLog>, IEnergyUsageRep
         await BulkInsertAsync(logs);
     }
 
-    public Task<List<EnergyUsageLog>> GetDeviceEnergyUsageByDateTime(DateTime start, DateTime end)
+    public async Task<List<EnergyUsageLog>> GetDeviceEnergyUsageByDateTime(DateTime start, DateTime end)
     {
-        throw new NotImplementedException();
+        var logsForDateRange = await IncludeReferences(
+                _context.EnergyUsageLogs
+                .Where(log => log.LoggedDate >= start && log.LoggedDate <= end)
+            )
+            .ToListAsync();
+        return logsForDateRange;
+    }
+
+    public async Task<List<EnergyUsageLog>> GetDeviceEnergyUsageByDeviceTypeAndDate(string deviceType, DateTime start, DateTime end)
+    {
+        var logsForTypeInDateRange = await IncludeReferences(
+                _context.EnergyUsageLogs
+                .Where(log => log.LoggedDate >= start && log.LoggedDate <= end)
+                .Where(log => log.Device!.Type == deviceType)
+            )
+            .ToListAsync();
+        return logsForTypeInDateRange;
     }
 
     public Task<List<EnergyUsageLog>> GetDistinctDeviceEnergyUsage()
@@ -60,38 +76,65 @@ public class EnergyUsageRepository : Repository<EnergyUsageLog>, IEnergyUsageRep
 
     public async Task<List<EnergyUsageLog>> GetUsageByDeviceId(int id)
     {
-        var logsForDevice = await _context.EnergyUsageLogs
-            .Where(log => log.Device!.Id == id)
+        var logsForDevice = await IncludeReferences(
+                _context.EnergyUsageLogs
+                .Where(log => log.Device!.Id == id)
+            )
             .ToListAsync();
         return logsForDevice;
     }
 
     public async Task<List<EnergyUsageLog>> GetUsageByDeviceType(string deviceType)
     {
-        var logsForType = await _context.EnergyUsageLogs
-            .Where(log => log.Device!.Type == deviceType)
+        var logsForType = await IncludeReferences(
+                _context.EnergyUsageLogs
+                .Where(log => log.Device!.Type == deviceType)
+            )
             .ToListAsync();
         return logsForType;
     }
 
     public async Task<List<EnergyUsageLog>> GetUsageByLabId(int id)
     {
-        var logsForLab = await _context.EnergyUsageLogs
-            .Where(log => log.Lab!.LabId == id)
+        var logsForLab = await IncludeReferences(
+                _context.EnergyUsageLogs
+                .Where(log => log.Lab!.LabId == id)
+            )
             .ToListAsync();
         return logsForLab;
     }
 
     public Task<List<EnergyUsageLog>> GetUsageByUser(ApplicationUser? user)
     {
-        if(user == null) {
-            return _context.EnergyUsageLogs
-                .Where(log => log.LoggedBy != null)
-                .ToListAsync();
-        } else {
-            return _context.EnergyUsageLogs
-                .Where(log => log.LoggedBy != null && log.LoggedBy.Equals(user))
+        if (user == null)
+        {
+            return IncludeReferences(
+                    _context.EnergyUsageLogs
+                    .Where(log => log.LoggedBy != null)
+                )
                 .ToListAsync();
         }
+        else
+        {
+            return IncludeReferences(
+                    _context.EnergyUsageLogs
+                    .Where(log => log.LoggedBy != null && log.LoggedBy.Equals(user))
+                )
+                .ToListAsync();
+        }
+    }
+    protected override IQueryable<EnergyUsageLog> IncludeReferences(IQueryable<EnergyUsageLog> logQuery)
+    {
+        return base.IncludeReferences(logQuery)
+            .Include(log => log.Device)
+            .Include(log => log.Lab);
+    }
+
+    protected override async Task IncludeReferencesForFindAsync(EnergyUsageLog log)
+    {
+        await base.IncludeReferencesForFindAsync(log);
+        var deviceLoadTask = _context.Entry(log).Reference(l => l.Device).LoadAsync();
+        var labLoadTask = _context.Entry(log).Reference(l => l.Lab).LoadAsync();
+        await Task.WhenAll(deviceLoadTask, labLoadTask);
     }
 }
