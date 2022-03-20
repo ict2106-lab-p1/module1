@@ -1,6 +1,7 @@
 using System.Text;
 
 using LivingLab.Core.Interfaces.Services;
+using LivingLab.Core.Interfaces.Services.EnergyUsageInterfaces;
 using LivingLab.Core.Models;
 
 using Microsoft.AspNetCore.Http;

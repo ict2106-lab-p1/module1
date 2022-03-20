@@ -2,7 +2,7 @@
 /* Author: Team P1-3*/
 /* </remarks>*/
 
-$(document).ready(function () {
+$(document).ready(function() {
 
     const overlay = document.querySelector('#overlay')
     const addBtn = document.querySelector('#addDeviceBtn')
@@ -27,9 +27,8 @@ $(document).ready(function () {
     }
 
     viewMoreBtns.forEach(btn => btn.addEventListener('click', viewwMoreEventHandler))
-    
     $('.btnViewMore').each(function() {
-        $(this).on('click', function(evt){
+        $(this).on('click', function(evt) {
             $this = $(this);
             var dtRow = $this.parents('tr');
             document.postDeviceType.deviceType.value = dtRow[0].cells[0].innerHTML;
