@@ -1,5 +1,4 @@
 using LivingLab.Core.Entities;
-using LivingLab.Core.Entities.DTO;
 using LivingLab.Core.Entities.DTO.Device;
 using LivingLab.Core.Interfaces.Repositories;
 using LivingLab.Infrastructure.Data;
@@ -18,7 +17,7 @@ public class DeviceRepository : Repository<Device>, IDeviceRepository
     }
     public async Task<List<ViewDeviceTypeDTO>> GetViewDeviceType()
     {
-        var deviceGroup = await _context.Devices.GroupBy(t => t.Type).Select(t=> new{Key = t.Key, Count = t.Count()}).ToListAsync();
+        var deviceGroup = await _context.Devices.GroupBy(t => t.Type).Select(t => new { Key = t.Key, Count = t.Count() }).ToListAsync();
         List<ViewDeviceTypeDTO> deviceTypeDtos = new List<ViewDeviceTypeDTO>();
         foreach (var group in deviceGroup)
         {
@@ -27,7 +26,6 @@ public class DeviceRepository : Repository<Device>, IDeviceRepository
             deviceTypeDto.Quantity = group.Count;
             deviceTypeDtos.Add(deviceTypeDto);
         }
-        
         return deviceTypeDtos;
     }
 

@@ -1,8 +1,8 @@
 /* <remarks>*/
 /* Author: Team P1-3*/
 /* </remarks>*/
-$(document).ready(function () {
-    
+$(document).ready(function() {
+
     //Add Overlay
     const overlay = document.querySelector('#overlay')
     const viewMoreBtns = document.querySelectorAll('#viewMoreBtn')
@@ -12,17 +12,17 @@ $(document).ready(function () {
         overlay.classList.toggle('flex')
     }
 
-    $(document).on('click', '#close-modal', function () {
+    $(document).on('click', '#close-modal', function() {
         toggleModal()
     });
-    $(document).on('click', '#addAccessoryBtn', function () {
+    $(document).on('click', '#addAccessoryBtn', function() {
         clickAdd(this)
         toggleModal()
     });
-    $(document).on('click', "#cancelBtn", function () {
+    $(document).on('click', "#cancelBtn", function() {
         toggleModal()
     });
-    
+
     const viewwMoreEventHandler = () => {
         console.log("View More Accessory");
         var accessoryType = event.target.parentElement.parentElement.firstElementChild.textContent;
@@ -31,11 +31,10 @@ $(document).ready(function () {
         document.postAccessoryType.submit();
     }
     viewMoreBtns.forEach(btn => btn.addEventListener('click', viewwMoreEventHandler))
-    $('#AccessoryTypeId').change(function(){
+    $('#AccessoryTypeId').change(function() {
         console.log('click')
         var selectedValue = jQuery(this).val()
-        if (selectedValue === "Others")
-        {
+        if (selectedValue === "Others") {
             $("#forNewType").removeClass('hidden')
         } else {
             $("#forNewType").addClass('hidden')
@@ -44,14 +43,14 @@ $(document).ready(function () {
 
 });
 
+
 function clickAdd(e) {
     $.get('/Accessory/AddAccessoryDetails',
-        function (data) {
+        function(data) {
             document.getElementById("accessoryId").value = data.accessory.id + 1
             var accessoryTypeDDL = document.getElementById("accessoryType")
-            if (accessoryTypeDDL.length === 0)
-            {
-                for(var i=0; i < data.accessoryTypes.length; i++){
+            if (accessoryTypeDDL.length === 0) {
+                for (var i = 0; i < data.accessoryTypes.length; i++) {
                     var element = document.createElement("option")
                     element.textContent = data.accessoryTypes[i].type
                     element.value = data.accessoryTypes[i].id

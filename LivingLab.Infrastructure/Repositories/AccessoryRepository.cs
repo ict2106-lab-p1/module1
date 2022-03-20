@@ -1,5 +1,4 @@
 using LivingLab.Core.Entities;
-using LivingLab.Core.Entities.DTO;
 using LivingLab.Core.Entities.DTO.Accessory;
 using LivingLab.Core.Interfaces.Repositories;
 using LivingLab.Infrastructure.Data;
@@ -20,7 +19,7 @@ public class AccessoryRepository : Repository<Accessory>, IAccessoryRepository
     public async Task<List<Accessory>> GetAccessoryWithAccessoryType(string accessoryType)
     {
         // retrieve accessory table together with accessory type details using include to join entities 
-        List <Accessory> accessories = await _context.Accessories.Include(a => a.AccessoryType)
+        List<Accessory> accessories = await _context.Accessories.Include(a => a.AccessoryType)
             .Where(t => accessoryType.Contains(t.AccessoryType.Type))
             .ToListAsync();
         return accessories;
@@ -36,7 +35,7 @@ public class AccessoryRepository : Repository<Accessory>, IAccessoryRepository
     {
         var accessoryGroup = await _context.Accessories.Include(a => a.AccessoryType)
             .GroupBy(t => t.AccessoryType!.Type)
-            .Select(t=> new{Key = t.Key, Count = t.Count()})
+            .Select(t => new { Key = t.Key, Count = t.Count() })
             .ToListAsync();
         List<ViewAccessoryTypeDTO> accessoryTypeDtos = new List<ViewAccessoryTypeDTO>();
         foreach (var group in accessoryGroup)
@@ -46,7 +45,6 @@ public class AccessoryRepository : Repository<Accessory>, IAccessoryRepository
             accessoryTypeDto.Quantity = group.Count;
             accessoryTypeDtos.Add(accessoryTypeDto);
         }
-        
         return accessoryTypeDtos;
     }
     
@@ -64,7 +62,7 @@ public class AccessoryRepository : Repository<Accessory>, IAccessoryRepository
         Console.WriteLine("Delete Succ");
         return deleteAccessory;
     }
-
+    
     public async Task<AccessoryDetailsDTO> EditAccessory(AccessoryDetailsDTO accessoryDetailsDto)
     {
         Accessory accessory = (_context.Accessories.Include(d => d.AccessoryType)

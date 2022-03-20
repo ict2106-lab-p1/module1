@@ -28,7 +28,6 @@ public class AccessoryController : Controller
         ViewAccessoryViewModel viewAccessories = await _accessoryService.ViewAccessory(accessoryType);
         return View("ViewAccessory", viewAccessories);
     }
-    
     // high level view
     [Route("ViewAccessoryType")]
     public async Task<IActionResult> ViewAccessoryType()
