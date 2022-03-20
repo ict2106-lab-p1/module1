@@ -41,7 +41,6 @@ public class UserManagementService : IUserManagementService
     
     public async Task<UserManagementViewModel> ViewUserDetails(string id)
     {
-        //retrieve data from db
         ApplicationUser user = await _accountDomainService.ViewAccountDetails(id);
         UserManagementViewModel userVM = _mapper.Map< ApplicationUser, UserManagementViewModel> (user);
         return userVM;
@@ -49,17 +48,13 @@ public class UserManagementService : IUserManagementService
 
     public async Task<UserManagementViewModel> EditAccount(UserManagementViewModel userViewModel)
     {
-        //retrieve data from db
         ApplicationUser editAccount = _mapper.Map<UserManagementViewModel, ApplicationUser> (userViewModel);
         await _accountDomainService.EditAccount(editAccount);
-        
-        Console.WriteLine("in ui service" +  userViewModel);
         return userViewModel;    
         
     }
     public async Task<UserManagementViewModel> DeleteAccount(UserManagementViewModel userViewModel)
     {
-        //retrieve data from db
         ApplicationUser deleteAccount = _mapper.Map<UserManagementViewModel, ApplicationUser> (userViewModel);
         await _accountDomainService.DeleteAccount(deleteAccount);
         

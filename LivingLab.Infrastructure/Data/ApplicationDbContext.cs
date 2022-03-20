@@ -26,6 +26,8 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     public DbSet<AccessoryType> AccessoryTypes { get; set; }
     public DbSet<Booking> Bookings { get; set; }
     public DbSet<LabAccess> LabAccesses { get; set; }
+    public DbSet<Lab> LabProfile { get; set; }
+
     public DbSet<ApplicationUser> Users { get; set; }
 
 

@@ -2,6 +2,7 @@ using LivingLab.Web.UIServices.EnergyUsageAnalysisServices;
 using LivingLab.Web.UIServices.ManualLogs;
 using LivingLab.Web.UIServices.Accessory;
 using LivingLab.Web.UIServices.Device;
+using LivingLab.Web.UIServices.LabProfile;
 using LivingLab.Web.UIServices.Todo;
 using LivingLab.Web.UIServices.UserManagement;
 
@@ -29,6 +30,8 @@ public static class ConfigureWebServices
         services.AddTransient<IDeviceService, DeviceService>();
         services.AddTransient<IAccessoryService, AccessoryServices>();
         services.AddTransient<IUserManagementService, UserManagementService>();
+        services.AddTransient<ILabProfileService, LabProfileService>();
+
 
 
         return services;

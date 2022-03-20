@@ -41,12 +41,8 @@ public class UserManagementController : Controller
     [HttpPost("View/Edit")]
     public async Task<IActionResult> EditUser(UserManagementViewModel editAccount)
     {
-        //received data 
-        Console.WriteLine("Email: "+ editAccount.Email);
-        Console.WriteLine("ID: "+ editAccount.Id);
         await _userManagementService.EditAccount(editAccount);
 
-        // Temp - To display ViewAll after editing
         ViewUserManagementViewModel viewAccounts = await _userManagementService.GetAllAccounts();
         return View("Index", viewAccounts);
     }
@@ -54,10 +50,7 @@ public class UserManagementController : Controller
     [HttpPost("View/Delete")]
     public async Task<IActionResult> DeleteAccount(UserManagementViewModel deleteAccount)
     {
-        Console.WriteLine("ID: "+ deleteAccount.Id);
-
         await _userManagementService.DeleteAccount(deleteAccount);
-
         ViewUserManagementViewModel viewAccounts = await _userManagementService.GetAllAccounts();
         return View("Index", viewAccounts);
     }

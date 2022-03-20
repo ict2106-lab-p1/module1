@@ -1,7 +1,7 @@
 @model LivingLab.Web.Models.ViewModels.UserManagement.UserManagementViewModel
 
 @{
-    ViewData["Title"] = "User Details";
+    ViewData["Title"] = "Edit Profile";
 }
  <h3 class="text-2xl font-bold mb-8">Edit Profile </h3>
 
@@ -31,20 +31,16 @@
         </select>
     </div>
     </div>
-
-
-
     <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
         <label class="tracking-wide text-gray-700 text-xs font-bold mb-2" for="user-lab-access">
             Lab Access Rights
         </label>
         <div class="relative">
-            <select class="block appearance-none w-full bg-white text-gray-900 border border-gray-200  py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="user-lab-access" name="Lab Access">
-                <option value="Available">Available</option>
-                <option value="Unavailable">Unavailable</option>
-                <option value="Booked">Booked</option>
-                <option value="In Maintenance">In Maintenance</option>
+            <select class="block appearance-none w-full bg-white text-gray-900 border border-gray-200  py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="user-lab-access" name="LabAccess">
+                <option value="SIT-1A">SIT-1A</option>
+                <option value="SIT-2A">SIT-2A</option>
+                <option value="SIT-3A">SIT-3A</option>
+                <option value="SIT-4A">SIT-4A</option>
             </select>
         </div>
-
-</div>
+    </div>

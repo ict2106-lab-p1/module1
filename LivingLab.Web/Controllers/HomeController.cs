@@ -1,6 +1,10 @@
 using System.Diagnostics;
 
 using LivingLab.Web.Models.ViewModels;
+using LivingLab.Web.Models.ViewModels.LabProfile;
+using LivingLab.Web.Models.ViewModels.UserManagement;
+using LivingLab.Web.UIServices.LabProfile;
+using LivingLab.Web.UIServices.UserManagement;
 
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -13,11 +17,14 @@ namespace LivingLab.Web.Controllers;
 public class HomeController : Controller
 {
     private readonly ILogger<HomeController> _logger;
-
-    public HomeController(ILogger<HomeController> logger)
+    private readonly ILabProfileService _labProfileService;
+    
+    public HomeController(ILogger<HomeController> logger, ILabProfileService labProfileService)
     {
         _logger = logger;
+        _labProfileService = labProfileService;
     }
+    
 
     [Route("/")]
     public IActionResult Index()
@@ -70,4 +77,21 @@ public class HomeController : Controller
     {
         return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
     }
+    
+
+
+    [Route("index")]
+    public async Task<IActionResult> Labs(string userId)
+    {
+        ViewLabProfileViewModel viewLabProfileViewModel = await _labProfileService.GetAllLabAccounts();
+        return View("Index", viewLabProfileViewModel); 
+    }
+    [Route("View/{id}")]
+    public async Task<LabProfileViewModel> ViewLabDetails(int id)
+    { 
+        //retrieve data from db
+        LabProfileViewModel lab = await _labProfileService.ViewLabDetails(id);
+        return lab;
+    }
+
 }

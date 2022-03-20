@@ -1,3 +1,6 @@
+using LivingLab.Core.Entities;
+using LivingLab.Core.Entities.Identity;
+using LivingLab.Core.Interfaces.Repositories;
 using LivingLab.Core.Interfaces.Services;
 
 namespace LivingLab.Core.DomainServices;
@@ -10,5 +13,23 @@ namespace LivingLab.Core.DomainServices;
 /// </remarks>
 public class LabProfileDomainService: ILabProfileDomainService
 {
+    public readonly ILabProfileRepository _labRepository;
+    
+    //initialise repository 
+    public LabProfileDomainService(ILabProfileRepository labRepository)
+    {
+        _labRepository = labRepository;
+    }
+    
+    public Task<List<Lab>> ViewLabs()
+    {
+        return _labRepository.GetAllLabs();
+    } 
+ 
+    
+    public Task<Lab> ViewLabDetails(int id)
+    {
+        return _labRepository.GetLabDetails(id);
+    }
     
 }
