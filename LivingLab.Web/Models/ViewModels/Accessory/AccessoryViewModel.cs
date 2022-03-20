@@ -17,4 +17,8 @@ public class AccessoryViewModel
     
     public string? LabUserId { get; set; }
     public DateTime? DueDate { get; set; }
+    
+    public string? ReviewStatus { get; set; }
+    
+    public string? ReviewedBy { get; set; }
 }
