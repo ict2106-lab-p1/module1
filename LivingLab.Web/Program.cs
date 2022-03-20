@@ -1,3 +1,5 @@
+using System.Net;
+
 using LivingLab.Infrastructure;
 using LivingLab.Infrastructure.Configuration;
 using LivingLab.Web;
@@ -51,7 +53,7 @@ if (app.Environment.IsDevelopment())
 }
 else
 {
-    app.UseExceptionHandler("/Home/Error");
+    app.UseExceptionHandler("/Error");
     app.UseHsts();
 }
 //SET REDIRECTION BASED ON AUTHORIZATION POLICY START
@@ -65,7 +67,7 @@ app.Use(async (ctx, next) =>
         var result = await authService.AuthorizeAsync(ctx.User, ctx.GetRouteData(), authAttr.Policy);
         if (!result.Succeeded)
         {
-            var path = "/Areas/Identity/Pages/Account/Login.cshtml";
+            var path = "/Login/Login.cshtml";
             ctx.Response.Redirect(path);
             return;
         }
@@ -78,6 +80,17 @@ app.UseStaticFiles();
 app.UseSession();
 app.UseRouting();
 
+app.UseStatusCodePages(async context => {
+    var request = context.HttpContext.Request;
+    var response = context.HttpContext.Response;
+
+    if (response.StatusCode == (int)HttpStatusCode.Unauthorized)
+
+    {
+        response.Redirect("/Login/Login");
+    }
+});
+
 app.UseAuthentication();
 app.UseAuthorization();
 
@@ -85,12 +98,4 @@ app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
 app.MapRazorPages();
-app.MapPost("/sms", () => {
-   var response = @"
-       <Response>
-           <Message>Hello from a .NET Minimal API!</Message>
-       </Response>";
-
-   return Results.Text(response, "application/xml");
-});
 app.Run();

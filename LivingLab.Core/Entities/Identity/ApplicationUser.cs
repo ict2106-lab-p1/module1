@@ -16,10 +16,11 @@ public class ApplicationUser : IdentityUser
     private List<EmailLog> NotificationEmails { get; set; } = new List<EmailLog>();
     private List<SmsLog> NotificationSmses { get; set; } = new List<SmsLog>();
     public string? AuthenticationType { get; set; }
+    public int? OTP { get; set; }
     [DataType(DataType.DateTime)]
     public DateTime SMSExpiry { get; set; }
     public string? UserFaculty { get; set; }
-    public List<Booking> Bookings { get; set; }
-    public List<Lab> Labs { get; set; }
-    public List<LabAccess> LabAccesses { get; set; }
+    public List<Booking> Bookings { get; set; } = new List<Booking>();
+    public List<Lab> Labs { get; set; } = new List<Lab>();
+    public List<LabAccess> LabAccesses { get; set; } = new List<LabAccess>();
 }
