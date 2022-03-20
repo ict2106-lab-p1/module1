@@ -14,4 +14,10 @@ public class SessionStatsRepository : Repository<SessionStats>, ISessionStatsRep
     {
         _context = context;
     }
+
+    public async Task<List<SessionStats>> GetSessionStatsView()
+    {
+        List<SessionStats> sessionStats = await _context.SessionStats.ToListAsync();
+        return sessionStats;
+    }
 }

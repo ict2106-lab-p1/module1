@@ -1,7 +1,10 @@
 using AutoMapper;
 
+using LivingLab.Core.Entities;
 using LivingLab.Core.Interfaces.Repositories;
+using LivingLab.Core.Interfaces.Services;
 using LivingLab.Web.Models.ViewModels.Device;
+using LivingLab.Web.Models.ViewModels.LabProfile;
 using LivingLab.Web.UIServices.LabProfile;
 
 namespace LivingLab.Web.UIServices.LabProfile;
@@ -11,26 +14,26 @@ namespace LivingLab.Web.UIServices.LabProfile;
 public class LabProfileService : ILabProfileService
 {
     private readonly  IMapper _mapper;
-    private readonly IDeviceRepository _deviceRepository;
+    private readonly ILabProfileDomainService _labProf;
 
-    public LabProfileService(IDeviceRepository deviceRepository, IMapper mapper)
+    public LabProfileService(ILabProfileDomainService labProf, IMapper mapper)
     {
-        _deviceRepository = deviceRepository;
+        _labProf = labProf;
         _mapper = mapper;
     }
 
-    public async Task<ViewDeviceViewModel> viewDevice()
+    public async Task<Lab?> NewLab(LabProfileViewModel labinput)
     {
-        //retrieve data from db
-        List<Core.Entities.Device> deviceList = await _deviceRepository.GetAllAsync();
-                
-        //map entity model to view model
-        List<DeviceViewModel> devices = _mapper.Map<List<Core.Entities.Device>, List<DeviceViewModel>> (deviceList);
-            
-        //add list of device view model to the view device view model
-        ViewDeviceViewModel viewDevices = new ViewDeviceViewModel();
-        viewDevices.DeviceList = devices;
-        return viewDevices;
+        var labWrapper = new Lab
+        {
+            LabLocation = labinput.LabLocation,
+            LabStatus = labinput.LabStatus,
+            LabInCharge = labinput.LabInCharge,
+            Area = labinput.Area,
+            Capacity = labinput.Capacity,
+            EnergyUsageBenchmark = labinput.EnergyUsageBenchmark
+        };
+        return await _labProf.NewLab(labWrapper);
     }
     
 }

@@ -1,0 +1,50 @@
+@model LivingLab.Web.Models.ViewModels.SessionStats.ViewSessionStatsViewModel
+
+@{
+    ViewData["Title"] = "View Session Statistics";
+}
+
+<link rel="Stylesheet" href="~/css/viewSessionStats.css" type="text/css" xmlns="http://www.w3.org/1999/html"/>
+
+<div class="grid grid-cols-2 mb-2">
+    <div>
+        <h3 class="text-lg"> NYP-SR7C </h3>
+        <h1 class="text-2xl"> View Session Statistics</h1>
+
+    </div>
+
+    <div class="justify-self-end">
+        <button id="exportBtn" class="bg-purple-500 hover:bg-purple-700 text-white font-bold py-2 px-8 rounded">
+            Export
+        </button>
+    </div>
+</div>
+<hr class="mb-4"/>
+
+<table id="table_id" class="display">
+    <thead>
+    <tr>
+        <th>#</th>
+        <th>DATE</th>
+        <th>LOG IN</th>
+        <th>LOG OUT</th>
+        <th>DATA UPLOADED</th>
+    </tr>
+    </thead>
+    <tbody>
+    @foreach (var report in Model.SessionStatsList) {
+        <tr>
+            <td> @report.Lab </td>
+            <td> @report.Date.ToString("MM/dd/yyyy") </td>
+            <td> @report.LoginTime.ToString("h:mm:ss tt") </td>
+            <td> @report.LogoutTime.ToString("h:mm:ss tt") </td>
+            <td> @report.DataUploaded  </td>
+        </tr>
+    }
+    </tbody>
+</table>
+
+@section Scripts
+{
+    <script src="~/js/viewSessionStats.js"></script>
+}

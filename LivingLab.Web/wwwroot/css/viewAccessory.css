@@ -12,3 +12,8 @@
 .dataTables_wrapper .myfilter .dataTables_filter {
     float: left
 }
+
+.disabled {
+    pointer-events:none;
+    background:grey;
+}

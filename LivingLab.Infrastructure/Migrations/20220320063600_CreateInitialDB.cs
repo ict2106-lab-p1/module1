@@ -109,6 +109,7 @@ namespace LivingLab.Infrastructure.Migrations
                     FirstName = table.Column<string>(type: "TEXT", nullable: true),
                     LastName = table.Column<string>(type: "TEXT", nullable: true),
                     AuthenticationType = table.Column<string>(type: "TEXT", nullable: true),
+                    OTP = table.Column<int>(type: "INTEGER", nullable: true),
                     SMSExpiry = table.Column<DateTime>(type: "TEXT", nullable: false),
                     UserFaculty = table.Column<string>(type: "TEXT", nullable: true),
                     UserName = table.Column<string>(type: "TEXT", maxLength: 256, nullable: true),
@@ -228,7 +229,9 @@ namespace LivingLab.Infrastructure.Migrations
                     LabLocation = table.Column<string>(type: "TEXT", nullable: false),
                     LabStatus = table.Column<string>(type: "TEXT", nullable: false),
                     LabInCharge = table.Column<string>(type: "TEXT", nullable: true),
-                    Capacity = table.Column<int>(type: "INTEGER", nullable: false)
+                    Capacity = table.Column<int>(type: "INTEGER", nullable: false),
+                    Area = table.Column<int>(type: "INTEGER", nullable: true),
+                    EnergyUsageBenchmark = table.Column<double>(type: "REAL", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -336,7 +339,9 @@ namespace LivingLab.Infrastructure.Migrations
                     LabId = table.Column<int>(type: "INTEGER", nullable: false),
                     AccessoryTypeId = table.Column<int>(type: "INTEGER", nullable: false),
                     LabUserId = table.Column<string>(type: "TEXT", nullable: true),
-                    DueDate = table.Column<DateTime>(type: "Date", nullable: true)
+                    DueDate = table.Column<DateTime>(type: "Date", nullable: true),
+                    ReviewStatus = table.Column<string>(type: "TEXT", nullable: true),
+                    ReviewedBy = table.Column<string>(type: "TEXT", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -397,7 +402,9 @@ namespace LivingLab.Infrastructure.Migrations
                     Status = table.Column<string>(type: "TEXT", nullable: false),
                     Type = table.Column<string>(type: "TEXT", nullable: false),
                     Description = table.Column<string>(type: "TEXT", nullable: true),
-                    Threshold = table.Column<double>(type: "REAL", nullable: true)
+                    Threshold = table.Column<double>(type: "REAL", nullable: true),
+                    ReviewStatus = table.Column<string>(type: "TEXT", nullable: true),
+                    ReviewedBy = table.Column<string>(type: "TEXT", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -558,18 +565,18 @@ namespace LivingLab.Infrastructure.Migrations
 
             migrationBuilder.InsertData(
                 table: "Users",
-                columns: new[] { "Id", "AccessFailedCount", "AuthenticationType", "ConcurrencyStamp", "Email", "EmailConfirmed", "FirstName", "LastName", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SMSExpiry", "SecurityStamp", "TwoFactorEnabled", "UserFaculty", "UserName" },
-                values: new object[] { "UserId1", 0, "None", null, "David@gmail.com", false, "David", "Cheng", true, null, null, null, "testtesttest", "96878607", false, new DateTime(2022, 7, 19, 12, 0, 0, 0, DateTimeKind.Unspecified), null, false, "ICT", null });
+                columns: new[] { "Id", "AccessFailedCount", "AuthenticationType", "ConcurrencyStamp", "Email", "EmailConfirmed", "FirstName", "LastName", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "OTP", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SMSExpiry", "SecurityStamp", "TwoFactorEnabled", "UserFaculty", "UserName" },
+                values: new object[] { "UserId1", 0, "None", null, "David@gmail.com", false, "David", "Cheng", true, null, null, null, null, "testtesttest", "96878607", false, new DateTime(2022, 7, 19, 12, 0, 0, 0, DateTimeKind.Unspecified), null, false, "ICT", null });
 
             migrationBuilder.InsertData(
                 table: "Users",
-                columns: new[] { "Id", "AccessFailedCount", "AuthenticationType", "ConcurrencyStamp", "Email", "EmailConfirmed", "FirstName", "LastName", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SMSExpiry", "SecurityStamp", "TwoFactorEnabled", "UserFaculty", "UserName" },
-                values: new object[] { "UserId2", 0, "None", null, "henry@gmail.com", false, "Carlton", "Foo", true, null, null, null, "testtesttest", "12341234", false, new DateTime(2022, 7, 19, 12, 0, 0, 0, DateTimeKind.Unspecified), null, false, "SE", null });
+                columns: new[] { "Id", "AccessFailedCount", "AuthenticationType", "ConcurrencyStamp", "Email", "EmailConfirmed", "FirstName", "LastName", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "OTP", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SMSExpiry", "SecurityStamp", "TwoFactorEnabled", "UserFaculty", "UserName" },
+                values: new object[] { "UserId2", 0, "None", null, "henry@gmail.com", false, "Carlton", "Foo", true, null, null, null, null, "testtesttest", "12341234", false, new DateTime(2022, 7, 19, 12, 0, 0, 0, DateTimeKind.Unspecified), null, false, "SE", null });
 
             migrationBuilder.InsertData(
                 table: "Users",
-                columns: new[] { "Id", "AccessFailedCount", "AuthenticationType", "ConcurrencyStamp", "Email", "EmailConfirmed", "FirstName", "LastName", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SMSExpiry", "SecurityStamp", "TwoFactorEnabled", "UserFaculty", "UserName" },
-                values: new object[] { "UserId3", 0, "None", null, "houliang@gmail.com", false, "Hou Liang", "Yip", true, null, null, null, "testtesttest", "80808080", false, new DateTime(2022, 7, 19, 12, 0, 0, 0, DateTimeKind.Unspecified), null, false, "SE", null });
+                columns: new[] { "Id", "AccessFailedCount", "AuthenticationType", "ConcurrencyStamp", "Email", "EmailConfirmed", "FirstName", "LastName", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "OTP", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SMSExpiry", "SecurityStamp", "TwoFactorEnabled", "UserFaculty", "UserName" },
+                values: new object[] { "UserId3", 0, "None", null, "houliang@gmail.com", false, "Hou Liang", "Yip", true, null, null, null, null, "testtesttest", "80808080", false, new DateTime(2022, 7, 19, 12, 0, 0, 0, DateTimeKind.Unspecified), null, false, "SE", null });
 
             migrationBuilder.InsertData(
                 table: "LabAccess",
@@ -578,88 +585,88 @@ namespace LivingLab.Infrastructure.Migrations
 
             migrationBuilder.InsertData(
                 table: "Labs",
-                columns: new[] { "LabId", "Capacity", "LabInCharge", "LabLocation", "LabStatus" },
-                values: new object[] { 1, 20, "UserId1", "NYP-SR7C", "Available" });
+                columns: new[] { "LabId", "Area", "Capacity", "EnergyUsageBenchmark", "LabInCharge", "LabLocation", "LabStatus" },
+                values: new object[] { 1, null, 20, null, "UserId1", "NYP-SR7C", "Available" });
 
             migrationBuilder.InsertData(
                 table: "Accessories",
-                columns: new[] { "Id", "AccessoryTypeId", "DueDate", "LabId", "LabUserId", "LastUpdated", "Status" },
-                values: new object[] { 1, 1, null, 1, null, new DateTime(2021, 10, 10, 0, 0, 0, 0, DateTimeKind.Unspecified), "Available" });
+                columns: new[] { "Id", "AccessoryTypeId", "DueDate", "LabId", "LabUserId", "LastUpdated", "ReviewStatus", "ReviewedBy", "Status" },
+                values: new object[] { 1, 1, null, 1, null, new DateTime(2021, 10, 10, 0, 0, 0, 0, DateTimeKind.Unspecified), "Pending", "David", "Available" });
 
             migrationBuilder.InsertData(
                 table: "Accessories",
-                columns: new[] { "Id", "AccessoryTypeId", "DueDate", "LabId", "LabUserId", "LastUpdated", "Status" },
-                values: new object[] { 2, 1, new DateTime(2022, 10, 14, 0, 0, 0, 0, DateTimeKind.Unspecified), 1, "User1", new DateTime(2021, 10, 14, 0, 0, 0, 0, DateTimeKind.Unspecified), "Borrowed" });
+                columns: new[] { "Id", "AccessoryTypeId", "DueDate", "LabId", "LabUserId", "LastUpdated", "ReviewStatus", "ReviewedBy", "Status" },
+                values: new object[] { 2, 1, new DateTime(2022, 10, 14, 0, 0, 0, 0, DateTimeKind.Unspecified), 1, "User1", new DateTime(2021, 10, 14, 0, 0, 0, 0, DateTimeKind.Unspecified), "Pending", "David", "Borrowed" });
 
             migrationBuilder.InsertData(
                 table: "Accessories",
-                columns: new[] { "Id", "AccessoryTypeId", "DueDate", "LabId", "LabUserId", "LastUpdated", "Status" },
-                values: new object[] { 3, 2, null, 1, null, new DateTime(2021, 10, 17, 0, 0, 0, 0, DateTimeKind.Unspecified), "Available" });
+                columns: new[] { "Id", "AccessoryTypeId", "DueDate", "LabId", "LabUserId", "LastUpdated", "ReviewStatus", "ReviewedBy", "Status" },
+                values: new object[] { 3, 2, null, 1, null, new DateTime(2021, 10, 17, 0, 0, 0, 0, DateTimeKind.Unspecified), "Pending", "David", "Available" });
 
             migrationBuilder.InsertData(
                 table: "Accessories",
-                columns: new[] { "Id", "AccessoryTypeId", "DueDate", "LabId", "LabUserId", "LastUpdated", "Status" },
-                values: new object[] { 4, 2, null, 1, null, new DateTime(2021, 10, 21, 0, 0, 0, 0, DateTimeKind.Unspecified), "Available" });
+                columns: new[] { "Id", "AccessoryTypeId", "DueDate", "LabId", "LabUserId", "LastUpdated", "ReviewStatus", "ReviewedBy", "Status" },
+                values: new object[] { 4, 2, null, 1, null, new DateTime(2021, 10, 21, 0, 0, 0, 0, DateTimeKind.Unspecified), "Pending", "David", "Available" });
 
             migrationBuilder.InsertData(
                 table: "Accessories",
-                columns: new[] { "Id", "AccessoryTypeId", "DueDate", "LabId", "LabUserId", "LastUpdated", "Status" },
-                values: new object[] { 5, 3, new DateTime(2022, 9, 9, 0, 0, 0, 0, DateTimeKind.Unspecified), 1, "User1", new DateTime(2021, 9, 9, 0, 0, 0, 0, DateTimeKind.Unspecified), "Borrowed" });
+                columns: new[] { "Id", "AccessoryTypeId", "DueDate", "LabId", "LabUserId", "LastUpdated", "ReviewStatus", "ReviewedBy", "Status" },
+                values: new object[] { 5, 3, new DateTime(2022, 9, 9, 0, 0, 0, 0, DateTimeKind.Unspecified), 1, "User1", new DateTime(2021, 9, 9, 0, 0, 0, 0, DateTimeKind.Unspecified), "Pending", "David", "Borrowed" });
 
             migrationBuilder.InsertData(
                 table: "Accessories",
-                columns: new[] { "Id", "AccessoryTypeId", "DueDate", "LabId", "LabUserId", "LastUpdated", "Status" },
-                values: new object[] { 6, 3, null, 1, null, new DateTime(2021, 9, 5, 0, 0, 0, 0, DateTimeKind.Unspecified), "Available" });
+                columns: new[] { "Id", "AccessoryTypeId", "DueDate", "LabId", "LabUserId", "LastUpdated", "ReviewStatus", "ReviewedBy", "Status" },
+                values: new object[] { 6, 3, null, 1, null, new DateTime(2021, 9, 5, 0, 0, 0, 0, DateTimeKind.Unspecified), "Pending", "David", "Available" });
 
             migrationBuilder.InsertData(
                 table: "Accessories",
-                columns: new[] { "Id", "AccessoryTypeId", "DueDate", "LabId", "LabUserId", "LastUpdated", "Status" },
-                values: new object[] { 7, 4, null, 1, null, new DateTime(2021, 8, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Available" });
+                columns: new[] { "Id", "AccessoryTypeId", "DueDate", "LabId", "LabUserId", "LastUpdated", "ReviewStatus", "ReviewedBy", "Status" },
+                values: new object[] { 7, 4, null, 1, null, new DateTime(2021, 8, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Pending", "David", "Available" });
 
             migrationBuilder.InsertData(
                 table: "Accessories",
-                columns: new[] { "Id", "AccessoryTypeId", "DueDate", "LabId", "LabUserId", "LastUpdated", "Status" },
-                values: new object[] { 8, 4, new DateTime(2022, 9, 5, 0, 0, 0, 0, DateTimeKind.Unspecified), 1, "User1", new DateTime(2021, 8, 10, 0, 0, 0, 0, DateTimeKind.Unspecified), "Borrowed" });
+                columns: new[] { "Id", "AccessoryTypeId", "DueDate", "LabId", "LabUserId", "LastUpdated", "ReviewStatus", "ReviewedBy", "Status" },
+                values: new object[] { 8, 4, new DateTime(2022, 9, 5, 0, 0, 0, 0, DateTimeKind.Unspecified), 1, "User1", new DateTime(2021, 8, 10, 0, 0, 0, 0, DateTimeKind.Unspecified), "Pending", "David", "Borrowed" });
 
             migrationBuilder.InsertData(
                 table: "Accessories",
-                columns: new[] { "Id", "AccessoryTypeId", "DueDate", "LabId", "LabUserId", "LastUpdated", "Status" },
-                values: new object[] { 9, 5, null, 1, null, new DateTime(2021, 7, 3, 0, 0, 0, 0, DateTimeKind.Unspecified), "Available" });
+                columns: new[] { "Id", "AccessoryTypeId", "DueDate", "LabId", "LabUserId", "LastUpdated", "ReviewStatus", "ReviewedBy", "Status" },
+                values: new object[] { 9, 5, null, 1, null, new DateTime(2021, 7, 3, 0, 0, 0, 0, DateTimeKind.Unspecified), "Pending", "David", "Available" });
 
             migrationBuilder.InsertData(
                 table: "Accessories",
-                columns: new[] { "Id", "AccessoryTypeId", "DueDate", "LabId", "LabUserId", "LastUpdated", "Status" },
-                values: new object[] { 10, 5, new DateTime(2022, 10, 14, 0, 0, 0, 0, DateTimeKind.Unspecified), 1, "User1", new DateTime(2021, 6, 24, 0, 0, 0, 0, DateTimeKind.Unspecified), "Borrowed" });
+                columns: new[] { "Id", "AccessoryTypeId", "DueDate", "LabId", "LabUserId", "LastUpdated", "ReviewStatus", "ReviewedBy", "Status" },
+                values: new object[] { 10, 5, new DateTime(2022, 10, 14, 0, 0, 0, 0, DateTimeKind.Unspecified), 1, "User1", new DateTime(2021, 6, 24, 0, 0, 0, 0, DateTimeKind.Unspecified), "Pending", "David", "Borrowed" });
 
             migrationBuilder.InsertData(
                 table: "Accessories",
-                columns: new[] { "Id", "AccessoryTypeId", "DueDate", "LabId", "LabUserId", "LastUpdated", "Status" },
-                values: new object[] { 11, 6, null, 1, null, new DateTime(2021, 7, 25, 0, 0, 0, 0, DateTimeKind.Unspecified), "Available" });
+                columns: new[] { "Id", "AccessoryTypeId", "DueDate", "LabId", "LabUserId", "LastUpdated", "ReviewStatus", "ReviewedBy", "Status" },
+                values: new object[] { 11, 6, null, 1, null, new DateTime(2021, 7, 25, 0, 0, 0, 0, DateTimeKind.Unspecified), "Pending", "David", "Available" });
 
             migrationBuilder.InsertData(
                 table: "Accessories",
-                columns: new[] { "Id", "AccessoryTypeId", "DueDate", "LabId", "LabUserId", "LastUpdated", "Status" },
-                values: new object[] { 12, 6, null, 1, null, new DateTime(2021, 4, 3, 0, 0, 0, 0, DateTimeKind.Unspecified), "Available" });
+                columns: new[] { "Id", "AccessoryTypeId", "DueDate", "LabId", "LabUserId", "LastUpdated", "ReviewStatus", "ReviewedBy", "Status" },
+                values: new object[] { 12, 6, null, 1, null, new DateTime(2021, 4, 3, 0, 0, 0, 0, DateTimeKind.Unspecified), "Pending", "David", "Available" });
 
             migrationBuilder.InsertData(
                 table: "Accessories",
-                columns: new[] { "Id", "AccessoryTypeId", "DueDate", "LabId", "LabUserId", "LastUpdated", "Status" },
-                values: new object[] { 13, 7, new DateTime(2022, 7, 19, 0, 0, 0, 0, DateTimeKind.Unspecified), 1, "User1", new DateTime(2021, 7, 19, 0, 0, 0, 0, DateTimeKind.Unspecified), "Borrowed" });
+                columns: new[] { "Id", "AccessoryTypeId", "DueDate", "LabId", "LabUserId", "LastUpdated", "ReviewStatus", "ReviewedBy", "Status" },
+                values: new object[] { 13, 7, new DateTime(2022, 7, 19, 0, 0, 0, 0, DateTimeKind.Unspecified), 1, "User1", new DateTime(2021, 7, 19, 0, 0, 0, 0, DateTimeKind.Unspecified), "Pending", "David", "Borrowed" });
 
             migrationBuilder.InsertData(
                 table: "Accessories",
-                columns: new[] { "Id", "AccessoryTypeId", "DueDate", "LabId", "LabUserId", "LastUpdated", "Status" },
-                values: new object[] { 14, 7, new DateTime(2022, 12, 14, 0, 0, 0, 0, DateTimeKind.Unspecified), 1, "user1", new DateTime(2021, 12, 14, 0, 0, 0, 0, DateTimeKind.Unspecified), "Borrowed" });
+                columns: new[] { "Id", "AccessoryTypeId", "DueDate", "LabId", "LabUserId", "LastUpdated", "ReviewStatus", "ReviewedBy", "Status" },
+                values: new object[] { 14, 7, new DateTime(2022, 12, 14, 0, 0, 0, 0, DateTimeKind.Unspecified), 1, "user1", new DateTime(2021, 12, 14, 0, 0, 0, 0, DateTimeKind.Unspecified), "Pending", "David", "Borrowed" });
 
             migrationBuilder.InsertData(
                 table: "Accessories",
-                columns: new[] { "Id", "AccessoryTypeId", "DueDate", "LabId", "LabUserId", "LastUpdated", "Status" },
-                values: new object[] { 15, 8, null, 1, null, new DateTime(2021, 11, 12, 0, 0, 0, 0, DateTimeKind.Unspecified), "Available" });
+                columns: new[] { "Id", "AccessoryTypeId", "DueDate", "LabId", "LabUserId", "LastUpdated", "ReviewStatus", "ReviewedBy", "Status" },
+                values: new object[] { 15, 8, null, 1, null, new DateTime(2021, 11, 12, 0, 0, 0, 0, DateTimeKind.Unspecified), "Pending", "David", "Available" });
 
             migrationBuilder.InsertData(
                 table: "Accessories",
-                columns: new[] { "Id", "AccessoryTypeId", "DueDate", "LabId", "LabUserId", "LastUpdated", "Status" },
-                values: new object[] { 16, 8, null, 1, null, new DateTime(2021, 7, 3, 0, 0, 0, 0, DateTimeKind.Unspecified), "Available" });
+                columns: new[] { "Id", "AccessoryTypeId", "DueDate", "LabId", "LabUserId", "LastUpdated", "ReviewStatus", "ReviewedBy", "Status" },
+                values: new object[] { 16, 8, null, 1, null, new DateTime(2021, 7, 3, 0, 0, 0, 0, DateTimeKind.Unspecified), "Pending", "David", "Available" });
 
             migrationBuilder.InsertData(
                 table: "Booking",
@@ -668,28 +675,28 @@ namespace LivingLab.Infrastructure.Migrations
 
             migrationBuilder.InsertData(
                 table: "Devices",
-                columns: new[] { "Id", "Description", "LabId", "LastUpdated", "Name", "SerialNo", "Status", "Threshold", "Type" },
-                values: new object[] { 1, "Its purpose is to detect situation in the laboratory", 1, new DateTime(2020, 10, 10, 0, 0, 0, 0, DateTimeKind.Unspecified), "Surveillance Camera", "SC1001", "Available", null, "Surveillance Camera" });
+                columns: new[] { "Id", "Description", "LabId", "LastUpdated", "Name", "ReviewStatus", "ReviewedBy", "SerialNo", "Status", "Threshold", "Type" },
+                values: new object[] { 1, "Its purpose is to detect situation in the laboratory", 1, new DateTime(2020, 10, 10, 0, 0, 0, 0, DateTimeKind.Unspecified), "Surveillance Camera", "Pending", "David", "SC1001", "Available", null, "Surveillance Camera" });
 
             migrationBuilder.InsertData(
                 table: "Devices",
-                columns: new[] { "Id", "Description", "LabId", "LastUpdated", "Name", "SerialNo", "Status", "Threshold", "Type" },
-                values: new object[] { 2, "Its purpose is to detect temperature in the laboratory", 1, new DateTime(2020, 10, 11, 0, 0, 0, 0, DateTimeKind.Unspecified), "Temperature Sensor", "R1001", "Available", null, "Temperature Sensor" });
+                columns: new[] { "Id", "Description", "LabId", "LastUpdated", "Name", "ReviewStatus", "ReviewedBy", "SerialNo", "Status", "Threshold", "Type" },
+                values: new object[] { 2, "Its purpose is to detect temperature in the laboratory", 1, new DateTime(2020, 10, 11, 0, 0, 0, 0, DateTimeKind.Unspecified), "Temperature Sensor", "Approved", "David", "R1001", "Available", null, "Temperature Sensor" });
 
             migrationBuilder.InsertData(
                 table: "Devices",
-                columns: new[] { "Id", "Description", "LabId", "LastUpdated", "Name", "SerialNo", "Status", "Threshold", "Type" },
-                values: new object[] { 3, "Its purpose is to detect humidity in the laboratory", 1, new DateTime(2020, 9, 9, 0, 0, 0, 0, DateTimeKind.Unspecified), "Humidity Sensor", "S1001", "Available", null, "Humidity Sensor" });
+                columns: new[] { "Id", "Description", "LabId", "LastUpdated", "Name", "ReviewStatus", "ReviewedBy", "SerialNo", "Status", "Threshold", "Type" },
+                values: new object[] { 3, "Its purpose is to detect humidity in the laboratory", 1, new DateTime(2020, 9, 9, 0, 0, 0, 0, DateTimeKind.Unspecified), "Humidity Sensor", "Approved", "David", "S1001", "Available", null, "Humidity Sensor" });
 
             migrationBuilder.InsertData(
                 table: "Devices",
-                columns: new[] { "Id", "Description", "LabId", "LastUpdated", "Name", "SerialNo", "Status", "Threshold", "Type" },
-                values: new object[] { 4, "Its purpose is to detect light in the laboratory", 1, new DateTime(2019, 8, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Light Sensor", "SL1001", "Available", null, "Light Sensor" });
+                columns: new[] { "Id", "Description", "LabId", "LastUpdated", "Name", "ReviewStatus", "ReviewedBy", "SerialNo", "Status", "Threshold", "Type" },
+                values: new object[] { 4, "Its purpose is to detect light in the laboratory", 1, new DateTime(2019, 8, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Light Sensor", "Rejected", "David", "SL1001", "Available", null, "Light Sensor" });
 
             migrationBuilder.InsertData(
                 table: "Devices",
-                columns: new[] { "Id", "Description", "LabId", "LastUpdated", "Name", "SerialNo", "Status", "Threshold", "Type" },
-                values: new object[] { 5, "It is used to control brightness of the lights in the lab", 1, new DateTime(2019, 7, 3, 0, 0, 0, 0, DateTimeKind.Unspecified), "VR Light Controls", "VRL1001", "Unavailable", null, "VR Light Controls" });
+                columns: new[] { "Id", "Description", "LabId", "LastUpdated", "Name", "ReviewStatus", "ReviewedBy", "SerialNo", "Status", "Threshold", "Type" },
+                values: new object[] { 5, "It is used to control brightness of the lights in the lab", 1, new DateTime(2019, 7, 3, 0, 0, 0, 0, DateTimeKind.Unspecified), "VR Light Controls", "Pending", "David", "VRL1001", "Unavailable", null, "VR Light Controls" });
 
             migrationBuilder.InsertData(
                 table: "SessionStats",

@@ -1,4 +1,5 @@
 using LivingLab.Core.Entities;
+using LivingLab.Core.Entities.DTO;
 
 namespace LivingLab.Core.Interfaces.Repositories;
 /// <remarks>
@@ -6,4 +7,5 @@ namespace LivingLab.Core.Interfaces.Repositories;
 /// </remarks>
 public interface ISessionStatsRepository : IRepository<SessionStats>
 {
+    Task<List<SessionStats>> GetSessionStatsView();
 }

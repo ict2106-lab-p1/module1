@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace LivingLab.Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20220311102313_CreateInitialDB")]
+    [Migration("20220320063600_CreateInitialDB")]
     partial class CreateInitialDB
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -70,6 +70,12 @@ namespace LivingLab.Infrastructure.Migrations
                     b.Property<DateTime>("LastUpdated")
                         .HasColumnType("Date");
 
+                    b.Property<string>("ReviewStatus")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("ReviewedBy")
+                        .HasColumnType("TEXT");
+
                     b.Property<string>("Status")
                         .IsRequired()
                         .HasColumnType("TEXT");
@@ -89,6 +95,8 @@ namespace LivingLab.Infrastructure.Migrations
                             AccessoryTypeId = 1,
                             LabId = 1,
                             LastUpdated = new DateTime(2021, 10, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ReviewStatus = "Pending",
+                            ReviewedBy = "David",
                             Status = "Available"
                         },
                         new
@@ -99,6 +107,8 @@ namespace LivingLab.Infrastructure.Migrations
                             LabId = 1,
                             LabUserId = "User1",
                             LastUpdated = new DateTime(2021, 10, 14, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ReviewStatus = "Pending",
+                            ReviewedBy = "David",
                             Status = "Borrowed"
                         },
                         new
@@ -107,6 +117,8 @@ namespace LivingLab.Infrastructure.Migrations
                             AccessoryTypeId = 2,
                             LabId = 1,
                             LastUpdated = new DateTime(2021, 10, 17, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ReviewStatus = "Pending",
+                            ReviewedBy = "David",
                             Status = "Available"
                         },
                         new
@@ -115,6 +127,8 @@ namespace LivingLab.Infrastructure.Migrations
                             AccessoryTypeId = 2,
                             LabId = 1,
                             LastUpdated = new DateTime(2021, 10, 21, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ReviewStatus = "Pending",
+                            ReviewedBy = "David",
                             Status = "Available"
                         },
                         new
@@ -125,6 +139,8 @@ namespace LivingLab.Infrastructure.Migrations
                             LabId = 1,
                             LabUserId = "User1",
                             LastUpdated = new DateTime(2021, 9, 9, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ReviewStatus = "Pending",
+                            ReviewedBy = "David",
                             Status = "Borrowed"
                         },
                         new
@@ -133,6 +149,8 @@ namespace LivingLab.Infrastructure.Migrations
                             AccessoryTypeId = 3,
                             LabId = 1,
                             LastUpdated = new DateTime(2021, 9, 5, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ReviewStatus = "Pending",
+                            ReviewedBy = "David",
                             Status = "Available"
                         },
                         new
@@ -141,6 +159,8 @@ namespace LivingLab.Infrastructure.Migrations
                             AccessoryTypeId = 4,
                             LabId = 1,
                             LastUpdated = new DateTime(2021, 8, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ReviewStatus = "Pending",
+                            ReviewedBy = "David",
                             Status = "Available"
                         },
                         new
@@ -151,6 +171,8 @@ namespace LivingLab.Infrastructure.Migrations
                             LabId = 1,
                             LabUserId = "User1",
                             LastUpdated = new DateTime(2021, 8, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ReviewStatus = "Pending",
+                            ReviewedBy = "David",
                             Status = "Borrowed"
                         },
                         new
@@ -159,6 +181,8 @@ namespace LivingLab.Infrastructure.Migrations
                             AccessoryTypeId = 5,
                             LabId = 1,
                             LastUpdated = new DateTime(2021, 7, 3, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ReviewStatus = "Pending",
+                            ReviewedBy = "David",
                             Status = "Available"
                         },
                         new
@@ -169,6 +193,8 @@ namespace LivingLab.Infrastructure.Migrations
                             LabId = 1,
                             LabUserId = "User1",
                             LastUpdated = new DateTime(2021, 6, 24, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ReviewStatus = "Pending",
+                            ReviewedBy = "David",
                             Status = "Borrowed"
                         },
                         new
@@ -177,6 +203,8 @@ namespace LivingLab.Infrastructure.Migrations
                             AccessoryTypeId = 6,
                             LabId = 1,
                             LastUpdated = new DateTime(2021, 7, 25, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ReviewStatus = "Pending",
+                            ReviewedBy = "David",
                             Status = "Available"
                         },
                         new
@@ -185,6 +213,8 @@ namespace LivingLab.Infrastructure.Migrations
                             AccessoryTypeId = 6,
                             LabId = 1,
                             LastUpdated = new DateTime(2021, 4, 3, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ReviewStatus = "Pending",
+                            ReviewedBy = "David",
                             Status = "Available"
                         },
                         new
@@ -195,6 +225,8 @@ namespace LivingLab.Infrastructure.Migrations
                             LabId = 1,
                             LabUserId = "User1",
                             LastUpdated = new DateTime(2021, 7, 19, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ReviewStatus = "Pending",
+                            ReviewedBy = "David",
                             Status = "Borrowed"
                         },
                         new
@@ -205,6 +237,8 @@ namespace LivingLab.Infrastructure.Migrations
                             LabId = 1,
                             LabUserId = "user1",
                             LastUpdated = new DateTime(2021, 12, 14, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ReviewStatus = "Pending",
+                            ReviewedBy = "David",
                             Status = "Borrowed"
                         },
                         new
@@ -213,6 +247,8 @@ namespace LivingLab.Infrastructure.Migrations
                             AccessoryTypeId = 8,
                             LabId = 1,
                             LastUpdated = new DateTime(2021, 11, 12, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ReviewStatus = "Pending",
+                            ReviewedBy = "David",
                             Status = "Available"
                         },
                         new
@@ -221,6 +257,8 @@ namespace LivingLab.Infrastructure.Migrations
                             AccessoryTypeId = 8,
                             LabId = 1,
                             LastUpdated = new DateTime(2021, 7, 3, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ReviewStatus = "Pending",
+                            ReviewedBy = "David",
                             Status = "Available"
                         });
                 });
@@ -395,6 +433,12 @@ namespace LivingLab.Infrastructure.Migrations
                         .IsRequired()
                         .HasColumnType("TEXT");
 
+                    b.Property<string>("ReviewStatus")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("ReviewedBy")
+                        .HasColumnType("TEXT");
+
                     b.Property<string>("SerialNo")
                         .IsRequired()
                         .HasColumnType("TEXT");
@@ -424,6 +468,8 @@ namespace LivingLab.Infrastructure.Migrations
                             LabId = 1,
                             LastUpdated = new DateTime(2020, 10, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "Surveillance Camera",
+                            ReviewStatus = "Pending",
+                            ReviewedBy = "David",
                             SerialNo = "SC1001",
                             Status = "Available",
                             Type = "Surveillance Camera"
@@ -435,6 +481,8 @@ namespace LivingLab.Infrastructure.Migrations
                             LabId = 1,
                             LastUpdated = new DateTime(2020, 10, 11, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "Temperature Sensor",
+                            ReviewStatus = "Approved",
+                            ReviewedBy = "David",
                             SerialNo = "R1001",
                             Status = "Available",
                             Type = "Temperature Sensor"
@@ -446,6 +494,8 @@ namespace LivingLab.Infrastructure.Migrations
                             LabId = 1,
                             LastUpdated = new DateTime(2020, 9, 9, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "Humidity Sensor",
+                            ReviewStatus = "Approved",
+                            ReviewedBy = "David",
                             SerialNo = "S1001",
                             Status = "Available",
                             Type = "Humidity Sensor"
@@ -457,6 +507,8 @@ namespace LivingLab.Infrastructure.Migrations
                             LabId = 1,
                             LastUpdated = new DateTime(2019, 8, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "Light Sensor",
+                            ReviewStatus = "Rejected",
+                            ReviewedBy = "David",
                             SerialNo = "SL1001",
                             Status = "Available",
                             Type = "Light Sensor"
@@ -468,6 +520,8 @@ namespace LivingLab.Infrastructure.Migrations
                             LabId = 1,
                             LastUpdated = new DateTime(2019, 7, 3, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "VR Light Controls",
+                            ReviewStatus = "Pending",
+                            ReviewedBy = "David",
                             SerialNo = "VRL1001",
                             Status = "Unavailable",
                             Type = "VR Light Controls"
@@ -604,6 +658,9 @@ namespace LivingLab.Infrastructure.Migrations
                         .HasMaxLength(256)
                         .HasColumnType("TEXT");
 
+                    b.Property<int?>("OTP")
+                        .HasColumnType("INTEGER");
+
                     b.Property<string>("PasswordHash")
                         .HasColumnType("TEXT");
 
@@ -700,9 +757,15 @@ namespace LivingLab.Infrastructure.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
+                    b.Property<int?>("Area")
+                        .HasColumnType("INTEGER");
+
                     b.Property<int?>("Capacity")
                         .IsRequired()
                         .HasColumnType("INTEGER");
+
+                    b.Property<double?>("EnergyUsageBenchmark")
+                        .HasColumnType("REAL");
 
                     b.Property<string>("LabInCharge")
                         .HasColumnType("TEXT");
