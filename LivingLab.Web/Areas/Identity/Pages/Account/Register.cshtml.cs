@@ -148,7 +148,6 @@ namespace LivingLab.Web.Areas.Identity.Pages.Account
             if (ModelState.IsValid)
             {
                 var user = CreateUser();
-
                 await _userStore.SetUserNameAsync(user, Input.Email, CancellationToken.None);
                 await _emailStore.SetEmailAsync(user, Input.Email, CancellationToken.None);
                 var result = await _userManager.CreateAsync(user, Input.Password);
@@ -157,21 +156,7 @@ namespace LivingLab.Web.Areas.Identity.Pages.Account
                 {
                     _logger.LogInformation("User created a new account with password.");
 
-                    RegisterViewModel userData = new RegisterViewModel
-                    {
-                        Email = Input.Email,
-                        FirstName = Input.FirstName,
-                        LastName = Input.LastName,
-                        UserName = Input.Username,
-                        PhoneNumber = Input.PhoneNumber,
-                        IsSMS = Input.IsSMS,
-                        IsGoogleAuth = Input.IsGoogle,
-                        Password = Input.Password,
-                        ConfirmPassword = Input.ConfirmPassword,
-                        StudentFaculty = Input.Faculty,
-                    };
                     var userId = await _userManager.GetUserIdAsync(user);
-                    await _accountService.UpdateUser(userId,userData);
 
                     var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
                     

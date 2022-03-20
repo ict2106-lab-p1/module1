@@ -1,4 +1,6 @@
+using LivingLab.Core.Entities;
 using LivingLab.Web.Models.ViewModels.Device;
+using LivingLab.Web.Models.ViewModels.LabProfile;
 
 namespace LivingLab.Web.UIServices.LabProfile;
 /// <remarks>
@@ -6,5 +8,5 @@ namespace LivingLab.Web.UIServices.LabProfile;
 /// </remarks>
 public interface ILabProfileService
 {
-    Task<ViewDeviceViewModel> viewDevice();
+    Task<Lab?> NewLab(LabProfileViewModel labinput);
 }

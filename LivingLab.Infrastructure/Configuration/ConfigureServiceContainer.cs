@@ -52,6 +52,8 @@ public static class ConfigureServiceContainer
         services.AddTransient<ISessionStatsRepository, SessionStatsRepository>();
 
         services.AddTransient<IAccountRepository, AccountRepository>();
+        services.AddTransient<ILabProfileRepository, LabProfileRepository>();
+        services.AddTransient<IBookingRepository, BookingRepository>();
 
         // Services
         services.AddTransient<ITodoDomainService, TodoDomainService>();
@@ -65,6 +67,11 @@ public static class ConfigureServiceContainer
         services.AddTransient<IEnergyLogDomainService, EnergyLogDomainService>();
 
         services.AddTransient<IAccountDomainService, AccountDomainService>();
+        services.AddTransient<ILabProfileDomainService, LabProfileDomainService>();
+        services.AddTransient<IBookingDomainService, BookingDomainService>();
+        services.AddTransient<IIdentityDomainService, IdentityDomainService>();
+        services.AddTransient<ILabAccessDomainService, LabAccessDomainService>();
+        
 
 
         return services;

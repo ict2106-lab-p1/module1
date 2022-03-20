@@ -1,5 +1,7 @@
+using LivingLab.Core.Entities;
 using LivingLab.Core.Entities.Identity;
 using LivingLab.Web.Models.DTOs.Todo;
+using LivingLab.Web.Models.ViewModels.LabProfile;
 using LivingLab.Web.Models.ViewModels.Login;
 
 namespace LivingLab.Web.UIServices.Account;
@@ -9,11 +11,11 @@ namespace LivingLab.Web.UIServices.Account;
 public interface IAccountService
 {
     Task<int> Login(LoginViewModel user);
-    Task<ApplicationUser?> UpdateUser(string userid, RegisterViewModel user);
+    Task<ApplicationUser?> UpdateUser(RegisterViewModel input);
+    Task<ApplicationUser?> NewUser(RegisterViewModel input);
 
     Task <Boolean> GenerateCode(ApplicationUser user);
 
     Task<Boolean> VerifyCode(string userid, VerifyViewModel viewModel);
 
-    Task<ApplicationUser?> Save(ApplicationUser user);
 }

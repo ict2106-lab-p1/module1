@@ -10,7 +10,7 @@ public class Lab
 {
     [Key]
     public int LabId { get; set; }
-
+    
     [Required]
     public string? LabLocation { get; set; }
 

@@ -3,6 +3,10 @@ using LivingLab.Web.UIServices.ManualLogs;
 using LivingLab.Web.UIServices.Accessory;
 using LivingLab.Web.UIServices.Account;
 using LivingLab.Web.UIServices.Device;
+using LivingLab.Web.UIServices.Identity;
+using LivingLab.Web.UIServices.LabAccess;
+using LivingLab.Web.UIServices.LabBooking;
+using LivingLab.Web.UIServices.LabProfile;
 using LivingLab.Web.UIServices.NotificationManagement;
 using LivingLab.Web.UIServices.Todo;
 
@@ -32,6 +36,10 @@ public static class ConfigureWebServices
         // Add application services.
         services.AddTransient<IAccountService, AccountService>();
         services.AddTransient<INotificationManagementService, NotificationManagementService>();
+        services.AddTransient<ILabBookingService, LabBookingService>();
+        services.AddTransient<ILabProfileService, LabProfileService>();
+        services.AddTransient<IIdentityService, IdentityService>();
+        services.AddTransient<ILabAccessService, LabAccessService>();
 
         return services;
     }

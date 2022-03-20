@@ -20,11 +20,7 @@ public class RegisterViewModel
     [Required(ErrorMessage = "Please enter a valid last name")]
     [Display(Name = "Last Name")]
     public string LastName { get; set; }
-    
-    [Required(ErrorMessage = "Please enter a valid user name")]
-    [Display(Name = "User Name")]
-    public string UserName { get; set; }
-    
+
     [Required(ErrorMessage = "Please enter a valid phone number")]
     [Display(Name = "Phone Number")]
     public string PhoneNumber { get; set; }
@@ -45,5 +41,5 @@ public class RegisterViewModel
 
     [Required]
     [Display(Name = "Faculty")]
-    public string StudentFaculty { get; set; }
+    public string Faculty { get; set; }
 }

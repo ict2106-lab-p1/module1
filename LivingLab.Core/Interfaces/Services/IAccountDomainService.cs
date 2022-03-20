@@ -11,11 +11,11 @@ namespace LivingLab.Core.Interfaces.Services;
 public interface IAccountDomainService
 {
     Task<ApplicationUser?> GetUser(string id);
+    
     Task <ApplicationUser?> UpdateUser(ApplicationUser user);
 
     Task<Boolean> GenerateCode(ApplicationUser user);
 
     Task<Boolean> VerifyCode(string userid, int OTP);
 
-    Task<ApplicationUser?> Save(ApplicationUser user);
 }

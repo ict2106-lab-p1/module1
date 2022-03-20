@@ -121,25 +121,8 @@ public class LoginController : Controller
                 return View(userDetails);
             }
         }
-        
-
         return View();
     }
-    
-    // [HttpPost]
-    // public async Task<IActionResult> Register(string userid, RegisterViewModel registration)
-    // {
-    //     try
-    //     {
-    //         await _accountService.UpdateUser(userid, registration);
-    //         return Ok();
-    //     }
-    //     catch (Exception e)
-    //     {
-    //         _logger.LogError(e.Message);
-    //         return Error();
-    //     }
-    // }
 
     [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
     public IActionResult Error()

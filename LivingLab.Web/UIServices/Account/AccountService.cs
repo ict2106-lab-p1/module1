@@ -5,11 +5,13 @@ using LivingLab.Core.Entities.Identity;
 using LivingLab.Core.Interfaces.Repositories;
 using LivingLab.Core.Interfaces.Services;
 using LivingLab.Web.Models.DTOs.Todo;
+using LivingLab.Web.Models.ViewModels.LabProfile;
 using LivingLab.Web.Models.ViewModels.Login;
 using LivingLab.Web.UIServices.NotificationManagement;
 using LivingLab.Web.UIServices.Todo;
 
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.UI.Services;
 
 namespace LivingLab.Web.UIServices.Account;
 /// <summary>
@@ -23,13 +25,20 @@ public class AccountService : IAccountService
 {
     private readonly IAccountDomainService _accountDomainService;
     private readonly SignInManager<ApplicationUser> _signInManager;
+    private readonly UserManager<ApplicationUser> _userManager;
     private readonly ILogger<AccountService> _logger;
+    private readonly IUserStore<ApplicationUser> _userStore;
+    private readonly IUserEmailStore<ApplicationUser> _emailStore;
     
-    public AccountService( ILogger<AccountService> logger, SignInManager<ApplicationUser> signInManager, IAccountDomainService accountDomainService)
+    public AccountService( IUserStore<ApplicationUser> userStore, IEmailSender emailSender, UserManager<ApplicationUser> userManager, ILogger<AccountService> logger, SignInManager<ApplicationUser> signInManager, IAccountDomainService accountDomainService)
     {
         _signInManager = signInManager;
         _accountDomainService = accountDomainService;
         _logger = logger;
+        _userManager = userManager;
+        _userStore = userStore;
+        _emailStore = GetEmailStore();
+;
     }
 
 
@@ -55,14 +64,14 @@ public class AccountService : IAccountService
         return value;
     }
 
-    public async Task<ApplicationUser?> UpdateUser(string userid, RegisterViewModel user)
+    public async Task<ApplicationUser?> UpdateUser(RegisterViewModel input)
     {
         string Auth = "";
-        if (user.IsGoogleAuth)
+        if (input.IsGoogleAuth)
         {
             Auth = "Google";
         }
-        else if (user.IsSMS)
+        else if (input.IsSMS)
         {
             Auth = "SMS";
         }
@@ -70,22 +79,58 @@ public class AccountService : IAccountService
         {
             Auth = "None";
         }
+
+        ApplicationUser userDetails = await _userManager.FindByEmailAsync(input.Email);
+
+        userDetails.FirstName = input.FirstName;
+        userDetails.LastName = input.LastName;
+        userDetails.AuthenticationType = Auth;
+        userDetails.OTP = 000000;
+        userDetails.UserFaculty = input.Faculty;
+        userDetails.PhoneNumber = input.PhoneNumber;
+
         // ApplicationUser input = ApplicationUser(Id, user.FirstName, user.LastName, Auth, "",
         //     SMSTime, user.StudentFaculty, user.Email, user.Email.ToUpper(), user.Email,
         //     user.Email.ToUpper(), EmailConfirmed, PasswordHasher<>, SecurityStamp<>, ConcurrencyStamp,
         //     user.PhoneNumber, PhoneNumberConfirmed, TwoFactorEnabled, "", LockoutEnabled, AccessFailedCount);
         
-        ApplicationUser input = new ApplicationUser
-        {
-            Id = userid,
-            AccessFailedCount = 0,
-            AuthenticationType = Auth,
-            OTP = 0,
-            UserFaculty = user.StudentFaculty,
-            FirstName = user.FirstName,
+        return await _accountDomainService.UpdateUser(userDetails);
+    }
 
-        };
-        return await _accountDomainService.UpdateUser(input);
+    public async Task<ApplicationUser?> NewUser(RegisterViewModel input)
+    {
+        var user = CreateUser();
+
+        await _userStore.SetUserNameAsync(user, input.Email, CancellationToken.None);
+        await _emailStore.SetEmailAsync(user, input.Email, CancellationToken.None);
+        var result = await _userManager.CreateAsync(user, input.Password);
+
+        if (result.Succeeded)
+        {
+            _logger.LogInformation("User created a new account with password.");
+
+            var userId = await _userManager.GetUserIdAsync(user);
+            // var userDetails = await _userManager.FindByIdAsync(userId);
+
+            user.UserFaculty = input.Faculty;
+            user.LastName = input.LastName;
+            user.FirstName = input.FirstName;
+            if (input.IsGoogleAuth)
+            {
+                user.AuthenticationType = "Google";
+            }
+            else
+            {
+                user.AuthenticationType = "SMS";
+            }
+
+            user.PhoneNumber = input.PhoneNumber;
+
+            return await _accountDomainService.UpdateUser(user);
+
+        }
+        return user;
+
     }
 
     public async Task<bool> GenerateCode(ApplicationUser user)
@@ -98,9 +143,25 @@ public class AccountService : IAccountService
         return await _accountDomainService.VerifyCode(userid, viewModel.OTP);
     }
 
-    public async Task<ApplicationUser?> Save(ApplicationUser user)
+    private ApplicationUser CreateUser()
     {
-
-        return await _accountDomainService.Save(user);
+        try
+        {
+            return Activator.CreateInstance<ApplicationUser>();
+        }
+        catch
+        {
+            throw new InvalidOperationException($"Can't create an instance of '{nameof(ApplicationUser)}'. " +
+                                                $"Ensure that '{nameof(ApplicationUser)}' is not an abstract class and has a parameterless constructor, or alternatively " +
+                                                $"override the register page in /Areas/Identity/Pages/Account/Register.cshtml");
+        }
+    }
+    private IUserEmailStore<ApplicationUser> GetEmailStore()
+    {
+        if (!_userManager.SupportsUserEmail)
+        {
+            throw new NotSupportedException("The default UI requires a user store with email support.");
+        }
+        return (IUserEmailStore<ApplicationUser>)_userStore;
     }
 }
