@@ -1,3 +1,5 @@
+using LivingLab.Core.Entities.Identity;
+
 namespace LivingLab.Web.UIServices.NotificationManagement;
 
 /// <remarks>
@@ -6,4 +8,6 @@ namespace LivingLab.Web.UIServices.NotificationManagement;
 public interface INotificationManagementService
 {
     Task SetNotificationPref();
+
+    Task SendTextToPhone(ApplicationUser user);
 }

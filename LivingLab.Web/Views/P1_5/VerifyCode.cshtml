@@ -1,6 +1,8 @@
 @* /// <remarks> *@
 @* /// Author: Team P1-5 *@
 @* /// </remarks> *@
+@model LivingLab.Web.Models.ViewModels.Login.LoginViewModel
+
 @{
     ViewData["Title"] = "Verify Login";
     }
@@ -21,8 +23,13 @@
                 
                 <div class = "mt-16">
                     @* <button id="verify-submit" type="submit" class="w-4/12 h8 text-base text-white bg-gray-700 hover:bg-gray-800 focus:ring-4 focus:ring-gray-300 font-medium  rounded-md text-sm px-5 py-2.5 text-center">Verify</button> *@
-                    <button id="verify-submit" type="submit" class="w-4/12 h8 text-base text-white bg-gray-700 hover:bg-gray-800 focus:ring-4 focus:ring-gray-300 font-medium  rounded-md text-sm px-5 py-2.5 text-center"><a asp-controller="Home" asp-action="Index">Verify</a>
-</button>
+                    <button id="verify-submit" type="submit" class="w-4/12 h8 text-base text-white bg-gray-700 hover:bg-gray-800 focus:ring-4 focus:ring-gray-300 font-medium  rounded-md text-sm px-5 py-2.5 text-center"><a asp-controller="Home" asp-action="Index">Verify Code</a>
+                    </button>
+                </div>
+                
+                <div class="mt-4">
+                    <button class="w-4/12 h8 text-base text-white bg-gray-700 hover:bg-gray-800 focus:ring-4 focus:ring-gray-300 font-medium rounded-md text-sm px-5 py-2.5 text-center"><a asp-controller="P1_5" asp-action="ResetCode">Re-send Code</a>
+                    </button>
                 </div>
             </form>
         </section>

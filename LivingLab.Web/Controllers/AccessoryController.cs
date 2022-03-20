@@ -4,13 +4,12 @@ using Microsoft.AspNetCore.Mvc;
 using LivingLab.Web.Models.ViewModels;
 using LivingLab.Web.Models.ViewModels.Accessory;
 using LivingLab.Web.UIServices.Accessory;
-using LivingLab.Web.UIServices.Device;
 
 namespace LivingLab.Web.Controllers;
 /// <remarks>
 /// Author: Team P1-3
 /// </remarks>
-[Route("Accessory")]
+[Route("/Accessory")]
 public class AccessoryController : Controller
 {
     private readonly ILogger<AccessoryController> _logger;
@@ -37,13 +36,54 @@ public class AccessoryController : Controller
         ViewAccessoryTypeViewModel viewAccessories = await _accessoryService.ViewAccessoryType();
         return View("ViewAccessoryType", viewAccessories);
     }
+    
+    
+    [Route("AddAccessoryDetails")]
+    public async Task<AccessoryDetailsViewModel> AddAccessoryDetails()
+    { 
+        //retrieve data from db
+        AccessoryDetailsViewModel accessoryDetails = await _accessoryService.AddAccessoryDetails();
+        return accessoryDetails;
+    }
+    
+    [Route("GetEditDetails/{id}")]
+    public async Task<AccessoryDetailsViewModel> EditAccessoryDetails(int id)
+    { 
+        //retrieve data from db
+        AccessoryDetailsViewModel accessoryDetails = await _accessoryService.EditAccessoryDetails(id);
+        return accessoryDetails;
+    }
 
-    // [HttpGet]
-    // public async Task<IActionResult> GetAll()
-    // {
-    //     List<Accessory> accessoryList = await _accessoryRepository.GetAccessoryWithAccessoryType();
-    //     return Ok(accessoryList);
-    // }
+    [Route("GetDeleteDetails/{id}")]
+    public async Task<AccessoryViewModel> GetDeleteDetails(int id)
+    {
+        AccessoryViewModel accessoryViewModel = await _accessoryService.GetAccessory(id);
+        return accessoryViewModel;
+    }
+    
+    [HttpPost("CreateAccessory")]
+    public async Task<IActionResult> CreateAccessory(AccessoryDetailsViewModel viewModel)
+    {
+        await _accessoryService.AddAccessory(viewModel);
+        return RedirectToAction("ViewAccessoryType");
+    }
+    
+    [HttpPost("EditAccessory")]
+    public async Task<IActionResult> EditAccessory(AccessoryDetailsViewModel viewModel)
+    {
+        await _accessoryService.EditAccessory(viewModel);
+        return RedirectToAction("ViewAccessoryType");
+    }
+    
+    [HttpPost("View/Delete")]
+    public async Task<IActionResult> DeleteAccessory(AccessoryViewModel deleteAccessory)
+    {
+        await _accessoryService.DeleteAccessory(deleteAccessory); 
+        
+        // Temp - To display ViewAll after editing
+        ViewAccessoryViewModel viewAccessory = await _accessoryService.ViewAccessory(deleteAccessory.AccessoryType.Type);
+        return View("ViewAccessory", viewAccessory);
+    }
 
     [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
     public IActionResult Error()

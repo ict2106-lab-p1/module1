@@ -1,4 +1,5 @@
-﻿@model LivingLab.Web.Models.ViewModels.Device.ViewDeviceTypeViewModel
+﻿@using LivingLab.Web.Models.ViewModels.Device
+@model LivingLab.Web.Models.ViewModels.Device.ViewDeviceTypeViewModel
 @*  <remarks> *@
 @*  Author: Team P1-3 *@
 @*  </remarks> *@
@@ -16,32 +17,33 @@
     </div>
 
     <div class="justify-self-end">
-        <button id="addDeviceBtn" class="bg-purple-500 hover:bg-purple-700 text-white font-bold py-2 px-8 rounded">
-            Add device
+        <button id="addDeviceBtn" class="btn btn-primary font-bold rounded">
+            Add new device
         </button>
     </div>
 </div>
 <hr class="mb-4"/>
 
-<table id="table_id" class="display">
-    <thead>
-    <tr>
-        <th>Name</th>
-        <th>Qty</th>
-        <th></th>
-    </tr>
-    </thead>
-    <tbody>
-    @foreach (var device in Model.ViewDeviceTypeDtos)
-    {
-        <tr>
-            <td>@device.Type</td>
-            <td>@device.Quantity</td>
-            <td></td>
-        </tr>
-    }
-    </tbody>
-</table>
+<div class= "container my-4 mx-auto px-4 md:px-8 ">
+        <div class= "flex flex-wrap -mx-1 lg:-mx-4">
+        @foreach (var device in Model.ViewDeviceTypeDtos)
+        {
+            <div class="card w-64 bg-base-100 shadow-xl m-4">
+                <figure>
+                    <img src="https://ak.picdn.net/shutterstock/videos/3820817/thumb/1.jpg?ip=x480"
+                            alt="">
+                </figure>
+                <div class="card-body items-center text-center">
+                    <h2 class="card-title">@device.Type</h2>
+                    <p>Quantity: @device.Quantity</p>
+                    <div class="card-actions text-center">
+                        <button id="viewMoreBtn" class="btn btn-outline btn-primary mt-2 viewMoreBtn" type="button">View More</button>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
 
 <form asp-controller="Device" asp-action="ViewAll" method="post" name="postDeviceType">
     <input type="hidden" name="deviceType"/>
@@ -61,114 +63,17 @@
         <div>
             <p class="text-md-start">NYP-SR7C </p>
         </div>
-        <div class="mt-4">
-            <form class="w-full max-w-lg">
-                <div class="flex flex-wrap -mx-3 mb-2">
-                    <div class="w-full px-3">
-                        <label class="tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-device-id">
-                            Device ID
-                        </label>
-                        <input class="appearance-none block w-full bg-gray-100 text-gray-700 border border-gray-300 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-device-id" type="text" placeholder="D0001" disabled>
-                        @* <p class="text-gray-600 text-xs italic">Make it as long and as crazy as you'd like</p> *@
-                    </div>
+                <div class="mt-4">
+                    <form class="w-full max-w-lg" method="post" enctype="multipart/form-data" asp-controller="Device" asp-action="AddDevice">
+                        @{
+                            @await Html.PartialAsync("_AddDevice", new DeviceViewModel());
+                        }
+                    </form>
                 </div>
-                <div class="flex flex-wrap -mx-3 mb-6">
-                    <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
-                        <label class="tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-device-type">
-                            Device Type
-                        </label>
-                        <div class="relative">
-                            <select class="block appearance-none w-full bg-white text-gray-900 border border-gray-200 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-device-type">
-                                <option>Smart Sensors</option>
-                                <option>Lighting</option>
-                                <option>Robots</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="w-full md:w-1/2 px-3">
-                        <label class="tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-desc">
-                            Description
-                        </label>
-                        <input class="appearance-none block w-full bg-white text-gray-900 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-desc" type="text" placeholder="Description">
-                    </div>
-                </div>
-                <div class="flex flex-wrap -mx-3 mb-6">
-                    <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
-                        <label class="tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-cost">
-                            Cost
-                        </label>
-                        <input class="appearance-none block w-full bg-white text-gray-900 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-cost" type="number" placeholder="$00.00">
-                    </div>
-
-                    <div class="w-full md:w-1/2 px-3">
-                        <label class="tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-serialnum">
-                            Serial Number
-                        </label>
-                        <input class="appearance-none block w-full bg-white text-gray-900 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-serialnum" type="text" placeholder="A12345678E">
-                    </div>
-                </div>
-
-                <div class="flex flex-wrap -mx-3 mb-6">
-                    <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
-                        <label class="tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-status">
-                            Status
-                        </label>
-                        <div class="relative">
-                            <select class="block appearance-none w-full bg-white text-gray-900 border border-gray-200  py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-status">
-                                <option>Available</option>
-                                <option>Booked</option>
-                                <option>In Maintenance</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="w-full md:w-1/2 px-3">
-                        <label class="tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-reviewer">
-                            Assign Reviewer
-                        </label>
-                        <div class="relative">
-                            <select class="block appearance-none w-full bg-white text-gray-900 border border-gray-200 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-reviewer">
-                                <option>Lab Technician 0</option>
-                                <option>Lab Technician 1</option>
-                                <option>Lab Technician 2</option>
-                                <option>Lab Technician 3</option>
-                                <option>Lab Technician 4</option>
-                                <option>Lab Technician 5</option>
-                            </select>
-                        </div>
-                    </div>
-                </div>
-                <div class="mt-3 flex justify-end space-x-3">
-                    <button class="bg-transparent hover:bg-purple-500 text-purple-700 font-semibold hover:text-white py-2 px-4 border border-purple-500 hover:border-transparent rounded">
-                        Cancel
-                    </button>
-                    <button class="bg-purple-500 hover:bg-purple-700 text-white font-bold py-2 px-4 rounded" type="submit">
-                        Add
-                    </button>
-                </div>
-            </form>
-        </div>
     </div>
 </div>
 
 @section Scripts
 {
-    <script>
-            window.addEventListener('DOMContentLoaded', () =>{
-                const overlay = document.querySelector('#overlay')
-                const addBtn = document.querySelector('#addDeviceBtn')
-                const closeBtn = document.querySelector('#close-modal')
-    
-                const toggleModal = () => {
-                    overlay.classList.toggle('hidden')
-                    overlay.classList.toggle('flex')
-                }
-    
-                addBtn.addEventListener('click', toggleModal)
-    
-                closeBtn.addEventListener('click', toggleModal)
-            })
-    
-    </script>
-    
     <script src="~/js/viewDeviceType.js"></script>
 }

@@ -11,11 +11,13 @@ public class AccessoryViewModel
     public DateTime LastUpdated { get; set; }
     public int LabId { get; set; }
     public int AccessoryTypeId { get; set; }
-    
     public Lab? Lab { get; set; }
-
+    public string? LabUserId { get; set; }
     public AccessoryType? AccessoryType { get; set; }
     
-    public int? LabUserId { get; set; }
     public DateTime? DueDate { get; set; }
+    
+    public string? ReviewStatus { get; set; }
+    
+    public string? ReviewedBy { get; set; }
 }

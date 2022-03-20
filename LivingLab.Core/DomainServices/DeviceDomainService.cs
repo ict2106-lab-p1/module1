@@ -1,5 +1,5 @@
 using LivingLab.Core.Entities;
-using LivingLab.Core.Entities.DTO;
+using LivingLab.Core.Entities.DTO.Device;
 using LivingLab.Core.Interfaces.Repositories;
 using LivingLab.Core.Interfaces.Services;
 
@@ -23,5 +23,26 @@ public class DeviceDomainService : IDeviceDomainService
     public Task<List<ViewDeviceTypeDTO>> ViewDeviceType()
     {
         return _deviceRepository.GetViewDeviceType();
+    }
+    
+    public Task<Device> ViewDeviceDetails(int id)
+    {
+        return _deviceRepository.GetDeviceDetails(id);
+    }
+    public Task<Device> GetDeviceLastRow()
+    {
+        return _deviceRepository.GetLastRow();
+    }
+    public Task<Device> AddDevice(Device addedDevice)
+    {
+        return _deviceRepository.AddDevice(addedDevice);
+    }
+    public Task<Device> EditDeviceDetails(Device editedDevice)
+    {
+        return _deviceRepository.EditDeviceDetails(editedDevice);
+    }
+    public Task<Device> DeleteDevice(Device deletedDevice)
+    {
+        return _deviceRepository.DeleteDevice(deletedDevice);
     }
 }
