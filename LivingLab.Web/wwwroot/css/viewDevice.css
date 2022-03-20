@@ -10,5 +10,19 @@
 @tailwind components;
 @tailwind utilities;
 .dataTables_wrapper .myfilter .dataTables_filter {
+<<<<<<< HEAD
     float: left
 }
+=======
+    float: left;
+}
+
+#overlay {
+    z-index: 999;
+}
+
+.disabled {
+    pointer-events: none;
+    background: grey;
+}
+>>>>>>> 90b10889d83940c28fac73d217dde82139b35141

@@ -1,7 +1,6 @@
 using AutoMapper;
 
-using LivingLab.Core.Entities.DTO;
-using LivingLab.Core.Interfaces.Repositories;
+using LivingLab.Core.Entities.DTO.Device;
 using LivingLab.Core.Interfaces.Services;
 using LivingLab.Web.Models.ViewModels.Device;
 
@@ -43,6 +42,49 @@ public class DeviceService : IDeviceService
         ViewDeviceTypeViewModel deviceTypeViewModel = new ViewDeviceTypeViewModel();
         deviceTypeViewModel.ViewDeviceTypeDtos = deviceList;
         return deviceTypeViewModel;
+    }
+    
+    public async Task<DeviceViewModel> ViewDeviceDetails(int id)
+    {
+        //retrieve data from db
+        Core.Entities.Device device = await _deviceDomainService.ViewDeviceDetails(id);
+        DeviceViewModel deviceVM = _mapper.Map<Core.Entities.Device, DeviceViewModel> (device);
+        return deviceVM;
+    }
+    
+    public async Task<DeviceViewModel> AddDevice(DeviceViewModel deviceViewModel)
+    {
+        //retrieve data from db
+        Core.Entities.Device addDevice = _mapper.Map<DeviceViewModel, Core.Entities.Device> (deviceViewModel);
+        await _deviceDomainService.AddDevice(addDevice);
+        return deviceViewModel;
+    }
+    
+    public async Task<DeviceViewModel> ViewAddDetails()
+    {
+        //retrieve data from db
+        Core.Entities.Device device = await _deviceDomainService.GetDeviceLastRow();
+        DeviceViewModel deviceVM = _mapper.Map<Core.Entities.Device, DeviceViewModel> (device);
+        return deviceVM;
+    }
+    
+    
+    public async Task<DeviceViewModel> EditDevice(DeviceViewModel deviceViewModel)
+    {
+        //retrieve data from db
+        Core.Entities.Device editDevice = _mapper.Map<DeviceViewModel, Core.Entities.Device> (deviceViewModel);
+        await _deviceDomainService.EditDeviceDetails(editDevice);
+        
+        return deviceViewModel;
+    }
+    
+    public async Task<DeviceViewModel> DeleteDevice(DeviceViewModel deviceViewModel)
+    {
+        //retrieve data from db
+        Core.Entities.Device deleteDevice = _mapper.Map<DeviceViewModel, Core.Entities.Device> (deviceViewModel);
+        await _deviceDomainService.DeleteDevice(deleteDevice);
+        
+        return deviceViewModel;
     }
     
 }

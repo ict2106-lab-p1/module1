@@ -1,0 +1,72 @@
+@model LivingLab.Web.Models.ViewModels.Login.RegisterViewModel
+@* /// <remarks> *@
+@* /// Author: Team P1-5 *@
+@* /// </remarks> *@
+@{
+    ViewData["Title"] = "Register";
+}
+<h1>@ViewData["Title"]</h1>
+
+<div class="row">
+    <div class="col-md-4">
+        <form id="registerForm" method="post" asp-controller="Account" asp-action="Register">
+            <h2>Create a new account.</h2>
+            <hr />
+            @* <div asp-validation-summary="ModelOnly" class="text-danger"></div> *@
+            <div class="form-floating">
+                <label asp-for="Email"></label>
+                <input asp-for="Email" class="form-control" autocomplete="email" aria-required="true"/>
+                <span asp-validation-for="Email" class="text-danger"></span>
+            </div>
+            <div class="form-floating">
+                <label asp-for="FirstName"></label>
+                <input asp-for="FirstName" class="form-control" autocomplete="firstname" aria-required="true"/>
+                <span asp-validation-for="FirstName" class="text-danger"></span>
+            </div>
+            <div class="form-floating">
+                <label asp-for="LastName"></label>
+                <input asp-for="LastName" class="form-control" autocomplete="lastname" aria-required="true"/>
+                <span asp-validation-for="LastName" class="text-danger"></span>
+            </div>
+            <div class="form-floating">
+                <label asp-for="PhoneNumber"></label>
+                <input asp-for="PhoneNumber" class="form-control" autocomplete="phone" aria-required="true"/>
+                <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+            </div>
+            <div class="form-floating">
+                @* <label asp-for="Faculty"></label>
+                <input asp-for="Faculty" class="form-control" autocomplete="faculty" aria-required="true"/>
+                                <span asp-validation-for="Faculty" class="text-danger"></span> *@
+                <select name="faculty" asp-for="Faculty"> 
+                     <option value="SE">SE</option> 
+                    <option value="ICT">ICT</option> 
+                     <option value="MDME">MDME</option>
+                     <option value="CSC">CSC</option> 
+                </select>
+            </div>
+            <div class="form-floating mt-4 mb-4">
+                <span style="white-space: pre-line">
+                <label asp-for="IsSMS"></label>
+                    @Html.CheckBoxFor(model => model.IsSMS)sms
+                    @Html.CheckBoxFor(model => model.IsGoogleAuth)google authentication
+                </span>
+            </div>
+            <div class="form-floating">
+                <label asp-for="Password"></label>
+                <input asp-for="Password" type="password" hidden class="form-control" autocomplete="new-password" aria-required="true"/>
+                <span asp-validation-for="Password" class="text-danger"></span>
+            </div>
+            <div class="form-floating">
+                <label asp-for="ConfirmPassword"></label>
+                <input asp-for="ConfirmPassword" type="password" hidden class="form-control" autocomplete="confirm-password" aria-required="true"/>
+                <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
+            </div>
+            <button id="registerSubmit" class="w-100 btn btn-lg btn-primary" >Register</button>
+        </form>
+    </div>
+    
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
