@@ -41,8 +41,9 @@ public class UserManagementController : Controller
     [HttpPost("View/Edit")]
     public async Task<IActionResult> EditUser(UserManagementViewModel editAccount)
     {
-        Console.WriteLine("ID: "+ editAccount.Id);
+        //received data 
         Console.WriteLine("Email: "+ editAccount.Email);
+        Console.WriteLine("ID: "+ editAccount.Id);
         await _userManagementService.EditAccount(editAccount);
 
         // Temp - To display ViewAll after editing
@@ -50,7 +51,6 @@ public class UserManagementController : Controller
         return View("Index", viewAccounts);
     }
     
-
     [HttpPost("View/Delete")]
     public async Task<IActionResult> DeleteAccount(UserManagementViewModel deleteAccount)
     {
@@ -61,33 +61,4 @@ public class UserManagementController : Controller
         ViewUserManagementViewModel viewAccounts = await _userManagementService.GetAllAccounts();
         return View("Index", viewAccounts);
     }
-
-    // // GET: api/Account
-    // [HttpGet]
-    // public async Task<IActionResult> GetAllAccount()
-    // {
-    //     return Ok(await _accountService.());
-    // }
-
-    // // GET: api/Account/"User1"
-    // [HttpGet("{userId:string}")]
-    // public IActionResult Get(string userId)
-    // {
-    //     return Ok(_todoService.GetTodoAsync(id));
-    // }
-    //
-    // // POST: api/Todo
-    // [HttpPost]
-    // public async Task<IActionResult> Post(CreateTodoDTO todo)
-    // {
-    //     try
-    //     {
-    //         return Ok(await _todoService.CreateTodoAsync(todo));
-    //     }
-    //     catch (Exception e)
-    //     {
-    //         return BadRequest(e.Message);
-    //     }
-    // }
-    
 }

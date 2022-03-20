@@ -53,6 +53,7 @@ public class UserManagementService : IUserManagementService
         ApplicationUser editAccount = _mapper.Map<UserManagementViewModel, ApplicationUser> (userViewModel);
         await _accountDomainService.EditAccount(editAccount);
         
+        Console.WriteLine("in ui service" +  userViewModel);
         return userViewModel;    
         
     }

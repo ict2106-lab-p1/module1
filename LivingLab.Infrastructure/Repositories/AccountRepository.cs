@@ -34,28 +34,29 @@ public class AccountRepository : Repository<ApplicationUser>, IAccountRepository
         return user;
     }
     
-    // public async Task<ApplicationUser?> GetAccount(string userId)
-    // {
-    //     throw new NotImplementedException();
-    // }
-    //
-    // public async Task<ApplicationUser?> AddAccount(ApplicationUser user)
-    // {
-    //     throw new NotImplementedException();
-    // }
-    //
-    
     public async Task<ApplicationUser> EditUserDetail(ApplicationUser editUser)
     {
+        Console.WriteLine("TEST");
+
         ApplicationUser currentUser = (await _context.Users.SingleOrDefaultAsync(d => d.Id == editUser.Id))!;
-        currentUser.FirstName = editUser.FirstName;
-        currentUser.LastName = editUser.LastName;
+        // currentUser.FirstName = editUser.FirstName;
+        // currentUser.LastName = editUser.LastName;
+        Console.WriteLine("email" + currentUser.Email);
+        Console.WriteLine("TESTtest2");
+
         currentUser.Email = editUser.Email;
-        currentUser.UserFaculty  = editUser.UserFaculty;
-        currentUser.LabAccesses  = editUser.LabAccesses;
-        currentUser.PhoneNumber = editUser.PhoneNumber;
-        currentUser.PasswordHash = editUser.PasswordHash;
-        await _context.SaveChangesAsync();
+        Console.WriteLine("email" + currentUser.Email);
+        Console.WriteLine("email" + editUser.Email);
+
+        Console.WriteLine("TEST3");
+
+        // currentUser.UserFaculty  = editUser.UserFaculty;
+        // currentUser.LabAccesses  = editUser.LabAccesses;
+        // currentUser.PhoneNumber = editUser.PhoneNumber;
+        // currentUser.PasswordHash = editUser.PasswordHash;
+        await _context.SaveChangesAsync();        
+        Console.WriteLine("Edit successful");
+
             
         return editUser;
     }
