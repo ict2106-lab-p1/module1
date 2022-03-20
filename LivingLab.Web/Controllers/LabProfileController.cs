@@ -10,8 +10,7 @@ namespace LivingLab.Web.Controllers;
 /// <remarks>
 /// Author: Team P1-5
 /// </remarks>
-[Route ("Lab")]
-public class LabProfileController: BaseApiController
+public class LabProfileController: Controller
 {
     private readonly ILabProfileService _labProfileService;
     private readonly ILogger<LabProfileController> _logger;
@@ -22,7 +21,6 @@ public class LabProfileController: BaseApiController
     }
     
     
-    [Route("Register")]
     public IActionResult LabRegister()
     {
         return View("LabRegister");

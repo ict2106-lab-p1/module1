@@ -16,29 +16,21 @@ namespace LivingLab.Web.Controllers;
 /// <remarks>
 /// Author: Team P1-3
 /// </remarks>
-[Route("/")]
 public class HomeController : Controller
 {
     private readonly ILogger<HomeController> _logger;
     private readonly SignInManager<ApplicationUser> _signInManager;
-    // private readonly IAccountService _accountService;
 
     public HomeController(ILogger<HomeController> logger, SignInManager<ApplicationUser> signInManager)
     {
         _logger = logger;
         _signInManager = signInManager;
-        // _accountService = accountService;
 
     }
 
-    [Authorize]
-    [Route("/home")]
     public IActionResult Index()
     {
-        HttpContext.Session.SetInt32("UserID", 1);
         return View("Index");
-        
-        
     }
 
     [Route("privacy")]
@@ -63,20 +55,7 @@ public class HomeController : Controller
         return View("ExamplePage");
     }
     
-    // [HttpPost]
-    // public async Task<IActionResult> Save(string userid, RegisterViewModel registration)
-    // {
-    //     try
-    //     {
-    //         await _accountService.UpdateUser(userid, registration);
-    //         return Ok();
-    //     }
-    //     catch (Exception e)
-    //     {
-    //         _logger.LogError(e.Message);
-    //         return Error();
-    //     }
-    // }
+ 
 
     [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
     public IActionResult Error()

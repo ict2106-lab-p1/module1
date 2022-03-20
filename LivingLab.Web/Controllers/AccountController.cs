@@ -14,8 +14,7 @@ namespace LivingLab.Web.Controllers;
 /// <remarks>
 /// Author: Team P1-5
 /// </remarks>
-[Route("Account")]
-public class AccountController: BaseApiController
+public class AccountController: Controller
 {
     private readonly IAccountService _accountService;
     private readonly ILogger<AccountController> _logger;
@@ -29,7 +28,6 @@ public class AccountController: BaseApiController
         _userManager = userManager;
     }
 
-    [Route("Register")]
     public IActionResult Register()
     {
         return View("Register");
@@ -37,7 +35,7 @@ public class AccountController: BaseApiController
 
     
     [HttpPost]
-    public async Task<ViewResult> LabRegister(RegisterViewModel registration)
+    public async Task<ViewResult> Register(RegisterViewModel registration)
     {
         if (ModelState.IsValid)
         {
