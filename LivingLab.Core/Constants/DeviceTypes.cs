@@ -13,4 +13,17 @@ public static class DeviceTypes
     public const string MISCELLANEOUS = "Misc";
     public const string SMART_LIGHTING = "SmartLighting";
     public const string CAMERA = "Camera";
+
+    public static string[] GetAllDeviceTypes() {
+        return new string[] {
+            POWER_METER,
+            MICROPROCESSOR,
+            SMART_SENSOR,
+            ROBOT,
+            AUGMENTED_OR_VIRTUAL_REALITY,
+            MISCELLANEOUS,
+            SMART_LIGHTING,
+            CAMERA
+        };
+    }
 }

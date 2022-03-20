@@ -1,0 +1,23 @@
+/* <remarks>*/
+
+
+/* Author: Team P1-3*/
+
+
+/* </remarks>*/
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+.dataTables_wrapper .myfilter .dataTables_filter {
+    float: left
+}
+
+#overlay {
+    z-index: 999;
+}
+
+.disabled {
+    pointer-events:none;
+    background:grey;
+}

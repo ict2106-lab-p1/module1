@@ -34,23 +34,21 @@
                 <span asp-validation-for="PhoneNumber" class="text-danger"></span>
             </div>
             <div class="form-floating">
-                <label asp-for="Faculty"></label>
+                @* <label asp-for="Faculty"></label>
                 <input asp-for="Faculty" class="form-control" autocomplete="faculty" aria-required="true"/>
-                                <span asp-validation-for="Faculty" class="text-danger"></span>
-                @* <select name="faculty" asp-for="Faculty"> *@
-                @*     <option value="SE">SE</option> *@
-                @*     <option value="ICT">ICT</option> *@
-                @*     <option value="MDME">MDME</option> *@
-                @*     <option value="CSC">CSC</option> *@
-                @* </select> *@
+                                <span asp-validation-for="Faculty" class="text-danger"></span> *@
+                <select name="faculty" asp-for="Faculty"> 
+                     <option value="SE">SE</option> 
+                    <option value="ICT">ICT</option> 
+                     <option value="MDME">MDME</option>
+                     <option value="CSC">CSC</option> 
+                </select>
             </div>
             <div class="form-floating mt-4 mb-4">
                 <span style="white-space: pre-line">
                 <label asp-for="IsSMS"></label>
-                    @* <input asp-for="IsSMS" type="checkbox" value="SMS" />SMS *@
-                    @Html.CheckBoxFor(model => model.IsSMS)
-                    @Html.CheckBoxFor(model => model.IsGoogleAuth)
-                @* <input asp-for="IsGoogleAuth" type="checkbox" value="GoogleAuth"/> Google Authentication *@
+                    @Html.CheckBoxFor(model => model.IsSMS)sms
+                    @Html.CheckBoxFor(model => model.IsGoogleAuth)google authentication
                 </span>
             </div>
             <div class="form-floating">

@@ -1,5 +1,6 @@
 using LivingLab.Core.Entities;
 using LivingLab.Core.Interfaces.Services;
+using LivingLab.Core.Interfaces.Services.EnergyUsageInterfaces;
 
 namespace LivingLab.Web.UIServices.EnergyLog;
 
