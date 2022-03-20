@@ -1,4 +1,4 @@
-﻿@using Microsoft.AspNetCore.Identity
+@using Microsoft.AspNetCore.Identity
 @using LivingLab.Core.Entities.Identity
 @inject SignInManager<ApplicationUser> SignInManager
 @inject UserManager<ApplicationUser> UserManager
@@ -8,14 +8,12 @@
     ViewData["Title"] = "Home Page";
 }
 
-@if (SignInManager.IsSignedIn(User))
-{
-    <div class="m-0 overflow-hidden 	">
+    <div class="m-0 overflow-hidden">
     <div class="header sticky ">
-        <h1 class="text-4xl text-gray-600 font-semibold  ">Dashboard</h1>
+        <h1 class="text-4xl text-gray-600 font-semibold">Dashboard</h1>
     </div>
     <div class=" flex justify-evenly ">
-        <div class=" w-96 py-12 px-12 bg-white shadow-lg rounded-lg my-20 mr-4">
+        <div class=" w-64 py-12 px-12 bg-white shadow-lg rounded-lg my-20 mr-4">
             <div>
                 <h2 class="text-gray-800 text-xl font-semibold mt-4">Average Device Energy Usage</h2>
                 <div class="flex">
@@ -27,7 +25,7 @@
                 <a href="#" class="text-sm font-medium text-indigo-500">View more</a>
             </div>
         </div>
-        <div class=" w-96 py-12 px-12 bg-white shadow-lg rounded-lg my-20 mr-4">
+        <div class=" w-64 py-12 px-12 bg-white shadow-lg rounded-lg my-20 mr-4">
             <div class="flex">
 
             </div>
@@ -43,7 +41,7 @@
             </div>
         </div>
 
-        <div class=" w-96 py-12 px-12 bg-white shadow-lg rounded-lg my-20 mr-4">
+        <div class=" w-64 py-12 px-12 bg-white shadow-lg rounded-lg my-20 mr-4">
             <div>
                 <h2 class="text-gray-800 text-xl font-semibold mt-4">Average Labs Log In</h2>
                 <div class="flex">
@@ -54,7 +52,7 @@
                 <a href="#" class="text-sm font-medium text-indigo-500">View more</a>
             </div>
         </div>
-        <div class=" w-96 py-12 px-12 bg-white shadow-lg rounded-lg my-20 mr-4">
+        <div class=" w-64 py-12 px-12 bg-white shadow-lg rounded-lg my-20 mr-4">
             <div>
                 <h2 class="text-gray-800 text-xl font-semibold mt-4">Average Data Uploaded </h2>
                 <div class="flex">
@@ -76,8 +74,3 @@
 
     </div>
 </div>
-}
-else
-{
-
-}

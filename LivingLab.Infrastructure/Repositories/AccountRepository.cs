@@ -2,6 +2,8 @@ using LivingLab.Core.Entities.Identity;
 using LivingLab.Core.Interfaces.Repositories;
 using LivingLab.Infrastructure.Data;
 
+using Microsoft.EntityFrameworkCore;
+
 namespace LivingLab.Infrastructure.Repositories;
 /// <remarks>
 /// Author: Team P1-5
@@ -17,17 +19,19 @@ public class AccountRepository : Repository<ApplicationUser>, IAccountRepository
 
     public async Task<List<ApplicationUser>?> GetAllAccount()
     {
-        throw new NotImplementedException();
+        return await _context.Set<ApplicationUser>().ToListAsync();
     }
 
-    public async Task<ApplicationUser?> GetAccount(string userId)
+    //TODO: Implement a status model return Object, status
+    public async Task<ApplicationUser?> GetAccountById(string id)
     {
-        throw new NotImplementedException();
+        return await _context.Set<ApplicationUser>().FindAsync(id);
     }
 
     public async Task<ApplicationUser?> AddAccount(ApplicationUser user)
     {
-        throw new NotImplementedException();
+        await _context.AddAsync(user);
+        return user;
     }
 
     public async Task<int> DeleteAccount(string userId)

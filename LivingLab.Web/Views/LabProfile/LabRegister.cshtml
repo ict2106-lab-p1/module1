@@ -1,0 +1,54 @@
+@model LivingLab.Web.Models.ViewModels.LabProfile.LabProfileViewModel
+@* /// <remarks> *@
+@* /// Author: Team P1-5 *@
+@* /// </remarks> *@
+@{
+    ViewData["Title"] = "Lab Register";
+}
+<h1>@ViewData["Title"]</h1>
+
+<div class="row">
+    <div class="col-md-4">
+        <form id="registerLab" method="post" asp-controller="LabProfile" asp-action="LabRegister">
+            <h2>Create a new Lab.</h2>
+            <hr />
+            @* <div asp-validation-summary="ModelOnly" class="text-danger"></div> *@
+            <div class="form-floating">
+                <label asp-for="LabLocation"></label>
+                <input asp-for="LabLocation" class="form-control" aria-required="true"/>
+                <span asp-validation-for="LabLocation" class="text-danger"></span>
+            </div>
+            <div class="form-floating">
+                <label asp-for="LabStatus"></label>
+                <input asp-for="LabStatus" class="form-control" aria-required="true"/>
+                <span asp-validation-for="LabStatus" class="text-danger"></span>
+            </div>
+            <div class="form-floating">
+                <label asp-for="LabInCharge"></label>
+                <input asp-for="LabInCharge" class="form-control" aria-required="true"/>
+                <span asp-validation-for="LabInCharge" class="text-danger"></span>
+            </div>
+            <div class="form-floating">
+                <label asp-for="Capacity"></label>
+                <input asp-for="Capacity" class="form-control" aria-required="true"/>
+                <span asp-validation-for="Capacity" class="text-danger"></span>
+            </div>
+            <div class="form-floating">
+                <label asp-for="Area"></label>
+                <input asp-for="Area" class="form-control" aria-required="true"/>
+                <span asp-validation-for="Area" class="text-danger"></span>
+            </div>
+            <div class="form-floating">
+                <label asp-for="EnergyUsageBenchmark"></label>
+                <input asp-for="EnergyUsageBenchmark" class="form-control" aria-required="true"/>
+                <span asp-validation-for="EnergyUsageBenchmark" class="text-danger"></span>
+            </div>
+            <button id="labsubmit" class="w-100 btn btn-lg btn-primary">New Lab</button>
+        </form>
+    </div>
+    
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

@@ -44,11 +44,11 @@ public static class DataSeeder
         );
 
         modelBuilder.Entity<Device>().HasData(
-                new { Id = 1, Name = "Surveillance Camera", LastUpdated = new DateTime(2020, 10, 10), SerialNo = "SC1001", LabId = 1, Status = "Available", Type = "Surveillance Camera", Description = "Its purpose is to detect situation in the laboratory" },
-                new { Id = 2, Name = "Temperature Sensor", LastUpdated = new DateTime(2020, 10, 11), SerialNo = "R1001", LabId = 1, Status = "Available", Type = "Temperature Sensor", Description = "Its purpose is to detect temperature in the laboratory" },
-                new { Id = 3, Name = "Humidity Sensor", LastUpdated = new DateTime(2020, 9, 9), SerialNo = "S1001", LabId = 1, Status = "Available", Type = "Humidity Sensor", Description = "Its purpose is to detect humidity in the laboratory" },
-                new { Id = 4, Name = "Light Sensor", LastUpdated = new DateTime(2019, 8, 1), SerialNo = "SL1001", LabId = 1, Status = "Available", Type = "Light Sensor", Description = "Its purpose is to detect light in the laboratory" },
-                new { Id = 5, Name = "VR Light Controls", LastUpdated = new DateTime(2019, 7, 3), SerialNo = "VRL1001", LabId = 1, Status = "Unavailable", Type = "VR Light Controls", Description = "It is used to control brightness of the lights in the lab" }
+                new { Id = 1, Name = "Surveillance Camera", LastUpdated = new DateTime(2020, 10, 10), SerialNo = "SC1001", LabId = 1, Status = "Available", Type = "Surveillance Camera", Description = "Its purpose is to detect situation in the laboratory" , ReviewStatus = "Pending", ReviewedBy = "David"},
+                new { Id = 2, Name = "Temperature Sensor", LastUpdated = new DateTime(2020, 10, 11), SerialNo = "R1001", LabId = 1, Status = "Available", Type = "Temperature Sensor", Description = "Its purpose is to detect temperature in the laboratory", ReviewStatus = "Approved", ReviewedBy = "David"},
+                new { Id = 3, Name = "Humidity Sensor", LastUpdated = new DateTime(2020, 9, 9), SerialNo = "S1001", LabId = 1, Status = "Available", Type = "Humidity Sensor", Description = "Its purpose is to detect humidity in the laboratory", ReviewStatus = "Approved", ReviewedBy = "David" },
+                new { Id = 4, Name = "Light Sensor", LastUpdated = new DateTime(2019, 8, 1), SerialNo = "SL1001", LabId = 1, Status = "Available", Type = "Light Sensor", Description = "Its purpose is to detect light in the laboratory", ReviewStatus = "Rejected", ReviewedBy = "David" },
+                new { Id = 5, Name = "VR Light Controls", LastUpdated = new DateTime(2019, 7, 3), SerialNo = "VRL1001", LabId = 1, Status = "Unavailable", Type = "VR Light Controls", Description = "It is used to control brightness of the lights in the lab", ReviewStatus = "Pending" , ReviewedBy = "David"}
         );
 
         // Accessory and Accessory Types
@@ -64,28 +64,28 @@ public static class DataSeeder
         );
 
         modelBuilder.Entity<Accessory>().HasData(
-                new { Id = 1, Status = "Available", LastUpdated = new DateTime(2021, 10, 10), LabId = 1, AccessoryTypeId = 1 },
-                new { Id = 2, Status = "Borrowed", LastUpdated = new DateTime(2021, 10, 14), LabId = 1, AccessoryTypeId = 1, LabUserId = "User1", DueDate = new DateTime(2022, 10, 14) },
-                new { Id = 3, Status = "Available", LastUpdated = new DateTime(2021, 10, 17), LabId = 1, AccessoryTypeId = 2 },
-                new { Id = 4, Status = "Available", LastUpdated = new DateTime(2021, 10, 21), LabId = 1, AccessoryTypeId = 2 },
-                new { Id = 5, Status = "Borrowed", LastUpdated = new DateTime(2021, 9, 9), LabId = 1, AccessoryTypeId = 3, LabUserId = "User1", DueDate = new DateTime(2022, 9, 9) },
-                new { Id = 6, Status = "Available", LastUpdated = new DateTime(2021, 9, 5), LabId = 1, AccessoryTypeId = 3 },
-                new { Id = 7, Status = "Available", LastUpdated = new DateTime(2021, 8, 1), LabId = 1, AccessoryTypeId = 4 },
-                new { Id = 8, Status = "Borrowed", LastUpdated = new DateTime(2021, 8, 10), LabId = 1, AccessoryTypeId = 4, LabUserId = "User1", DueDate = new DateTime(2022, 9, 5) },
-                new { Id = 9, Status = "Available", LastUpdated = new DateTime(2021, 7, 3), LabId = 1, AccessoryTypeId = 5 },
-                new { Id = 10, Status = "Borrowed", LastUpdated = new DateTime(2021, 6, 24), LabId = 1, AccessoryTypeId = 5, LabUserId = "User1", DueDate = new DateTime(2022, 10, 14) },
-                new { Id = 11, Status = "Available", LastUpdated = new DateTime(2021, 7, 25), LabId = 1, AccessoryTypeId = 6 },
-                new { Id = 12, Status = "Available", LastUpdated = new DateTime(2021, 4, 3), LabId = 1, AccessoryTypeId = 6 },
-                new { Id = 13, Status = "Borrowed", LastUpdated = new DateTime(2021, 7, 19), LabId = 1, AccessoryTypeId = 7, LabUserId = "User1", DueDate = new DateTime(2022, 7, 19) },
-                new { Id = 14, Status = "Borrowed", LastUpdated = new DateTime(2021, 12, 14), LabId = 1, AccessoryTypeId = 7, LabUserId = "user1", DueDate = new DateTime(2022, 12, 14) },
-                new { Id = 15, Status = "Available", LastUpdated = new DateTime(2021, 11, 12), LabId = 1, AccessoryTypeId = 8 },
-                new { Id = 16, Status = "Available", LastUpdated = new DateTime(2021, 7, 3), LabId = 1, AccessoryTypeId = 8 }
+                new { Id = 1, Status = "Available", LastUpdated = new DateTime(2021, 10, 10), LabId = 1, AccessoryTypeId = 1 , ReviewStatus = "Pending" , ReviewedBy = "David"},
+                new { Id = 2, Status = "Borrowed", LastUpdated = new DateTime(2021, 10, 14), LabId = 1, AccessoryTypeId = 1, LabUserId = "User1", DueDate = new DateTime(2022, 10, 14), ReviewStatus = "Pending" , ReviewedBy = "David" },
+                new { Id = 3, Status = "Available", LastUpdated = new DateTime(2021, 10, 17), LabId = 1, AccessoryTypeId = 2, ReviewStatus = "Pending" , ReviewedBy = "David" },
+                new { Id = 4, Status = "Available", LastUpdated = new DateTime(2021, 10, 21), LabId = 1, AccessoryTypeId = 2, ReviewStatus = "Pending" , ReviewedBy = "David" },
+                new { Id = 5, Status = "Borrowed", LastUpdated = new DateTime(2021, 9, 9), LabId = 1, AccessoryTypeId = 3, LabUserId = "User1", DueDate = new DateTime(2022, 9, 9) , ReviewStatus = "Pending" , ReviewedBy = "David"},
+                new { Id = 6, Status = "Available", LastUpdated = new DateTime(2021, 9, 5), LabId = 1, AccessoryTypeId = 3 , ReviewStatus = "Pending" , ReviewedBy = "David"},
+                new { Id = 7, Status = "Available", LastUpdated = new DateTime(2021, 8, 1), LabId = 1, AccessoryTypeId = 4 , ReviewStatus = "Pending" , ReviewedBy = "David"},
+                new { Id = 8, Status = "Borrowed", LastUpdated = new DateTime(2021, 8, 10), LabId = 1, AccessoryTypeId = 4, LabUserId = "User1", DueDate = new DateTime(2022, 9, 5) , ReviewStatus = "Pending" , ReviewedBy = "David"},
+                new { Id = 9, Status = "Available", LastUpdated = new DateTime(2021, 7, 3), LabId = 1, AccessoryTypeId = 5 , ReviewStatus = "Pending" , ReviewedBy = "David"},
+                new { Id = 10, Status = "Borrowed", LastUpdated = new DateTime(2021, 6, 24), LabId = 1, AccessoryTypeId = 5, LabUserId = "User1", DueDate = new DateTime(2022, 10, 14) , ReviewStatus = "Pending" , ReviewedBy = "David"},
+                new { Id = 11, Status = "Available", LastUpdated = new DateTime(2021, 7, 25), LabId = 1, AccessoryTypeId = 6, ReviewStatus = "Pending" , ReviewedBy = "David"},
+                new { Id = 12, Status = "Available", LastUpdated = new DateTime(2021, 4, 3), LabId = 1, AccessoryTypeId = 6 , ReviewStatus = "Pending" , ReviewedBy = "David"},
+                new { Id = 13, Status = "Borrowed", LastUpdated = new DateTime(2021, 7, 19), LabId = 1, AccessoryTypeId = 7, LabUserId = "User1", DueDate = new DateTime(2022, 7, 19) , ReviewStatus = "Pending" , ReviewedBy = "David"},
+                new { Id = 14, Status = "Borrowed", LastUpdated = new DateTime(2021, 12, 14), LabId = 1, AccessoryTypeId = 7, LabUserId = "user1", DueDate = new DateTime(2022, 12, 14), ReviewStatus = "Pending" , ReviewedBy = "David" },
+                new { Id = 15, Status = "Available", LastUpdated = new DateTime(2021, 11, 12), LabId = 1, AccessoryTypeId = 8 , ReviewStatus = "Pending" , ReviewedBy = "David"},
+                new { Id = 16, Status = "Available", LastUpdated = new DateTime(2021, 7, 3), LabId = 1, AccessoryTypeId = 8 , ReviewStatus = "Pending" , ReviewedBy = "David"}
         );
 
         modelBuilder.Entity<SessionStats>().HasData(
-                new { Id = 1, Date = new DateTime(2021, 7, 3), LoginTime = new DateTime(2021, 7, 3, 9, 0, 0), LogoutTime = new DateTime(2021, 7, 3, 12, 0, 0), DataUploaded = 58.0, LabId = 1 },
-                new { Id = 2, Date = new DateTime(2021, 7, 4), LoginTime = new DateTime(2021, 7, 4, 10, 0, 0), LogoutTime = new DateTime(2021, 7, 4, 15, 0, 0), DataUploaded = 64.0, LabId = 1 },
-                new { Id = 3, Date = new DateTime(2021, 7, 5), LoginTime = new DateTime(2021, 7, 5, 13, 0, 0), LogoutTime = new DateTime(2021, 7, 5, 18, 0, 0), DataUploaded = 128.0, LabId = 1 }
+                new { Id = 1, Date = new DateTime(2021,7,3), LoginTime = new DateTime(2021, 7, 3, 9,0,0), LogoutTime = new DateTime(2021, 7, 3, 12,0,0), DataUploaded= 58.0, LabId=1},
+                new { Id = 2, Date = new DateTime(2021,7,4), LoginTime = new DateTime(2021, 7, 4, 10,0,0), LogoutTime = new DateTime(2021, 7, 4, 15,0,0), DataUploaded= 64.0, LabId=1},
+                new { Id = 3, Date = new DateTime(2021,7,5), LoginTime = new DateTime(2021, 7, 5, 13,0,0), LogoutTime = new DateTime(2021, 7, 5, 18,0,0), DataUploaded= 128.0, LabId=1}
         );
     }
 }

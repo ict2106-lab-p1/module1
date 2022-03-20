@@ -13,6 +13,10 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
 using LivingLab.Core.Entities.Identity;
+using LivingLab.Web.Controllers;
+using LivingLab.Web.Models.ViewModels.Login;
+using LivingLab.Web.UIServices.Account;
+
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
@@ -30,13 +34,15 @@ namespace LivingLab.Web.Areas.Identity.Pages.Account
         private readonly IUserEmailStore<ApplicationUser> _emailStore;
         private readonly ILogger<RegisterModel> _logger;
         private readonly IEmailSender _emailSender;
+        private readonly IAccountService _accountService;
 
         public RegisterModel(
             UserManager<ApplicationUser> userManager,
             IUserStore<ApplicationUser> userStore,
             SignInManager<ApplicationUser> signInManager,
             ILogger<RegisterModel> logger,
-            IEmailSender emailSender)
+            IEmailSender emailSender,
+            IAccountService accountService)
         {
             _userManager = userManager;
             _userStore = userStore;
@@ -44,6 +50,7 @@ namespace LivingLab.Web.Areas.Identity.Pages.Account
             _signInManager = signInManager;
             _logger = logger;
             _emailSender = emailSender;
+            _accountService = accountService;
         }
 
         /// <summary>
@@ -75,11 +82,38 @@ namespace LivingLab.Web.Areas.Identity.Pages.Account
             ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
             ///     directly from your code. This API may change or be removed in future releases.
             /// </summary>
-            [Required]
+            [Required (ErrorMessage = "Please enter email")]
             [EmailAddress]
             [Display(Name = "Email")]
             public string Email { get; set; }
 
+            
+            /// <summary>
+            ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
+            ///     directly from your code. This API may change or be removed in future releases.
+            /// </summary>
+            [Required (ErrorMessage = "Please enter phone number")]
+            [Phone]
+            [Display(Name = "PhoneNumber")]
+            public string PhoneNumber { get; set; }
+
+            [Display(Name = "Select login authentication")]
+            public Boolean IsSMS { get; set; }
+            public Boolean IsGoogle { get; set; }
+            
+            [Display(Name = "Select your faculty")]
+            public string Faculty { get; set; }
+            
+            [Required]
+            [Display(Name = "First Name")]
+            public string FirstName { get; set; }
+            [Required]
+            [Display(Name = "Last Name")]
+            public string LastName { get; set; }
+            
+            [Required(ErrorMessage = "Please enter username")]
+            [Display(Name = "Username")]
+            public string Username { get; set; }
             /// <summary>
             ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
             ///     directly from your code. This API may change or be removed in future releases.
@@ -114,7 +148,6 @@ namespace LivingLab.Web.Areas.Identity.Pages.Account
             if (ModelState.IsValid)
             {
                 var user = CreateUser();
-
                 await _userStore.SetUserNameAsync(user, Input.Email, CancellationToken.None);
                 await _emailStore.SetEmailAsync(user, Input.Email, CancellationToken.None);
                 var result = await _userManager.CreateAsync(user, Input.Password);
@@ -124,7 +157,9 @@ namespace LivingLab.Web.Areas.Identity.Pages.Account
                     _logger.LogInformation("User created a new account with password.");
 
                     var userId = await _userManager.GetUserIdAsync(user);
+
                     var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
+                    
                     code = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(code));
                     var callbackUrl = Url.Page(
                         "/Account/ConfirmEmail",

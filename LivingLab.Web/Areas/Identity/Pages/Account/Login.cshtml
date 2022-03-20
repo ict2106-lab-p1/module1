@@ -1,9 +1,10 @@
 ﻿@page
 @model LoginModel
-
 @{
     ViewData["Title"] = "Log in";
 }
+
+<h1>@ViewData["Title"]</h1>
 
 <div class="row">
     <div class="col-md-4 text-center">
@@ -30,16 +31,13 @@
                 <div class="flex justify-center mt-4">
                     <div class="block w-4/12">
                         <div class="flex justify-between whitespace-nowrap">
-                            <div class="checkbox accent-slate-500">
-                                <label asp-for="Input.RememberMe" class="form-label font-semibold">
-                                    <input class="form-check-input rounded border border-solid border-black :focus:bg-black" asp-for="Input.RememberMe"/>
+                            <label asp-for="Input.RememberMe" class="form-label font-semibold">
+                                    <input class="form-check-input rounded" asp-for="Input.RememberMe"/>
                                     @* @Html.DisplayNameFor(m => m.Input.RememberMe) *@
                                     Remember Me?
                                 </label>
-                                
-                            </div>
                             <p class="font-semibold">
-                                <a id="forgot-password" asp-page="./ForgotPassword">Forgot Password</a>
+                                <a id="forgot-password" asp-controller="Login" asp-action="ForgotPassword">Forgot Password</a>
                             </p>
                         </div>
                         </div>
