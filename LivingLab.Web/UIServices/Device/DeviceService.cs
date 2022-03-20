@@ -1,5 +1,6 @@
 using AutoMapper;
 
+using LivingLab.Core.Entities.DTO;
 using LivingLab.Core.Entities.DTO.Device;
 using LivingLab.Core.Interfaces.Services;
 using LivingLab.Web.Models.ViewModels.Device;

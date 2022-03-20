@@ -1,4 +1,5 @@
 using LivingLab.Core.Entities;
+using LivingLab.Core.Entities.DTO;
 using LivingLab.Core.Entities.DTO.Accessory;
 using LivingLab.Core.Interfaces.Repositories;
 using LivingLab.Infrastructure.Data;
@@ -62,7 +63,6 @@ public class AccessoryRepository : Repository<Accessory>, IAccessoryRepository
         Console.WriteLine("Delete Succ");
         return deleteAccessory;
     }
-    
     public async Task<AccessoryDetailsDTO> EditAccessory(AccessoryDetailsDTO accessoryDetailsDto)
     {
         Accessory accessory = (_context.Accessories.Include(d => d.AccessoryType)

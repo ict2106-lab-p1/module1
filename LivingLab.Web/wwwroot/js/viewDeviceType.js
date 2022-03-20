@@ -27,6 +27,7 @@ $(document).ready(function() {
     }
 
     viewMoreBtns.forEach(btn => btn.addEventListener('click', viewwMoreEventHandler))
+
     $('.btnViewMore').each(function() {
         $(this).on('click', function(evt) {
             $this = $(this);

@@ -43,7 +43,6 @@ $(document).ready(function() {
 
 });
 
-
 function clickAdd(e) {
     $.get('/Accessory/AddAccessoryDetails',
         function(data) {
