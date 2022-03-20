@@ -43,24 +43,6 @@ $(document).ready(function() {
 
 });
 
-const viewwMoreEventHandler = () => {
-    console.log("View More Accessory");
-    var accessoryType = event.target.parentElement.parentElement.firstElementChild.textContent;
-    console.log(accessoryType);
-    document.postAccessoryType.accessoryType.value = accessoryType
-    document.postAccessoryType.submit();
-}
-viewMoreBtns.forEach(btn => btn.addEventListener('click', viewwMoreEventHandler))
-$('#AccessoryTypeId').change(function() {
-    console.log('click')
-    var selectedValue = jQuery(this).val()
-    if (selectedValue === "Others") {
-        $("#forNewType").removeClass('hidden')
-    } else {
-        $("#forNewType").addClass('hidden')
-    }
-})
-
 
 function clickAdd(e) {
     $.get('/Accessory/AddAccessoryDetails',
