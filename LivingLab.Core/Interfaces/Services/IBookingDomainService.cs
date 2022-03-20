@@ -6,7 +6,7 @@ namespace LivingLab.Core.Interfaces.Services;
 /// <remarks>
 /// Author: Team P1-5
 /// </remarks>
-public class IBookingDomainService
+public interface IBookingDomainService
 {
     
 }

@@ -7,7 +7,8 @@ namespace LivingLab.Core.Interfaces.Repositories;
 public interface IAccountRepository : IRepository<ApplicationUser>
 {
     Task<List<ApplicationUser>?> GetAllAccount();
-    Task<ApplicationUser?> GetAccount(string userId);
+    Task<ApplicationUser?> GetAccountById(string id);
     Task<ApplicationUser?> AddAccount(ApplicationUser user);
     Task<int> DeleteAccount(string userId);
+    
 }

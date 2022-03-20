@@ -2,11 +2,13 @@ using AutoMapper;
 
 using LivingLab.Core.Entities;
 using LivingLab.Core.Entities.DTO;
+using LivingLab.Core.Entities.Identity;
 using LivingLab.Core.Models;
 using LivingLab.Web.Models.DTOs.Todo;
 using LivingLab.Web.Models.ViewModels;
 using LivingLab.Web.Models.ViewModels.Accessory;
 using LivingLab.Web.Models.ViewModels.Device;
+using LivingLab.Web.Models.ViewModels.Login;
 
 namespace LivingLab.Web.Mapping;
 
@@ -22,8 +24,8 @@ public class MappingProfile : Profile
         CreateMap<Accessory, AccessoryViewModel>();
         CreateMap<ViewDeviceTypeDTO, DeviceTypeViewModel>();
         CreateMap<ViewAccessoryTypeDTO, AccessoryTypeViewModel>();
-        
-        
+
+
         // ViewModel/ApiModel to Domain
         CreateMap<TodoDTO, Todo>();
         CreateMap<LogItemViewModel, EnergyUsageCsvModel>();
