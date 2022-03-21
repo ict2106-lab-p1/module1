@@ -6,7 +6,7 @@
 <div class="row">
     <div class="col-md-4 text-center">
         <section>
-            <form id="account" method="post">
+            <form id="account" method="post" asp-controller="Login" asp-action="LoginUser">
                 <h1 class="font-semibold text-5xl mt-16">Login</h1>
                 @* <div asp-validation-summary="ModelOnly" class="text-danger"></div> *@
                 <div class="form-floating">
@@ -24,6 +24,7 @@
                     </div>
                     <span asp-validation-for="Password" class="text-sm text-red-500"></span>
                 </div>
+                @Html.ValidationMessageFor(m => m.Password)
                 
                 <div class="flex justify-center mt-4">
                     <div class="block w-4/12">

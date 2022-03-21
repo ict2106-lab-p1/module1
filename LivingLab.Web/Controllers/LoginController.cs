@@ -8,6 +8,7 @@ using LivingLab.Web.UIServices.Account;
 using LivingLab.Web.UIServices.NotificationManagement;
 
 using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -17,7 +18,7 @@ namespace LivingLab.Web.Controllers;
 /// Author: Team P1-5
 /// </remarks>
 
-[Route("Login")]
+[Route("login")]
 public class LoginController : Controller
 {
     private readonly ILogger<LoginController> _logger;
@@ -37,39 +38,100 @@ public class LoginController : Controller
     }
 
     [HttpGet]
-    [Route("Login")]
+    /* For route to /login */
+    [Route("")] 
     public IActionResult Index()
     {
-        return View("Index");
+        return View();
     }
     
-    [Route("VerifyCode")]
+    [AllowAnonymous]
+    /*Login if user details is true*/
+    [HttpPost]
+    public async Task<IActionResult> LoginUser(LoginViewModel userDetails)
+    {
+        //Delete the Session object.
+        HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
+        _signInManager.SignOutAsync();
+        HttpContext.Response.Cookies.Delete(".AspNetCore.Cookies");
+        if (ModelState.IsValid)
+        {
+            try
+            {
+                var result = await _signInManager.PasswordSignInAsync(userDetails.Email, userDetails.Password, userDetails.RememberMe, lockoutOnFailure: false);
+                if (result.Succeeded)
+                {
+                    
+                    ApplicationUser user = await _userManager.GetUserAsync(User);
+
+                    _logger.LogInformation(user.AuthenticationType);
+
+                    if (user.AuthenticationType.Contains("SMS"))
+                    {
+                        _logger.LogInformation("Verify Code");
+                        await _accountService.GenerateCode(user);
+                        await _notif.SendTextToPhone(user);
+                        return RedirectToAction("verifycode", "Login");
+                    }
+                    else if (user.AuthenticationType.Contains("Google"))
+                    {
+                        _logger.LogInformation("Google Auth");
+                        return View("Index");
+                    }
+                    else
+                    {
+                        return RedirectToAction("Dashboard", "Home");
+                    }
+
+
+                }
+                else
+                {
+                    _logger.LogInformation("Fail to login");
+                    ModelState.AddModelError(nameof(userDetails.Password), "Password entered wrongly");
+                    return View("Index",userDetails);
+                }
+            }
+            catch (Exception e)
+            {
+                _logger.LogInformation(e.ToString());
+                return View(nameof(Index));
+            }
+        }
+        return View(nameof(Index));
+    }
+    
+    [Authorize]
+    /* For route to /login/verifycode */
+    [Route("verifycode")]
     public IActionResult VerifyCode()
     {
         return View("VerifyCode");
     }
     
     [HttpPost]
-    [Route("VerifyCode")]
-    public async Task<RedirectToActionResult> VerifyCode(VerifyViewModel inputDetails)
+    [Route("verifycode")]
+    public async Task<ActionResult> VerifyCode(VerifyViewModel inputDetails)
     {
         ApplicationUser user = await _userManager.GetUserAsync(User);
         var result = await _accountService.VerifyCode(user.Id, inputDetails);
         if (result)
         {
             _logger.LogInformation("HENRY SUCCESS");
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("Dashboard", "Home");
         }
         else
         {
             _logger.LogInformation("HENRY FAIL");
-            return RedirectToAction("VerifyCode");
+            ModelState.AddModelError(nameof(inputDetails.OTP), "OTP has expired, please generate new OTP");
+            return View(inputDetails);
 
         }
         
     }
     
-    [Route("NewCode")]
+    [Authorize]
+    [Route("newcode")]
     public async Task<RedirectToActionResult> NewCode()
     {
         ApplicationUser user = await _userManager.GetUserAsync(User);
@@ -90,38 +152,6 @@ public class LoginController : Controller
     public IActionResult ForgotPassword()
     {
         return Redirect("/Identity/Account/ForgotPassword");
-    }
-
-    [AllowAnonymous]
-    [HttpPost("Login")]
-    public async Task<IActionResult> Index(LoginViewModel userDetails)
-    {
-        if (ModelState.IsValid)
-        {
-            try
-            {
-                var result = await _signInManager.PasswordSignInAsync(userDetails.Email, userDetails.Password, userDetails.RememberMe, lockoutOnFailure: false);
-                if (result.Succeeded)
-                {
-                    _logger.LogInformation("Go to Verify Code");
-                    ApplicationUser user = await _userManager.GetUserAsync(User);
-                    await _accountService.GenerateCode(user);
-                    await _notif.SendTextToPhone(user);
-                    return RedirectToAction("VerifyCode", "Login");
-                }
-                else
-                {
-                    _logger.LogInformation("Fail to login");
-                    return View(userDetails);
-                }
-            }
-            catch (Exception e)
-            {
-                _logger.LogInformation("Failed to login");
-                return View(userDetails);
-            }
-        }
-        return View();
     }
 
     [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

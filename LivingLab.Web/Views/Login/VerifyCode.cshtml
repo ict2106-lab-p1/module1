@@ -9,7 +9,7 @@
 <div class="row">
     <div class="col-md-4 text-center">
         <section>
-            <form id="account" method="post">
+            <form method="post" asp-controller="Login" asp-action="VerifyCode">
                 <h1 class="font-semibold text-5xl mt-16">Login</h1>
                 @* <div asp-validation-summary="ModelOnly" class="text-danger"></div> *@
                 <div class="form-floating">
@@ -20,17 +20,18 @@
                     <span class="text-sm text-red-500"></span>
                 </div>
 
+                @Html.ValidationMessageFor(m => m.OTP)
                 <div class="mt-16">
                     @* <button id="verify-submit" type="submit" class="w-4/12 h8 text-base text-white bg-gray-700 hover:bg-gray-800 focus:ring-4 focus:ring-gray-300 font-medium  rounded-md text-sm px-5 py-2.5 text-center">Verify</button> *@
                     <button id="verify-submit" type="submit" class="w-4/12 h8 text-base text-white bg-gray-700 hover:bg-gray-800 focus:ring-4 focus:ring-gray-300 font-medium  rounded-md text-sm px-5 py-2.5 text-center">
-                        <a asp-controller="Login" asp-action="VerifyCode">Verify Code</a>
+                        Verify Code
                     </button>
                 </div>
             </form>
-            <form method="post">
+            <form method="post" asp-controller="Login" asp-action="NewCode">
                 <div class="mt-4">
                     <button type="submit" class="w-4/12 h8 text-base text-white bg-gray-700 hover:bg-gray-800 focus:ring-4 focus:ring-gray-300 font-medium rounded-md text-sm px-5 py-2.5 text-center">
-                        <a asp-controller="Login" asp-action="NewCode">Re-send Code</a>
+                        Re-send Code
                     </button>
                 </div>
             </form>

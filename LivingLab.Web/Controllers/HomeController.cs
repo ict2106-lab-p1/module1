@@ -16,6 +16,7 @@ namespace LivingLab.Web.Controllers;
 /// <remarks>
 /// Author: Team P1-3
 /// </remarks>
+[Authorize]
 public class HomeController : Controller
 {
     private readonly ILogger<HomeController> _logger;
@@ -33,12 +34,19 @@ public class HomeController : Controller
         return View("Index");
     }
 
+    [Route ("dashboard")]
+    public IActionResult Dashboard()
+    {
+        return View("Index");
+    }
+
     [Route("privacy")]
     public IActionResult Privacy()
     {
         return View("Privacy");
     }
-    [Route("Logout")]
+    
+    [Route("logout")]
     public IActionResult Logout()
     {
         //Delete the Session object.
@@ -53,9 +61,6 @@ public class HomeController : Controller
     {
         return View("ExamplePage");
     }
-    
- 
-
 
 
     [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
