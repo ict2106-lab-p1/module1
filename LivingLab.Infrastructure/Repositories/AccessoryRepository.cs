@@ -32,9 +32,11 @@ public class AccessoryRepository : Repository<Accessory>, IAccessoryRepository
     }
 
 
-    public async Task<List<ViewAccessoryTypeDTO>> GetAccessoryType()
+    public async Task<List<ViewAccessoryTypeDTO>> GetAccessoryType(string labLocation)
     {
         var accessoryGroup = await _context.Accessories.Include(a => a.AccessoryType)
+            .Include(l => l.Lab)
+            .Where(l => l.Lab!.LabLocation == labLocation)
             .GroupBy(t => t.AccessoryType!.Type)
             .Select(t => new { Key = t.Key, Count = t.Count() })
             .ToListAsync();

@@ -9,7 +9,7 @@ namespace LivingLab.Core.Interfaces.Services;
 public interface IAccessoryDomainService
 {
     Task<List<Accessory>> ViewAccessory(string accessoryType);
-    Task<List<ViewAccessoryTypeDTO>> ViewAccessoryType();
+    Task<List<ViewAccessoryTypeDTO>> ViewAccessoryType(string labLocation);
 
     Task<Accessory> AddAccessory(Accessory accessory);
     Task<AccessoryDetailsDTO> EditAccessory(AccessoryDetailsDTO accessoryDetailsDto);

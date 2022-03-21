@@ -11,7 +11,7 @@ namespace LivingLab.Web.Controllers;
 /// <remarks>
 /// Author: Team P1-3
 /// </remarks>
-[Route("Device")]
+[Route("/Device")]
 public class DeviceController : Controller
 {
     private readonly ILogger<DeviceController> _logger;
@@ -23,10 +23,10 @@ public class DeviceController : Controller
         _deviceService = deviceService;
     }
 
-    [Route("ViewType")]
-    public async Task<IActionResult> ViewType()
+    [Route("ViewType/{labLocation}")]
+    public async Task<IActionResult> ViewType(string labLocation)
     {
-        ViewDeviceTypeViewModel viewDeviceTypeViewModel = await _deviceService.ViewDeviceType();
+        ViewDeviceTypeViewModel viewDeviceTypeViewModel = await _deviceService.ViewDeviceType(labLocation);
         return View("ViewDeviceType", viewDeviceTypeViewModel);
     }
     

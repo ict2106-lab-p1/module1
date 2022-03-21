@@ -34,9 +34,9 @@ public class DeviceService : IDeviceService
         return viewDevices;
     }
 
-    public async Task<ViewDeviceTypeViewModel> ViewDeviceType()
+    public async Task<ViewDeviceTypeViewModel> ViewDeviceType(string labLocation)
     {
-        List<ViewDeviceTypeDTO> viewDeviceTypeDtos = await _deviceDomainService.ViewDeviceType();
+        List<ViewDeviceTypeDTO> viewDeviceTypeDtos = await _deviceDomainService.ViewDeviceType(labLocation);
         //map viewDeviceTypeDto to deviceTypeViewModel
         List<DeviceTypeViewModel> deviceList =
             _mapper.Map<List<ViewDeviceTypeDTO>, List<DeviceTypeViewModel>>(viewDeviceTypeDtos);

@@ -21,9 +21,9 @@ public class DeviceDomainService : IDeviceDomainService
         return _deviceRepository.GetAllDevicesByType(deviceType);
     }
 
-    public Task<List<ViewDeviceTypeDTO>> ViewDeviceType()
+    public Task<List<ViewDeviceTypeDTO>> ViewDeviceType(string labLocation)
     {
-        return _deviceRepository.GetViewDeviceType();
+        return _deviceRepository.GetViewDeviceType(labLocation);
     }
     
     public Task<Device> ViewDeviceDetails(int id)

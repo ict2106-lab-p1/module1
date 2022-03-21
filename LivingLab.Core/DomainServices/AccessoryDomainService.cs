@@ -23,9 +23,9 @@ public class AccessoryDomainService : IAccessoryDomainService
         return _accessoryRepository.GetAccessoryWithAccessoryType(accessoryType);
     }
 
-    public Task<List<ViewAccessoryTypeDTO>> ViewAccessoryType()
+    public Task<List<ViewAccessoryTypeDTO>> ViewAccessoryType(string labLocation)
     {
-        return _accessoryRepository.GetAccessoryType();
+        return _accessoryRepository.GetAccessoryType(labLocation);
     }
     
     public Task<List<AccessoryType>> GetAllAsyncAccessoryType()

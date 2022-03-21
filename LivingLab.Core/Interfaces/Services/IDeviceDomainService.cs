@@ -9,7 +9,7 @@ namespace LivingLab.Core.Interfaces.Services;
 public interface IDeviceDomainService
 {
     Task<List<Device>> ViewDevice(string deviceType);
-    Task<List<ViewDeviceTypeDTO>> ViewDeviceType();
+    Task<List<ViewDeviceTypeDTO>> ViewDeviceType(string labLocation);
     Task<Device> ViewDeviceDetails(int id);
     Task<Device> GetDeviceLastRow();
     Task<Device> AddDevice(Device addedDevice);

@@ -16,9 +16,14 @@ public class DeviceRepository : Repository<Device>, IDeviceRepository
     {
         _context = context;
     }
-    public async Task<List<ViewDeviceTypeDTO>> GetViewDeviceType()
+    public async Task<List<ViewDeviceTypeDTO>> GetViewDeviceType(string labLocation)
     {
-        var deviceGroup = await _context.Devices.GroupBy(t => t.Type).Select(t => new { Key = t.Key, Count = t.Count() }).ToListAsync();
+        var deviceGroup = await _context.Devices
+            .Include(l => l.Lab)
+            .Where(l => l.Lab!.LabLocation == labLocation)
+            .GroupBy(t => t.Type)
+            .Select(t => new { Key = t.Key, Count = t.Count() })
+            .ToListAsync();
         List<ViewDeviceTypeDTO> deviceTypeDtos = new List<ViewDeviceTypeDTO>();
         foreach (var group in deviceGroup)
         {

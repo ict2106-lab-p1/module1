@@ -7,7 +7,7 @@ namespace LivingLab.Web.UIServices.Accessory;
 public interface IAccessoryService
 {
     Task<ViewAccessoryViewModel> ViewAccessory(string accessoryType);
-    Task<ViewAccessoryTypeViewModel> ViewAccessoryType();
+    Task<ViewAccessoryTypeViewModel> ViewAccessoryType(string labLocation);
     Task<ViewAccessoryViewModel> AddAccessory(AccessoryDetailsViewModel viewModelInput);
 
     Task<AccessoryViewModel> DeleteAccessory(AccessoryViewModel deleteAccessory);

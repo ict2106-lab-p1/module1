@@ -33,9 +33,9 @@ public class AccessoryServices : IAccessoryService
         return new ViewAccessoryViewModel {AccessoryList = accessories};
     }
 
-    public async Task<ViewAccessoryTypeViewModel> ViewAccessoryType()
+    public async Task<ViewAccessoryTypeViewModel> ViewAccessoryType(string labLocation)
     {
-        List<ViewAccessoryTypeDTO> viewAccessoryTypeDtos = await _accessoryDomainService.ViewAccessoryType();
+        List<ViewAccessoryTypeDTO> viewAccessoryTypeDtos = await _accessoryDomainService.ViewAccessoryType(labLocation);
         List<OverallAccessoryTypeViewModel> accessoryTypeViewModels =
             _mapper.Map<List<ViewAccessoryTypeDTO>, List<OverallAccessoryTypeViewModel>>(viewAccessoryTypeDtos);
         ViewAccessoryTypeViewModel viewAccessoryTypeViewModel = new ViewAccessoryTypeViewModel();

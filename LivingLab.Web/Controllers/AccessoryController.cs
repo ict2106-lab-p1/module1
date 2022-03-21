@@ -29,10 +29,10 @@ public class AccessoryController : Controller
         return View("ViewAccessory", viewAccessories);
     }
     // high level view
-    [Route("ViewAccessoryType")]
-    public async Task<IActionResult> ViewAccessoryType()
+    [Route("ViewAccessoryType/{labLocation}")]
+    public async Task<IActionResult> ViewAccessoryType(string labLocation)
     {
-        ViewAccessoryTypeViewModel viewAccessories = await _accessoryService.ViewAccessoryType();
+        ViewAccessoryTypeViewModel viewAccessories = await _accessoryService.ViewAccessoryType(labLocation);
         return View("ViewAccessoryType", viewAccessories);
     }
     
