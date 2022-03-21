@@ -23,9 +23,9 @@ public class AccessoryController : Controller
 
     // detailed view
     [HttpPost("ViewAccessory")]
-    public async Task<IActionResult> ViewAccessory(string accessoryType)
+    public async Task<IActionResult> ViewAccessory(string accessoryType, string labLocation)
     {
-        ViewAccessoryViewModel viewAccessories = await _accessoryService.ViewAccessory(accessoryType);
+        ViewAccessoryViewModel viewAccessories = await _accessoryService.ViewAccessory(accessoryType, labLocation);
         return View("ViewAccessory", viewAccessories);
     }
     // high level view
@@ -75,12 +75,12 @@ public class AccessoryController : Controller
     }
     
     [HttpPost("View/Delete")]
-    public async Task<IActionResult> DeleteAccessory(AccessoryViewModel deleteAccessory)
+    public async Task<IActionResult> DeleteAccessory(AccessoryViewModel deleteAccessory, string labLocation)
     {
         await _accessoryService.DeleteAccessory(deleteAccessory); 
         
         // Temp - To display ViewAll after editing
-        ViewAccessoryViewModel viewAccessory = await _accessoryService.ViewAccessory(deleteAccessory.AccessoryType.Type);
+        ViewAccessoryViewModel viewAccessory = await _accessoryService.ViewAccessory(deleteAccessory.AccessoryType.Type, labLocation);
         return View("ViewAccessory", viewAccessory);
     }
 

@@ -18,9 +18,9 @@ public class AccessoryDomainService : IAccessoryDomainService
         _accessoryTypeRepository = accessoryTypeRepository;
     }
     
-    public Task<List<Accessory>> ViewAccessory(string accessoryType)
+    public Task<List<Accessory>> ViewAccessory(string accessoryType, string labLocation)
     {
-        return _accessoryRepository.GetAccessoryWithAccessoryType(accessoryType);
+        return _accessoryRepository.GetAccessoryWithAccessoryType(accessoryType, labLocation);
     }
 
     public Task<List<ViewAccessoryTypeDTO>> ViewAccessoryType(string labLocation)

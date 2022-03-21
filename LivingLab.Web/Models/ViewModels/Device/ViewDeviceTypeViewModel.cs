@@ -6,5 +6,6 @@ namespace LivingLab.Web.Models.ViewModels.Device;
 /// </remarks>
 public class ViewDeviceTypeViewModel
 {
+    public string labLocation { get; set; }
     public List<DeviceTypeViewModel> ViewDeviceTypeDtos { get; set; }
 }

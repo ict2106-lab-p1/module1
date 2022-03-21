@@ -6,7 +6,7 @@ namespace LivingLab.Web.UIServices.Device;
 /// </remarks>
 public interface IDeviceService
 {
-    Task<ViewDeviceViewModel> ViewDevice(string deviceType);
+    Task<ViewDeviceViewModel> ViewDevice(string deviceType, string labLocation);
     Task<ViewDeviceTypeViewModel> ViewDeviceType(string labLocation);
     Task<DeviceViewModel> ViewDeviceDetails(int id);
     Task<DeviceViewModel> AddDevice(DeviceViewModel deviceViewModel);

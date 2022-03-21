@@ -17,11 +17,12 @@ public class AccessoryRepository : Repository<Accessory>, IAccessoryRepository
         _context = context;
     }
 
-    public async Task<List<Accessory>> GetAccessoryWithAccessoryType(string accessoryType)
+    public async Task<List<Accessory>> GetAccessoryWithAccessoryType(string accessoryType, string labLocation)
     {
         // retrieve accessory table together with accessory type details using include to join entities 
-        List<Accessory> accessories = await _context.Accessories.Include(a => a.AccessoryType)
-            .Where(t => accessoryType.Contains(t.AccessoryType.Type))
+        List<Accessory> accessories = await _context.Accessories
+            .Include(a => a.AccessoryType)
+            .Where(t => accessoryType.Contains(t.AccessoryType!.Type) && t.Lab!.LabLocation==labLocation)
             .ToListAsync();
         return accessories;
     }
@@ -30,12 +31,9 @@ public class AccessoryRepository : Repository<Accessory>, IAccessoryRepository
     {
         return (await _context.Accessories.Include(a => a.AccessoryType).SingleOrDefaultAsync(a => a.Id == id))!;
     }
-
-
     public async Task<List<ViewAccessoryTypeDTO>> GetAccessoryType(string labLocation)
     {
         var accessoryGroup = await _context.Accessories.Include(a => a.AccessoryType)
-            .Include(l => l.Lab)
             .Where(l => l.Lab!.LabLocation == labLocation)
             .GroupBy(t => t.AccessoryType!.Type)
             .Select(t => new { Key = t.Key, Count = t.Count() })
