@@ -49,6 +49,7 @@ public class HomeController : Controller
     [Route("logout")]
     public IActionResult Logout()
     {
+        _logger.LogInformation("Logging out");
         //Delete the Session object.
         HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
         _signInManager.SignOutAsync();

@@ -143,6 +143,11 @@ public class AccountService : IAccountService
         return await _accountDomainService.VerifyCode(userid, viewModel.OTP);
     }
 
+    public async Task UpdateUserSettings(ApplicationUser user)
+    {
+        await _accountDomainService.UpdateUserSettings(user);
+    }
+
     private ApplicationUser CreateUser()
     {
         try

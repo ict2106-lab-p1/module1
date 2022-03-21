@@ -71,6 +71,11 @@ public class AccountDomainService: IAccountDomainService
         return false;
     }
 
+    public async Task UpdateUserSettings(ApplicationUser user)
+    {
+        await _accountRepository.UpdateAsync(user);
+    }
+
     public async Task<ApplicationUser?> Save(ApplicationUser user)
     {
         return await _accountRepository.AddAccount(user);

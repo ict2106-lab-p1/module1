@@ -18,4 +18,6 @@ public interface IAccountDomainService
 
     Task<Boolean> VerifyCode(string userid, int OTP);
 
+    Task UpdateUserSettings(ApplicationUser user);
+
 }

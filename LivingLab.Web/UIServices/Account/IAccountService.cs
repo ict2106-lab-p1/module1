@@ -18,4 +18,6 @@ public interface IAccountService
 
     Task<Boolean> VerifyCode(string userid, VerifyViewModel viewModel);
 
+    Task UpdateUserSettings(ApplicationUser user);
+
 }

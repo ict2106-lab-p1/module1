@@ -34,7 +34,6 @@ public class LoginController : Controller
         _signInManager = signInManager;
         _userManager = userManager;
         _notif = notif;
-
     }
 
     [HttpGet]
@@ -45,15 +44,10 @@ public class LoginController : Controller
         return View();
     }
     
-    [AllowAnonymous]
     /*Login if user details is true*/
     [HttpPost]
     public async Task<IActionResult> LoginUser(LoginViewModel userDetails)
     {
-        //Delete the Session object.
-        HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
-        _signInManager.SignOutAsync();
-        HttpContext.Response.Cookies.Delete(".AspNetCore.Cookies");
         if (ModelState.IsValid)
         {
             try
