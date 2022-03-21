@@ -31,9 +31,7 @@ public static class ConfigureWebServices
         services.AddTransient<IAccessoryService, AccessoryServices>();
         services.AddTransient<IUserManagementService, UserManagementService>();
         services.AddTransient<ILabProfileService, LabProfileService>();
-
-
-
+        
         return services;
     }
 

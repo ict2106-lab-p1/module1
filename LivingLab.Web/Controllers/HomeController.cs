@@ -27,10 +27,13 @@ public class HomeController : Controller
     
 
     [Route("/")]
-    public IActionResult Index()
+    public async Task<IActionResult> Index()
     {
-        HttpContext.Session.SetInt32("UserID", 1);
-        return View("Index");
+        // HttpContext.Session.SetInt32("UserID", 1);
+        // return View("Index");
+        ViewLabProfileViewModel viewLabProfileViewModel = await _labProfileService.GetAllLabAccounts();
+        Console.WriteLine("test");
+        return View("Index", viewLabProfileViewModel); 
     }
 
     [Route("privacy")]
@@ -65,27 +68,28 @@ public class HomeController : Controller
     }
 
 
-
-    [Route("/example")]
-    public IActionResult ExamplePage()
-    {
-        return View("ExamplePage");
-    }
-
-    [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-    public IActionResult Error()
-    {
-        return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
-    }
+    //
+    // [Route("/example")]
+    // public IActionResult ExamplePage()
+    // {
+    //     return View("ExamplePage");
+    // }
+    //
+    // [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
+    // public IActionResult Error()
+    // {
+    //     return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+    // }
     
 
 
-    [Route("index")]
-    public async Task<IActionResult> Labs(string userId)
-    {
-        ViewLabProfileViewModel viewLabProfileViewModel = await _labProfileService.GetAllLabAccounts();
-        return View("Index", viewLabProfileViewModel); 
-    }
+    // [Route("/Index")]
+    // public async Task<IActionResult> Labs()
+    // {
+    //     ViewLabProfileViewModel viewLabProfileViewModel = await _labProfileService.GetAllLabAccounts();
+    //     Console.WriteLine("test");
+    //     return View("Index", viewLabProfileViewModel); 
+    // }
     [Route("View/{id}")]
     public async Task<LabProfileViewModel> ViewLabDetails(int id)
     { 

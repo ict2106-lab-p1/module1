@@ -8,6 +8,7 @@ using LivingLab.Web.Models.DTOs.Todo;
 using LivingLab.Web.Models.ViewModels;
 using LivingLab.Web.Models.ViewModels.Accessory;
 using LivingLab.Web.Models.ViewModels.Device;
+using LivingLab.Web.Models.ViewModels.LabProfile;
 using LivingLab.Web.Models.ViewModels.UserManagement;
 
 namespace LivingLab.Web.Mapping;
@@ -25,6 +26,7 @@ public class MappingProfile : Profile
         CreateMap<ViewDeviceTypeDTO, DeviceTypeViewModel>();
         CreateMap<ViewAccessoryTypeDTO, AccessoryTypeViewModel>();
         CreateMap<ApplicationUser, UserManagementViewModel>();
+        CreateMap<Core.Entities.Lab, LabProfileViewModel>();
 
 
         
@@ -40,6 +42,8 @@ public class MappingProfile : Profile
         CreateMap<DeviceViewModel, Device>();
         CreateMap<AccessoryViewModel, Accessory>();
         CreateMap<UserManagementViewModel, ApplicationUser>();
+        CreateMap<LabProfileViewModel,Core.Entities.Lab >();
+
 
     }
 }
