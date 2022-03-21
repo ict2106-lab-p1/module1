@@ -28,9 +28,6 @@ public class MappingProfile : Profile
         CreateMap<ApplicationUser, UserManagementViewModel>();
         CreateMap<Core.Entities.Lab, LabProfileViewModel>();
 
-
-        
-        
         // ViewModel/ApiModel to Domain
         CreateMap<TodoDTO, Todo>();
         CreateMap<LogItemViewModel, EnergyUsageCsvModel>();
