@@ -23,23 +23,22 @@ public class AccessoryServices : IAccessoryService
         _accessoryDomainService = accessoryDomainService;
     }
 
-    public async Task<ViewAccessoryViewModel> ViewAccessory(string accessoryType)
+    public async Task<ViewAccessoryViewModel> ViewAccessory(string accessoryType, string labLocation)
     {
         // retrieve all accessory from specific accessory type from db
-        List<Core.Entities.Accessory> accessoryList = await _accessoryDomainService.ViewAccessory(accessoryType);
+        List<Core.Entities.Accessory> accessoryList = await _accessoryDomainService.ViewAccessory(accessoryType, labLocation);
         // map entity model to view model
         List<AccessoryViewModel> accessories =
             _mapper.Map<List<Core.Entities.Accessory>, List<AccessoryViewModel>>(accessoryList);
         return new ViewAccessoryViewModel {AccessoryList = accessories};
     }
 
-    public async Task<ViewAccessoryTypeViewModel> ViewAccessoryType()
+    public async Task<ViewAccessoryTypeViewModel> ViewAccessoryType(string labLocation)
     {
-        List<ViewAccessoryTypeDTO> viewAccessoryTypeDtos = await _accessoryDomainService.ViewAccessoryType();
+        List<ViewAccessoryTypeDTO> viewAccessoryTypeDtos = await _accessoryDomainService.ViewAccessoryType(labLocation);
         List<OverallAccessoryTypeViewModel> accessoryTypeViewModels =
             _mapper.Map<List<ViewAccessoryTypeDTO>, List<OverallAccessoryTypeViewModel>>(viewAccessoryTypeDtos);
-        ViewAccessoryTypeViewModel viewAccessoryTypeViewModel = new ViewAccessoryTypeViewModel();
-        return new ViewAccessoryTypeViewModel {accessoryTypeList = accessoryTypeViewModels};
+        return new ViewAccessoryTypeViewModel {accessoryTypeList = accessoryTypeViewModels, labLocation = labLocation};
     }
 
     public async Task<AccessoryViewModel> GetAccessory(int id)

@@ -47,6 +47,7 @@
 
 <form asp-controller="Device" asp-action="ViewAll" method="post" name="postDeviceType">
     <input type="hidden" name="deviceType"/>
+    <input type="hidden" name="labLocation" value="@Model.labLocation"/>
 </form>
 
 <div class="bg-black bg-opacity-50 absolute inset-0 hidden justify-center items-center" id="overlay">

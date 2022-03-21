@@ -18,14 +18,14 @@ public class AccessoryDomainService : IAccessoryDomainService
         _accessoryTypeRepository = accessoryTypeRepository;
     }
     
-    public Task<List<Accessory>> ViewAccessory(string accessoryType)
+    public Task<List<Accessory>> ViewAccessory(string accessoryType, string labLocation)
     {
-        return _accessoryRepository.GetAccessoryWithAccessoryType(accessoryType);
+        return _accessoryRepository.GetAccessoryWithAccessoryType(accessoryType, labLocation);
     }
 
-    public Task<List<ViewAccessoryTypeDTO>> ViewAccessoryType()
+    public Task<List<ViewAccessoryTypeDTO>> ViewAccessoryType(string labLocation)
     {
-        return _accessoryRepository.GetAccessoryType();
+        return _accessoryRepository.GetAccessoryType(labLocation);
     }
     
     public Task<List<AccessoryType>> GetAllAsyncAccessoryType()

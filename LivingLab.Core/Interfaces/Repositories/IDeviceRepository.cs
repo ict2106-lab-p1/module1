@@ -8,8 +8,8 @@ namespace LivingLab.Core.Interfaces.Repositories;
 /// </remarks>
 public interface IDeviceRepository : IRepository<Device>
 {
-    Task<List<ViewDeviceTypeDTO>> GetViewDeviceType();
-    Task<List<Device>> GetAllDevicesByType(string deviceType);
+    Task<List<ViewDeviceTypeDTO>> GetViewDeviceType(string labLocation);
+    Task<List<Device>> GetAllDevicesByType(string deviceType, string labLocation);
     Task<Device> GetDeviceDetails(int id);
     Task<Device> GetLastRow();
     Task<Device> AddDevice(Device addedDevice);

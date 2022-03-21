@@ -11,6 +11,9 @@ using LivingLab.Web.Models.ViewModels.Accessory;
 using LivingLab.Web.Models.ViewModels.Device;
 using LivingLab.Web.Models.ViewModels.SessionStats;
 
+using Lab = LivingLab.Core.Entities.Lab;
+using LabViewModel = LivingLab.Web.Models.ViewModels.LabViewModel;
+
 namespace LivingLab.Web.Mapping;
 
 public class MappingProfile : Profile
@@ -18,5 +21,6 @@ public class MappingProfile : Profile
     public MappingProfile()
     {
         CreateMap<Todo, TodoDTO>().ReverseMap();
+        CreateMap<Lab, LabViewModel>().ReverseMap();
     }
 }

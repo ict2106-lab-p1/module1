@@ -8,5 +8,6 @@ namespace LivingLab.Web.Models.ViewModels.Accessory;
 /// </remarks>
 public class ViewAccessoryTypeViewModel
 {
+    public string labLocation { get; set; }
     public List<OverallAccessoryTypeViewModel> accessoryTypeList { get; set; }
 }

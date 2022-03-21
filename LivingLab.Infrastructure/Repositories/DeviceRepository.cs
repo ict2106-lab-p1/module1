@@ -16,9 +16,13 @@ public class DeviceRepository : Repository<Device>, IDeviceRepository
     {
         _context = context;
     }
-    public async Task<List<ViewDeviceTypeDTO>> GetViewDeviceType()
+    public async Task<List<ViewDeviceTypeDTO>> GetViewDeviceType(string labLocation)
     {
-        var deviceGroup = await _context.Devices.GroupBy(t => t.Type).Select(t => new { Key = t.Key, Count = t.Count() }).ToListAsync();
+        var deviceGroup = await _context.Devices
+            .Where(l => l.Lab!.LabLocation == labLocation)
+            .GroupBy(t => t.Type)
+            .Select(t => new { Key = t.Key, Count = t.Count() })
+            .ToListAsync();
         List<ViewDeviceTypeDTO> deviceTypeDtos = new List<ViewDeviceTypeDTO>();
         foreach (var group in deviceGroup)
         {
@@ -30,9 +34,9 @@ public class DeviceRepository : Repository<Device>, IDeviceRepository
         return deviceTypeDtos;
     }
 
-    public async Task<List<Device>> GetAllDevicesByType(string deviceType)
-    {
-        List<Device> deviceList = await _context.Devices.Where(t => deviceType.Contains(t.Type)).ToListAsync();
+    public async Task<List<Device>> GetAllDevicesByType(string deviceType, string labLocation)
+    { 
+        List<Device> deviceList = await _context.Devices.Where(t => deviceType.Contains(t.Type) && t.Lab.LabLocation == labLocation).ToListAsync();
         return deviceList;
     }
     
