@@ -16,6 +16,15 @@ public class AccessoryRepository : Repository<Accessory>, IAccessoryRepository
     {
         _context = context;
     }
+    
+    public async Task<List<Accessory>> GetAccessoriesForLabProfile(string labLocation)
+    {
+        var accessories = await _context.Accessories
+            .Where(t => t.Status.ToLower().Equals("available")
+                        && t.Lab.LabLocation.Equals("labLocation"))
+            .ToListAsync();
+        return accessories;
+    }
 
     public async Task<List<Accessory>> GetAccessoryWithAccessoryType(string accessoryType, string labLocation)
     {
@@ -68,7 +77,6 @@ public class AccessoryRepository : Repository<Accessory>, IAccessoryRepository
         Accessory currentAccessory = (await _context.Accessories.SingleOrDefaultAsync(d => d.Id == deleteAccessory.Id))!;
         _context.Accessories.Remove(currentAccessory);
         await _context.SaveChangesAsync();
-        Console.WriteLine("Delete Succ");
         return deleteAccessory;
     }
     public async Task<AccessoryDetailsDTO> EditAccessory(AccessoryDetailsDTO accessoryDetailsDto)
@@ -82,13 +90,4 @@ public class AccessoryRepository : Repository<Accessory>, IAccessoryRepository
         await _context.SaveChangesAsync();
         return accessoryDetailsDto;
     }
-
-    // public async Task<Accessory> AddAccessory(Accessory accessory)
-    // {
-    //     accessory.Status = "Available";
-    //     accessory.LastUpdated = DateTime.Today;
-    //     accessory.ReviewStatus = "Reviewing";
-    //     await _context.AddAsync(accessory);
-    //     return accessory;
-    // }
 }

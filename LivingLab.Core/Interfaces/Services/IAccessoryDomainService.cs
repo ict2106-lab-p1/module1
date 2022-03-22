@@ -14,9 +14,8 @@ public interface IAccessoryDomainService
     /***    
      * For P1-5 you can use this method below to populate the accessory list in the lab profile,
      * by injecting this IAccessoryDomainService in your UI's lab service.
-     * You can map the ViewAccessoryTypeDTO to OverallAccessoryTypeViewModel.
-     * Anything you can refer to AccessoryService's ViewAccessoryType() method.
      */
+    Task<List<Accessory>> GetAccessoriesForLabProfile(string labLocation);
     Task<List<ViewAccessoryTypeDTO>> ViewAccessoryType(string labLocation);
     
     Task<Accessory> AddAccessory(Accessory accessory);
