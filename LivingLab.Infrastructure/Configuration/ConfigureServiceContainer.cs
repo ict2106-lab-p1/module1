@@ -33,6 +33,7 @@ public static class ConfigureServiceContainer
 
     public static void AddIdentities(this IServiceCollection services) =>
         services.AddDefaultIdentity<ApplicationUser>()
+            .AddRoles<IdentityRole>()
             .AddEntityFrameworkStores<ApplicationDbContext>()
             .AddDefaultTokenProviders();
 

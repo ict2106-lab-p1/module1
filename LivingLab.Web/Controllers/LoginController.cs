@@ -45,7 +45,6 @@ public class LoginController : Controller
 
     [HttpGet]
     /* For route to /login */
-    [Route("")]
     public IActionResult Index()
     {
         return View();

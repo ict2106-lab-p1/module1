@@ -22,7 +22,8 @@ public class HomeController : Controller
     private readonly ILogger<HomeController> _logger;
     private readonly SignInManager<ApplicationUser> _signInManager;
 
-    public HomeController(ILogger<HomeController> logger, SignInManager<ApplicationUser> signInManager)
+    public HomeController(ILogger<HomeController> logger, 
+        SignInManager<ApplicationUser> signInManager)
     {
         _logger = logger;
         _signInManager = signInManager;

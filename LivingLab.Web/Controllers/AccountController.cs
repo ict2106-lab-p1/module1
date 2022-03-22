@@ -23,13 +23,15 @@ public class AccountController: Controller
     private readonly SignInManager<ApplicationUser> _signInManager;
     private readonly UserManager<ApplicationUser> _userManager;
     private readonly IEmailSender _emailSender;
-    public AccountController(IEmailSender emailSender, IAccountService accountService, ILogger<AccountController> logger, SignInManager<ApplicationUser> signInManager, UserManager<ApplicationUser> userManager)
+
+    public AccountController( IEmailSender emailSender, IAccountService accountService, ILogger<AccountController> logger, SignInManager<ApplicationUser> signInManager, UserManager<ApplicationUser> userManager)
     {
         _accountService = accountService;
         _logger = logger;
         _signInManager = signInManager;
         _userManager = userManager;
         _emailSender = emailSender;
+
     }
 
     public IActionResult Register()
@@ -53,6 +55,8 @@ public class AccountController: Controller
                         "ConfirmEmail", "Account", 
                         new { userId = model.Id, token = token }, 
                         protocol: Request.Scheme);
+
+                    await _userManager.AddToRoleAsync(model, "user");
 
                     await _emailSender.SendEmailAsync(model.Email, 
                         "Confirm your account", 

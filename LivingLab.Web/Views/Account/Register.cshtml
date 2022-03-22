@@ -33,12 +33,23 @@
                 <input asp-for="PhoneNumber" class="form-control" autocomplete="tel" aria-required="true"/>
                 <span asp-validation-for="PhoneNumber" class="text-danger"></span>
             </div>
+
+            <label asp-for="Role"></label>
             <div class="form-floating">
-                <select name="faculty" asp-for="Faculty"> 
-                     <option value="SE">SE</option> 
-                    <option value="ICT">ICT</option> 
-                     <option value="MDME">MDME</option>
-                     <option value="CSC">CSC</option> 
+                <select name="role" asp-for="Role">
+                    <option value="User">User</option>
+                    <option value="Labtech">Labtech</option>
+                    <option value="Admin">Admin</option>
+                </select>
+            </div>
+            
+            <label asp-for="Faculty"></label>
+            <div class="form-floating">
+                <select name="faculty" asp-for="Faculty">
+                    <option value="SE">SE</option>
+                    <option value="ICT">ICT</option>
+                    <option value="MDME">MDME</option>
+                    <option value="CSC">CSC</option>
                 </select>
             </div>
             <div class="form-floating mt-4 mb-4">

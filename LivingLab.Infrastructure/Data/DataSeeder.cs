@@ -1,7 +1,9 @@
 using LivingLab.Core.Constants;
 using LivingLab.Core.Entities;
 using LivingLab.Core.Entities.Identity;
+using LivingLab.Core.Enums;
 
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
 namespace LivingLab.Infrastructure.Data;
@@ -24,13 +26,18 @@ public static class DataSeeder
         // modelBuilder.Entity<Labs>().HasData(
         // new { Id = 1, Location = "NYP-SR7C", PersonInCharge = "David", LabStatus ="Available"}
         // );
-
+        
         modelBuilder.Entity<ApplicationUser>().HasData(
             new { Id = "UserId1", UserId = 1, FirstName = "David", LastName = "Cheng", PhoneNumber = "96878607", Email = "David@gmail.com", TwoFactorEnabled = false, AuthenticationType = "None", PasswordHash = "testtesttest", SMSExpiry = new DateTime(2022, 7, 19, hour: 12, minute: 00, second: 00), UserFaculty = "ICT", AccessFailedCount = 0, LockoutEnabled = true, EmailConfirmed = false, PhoneNumberConfirmed = false },
             new { Id = "UserId2", UserId = 2, FirstName = "Carlton", LastName = "Foo", PhoneNumber = "12341234", Email = "henry@gmail.com", TwoFactorEnabled = false, AuthenticationType = "None", PasswordHash = "testtesttest", SMSExpiry = new DateTime(2022, 7, 19, hour: 12, minute: 00, second: 00), UserFaculty = "SE", AccessFailedCount = 0, LockoutEnabled = true, EmailConfirmed = false, PhoneNumberConfirmed = false },
             new { Id = "UserId3", UserId = 3, FirstName = "Hou Liang", LastName = "Yip", PhoneNumber = "80808080", Email = "houliang@gmail.com", TwoFactorEnabled = false, AuthenticationType = "None", PasswordHash = "testtesttest", SMSExpiry = new DateTime(2022, 7, 19, hour: 12, minute: 00, second: 00), UserFaculty = "SE", AccessFailedCount = 0, LockoutEnabled = true, EmailConfirmed = false, PhoneNumberConfirmed = false }
         );
 
+        modelBuilder.Entity<IdentityRole>().HasData(
+            new { Id = "1", Name = "User", NormalizedName = "USER", ConcurrencyStamp = "" },
+            new { Id = "2", Name = "Labtech", NormalizedName = "LABTECH", ConcurrencyStamp = "" },
+            new { Id = "3", Name = "Admin", NormalizedName = "ADMIN", ConcurrencyStamp = "" });
+        
         modelBuilder.Entity<Lab>().HasData(
             new { LabId = 1, LabLocation = "NYP-SR7C", LabInCharge = "UserId1", LabStatus = "Available", Capacity = 20 }
         );

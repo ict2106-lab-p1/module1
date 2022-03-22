@@ -11,8 +11,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace LivingLab.Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20220322081911_Add-Entities2")]
-    partial class AddEntities2
+    [Migration("20220322185301_Add-Entities3")]
+    partial class AddEntities3
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -973,6 +973,29 @@ namespace LivingLab.Infrastructure.Migrations
                         .HasDatabaseName("RoleNameIndex");
 
                     b.ToTable("Role", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = "1",
+                            ConcurrencyStamp = "",
+                            Name = "User",
+                            NormalizedName = "USER"
+                        },
+                        new
+                        {
+                            Id = "2",
+                            ConcurrencyStamp = "",
+                            Name = "Labtech",
+                            NormalizedName = "LABTECH"
+                        },
+                        new
+                        {
+                            Id = "3",
+                            ConcurrencyStamp = "",
+                            Name = "Admin",
+                            NormalizedName = "ADMIN"
+                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

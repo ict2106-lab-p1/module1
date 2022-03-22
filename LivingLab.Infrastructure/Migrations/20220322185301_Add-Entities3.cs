@@ -4,7 +4,7 @@
 
 namespace LivingLab.Infrastructure.Migrations
 {
-    public partial class AddEntities2 : Migration
+    public partial class AddEntities3 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
