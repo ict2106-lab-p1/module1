@@ -14,7 +14,12 @@ $(document).ready(function() {
         overlay.classList.toggle('flex')
     }
 
-    addBtn.addEventListener('click', toggleModal)
+    // addBtn.addEventListener('click', toggleModal)
+
+    $(document).on('click', '#addDeviceBtn', function () {
+        clickAdd(this)
+        toggleModal()
+    });
 
     closeBtn.addEventListener('click', toggleModal)
 
@@ -38,3 +43,13 @@ $(document).ready(function() {
         })
     })
 });
+
+function clickAdd(e) {
+    $.get("/Device/ViewAddDetails", function (data) {
+        console.log("ViewAddDetails: " + data);
+        console.log("Last row Id: " + data.id);
+        document.getElementById("add-device-id").value = data.id + 1;
+        document.getElementById("labId").value = data.lab.labId
+        document.getElementById("labLocation").value = data.lab.labLocation
+    });
+}

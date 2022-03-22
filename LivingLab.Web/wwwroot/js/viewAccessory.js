@@ -116,6 +116,8 @@ function clickAdd(e) {
             last.value = "Others";
             accessoryTypeDDL.appendChild(last);
         }
+        document.getElementById("labId").value = data.accessory.labId
+        document.getElementById("labLocation").value = data.accessory.lab.labLocation
     });
 }
 
@@ -147,12 +149,13 @@ function clickEdit(e) {
             document.getElementById("AccessoryType").value =
                 accessoryTypeDDL.options[accessoryTypeDDL.selectedIndex].textContent;
             document.getElementById("editAccessoryName").value =
-                data.accessory.accessoryType.name;
+                data.accessory.name;
             document.getElementById("editDescription").value =
                 data.accessory.accessoryType.description;
             document.getElementById("editStatus").value = data.accessory.status;
             document.getElementById("editDueDate").value = data.accessory.dueDate;
             document.getElementById("editLabUser").value = data.accessory.labUserId;
+            document.getElementById("editLabLocation").value = data.accessory.lab.labLocation
         }
     );
 }
@@ -162,14 +165,17 @@ function clickDelete(e) {
         "/Accessory/GetDeleteDetails/" + e.getAttribute("data-id"), // url
         function(data, textStatus, jqXHR) {
             // success callback
-            console.log(document.getElementById("accessoryName"));
+            console.log(data);
             document.getElementById("del-accessory-id").value = data.id;
             document.getElementById("accessory-name").innerHTML =
-                data.accessoryType.name;
+                data.name;
             document.getElementById("del-accessory-name").value =
-                data.accessoryType.name;
+                data.name;
             document.getElementById("del-accessory-type").value =
                 data.accessoryType.type;
+            document.getElementById("deleteLabLocation").value = data.lab.labLocation;
+            console.log(document.getElementById("deleteLabLocation").value);
+            console.log(document.getElementById("del-accessory-type").value);
         }
     );
 }

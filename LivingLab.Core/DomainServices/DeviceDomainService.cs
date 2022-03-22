@@ -16,6 +16,12 @@ public class DeviceDomainService : IDeviceDomainService
     {
         _deviceRepository = deviceRepository;
     }
+
+    public Task<List<Device>> GetDevicesForLabProfile(string labLocation)
+    {
+        return _deviceRepository.GetDevicesForLabProfile(labLocation);
+    }
+    
     public Task<List<Device>> ViewDevice(string deviceType, string labLocation)
     {
         return _deviceRepository.GetAllDevicesByType(deviceType, labLocation);

@@ -16,8 +16,11 @@ public class Accessory : BaseEntity
     public DateTime LastUpdated { get; set; }
     [Required]
     public int LabId { get; set; }
+
+    [Required] public int AccessoryTypeId { get; set; }
+
     [Required]
-    public int AccessoryTypeId { get; set; }
+    public string Name { get; set; }
 
     public Lab? Lab { get; set; }
 

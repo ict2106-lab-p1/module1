@@ -64,23 +64,25 @@ public class AccessoryController : Controller
     public async Task<IActionResult> CreateAccessory(AccessoryDetailsViewModel viewModel)
     {
         await _accessoryService.AddAccessory(viewModel);
-        return RedirectToAction("ViewAccessoryType");
+        return Redirect($"ViewAccessoryType/{viewModel.Accessory.Lab.LabLocation}");
     }
     
     [HttpPost("EditAccessory")]
     public async Task<IActionResult> EditAccessory(AccessoryDetailsViewModel viewModel)
     {
         await _accessoryService.EditAccessory(viewModel);
-        return RedirectToAction("ViewAccessoryType");
+        
+        ViewAccessoryViewModel viewAccessory = await _accessoryService.ViewAccessory(viewModel.Accessory.AccessoryType.Type, viewModel.Accessory.Lab.LabLocation);
+        return View("ViewAccessory", viewAccessory);
     }
     
     [HttpPost("View/Delete")]
-    public async Task<IActionResult> DeleteAccessory(AccessoryViewModel deleteAccessory, string labLocation)
+    public async Task<IActionResult> DeleteAccessory(AccessoryViewModel deleteAccessory)
     {
         await _accessoryService.DeleteAccessory(deleteAccessory); 
         
         // Temp - To display ViewAll after editing
-        ViewAccessoryViewModel viewAccessory = await _accessoryService.ViewAccessory(deleteAccessory.AccessoryType.Type, labLocation);
+        ViewAccessoryViewModel viewAccessory = await _accessoryService.ViewAccessory(deleteAccessory.AccessoryType.Type, deleteAccessory.Lab.LabLocation);
         return View("ViewAccessory", viewAccessory);
     }
 

@@ -1,3 +1,5 @@
+using LivingLab.Core.Entities;
+
 namespace LivingLab.Web.Models.ViewModels.Device;
 /// <remarks>
 /// Author: Team P1-3

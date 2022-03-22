@@ -8,9 +8,11 @@ namespace LivingLab.Core.Interfaces.Repositories;
 /// </remarks>
 public interface IAccessoryRepository : IRepository<Accessory>
 {
+    Task<List<Accessory>> GetAccessoriesForLabProfile(string labLocation);
     Task<List<Accessory>> GetAccessoryWithAccessoryType(string accessoryType, string labLocation);
     Task<List<ViewAccessoryTypeDTO>> GetAccessoryType(string labLocation);
     Task<Accessory> GetLastRow();
+    
     Task<AccessoryDetailsDTO> EditAccessory(AccessoryDetailsDTO accessoryDetailsDto);
     Task<Accessory> DeleteAccessory(Accessory deletedAccessory);
     Task<Accessory> GetAccessory(int id);
