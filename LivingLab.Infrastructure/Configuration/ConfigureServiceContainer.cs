@@ -3,6 +3,7 @@ using LivingLab.Core.Entities.Identity;
 using LivingLab.Core.Interfaces.Repositories;
 using LivingLab.Core.Interfaces.Services;
 using LivingLab.Infrastructure.Data;
+using LivingLab.Infrastructure.InfraServices;
 using LivingLab.Infrastructure.Repositories;
 
 using Microsoft.AspNetCore.Identity;
@@ -42,6 +43,7 @@ public static class ConfigureServiceContainer
 
         services.AddTransient<ITodoRepository, TodoRepository>();
         services.AddTransient<ITodoDomainService, TodoDomainService>();
+        services.AddTransient<IEmailSender, EmailSender>();
 
         return services;
     }

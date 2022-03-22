@@ -1,3 +1,5 @@
+using System.Security.Policy;
+
 using AutoMapper;
 
 using LivingLab.Core.Entities;
@@ -12,6 +14,8 @@ using LivingLab.Web.UIServices.Todo;
 
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI.Services;
+
+using Twilio.Http;
 
 namespace LivingLab.Web.UIServices.Account;
 /// <summary>
@@ -30,7 +34,7 @@ public class AccountService : IAccountService
     private readonly IUserStore<ApplicationUser> _userStore;
     private readonly IUserEmailStore<ApplicationUser> _emailStore;
     
-    public AccountService( IUserStore<ApplicationUser> userStore, IEmailSender emailSender, UserManager<ApplicationUser> userManager, ILogger<AccountService> logger, SignInManager<ApplicationUser> signInManager, IAccountDomainService accountDomainService)
+    public AccountService( IUserStore<ApplicationUser> userStore, UserManager<ApplicationUser> userManager, ILogger<AccountService> logger, SignInManager<ApplicationUser> signInManager, IAccountDomainService accountDomainService)
     {
         _signInManager = signInManager;
         _accountDomainService = accountDomainService;
@@ -108,9 +112,6 @@ public class AccountService : IAccountService
         if (result.Succeeded)
         {
             _logger.LogInformation("User created a new account with password.");
-
-            var userId = await _userManager.GetUserIdAsync(user);
-            // var userDetails = await _userManager.FindByIdAsync(userId);
 
             user.UserFaculty = input.Faculty;
             user.LastName = input.LastName;
