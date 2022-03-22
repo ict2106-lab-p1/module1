@@ -81,11 +81,11 @@ public class AccessoryServices : IAccessoryService
         AccessoryDetailsViewModel addAccessoryDetails = viewModelInput;
         ViewAccessoryViewModel viewAccessoryViewModel = new ViewAccessoryViewModel();
         AccessoryViewModel accessoryVM = new AccessoryViewModel();
+
         // Add new accessory Type
         if (addAccessoryDetails.NewAccessoryType != null)
         {
             accessoryVM.AccessoryType = new AccessoryType();
-            accessoryVM.AccessoryType.Name = addAccessoryDetails.Accessory.AccessoryType.Name;
             accessoryVM.AccessoryType.Type = addAccessoryDetails.NewAccessoryType;
             accessoryVM.AccessoryType.Description = addAccessoryDetails.Accessory.AccessoryType.Description;
             accessoryVM.AccessoryType.Borrowable = addAccessoryDetails.BorrowableValue == "1";
@@ -94,11 +94,12 @@ public class AccessoryServices : IAccessoryService
         {
             accessoryVM.AccessoryTypeId = addAccessoryDetails.Accessory.AccessoryType.Id;
         }
-
-        accessoryVM.Status = "Reviewing";
-        accessoryVM.LastUpdated = DateTime.Now;
-        accessoryVM.LabId = 1; //currently hardcoded need get real one
-
+        accessoryVM.Name = addAccessoryDetails.Accessory.Name;
+        accessoryVM.Status = "Available";
+        accessoryVM.LastUpdated = DateTime.Today;
+        accessoryVM.ReviewStatus = "Reviewing";
+        accessoryVM.LabId = addAccessoryDetails.Accessory.Lab.LabId;
+        
         // map view model back to accessory
         Core.Entities.Accessory newAccessory = _mapper.Map<AccessoryViewModel, Core.Entities.Accessory>(accessoryVM);
         // add new accessory to db

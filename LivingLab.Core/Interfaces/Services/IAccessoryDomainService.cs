@@ -18,8 +18,9 @@ public interface IAccessoryDomainService
      * Anything you can refer to AccessoryService's ViewAccessoryType() method.
      */
     Task<List<ViewAccessoryTypeDTO>> ViewAccessoryType(string labLocation);
-
+    
     Task<Accessory> AddAccessory(Accessory accessory);
+    
     Task<AccessoryDetailsDTO> EditAccessory(AccessoryDetailsDTO accessoryDetailsDto);
     Task<Accessory> DeleteAccessory(Accessory deleteAccessory);
     Task<AccessoryDetailsDTO> AddAccessoryDetails();

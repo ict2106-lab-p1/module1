@@ -97,6 +97,8 @@ function clickAdd(e) {
         console.log("ViewAddDetails: " + data);
         console.log("Last row Id: " + data.id);
         document.getElementById("add-device-id").value = data.id + 1;
+        document.getElementById("labId").value = data.accessory.lab.labId
+        document.getElementById("labLocation").value = data.accessory.lab.labLocation
     });
     /*
               $.get('/Device/ViewType',
@@ -127,6 +129,8 @@ function clickEdit(e) {
             document.getElementById("grid-desc").value = data.description;
             document.getElementById("grid-status").value = data.status;
             document.getElementById("grid-threshold").value = data.threshold;
+            document.getElementById("editLabLocation").value = data.lab.labLocation;
+            console.log(document.getElementById("editLabLocation").value)
         }
     );
 }
@@ -135,10 +139,12 @@ function clickDelete(e) {
     $.get(
         "/Device/View/" + e.getAttribute("data-id"), // url
         function(data, textStatus, jqXHR) {
-            // success callback
+            // success callbackdelete
             document.getElementById("del-device-id").value = data.id;
             document.getElementById("deviceName").innerHTML = data.name;
             document.getElementById("del-device-name").value = data.name;
+            document.getElementById("deleteDeviceType").value = data.type;
+            document.getElementById("deleteLabLocation").value = data.lab.labLocation;
         }
     );
 }

@@ -59,32 +59,32 @@ public class DeviceController : Controller
     }
     
     [HttpPost("View/Edit")]
-    public async Task<IActionResult> EditDevice(DeviceViewModel editedDevice, string labLocation)
+    public async Task<IActionResult> EditDevice(DeviceViewModel editedDevice)
     {
         Console.WriteLine("DEVID: "+ editedDevice.Id);
         Console.WriteLine("DEVTYPE: "+ editedDevice.Type);
         await _deviceService.EditDevice(editedDevice);
 
         // Temp - To display ViewAll after editing
-        ViewDeviceViewModel viewDevices = await _deviceService.ViewDevice(editedDevice.Type, labLocation);
+        ViewDeviceViewModel viewDevices = await _deviceService.ViewDevice(editedDevice.Type, editedDevice.Lab.LabLocation);
         return View("ViewDevice", viewDevices);
     }
     
-    [HttpPost("View/Add")]
-    public async Task<IActionResult> AddDevice(DeviceViewModel addedDevice , string labLocation)
+    [HttpPost("ViewAdd")]
+    public async Task<IActionResult> AddDevice(DeviceViewModel addedDevice)
     {
         await _deviceService.AddDevice(addedDevice);
-        ViewDeviceViewModel viewDevices = await _deviceService.ViewDevice(addedDevice.Type, labLocation);
-        return View("ViewDevice", viewDevices);
+        ViewDeviceViewModel viewDevices = await _deviceService.ViewDevice(addedDevice.Type, addedDevice.Lab.LabLocation);
+        return Redirect($"ViewType/{addedDevice.Lab.LabLocation}");
     }
     
     [HttpPost("View/Delete")]
-    public async Task<IActionResult> DeleteDevice(DeviceViewModel deleteDevice, string labLocation)
+    public async Task<IActionResult> DeleteDevice(DeviceViewModel deleteDevice)
     {
-        await _deviceService.DeleteDevice(deleteDevice); 
+        await _deviceService.DeleteDevice(deleteDevice);
         
         // Temp - To display ViewAll after editing
-        ViewDeviceViewModel viewDevices = await _deviceService.ViewDevice(deleteDevice.Type, labLocation);
+        ViewDeviceViewModel viewDevices = await _deviceService.ViewDevice(deleteDevice.Type, deleteDevice.Lab.LabLocation);
         return View("ViewDevice", viewDevices);
     }
 

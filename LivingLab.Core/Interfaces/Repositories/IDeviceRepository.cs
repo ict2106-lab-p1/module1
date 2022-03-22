@@ -11,6 +11,7 @@ public interface IDeviceRepository : IRepository<Device>
     Task<List<ViewDeviceTypeDTO>> GetViewDeviceType(string labLocation);
     Task<List<Device>> GetAllDevicesByType(string deviceType, string labLocation);
     Task<Device> GetDeviceDetails(int id);
+    Task<List<Device>> GetDevicesForLabProfile(string labLocation);
     Task<Device> GetLastRow();
     Task<Device> AddDevice(Device addedDevice);
     Task<Device> EditDeviceDetails(Device editedDevice);
