@@ -53,28 +53,33 @@ public class LoginController : Controller
 
     /*Login if user details is true*/
     [HttpPost]
-    public async Task<IActionResult> LoginUser(LoginViewModel userDetails)
+    public async Task<IActionResult> Index(LoginViewModel? userDetails)
     {
+        _logger.LogInformation("I am here");
         if (ModelState.IsValid)
         {
             try
             {
-                var result = await _signInManager.PasswordSignInAsync(userDetails.Email, userDetails.Password,
-                    userDetails.RememberMe, lockoutOnFailure: false);
+
+                if (userDetails == null)
+                {
+                    return View(nameof(Index), userDetails);
+                }
+                
+                var result = await _signInManager.PasswordSignInAsync(userDetails?.Email, userDetails?.Password,
+                    userDetails!.RememberMe, lockoutOnFailure: false);
                 if (result.Succeeded)
                 {
                     ApplicationUser user = await _userManager.GetUserAsync(User);
-
-                    _logger.LogInformation(user.AuthenticationType);
-
-                    if (user.AuthenticationType.Contains("SMS"))
+                    
+                    if (user.AuthenticationType != null && user.AuthenticationType.Contains("SMS"))
                     {
                         _logger.LogInformation("Verify Code");
                         await _accountService.GenerateCode(user);
                         await _notif.SendTextToPhone(user);
                         return RedirectToAction("verifycode", "Login");
                     }
-                    else if (user.AuthenticationType.Contains("Google"))
+                    else if (user.AuthenticationType != null && user.AuthenticationType.Contains("Google"))
                     {
                         _logger.LogInformation("Google Auth");
                         return View("Index");

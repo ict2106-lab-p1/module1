@@ -31,7 +31,7 @@ public class HomeController : Controller
 
     public IActionResult Index()
     {
-        return View("Index");
+        return RedirectToAction("Index", "Login");
     }
 
     [Route ("dashboard")]
