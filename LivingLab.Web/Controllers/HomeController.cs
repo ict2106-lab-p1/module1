@@ -38,6 +38,7 @@ public class HomeController : Controller
     [Route ("dashboard")]
     public IActionResult Dashboard()
     {
+        //TODO: RedirectToLivingLab
         return View("Index");
     }
 
