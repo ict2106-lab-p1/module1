@@ -37,7 +37,7 @@ public static class ConfigureWebServices
         services.AddTransient<IManualLogService, ManualLogService>();
         // services.AddTransient<IExportToCSVService, ExportToCSVService>();
         services.AddTransient<IDeviceService, DeviceService>();
-        services.AddTransient<IAccessoryService, AccessoryServices>();
+        services.AddTransient<IAccessoryService, AccessoryService>();
         services.AddTransient<IUserManagementService, UserManagementService>();
         services.AddTransient<ILabProfileService, LabProfileService>();
         
