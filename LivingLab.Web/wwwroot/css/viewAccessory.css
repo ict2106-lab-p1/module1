@@ -10,7 +10,7 @@
 @tailwind components;
 @tailwind utilities;
 .dataTables_wrapper .myfilter .dataTables_filter {
-    float: left;
+    float: left
 }
 
 .disabled {

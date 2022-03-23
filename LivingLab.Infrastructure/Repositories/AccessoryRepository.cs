@@ -1,4 +1,5 @@
 using LivingLab.Core.Entities;
+using LivingLab.Core.Entities.DTO;
 using LivingLab.Core.Entities.DTO.Accessory;
 using LivingLab.Core.Interfaces.Repositories;
 using LivingLab.Infrastructure.Data;
@@ -15,25 +16,40 @@ public class AccessoryRepository : Repository<Accessory>, IAccessoryRepository
     {
         _context = context;
     }
+    
+    public async Task<List<Accessory>> GetAccessoriesForLabProfile(string labLocation)
+    {
+        var accessories = await _context.Accessories
+            .Where(t => t.Status.ToLower().Equals("available")
+                        && t.Lab.LabLocation.Equals("labLocation"))
+            .ToListAsync();
+        return accessories;
+    }
 
-    public async Task<List<Accessory>> GetAccessoryWithAccessoryType(string accessoryType)
+    public async Task<List<Accessory>> GetAccessoryWithAccessoryType(string accessoryType, string labLocation)
     {
         // retrieve accessory table together with accessory type details using include to join entities 
-        List<Accessory> accessories = await _context.Accessories.Include(a => a.AccessoryType)
-            .Where(t => accessoryType.Contains(t.AccessoryType.Type))
+        List<Accessory> accessories = await _context.Accessories
+            .Include(l=>l.Lab)
+            .Include(a => a.AccessoryType)
+            .Where(t => accessoryType.Contains(t.AccessoryType!.Type) && t.Lab!.LabLocation==labLocation)
             .ToListAsync();
         return accessories;
     }
 
     public async Task<Accessory> GetAccessory(int id)
     {
-        return (await _context.Accessories.Include(a => a.AccessoryType).SingleOrDefaultAsync(a => a.Id == id))!;
+        return (await _context.Accessories
+            .Include(l => l.Lab)
+            .Include(a => a.AccessoryType)
+            .SingleOrDefaultAsync(a => a.Id == id))!;
     }
-
-
-    public async Task<List<ViewAccessoryTypeDTO>> GetAccessoryType()
+    public async Task<List<ViewAccessoryTypeDTO>> GetAccessoryType(string labLocation)
     {
-        var accessoryGroup = await _context.Accessories.Include(a => a.AccessoryType)
+        var accessoryGroup = await _context.Accessories
+            .Include(l=>l.Lab)
+            .Include(a => a.AccessoryType)
+            .Where(l => l.Lab!.LabLocation == labLocation)
             .GroupBy(t => t.AccessoryType!.Type)
             .Select(t => new { Key = t.Key, Count = t.Count() })
             .ToListAsync();
@@ -50,7 +66,9 @@ public class AccessoryRepository : Repository<Accessory>, IAccessoryRepository
     
     public async Task<Accessory> GetLastRow()
     {
-        var accessory = await _context.Accessories.OrderByDescending(a => a.Id).FirstOrDefaultAsync();
+        var accessory = await _context.Accessories
+            .Include(l=>l.Lab)    
+            .OrderByDescending(a => a.Id).FirstOrDefaultAsync();
         return accessory;
     }
     public async Task<Accessory> DeleteAccessory(Accessory deleteAccessory)
@@ -59,15 +77,13 @@ public class AccessoryRepository : Repository<Accessory>, IAccessoryRepository
         Accessory currentAccessory = (await _context.Accessories.SingleOrDefaultAsync(d => d.Id == deleteAccessory.Id))!;
         _context.Accessories.Remove(currentAccessory);
         await _context.SaveChangesAsync();
-        Console.WriteLine("Delete Succ");
         return deleteAccessory;
     }
-    
     public async Task<AccessoryDetailsDTO> EditAccessory(AccessoryDetailsDTO accessoryDetailsDto)
     {
         Accessory accessory = (_context.Accessories.Include(d => d.AccessoryType)
             .SingleOrDefault(d => d.Id == accessoryDetailsDto.Accessory.Id))!;
-        accessory.AccessoryType.Name = accessoryDetailsDto.Accessory.AccessoryType.Name;
+        accessory.Name = accessoryDetailsDto.Accessory.Name;
         accessory.AccessoryType.Type = accessoryDetailsDto.Accessory.AccessoryType.Type;
         accessory.AccessoryType.Borrowable = accessoryDetailsDto.BorrowableValue == "1";
         accessory.DueDate = accessoryDetailsDto.Accessory.DueDate;

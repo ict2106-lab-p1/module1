@@ -73,33 +73,33 @@ public static class DataSeeder
 
         // Accessory and Accessory Types
         modelBuilder.Entity<AccessoryType>().HasData(
-                new { Id = 1, Type = "Camera", Borrowable = true, Name = "Sony A7 IV", Description = "Its purpose is to capture images and videos" },
-                new { Id = 2, Type = "Ultrasonic Sensor", Borrowable = true, Name = "MA300D1-1", Description = "Its purpose is to detect obstacles" },
-                new { Id = 3, Type = "Humidity Sensor", Borrowable = true, Name = "DHT22", Description = "Its purpose is to detect humidity in the environment" },
-                new { Id = 4, Type = "Water pressure Sensor", Borrowable = true, Name = "LEFOO LFT2000W", Description = "Its purpose is to detect water pressure" },
-                new { Id = 5, Type = "IR Sensor", Borrowable = true, Name = "RM1802", Description = "It is used to switch on the lights in the lab" },
-                new { Id = 6, Type = "Proximity Sensor", Borrowable = true, Name = "HC-SR04", Description = "Its purpose is to detect proximity of an obstacle" },
-                new { Id = 7, Type = "LED Lights", Borrowable = false, Name = "EDGELEC 4Pin LED Diodes", Description = "Its purpose is to emit light" },
-                new { Id = 8, Type = "Buzzer", Borrowable = true, Name = "TMB09A05", Description = "Its purpose is to emit sound from the device" }
+                new { Id = 1, Type = "Camera", Borrowable = true, Description = "Its purpose is to capture images and videos" },
+                new { Id = 2, Type = "Ultrasonic Sensor", Borrowable = true, Description = "Its purpose is to detect obstacles" },
+                new { Id = 3, Type = "Humidity Sensor", Borrowable = true, Description = "Its purpose is to detect humidity in the environment" },
+                new { Id = 4, Type = "Water pressure Sensor", Borrowable = true, Description = "Its purpose is to detect water pressure" },
+                new { Id = 5, Type = "IR Sensor", Borrowable = true, Description = "It is used to switch on the lights in the lab" },
+                new { Id = 6, Type = "Proximity Sensor", Borrowable = true, Description = "Its purpose is to detect proximity of an obstacle" },
+                new { Id = 7, Type = "LED Lights", Borrowable = false, Description = "Its purpose is to emit light" },
+                new { Id = 8, Type = "Buzzer", Borrowable = true, Description = "Its purpose is to emit sound from the device" }
         );
 
         modelBuilder.Entity<Accessory>().HasData(
-                new { Id = 1, Status = "Available", LastUpdated = new DateTime(2021, 10, 10), LabId = 1, AccessoryTypeId = 1 , ReviewStatus = "Pending" , ReviewedBy = "David"},
-                new { Id = 2, Status = "Borrowed", LastUpdated = new DateTime(2021, 10, 14), LabId = 1, AccessoryTypeId = 1, LabUserId = "DefaultAdmin1", DueDate = new DateTime(2022, 10, 14), ReviewStatus = "Pending" , ReviewedBy = "David" },
-                new { Id = 3, Status = "Available", LastUpdated = new DateTime(2021, 10, 17), LabId = 1, AccessoryTypeId = 2, ReviewStatus = "Pending" , ReviewedBy = "David" },
-                new { Id = 4, Status = "Available", LastUpdated = new DateTime(2021, 10, 21), LabId = 1, AccessoryTypeId = 2, ReviewStatus = "Pending" , ReviewedBy = "David" },
-                new { Id = 5, Status = "Borrowed", LastUpdated = new DateTime(2021, 9, 9), LabId = 1, AccessoryTypeId = 3, LabUserId = "DefaultAdmin1", DueDate = new DateTime(2022, 9, 9) , ReviewStatus = "Pending" , ReviewedBy = "David"},
-                new { Id = 6, Status = "Available", LastUpdated = new DateTime(2021, 9, 5), LabId = 1, AccessoryTypeId = 3 , ReviewStatus = "Pending" , ReviewedBy = "David"},
-                new { Id = 7, Status = "Available", LastUpdated = new DateTime(2021, 8, 1), LabId = 1, AccessoryTypeId = 4 , ReviewStatus = "Pending" , ReviewedBy = "David"},
-                new { Id = 8, Status = "Borrowed", LastUpdated = new DateTime(2021, 8, 10), LabId = 1, AccessoryTypeId = 4, LabUserId = "DefaultAdmin1", DueDate = new DateTime(2022, 9, 5) , ReviewStatus = "Pending" , ReviewedBy = "David"},
-                new { Id = 9, Status = "Available", LastUpdated = new DateTime(2021, 7, 3), LabId = 1, AccessoryTypeId = 5 , ReviewStatus = "Pending" , ReviewedBy = "David"},
-                new { Id = 10, Status = "Borrowed", LastUpdated = new DateTime(2021, 6, 24), LabId = 1, AccessoryTypeId = 5, LabUserId = "DefaultAdmin1", DueDate = new DateTime(2022, 10, 14) , ReviewStatus = "Pending" , ReviewedBy = "David"},
-                new { Id = 11, Status = "Available", LastUpdated = new DateTime(2021, 7, 25), LabId = 1, AccessoryTypeId = 6, ReviewStatus = "Pending" , ReviewedBy = "David"},
-                new { Id = 12, Status = "Available", LastUpdated = new DateTime(2021, 4, 3), LabId = 1, AccessoryTypeId = 6 , ReviewStatus = "Pending" , ReviewedBy = "David"},
-                new { Id = 13, Status = "Borrowed", LastUpdated = new DateTime(2021, 7, 19), LabId = 1, AccessoryTypeId = 7, LabUserId = "DefaultAdmin1", DueDate = new DateTime(2022, 7, 19) , ReviewStatus = "Pending" , ReviewedBy = "David"},
-                new { Id = 14, Status = "Borrowed", LastUpdated = new DateTime(2021, 12, 14), LabId = 1, AccessoryTypeId = 7, LabUserId = "DefaultAdmin1", DueDate = new DateTime(2022, 12, 14), ReviewStatus = "Pending" , ReviewedBy = "David" },
-                new { Id = 15, Status = "Available", LastUpdated = new DateTime(2021, 11, 12), LabId = 1, AccessoryTypeId = 8 , ReviewStatus = "Pending" , ReviewedBy = "David"},
-                new { Id = 16, Status = "Available", LastUpdated = new DateTime(2021, 7, 3), LabId = 1, AccessoryTypeId = 8 , ReviewStatus = "Pending" , ReviewedBy = "David"}
+                new { Id = 1, Name = "Sony A7 IV", Status = "Available", LastUpdated = new DateTime(2021, 10, 10), LabId = 1, AccessoryTypeId = 1 , ReviewStatus = "Pending" , ReviewedBy = "David"},
+                new { Id = 2, Name = "Sony A8 IV", Status = "Borrowed", LastUpdated = new DateTime(2021, 10, 14), LabId = 1, AccessoryTypeId = 1, LabUserId = "DefaultAdmin1", DueDate = new DateTime(2022, 10, 14), ReviewStatus = "Pending" , ReviewedBy = "David" },
+                new { Id = 3, Name = "MA300D1-1", Status = "Available", LastUpdated = new DateTime(2021, 10, 17), LabId = 1, AccessoryTypeId = 2, ReviewStatus = "Pending" , ReviewedBy = "David" },
+                new { Id = 4, Name = "MA300D1-2", Status = "Available", LastUpdated = new DateTime(2021, 10, 21), LabId = 1, AccessoryTypeId = 2, ReviewStatus = "Pending" , ReviewedBy = "David" },
+                new { Id = 5, Name = "DHT22", Status = "Borrowed", LastUpdated = new DateTime(2021, 9, 9), LabId = 1, AccessoryTypeId = 3, LabUserId = "DefaultAdmin1", DueDate = new DateTime(2022, 9, 9) , ReviewStatus = "Pending" , ReviewedBy = "David"},
+                new { Id = 6, Name = "DHT23", Status = "Available", LastUpdated = new DateTime(2021, 9, 5), LabId = 1, AccessoryTypeId = 3 , ReviewStatus = "Pending" , ReviewedBy = "David"},
+                new { Id = 7, Name = "LEFOO LFT2000W", Status = "Available", LastUpdated = new DateTime(2021, 8, 1), LabId = 1, AccessoryTypeId = 4 , ReviewStatus = "Pending" , ReviewedBy = "David"},
+                new { Id = 8, Name = "LEFO1 LFT2000W", Status = "Borrowed", LastUpdated = new DateTime(2021, 8, 10), LabId = 1, AccessoryTypeId = 4, LabUserId = "DefaultAdmin1", DueDate = new DateTime(2022, 9, 5) , ReviewStatus = "Pending" , ReviewedBy = "David"},
+                new { Id = 9, Name = "RM1802", Status = "Available", LastUpdated = new DateTime(2021, 7, 3), LabId = 1, AccessoryTypeId = 5 , ReviewStatus = "Pending" , ReviewedBy = "David"},
+                new { Id = 10, Name = "RM1803", Status = "Borrowed", LastUpdated = new DateTime(2021, 6, 24), LabId = 1, AccessoryTypeId = 5, LabUserId = "DefaultAdmin1", DueDate = new DateTime(2022, 10, 14) , ReviewStatus = "Pending" , ReviewedBy = "David"},
+                new { Id = 11, Name = "HC-SR04", Status = "Available", LastUpdated = new DateTime(2021, 7, 25), LabId = 1, AccessoryTypeId = 6, ReviewStatus = "Pending" , ReviewedBy = "David"},
+                new { Id = 12, Name = "HC-SR05", Status = "Available", LastUpdated = new DateTime(2021, 4, 3), LabId = 1, AccessoryTypeId = 6 , ReviewStatus = "Pending" , ReviewedBy = "David"},
+                new { Id = 13, Name = "EDGELEC 4Pin LED Diodes", Status = "Borrowed", LastUpdated = new DateTime(2021, 7, 19), LabId = 1, AccessoryTypeId = 7, LabUserId = "DefaultAdmin1", DueDate = new DateTime(2022, 7, 19) , ReviewStatus = "Pending" , ReviewedBy = "David"},
+                new { Id = 14, Name = "EDGELEC 6Pin LED Diodes", Status = "Borrowed", LastUpdated = new DateTime(2021, 12, 14), LabId = 1, AccessoryTypeId = 7, LabUserId = "DefaultAdmin1", DueDate = new DateTime(2022, 12, 14), ReviewStatus = "Pending" , ReviewedBy = "David" },
+                new { Id = 15, Name = "TMB09A05", Status = "Available", LastUpdated = new DateTime(2021, 11, 12), LabId = 1, AccessoryTypeId = 8 , ReviewStatus = "Pending" , ReviewedBy = "David"},
+                new { Id = 16, Name = "TMB09A06", Status = "Available", LastUpdated = new DateTime(2021, 7, 3), LabId = 1, AccessoryTypeId = 8 , ReviewStatus = "Pending" , ReviewedBy = "David"}
         );
 
         modelBuilder.Entity<SessionStats>().HasData(
