@@ -20,8 +20,31 @@ public class AccessoryRepository : Repository<Accessory>, IAccessoryRepository
     public async Task<List<Accessory>> GetAccessoriesForLabProfile(string labLocation)
     {
         var accessories = await _context.Accessories
-            .Where(t => t.Status.ToLower().Equals("available")
-                        && t.Lab.LabLocation.Equals("labLocation"))
+            .Where(t => t.Status == "Available"
+                        && t.Lab.LabLocation.Equals(labLocation))
+            .ToListAsync();
+        return accessories;
+    }
+    
+    public async void UpdateAccessoryStatus(string accessoryId, string accessoryReviewStatus)
+    {
+        Accessory accessory = 
+            (await _context.Accessories
+                .Where(a => a.Id == Convert.ToInt32(accessoryId))
+                .FirstOrDefaultAsync())!;
+        if (accessory.ReviewStatus != accessoryReviewStatus)
+        {
+            accessory.ReviewStatus = accessoryReviewStatus;
+        }
+        await _context.SaveChangesAsync();
+    }
+    
+    // to display in reviewEquipment
+    public async Task<List<Accessory>> GetAllAccessoriesForReview(string labLocation)
+    {
+        var accessories = await _context.Accessories
+            .Include(t => t.AccessoryType)
+            .Where(t => t.Lab.LabLocation.Equals(labLocation))
             .ToListAsync();
         return accessories;
     }
