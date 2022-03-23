@@ -3,6 +3,10 @@
     ViewData["Title"] = "Login";
 }
 
+@* /// <remarks> *@
+@* /// Author: Team P1-5 *@
+@* /// </remarks> *@
+
 <div class="row">
     <div class="col-md-4 text-center">
         <section>
@@ -24,7 +28,6 @@
                     </div>
                     <span asp-validation-for="Password" class="text-sm text-red-500"></span>
                 </div>
-                @Html.ValidationMessageFor(m => m.Password)
                 
                 <div class="flex justify-center mt-4">
                     <div class="block w-4/12">

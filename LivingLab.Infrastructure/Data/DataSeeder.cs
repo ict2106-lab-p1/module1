@@ -28,26 +28,39 @@ public static class DataSeeder
         // );
         
         modelBuilder.Entity<ApplicationUser>().HasData(
-            new { Id = "UserId1", UserId = 1, FirstName = "David", LastName = "Cheng", PhoneNumber = "96878607", Email = "David@gmail.com", TwoFactorEnabled = false, AuthenticationType = "None", PasswordHash = "testtesttest", SMSExpiry = new DateTime(2022, 7, 19, hour: 12, minute: 00, second: 00), UserFaculty = "ICT", AccessFailedCount = 0, LockoutEnabled = true, EmailConfirmed = false, PhoneNumberConfirmed = false },
-            new { Id = "UserId2", UserId = 2, FirstName = "Carlton", LastName = "Foo", PhoneNumber = "12341234", Email = "henry@gmail.com", TwoFactorEnabled = false, AuthenticationType = "None", PasswordHash = "testtesttest", SMSExpiry = new DateTime(2022, 7, 19, hour: 12, minute: 00, second: 00), UserFaculty = "SE", AccessFailedCount = 0, LockoutEnabled = true, EmailConfirmed = false, PhoneNumberConfirmed = false },
-            new { Id = "UserId3", UserId = 3, FirstName = "Hou Liang", LastName = "Yip", PhoneNumber = "80808080", Email = "houliang@gmail.com", TwoFactorEnabled = false, AuthenticationType = "None", PasswordHash = "testtesttest", SMSExpiry = new DateTime(2022, 7, 19, hour: 12, minute: 00, second: 00), UserFaculty = "SE", AccessFailedCount = 0, LockoutEnabled = true, EmailConfirmed = false, PhoneNumberConfirmed = false }
+            new { Id = "DefaultAdmin1", UserId = 3, FirstName = "Sexy", LastName = "Sotong", UserName = "nghanyi1997@gmail.com", NormalizedUserName = "nghanyi1997@gmail.com", NormalizedEmail = "nghanyi1997@gmail.com", PhoneNumber = "To Be Changed", Email = "nghanyi1997@gmail.com", TwoFactorEnabled = false, AuthenticationType = "None", PasswordHash = "testtesttest", SMSExpiry = new DateTime(2022, 7, 19, hour: 12, minute: 00, second: 00), UserFaculty = "SE", AccessFailedCount = 0, LockoutEnabled = true, EmailConfirmed = true, PhoneNumberConfirmed = false },
+            new { Id = "DefaultAdmin2", UserId = 1, FirstName = "Ji Pyeong", LastName = "Han",  UserName = "mailstohenry@gmail.com", NormalizedUserName = "mailstohenry@gmail.com", NormalizedEmail = "mailstohenry@gmail.com",PhoneNumber = "To Be Changed", Email = "mailstohenry@gmail.com", TwoFactorEnabled = false, AuthenticationType = "None", PasswordHash = "testtesttest", SMSExpiry = new DateTime(2022, 7, 19, hour: 12, minute: 00, second: 00), UserFaculty = "SE", AccessFailedCount = 0, LockoutEnabled = true, EmailConfirmed = true, PhoneNumberConfirmed = false },
+            new { Id = "DefaultAdmin3", UserId = 2, FirstName = "Do San", LastName = "Nam",  UserName = "shengyu98@hotmail.com", NormalizedUserName = "shengyu98@hotmail.com", NormalizedEmail = "shengyu98@hotmail.com", PhoneNumber = "To Be Changed", Email = "shengyu98@hotmail.com", TwoFactorEnabled = false, AuthenticationType = "None", PasswordHash = "testtesttest", SMSExpiry = new DateTime(2022, 7, 19, hour: 12, minute: 00, second: 00), UserFaculty = "SE", AccessFailedCount = 0, LockoutEnabled = true, EmailConfirmed = true, PhoneNumberConfirmed = false },
+            new { Id = "DefaultAdmin4", UserId = 3, FirstName = "Test", LastName = "Test", UserName = "test@gmail.com", NormalizedUserName = "test@gmail.com", PhoneNumber = "00000000", Email = "test@gmail.com", TwoFactorEnabled = false, AuthenticationType = "None", PasswordHash = "testtesttest", SMSExpiry = new DateTime(2022, 7, 19, hour: 12, minute: 00, second: 00), UserFaculty = "ICT", AccessFailedCount = 0, LockoutEnabled = true, EmailConfirmed = false, PhoneNumberConfirmed = false }
         );
 
         modelBuilder.Entity<IdentityRole>().HasData(
             new { Id = "1", Name = "User", NormalizedName = "USER", ConcurrencyStamp = "" },
             new { Id = "2", Name = "Labtech", NormalizedName = "LABTECH", ConcurrencyStamp = "" },
             new { Id = "3", Name = "Admin", NormalizedName = "ADMIN", ConcurrencyStamp = "" });
-        
+
+        modelBuilder.Entity<IdentityUserRole<string>>().HasData(
+            new { UserId = "DefaultAdmin1", RoleId = "1" },
+            new { UserId = "DefaultAdmin1", RoleId = "2" },
+            new { UserId = "DefaultAdmin1", RoleId = "3" },
+            new { UserId = "DefaultAdmin2", RoleId = "1" },
+            new { UserId = "DefaultAdmin2", RoleId = "2" },
+            new { UserId = "DefaultAdmin2", RoleId = "3" },
+            new { UserId = "DefaultAdmin3", RoleId = "1" },
+            new { UserId = "DefaultAdmin3", RoleId = "2" },
+            new { UserId = "DefaultAdmin3", RoleId = "3" }
+            );
+
         modelBuilder.Entity<Lab>().HasData(
-            new { LabId = 1, LabLocation = "NYP-SR7C", LabInCharge = "UserId1", LabStatus = "Available", Capacity = 20 }
+            new { LabId = 1, LabLocation = "NYP-SR7C", LabInCharge = "DefaultAdmin1", LabStatus = "Available", Capacity = 20 }
         );
 
         modelBuilder.Entity<LabAccess>().HasData(
-            new { UserId = "UserId2", LabId = 1, InitiatorId = "UserId1" }
+            new { UserId = "DefaultAdmin2", LabId = 1, InitiatorId = "DefaultAdmin1" }
         );
 
         modelBuilder.Entity<Booking>().HasData(
-            new { BookingId = 1, StartDateTime = new DateTime(2022, 7, 19, hour: 10, minute: 00, second: 00), EndDateTime = new DateTime(2022, 7, 19, hour: 12, minute: 00, second: 00), LabId = 1, UserId = "UserId3" }
+            new { BookingId = 1, StartDateTime = new DateTime(2022, 7, 19, hour: 10, minute: 00, second: 00), EndDateTime = new DateTime(2022, 7, 19, hour: 12, minute: 00, second: 00), LabId = 1, UserId = "DefaultAdmin3" }
         );
 
         modelBuilder.Entity<Device>().HasData(
@@ -72,19 +85,19 @@ public static class DataSeeder
 
         modelBuilder.Entity<Accessory>().HasData(
                 new { Id = 1, Status = "Available", LastUpdated = new DateTime(2021, 10, 10), LabId = 1, AccessoryTypeId = 1 , ReviewStatus = "Pending" , ReviewedBy = "David"},
-                new { Id = 2, Status = "Borrowed", LastUpdated = new DateTime(2021, 10, 14), LabId = 1, AccessoryTypeId = 1, LabUserId = "User1", DueDate = new DateTime(2022, 10, 14), ReviewStatus = "Pending" , ReviewedBy = "David" },
+                new { Id = 2, Status = "Borrowed", LastUpdated = new DateTime(2021, 10, 14), LabId = 1, AccessoryTypeId = 1, LabUserId = "DefaultAdmin1", DueDate = new DateTime(2022, 10, 14), ReviewStatus = "Pending" , ReviewedBy = "David" },
                 new { Id = 3, Status = "Available", LastUpdated = new DateTime(2021, 10, 17), LabId = 1, AccessoryTypeId = 2, ReviewStatus = "Pending" , ReviewedBy = "David" },
                 new { Id = 4, Status = "Available", LastUpdated = new DateTime(2021, 10, 21), LabId = 1, AccessoryTypeId = 2, ReviewStatus = "Pending" , ReviewedBy = "David" },
-                new { Id = 5, Status = "Borrowed", LastUpdated = new DateTime(2021, 9, 9), LabId = 1, AccessoryTypeId = 3, LabUserId = "User1", DueDate = new DateTime(2022, 9, 9) , ReviewStatus = "Pending" , ReviewedBy = "David"},
+                new { Id = 5, Status = "Borrowed", LastUpdated = new DateTime(2021, 9, 9), LabId = 1, AccessoryTypeId = 3, LabUserId = "DefaultAdmin1", DueDate = new DateTime(2022, 9, 9) , ReviewStatus = "Pending" , ReviewedBy = "David"},
                 new { Id = 6, Status = "Available", LastUpdated = new DateTime(2021, 9, 5), LabId = 1, AccessoryTypeId = 3 , ReviewStatus = "Pending" , ReviewedBy = "David"},
                 new { Id = 7, Status = "Available", LastUpdated = new DateTime(2021, 8, 1), LabId = 1, AccessoryTypeId = 4 , ReviewStatus = "Pending" , ReviewedBy = "David"},
-                new { Id = 8, Status = "Borrowed", LastUpdated = new DateTime(2021, 8, 10), LabId = 1, AccessoryTypeId = 4, LabUserId = "User1", DueDate = new DateTime(2022, 9, 5) , ReviewStatus = "Pending" , ReviewedBy = "David"},
+                new { Id = 8, Status = "Borrowed", LastUpdated = new DateTime(2021, 8, 10), LabId = 1, AccessoryTypeId = 4, LabUserId = "DefaultAdmin1", DueDate = new DateTime(2022, 9, 5) , ReviewStatus = "Pending" , ReviewedBy = "David"},
                 new { Id = 9, Status = "Available", LastUpdated = new DateTime(2021, 7, 3), LabId = 1, AccessoryTypeId = 5 , ReviewStatus = "Pending" , ReviewedBy = "David"},
-                new { Id = 10, Status = "Borrowed", LastUpdated = new DateTime(2021, 6, 24), LabId = 1, AccessoryTypeId = 5, LabUserId = "User1", DueDate = new DateTime(2022, 10, 14) , ReviewStatus = "Pending" , ReviewedBy = "David"},
+                new { Id = 10, Status = "Borrowed", LastUpdated = new DateTime(2021, 6, 24), LabId = 1, AccessoryTypeId = 5, LabUserId = "DefaultAdmin1", DueDate = new DateTime(2022, 10, 14) , ReviewStatus = "Pending" , ReviewedBy = "David"},
                 new { Id = 11, Status = "Available", LastUpdated = new DateTime(2021, 7, 25), LabId = 1, AccessoryTypeId = 6, ReviewStatus = "Pending" , ReviewedBy = "David"},
                 new { Id = 12, Status = "Available", LastUpdated = new DateTime(2021, 4, 3), LabId = 1, AccessoryTypeId = 6 , ReviewStatus = "Pending" , ReviewedBy = "David"},
-                new { Id = 13, Status = "Borrowed", LastUpdated = new DateTime(2021, 7, 19), LabId = 1, AccessoryTypeId = 7, LabUserId = "User1", DueDate = new DateTime(2022, 7, 19) , ReviewStatus = "Pending" , ReviewedBy = "David"},
-                new { Id = 14, Status = "Borrowed", LastUpdated = new DateTime(2021, 12, 14), LabId = 1, AccessoryTypeId = 7, LabUserId = "user1", DueDate = new DateTime(2022, 12, 14), ReviewStatus = "Pending" , ReviewedBy = "David" },
+                new { Id = 13, Status = "Borrowed", LastUpdated = new DateTime(2021, 7, 19), LabId = 1, AccessoryTypeId = 7, LabUserId = "DefaultAdmin1", DueDate = new DateTime(2022, 7, 19) , ReviewStatus = "Pending" , ReviewedBy = "David"},
+                new { Id = 14, Status = "Borrowed", LastUpdated = new DateTime(2021, 12, 14), LabId = 1, AccessoryTypeId = 7, LabUserId = "DefaultAdmin1", DueDate = new DateTime(2022, 12, 14), ReviewStatus = "Pending" , ReviewedBy = "David" },
                 new { Id = 15, Status = "Available", LastUpdated = new DateTime(2021, 11, 12), LabId = 1, AccessoryTypeId = 8 , ReviewStatus = "Pending" , ReviewedBy = "David"},
                 new { Id = 16, Status = "Available", LastUpdated = new DateTime(2021, 7, 3), LabId = 1, AccessoryTypeId = 8 , ReviewStatus = "Pending" , ReviewedBy = "David"}
         );

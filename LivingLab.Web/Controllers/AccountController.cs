@@ -33,7 +33,10 @@ public class AccountController: Controller
         _emailSender = emailSender;
 
     }
-
+    
+    //TODO: Add [Authorize(Roles = "Admin")]
+    [Route("register")]
+    /*Admin can see this page and register*/
     public IActionResult Register()
     {
         return View("Register");
@@ -41,6 +44,9 @@ public class AccountController: Controller
 
     
     [HttpPost]
+    [Route("register")]
+    //TODO: Add [Authorize(Roles = "Admin")]
+    /*Allow admin to register users*/
     public async Task<ViewResult> Register(RegisterViewModel registration)
     {
         if (ModelState.IsValid)
@@ -79,7 +85,9 @@ public class AccountController: Controller
     }
 
     [HttpGet]
+    [Route("confirmemail")]
     [AllowAnonymous]
+    /*Goes to confirm email page*/
     public async Task<IActionResult> ConfirmEmail(string? userId, string? token)
     {
         _logger.LogInformation(userId);
@@ -104,11 +112,12 @@ public class AccountController: Controller
         }
     }
 
-    [Authorize]
+    [Authorize(Roles = "User,Labtech,Admin")]
     [Route("settings")]
+    /*Show the settings page with properties binding*/
     public async Task<ViewResult> Settings(SettingsViewModel settingsViewModel)
     {
-        ApplicationUser user = await _userManager.GetUserAsync(User);
+        var user = await _userManager.GetUserAsync(User);
         settingsViewModel.Email = user.Email;
         settingsViewModel.PhoneNumber = user.PhoneNumber;
 
@@ -123,17 +132,13 @@ public class AccountController: Controller
     }
     
     [HttpPost]
-    public async Task<ViewResult> SetUp2FA(SettingsViewModel settingsViewModel)
+    [Authorize(Roles = "User,Admin,Labtech")]
+    /*User can select their 2 fa option*/
+    public async Task<RedirectToActionResult> SetUp2FA(SettingsViewModel settingsViewModel)
     {
         ApplicationUser user = await _userManager.GetUserAsync(User);
 
-        _logger.LogInformation("SMS Auth set to " + settingsViewModel.SMSAuth + "Email Auth set to " +settingsViewModel.GoogleAuth);
-        if (settingsViewModel.SMSAuth && settingsViewModel.GoogleAuth)
-        {
-            _logger.LogInformation("Cannot have two authentication methods");
-            return View("SMSAuth", settingsViewModel);
-        }
-        else if (settingsViewModel.SMSAuth == true)
+        if (settingsViewModel.SMSAuth)
         {
             _logger.LogInformation("Select SMS");
             user.AuthenticationType = "SMS";
@@ -142,7 +147,7 @@ public class AccountController: Controller
                 user.PhoneNumber = settingsViewModel.PhoneNumber;
             }
 
-        }else if (settingsViewModel.GoogleAuth == true)
+        }else if (settingsViewModel.GoogleAuth)
         {
             _logger.LogInformation("Select Email");
             user.AuthenticationType = "Email";
@@ -158,8 +163,8 @@ public class AccountController: Controller
         }
 
         await _accountService.UpdateUserSettings(user);
-        
-        return View("SMSAuth", settingsViewModel);
+
+        return RedirectToAction("Settings", "Account");
     }
 
     [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

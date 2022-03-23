@@ -31,10 +31,16 @@
             <form method="post" asp-controller="Login" asp-action="NewCodeSMS">
                 <div class="mt-4">
                     <button type="submit" class="w-4/12 h8 text-base text-white bg-gray-700 hover:bg-gray-800 focus:ring-4 focus:ring-gray-300 font-medium rounded-md text-sm px-5 py-2.5 text-center">
-                        Re-send Code
+                        Re-send Code To Email
                     </button>
                 </div>
             </form>
+
+            <div class="mt-4">
+                <u>
+                    <a asp-controller="Login" asp-action="ContactAdmin">Lost my phone number</a>
+                </u>
+            </div>
         </section>
     </div>
 </div>

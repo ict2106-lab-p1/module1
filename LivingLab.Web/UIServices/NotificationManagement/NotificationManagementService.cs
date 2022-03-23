@@ -29,6 +29,7 @@ public class NotificationManagementService : INotificationManagementService
         return _notificationDomainService.SetNotificationPref();
     }
 
+    /*Send a normal SMS to the user*/
     public async Task SendTextToPhone(string phone, string msgBody)
     {
         // Find your Account SID and Auth Token at twilio.com/console

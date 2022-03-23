@@ -10,15 +10,9 @@ namespace LivingLab.Web.UIServices.Account;
 /// </remarks>
 public interface IAccountService
 {
-    Task<int> Login(LoginViewModel user);
-    Task<ApplicationUser?> UpdateUser(RegisterViewModel input);
     Task<ApplicationUser?> NewUser(RegisterViewModel input);
-
     Task <Boolean> GenerateCodeSMS(ApplicationUser user);
     Task <Boolean> GenerateCodeEmail(ApplicationUser user);
-
     Task<Boolean> VerifyCode(string userid, VerifyViewModel viewModel);
-
     Task UpdateUserSettings(ApplicationUser user);
-
 }

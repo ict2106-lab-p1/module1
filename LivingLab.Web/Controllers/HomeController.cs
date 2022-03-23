@@ -2,21 +2,17 @@ using System.Diagnostics;
 
 using LivingLab.Core.Entities.Identity;
 using LivingLab.Web.Models.ViewModels;
-using LivingLab.Web.Models.ViewModels.Login;
-using LivingLab.Web.UIServices.Account;
 
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace LivingLab.Web.Controllers;
 /// <remarks>
 /// Author: Team P1-3
 /// </remarks>
-[Authorize]
 public class HomeController : Controller
 {
     private readonly ILogger<HomeController> _logger;
@@ -30,23 +26,31 @@ public class HomeController : Controller
 
     }
 
+    /*Reroute the users to the login page*/
+    [AllowAnonymous]
     public IActionResult Index()
     {
         return RedirectToAction("Index", "Login");
     }
 
+    /*Reroute the users to the main dashboard*/
+    [Authorize(Roles = "User,Labtech,Admin")]
     [Route ("dashboard")]
     public IActionResult Dashboard()
     {
         return View("Index");
     }
 
+    /*Privacy page which was built in*/
+    [Authorize(Roles = "Admin")]
     [Route("privacy")]
     public IActionResult Privacy()
     {
         return View("Privacy");
     }
     
+    /*Can be called to remove the user*/
+    [Authorize(Roles = "User,Labtech,Admin")]
     [Route("logout")]
     public IActionResult Logout()
     {
@@ -55,9 +59,10 @@ public class HomeController : Controller
         HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
         _signInManager.SignOutAsync();
         HttpContext.Response.Cookies.Delete(".AspNetCore.Cookies");
-        return RedirectToAction("Index");
+        return RedirectToAction("Index", "Login");
     }
 
+    /*Not in use, just an example*/
     [Route("/example")]
     public IActionResult ExamplePage()
     {

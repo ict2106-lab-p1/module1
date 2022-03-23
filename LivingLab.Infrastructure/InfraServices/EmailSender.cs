@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Identity.UI.Services;
 
 namespace LivingLab.Infrastructure.InfraServices;
 
+/*Send email using Google mail Living.Lab*/
 public class EmailSender : Core.Interfaces.Services.IEmailSender
 {
     public EmailSender()

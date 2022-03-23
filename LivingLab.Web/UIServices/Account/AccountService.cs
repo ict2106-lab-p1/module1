@@ -56,62 +56,7 @@ public class AccountService : IAccountService
         _emailSender = emailSender;
     }
 
-
-    public async Task<int> Login(LoginViewModel user)
-    {
-        int value = 0;
-        
-            // This doesn't count login failures towards account lockout
-            // To enable password failures to trigger account lockout, set lockoutOnFailure: true
-            var result = await _signInManager.PasswordSignInAsync(user.Email, user.Password, user.RememberMe, lockoutOnFailure: false);
-            if (result.Succeeded)
-            {
-                _logger.LogInformation("User logged in.");
-                value = 200;
-
-            }
-            else
-            {
-                value = -1;
-            }
-            
-
-        return value;
-    }
-
-    public async Task<ApplicationUser?> UpdateUser(RegisterViewModel input)
-    {
-        string Auth = "";
-        if (input.IsGoogleAuth)
-        {
-            Auth = "Email";
-        }
-        else if (input.IsSMS)
-        {
-            Auth = "SMS";
-        }
-        else
-        {
-            Auth = "None";
-        }
-
-        ApplicationUser userDetails = await _userManager.FindByEmailAsync(input.Email);
-
-        userDetails.FirstName = input.FirstName;
-        userDetails.LastName = input.LastName;
-        userDetails.AuthenticationType = Auth;
-        userDetails.OTP = 000000;
-        userDetails.UserFaculty = input.Faculty;
-        userDetails.PhoneNumber = input.PhoneNumber;
-
-        // ApplicationUser input = ApplicationUser(Id, user.FirstName, user.LastName, Auth, "",
-        //     SMSTime, user.StudentFaculty, user.Email, user.Email.ToUpper(), user.Email,
-        //     user.Email.ToUpper(), EmailConfirmed, PasswordHasher<>, SecurityStamp<>, ConcurrencyStamp,
-        //     user.PhoneNumber, PhoneNumberConfirmed, TwoFactorEnabled, "", LockoutEnabled, AccessFailedCount);
-        
-        return await _accountDomainService.UpdateUser(userDetails);
-    }
-
+    /*Registers a new user - Admin only*/
     public async Task<ApplicationUser?> NewUser(RegisterViewModel input)
     {
         var user = CreateUser();
@@ -149,6 +94,7 @@ public class AccountService : IAccountService
 
     }
 
+    /*Generate login OTP for SMS*/
     public async Task<bool> GenerateCodeSMS(ApplicationUser user)
     {
         if (await _accountDomainService.GenerateCode(user))
@@ -169,12 +115,14 @@ public class AccountService : IAccountService
         return false;
     }
 
+    /*Generates login OTP for email*/
     public async Task<bool> GenerateCodeEmail(ApplicationUser user)
     {
         if (await _accountDomainService.GenerateCode(user))
         {
             try
             {
+                _logger.LogInformation("TwoTime HENRY");
                 ApplicationUser userDetails = await _userManager.FindByIdAsync(user.Id);
                 string emailHeader = "OTP for Living Lab";
                 string msgBody = "Your 6 digit OTP for Living Lab is " + userDetails.OTP;
@@ -192,16 +140,19 @@ public class AccountService : IAccountService
         return false;
     }
 
+    /*Verify if the OTP code is correct*/
     public async Task<bool> VerifyCode(string userid, VerifyViewModel viewModel)
     {
         return await _accountDomainService.VerifyCode(userid, viewModel.OTP);
     }
 
+    /*Update user settings 2FA selection*/
     public async Task UpdateUserSettings(ApplicationUser user)
     {
-        await _accountDomainService.UpdateUserSettings(user);
+        await _accountDomainService.UpdateUser(user);
     }
 
+    /*Function from users manager to create users*/
     private ApplicationUser CreateUser()
     {
         try
@@ -215,6 +166,8 @@ public class AccountService : IAccountService
                                                 $"override the register page in /Areas/Identity/Pages/Account/Register.cshtml");
         }
     }
+    
+    /*Function to store email to user manager*/
     private IUserEmailStore<ApplicationUser> GetEmailStore()
     {
         if (!_userManager.SupportsUserEmail)
