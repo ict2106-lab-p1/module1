@@ -1,16 +1,13 @@
-using System.Net;
 
+using LivingLab.Core.Entities.Identity;
 using LivingLab.Infrastructure;
 using LivingLab.Infrastructure.Configuration;
+using LivingLab.Infrastructure.Data;
 using LivingLab.Web;
 using LivingLab.Web.Configuration;
-using LivingLab.Web.Controllers;
 
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http.Features;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.EntityFrameworkCore;
-using LivingLab.Infrastructure.Data;
+
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -25,7 +22,25 @@ builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 builder.Services.AddControllersWithViews().AddNewtonsoftJson(options =>
         options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
-builder.Services.AddRazorPages();
+builder.Services.AddRazorPages().AddRazorPagesOptions(ops =>
+{
+    ops.Conventions.AuthorizeAreaFolder("Home", "/", "RequireAdmins");
+    ops.Conventions.AuthorizeFolder("/", "RequireAdmins");
+    ops.Conventions.AllowAnonymousToAreaPage("Login", "/");
+});
+builder.Services.AddAuthorization(ops =>
+{
+    ops.AddPolicy("RequireAdmins", policy => policy.RequireRole("Admins"));
+});
+builder.Services.AddScoped<XCookieAuthEvents>();
+
+// optional: customize cookie expiration time
+builder.Services.ConfigureApplicationCookie(ops =>
+{
+    ops.EventsType = typeof(XCookieAuthEvents);
+    ops.ExpireTimeSpan = TimeSpan.FromMinutes(30);
+    ops.SlidingExpiration = true;
+});
 builder.Services.AddDistributedMemoryCache();
 builder.Services.AddSession(options =>
 {
@@ -36,13 +51,6 @@ builder.Services.AddSession(options =>
 builder.Services.AddHttpContextAccessor();
 builder.Services.AddControllersWithViews();
 
-//ADD AUTHORIZATION POLICY START
-builder.Services.AddAuthorization(options =>
-{
-    options.AddPolicy("LoggedIn", policy =>
-        policy.Requirements.Add(new AuthorizeLoggedInController()));
-});
-builder.Services.AddSingleton<IAuthorizationHandler, LoggedIn>();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -53,43 +61,16 @@ if (app.Environment.IsDevelopment())
 }
 else
 {
-    app.UseExceptionHandler("/Error");
-    app.UseHsts();
+    app.UseExceptionHandler("/Home/Error");
 }
-//SET REDIRECTION BASED ON AUTHORIZATION POLICY START
-app.Use(async (ctx, next) =>
-{
-    var ep = ctx.Features.Get<IEndpointFeature>()?.Endpoint;
-    var authAttr = ep?.Metadata?.GetMetadata<AuthorizeAttribute>();
-    if (authAttr != null && authAttr.Policy == "LoggedIn")
-    {
-        var authService = ctx.RequestServices.GetRequiredService<IAuthorizationService>();
-        var result = await authService.AuthorizeAsync(ctx.User, ctx.GetRouteData(), authAttr.Policy);
-        if (!result.Succeeded)
-        {
-            var path = "/Login/Login.cshtml";
-            ctx.Response.Redirect(path);
-            return;
-        }
-    }
-    await next();
-});
+// SET TO LOGIN iF WRONG URL
+app.UseStatusCodePages();
+// app.UseStatusCodePagesWithRedirects("/login");
+
 //SET REDIRECTION BASED ON AUTHORIZATION POLICY END
-app.UseHttpsRedirection();
 app.UseStaticFiles();
-app.UseSession();
+app.UseCookiePolicy();
 app.UseRouting();
-
-app.UseStatusCodePages(async context => {
-    var request = context.HttpContext.Request;
-    var response = context.HttpContext.Response;
-
-    if (response.StatusCode == (int)HttpStatusCode.Unauthorized)
-
-    {
-        response.Redirect("/Login/Login");
-    }
-});
 
 app.UseAuthentication();
 app.UseAuthorization();

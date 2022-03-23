@@ -38,4 +38,12 @@
     <_ContentIncludedByDefault Remove="Views\ManualLogExample\Index.cshtml" />
   </ItemGroup>
 
+  <ItemGroup>
+    <AdditionalFiles Include="Views\Account\SMSAuth.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Areas\Identity\Pages\Account" />
+  </ItemGroup>
+
 </Project>

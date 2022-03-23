@@ -22,12 +22,13 @@ public class AccountRepository : Repository<ApplicationUser>, IAccountRepository
         return await _context.Set<ApplicationUser>().ToListAsync();
     }
 
-    //TODO: Implement a status model return Object, status
+    /*Get the account by ID*/
     public async Task<ApplicationUser?> GetAccountById(string id)
     {
         return await _context.Set<ApplicationUser>().FindAsync(id);
     }
 
+    /*Add the account into DB*/
     public async Task<ApplicationUser?> AddAccount(ApplicationUser user)
     {
         await _context.AddAsync(user);

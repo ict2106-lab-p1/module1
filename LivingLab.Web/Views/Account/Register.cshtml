@@ -20,28 +20,36 @@
             </div>
             <div class="form-floating">
                 <label asp-for="FirstName"></label>
-                <input asp-for="FirstName" class="form-control" autocomplete="firstname" aria-required="true"/>
+                <input asp-for="FirstName" class="form-control" autocomplete="given-name" aria-required="true"/>
                 <span asp-validation-for="FirstName" class="text-danger"></span>
             </div>
             <div class="form-floating">
                 <label asp-for="LastName"></label>
-                <input asp-for="LastName" class="form-control" autocomplete="lastname" aria-required="true"/>
+                <input asp-for="LastName" class="form-control" autocomplete="family-name" aria-required="true"/>
                 <span asp-validation-for="LastName" class="text-danger"></span>
             </div>
             <div class="form-floating">
                 <label asp-for="PhoneNumber"></label>
-                <input asp-for="PhoneNumber" class="form-control" autocomplete="phone" aria-required="true"/>
+                <input asp-for="PhoneNumber" class="form-control" autocomplete="tel" aria-required="true"/>
                 <span asp-validation-for="PhoneNumber" class="text-danger"></span>
             </div>
+
+            <label asp-for="Role"></label>
             <div class="form-floating">
-                @* <label asp-for="Faculty"></label>
-                <input asp-for="Faculty" class="form-control" autocomplete="faculty" aria-required="true"/>
-                                <span asp-validation-for="Faculty" class="text-danger"></span> *@
-                <select name="faculty" asp-for="Faculty"> 
-                     <option value="SE">SE</option> 
-                    <option value="ICT">ICT</option> 
-                     <option value="MDME">MDME</option>
-                     <option value="CSC">CSC</option> 
+                <select name="role" asp-for="Role">
+                    <option value="User">User</option>
+                    <option value="Labtech">Labtech</option>
+                    <option value="Admin">Admin</option>
+                </select>
+            </div>
+            
+            <label asp-for="Faculty"></label>
+            <div class="form-floating">
+                <select name="faculty" asp-for="Faculty">
+                    <option value="SE">SE</option>
+                    <option value="ICT">ICT</option>
+                    <option value="MDME">MDME</option>
+                    <option value="CSC">CSC</option>
                 </select>
             </div>
             <div class="form-floating mt-4 mb-4">
