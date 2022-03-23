@@ -31,6 +31,13 @@ public class AccountRepository : Repository<ApplicationUser>, IAccountRepository
     {
         ApplicationUser user = (await _context.Users.SingleOrDefaultAsync(d => d.Id == id))!;
         return user;
+        // return await _context.Set<ApplicationUser>().ToListAsync();
+    }
+
+    //TODO: Implement a status model return Object, status
+    public async Task<ApplicationUser?> GetAccountById(string id)
+    {
+        return await _context.Set<ApplicationUser>().FindAsync(id);
     }
     
     public async Task<ApplicationUser> EditUserDetail(ApplicationUser editUser)
@@ -41,6 +48,8 @@ public class AccountRepository : Repository<ApplicationUser>, IAccountRepository
         currentUser.LabAccesses  = editUser.LabAccesses;
         await _context.SaveChangesAsync();       
         return editUser;
+        // await _context.AddAsync(user);
+        // return user;
     }
     public async Task<ApplicationUser> DeleteAccount(ApplicationUser deleteUser)
     {

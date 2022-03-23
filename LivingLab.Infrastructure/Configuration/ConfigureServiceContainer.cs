@@ -1,9 +1,10 @@
 using LivingLab.Core.DomainServices;
+using LivingLab.Core.DomainServices.EnergyUsageServices;
 using LivingLab.Core.Entities.Identity;
 using LivingLab.Core.Interfaces.Repositories;
 using LivingLab.Core.Interfaces.Services;
+using LivingLab.Core.Interfaces.Services.EnergyUsageInterfaces;
 using LivingLab.Infrastructure.Data;
-using LivingLab.Infrastructure.InfraServices;
 using LivingLab.Infrastructure.InfraServices.CsvParser;
 using LivingLab.Infrastructure.Repositories;
 
@@ -12,6 +13,13 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace LivingLab.Infrastructure.Configuration;
 
+/// <summary>
+/// This is the BASE configuration class for dependency injection and any additional services in the CORE PROJECT.
+/// You should not need to touch this file.
+///
+/// Team P1-1 & P1-2: Inject into ConfigureEnergyMonitoringServices.cs
+/// Team P1-3 & P1-5: Inject into ConfigureManagementServices.cs
+/// </summary>
 public static class ConfigureServiceContainer
 {
     public static void ConfigurePasswordPolicy(this IServiceCollection services) =>
@@ -32,15 +40,9 @@ public static class ConfigureServiceContainer
 
     public static IServiceCollection AddCoreServices(this IServiceCollection services)
     {
-        AddTransientServices(services);
-        AddScopedServices(services);
-        AddSingletonServices(services);
-        return services;
-    }
+        services.AddEnergyMonitoringServices();
+        services.AddManagementServices();
 
-    private static IServiceCollection AddTransientServices(this IServiceCollection services)
-    {
-        // Repositories
         services.AddTransient<ITodoRepository, TodoRepository>();
         services.AddTransient<IEnergyUsageRepository, EnergyUsageRepository>();
         services.AddTransient<ISmsRepository, SmsRepository>();
@@ -59,7 +61,7 @@ public static class ConfigureServiceContainer
         services.AddTransient<ITodoDomainService, TodoDomainService>();
         services.AddTransient<IEnergyUsageLogCsvParser, EnergyUsageLogCsvParser>();
         // services.AddTransient<IExportData, ExportData>();
-        services.AddTransient<IEnergyUsageService, EnergyUsageService>();
+        // services.AddTransient<IEnergyUsageService, EnergyUsageService>();
         services.AddTransient<IManualLogDomainService, ManualLogDomainService>();
         services.AddTransient<INotificationDomainService, NotificationDomainService>();
         services.AddTransient<IDeviceDomainService, DeviceDomainService>();
@@ -83,6 +85,7 @@ public static class ConfigureServiceContainer
     private static IServiceCollection AddSingletonServices(this IServiceCollection services)
     {
         // services.AddSingleton<ITodoRepository, TodoRepository>();
+        services.AddTransient<ITodoDomainService, TodoDomainService>();
 
         return services;
     }

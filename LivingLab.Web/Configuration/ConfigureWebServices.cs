@@ -1,29 +1,33 @@
-using LivingLab.Web.UIServices.EnergyUsageAnalysisServices;
+using LivingLab.Web.UIServices.EnergyUsage;
 using LivingLab.Web.UIServices.ManualLogs;
 using LivingLab.Web.UIServices.Accessory;
+using LivingLab.Web.UIServices.Account;
 using LivingLab.Web.UIServices.Device;
 using LivingLab.Web.UIServices.LabProfile;
+using LivingLab.Web.UIServices.SessionStats;
+using LivingLab.Web.UIServices.Identity;
+using LivingLab.Web.UIServices.LabAccess;
+using LivingLab.Web.UIServices.LabBooking;
+using LivingLab.Web.UIServices.LabProfile;
+using LivingLab.Web.UIServices.NotificationManagement;
 using LivingLab.Web.UIServices.Todo;
 using LivingLab.Web.UIServices.UserManagement;
 
 namespace LivingLab.Web.Configuration;
 
 /// <summary>
-/// This is the configuration class for dependency injection in the WEB PROJECT.
-/// Add any new classes that need to be injected here.
+/// This is the BASE configuration class for dependency injection in the WEB PROJECT.
+/// You should not need to touch this file.
+///
+/// Team P1-1 & P1-2: Inject into ConfigureEnergyMonitoringServices.cs
+/// Team P1-3 & P1-5: Inject into ConfigureManagementServices.cs
 /// </summary>
 public static class ConfigureWebServices
 {
     public static IServiceCollection AddWebServices(this IServiceCollection services)
     {
-        AddWebTransientServices(services);
-        AddWebScopedServices(services);
-        AddWebSingletonServices(services);
-        return services;
-    }
-
-    private static IServiceCollection AddWebTransientServices(this IServiceCollection services)
-    {
+        services.AddEnergyMonitoringServices();
+        services.AddManagementServices();
         services.AddTransient<ITodoService, TodoService>();
         services.AddTransient<IManualLogService, ManualLogService>();
         // services.AddTransient<IExportToCSVService, ExportToCSVService>();

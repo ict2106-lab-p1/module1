@@ -1,4 +1,5 @@
 using LivingLab.Core.Entities;
+using LivingLab.Core.Entities.Identity;
 
 namespace LivingLab.Core.Interfaces.Services;
 /// <summary>
@@ -12,6 +13,5 @@ public interface ILabProfileDomainService
 {
     Task<List<Lab>> ViewLabs();
     Task<Lab> ViewLabDetails(int id);
-
-
+    Task<Lab?> NewLab(Lab labinput);
 }

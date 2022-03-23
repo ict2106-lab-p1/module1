@@ -2,6 +2,7 @@ using LivingLab.Core.Entities;
 using LivingLab.Core.Entities.DTO;
 using LivingLab.Core.Entities.Identity;
 using LivingLab.Core.Interfaces.Repositories;
+using LivingLab.Core.Entities.Identity;
 
 namespace LivingLab.Core.Interfaces.Services;
 /// <summary>
@@ -12,7 +13,6 @@ namespace LivingLab.Core.Interfaces.Services;
 /// Author: Team P1-5
 /// </remarks>
 public interface IAccountDomainService
-
 {
     Task<List<ApplicationUser>> ViewAccounts();
     Task<ApplicationUser> ViewAccountDetails(string id);
@@ -20,6 +20,13 @@ public interface IAccountDomainService
     Task<ApplicationUser> EditAccount(ApplicationUser editAccount);
 
     Task<ApplicationUser> DeleteAccount(ApplicationUser deletedUser);
+    
+    Task<ApplicationUser?> GetUser(string id);
+    
+    Task <ApplicationUser?> UpdateUser(ApplicationUser user);
 
+    Task<Boolean> GenerateCode(ApplicationUser user);
+
+    Task<Boolean> VerifyCode(string userid, int OTP);
 
 }

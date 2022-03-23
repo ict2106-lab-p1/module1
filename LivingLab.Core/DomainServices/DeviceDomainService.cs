@@ -1,5 +1,6 @@
 using LivingLab.Core.Entities;
 using LivingLab.Core.Entities.DTO;
+using LivingLab.Core.Entities.DTO.Device;
 using LivingLab.Core.Interfaces.Repositories;
 using LivingLab.Core.Interfaces.Services;
 
@@ -15,13 +16,40 @@ public class DeviceDomainService : IDeviceDomainService
     {
         _deviceRepository = deviceRepository;
     }
-    public Task<List<Device>> ViewDevice(string deviceType)
+
+    public Task<List<Device>> GetDevicesForLabProfile(string labLocation)
     {
-        return _deviceRepository.GetAllDevicesByType(deviceType);
+        return _deviceRepository.GetDevicesForLabProfile(labLocation);
+    }
+    
+    public Task<List<Device>> ViewDevice(string deviceType, string labLocation)
+    {
+        return _deviceRepository.GetAllDevicesByType(deviceType, labLocation);
     }
 
-    public Task<List<ViewDeviceTypeDTO>> ViewDeviceType()
+    public Task<List<ViewDeviceTypeDTO>> ViewDeviceType(string labLocation)
     {
-        return _deviceRepository.GetViewDeviceType();
+        return _deviceRepository.GetViewDeviceType(labLocation);
+    }
+    
+    public Task<Device> ViewDeviceDetails(int id)
+    {
+        return _deviceRepository.GetDeviceDetails(id);
+    }
+    public Task<Device> GetDeviceLastRow()
+    {
+        return _deviceRepository.GetLastRow();
+    }
+    public Task<Device> AddDevice(Device addedDevice)
+    {
+        return _deviceRepository.AddDevice(addedDevice);
+    }
+    public Task<Device> EditDeviceDetails(Device editedDevice)
+    {
+        return _deviceRepository.EditDeviceDetails(editedDevice);
+    }
+    public Task<Device> DeleteDevice(Device deletedDevice)
+    {
+        return _deviceRepository.DeleteDevice(deletedDevice);
     }
 }

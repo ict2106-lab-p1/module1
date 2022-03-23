@@ -101,4 +101,26 @@ public class P1_5Controller : Controller
     // {
     //     return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
     // }
+     
+    
+    [Route("VerifyCode")]
+    public IActionResult VerifyCode()
+    {
+        return View("VerifyCode");
+    }
+    
+    [Route("/ResetCode")]
+    public IActionResult ResetCode()
+    {
+        // TODO: Call the reset code here
+        
+        return View("VerifyCode");
+    }
+    
+    [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
+    public IActionResult Error()
+    {
+        return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+    }
 }
+

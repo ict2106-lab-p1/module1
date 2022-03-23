@@ -3,6 +3,8 @@ using LivingLab.Core.Entities.Identity;
 using LivingLab.Core.Interfaces.Repositories;
 using LivingLab.Core.Interfaces.Services;
 
+using Microsoft.Extensions.Logging;
+
 namespace LivingLab.Core.DomainServices;
 /// <summary>
 /// Domain service implementations belongs here.
@@ -13,13 +15,13 @@ namespace LivingLab.Core.DomainServices;
 /// </remarks>
 public class LabProfileDomainService: ILabProfileDomainService
 {
-    public readonly ILabProfileRepository _labRepository;
-    
-    //initialise repository 
-    public LabProfileDomainService(ILabProfileRepository labRepository)
+    private readonly ILabProfileRepository _labRepository;
+    private readonly ILogger _logger;
+    public LabProfileDomainService(ILabProfileRepository labRepository, ILogger<ILabProfileRepository> logger)
     {
         _labRepository = labRepository;
-    }
+        _logger = logger;
+    }    
     
     public Task<List<Lab>> ViewLabs()
     {
@@ -31,5 +33,10 @@ public class LabProfileDomainService: ILabProfileDomainService
     {
         return _labRepository.GetLabDetails(id);
     }
-    
+  
+    public async Task<Lab?> NewLab(Lab labinput)
+    {
+        _logger.LogInformation("Henry add lab");
+        return await _labRepository.AddAsync(labinput);
+    }
 }

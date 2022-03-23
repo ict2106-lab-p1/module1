@@ -10,11 +10,11 @@ public interface IAccountRepository : IRepository<ApplicationUser>
 
    
 {
-    Task<List<ApplicationUser>> GetAllAccount();
     Task<ApplicationUser> GetAccountDetails(string id);
-    
-    Task<ApplicationUser> DeleteAccount(ApplicationUser deleteAccount);
     Task<ApplicationUser> EditUserDetail(ApplicationUser editUser);
-
+    Task<List<ApplicationUser>?> GetAllAccount();
+    Task<ApplicationUser?> GetAccountById(string id);
+    // Task<ApplicationUser?> AddAccount(ApplicationUser user);
+    Task<ApplicationUser> DeleteAccount(ApplicationUser deleteUser);
 
 }

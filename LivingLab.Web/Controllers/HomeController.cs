@@ -1,30 +1,39 @@
 using System.Diagnostics;
 
+using LivingLab.Core.Entities.Identity;
 using LivingLab.Web.Models.ViewModels;
 using LivingLab.Web.Models.ViewModels.LabProfile;
 using LivingLab.Web.Models.ViewModels.UserManagement;
 using LivingLab.Web.UIServices.LabProfile;
 using LivingLab.Web.UIServices.UserManagement;
+using LivingLab.Web.Models.ViewModels.Login;
+using LivingLab.Web.UIServices.Account;
 
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace LivingLab.Web.Controllers;
 /// <remarks>
 /// Author: Team P1-3
 /// </remarks>
-[Route("home")]
 public class HomeController : Controller
 {
     private readonly ILogger<HomeController> _logger;
     private readonly ILabProfileService _labProfileService;
+    private readonly SignInManager<ApplicationUser> _signInManager;
+
     
-    public HomeController(ILogger<HomeController> logger, ILabProfileService labProfileService)
+
+    public HomeController(ILogger<HomeController> logger, SignInManager<ApplicationUser> signInManager,  ILabProfileService labProfileService)
     {
         _logger = logger;
+        _signInManager = signInManager;
         _labProfileService = labProfileService;
     }
-    
 
     [Route("/")]
     public async Task<IActionResult> Index()
@@ -34,37 +43,26 @@ public class HomeController : Controller
         ViewLabProfileViewModel viewLabProfileViewModel = await _labProfileService.GetAllLabAccounts();
         Console.WriteLine("test");
         return View("Index", viewLabProfileViewModel); 
+        
     }
+    // public IActionResult Index()
+    // {
+    //     return View("Index");
+    // }
 
     [Route("privacy")]
     public IActionResult Privacy()
     {
         return View("Privacy");
     }
-    
-    // [HttpPost]
-    // public IActionResult SetSession()
-    // {
-    //     //Set value in Session object.
-    //     HttpContext.Session.SetString("Name", "Mudassar Khan");
-    //
-    //     return RedirectToAction("Index");
-    // }
-    // [HttpPost]
-    // public IActionResult DeleteSession()
-    // {
-    //     //Delete the Session object.
-    //     HttpContext.Session.Remove("UserID");
-    //     
-    //     return RedirectToAction("Index");
-    //     
-    // }
     [Route("Logout")]
     public IActionResult Logout()
     {
         //Delete the Session object.
-        HttpContext.Session.Clear();
-        return View("Index");
+        HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
+        _signInManager.SignOutAsync();
+        HttpContext.Response.Cookies.Delete(".AspNetCore.Cookies");
+        return RedirectToAction("Index");
     }
 
 
@@ -81,6 +79,14 @@ public class HomeController : Controller
     //     return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
     // }
     
+    [Route("/example")]
+    public IActionResult ExamplePage()
+    {
+        return View("ExamplePage");
+    }
+    
+ 
+
 
 
     // [Route("/Index")]

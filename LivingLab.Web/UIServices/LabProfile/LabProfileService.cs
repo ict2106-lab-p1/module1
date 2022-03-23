@@ -33,12 +33,28 @@ public class LabProfileService : ILabProfileService
         labViewModel.labList = allLabList;
         return labViewModel;
     }
-    
+
     public async Task<LabProfileViewModel> ViewLabDetails(int id)
     {
         Lab lab = await _labProfileDomainService.ViewLabDetails(id);
-        LabProfileViewModel labVM = _mapper.Map< Lab, LabProfileViewModel>(lab);
+        LabProfileViewModel labVM = _mapper.Map<Lab, LabProfileViewModel>(lab);
         return labVM;
+    }
+
+
+
+    public async Task<Lab?> NewLab(LabProfileViewModel labinput)
+    {
+        var labWrapper = new Lab
+        {
+            LabLocation = labinput.LabLocation,
+            LabStatus = labinput.LabStatus,
+            LabInCharge = labinput.LabInCharge,
+            // Area = labinput.Area,
+            // Capacity = labinput.Capacity,
+            // EnergyUsageBenchmark = labinput.EnergyUsageBenchmark
+        };
+        return await _labProfileDomainService.NewLab(labWrapper);
     }
     
 }
