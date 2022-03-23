@@ -34,20 +34,21 @@ public class AccountRepository : Repository<ApplicationUser>, IAccountRepository
         // return await _context.Set<ApplicationUser>().ToListAsync();
     }
 
-    //TODO: Implement a status model return Object, status
+    /*Get the account by ID*/
     public async Task<ApplicationUser?> GetAccountById(string id)
     {
         return await _context.Set<ApplicationUser>().FindAsync(id);
     }
-    
-    public async Task<ApplicationUser> EditUserDetail(ApplicationUser editUser)
+
+    /*Add the account into DB*/
+    public async Task<ApplicationUser?> AddAccount(ApplicationUser user)
     {
-        ApplicationUser currentUser = (await _context.Users.SingleOrDefaultAsync(d => d.Id == editUser.Id))!;
-        currentUser.Email = editUser.Email;
-        currentUser.UserFaculty  = editUser.UserFaculty;
-        currentUser.LabAccesses  = editUser.LabAccesses;
+        ApplicationUser currentUser = (await _context.Users.SingleOrDefaultAsync(d => d.Id == user.Id))!;
+        currentUser.Email = user.Email;
+        currentUser.UserFaculty  = user.UserFaculty;
+        currentUser.LabAccesses  = user.LabAccesses;
         await _context.SaveChangesAsync();       
-        return editUser;
+        return user;
         // await _context.AddAsync(user);
         // return user;
     }

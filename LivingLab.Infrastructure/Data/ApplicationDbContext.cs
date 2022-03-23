@@ -15,6 +15,7 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     public DbSet<Todo> Todos { get; set; }
     public DbSet<Lab> Labs { get; set; }
     public DbSet<Device> Devices { get; set; }
+    
     public DbSet<EnergyUsageLog> EnergyUsageLogs { get; set; }
     public DbSet<EnergyUsagePredictionLog> EnergyUsagePredictions { get; set; }
     public DbSet<PowerGenerationMix> PowerGenerationMix { get; set; }

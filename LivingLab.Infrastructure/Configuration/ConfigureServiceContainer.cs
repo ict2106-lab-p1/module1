@@ -1,11 +1,9 @@
 using LivingLab.Core.DomainServices;
-using LivingLab.Core.DomainServices.EnergyUsageServices;
 using LivingLab.Core.Entities.Identity;
 using LivingLab.Core.Interfaces.Repositories;
 using LivingLab.Core.Interfaces.Services;
-using LivingLab.Core.Interfaces.Services.EnergyUsageInterfaces;
 using LivingLab.Infrastructure.Data;
-using LivingLab.Infrastructure.InfraServices.CsvParser;
+using LivingLab.Infrastructure.InfraServices;
 using LivingLab.Infrastructure.Repositories;
 
 using Microsoft.AspNetCore.Identity;
@@ -34,7 +32,8 @@ public static class ConfigureServiceContainer
         });
 
     public static void AddIdentities(this IServiceCollection services) =>
-        services.AddDefaultIdentity<ApplicationUser>()
+        services.AddDefaultIdentity<ApplicationUser>(options => options.SignIn.RequireConfirmedAccount = true)
+            .AddRoles<IdentityRole>()
             .AddEntityFrameworkStores<ApplicationDbContext>()
             .AddDefaultTokenProviders();
 
@@ -44,48 +43,9 @@ public static class ConfigureServiceContainer
         services.AddManagementServices();
 
         services.AddTransient<ITodoRepository, TodoRepository>();
-        services.AddTransient<IEnergyUsageRepository, EnergyUsageRepository>();
-        services.AddTransient<ISmsRepository, SmsRepository>();
-        services.AddTransient<IEmailRepository, EmailRepository>();
-        services.AddTransient<IPowerGenerationMixRepository, PowerGenerationMixRepository>();
-        services.AddTransient<IAccessoryRepository, AccessoryRepository>();
-        services.AddTransient<IAccessoryTypeRepository, AccessoryTypeRepository>();
-        services.AddTransient<IDeviceRepository, DeviceRepository>();
-        services.AddTransient<ISessionStatsRepository, SessionStatsRepository>();
-        services.AddTransient<IAccountRepository, AccountRepository>();
-        services.AddTransient<ILabProfileRepository, LabProfileRepository>();
-
-
-
-        // Services
         services.AddTransient<ITodoDomainService, TodoDomainService>();
-        services.AddTransient<IEnergyUsageLogCsvParser, EnergyUsageLogCsvParser>();
-        // services.AddTransient<IExportData, ExportData>();
-        // services.AddTransient<IEnergyUsageService, EnergyUsageService>();
-        services.AddTransient<IManualLogDomainService, ManualLogDomainService>();
-        services.AddTransient<INotificationDomainService, NotificationDomainService>();
-        services.AddTransient<IDeviceDomainService, DeviceDomainService>();
-        services.AddTransient<IAccessoryDomainService, AccessoryDomainService>();
-        services.AddTransient<IEnergyLogDomainService, EnergyLogDomainService>();
-        services.AddTransient<IAccountDomainService, AccountDomainService>();
-        services.AddTransient<ILabProfileDomainService, LabProfileDomainService>();
-
-
-
-
-        return services;
-    }
-
-    private static IServiceCollection AddScopedServices(this IServiceCollection services)
-    {
-        // services.AddScoped<ITodoRepository, TodoRepository>();
-
-        return services;
-    }
-    private static IServiceCollection AddSingletonServices(this IServiceCollection services)
-    {
-        // services.AddSingleton<ITodoRepository, TodoRepository>();
-        services.AddTransient<ITodoDomainService, TodoDomainService>();
+        // Shared Email Service Provider
+        services.AddTransient<IEmailSender, EmailSender>();
 
         return services;
     }

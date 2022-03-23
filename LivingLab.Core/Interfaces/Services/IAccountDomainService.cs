@@ -20,13 +20,12 @@ public interface IAccountDomainService
     Task<ApplicationUser> EditAccount(ApplicationUser editAccount);
 
     Task<ApplicationUser> DeleteAccount(ApplicationUser deletedUser);
+
+    Task<ApplicationUser?> Save(ApplicationUser user);
     
     Task<ApplicationUser?> GetUser(string id);
     
     Task <ApplicationUser?> UpdateUser(ApplicationUser user);
-
     Task<Boolean> GenerateCode(ApplicationUser user);
-
     Task<Boolean> VerifyCode(string userid, int OTP);
-
 }

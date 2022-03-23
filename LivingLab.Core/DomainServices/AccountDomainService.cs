@@ -44,7 +44,7 @@ public class AccountDomainService: IAccountDomainService
 
     public Task<ApplicationUser> EditAccount(ApplicationUser editAccount)
     {
-        return _accountRepository.EditUserDetail(editAccount);
+        return _accountRepository.AddAccount(editAccount);
     } 
     public Task<ApplicationUser> DeleteAccount(ApplicationUser deletedUser)
     {
@@ -57,52 +57,55 @@ public class AccountDomainService: IAccountDomainService
         return await _accountRepository.GetAccountById(id);
     }
 
+    /*Function to update user information one by one*/
     public async Task<ApplicationUser?> UpdateUser(ApplicationUser user)
     {
         return await _accountRepository.UpdateAsync(user);
     }
 
+    /*Generate random OTP for user*/
     public async Task<bool> GenerateCode(ApplicationUser user)
     {
-        // var oldValue = user.OTP;
+        var oldValue = user.OTP;
         Random random = new Random();
         int newCode = random.Next(100000, 999999);
 
         DateTime newTime = DateTime.Now;
         newTime = newTime.AddMinutes(5);
         user.SMSExpiry = newTime;
-        // user.OTP = newCode;
+        user.OTP = newCode;
 
         await _accountRepository.UpdateAsync(user);
 
-        // if (user.OTP != oldValue)
-        // {
-        //     return true;
-        // }
-        // else
-        // {
-        //     return false;
-        // }
+        if (user.OTP != oldValue)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
         return false;
     }
 
+    /*Verify the OTP with checking of expiry*/
     public async Task<bool> VerifyCode(string userid, int otpCode)
     {
         var result = await _accountRepository.GetAccountById(userid);
         if (result != null && result.SMSExpiry > DateTime.Now)
         {
-            // if (result.OTP == otpCode)
-            // {
-            //     _logger.LogInformation("HENRY Same OTP");
-            //     return true;
-            // }
+            if (result.OTP == otpCode)
+            {
+                //If match returns true
+                return true;
+            }
         }
 
         return false;
     }
-    //
-    // public async Task<ApplicationUser?> Save(ApplicationUser user)
-    // {
-    //     return await _accountRepository.AddAccount(user);
-    // }
+    
+    public async Task<ApplicationUser?> Save(ApplicationUser user)
+    {
+        return await _accountRepository.AddAccount(user);
+    }
 }

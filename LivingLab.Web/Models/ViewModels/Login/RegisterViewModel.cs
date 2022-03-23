@@ -40,6 +40,9 @@ public class RegisterViewModel
     public string ConfirmPassword { get; set; }
 
     [Required]
-    [Display(Name = "Faculty")]
+    [Display(Name = "Select Faculty")]
     public string Faculty { get; set; }
+    
+    [Display(Name = "Select Role Of User")]
+    public string Role { get; set; }
 }
