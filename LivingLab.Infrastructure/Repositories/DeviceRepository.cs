@@ -62,7 +62,7 @@ public class DeviceRepository : Repository<Device>, IDeviceRepository
         }
         return deviceTypeDtos;
     }
-
+    
     public async Task<List<Device>> GetAllDevicesByType(string deviceType, string labLocation)
     { 
         List<Device> deviceList = await _context.Devices

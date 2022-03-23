@@ -5,6 +5,7 @@ using LivingLab.Web.UIServices.ManualLogs;
 using LivingLab.Web.UIServices.Accessory;
 using LivingLab.Web.UIServices.Account;
 using LivingLab.Web.UIServices.Device;
+using LivingLab.Web.UIServices.LabProfile;
 using LivingLab.Web.UIServices.SessionStats;
 using LivingLab.Web.UIServices.Identity;
 using LivingLab.Web.UIServices.LabAccess;
@@ -12,6 +13,7 @@ using LivingLab.Web.UIServices.LabBooking;
 using LivingLab.Web.UIServices.LabProfile;
 using LivingLab.Web.UIServices.NotificationManagement;
 using LivingLab.Web.UIServices.Todo;
+using LivingLab.Web.UIServices.UserManagement;
 
 using Microsoft.AspNetCore.Identity;
 
@@ -32,6 +34,22 @@ public static class ConfigureWebServices
         services.AddEnergyMonitoringServices();
         services.AddManagementServices();
         services.AddTransient<ITodoService, TodoService>();
+        services.AddTransient<IManualLogService, ManualLogService>();
+        // services.AddTransient<IExportToCSVService, ExportToCSVService>();
+        services.AddTransient<IDeviceService, DeviceService>();
+        services.AddTransient<IAccessoryService, AccessoryServices>();
+        services.AddTransient<IUserManagementService, UserManagementService>();
+        services.AddTransient<ILabProfileService, LabProfileService>();
+        
+        return services;
+    }
+
+    private static IServiceCollection AddWebScopedServices(this IServiceCollection services)
+    {
+        return services;
+    }
+    private static IServiceCollection AddWebSingletonServices(this IServiceCollection services)
+    {
         return services;
     }
 }

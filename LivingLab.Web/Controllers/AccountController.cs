@@ -62,7 +62,7 @@ public class AccountController: Controller
                         new { userId = model.Id, token = token }, 
                         protocol: Request.Scheme);
 
-                    await _userManager.AddToRoleAsync(model, "user");
+                    await _userManager.AddToRoleAsync(model, registration.Role);
 
                     await _emailSender.SendEmailAsync(model.Email, 
                         "Confirm your account", 
@@ -80,6 +80,7 @@ public class AccountController: Controller
         }
         else
         {
+            _logger.LogInformation("test");
             return View(nameof(Register),registration);
         }
     }

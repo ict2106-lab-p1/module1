@@ -122,7 +122,6 @@ public class AccountService : IAccountService
         {
             try
             {
-                _logger.LogInformation("TwoTime HENRY");
                 ApplicationUser userDetails = await _userManager.FindByIdAsync(user.Id);
                 string emailHeader = "OTP for Living Lab";
                 string msgBody = "Your 6 digit OTP for Living Lab is " + userDetails.OTP;

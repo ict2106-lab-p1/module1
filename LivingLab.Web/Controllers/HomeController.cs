@@ -2,6 +2,12 @@ using System.Diagnostics;
 
 using LivingLab.Core.Entities.Identity;
 using LivingLab.Web.Models.ViewModels;
+using LivingLab.Web.Models.ViewModels.LabProfile;
+using LivingLab.Web.Models.ViewModels.UserManagement;
+using LivingLab.Web.UIServices.LabProfile;
+using LivingLab.Web.UIServices.UserManagement;
+using LivingLab.Web.Models.ViewModels.Login;
+using LivingLab.Web.UIServices.Account;
 using LivingLab.Web.UIServices.NotificationManagement;
 
 using Microsoft.AspNetCore.Authentication;
@@ -17,17 +23,20 @@ namespace LivingLab.Web.Controllers;
 public class HomeController : Controller
 {
     private readonly ILogger<HomeController> _logger;
+    private readonly ILabProfileService _labProfileService;
     private readonly SignInManager<ApplicationUser> _signInManager;
 
-    public HomeController(ILogger<HomeController> logger, 
-        SignInManager<ApplicationUser> signInManager)
+
+    public HomeController(ILogger<HomeController> logger, SignInManager<ApplicationUser> signInManager,  ILabProfileService labProfileService)
     {
         _logger = logger;
         _signInManager = signInManager;
+        _labProfileService = labProfileService;
     }
 
     /*Reroute the users to the login page*/
     [AllowAnonymous]
+    [Route("/")]
     public IActionResult Index()
     {
         return RedirectToAction("Index", "Login");
@@ -38,8 +47,8 @@ public class HomeController : Controller
     [Route ("dashboard")]
     public IActionResult Dashboard()
     {
-        //TODO: RedirectToLivingLab
-        return View("Index");
+        //TODO: RedirectToLivingLab, for now its directing to lab profile
+        return RedirectToAction("ViewLab", "LabProfile");
     }
 
     /*Privacy page which was built in*/
@@ -70,10 +79,20 @@ public class HomeController : Controller
         return View("ExamplePage");
     }
 
-
-    [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-    public IActionResult Error()
-    {
-        return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+    // [Route("/Index")]
+    // public async Task<IActionResult> Labs()
+    // {
+    //     ViewLabProfileViewModel viewLabProfileViewModel = await _labProfileService.GetAllLabAccounts();
+    //     Console.WriteLine("test");
+    //     return View("Index", viewLabProfileViewModel); 
+    // }
+    
+    [Route("View/{id}")]
+    public async Task<LabProfileViewModel> ViewLabDetails(int id)
+    { 
+        //retrieve data from db
+        LabProfileViewModel lab = await _labProfileService.ViewLabDetails(id);
+        return lab;
     }
+
 }

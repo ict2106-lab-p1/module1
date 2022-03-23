@@ -44,6 +44,7 @@ public static class ConfigureServiceContainer
 
         services.AddTransient<ITodoRepository, TodoRepository>();
         services.AddTransient<ITodoDomainService, TodoDomainService>();
+        // Shared Email Service Provider
         services.AddTransient<IEmailSender, EmailSender>();
 
         return services;

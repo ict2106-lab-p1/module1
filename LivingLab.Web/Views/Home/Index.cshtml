@@ -1,9 +1,19 @@
+﻿@using Microsoft.AspNetCore.Identity
+@using LivingLab.Core.Entities.Identity
+
+@using LivingLab.Web.Models.ViewModels.LabProfile
+@model LivingLab.Web.Models.ViewModels.LabProfile.ViewLabProfileViewModel
+
+
+@inject SignInManager<ApplicationUser> SignInManager
+@inject UserManager<ApplicationUser> UserManager
+
 
 @{
     ViewData["Title"] = "Home Page";
 }
 
-    <div class="m-0 overflow-hidden">
+<div class="m-0 overflow-hidden">
     <div class="header sticky ">
         <h1 class="text-4xl text-gray-600 font-semibold">Dashboard</h1>
     </div>

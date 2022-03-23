@@ -1,3 +1,5 @@
+using LivingLab.Core.Entities;
+using LivingLab.Core.Entities.DTO;
 using LivingLab.Core.Entities.Identity;
 using LivingLab.Core.Interfaces.Repositories;
 using LivingLab.Core.Interfaces.Services;
@@ -21,6 +23,38 @@ public class AccountDomainService: IAccountDomainService
     {
         _accountRepository = accountRepository;
         _logger = logger;
+    }    
+    //initialise repository 
+    public AccountDomainService(IAccountRepository accountRepository)
+    {
+        _accountRepository = accountRepository;
+    }
+
+    public Task<List<ApplicationUser>> ViewAccounts()
+    {
+        return _accountRepository.GetAllAccount();
+    } 
+ 
+    
+    public Task<ApplicationUser> ViewAccountDetails(string id)
+    {
+        return _accountRepository.GetAccountDetails(id);
+    }
+
+
+    public Task<ApplicationUser> EditAccount(ApplicationUser editAccount)
+    {
+        return _accountRepository.AddAccount(editAccount);
+    } 
+    public Task<ApplicationUser> DeleteAccount(ApplicationUser deletedUser)
+    {
+        return _accountRepository.DeleteAccount(deletedUser);
+    } 
+    
+
+    public async Task<ApplicationUser?> GetUser(string id)
+    {
+        return await _accountRepository.GetAccountById(id);
     }
 
     /*Function to update user information one by one*/
@@ -51,6 +85,7 @@ public class AccountDomainService: IAccountDomainService
         {
             return false;
         }
+        return false;
     }
 
     /*Verify the OTP with checking of expiry*/
@@ -61,7 +96,7 @@ public class AccountDomainService: IAccountDomainService
         {
             if (result.OTP == otpCode)
             {
-                _logger.LogInformation("HENRY Same OTP");
+                //If match returns true
                 return true;
             }
         }
@@ -69,7 +104,6 @@ public class AccountDomainService: IAccountDomainService
         return false;
     }
     
-
     public async Task<ApplicationUser?> Save(ApplicationUser user)
     {
         return await _accountRepository.AddAccount(user);

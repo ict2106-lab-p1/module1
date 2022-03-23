@@ -710,10 +710,11 @@ namespace LivingLab.Infrastructure.Migrations
                             AccessFailedCount = 0,
                             AuthenticationType = "None",
                             Email = "nghanyi1997@gmail.com",
-                            EmailConfirmed = false,
+                            EmailConfirmed = true,
                             FirstName = "Sexy",
                             LastName = "Sotong",
                             LockoutEnabled = true,
+                            NormalizedEmail = "nghanyi1997@gmail.com",
                             NormalizedUserName = "nghanyi1997@gmail.com",
                             PasswordHash = "testtesttest",
                             PhoneNumber = "To Be Changed",
@@ -733,6 +734,7 @@ namespace LivingLab.Infrastructure.Migrations
                             FirstName = "Ji Pyeong",
                             LastName = "Han",
                             LockoutEnabled = true,
+                            NormalizedEmail = "mailstohenry@gmail.com",
                             NormalizedUserName = "mailstohenry@gmail.com",
                             PasswordHash = "testtesttest",
                             PhoneNumber = "To Be Changed",
@@ -748,10 +750,11 @@ namespace LivingLab.Infrastructure.Migrations
                             AccessFailedCount = 0,
                             AuthenticationType = "None",
                             Email = "shengyu98@hotmail.com",
-                            EmailConfirmed = false,
+                            EmailConfirmed = true,
                             FirstName = "Do San",
                             LastName = "Nam",
                             LockoutEnabled = true,
+                            NormalizedEmail = "shengyu98@hotmail.com",
                             NormalizedUserName = "shengyu98@hotmail.com",
                             PasswordHash = "testtesttest",
                             PhoneNumber = "To Be Changed",
@@ -788,16 +791,6 @@ namespace LivingLab.Infrastructure.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
-                    b.Property<int?>("Area")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int?>("Capacity")
-                        .IsRequired()
-                        .HasColumnType("INTEGER");
-
-                    b.Property<double?>("EnergyUsageBenchmark")
-                        .HasColumnType("REAL");
-
                     b.Property<string>("LabInCharge")
                         .HasColumnType("TEXT");
 
@@ -819,7 +812,6 @@ namespace LivingLab.Infrastructure.Migrations
                         new
                         {
                             LabId = 1,
-                            Capacity = 20,
                             LabInCharge = "DefaultAdmin1",
                             LabLocation = "NYP-SR7C",
                             LabStatus = "Available"
