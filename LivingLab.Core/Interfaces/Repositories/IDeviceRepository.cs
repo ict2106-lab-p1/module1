@@ -10,6 +10,7 @@ public interface IDeviceRepository : IRepository<Device>
 {
     Task<List<ViewDeviceTypeDTO>> GetViewDeviceType(string labLocation);
     Task<List<Device>> GetAllDevicesByType(string deviceType, string labLocation);
+    void UpdateDeviceStatus(string deviceId, string deviceReviewStatus);
     Task<List<Device>> GetAllDevicesForReview(string labLocation);
     Task<Device> GetDeviceDetails(int id);
     Task<List<Device>> GetDevicesForLabProfile(string labLocation);

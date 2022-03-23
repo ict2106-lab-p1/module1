@@ -26,6 +26,19 @@ public class AccessoryRepository : Repository<Accessory>, IAccessoryRepository
         return accessories;
     }
     
+    public async void UpdateAccessoryStatus(string accessoryId, string accessoryReviewStatus)
+    {
+        Accessory accessory = 
+            (await _context.Accessories
+                .Where(a => a.Id == Convert.ToInt32(accessoryId))
+                .FirstOrDefaultAsync())!;
+        if (accessory.ReviewStatus != accessoryReviewStatus)
+        {
+            accessory.ReviewStatus = accessoryReviewStatus;
+        }
+        await _context.SaveChangesAsync();
+    }
+    
     // to display in reviewEquipment
     public async Task<List<Accessory>> GetAllAccessoriesForReview(string labLocation)
     {

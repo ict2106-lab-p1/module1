@@ -25,7 +25,17 @@ public class DeviceRepository : Repository<Device>, IDeviceRepository
             .ToListAsync();
         return device;
     }
-    
+
+    public async void UpdateDeviceStatus(string deviceId, string deviceReviewStatus)
+    {
+        Device device = (await _context.Devices.Where(d => d.Id == Convert.ToInt32(deviceId)).FirstOrDefaultAsync())!;
+        if (device.ReviewStatus != deviceReviewStatus)
+        {
+            device.ReviewStatus = deviceReviewStatus;
+        }
+        await _context.SaveChangesAsync();
+    }
+
     public async Task<List<Device>> GetAllDevicesForReview(string labLocation)
     {
         var device = await _context.Devices

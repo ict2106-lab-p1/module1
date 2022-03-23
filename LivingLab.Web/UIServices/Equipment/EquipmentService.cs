@@ -38,4 +38,14 @@ public class EquipmentService: IEquipmentService
         };
     }
 
+    public void UpdateDeviceStatus(string deviceId, string deviceReviewStatus)
+    {
+        _deviceDomainService.UpdateDeviceStatus(deviceId, deviceReviewStatus);
+    }
+
+    public void UpdateAccessoryStatus(string accessoryId, string accessoryReviewStatus)
+    {
+        _accessoryDomainService.UpdateAccessoryStatus(accessoryId, accessoryReviewStatus);
+    }
+
 }

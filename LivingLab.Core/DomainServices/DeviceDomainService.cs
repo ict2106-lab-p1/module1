@@ -22,6 +22,11 @@ public class DeviceDomainService : IDeviceDomainService
         return _deviceRepository.GetDevicesForLabProfile(labLocation);
     }
 
+    public void UpdateDeviceStatus(string deviceId, string deviceReviewStatus)
+    {
+        _deviceRepository.UpdateDeviceStatus(deviceId, deviceReviewStatus);
+    }
+
     public Task<List<Device>> GetAllDevicesForReview(string labLocation)
     {
         return _deviceRepository.GetAllDevicesForReview(labLocation);

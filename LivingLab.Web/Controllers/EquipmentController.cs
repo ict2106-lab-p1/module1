@@ -25,6 +25,20 @@ public class EquipmentController: Controller
         EquipmentViewModel equipmentViewModel = await _equipmentService.ViewEquipment(labLocation);
         return View("ReviewEquipment", equipmentViewModel);
     }
+
+    [HttpPost("UpdateDevice")]
+    public IActionResult UpdateDevice(string deviceId, string deviceReviewStatus, string labLocation)
+    {
+        _equipmentService.UpdateDeviceStatus(deviceId, deviceReviewStatus);
+        return Redirect($"ReviewEquipment/{labLocation}#device");
+    }
+    
+    [HttpPost("UpdateAccessory")]
+    public IActionResult UpdateAccessory(string accessoryId, string accessoryReviewStatus, string labLocation)
+    {
+        _equipmentService.UpdateAccessoryStatus(accessoryId, accessoryReviewStatus);
+        return Redirect($"ReviewEquipment/{labLocation}#accessory");
+    }
     
     [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
     public IActionResult Error()
