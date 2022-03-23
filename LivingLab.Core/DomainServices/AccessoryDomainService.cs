@@ -21,6 +21,11 @@ public class AccessoryDomainService : IAccessoryDomainService
     {
         return _accessoryRepository.GetAccessoriesForLabProfile(labLocation);
     }
+
+    public Task<List<Accessory>> GetAllAccessoriesForReview(string labLocation)
+    {
+        return _accessoryRepository.GetAllAccessoriesForReview(labLocation);
+    }
     
     public Task<List<Accessory>> ViewAccessory(string accessoryType, string labLocation)
     {

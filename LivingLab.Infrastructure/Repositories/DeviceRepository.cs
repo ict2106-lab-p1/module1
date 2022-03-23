@@ -21,11 +21,19 @@ public class DeviceRepository : Repository<Device>, IDeviceRepository
     {
         var device = await _context.Devices
             .Where(t => t.Status.ToLower().Equals("available")
-                        && t.Lab.LabLocation.Equals("labLocation"))
+                        && t.Lab.LabLocation.Equals(labLocation))
             .ToListAsync();
         return device;
     }
-
+    
+    public async Task<List<Device>> GetAllDevicesForReview(string labLocation)
+    {
+        var device = await _context.Devices
+            .Where(t => t.Lab.LabLocation.Equals(labLocation))
+            .ToListAsync();
+        return device;
+    }
+    
     public async Task<List<ViewDeviceTypeDTO>> GetViewDeviceType(string labLocation)
     {
         var deviceGroup = await _context.Devices

@@ -12,12 +12,12 @@ namespace LivingLab.Web.UIServices.Accessory;
 /// <remarks>
 /// Author: Team P1-3
 /// </remarks>
-public class AccessoryServices : IAccessoryService
+public class AccessoryService : IAccessoryService
 {
     private readonly IMapper _mapper;
     private readonly IAccessoryDomainService _accessoryDomainService;
 
-    public AccessoryServices(IMapper mapper, IAccessoryDomainService accessoryDomainService)
+    public AccessoryService(IMapper mapper, IAccessoryDomainService accessoryDomainService)
     {
         _mapper = mapper;
         _accessoryDomainService = accessoryDomainService;
@@ -97,7 +97,7 @@ public class AccessoryServices : IAccessoryService
         accessoryVM.Name = addAccessoryDetails.Accessory.Name;
         accessoryVM.Status = "Available";
         accessoryVM.LastUpdated = DateTime.Today;
-        accessoryVM.ReviewStatus = "Reviewing";
+        accessoryVM.ReviewStatus = "Pending";
         accessoryVM.LabId = addAccessoryDetails.Accessory.Lab.LabId;
         
         // map view model back to accessory

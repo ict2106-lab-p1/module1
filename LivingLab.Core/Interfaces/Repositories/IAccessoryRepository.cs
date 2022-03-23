@@ -10,6 +10,7 @@ public interface IAccessoryRepository : IRepository<Accessory>
 {
     Task<List<Accessory>> GetAccessoriesForLabProfile(string labLocation);
     Task<List<Accessory>> GetAccessoryWithAccessoryType(string accessoryType, string labLocation);
+    Task<List<Accessory>> GetAllAccessoriesForReview(string labLocation);
     Task<List<ViewAccessoryTypeDTO>> GetAccessoryType(string labLocation);
     Task<Accessory> GetLastRow();
     

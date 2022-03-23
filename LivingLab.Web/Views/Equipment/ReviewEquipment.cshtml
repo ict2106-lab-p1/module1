@@ -1,0 +1,102 @@
+@model LivingLab.Web.Models.ViewModels.Equipment.EquipmentViewModel
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>title</title>
+</head>
+<body>
+<div
+    x-data="{
+        openTab: 1,
+        activeClasses: 'border-l border-t border-r rounded-t text-blue-700',
+        inactiveClasses: 'text-blue-500 hover:text-blue-800'
+    }"
+    class="container mx-auto">
+
+    <ul class="flex border-b">
+        <li @@click="openTab = 1" :class="{ '-mb-px': openTab === 1 }" class="mr-1">
+            <a :class="openTab === 1 ? activeClasses : inactiveClasses" class="bg-white inline-block py-2 px-4 font-semibold" href="#">
+                Devices
+            </a>
+        </li>
+        <li @@click="openTab = 2" :class="{ '-mb-px': openTab === 2 }" class="mr-1">
+            <a :class="openTab === 2 ? activeClasses : inactiveClasses" class="bg-white inline-block py-2 px-4 font-semibold" href="#">
+                Accessories
+            </a>
+        </li>
+    </ul>
+    <div class="w-full bg-white p-4">
+        <div x-show="openTab === 1">
+            <table id="deviceTable" class="display">
+                <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Description</th>
+                    <th>Serial Num</th>
+                    <th>Last Updated</th>
+                    <th></th>
+                    <th></th>
+                </tr>
+                </thead>
+                <tbody>
+                @foreach (var device in Model.DeviceViewModelList)
+                {
+                    <tr>
+                        <td>@device.Id</td>
+                        <td>@device.Name</td>
+                        <td>@device.Description</td>
+                        <td>@device.SerialNo</td>
+                        <td>@device.LastUpdated.ToString("MM/dd/yyyy")</td>
+                        <td data-id="@device.Id" class="editDeviceBtn"></td>
+                        <td data-id="@device.Id" class="deleteDeviceBtn"></td>
+                    </tr>
+                }
+                </tbody>
+            </table>
+        </div>
+        <div x-show="openTab === 2">
+            <table id="accessoryTable" class="display">
+                <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Type</th>
+                    <th>Description</th>
+                    <th>Last Updated</th>
+                    <th>Status</th>
+                    <th>Borrowable</th>
+                    <th>Review Status</th>
+                    <th></th>
+                    <th></th>
+                </tr>
+                </thead>
+                <tbody>
+                @foreach (var accessory in Model.AccessoryViewModelList)
+                {
+                    <tr>
+                        <td>@accessory.Id</td>
+                        <td>@accessory.Name</td>
+                        <td>@accessory.AccessoryType.Type</td>
+                        <td>@accessory.AccessoryType.Description</td>
+                        <td>@accessory.LastUpdated.ToString("MM/dd/yyyy")</td>
+                        <td>@accessory.Status</td>
+                        <td>@accessory.AccessoryType.Borrowable</td>
+                        <td>@accessory.ReviewStatus</td>
+                        <td data-id="@accessory.Id" class="editAccessoryBtn"></td>
+                        <td data-id="@accessory.Id" class="deleteAccessoryBtn"></td>
+                    </tr>
+                }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+</body>
+</html>
+
+@section Scripts {
+    <script defer src="https://unpkg.com/alpinejs@3.9.1/dist/cdn.min.js"></script>
+    <script src="~/js/reviewEquipment.js"></script>
+}
