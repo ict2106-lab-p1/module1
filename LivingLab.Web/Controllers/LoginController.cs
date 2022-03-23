@@ -23,18 +23,18 @@ public class LoginController : Controller
     private readonly IAccountService _accountService;
     private readonly SignInManager<ApplicationUser> _signInManager;
     private readonly UserManager<ApplicationUser> _userManager;
-    private readonly IEmailSender _emailSender;
+    private readonly INotificationManagementService _notificationManagementService;
 
 
     public LoginController(ILogger<LoginController> logger,
         IAccountService accountService, SignInManager<ApplicationUser> signInManager,
-        UserManager<ApplicationUser> userManager, IEmailSender emailSender)
+        UserManager<ApplicationUser> userManager, INotificationManagementService notificationManagementService)
     {
         _logger = logger;
         _accountService = accountService;
         _signInManager = signInManager;
         _userManager = userManager;
-        _emailSender = emailSender;
+        _notificationManagementService = notificationManagementService;
     }
 
     [AllowAnonymous]
@@ -255,8 +255,8 @@ public class LoginController : Controller
                 var passwordResetLink = Url.Action("ResetPassword", "Login", new {email = model.Email, token = token},
                     Request.Scheme);
                 _logger.Log(LogLevel.Warning, passwordResetLink);
-                
-                await _emailSender.SendEmailAsync(model.Email, 
+
+                await _notificationManagementService.SendTextToEmail(model.Email, 
                     "Reset Password", 
                     "Please reset your password by clicking this link: <a href=\"" 
                     + passwordResetLink + "\">link</a>");

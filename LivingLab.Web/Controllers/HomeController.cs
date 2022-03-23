@@ -2,6 +2,7 @@ using System.Diagnostics;
 
 using LivingLab.Core.Entities.Identity;
 using LivingLab.Web.Models.ViewModels;
+using LivingLab.Web.UIServices.NotificationManagement;
 
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
@@ -23,7 +24,6 @@ public class HomeController : Controller
     {
         _logger = logger;
         _signInManager = signInManager;
-
     }
 
     /*Reroute the users to the login page*/

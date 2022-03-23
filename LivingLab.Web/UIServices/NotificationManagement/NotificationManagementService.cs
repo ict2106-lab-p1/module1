@@ -15,13 +15,15 @@ public class NotificationManagementService : INotificationManagementService
     private readonly INotificationDomainService _notificationDomainService;
     private readonly ILogger<NotificationManagementService> _logger;
     private readonly IConfiguration _config;
+    private readonly IEmailSender _emailSender;
 
     
-    public NotificationManagementService(IConfiguration config, INotificationDomainService notificationDomainService, ILogger<NotificationManagementService> logger)
+    public NotificationManagementService(IEmailSender emailSender, IConfiguration config, INotificationDomainService notificationDomainService, ILogger<NotificationManagementService> logger)
     {
         _notificationDomainService = notificationDomainService;
         _logger = logger;
         _config = config;
+        _emailSender = emailSender;
     }
     
     public Task SetNotificationPref()
@@ -44,7 +46,11 @@ public class NotificationManagementService : INotificationManagementService
         messageOptions.Body = msgBody;   
  
         var message = MessageResource.Create(messageOptions); 
-        Console.WriteLine(message.Body); 
-    
+        Console.WriteLine(message.Body);
+    }
+
+    public async Task SendTextToEmail(string email, string msgTitle, string msgBody)
+    {
+        await _emailSender.SendEmailAsync(email, msgTitle, msgBody);
     }
 }

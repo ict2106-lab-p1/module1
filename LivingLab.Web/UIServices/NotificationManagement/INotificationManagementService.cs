@@ -10,5 +10,7 @@ public interface INotificationManagementService
     Task SetNotificationPref();
 
     Task SendTextToPhone(string phone, string msgBody);
-    
+
+    Task SendTextToEmail(string email, string msgTitle, string msgBody);
+
 }
