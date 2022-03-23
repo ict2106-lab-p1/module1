@@ -16,6 +16,10 @@ public interface IAccessoryDomainService
      * by injecting this IAccessoryDomainService in your UI's lab service.
      */
     Task<List<Accessory>> GetAccessoriesForLabProfile(string labLocation);
+    void UpdateAccessoryStatus(string accessoryId, string accessoryReviewStatus);
+    
+    // to use for reviewEquipment
+    Task<List<Accessory>> GetAllAccessoriesForReview(string labLocation);
     Task<List<ViewAccessoryTypeDTO>> ViewAccessoryType(string labLocation);
     
     Task<Accessory> AddAccessory(Accessory accessory);

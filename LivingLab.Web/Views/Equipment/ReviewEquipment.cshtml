@@ -1,0 +1,145 @@
+@model LivingLab.Web.Models.ViewModels.Equipment.EquipmentViewModel
+@{
+    string labLocation = Convert.ToString(this.ViewContext.RouteData.Values["labLocation"]);
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>title</title>
+</head>
+<body>
+<div
+    x-data="{
+        openTab: 1,
+        activeClasses: 'border-l border-t border-r rounded-t text-blue-700',
+        inactiveClasses: 'text-blue-500 hover:text-blue-800'
+    }"
+    class="container mx-auto">
+
+    <ul class="flex border-b">
+        <li @@click="openTab = 1" :class="{ '-mb-px': openTab === 1 }" class="mr-1">
+            <a :class="openTab === 1 ? activeClasses : inactiveClasses" class="bg-white inline-block py-2 px-4 font-semibold" href="#device">
+                Devices
+            </a>
+        </li>
+        <li @@click="openTab = 2" :class="{ '-mb-px': openTab === 2 }" class="mr-1">
+            <a :class="openTab === 2 ? activeClasses : inactiveClasses" class="bg-white inline-block py-2 px-4 font-semibold" href="#accessory">
+                Accessories
+            </a>
+        </li>
+    </ul>
+    <div class="w-full bg-white p-4">
+        <div x-show="openTab === 1">
+            <form id="deviceForm" name="deviceForm" asp-controller="Equipment" asp-action="UpdateDevice" method="post">
+                <table id="deviceTable" class="display">
+                    <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Name</th>
+                        <th>Type</th>
+                        <th>Description</th>
+                        <th>Serial No.</th>
+                        <th>Review Status</th>
+                        <th></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    @foreach (var device in Model.DeviceViewModelList)
+                    {
+                        <tr>
+                            <td>@device.Id</td>
+                            <td>@device.Name</td>
+                            <td>@device.Type</td>
+                            <td>@device.Description</td>
+                            <td>@device.SerialNo</td>
+                            <td>@device.ReviewStatus</td>
+                            <td></td>
+                        </tr>
+                    }
+                    </tbody>
+                </table>
+                <input type="hidden" id="deviceId" name="deviceId"/>
+                <input type="hidden" id="deviceReviewStatus" name="deviceReviewStatus"/>
+
+                <input type="hidden" id="deviceLabLocation" name="labLocation" value="@labLocation"/>
+            </form>
+        </div>
+        <div x-show="openTab === 2">
+            <form id="accessoryForm" name="accessoryForm" asp-controller="Equipment" asp-action="UpdateAccessory" method="post">
+                <table id="accessoryTable" class="display">
+                    <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Name</th>
+                        <th>Type</th>
+                        <th>Description</th>
+                        <th>Status</th>
+                        <th>Borrowable</th>
+                        <th>Review Status</th>
+                        <th></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    @foreach (var accessory in Model.AccessoryViewModelList)
+                    {
+                        <tr>
+                            <td>@accessory.Id</td>
+                            <td>@accessory.Name</td>
+                            <td>@accessory.AccessoryType.Type</td>
+                            <td>@accessory.AccessoryType.Description</td>
+                            <td>@accessory.Status</td>
+                            <td>@accessory.AccessoryType.Borrowable</td>
+                            <td>@accessory.ReviewStatus</td>
+                            <td></td>
+                        </tr>
+                    }
+                    </tbody>
+                </table>
+                <input type="hidden" id="accessoryId" name="accessoryId"/>
+                <input type="hidden" id="accessoryReviewStatus" name="accessoryReviewStatus"/>
+                <input type="hidden" id="accessoryLabLocation" name="labLocation" value="@labLocation"/>
+            </form>
+        </div>
+    </div>
+</div>
+
+@* Review Equipment Modal *@
+<div class="bg-black bg-opacity-50 absolute inset-0 justify-center items-center hidden" id="equipmentOverlay">
+    <div class="bg-white max-w-xl py-4 px-4 rounded shadow-xl text-gray-800 my-32">
+        <div class="flex justify-between items-center">
+            <h4 id="modalHeader" class="text-lg font-bold">Review Device</h4>
+            <svg class="h-8 w-8 cursor-pointer p-1 hover:bg-gray-300 rounded-full closeModal" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd"
+                      d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
+                      clip-rule="evenodd">
+                </path>
+            </svg>
+        </div>
+        <div class="mt-4">
+            <div class="mt-3 space-x-3 justify-center">
+                <h5 id="serialNo" class="text-lg font-bold text-center">SC1001</h5>
+                <h5 id="type" class="text-base font-bold text-center">Surveillance Camera</h5>
+                <h5 id="confirmationMsg" class="text-sm text-center my-2 ">Do you want to approve or reject?</h5>
+            </div>
+
+            <div class="mt-3 flex space-x-3 justify-center">
+                @* <button class="bg-transparent hover:bg-purple-500 text-purple-700 font-semibold hover:text-white py-2 px-4 border border-purple-500 hover:border-transparent rounded closeAddModal"> *@
+                @*     Cancel *@
+                @* </button> *@
+                <button class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded w-1/5" id="approveBtn" type="button">
+                    Approve
+                </button>
+                <button class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded w-1/5" id="rejectBtn" type="button">
+                    Reject
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
+
+@section Scripts {
+    <script defer src="https://unpkg.com/alpinejs@3.9.1/dist/cdn.min.js"></script>
+    <script src="~/js/reviewEquipment.js"></script>
+}
