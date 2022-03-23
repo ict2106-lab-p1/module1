@@ -26,7 +26,7 @@ public static class ConfigureWebServices
     {
         services.AddTransient<ITodoService, TodoService>();
         services.AddTransient<IManualLogService, ManualLogService>();
-        services.AddTransient<IExportToCSVService, ExportToCSVService>();
+        // services.AddTransient<IExportToCSVService, ExportToCSVService>();
         services.AddTransient<IDeviceService, DeviceService>();
         services.AddTransient<IAccessoryService, AccessoryServices>();
         services.AddTransient<IUserManagementService, UserManagementService>();

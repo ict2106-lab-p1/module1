@@ -58,7 +58,7 @@ public static class ConfigureServiceContainer
         // Services
         services.AddTransient<ITodoDomainService, TodoDomainService>();
         services.AddTransient<IEnergyUsageLogCsvParser, EnergyUsageLogCsvParser>();
-        services.AddTransient<IExportData, ExportData>();
+        // services.AddTransient<IExportData, ExportData>();
         services.AddTransient<IEnergyUsageService, EnergyUsageService>();
         services.AddTransient<IManualLogDomainService, ManualLogDomainService>();
         services.AddTransient<INotificationDomainService, NotificationDomainService>();
