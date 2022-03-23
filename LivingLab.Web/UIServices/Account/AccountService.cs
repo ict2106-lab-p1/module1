@@ -17,6 +17,8 @@ using Microsoft.AspNetCore.Identity.UI.Services;
 
 using Twilio.Http;
 
+using IEmailSender = LivingLab.Core.Interfaces.Services.IEmailSender;
+
 namespace LivingLab.Web.UIServices.Account;
 /// <summary>
 /// This is a UI-specific service so it belongs in the Web project.
@@ -33,8 +35,16 @@ public class AccountService : IAccountService
     private readonly ILogger<AccountService> _logger;
     private readonly IUserStore<ApplicationUser> _userStore;
     private readonly IUserEmailStore<ApplicationUser> _emailStore;
+    private readonly INotificationManagementService _notif;
+    private readonly IEmailSender _emailSender;
     
-    public AccountService( IUserStore<ApplicationUser> userStore, UserManager<ApplicationUser> userManager, ILogger<AccountService> logger, SignInManager<ApplicationUser> signInManager, IAccountDomainService accountDomainService)
+    public AccountService(IUserStore<ApplicationUser> userStore, 
+        UserManager<ApplicationUser> userManager, 
+        ILogger<AccountService> logger, 
+        SignInManager<ApplicationUser> signInManager, 
+        IAccountDomainService accountDomainService,
+        INotificationManagementService notif,
+        IEmailSender emailSender)
     {
         _signInManager = signInManager;
         _accountDomainService = accountDomainService;
@@ -42,7 +52,8 @@ public class AccountService : IAccountService
         _userManager = userManager;
         _userStore = userStore;
         _emailStore = GetEmailStore();
-;
+        _notif = notif;
+        _emailSender = emailSender;
     }
 
 
@@ -73,7 +84,7 @@ public class AccountService : IAccountService
         string Auth = "";
         if (input.IsGoogleAuth)
         {
-            Auth = "Google";
+            Auth = "Email";
         }
         else if (input.IsSMS)
         {
@@ -118,11 +129,15 @@ public class AccountService : IAccountService
             user.FirstName = input.FirstName;
             if (input.IsGoogleAuth)
             {
-                user.AuthenticationType = "Google";
+                user.AuthenticationType = "Email";
+            }
+            else if (input.IsGoogleAuth)
+            {
+                user.AuthenticationType = "SMS";
             }
             else
             {
-                user.AuthenticationType = "SMS";
+                user.AuthenticationType = "None";
             }
 
             user.PhoneNumber = input.PhoneNumber;
@@ -134,9 +149,47 @@ public class AccountService : IAccountService
 
     }
 
-    public async Task<bool> GenerateCode(ApplicationUser user)
+    public async Task<bool> GenerateCodeSMS(ApplicationUser user)
     {
-        return await _accountDomainService.GenerateCode(user);
+        if (await _accountDomainService.GenerateCode(user))
+        {
+            try
+            {
+                ApplicationUser userDetails = await _userManager.FindByIdAsync(user.Id);
+                string msgBody = "Your 6 digit OTP for Living Lab is " + userDetails.OTP;
+                await _notif.SendTextToPhone("+65"+userDetails.PhoneNumber, msgBody);
+                return true;
+            }
+            catch (Exception e)
+            {
+                return false;
+            }
+        }
+
+        return false;
+    }
+
+    public async Task<bool> GenerateCodeEmail(ApplicationUser user)
+    {
+        if (await _accountDomainService.GenerateCode(user))
+        {
+            try
+            {
+                ApplicationUser userDetails = await _userManager.FindByIdAsync(user.Id);
+                string emailHeader = "OTP for Living Lab";
+                string msgBody = "Your 6 digit OTP for Living Lab is " + userDetails.OTP;
+                await _emailSender.SendEmailAsync(userDetails.Email,
+                    emailHeader,
+                    msgBody);
+                return true;
+            }
+            catch (Exception e)
+            {
+                return false;
+            }
+        }
+
+        return false;
     }
 
     public async Task<bool> VerifyCode(string userid, VerifyViewModel viewModel)

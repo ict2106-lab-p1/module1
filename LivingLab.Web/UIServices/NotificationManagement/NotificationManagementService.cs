@@ -29,7 +29,7 @@ public class NotificationManagementService : INotificationManagementService
         return _notificationDomainService.SetNotificationPref();
     }
 
-    public async Task SendTextToPhone(ApplicationUser user)
+    public async Task SendTextToPhone(string phone, string msgBody)
     {
         // Find your Account SID and Auth Token at twilio.com/console
         // and set the environment variables. See http://twil.io/secure
@@ -37,12 +37,10 @@ public class NotificationManagementService : INotificationManagementService
         string authToken = _config["TWILIO_AUTH_ID"];
 
         TwilioClient.Init(accountSid, authToken);
-        
-        string msgbody = "Your 6 digit OTP for Living Lab is " + user.OTP;
 
-        var messageOptions = new CreateMessageOptions(new PhoneNumber("+65"+user.PhoneNumber));   
+        var messageOptions = new CreateMessageOptions(new PhoneNumber(phone));   
         messageOptions.MessagingServiceSid = "MG7d7cd6b53ca04365964a61a99448d3e0";  
-        messageOptions.Body = msgbody;   
+        messageOptions.Body = msgBody;   
  
         var message = MessageResource.Create(messageOptions); 
         Console.WriteLine(message.Body); 

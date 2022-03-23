@@ -32,7 +32,7 @@ public static class ConfigureServiceContainer
         });
 
     public static void AddIdentities(this IServiceCollection services) =>
-        services.AddDefaultIdentity<ApplicationUser>()
+        services.AddDefaultIdentity<ApplicationUser>(options => options.SignIn.RequireConfirmedAccount = true)
             .AddRoles<IdentityRole>()
             .AddEntityFrameworkStores<ApplicationDbContext>()
             .AddDefaultTokenProviders();

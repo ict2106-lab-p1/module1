@@ -14,7 +14,8 @@ public interface IAccountService
     Task<ApplicationUser?> UpdateUser(RegisterViewModel input);
     Task<ApplicationUser?> NewUser(RegisterViewModel input);
 
-    Task <Boolean> GenerateCode(ApplicationUser user);
+    Task <Boolean> GenerateCodeSMS(ApplicationUser user);
+    Task <Boolean> GenerateCodeEmail(ApplicationUser user);
 
     Task<Boolean> VerifyCode(string userid, VerifyViewModel viewModel);
 

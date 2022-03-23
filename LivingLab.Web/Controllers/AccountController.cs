@@ -104,6 +104,7 @@ public class AccountController: Controller
         }
     }
 
+    [Authorize]
     [Route("settings")]
     public async Task<ViewResult> Settings(SettingsViewModel settingsViewModel)
     {
@@ -114,7 +115,7 @@ public class AccountController: Controller
         if (user.AuthenticationType == "SMS")
         {
             settingsViewModel.SMSAuth = true;
-        }else if (user.AuthenticationType == "Google")
+        }else if (user.AuthenticationType == "Email")
         {
             settingsViewModel.GoogleAuth = true;
         }
@@ -126,21 +127,29 @@ public class AccountController: Controller
     {
         ApplicationUser user = await _userManager.GetUserAsync(User);
 
-        _logger.LogInformation("HENRY IS HERE");
-        
+        _logger.LogInformation("SMS Auth set to " + settingsViewModel.SMSAuth + "Email Auth set to " +settingsViewModel.GoogleAuth);
         if (settingsViewModel.SMSAuth && settingsViewModel.GoogleAuth)
         {
             _logger.LogInformation("Cannot have two authentication methods");
             return View("SMSAuth", settingsViewModel);
         }
-        else if (settingsViewModel.SMSAuth)
+        else if (settingsViewModel.SMSAuth == true)
         {
             _logger.LogInformation("Select SMS");
             user.AuthenticationType = "SMS";
-        }else if (settingsViewModel.GoogleAuth)
+            if (settingsViewModel.PhoneNumber != user.PhoneNumber)
+            {
+                user.PhoneNumber = settingsViewModel.PhoneNumber;
+            }
+
+        }else if (settingsViewModel.GoogleAuth == true)
         {
             _logger.LogInformation("Select Email");
-            user.AuthenticationType = "Google";
+            user.AuthenticationType = "Email";
+            if (settingsViewModel.Email != user.Email)
+            {
+                user.Email = settingsViewModel.Email;
+            }
         }
         else
         {
@@ -148,8 +157,6 @@ public class AccountController: Controller
             user.AuthenticationType = "None";
         }
 
-        user.PhoneNumber = settingsViewModel.PhoneNumber;
-        user.Email = settingsViewModel.Email;
         await _accountService.UpdateUserSettings(user);
         
         return View("SMSAuth", settingsViewModel);

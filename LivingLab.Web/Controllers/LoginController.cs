@@ -54,7 +54,6 @@ public class LoginController : Controller
     [HttpPost]
     public async Task<IActionResult> Index(LoginViewModel? userDetails)
     {
-        _logger.LogInformation("I am here");
         if (ModelState.IsValid)
         {
             try
@@ -74,14 +73,15 @@ public class LoginController : Controller
                     if (user.AuthenticationType != null && user.AuthenticationType.Contains("SMS"))
                     {
                         _logger.LogInformation("Verify Code");
-                        await _accountService.GenerateCode(user);
-                        await _notif.SendTextToPhone(user);
-                        return RedirectToAction("verifycode", "Login");
+                        await _accountService.GenerateCodeSMS(user);
+                        
+                        return RedirectToAction("verifycodesms", "Login");
                     }
-                    else if (user.AuthenticationType != null && user.AuthenticationType.Contains("Google"))
+                    else if (user.AuthenticationType != null && user.AuthenticationType.Contains("Email"))
                     {
-                        _logger.LogInformation("Google Auth");
-                        return View("Index");
+                        _logger.LogInformation("Email Auth");
+                        await _accountService.GenerateCodeEmail(user);
+                        return RedirectToAction("verifycodeemail", "Login");
                     }
                     else
                     {
@@ -104,18 +104,60 @@ public class LoginController : Controller
 
         return View(nameof(Index));
     }
-
+    
     [Authorize]
     /* For route to /login/verifycode */
-    [Route("verifycode")]
-    public IActionResult VerifyCode()
+    [Route("verifycodeemail")]
+    public IActionResult VerifyCodeEmail()
     {
-        return View("VerifyCode");
+        return View("VerifyCodeEmail");
     }
 
     [HttpPost]
-    [Route("verifycode")]
-    public async Task<ActionResult> VerifyCode(VerifyViewModel inputDetails)
+    [Route("verifycodeemail")]
+    public async Task<ActionResult> VerifyCodeEmail(VerifyViewModel inputDetails)
+    {
+        ApplicationUser user = await _userManager.GetUserAsync(User);
+        var result = await _accountService.VerifyCode(user.Id, inputDetails);
+        if (result)
+        {
+            _logger.LogInformation("HENRY SUCCESS");
+            return RedirectToAction("Dashboard", "Home");
+        }
+        else
+        {
+            _logger.LogInformation("HENRY FAIL");
+            ModelState.AddModelError(nameof(inputDetails.OTP), "OTP has expired, please re-email new OTP");
+            return View(inputDetails);
+        }
+    }
+    
+    [Authorize]
+    [Route("newcodeemail")]
+    public async Task<RedirectToActionResult> NewCodeEmail()
+    {
+        ApplicationUser user = await _userManager.GetUserAsync(User);
+        if (await _accountService.GenerateCodeEmail(user))
+        {
+            return RedirectToAction(nameof(VerifyCodeEmail));
+        }
+        else
+        {
+            return RedirectToAction(nameof(VerifyCodeEmail));
+        }
+    }
+    
+    [Authorize]
+    /* For route to /login/verifycode */
+    [Route("verifycodesms")]
+    public IActionResult VerifyCodeSMS()
+    {
+        return View("VerifyCodeSMS");
+    }
+
+    [HttpPost]
+    [Route("verifycodesms")]
+    public async Task<ActionResult> VerifyCodeSMS(VerifyViewModel inputDetails)
     {
         ApplicationUser user = await _userManager.GetUserAsync(User);
         var result = await _accountService.VerifyCode(user.Id, inputDetails);
@@ -133,20 +175,17 @@ public class LoginController : Controller
     }
 
     [Authorize]
-    [Route("newcode")]
-    public async Task<RedirectToActionResult> NewCode()
+    [Route("newcodesms")]
+    public async Task<RedirectToActionResult> NewCodeSMS()
     {
         ApplicationUser user = await _userManager.GetUserAsync(User);
-        var result = await _accountService.GenerateCode(user);
-        if (result)
+        if (await _accountService.GenerateCodeSMS(user))
         {
-            _logger.LogInformation("HENRY CHANGE CODE");
-            await _notif.SendTextToPhone(user);
-            return RedirectToAction("VerifyCode", "Login");
+            return RedirectToAction(nameof(VerifyCodeSMS));
         }
         else
         {
-            return RedirectToAction("NewCode");
+            return RedirectToAction(nameof(VerifyCodeSMS));
         }
     }
 
