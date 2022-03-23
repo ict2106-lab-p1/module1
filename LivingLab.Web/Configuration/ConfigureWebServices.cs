@@ -1,3 +1,5 @@
+using LivingLab.Core.Entities.Identity;
+using LivingLab.Infrastructure.Data;
 using LivingLab.Web.UIServices.EnergyUsage;
 using LivingLab.Web.UIServices.ManualLogs;
 using LivingLab.Web.UIServices.Accessory;
@@ -10,6 +12,8 @@ using LivingLab.Web.UIServices.LabBooking;
 using LivingLab.Web.UIServices.LabProfile;
 using LivingLab.Web.UIServices.NotificationManagement;
 using LivingLab.Web.UIServices.Todo;
+
+using Microsoft.AspNetCore.Identity;
 
 namespace LivingLab.Web.Configuration;
 
@@ -24,6 +28,7 @@ public static class ConfigureWebServices
 {
     public static IServiceCollection AddWebServices(this IServiceCollection services)
     {
+
         services.AddEnergyMonitoringServices();
         services.AddManagementServices();
         services.AddTransient<ITodoService, TodoService>();

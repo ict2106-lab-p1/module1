@@ -23,16 +23,13 @@ public class AccountDomainService: IAccountDomainService
         _logger = logger;
     }
 
-    public async Task<ApplicationUser?> GetUser(string id)
-    {
-        return await _accountRepository.GetAccountById(id);
-    }
-
+    /*Function to update user information one by one*/
     public async Task<ApplicationUser?> UpdateUser(ApplicationUser user)
     {
         return await _accountRepository.UpdateAsync(user);
     }
 
+    /*Generate random OTP for user*/
     public async Task<bool> GenerateCode(ApplicationUser user)
     {
         var oldValue = user.OTP;
@@ -56,6 +53,7 @@ public class AccountDomainService: IAccountDomainService
         }
     }
 
+    /*Verify the OTP with checking of expiry*/
     public async Task<bool> VerifyCode(string userid, int otpCode)
     {
         var result = await _accountRepository.GetAccountById(userid);
@@ -70,6 +68,7 @@ public class AccountDomainService: IAccountDomainService
 
         return false;
     }
+    
 
     public async Task<ApplicationUser?> Save(ApplicationUser user)
     {

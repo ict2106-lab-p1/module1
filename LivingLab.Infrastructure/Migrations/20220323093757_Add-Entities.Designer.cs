@@ -3,6 +3,7 @@ using System;
 using LivingLab.Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace LivingLab.Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220323093757_Add-Entities")]
+    partial class AddEntities
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "6.0.1");
@@ -68,10 +70,6 @@ namespace LivingLab.Infrastructure.Migrations
                     b.Property<DateTime>("LastUpdated")
                         .HasColumnType("Date");
 
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
-
                     b.Property<string>("ReviewStatus")
                         .HasColumnType("TEXT");
 
@@ -97,7 +95,6 @@ namespace LivingLab.Infrastructure.Migrations
                             AccessoryTypeId = 1,
                             LabId = 1,
                             LastUpdated = new DateTime(2021, 10, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "Sony A7 IV",
                             ReviewStatus = "Pending",
                             ReviewedBy = "David",
                             Status = "Available"
@@ -110,7 +107,6 @@ namespace LivingLab.Infrastructure.Migrations
                             LabId = 1,
                             LabUserId = "DefaultAdmin1",
                             LastUpdated = new DateTime(2021, 10, 14, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "Sony A8 IV",
                             ReviewStatus = "Pending",
                             ReviewedBy = "David",
                             Status = "Borrowed"
@@ -121,7 +117,6 @@ namespace LivingLab.Infrastructure.Migrations
                             AccessoryTypeId = 2,
                             LabId = 1,
                             LastUpdated = new DateTime(2021, 10, 17, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "MA300D1-1",
                             ReviewStatus = "Pending",
                             ReviewedBy = "David",
                             Status = "Available"
@@ -132,7 +127,6 @@ namespace LivingLab.Infrastructure.Migrations
                             AccessoryTypeId = 2,
                             LabId = 1,
                             LastUpdated = new DateTime(2021, 10, 21, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "MA300D1-2",
                             ReviewStatus = "Pending",
                             ReviewedBy = "David",
                             Status = "Available"
@@ -145,7 +139,6 @@ namespace LivingLab.Infrastructure.Migrations
                             LabId = 1,
                             LabUserId = "DefaultAdmin1",
                             LastUpdated = new DateTime(2021, 9, 9, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "DHT22",
                             ReviewStatus = "Pending",
                             ReviewedBy = "David",
                             Status = "Borrowed"
@@ -156,7 +149,6 @@ namespace LivingLab.Infrastructure.Migrations
                             AccessoryTypeId = 3,
                             LabId = 1,
                             LastUpdated = new DateTime(2021, 9, 5, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "DHT23",
                             ReviewStatus = "Pending",
                             ReviewedBy = "David",
                             Status = "Available"
@@ -167,7 +159,6 @@ namespace LivingLab.Infrastructure.Migrations
                             AccessoryTypeId = 4,
                             LabId = 1,
                             LastUpdated = new DateTime(2021, 8, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "LEFOO LFT2000W",
                             ReviewStatus = "Pending",
                             ReviewedBy = "David",
                             Status = "Available"
@@ -180,7 +171,6 @@ namespace LivingLab.Infrastructure.Migrations
                             LabId = 1,
                             LabUserId = "DefaultAdmin1",
                             LastUpdated = new DateTime(2021, 8, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "LEFO1 LFT2000W",
                             ReviewStatus = "Pending",
                             ReviewedBy = "David",
                             Status = "Borrowed"
@@ -191,7 +181,6 @@ namespace LivingLab.Infrastructure.Migrations
                             AccessoryTypeId = 5,
                             LabId = 1,
                             LastUpdated = new DateTime(2021, 7, 3, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "RM1802",
                             ReviewStatus = "Pending",
                             ReviewedBy = "David",
                             Status = "Available"
@@ -204,7 +193,6 @@ namespace LivingLab.Infrastructure.Migrations
                             LabId = 1,
                             LabUserId = "DefaultAdmin1",
                             LastUpdated = new DateTime(2021, 6, 24, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "RM1803",
                             ReviewStatus = "Pending",
                             ReviewedBy = "David",
                             Status = "Borrowed"
@@ -215,7 +203,6 @@ namespace LivingLab.Infrastructure.Migrations
                             AccessoryTypeId = 6,
                             LabId = 1,
                             LastUpdated = new DateTime(2021, 7, 25, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "HC-SR04",
                             ReviewStatus = "Pending",
                             ReviewedBy = "David",
                             Status = "Available"
@@ -226,7 +213,6 @@ namespace LivingLab.Infrastructure.Migrations
                             AccessoryTypeId = 6,
                             LabId = 1,
                             LastUpdated = new DateTime(2021, 4, 3, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "HC-SR05",
                             ReviewStatus = "Pending",
                             ReviewedBy = "David",
                             Status = "Available"
@@ -239,7 +225,6 @@ namespace LivingLab.Infrastructure.Migrations
                             LabId = 1,
                             LabUserId = "DefaultAdmin1",
                             LastUpdated = new DateTime(2021, 7, 19, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "EDGELEC 4Pin LED Diodes",
                             ReviewStatus = "Pending",
                             ReviewedBy = "David",
                             Status = "Borrowed"
@@ -252,7 +237,6 @@ namespace LivingLab.Infrastructure.Migrations
                             LabId = 1,
                             LabUserId = "DefaultAdmin1",
                             LastUpdated = new DateTime(2021, 12, 14, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "EDGELEC 6Pin LED Diodes",
                             ReviewStatus = "Pending",
                             ReviewedBy = "David",
                             Status = "Borrowed"
@@ -263,7 +247,6 @@ namespace LivingLab.Infrastructure.Migrations
                             AccessoryTypeId = 8,
                             LabId = 1,
                             LastUpdated = new DateTime(2021, 11, 12, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "TMB09A05",
                             ReviewStatus = "Pending",
                             ReviewedBy = "David",
                             Status = "Available"
@@ -274,7 +257,6 @@ namespace LivingLab.Infrastructure.Migrations
                             AccessoryTypeId = 8,
                             LabId = 1,
                             LastUpdated = new DateTime(2021, 7, 3, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "TMB09A06",
                             ReviewStatus = "Pending",
                             ReviewedBy = "David",
                             Status = "Available"
@@ -293,6 +275,10 @@ namespace LivingLab.Infrastructure.Migrations
                     b.Property<string>("Description")
                         .HasColumnType("TEXT");
 
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
                     b.Property<string>("Type")
                         .IsRequired()
                         .HasColumnType("TEXT");
@@ -307,6 +293,7 @@ namespace LivingLab.Infrastructure.Migrations
                             Id = 1,
                             Borrowable = true,
                             Description = "Its purpose is to capture images and videos",
+                            Name = "Sony A7 IV",
                             Type = "Camera"
                         },
                         new
@@ -314,6 +301,7 @@ namespace LivingLab.Infrastructure.Migrations
                             Id = 2,
                             Borrowable = true,
                             Description = "Its purpose is to detect obstacles",
+                            Name = "MA300D1-1",
                             Type = "Ultrasonic Sensor"
                         },
                         new
@@ -321,6 +309,7 @@ namespace LivingLab.Infrastructure.Migrations
                             Id = 3,
                             Borrowable = true,
                             Description = "Its purpose is to detect humidity in the environment",
+                            Name = "DHT22",
                             Type = "Humidity Sensor"
                         },
                         new
@@ -328,6 +317,7 @@ namespace LivingLab.Infrastructure.Migrations
                             Id = 4,
                             Borrowable = true,
                             Description = "Its purpose is to detect water pressure",
+                            Name = "LEFOO LFT2000W",
                             Type = "Water pressure Sensor"
                         },
                         new
@@ -335,6 +325,7 @@ namespace LivingLab.Infrastructure.Migrations
                             Id = 5,
                             Borrowable = true,
                             Description = "It is used to switch on the lights in the lab",
+                            Name = "RM1802",
                             Type = "IR Sensor"
                         },
                         new
@@ -342,6 +333,7 @@ namespace LivingLab.Infrastructure.Migrations
                             Id = 6,
                             Borrowable = true,
                             Description = "Its purpose is to detect proximity of an obstacle",
+                            Name = "HC-SR04",
                             Type = "Proximity Sensor"
                         },
                         new
@@ -349,6 +341,7 @@ namespace LivingLab.Infrastructure.Migrations
                             Id = 7,
                             Borrowable = false,
                             Description = "Its purpose is to emit light",
+                            Name = "EDGELEC 4Pin LED Diodes",
                             Type = "LED Lights"
                         },
                         new
@@ -356,6 +349,7 @@ namespace LivingLab.Infrastructure.Migrations
                             Id = 8,
                             Borrowable = true,
                             Description = "Its purpose is to emit sound from the device",
+                            Name = "TMB09A05",
                             Type = "Buzzer"
                         });
                 });
