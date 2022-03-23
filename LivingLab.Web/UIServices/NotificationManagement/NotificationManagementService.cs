@@ -49,6 +49,7 @@ public class NotificationManagementService : INotificationManagementService
         Console.WriteLine(message.Body);
     }
 
+    /*Send Email to an address, details are defined in the domain services*/
     public async Task SendTextToEmail(string email, string msgTitle, string msgBody)
     {
         await _emailSender.SendEmailAsync(email, msgTitle, msgBody);

@@ -10,8 +10,6 @@ namespace LivingLab.Web.UIServices.LabProfile;
 public interface ILabProfileService
 {
     Task<ViewLabProfileViewModel> GetAllLabAccounts();
-    
-   Task<LabProfileViewModel> ViewLabDetails(int id);
-
+    Task<LabProfileViewModel> ViewLabDetails(int id);
     Task<Lab?> NewLab(LabProfileViewModel labinput);
 }

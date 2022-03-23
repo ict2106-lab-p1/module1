@@ -34,7 +34,6 @@ public class UserManagementController : Controller
     { 
         //retrieve data from db
         UserManagementViewModel user = await _userManagementService.ViewUserDetails(id);
-
         return user;
     }
     

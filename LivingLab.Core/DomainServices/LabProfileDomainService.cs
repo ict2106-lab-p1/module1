@@ -34,9 +34,9 @@ public class LabProfileDomainService: ILabProfileDomainService
         return _labRepository.GetLabDetails(id);
     }
   
+    /*Create new lab with lab details*/
     public async Task<Lab?> NewLab(Lab labinput)
     {
-        _logger.LogInformation("Henry add lab");
         return await _labRepository.AddAsync(labinput);
     }
 }

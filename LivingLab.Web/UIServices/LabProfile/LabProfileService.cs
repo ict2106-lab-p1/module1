@@ -42,7 +42,7 @@ public class LabProfileService : ILabProfileService
     }
 
 
-
+    /*Create lab profiles by admins*/
     public async Task<Lab?> NewLab(LabProfileViewModel labinput)
     {
         var labWrapper = new Lab
