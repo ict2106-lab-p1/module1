@@ -114,7 +114,11 @@ Alternatively, run the web app and let dotnet run migrations automatically. If y
 - 2002820 | Gou Hang         | gouhang26
 - 2001476 | Ter KaiSiang     | kiasiang419
 ### P1-06 Student ID & Name & Github ID
-
+- 2001701 | Gabriel Kok      | gabrielkhh
+- 2002452 | Aloysius Yeo     | aloywj
+- 2001632 | Yang Xiao        | 2000859YangXiao
+- 2000545 | Thomas Lee       | thomaslwk
+- 2001632 | Tan Yu Hui       | TanYuHui
 ---
 
 Credits: Thanks Percy for setting up the MVC skeleton + Tailwind integration.
