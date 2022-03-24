@@ -1,7 +1,7 @@
 /* <remarks>*/
 /* Author: Team P1-3*/
 /* </remarks>*/
-$(document).ready(function() {
+$(document).ready(function () {
 
     //Add Overlay
     const overlay = document.querySelector('#overlay')
@@ -28,10 +28,11 @@ $(document).ready(function() {
         var accessoryType = event.target.parentElement.parentElement.firstElementChild.textContent;
         console.log(accessoryType);
         document.postAccessoryType.accessoryType.value = accessoryType
-        document.postAccessoryType.submit();
+        document.postAccessoryType.labLocation.value =
+            document.postAccessoryType.submit();
     }
     viewMoreBtns.forEach(btn => btn.addEventListener('click', viewwMoreEventHandler))
-    $('#AccessoryTypeId').change(function() {
+    $('#AccessoryTypeId').change(function () {
         console.log('click')
         var selectedValue = jQuery(this).val()
         if (selectedValue === "Others") {
@@ -45,7 +46,9 @@ $(document).ready(function() {
 
 function clickAdd(e) {
     $.get('/Accessory/AddAccessoryDetails',
-        function(data) {
+        function (data) {
+            console.log("Hello!?")
+            console.log(data)
             document.getElementById("accessoryId").value = data.accessory.id + 1
             var accessoryTypeDDL = document.getElementById("accessoryType")
             if (accessoryTypeDDL.length === 0) {
@@ -60,5 +63,7 @@ function clickAdd(e) {
                 last.value = "Others"
                 accessoryTypeDDL.appendChild(last)
             }
+            document.getElementById("labId").value = data.accessory.lab.labId
+            document.getElementById("labLocation").value = data.accessory.lab.labLocation
         })
 }

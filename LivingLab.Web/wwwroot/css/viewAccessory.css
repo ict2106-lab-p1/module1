@@ -12,6 +12,6 @@
 }
 
 .disabled {
-  pointer-events: none;
-  background: grey;
+    pointer-events: none;
+    background: grey;
 }

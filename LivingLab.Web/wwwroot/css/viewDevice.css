@@ -8,7 +8,7 @@
 @tailwind components;
 @tailwind utilities;
 .dataTables_wrapper .myfilter .dataTables_filter {
-  float: left;
+    float: left;
 }
 
 #overlay {
@@ -16,6 +16,6 @@
 }
 
 .disabled {
-  pointer-events: none;
-  background: grey;
+    pointer-events: none;
+    background: grey;
 }

@@ -15,9 +15,42 @@ public class DeviceRepository : Repository<Device>, IDeviceRepository
     {
         _context = context;
     }
-    public async Task<List<ViewDeviceTypeDTO>> GetViewDeviceType()
+
+    public async Task<List<Device>> GetDevicesForLabProfile(string labLocation)
     {
-        var deviceGroup = await _context.Devices.GroupBy(t => t.Type).Select(t => new { Key = t.Key, Count = t.Count() }).ToListAsync();
+        var device = await _context.Devices
+            .Where(t => t.Status.ToLower().Equals("available")
+                        && t.Lab.LabLocation.Equals(labLocation))
+            .ToListAsync();
+        return device;
+    }
+
+    public async void UpdateDeviceStatus(string deviceId, string deviceReviewStatus)
+    {
+        Device device = (await _context.Devices.Where(d => d.Id == Convert.ToInt32(deviceId)).FirstOrDefaultAsync())!;
+        if (device.ReviewStatus != deviceReviewStatus)
+        {
+            device.ReviewStatus = deviceReviewStatus;
+        }
+        await _context.SaveChangesAsync();
+    }
+
+    public async Task<List<Device>> GetAllDevicesForReview(string labLocation)
+    {
+        var device = await _context.Devices
+            .Where(t => t.Lab.LabLocation.Equals(labLocation))
+            .ToListAsync();
+        return device;
+    }
+    
+    public async Task<List<ViewDeviceTypeDTO>> GetViewDeviceType(string labLocation)
+    {
+        var deviceGroup = await _context.Devices
+            .Include(l => l.Lab)
+            .Where(l => l.Lab!.LabLocation == labLocation)
+            .GroupBy(t => t.Type)
+            .Select(t => new { Key = t.Key, Count = t.Count() })
+            .ToListAsync();
         List<ViewDeviceTypeDTO> deviceTypeDtos = new List<ViewDeviceTypeDTO>();
         foreach (var group in deviceGroup)
         {
@@ -28,30 +61,38 @@ public class DeviceRepository : Repository<Device>, IDeviceRepository
         }
         return deviceTypeDtos;
     }
-
-    public async Task<List<Device>> GetAllDevicesByType(string deviceType)
-    {
-        List<Device> deviceList = await _context.Devices.Where(t => deviceType.Contains(t.Type)).ToListAsync();
+    
+    public async Task<List<Device>> GetAllDevicesByType(string deviceType, string labLocation)
+    { 
+        List<Device> deviceList = await _context.Devices
+            .Include(l => l.Lab)
+            .Where(t => deviceType.Contains(t.Type) && t.Lab.LabLocation == labLocation).ToListAsync();
         return deviceList;
     }
     
     public async Task<Device> GetDeviceDetails(int id)
     {
         // retrieve device db together with device type details using include to join entities
-        Device device = (await _context.Devices.SingleOrDefaultAsync(d => d.Id == id))!;
+        Device device = (await _context.Devices
+            .Include(l => l.Lab)
+            .SingleOrDefaultAsync(d => d.Id == id))!;
         return device;
     }
     public async Task<Device> GetLastRow()
     {
-        var device = await _context.Devices.OrderByDescending(d => d.Id).FirstOrDefaultAsync();
+        var device = await _context.Devices
+            .Include(l => l.Lab)
+            .OrderByDescending(d => d.Id).FirstOrDefaultAsync();
         return device;
     }
     
     public async Task<Device> AddDevice(Device addedDevice)
     {
-        addedDevice.LabId = 1;
+        addedDevice.LabId = addedDevice.Lab.LabId;
+        addedDevice.Lab = null;
         // add to database
         addedDevice.LastUpdated = DateTime.Today;
+        addedDevice.ReviewStatus = "Pending";
         _context.Devices.Add(addedDevice);
         await _context.SaveChangesAsync();
         return addedDevice;

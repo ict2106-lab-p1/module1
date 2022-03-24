@@ -1,4 +1,5 @@
 using LivingLab.Web.Controllers.Api;
+using LivingLab.Web.UIServices.UserManagement;
 using LivingLab.Web.Models.ViewModels.LabProfile;
 using LivingLab.Web.UIServices.Account;
 using LivingLab.Web.UIServices.LabProfile;
@@ -14,20 +15,32 @@ public class LabProfileController: Controller
 {
     private readonly ILabProfileService _labProfileService;
     private readonly ILogger<LabProfileController> _logger;
+    private readonly IUserManagementService _accountService;
+
     public LabProfileController(ILabProfileService labProfileService, ILogger<LabProfileController> logger)
-    {
-        _labProfileService = labProfileService;
+    {  _labProfileService = labProfileService;
         _logger = logger;
+        
     }
     
+    [Route("viewlab")]
+    public async Task<IActionResult> ViewLab()
+    {
+        ViewLabProfileViewModel viewLabProfileViewModel = await _labProfileService.GetAllLabAccounts();
+        return View("Index", viewLabProfileViewModel); 
+    }
     
+    [Authorize(Roles="Admin")]
+    /*Redirect to lab view*/
+    [Route("labregister")]
     public IActionResult LabRegister()
     {
         return View("LabRegister");
     }
 
-    // [Authorize]
+    [Authorize(Roles="Admin")]
     [HttpPost]
+    /*Create labs by admins*/
     public async Task<IActionResult> LabRegister(LabProfileViewModel labModel)
     {
         if (ModelState.IsValid)
@@ -39,9 +52,6 @@ public class LabProfileController: Controller
         
         _logger.LogInformation("Test fail");
         return View(nameof(LabRegister));
-
         
     }
-
-
 }

@@ -1,3 +1,5 @@
+using System.Security.Policy;
+
 using AutoMapper;
 
 using LivingLab.Core.Entities;
@@ -12,6 +14,10 @@ using LivingLab.Web.UIServices.Todo;
 
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI.Services;
+
+using Twilio.Http;
+
+using IEmailSender = LivingLab.Core.Interfaces.Services.IEmailSender;
 
 namespace LivingLab.Web.UIServices.Account;
 /// <summary>
@@ -29,8 +35,16 @@ public class AccountService : IAccountService
     private readonly ILogger<AccountService> _logger;
     private readonly IUserStore<ApplicationUser> _userStore;
     private readonly IUserEmailStore<ApplicationUser> _emailStore;
+    private readonly INotificationManagementService _notif;
+    private readonly IEmailSender _emailSender;
     
-    public AccountService( IUserStore<ApplicationUser> userStore, IEmailSender emailSender, UserManager<ApplicationUser> userManager, ILogger<AccountService> logger, SignInManager<ApplicationUser> signInManager, IAccountDomainService accountDomainService)
+    public AccountService(IUserStore<ApplicationUser> userStore, 
+        UserManager<ApplicationUser> userManager, 
+        ILogger<AccountService> logger, 
+        SignInManager<ApplicationUser> signInManager, 
+        IAccountDomainService accountDomainService,
+        INotificationManagementService notif,
+        IEmailSender emailSender)
     {
         _signInManager = signInManager;
         _accountDomainService = accountDomainService;
@@ -38,65 +52,11 @@ public class AccountService : IAccountService
         _userManager = userManager;
         _userStore = userStore;
         _emailStore = GetEmailStore();
-;
+        _notif = notif;
+        _emailSender = emailSender;
     }
 
-
-    public async Task<int> Login(LoginViewModel user)
-    {
-        int value = 0;
-        
-            // This doesn't count login failures towards account lockout
-            // To enable password failures to trigger account lockout, set lockoutOnFailure: true
-            var result = await _signInManager.PasswordSignInAsync(user.Email, user.Password, user.RememberMe, lockoutOnFailure: false);
-            if (result.Succeeded)
-            {
-                _logger.LogInformation("User logged in.");
-                value = 200;
-
-            }
-            else
-            {
-                value = -1;
-            }
-            
-
-        return value;
-    }
-
-    public async Task<ApplicationUser?> UpdateUser(RegisterViewModel input)
-    {
-        string Auth = "";
-        if (input.IsGoogleAuth)
-        {
-            Auth = "Google";
-        }
-        else if (input.IsSMS)
-        {
-            Auth = "SMS";
-        }
-        else
-        {
-            Auth = "None";
-        }
-
-        ApplicationUser userDetails = await _userManager.FindByEmailAsync(input.Email);
-
-        userDetails.FirstName = input.FirstName;
-        userDetails.LastName = input.LastName;
-        userDetails.AuthenticationType = Auth;
-        userDetails.OTP = 000000;
-        userDetails.UserFaculty = input.Faculty;
-        userDetails.PhoneNumber = input.PhoneNumber;
-
-        // ApplicationUser input = ApplicationUser(Id, user.FirstName, user.LastName, Auth, "",
-        //     SMSTime, user.StudentFaculty, user.Email, user.Email.ToUpper(), user.Email,
-        //     user.Email.ToUpper(), EmailConfirmed, PasswordHasher<>, SecurityStamp<>, ConcurrencyStamp,
-        //     user.PhoneNumber, PhoneNumberConfirmed, TwoFactorEnabled, "", LockoutEnabled, AccessFailedCount);
-        
-        return await _accountDomainService.UpdateUser(userDetails);
-    }
-
+    /*Registers a new user - Admin only*/
     public async Task<ApplicationUser?> NewUser(RegisterViewModel input)
     {
         var user = CreateUser();
@@ -109,19 +69,20 @@ public class AccountService : IAccountService
         {
             _logger.LogInformation("User created a new account with password.");
 
-            var userId = await _userManager.GetUserIdAsync(user);
-            // var userDetails = await _userManager.FindByIdAsync(userId);
-
             user.UserFaculty = input.Faculty;
             user.LastName = input.LastName;
             user.FirstName = input.FirstName;
             if (input.IsGoogleAuth)
             {
-                user.AuthenticationType = "Google";
+                user.AuthenticationType = "Email";
+            }
+            else if (input.IsGoogleAuth)
+            {
+                user.AuthenticationType = "SMS";
             }
             else
             {
-                user.AuthenticationType = "SMS";
+                user.AuthenticationType = "None";
             }
 
             user.PhoneNumber = input.PhoneNumber;
@@ -133,16 +94,64 @@ public class AccountService : IAccountService
 
     }
 
-    public async Task<bool> GenerateCode(ApplicationUser user)
+    /*Generate login OTP for SMS*/
+    public async Task<bool> GenerateCodeSMS(ApplicationUser user)
     {
-        return await _accountDomainService.GenerateCode(user);
+        if (await _accountDomainService.GenerateCode(user))
+        {
+            try
+            {
+                ApplicationUser userDetails = await _userManager.FindByIdAsync(user.Id);
+                string msgBody = "Your 6 digit OTP for Living Lab is " + userDetails.OTP;
+                await _notif.SendTextToPhone("+65"+userDetails.PhoneNumber, msgBody);
+                return true;
+            }
+            catch (Exception e)
+            {
+                return false;
+            }
+        }
+
+        return false;
     }
 
+    /*Generates login OTP for email*/
+    public async Task<bool> GenerateCodeEmail(ApplicationUser user)
+    {
+        if (await _accountDomainService.GenerateCode(user))
+        {
+            try
+            {
+                ApplicationUser userDetails = await _userManager.FindByIdAsync(user.Id);
+                string emailHeader = "OTP for Living Lab";
+                string msgBody = "Your 6 digit OTP for Living Lab is " + userDetails.OTP;
+                await _emailSender.SendEmailAsync(userDetails.Email,
+                    emailHeader,
+                    msgBody);
+                return true;
+            }
+            catch (Exception e)
+            {
+                return false;
+            }
+        }
+
+        return false;
+    }
+
+    /*Verify if the OTP code is correct*/
     public async Task<bool> VerifyCode(string userid, VerifyViewModel viewModel)
     {
         return await _accountDomainService.VerifyCode(userid, viewModel.OTP);
     }
 
+    /*Update user settings 2FA selection*/
+    public async Task UpdateUserSettings(ApplicationUser user)
+    {
+        await _accountDomainService.UpdateUser(user);
+    }
+
+    /*Function from users manager to create users*/
     private ApplicationUser CreateUser()
     {
         try
@@ -156,6 +165,8 @@ public class AccountService : IAccountService
                                                 $"override the register page in /Areas/Identity/Pages/Account/Register.cshtml");
         }
     }
+    
+    /*Function to store email to user manager*/
     private IUserEmailStore<ApplicationUser> GetEmailStore()
     {
         if (!_userManager.SupportsUserEmail)

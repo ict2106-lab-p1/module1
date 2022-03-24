@@ -2,7 +2,6 @@ Refer to WORKFLOW.md for instructions on the development flow.
 
 ## Development Workflow
 ```master```: Only codes that are ready to deploy will be merged here
-<br>
 ```dev```: This is where completed features are being merged
 
 ## Getting started
@@ -83,19 +82,39 @@ It's "safe" to ignore warnings on startup about nullables. These are scaffolded 
 Alternatively, run the web app and let dotnet run migrations automatically. If you encounter an exception page, click on "Run migrations" and refresh.
 
 #### Clean state
-Remove `livinglab.sqlite`, rerun migrations.
+- Remove `livinglab.sqlite`, rerun migrations.
 
 ## Github ID
 ### P1-01 Student ID & Name & Github ID
-- 2002437 Han Yi hanyi97
-- 2002362 Jia Jia jiajiatan
-- 2002288 Mary Michelle mmichelle1
-- 2001868 Yong Zheng PixlRainbow
+- 2002437 | Han Yi           | hanyi97
+- 2002362 | Jia Jia          | jiajiatan
+- 2002288 | Mary Michelle    | mmichelle1
+- 2001868 | Yong Zheng       | PixlRainbow
 ### P1-02 Student ID & Name & Github ID
-- 2000522 Chen Dong Don-Whis
-- 2002230 Joey Chua 170joeychua
-- 2000990 Lee Wei Jie Guthixo
-- 2001631 Hong Ying HongYing222
+- 2002230 | Joey Chua        | 170joeychua
+- 2000522 | Chen Dong        | Don-Whis
+- 2000990 | Lee Wei Jie      | Guthixo
+- 2001631 | Hong Ying        | HongYing222
+### P1-03 Student ID & Name & Github ID
+- 2001206 | Chua Sheng Yu    | shengyu98
+- 2002220 | Angelene Joshna  | angelenejoshna
+- 2002262 | Hui Xuan Vanna   | thxcvanna
+- 2002226 | Eddie Tan DeJun  | EddieTanDJ
+- 2000621 | Carlton Anthoni  | CarltonFoo
+### P1-04 Student ID & Name & Github ID
+- 2002111 | Percy            | senkawa
+- 2002841 | Leong Kah En     | kahenll
+- 2001505 | M.d Nasarudin    | SpaceNas
+- 2001191 | Goh Jun Jie      | junjie167
+- 2002773 | Kamarullah Bin   | Kamarul917
+### P1-05 Student ID & Name & Github ID
+- 2000721 | Yip Hou Liang    | SageSG
+- 2001317 | Cai Ting Celine  | celineangct
+- 2002795 | Belle Sim        | bellesim
+- 2002820 | Gou Hang         | gouhang26
+- 2001476 | Ter KaiSiang     | kiasiang419
+### P1-06 Student ID & Name & Github ID
+
 ---
 
 Credits: Thanks Percy for setting up the MVC skeleton + Tailwind integration.
