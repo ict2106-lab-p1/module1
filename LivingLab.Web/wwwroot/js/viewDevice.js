@@ -1,16 +1,7 @@
-<<<<<<< HEAD
-
 /* <remarks>*/
 /* Author: Team P1-3*/
 /* </remarks>*/
 $(document).ready(function () {
-=======
-/* <remarks>*/
-/* Author: Team P1-3*/
-/* </remarks>*/
-
-$(document).ready(function() {
->>>>>>> dev
     //$('#table_id').DataTable();
     var table = $("#table_id").DataTable({
         dom: "<'ui stackable grid'" +
