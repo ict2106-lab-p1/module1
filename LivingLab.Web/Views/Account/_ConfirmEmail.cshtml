@@ -1,0 +1,16 @@
+<h3>Thank you for confirming your email</h3>
+<h4>Redirecting to login page or click <u><a asp-controller="Home" asp-action="Index">here</a></u></h4>
+@* /// <remarks> *@
+@* /// Author: Team P1-5 *@
+@* /// </remarks> *@
+
+@section Scripts {
+    <script>
+    const myTimeout = setTimeout(myGreeting, 3000);
+    
+    function myGreeting(){
+        window.location.replace("http://" + window.location.host + "/");
+        }
+        
+    </script>
+}

@@ -26,37 +26,37 @@
 
 <table id="table_id" class="display">
     <thead>
-        <tr>
-            <th>ID</th>
-            <th>Name</th>
-            <th>Type</th>
-            <th>Description</th>
-            <th>Last Updated</th>
-            <th>Status</th>
-            <th>Borrowable</th>
-            <th>Borrowed By</th>
-            <th>DueDate</th>
-            <th></th>
-            <th></th>
-        </tr>
+    <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Description</th>
+        <th>Last Updated</th>
+        <th>Status</th>
+        <th>Borrowable</th>
+        <th>Borrowed By</th>
+        <th>DueDate</th>
+        <th></th>
+        <th></th>
+    </tr>
     </thead>
     <tbody>
-        @foreach (var accessory in Model.AccessoryList)
-        {
-            <tr>
-                <td>@accessory.Id</td>
-                <td>@accessory.AccessoryType.Name</td>
-                <td>@accessory.AccessoryType.Type</td>
-                <td>@accessory.AccessoryType.Description</td>
-                <td>@accessory.LastUpdated.ToString("MM/dd/yyyy")</td>
-                <td>@accessory.Status</td>
-                <td>@accessory.AccessoryType.Borrowable</td>
-                <td>@accessory.LabUserId</td>
-                <td>@accessory.DueDate?.ToString("MM/dd/yyyy")</td>
-                <td data-id="@accessory.Id" class="editAccessoryBtn"></td>
-                <td data-id="@accessory.Id" class="deleteAccessoryBtn"></td>
-            </tr>
-        }
+    @foreach (var accessory in Model.AccessoryList)
+    {
+        <tr>
+            <td>@accessory.Id</td>
+            <td>@accessory.Name</td>
+            <td>@accessory.AccessoryType.Type</td>
+            <td>@accessory.AccessoryType.Description</td>
+            <td>@accessory.LastUpdated.ToString("MM/dd/yyyy")</td>
+            <td>@accessory.Status</td>
+            <td>@accessory.AccessoryType.Borrowable</td>
+            <td>@accessory.LabUserId</td>
+            <td>@accessory.DueDate?.ToString("MM/dd/yyyy")</td>
+            <td data-id="@accessory.Id" class="editAccessoryBtn"></td>
+            <td data-id="@accessory.Id" class="deleteAccessoryBtn"></td>
+        </tr>
+    }
     </tbody>
 </table>
 

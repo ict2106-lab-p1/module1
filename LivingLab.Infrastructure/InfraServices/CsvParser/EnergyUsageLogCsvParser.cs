@@ -1,8 +1,8 @@
 using System.Text;
 
-using LivingLab.Core.Interfaces.Services;
+using LivingLab.Core.Entities.DTO.EnergyUsageDTOs;
 using LivingLab.Core.Interfaces.Services.EnergyUsageInterfaces;
-using LivingLab.Core.Models;
+
 
 using Microsoft.AspNetCore.Http;
 
@@ -19,12 +19,12 @@ public class EnergyUsageLogCsvParser : IEnergyUsageLogCsvParser
     /**
      * Read and process the csv file.
      */
-    public IEnumerable<EnergyUsageCsvModel> Parse(IFormFile file)
+    public IEnumerable<EnergyUsageCsvDTO> Parse(IFormFile file)
     {
         var filePath = SaveFile(file);
         var options = new CsvParserOptions(true, ',');
         var mapper = new EnergyUsageLogCsvMapper();
-        var parser = new CsvParser<EnergyUsageCsvModel>(options, mapper);
+        var parser = new CsvParser<EnergyUsageCsvDTO>(options, mapper);
         var result = parser.ReadFromFile(filePath, Encoding.Default);
 
         return MapResult(result);
@@ -44,14 +44,15 @@ public class EnergyUsageLogCsvParser : IEnergyUsageLogCsvParser
     /**
      * Map processes data to Model.
      */
-    private IEnumerable<EnergyUsageCsvModel> MapResult(ParallelQuery<CsvMappingResult<EnergyUsageCsvModel>> result)
+    private IEnumerable<EnergyUsageCsvDTO> MapResult(ParallelQuery<CsvMappingResult<EnergyUsageCsvDTO>> result)
     {
-        var list = new List<EnergyUsageCsvModel>();
+        var list = new List<EnergyUsageCsvDTO>();
 
         foreach (var item in result)
         {
-            list.Add(new EnergyUsageCsvModel
+            list.Add(new EnergyUsageCsvDTO
             {
+                DeviceType = item.Result.DeviceType,
                 DeviceSerialNo = item.Result.DeviceSerialNo,
                 Interval = item.Result.Interval,
                 EnergyUsage = item.Result.EnergyUsage,

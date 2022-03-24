@@ -7,5 +7,6 @@ public class EnergyUsageLabViewModel
 {
     public int LabId { get; set; }
     public string Location { get; set; }
-    public string Area { get; set; }
+    public string Area { get; set; }    
+    public double EnergyUsageBenchmark { get; set; }
 }

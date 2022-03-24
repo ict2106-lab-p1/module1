@@ -23,31 +23,31 @@ public class AccessoryController : Controller
 
     // detailed view
     [HttpPost("ViewAccessory")]
-    public async Task<IActionResult> ViewAccessory(string accessoryType)
+    public async Task<IActionResult> ViewAccessory(string accessoryType, string labLocation)
     {
-        ViewAccessoryViewModel viewAccessories = await _accessoryService.ViewAccessory(accessoryType);
+        ViewAccessoryViewModel viewAccessories = await _accessoryService.ViewAccessory(accessoryType, labLocation);
         return View("ViewAccessory", viewAccessories);
     }
     // high level view
-    [Route("ViewAccessoryType")]
-    public async Task<IActionResult> ViewAccessoryType()
+    [Route("ViewAccessoryType/{labLocation}")]
+    public async Task<IActionResult> ViewAccessoryType(string labLocation)
     {
-        ViewAccessoryTypeViewModel viewAccessories = await _accessoryService.ViewAccessoryType();
+        ViewAccessoryTypeViewModel viewAccessories = await _accessoryService.ViewAccessoryType(labLocation);
         return View("ViewAccessoryType", viewAccessories);
     }
-    
-    
+
+
     [Route("AddAccessoryDetails")]
     public async Task<AccessoryDetailsViewModel> AddAccessoryDetails()
-    { 
+    {
         //retrieve data from db
         AccessoryDetailsViewModel accessoryDetails = await _accessoryService.AddAccessoryDetails();
         return accessoryDetails;
     }
-    
+
     [Route("GetEditDetails/{id}")]
     public async Task<AccessoryDetailsViewModel> EditAccessoryDetails(int id)
-    { 
+    {
         //retrieve data from db
         AccessoryDetailsViewModel accessoryDetails = await _accessoryService.EditAccessoryDetails(id);
         return accessoryDetails;
@@ -59,28 +59,30 @@ public class AccessoryController : Controller
         AccessoryViewModel accessoryViewModel = await _accessoryService.GetAccessory(id);
         return accessoryViewModel;
     }
-    
+
     [HttpPost("CreateAccessory")]
     public async Task<IActionResult> CreateAccessory(AccessoryDetailsViewModel viewModel)
     {
         await _accessoryService.AddAccessory(viewModel);
-        return RedirectToAction("ViewAccessoryType");
+        return Redirect($"ViewAccessoryType/{viewModel.Accessory.Lab.LabLocation}");
     }
-    
+
     [HttpPost("EditAccessory")]
     public async Task<IActionResult> EditAccessory(AccessoryDetailsViewModel viewModel)
     {
         await _accessoryService.EditAccessory(viewModel);
-        return RedirectToAction("ViewAccessoryType");
+        
+        ViewAccessoryViewModel viewAccessory = await _accessoryService.ViewAccessory(viewModel.Accessory.AccessoryType.Type, viewModel.Accessory.Lab.LabLocation);
+        return View("ViewAccessory", viewAccessory);
     }
-    
+
     [HttpPost("View/Delete")]
     public async Task<IActionResult> DeleteAccessory(AccessoryViewModel deleteAccessory)
     {
-        await _accessoryService.DeleteAccessory(deleteAccessory); 
-        
+        await _accessoryService.DeleteAccessory(deleteAccessory);
+
         // Temp - To display ViewAll after editing
-        ViewAccessoryViewModel viewAccessory = await _accessoryService.ViewAccessory(deleteAccessory.AccessoryType.Type);
+        ViewAccessoryViewModel viewAccessory = await _accessoryService.ViewAccessory(deleteAccessory.AccessoryType.Type, deleteAccessory.Lab.LabLocation);
         return View("ViewAccessory", viewAccessory);
     }
 

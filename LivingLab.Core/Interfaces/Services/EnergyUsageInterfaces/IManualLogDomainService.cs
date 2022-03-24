@@ -1,5 +1,5 @@
 using LivingLab.Core.Entities;
-using LivingLab.Core.Models;
+using LivingLab.Core.Entities.DTO.EnergyUsageDTOs;
 
 using Microsoft.AspNetCore.Http;
 
@@ -10,6 +10,6 @@ namespace LivingLab.Core.Interfaces.Services.EnergyUsageInterfaces;
 /// </remarks>
 public interface IManualLogDomainService
 {
-    List<EnergyUsageCsvModel> UploadLogs(IFormFile file);
+    List<EnergyUsageCsvDTO> UploadLogs(IFormFile file);
     Task SaveLogs(List<EnergyUsageLog> logs);
 }

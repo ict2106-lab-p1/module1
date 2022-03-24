@@ -19,10 +19,10 @@ public class Lab
 
     public string? LabInCharge { get; set; }
 
-    [Required]
-    public int? Capacity { get; set; }
-    
-    public int? Area { get; set; }
+    // [Required]
+    // public int? Capacity { get; set; }
+    //
+    // public int? Area { get; set; }
     
     public Double? EnergyUsageBenchmark { get; set; }
 

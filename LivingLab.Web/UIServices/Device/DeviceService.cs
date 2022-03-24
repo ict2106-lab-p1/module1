@@ -19,10 +19,10 @@ public class DeviceService : IDeviceService
         _mapper = mapper;
     }
 
-    public async Task<ViewDeviceViewModel> ViewDevice(string deviceType)
+    public async Task<ViewDeviceViewModel> ViewDevice(string deviceType, string labLocation)
     {
         //retrieve data from db
-        List<Core.Entities.Device> deviceList = await _deviceDomainService.ViewDevice(deviceType);
+        List<Core.Entities.Device> deviceList = await _deviceDomainService.ViewDevice(deviceType, labLocation);
                 
         //map entity model to view model
         List<DeviceViewModel> devices = _mapper.Map<List<Core.Entities.Device>, List<DeviceViewModel>> (deviceList);
@@ -33,14 +33,15 @@ public class DeviceService : IDeviceService
         return viewDevices;
     }
 
-    public async Task<ViewDeviceTypeViewModel> ViewDeviceType()
+    public async Task<ViewDeviceTypeViewModel> ViewDeviceType(string labLocation)
     {
-        List<ViewDeviceTypeDTO> viewDeviceTypeDtos = await _deviceDomainService.ViewDeviceType();
+        List<ViewDeviceTypeDTO> viewDeviceTypeDtos = await _deviceDomainService.ViewDeviceType(labLocation);
         //map viewDeviceTypeDto to deviceTypeViewModel
         List<DeviceTypeViewModel> deviceList =
             _mapper.Map<List<ViewDeviceTypeDTO>, List<DeviceTypeViewModel>>(viewDeviceTypeDtos);
         ViewDeviceTypeViewModel deviceTypeViewModel = new ViewDeviceTypeViewModel();
         deviceTypeViewModel.ViewDeviceTypeDtos = deviceList;
+        deviceTypeViewModel.labLocation = labLocation;
         return deviceTypeViewModel;
     }
     
