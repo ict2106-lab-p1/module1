@@ -24,7 +24,7 @@ public class Lab
     //
     // public int? Area { get; set; }
     
-    // public Double? EnergyUsageBenchmark { get; set; }
+    public Double? EnergyUsageBenchmark { get; set; }
 
     public List<Booking> Bookings { get; set; }
 

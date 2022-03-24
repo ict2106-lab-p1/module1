@@ -1,10 +1,11 @@
 using AutoMapper;
 
 using LivingLab.Core.Entities;
-using LivingLab.Core.Interfaces.Services;
+using LivingLab.Core.Entities.DTO.EnergyUsageDTOs;
 using LivingLab.Core.Interfaces.Services.EnergyUsageInterfaces;
-using LivingLab.Core.Models;
+
 using LivingLab.Web.Models.ViewModels;
+using LivingLab.Web.Models.ViewModels.EnergyUsage;
 
 namespace LivingLab.Web.UIServices.ManualLogs;
 
@@ -25,7 +26,7 @@ public class ManualLogService : IManualLogService
     public List<LogItemViewModel> UploadLogs(IFormFile file)
     {
         var logs = _manualLogDomainService.UploadLogs(file);
-        return _mapper.Map<List<EnergyUsageCsvModel>, List<LogItemViewModel>>(logs);
+        return _mapper.Map<List<EnergyUsageCsvDTO>, List<LogItemViewModel>>(logs);
     }
 
     public async Task SaveLogs(List<LogItemViewModel> logs)
