@@ -15,17 +15,28 @@ namespace LivingLab.Core.DomainServices;
 /// </remarks>
 public class LabProfileDomainService: ILabProfileDomainService
 {
-    private readonly ILabProfileRepository _labProfileRep;
+    private readonly ILabProfileRepository _labRepository;
     private readonly ILogger _logger;
-    
-    public LabProfileDomainService(ILabProfileRepository labProfileRep, ILogger<ILabProfileRepository> logger)
+    public LabProfileDomainService(ILabProfileRepository labRepository, ILogger<ILabProfileRepository> logger)
     {
-        _labProfileRep = labProfileRep;
+        _labRepository = labRepository;
         _logger = logger;
+    }    
+    
+    public Task<List<Lab>> ViewLabs()
+    {
+        return _labRepository.GetAllLabs();
+    } 
+ 
+    
+    public Task<Lab> ViewLabDetails(int id)
+    {
+        return _labRepository.GetLabDetails(id);
     }
+  
+    /*Create new lab with lab details*/
     public async Task<Lab?> NewLab(Lab labinput)
     {
-        _logger.LogInformation("Henry add lab");
-        return await _labProfileRep.AddAsync(labinput);
+        return await _labRepository.AddAsync(labinput);
     }
 }

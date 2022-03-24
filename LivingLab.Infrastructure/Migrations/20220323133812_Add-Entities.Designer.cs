@@ -11,8 +11,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace LivingLab.Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20220320082526_CreateInitialDB")]
-    partial class CreateInitialDB
+    [Migration("20220323133812_Add-Entities")]
+    partial class AddEntities
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -70,6 +70,10 @@ namespace LivingLab.Infrastructure.Migrations
                     b.Property<DateTime>("LastUpdated")
                         .HasColumnType("Date");
 
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
                     b.Property<string>("ReviewStatus")
                         .HasColumnType("TEXT");
 
@@ -95,6 +99,7 @@ namespace LivingLab.Infrastructure.Migrations
                             AccessoryTypeId = 1,
                             LabId = 1,
                             LastUpdated = new DateTime(2021, 10, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Name = "Sony A7 IV",
                             ReviewStatus = "Pending",
                             ReviewedBy = "David",
                             Status = "Available"
@@ -105,8 +110,9 @@ namespace LivingLab.Infrastructure.Migrations
                             AccessoryTypeId = 1,
                             DueDate = new DateTime(2022, 10, 14, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             LabId = 1,
-                            LabUserId = "User1",
+                            LabUserId = "DefaultAdmin1",
                             LastUpdated = new DateTime(2021, 10, 14, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Name = "Sony A8 IV",
                             ReviewStatus = "Pending",
                             ReviewedBy = "David",
                             Status = "Borrowed"
@@ -117,6 +123,7 @@ namespace LivingLab.Infrastructure.Migrations
                             AccessoryTypeId = 2,
                             LabId = 1,
                             LastUpdated = new DateTime(2021, 10, 17, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Name = "MA300D1-1",
                             ReviewStatus = "Pending",
                             ReviewedBy = "David",
                             Status = "Available"
@@ -127,6 +134,7 @@ namespace LivingLab.Infrastructure.Migrations
                             AccessoryTypeId = 2,
                             LabId = 1,
                             LastUpdated = new DateTime(2021, 10, 21, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Name = "MA300D1-2",
                             ReviewStatus = "Pending",
                             ReviewedBy = "David",
                             Status = "Available"
@@ -137,8 +145,9 @@ namespace LivingLab.Infrastructure.Migrations
                             AccessoryTypeId = 3,
                             DueDate = new DateTime(2022, 9, 9, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             LabId = 1,
-                            LabUserId = "User1",
+                            LabUserId = "DefaultAdmin1",
                             LastUpdated = new DateTime(2021, 9, 9, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Name = "DHT22",
                             ReviewStatus = "Pending",
                             ReviewedBy = "David",
                             Status = "Borrowed"
@@ -149,6 +158,7 @@ namespace LivingLab.Infrastructure.Migrations
                             AccessoryTypeId = 3,
                             LabId = 1,
                             LastUpdated = new DateTime(2021, 9, 5, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Name = "DHT23",
                             ReviewStatus = "Pending",
                             ReviewedBy = "David",
                             Status = "Available"
@@ -159,6 +169,7 @@ namespace LivingLab.Infrastructure.Migrations
                             AccessoryTypeId = 4,
                             LabId = 1,
                             LastUpdated = new DateTime(2021, 8, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Name = "LEFOO LFT2000W",
                             ReviewStatus = "Pending",
                             ReviewedBy = "David",
                             Status = "Available"
@@ -169,8 +180,9 @@ namespace LivingLab.Infrastructure.Migrations
                             AccessoryTypeId = 4,
                             DueDate = new DateTime(2022, 9, 5, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             LabId = 1,
-                            LabUserId = "User1",
+                            LabUserId = "DefaultAdmin1",
                             LastUpdated = new DateTime(2021, 8, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Name = "LEFO1 LFT2000W",
                             ReviewStatus = "Pending",
                             ReviewedBy = "David",
                             Status = "Borrowed"
@@ -181,6 +193,7 @@ namespace LivingLab.Infrastructure.Migrations
                             AccessoryTypeId = 5,
                             LabId = 1,
                             LastUpdated = new DateTime(2021, 7, 3, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Name = "RM1802",
                             ReviewStatus = "Pending",
                             ReviewedBy = "David",
                             Status = "Available"
@@ -191,8 +204,9 @@ namespace LivingLab.Infrastructure.Migrations
                             AccessoryTypeId = 5,
                             DueDate = new DateTime(2022, 10, 14, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             LabId = 1,
-                            LabUserId = "User1",
+                            LabUserId = "DefaultAdmin1",
                             LastUpdated = new DateTime(2021, 6, 24, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Name = "RM1803",
                             ReviewStatus = "Pending",
                             ReviewedBy = "David",
                             Status = "Borrowed"
@@ -203,6 +217,7 @@ namespace LivingLab.Infrastructure.Migrations
                             AccessoryTypeId = 6,
                             LabId = 1,
                             LastUpdated = new DateTime(2021, 7, 25, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Name = "HC-SR04",
                             ReviewStatus = "Pending",
                             ReviewedBy = "David",
                             Status = "Available"
@@ -213,6 +228,7 @@ namespace LivingLab.Infrastructure.Migrations
                             AccessoryTypeId = 6,
                             LabId = 1,
                             LastUpdated = new DateTime(2021, 4, 3, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Name = "HC-SR05",
                             ReviewStatus = "Pending",
                             ReviewedBy = "David",
                             Status = "Available"
@@ -223,8 +239,9 @@ namespace LivingLab.Infrastructure.Migrations
                             AccessoryTypeId = 7,
                             DueDate = new DateTime(2022, 7, 19, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             LabId = 1,
-                            LabUserId = "User1",
+                            LabUserId = "DefaultAdmin1",
                             LastUpdated = new DateTime(2021, 7, 19, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Name = "EDGELEC 4Pin LED Diodes",
                             ReviewStatus = "Pending",
                             ReviewedBy = "David",
                             Status = "Borrowed"
@@ -235,8 +252,9 @@ namespace LivingLab.Infrastructure.Migrations
                             AccessoryTypeId = 7,
                             DueDate = new DateTime(2022, 12, 14, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             LabId = 1,
-                            LabUserId = "user1",
+                            LabUserId = "DefaultAdmin1",
                             LastUpdated = new DateTime(2021, 12, 14, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Name = "EDGELEC 6Pin LED Diodes",
                             ReviewStatus = "Pending",
                             ReviewedBy = "David",
                             Status = "Borrowed"
@@ -247,6 +265,7 @@ namespace LivingLab.Infrastructure.Migrations
                             AccessoryTypeId = 8,
                             LabId = 1,
                             LastUpdated = new DateTime(2021, 11, 12, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Name = "TMB09A05",
                             ReviewStatus = "Pending",
                             ReviewedBy = "David",
                             Status = "Available"
@@ -257,6 +276,7 @@ namespace LivingLab.Infrastructure.Migrations
                             AccessoryTypeId = 8,
                             LabId = 1,
                             LastUpdated = new DateTime(2021, 7, 3, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Name = "TMB09A06",
                             ReviewStatus = "Pending",
                             ReviewedBy = "David",
                             Status = "Available"
@@ -275,10 +295,6 @@ namespace LivingLab.Infrastructure.Migrations
                     b.Property<string>("Description")
                         .HasColumnType("TEXT");
 
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
-
                     b.Property<string>("Type")
                         .IsRequired()
                         .HasColumnType("TEXT");
@@ -293,7 +309,6 @@ namespace LivingLab.Infrastructure.Migrations
                             Id = 1,
                             Borrowable = true,
                             Description = "Its purpose is to capture images and videos",
-                            Name = "Sony A7 IV",
                             Type = "Camera"
                         },
                         new
@@ -301,7 +316,6 @@ namespace LivingLab.Infrastructure.Migrations
                             Id = 2,
                             Borrowable = true,
                             Description = "Its purpose is to detect obstacles",
-                            Name = "MA300D1-1",
                             Type = "Ultrasonic Sensor"
                         },
                         new
@@ -309,7 +323,6 @@ namespace LivingLab.Infrastructure.Migrations
                             Id = 3,
                             Borrowable = true,
                             Description = "Its purpose is to detect humidity in the environment",
-                            Name = "DHT22",
                             Type = "Humidity Sensor"
                         },
                         new
@@ -317,7 +330,6 @@ namespace LivingLab.Infrastructure.Migrations
                             Id = 4,
                             Borrowable = true,
                             Description = "Its purpose is to detect water pressure",
-                            Name = "LEFOO LFT2000W",
                             Type = "Water pressure Sensor"
                         },
                         new
@@ -325,7 +337,6 @@ namespace LivingLab.Infrastructure.Migrations
                             Id = 5,
                             Borrowable = true,
                             Description = "It is used to switch on the lights in the lab",
-                            Name = "RM1802",
                             Type = "IR Sensor"
                         },
                         new
@@ -333,7 +344,6 @@ namespace LivingLab.Infrastructure.Migrations
                             Id = 6,
                             Borrowable = true,
                             Description = "Its purpose is to detect proximity of an obstacle",
-                            Name = "HC-SR04",
                             Type = "Proximity Sensor"
                         },
                         new
@@ -341,7 +351,6 @@ namespace LivingLab.Infrastructure.Migrations
                             Id = 7,
                             Borrowable = false,
                             Description = "Its purpose is to emit light",
-                            Name = "EDGELEC 4Pin LED Diodes",
                             Type = "LED Lights"
                         },
                         new
@@ -349,7 +358,6 @@ namespace LivingLab.Infrastructure.Migrations
                             Id = 8,
                             Borrowable = true,
                             Description = "Its purpose is to emit sound from the device",
-                            Name = "TMB09A05",
                             Type = "Buzzer"
                         });
                 });
@@ -391,7 +399,7 @@ namespace LivingLab.Infrastructure.Migrations
                             EndDateTime = new DateTime(2022, 7, 19, 12, 0, 0, 0, DateTimeKind.Unspecified),
                             LabId = 1,
                             StartDateTime = new DateTime(2022, 7, 19, 10, 0, 0, 0, DateTimeKind.Unspecified),
-                            UserId = "UserId3"
+                            UserId = "DefaultAdmin3"
                         });
                 });
 
@@ -700,54 +708,82 @@ namespace LivingLab.Infrastructure.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "UserId1",
+                            Id = "DefaultAdmin1",
                             AccessFailedCount = 0,
                             AuthenticationType = "None",
-                            Email = "David@gmail.com",
-                            EmailConfirmed = false,
-                            FirstName = "David",
-                            LastName = "Cheng",
+                            Email = "nghanyi1997@gmail.com",
+                            EmailConfirmed = true,
+                            FirstName = "Sexy",
+                            LastName = "Sotong",
                             LockoutEnabled = true,
+                            NormalizedEmail = "nghanyi1997@gmail.com",
+                            NormalizedUserName = "nghanyi1997@gmail.com",
                             PasswordHash = "testtesttest",
-                            PhoneNumber = "96878607",
+                            PhoneNumber = "To Be Changed",
                             PhoneNumberConfirmed = false,
                             SMSExpiry = new DateTime(2022, 7, 19, 12, 0, 0, 0, DateTimeKind.Unspecified),
                             TwoFactorEnabled = false,
-                            UserFaculty = "ICT"
+                            UserFaculty = "SE",
+                            UserName = "nghanyi1997@gmail.com"
                         },
                         new
                         {
-                            Id = "UserId2",
+                            Id = "DefaultAdmin2",
                             AccessFailedCount = 0,
                             AuthenticationType = "None",
-                            Email = "henry@gmail.com",
-                            EmailConfirmed = false,
-                            FirstName = "Carlton",
-                            LastName = "Foo",
+                            Email = "mailstohenry@gmail.com",
+                            EmailConfirmed = true,
+                            FirstName = "Ji Pyeong",
+                            LastName = "Han",
                             LockoutEnabled = true,
+                            NormalizedEmail = "mailstohenry@gmail.com",
+                            NormalizedUserName = "mailstohenry@gmail.com",
                             PasswordHash = "testtesttest",
-                            PhoneNumber = "12341234",
+                            PhoneNumber = "To Be Changed",
                             PhoneNumberConfirmed = false,
                             SMSExpiry = new DateTime(2022, 7, 19, 12, 0, 0, 0, DateTimeKind.Unspecified),
                             TwoFactorEnabled = false,
-                            UserFaculty = "SE"
+                            UserFaculty = "SE",
+                            UserName = "mailstohenry@gmail.com"
                         },
                         new
                         {
-                            Id = "UserId3",
+                            Id = "DefaultAdmin3",
                             AccessFailedCount = 0,
                             AuthenticationType = "None",
-                            Email = "houliang@gmail.com",
-                            EmailConfirmed = false,
-                            FirstName = "Hou Liang",
-                            LastName = "Yip",
+                            Email = "shengyu98@hotmail.com",
+                            EmailConfirmed = true,
+                            FirstName = "Do San",
+                            LastName = "Nam",
                             LockoutEnabled = true,
+                            NormalizedEmail = "shengyu98@hotmail.com",
+                            NormalizedUserName = "shengyu98@hotmail.com",
                             PasswordHash = "testtesttest",
-                            PhoneNumber = "80808080",
+                            PhoneNumber = "To Be Changed",
                             PhoneNumberConfirmed = false,
                             SMSExpiry = new DateTime(2022, 7, 19, 12, 0, 0, 0, DateTimeKind.Unspecified),
                             TwoFactorEnabled = false,
-                            UserFaculty = "SE"
+                            UserFaculty = "SE",
+                            UserName = "shengyu98@hotmail.com"
+                        },
+                        new
+                        {
+                            Id = "DefaultAdmin4",
+                            AccessFailedCount = 0,
+                            AuthenticationType = "None",
+                            Email = "test@gmail.com",
+                            EmailConfirmed = false,
+                            FirstName = "Test",
+                            LastName = "Test",
+                            LockoutEnabled = true,
+                            NormalizedUserName = "test@gmail.com",
+                            PasswordHash = "testtesttest",
+                            PhoneNumber = "00000000",
+                            PhoneNumberConfirmed = false,
+                            SMSExpiry = new DateTime(2022, 7, 19, 12, 0, 0, 0, DateTimeKind.Unspecified),
+                            TwoFactorEnabled = false,
+                            UserFaculty = "ICT",
+                            UserName = "test@gmail.com"
                         });
                 });
 
@@ -756,16 +792,6 @@ namespace LivingLab.Infrastructure.Migrations
                     b.Property<int>("LabId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
-
-                    b.Property<int?>("Area")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int?>("Capacity")
-                        .IsRequired()
-                        .HasColumnType("INTEGER");
-
-                    b.Property<double?>("EnergyUsageBenchmark")
-                        .HasColumnType("REAL");
 
                     b.Property<string>("LabInCharge")
                         .HasColumnType("TEXT");
@@ -788,8 +814,7 @@ namespace LivingLab.Infrastructure.Migrations
                         new
                         {
                             LabId = 1,
-                            Capacity = 20,
-                            LabInCharge = "UserId1",
+                            LabInCharge = "DefaultAdmin1",
                             LabLocation = "NYP-SR7C",
                             LabStatus = "Available"
                         });
@@ -816,9 +841,9 @@ namespace LivingLab.Infrastructure.Migrations
                     b.HasData(
                         new
                         {
-                            UserId = "UserId2",
+                            UserId = "DefaultAdmin2",
                             LabId = 1,
-                            InitiatorId = "UserId1"
+                            InitiatorId = "DefaultAdmin1"
                         });
                 });
 
@@ -973,6 +998,29 @@ namespace LivingLab.Infrastructure.Migrations
                         .HasDatabaseName("RoleNameIndex");
 
                     b.ToTable("Role", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = "1",
+                            ConcurrencyStamp = "",
+                            Name = "User",
+                            NormalizedName = "USER"
+                        },
+                        new
+                        {
+                            Id = "2",
+                            ConcurrencyStamp = "",
+                            Name = "Labtech",
+                            NormalizedName = "LABTECH"
+                        },
+                        new
+                        {
+                            Id = "3",
+                            ConcurrencyStamp = "",
+                            Name = "Admin",
+                            NormalizedName = "ADMIN"
+                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -1058,6 +1106,53 @@ namespace LivingLab.Infrastructure.Migrations
                     b.HasIndex("RoleId");
 
                     b.ToTable("UserRole", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            UserId = "DefaultAdmin1",
+                            RoleId = "1"
+                        },
+                        new
+                        {
+                            UserId = "DefaultAdmin1",
+                            RoleId = "2"
+                        },
+                        new
+                        {
+                            UserId = "DefaultAdmin1",
+                            RoleId = "3"
+                        },
+                        new
+                        {
+                            UserId = "DefaultAdmin2",
+                            RoleId = "1"
+                        },
+                        new
+                        {
+                            UserId = "DefaultAdmin2",
+                            RoleId = "2"
+                        },
+                        new
+                        {
+                            UserId = "DefaultAdmin2",
+                            RoleId = "3"
+                        },
+                        new
+                        {
+                            UserId = "DefaultAdmin3",
+                            RoleId = "1"
+                        },
+                        new
+                        {
+                            UserId = "DefaultAdmin3",
+                            RoleId = "2"
+                        },
+                        new
+                        {
+                            UserId = "DefaultAdmin3",
+                            RoleId = "3"
+                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>

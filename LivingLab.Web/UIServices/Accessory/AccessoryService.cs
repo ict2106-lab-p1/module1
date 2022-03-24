@@ -12,34 +12,33 @@ namespace LivingLab.Web.UIServices.Accessory;
 /// <remarks>
 /// Author: Team P1-3
 /// </remarks>
-public class AccessoryServices : IAccessoryService
+public class AccessoryService : IAccessoryService
 {
     private readonly IMapper _mapper;
     private readonly IAccessoryDomainService _accessoryDomainService;
 
-    public AccessoryServices(IMapper mapper, IAccessoryDomainService accessoryDomainService)
+    public AccessoryService(IMapper mapper, IAccessoryDomainService accessoryDomainService)
     {
         _mapper = mapper;
         _accessoryDomainService = accessoryDomainService;
     }
 
-    public async Task<ViewAccessoryViewModel> ViewAccessory(string accessoryType)
+    public async Task<ViewAccessoryViewModel> ViewAccessory(string accessoryType, string labLocation)
     {
         // retrieve all accessory from specific accessory type from db
-        List<Core.Entities.Accessory> accessoryList = await _accessoryDomainService.ViewAccessory(accessoryType);
+        List<Core.Entities.Accessory> accessoryList = await _accessoryDomainService.ViewAccessory(accessoryType, labLocation);
         // map entity model to view model
         List<AccessoryViewModel> accessories =
             _mapper.Map<List<Core.Entities.Accessory>, List<AccessoryViewModel>>(accessoryList);
         return new ViewAccessoryViewModel {AccessoryList = accessories};
     }
 
-    public async Task<ViewAccessoryTypeViewModel> ViewAccessoryType()
+    public async Task<ViewAccessoryTypeViewModel> ViewAccessoryType(string labLocation)
     {
-        List<ViewAccessoryTypeDTO> viewAccessoryTypeDtos = await _accessoryDomainService.ViewAccessoryType();
+        List<ViewAccessoryTypeDTO> viewAccessoryTypeDtos = await _accessoryDomainService.ViewAccessoryType(labLocation);
         List<OverallAccessoryTypeViewModel> accessoryTypeViewModels =
             _mapper.Map<List<ViewAccessoryTypeDTO>, List<OverallAccessoryTypeViewModel>>(viewAccessoryTypeDtos);
-        ViewAccessoryTypeViewModel viewAccessoryTypeViewModel = new ViewAccessoryTypeViewModel();
-        return new ViewAccessoryTypeViewModel {accessoryTypeList = accessoryTypeViewModels};
+        return new ViewAccessoryTypeViewModel {accessoryTypeList = accessoryTypeViewModels, labLocation = labLocation};
     }
 
     public async Task<AccessoryViewModel> GetAccessory(int id)
@@ -82,11 +81,11 @@ public class AccessoryServices : IAccessoryService
         AccessoryDetailsViewModel addAccessoryDetails = viewModelInput;
         ViewAccessoryViewModel viewAccessoryViewModel = new ViewAccessoryViewModel();
         AccessoryViewModel accessoryVM = new AccessoryViewModel();
+
         // Add new accessory Type
         if (addAccessoryDetails.NewAccessoryType != null)
         {
             accessoryVM.AccessoryType = new AccessoryType();
-            accessoryVM.AccessoryType.Name = addAccessoryDetails.Accessory.AccessoryType.Name;
             accessoryVM.AccessoryType.Type = addAccessoryDetails.NewAccessoryType;
             accessoryVM.AccessoryType.Description = addAccessoryDetails.Accessory.AccessoryType.Description;
             accessoryVM.AccessoryType.Borrowable = addAccessoryDetails.BorrowableValue == "1";
@@ -95,11 +94,12 @@ public class AccessoryServices : IAccessoryService
         {
             accessoryVM.AccessoryTypeId = addAccessoryDetails.Accessory.AccessoryType.Id;
         }
-
-        accessoryVM.Status = "Reviewing";
-        accessoryVM.LastUpdated = DateTime.Now;
-        accessoryVM.LabId = 1; //currently hardcoded need get real one
-
+        accessoryVM.Name = addAccessoryDetails.Accessory.Name;
+        accessoryVM.Status = "Available";
+        accessoryVM.LastUpdated = DateTime.Today;
+        accessoryVM.ReviewStatus = "Pending";
+        accessoryVM.LabId = addAccessoryDetails.Accessory.Lab.LabId;
+        
         // map view model back to accessory
         Core.Entities.Accessory newAccessory = _mapper.Map<AccessoryViewModel, Core.Entities.Accessory>(accessoryVM);
         // add new accessory to db

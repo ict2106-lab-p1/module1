@@ -1,3 +1,5 @@
+using LivingLab.Core.Entities;
+using LivingLab.Core.Entities.Identity;
 using System.ComponentModel.DataAnnotations;
 
 namespace LivingLab.Web.Models.ViewModels.LabProfile;
@@ -10,6 +12,16 @@ namespace LivingLab.Web.Models.ViewModels.LabProfile;
 /// </remarks>
 public class LabProfileViewModel
 {
+    public int LabId { get; set; }
+    
+    public List<Core.Entities.Booking> Bookings { get; set; }
+
+    public ApplicationUser ApplicationUser { get; set; }
+
+    public List<Core.Entities.SessionStats>? Logs { get; set; }
+    public List<Core.Entities.Accessory>? Accessories { get; set; }
+
+    public List<Core.Entities.Device>? Devices { get; set; }
     [Required]
     [Display(Name = "LabLocation")]
     public string LabLocation { get; set; }
