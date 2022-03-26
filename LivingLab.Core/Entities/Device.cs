@@ -18,9 +18,15 @@ public class Device : BaseEntity
     [Required]
     public Lab? Lab { get; set; }
     [Required]
+    public int LabId { get; set; }
+    [Required]
     public string Status { get; set; }
     [Required]
     public string Type { get; set; }
     public string? Description { get; set; }
     public double? Threshold { get; set; }
+    
+    public string? ReviewStatus { get; set; }
+    
+    public string? ReviewedBy { get; set; }
 }

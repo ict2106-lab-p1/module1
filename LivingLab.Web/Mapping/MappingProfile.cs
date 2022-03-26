@@ -2,12 +2,20 @@ using AutoMapper;
 
 using LivingLab.Core.Entities;
 using LivingLab.Core.Entities.DTO;
+using LivingLab.Core.Entities.Identity;
+using LivingLab.Core.Entities.DTO.Accessory;
+using LivingLab.Core.Entities.DTO.Device;
 using LivingLab.Core.Models;
 using LivingLab.Web.Models.DTOs.Todo;
 using LivingLab.Web.Models.ViewModels;
 using LivingLab.Web.Models.ViewModels.Accessory;
 using LivingLab.Web.Models.ViewModels.Device;
+using LivingLab.Web.Models.ViewModels.LabProfile;
+using LivingLab.Web.Models.ViewModels.UserManagement;
 using LivingLab.Web.Models.ViewModels.SessionStats;
+
+using Lab = LivingLab.Core.Entities.Lab;
+using LabViewModel = LivingLab.Web.Models.ViewModels.LabViewModel;
 
 namespace LivingLab.Web.Mapping;
 
@@ -21,11 +29,11 @@ public class MappingProfile : Profile
         CreateMap<EnergyUsageLog, LogItemViewModel>();
         CreateMap<Device, DeviceViewModel>();
         CreateMap<Accessory, AccessoryViewModel>();
-        CreateMap<SessionStats, SessionStatsViewModel>();
         CreateMap<ViewDeviceTypeDTO, DeviceTypeViewModel>();
         CreateMap<ViewAccessoryTypeDTO, AccessoryTypeViewModel>();
-        
-        
+        CreateMap<ApplicationUser, UserManagementViewModel>();
+        CreateMap<Core.Entities.Lab, LabProfileViewModel>();
+
         // ViewModel/ApiModel to Domain
         CreateMap<TodoDTO, Todo>();
         CreateMap<LogItemViewModel, EnergyUsageCsvModel>();
@@ -36,9 +44,9 @@ public class MappingProfile : Profile
                 opt => opt.MapFrom(src => TimeSpan.FromMinutes(src.Interval)));
         CreateMap<DeviceViewModel, Device>();
         CreateMap<AccessoryViewModel, Accessory>();
-
-        CreateMap<ViewDeviceTypeDTO, DeviceTypeViewModel>();
-        
-        CreateMap<ViewAccessoryTypeDTO, AccessoryTypeViewModel>();
+        CreateMap<UserManagementViewModel, ApplicationUser>();
+        CreateMap<LabProfileViewModel,Core.Entities.Lab >();
+        CreateMap<Todo, TodoDTO>().ReverseMap();
+        CreateMap<Lab, LabViewModel>().ReverseMap();
     }
 }

@@ -2,6 +2,7 @@ using AutoMapper;
 
 using LivingLab.Core.Entities;
 using LivingLab.Core.Interfaces.Services;
+using LivingLab.Core.Interfaces.Services.EnergyUsageInterfaces;
 using LivingLab.Core.Models;
 using LivingLab.Web.Models.ViewModels;
 

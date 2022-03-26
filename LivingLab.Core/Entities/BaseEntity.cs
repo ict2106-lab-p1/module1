@@ -1,8 +1,9 @@
 using System.ComponentModel.DataAnnotations;
 
 namespace LivingLab.Core.Entities;
+
 /// <remarks>
-/// Author: Team P1-3
+/// Author: Team P1-1
 /// </remarks>
 public class BaseEntity
 {

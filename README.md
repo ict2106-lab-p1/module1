@@ -2,7 +2,6 @@ Refer to WORKFLOW.md for instructions on the development flow.
 
 ## Development Workflow
 ```master```: Only codes that are ready to deploy will be merged here
-<br>
 ```dev```: This is where completed features are being merged
 
 ## Getting started
@@ -96,6 +95,18 @@ Remove `livinglab.sqlite`, rerun migrations.
 - 2002230 Joey Chua 170joeychua
 - 2000990 Lee Wei Jie Guthixo
 - 2001631 Hong Ying HongYing222
+### P1-03 Student ID & Name & Github ID
+- 2001206 | Chua Sheng Yu | shengyu98
+- 2002220 | Angelene Joshna | angelenejoshna
+- 2002262 | Tan Hui Xuan Vanna | thxcvanna
+- 2002226 | Eddie Tan DeJun | EddieTanDJ
+- 2000621 | Carlton Anthoni Foo | CarltonFoo
+### P1-04 Student ID & Name & Github ID
+
+### P1-05 Student ID & Name & Github ID
+
+### P1-06 Student ID & Name & Github ID
+
 ---
 
 Credits: Thanks Percy for setting up the MVC skeleton + Tailwind integration.

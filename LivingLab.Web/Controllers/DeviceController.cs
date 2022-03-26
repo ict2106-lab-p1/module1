@@ -11,7 +11,7 @@ namespace LivingLab.Web.Controllers;
 /// <remarks>
 /// Author: Team P1-3
 /// </remarks>
-[Route("Device")]
+[Route("/Device")]
 public class DeviceController : Controller
 {
     private readonly ILogger<DeviceController> _logger;
@@ -23,25 +23,36 @@ public class DeviceController : Controller
         _deviceService = deviceService;
     }
 
-    [Route("ViewType")]
-    public async Task<IActionResult> ViewType()
+    [Route("ViewType/{labLocation}")]
+    public async Task<IActionResult> ViewType(string labLocation)
     {
-        ViewDeviceTypeViewModel viewDeviceTypeViewModel = await _deviceService.ViewDeviceType();
+        ViewDeviceTypeViewModel viewDeviceTypeViewModel = await _deviceService.ViewDeviceType(labLocation);
         return View("ViewDeviceType", viewDeviceTypeViewModel);
     }
     
     [HttpPost("View")]
-    public async Task<IActionResult> ViewAll(string deviceType)
+    public async Task<IActionResult> ViewAll(string deviceType, string labLocation)
     {
-        ViewDeviceViewModel viewDevices = await _deviceService.ViewDevice(deviceType);
+        ViewDeviceViewModel viewDevices = await _deviceService.ViewDevice(deviceType, labLocation);
         return View("ViewDevice", viewDevices);
     }
+    
     
     [Route("View/{id}")]
     public async Task<DeviceViewModel> ViewDeviceDetails(int id)
     { 
         //retrieve data from db
         DeviceViewModel device = await _deviceService.ViewDeviceDetails(id);
+
+        return device;
+        // return View("_DeviceDetails", device);
+    }
+    
+    [Route("ViewAddDetails")]
+    public async Task<DeviceViewModel> ViewAddDetails()
+    { 
+        //retrieve data from db
+        DeviceViewModel device = await _deviceService.ViewAddDetails();
 
         return device;
         // return View("_DeviceDetails", device);
@@ -55,27 +66,25 @@ public class DeviceController : Controller
         await _deviceService.EditDevice(editedDevice);
 
         // Temp - To display ViewAll after editing
-        ViewDeviceViewModel viewDevices = await _deviceService.ViewDevice(editedDevice.Type);
+        ViewDeviceViewModel viewDevices = await _deviceService.ViewDevice(editedDevice.Type, editedDevice.Lab.LabLocation);
         return View("ViewDevice", viewDevices);
     }
     
-    [HttpPost("View/Add")]
+    [HttpPost("ViewAdd")]
     public async Task<IActionResult> AddDevice(DeviceViewModel addedDevice)
     {
-        // await _deviceService.EditDevice(editedDevice);
-        
-        // Temp - To display ViewAll after editing
-        ViewDeviceViewModel viewDevices = await _deviceService.ViewDevice(addedDevice.Type);
-        return View("ViewDevice", viewDevices);
+        await _deviceService.AddDevice(addedDevice);
+        ViewDeviceViewModel viewDevices = await _deviceService.ViewDevice(addedDevice.Type, addedDevice.Lab.LabLocation);
+        return Redirect($"ViewType/{addedDevice.Lab.LabLocation}");
     }
     
     [HttpPost("View/Delete")]
     public async Task<IActionResult> DeleteDevice(DeviceViewModel deleteDevice)
     {
-        await _deviceService.DeleteDevice(deleteDevice); 
+        await _deviceService.DeleteDevice(deleteDevice);
         
         // Temp - To display ViewAll after editing
-        ViewDeviceViewModel viewDevices = await _deviceService.ViewDevice(deleteDevice.Type);
+        ViewDeviceViewModel viewDevices = await _deviceService.ViewDevice(deleteDevice.Type, deleteDevice.Lab.LabLocation);
         return View("ViewDevice", viewDevices);
     }
 

@@ -1,14 +1,16 @@
 using LivingLab.Web.Controllers.Api;
-using LivingLab.Web.UIServices.Account;
+using LivingLab.Web.UIServices.UserManagement;
+
+using Microsoft.AspNetCore.Mvc;
 
 namespace LivingLab.Web.Controllers;
 /// <remarks>
 /// Author: Team P1-5
 /// </remarks>
-public class LivingLabDashboardController: BaseApiController
+public class LivingLabDashboardController: Controller
 {
-    private readonly IAccountService _accountService;
-    public LivingLabDashboardController(IAccountService accountService)
+    private readonly IUserManagementService _accountService;
+    public LivingLabDashboardController(IUserManagementService accountService)
     {
         _accountService = accountService;
     }

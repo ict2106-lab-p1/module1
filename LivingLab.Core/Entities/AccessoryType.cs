@@ -7,8 +7,6 @@ namespace LivingLab.Core.Entities;
 public class AccessoryType : BaseEntity
 {
     [Required]
-    public string Name { get; set; }
-    [Required]
     public string Type { get; set; }
 
     [Required]
