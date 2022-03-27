@@ -32,7 +32,7 @@ $(document).ready(function () {
             document.postAccessoryType.submit();
     }
     viewMoreBtns.forEach(btn => btn.addEventListener('click', viewwMoreEventHandler))
-    $('#AccessoryTypeId').change(function () {
+    $('#accessoryType').change(function () {
         console.log('click')
         var selectedValue = jQuery(this).val()
         if (selectedValue === "Others") {

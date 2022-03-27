@@ -80,10 +80,14 @@ $(document).ready(function() {
     $(document).on("click", ".closeEditModal", function() {
         toggleEditModal();
     });
+    $(document).on("click", ".cancelEditBtn", function() {
+        toggleEditModal();
+    });
     $(document).on("click", ".editAccessoryBtn", function() {
         clickEdit(this);
         toggleEditModal();
     });
+
 
     // Delete Overlay
     const deleteOverlay = document.querySelector("#deleteOverlay");
