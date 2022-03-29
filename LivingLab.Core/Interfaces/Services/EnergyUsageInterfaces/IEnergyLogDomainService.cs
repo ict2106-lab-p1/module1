@@ -7,5 +7,5 @@ namespace LivingLab.Core.Interfaces.Services.EnergyUsageInterfaces;
 /// </remarks>
 public interface IEnergyLogDomainService
 {
-    Task<EnergyUsageLog> Log(EnergyUsageLog log);
+    Task Log(EnergyUsageLog log);
 }

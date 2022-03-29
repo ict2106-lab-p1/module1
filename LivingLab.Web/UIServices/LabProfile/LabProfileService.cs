@@ -50,9 +50,9 @@ public class LabProfileService : ILabProfileService
             LabLocation = labinput.LabLocation,
             LabStatus = labinput.LabStatus,
             LabInCharge = labinput.LabInCharge,
-            // Area = labinput.Area,
-            // Capacity = labinput.Capacity,
-            // EnergyUsageBenchmark = labinput.EnergyUsageBenchmark
+            Area = labinput.Area,
+            Capacity = labinput.Capacity,
+            EnergyUsageBenchmark = labinput.EnergyUsageBenchmark
         };
         return await _labProfileDomainService.NewLab(labWrapper);
     }
