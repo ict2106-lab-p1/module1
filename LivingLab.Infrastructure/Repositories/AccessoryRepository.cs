@@ -110,6 +110,17 @@ public class AccessoryRepository : Repository<Accessory>, IAccessoryRepository
         accessory.AccessoryType.Type = accessoryDetailsDto.Accessory.AccessoryType.Type;
         accessory.AccessoryType.Borrowable = accessoryDetailsDto.BorrowableValue == "1";
         accessory.DueDate = accessoryDetailsDto.Accessory.DueDate;
+        accessory.Status = accessoryDetailsDto.Accessory.Status;
+        if (accessoryDetailsDto.Accessory.Status == "Borrowed")
+        {
+            accessory.LabUserId = accessoryDetailsDto.Accessory.LabUserId;
+            accessory.DueDate = accessoryDetailsDto.Accessory.DueDate;
+        }
+        else
+        {
+            accessory.LabUserId = null;
+            accessory.DueDate = null;
+        }
         await _context.SaveChangesAsync();
         return accessoryDetailsDto;
     }

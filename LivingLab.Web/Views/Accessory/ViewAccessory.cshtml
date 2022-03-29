@@ -47,11 +47,11 @@
             <td>@accessory.Name</td>
             <td>@accessory.AccessoryType.Type</td>
             <td>@accessory.AccessoryType.Description</td>
-            <td>@accessory.LastUpdated.ToString("MM/dd/yyyy")</td>
+            <td>@accessory.LastUpdated.ToString("dd/MM/yyyy")</td>
             <td>@accessory.Status</td>
             <td>@accessory.AccessoryType.Borrowable</td>
             <td>@accessory.LabUserId</td>
-            <td>@accessory.DueDate?.ToString("MM/dd/yyyy")</td>
+            <td>@accessory.DueDate?.ToString("dd/MM/yyyy")</td>
             <td data-id="@accessory.Id" class="editAccessoryBtn"></td>
             <td data-id="@accessory.Id" class="deleteAccessoryBtn"></td>
         </tr>
@@ -111,7 +111,7 @@
                     @await Html.PartialAsync("_EditAccessoryDetails", new AccessoryDetailsViewModel())
                 }
                 <div class="mt-3 flex justify-end space-x-3">
-                    <button id="cancelEditBtn" type="button" class="btn btn-outline">
+                    <button id="cancelEditBtn" type="button" class="btn btn-outline cancelEditBtn">
                         Cancel
                     </button>
                     <button class="btn btn-primary" type="submit">
