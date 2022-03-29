@@ -1,8 +1,7 @@
 /* <remarks>*/
 /* Author: Team P1-3*/
 /* </remarks>*/
-
-$(document).ready(function() {
+$(document).ready(function () {
     //$('#table_id').DataTable();
     var table = $("#table_id").DataTable({
         dom: "<'ui stackable grid'" +
@@ -97,23 +96,23 @@ function clickAdd(e) {
         console.log("ViewAddDetails: " + data);
         console.log("Last row Id: " + data.id);
         document.getElementById("add-device-id").value = data.id + 1;
-        document.getElementById("labId").value = data.accessory.lab.labId
-        document.getElementById("labLocation").value = data.accessory.lab.labLocation
+        document.getElementById("labId").value = data.lab.labId
+        document.getElementById("labLocation").value = data.lab.labLocation
     });
-    /*
-              $.get('/Device/ViewType',
-                  function (data) {
-                      console.log("View all: " + data)
-                      var deviceTypeDDL = document.getElementById("add-device-type")
-                      if (deviceTypeDDL.length === 0) {
-                          for (var i = 0; i < data.type.length; i++) {
-                              var element = document.createElement("option")
-                              element.textContent = data.type
-                              element.value = data.type
-                              deviceTypeDDL.appendChild(element)
-                          }
-                      }
-                  })*/
+    
+      // $.get('/Device/ViewType',
+      //     function (data) {
+      //         console.log("View all: " + data)
+      //         var deviceTypeDDL = document.getElementById("add-device-type")
+      //         if (deviceTypeDDL.length === 0) {
+      //             for (var i = 0; i < data.type.length; i++) {
+      //                 var element = document.createElement("option")
+      //                 element.textContent = data.type
+      //                 element.value = data.type
+      //                 deviceTypeDDL.appendChild(element)
+      //             }
+      //         }
+      //     })
 }
 
 function clickEdit(e) {

@@ -3,6 +3,7 @@ using LivingLab.Core.Entities.Identity;
 using LivingLab.Core.Interfaces.Repositories;
 using LivingLab.Core.Interfaces.Services;
 using LivingLab.Infrastructure.Data;
+using LivingLab.Infrastructure.InfraServices;
 using LivingLab.Infrastructure.Repositories;
 
 using Microsoft.AspNetCore.Identity;
@@ -31,7 +32,8 @@ public static class ConfigureServiceContainer
         });
 
     public static void AddIdentities(this IServiceCollection services) =>
-        services.AddDefaultIdentity<ApplicationUser>()
+        services.AddDefaultIdentity<ApplicationUser>(options => options.SignIn.RequireConfirmedAccount = true)
+            .AddRoles<IdentityRole>()
             .AddEntityFrameworkStores<ApplicationDbContext>()
             .AddDefaultTokenProviders();
 
@@ -42,6 +44,8 @@ public static class ConfigureServiceContainer
 
         services.AddTransient<ITodoRepository, TodoRepository>();
         services.AddTransient<ITodoDomainService, TodoDomainService>();
+        // Shared Email Service Provider
+        services.AddTransient<IEmailSender, EmailSender>();
 
         return services;
     }

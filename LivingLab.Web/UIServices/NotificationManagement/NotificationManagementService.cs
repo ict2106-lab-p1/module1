@@ -14,12 +14,16 @@ public class NotificationManagementService : INotificationManagementService
 {
     private readonly INotificationDomainService _notificationDomainService;
     private readonly ILogger<NotificationManagementService> _logger;
+    private readonly IConfiguration _config;
+    private readonly IEmailSender _emailSender;
 
     
-    public NotificationManagementService(INotificationDomainService notificationDomainService, ILogger<NotificationManagementService> logger)
+    public NotificationManagementService(IEmailSender emailSender, IConfiguration config, INotificationDomainService notificationDomainService, ILogger<NotificationManagementService> logger)
     {
         _notificationDomainService = notificationDomainService;
         _logger = logger;
+        _config = config;
+        _emailSender = emailSender;
     }
     
     public Task SetNotificationPref()
@@ -27,23 +31,27 @@ public class NotificationManagementService : INotificationManagementService
         return _notificationDomainService.SetNotificationPref();
     }
 
-    public async Task SendTextToPhone(ApplicationUser user)
+    /*Send a normal SMS to the user*/
+    public async Task SendTextToPhone(string phone, string msgBody)
     {
         // Find your Account SID and Auth Token at twilio.com/console
         // and set the environment variables. See http://twil.io/secure
-        string accountSid = "AC7ef3169ab7a740f0ebb42a0643a5be7b";
-        string authToken = "ad1b1652b2d931d7750455a847e0ab89";
+        string accountSid = _config["TWILIO_ACC_ID"];
+        string authToken = _config["TWILIO_AUTH_ID"];
 
         TwilioClient.Init(accountSid, authToken);
-        
-        string msgbody = "Your 6 digit OTP for Living Lab is " + user.OTP;
 
-        var messageOptions = new CreateMessageOptions(new PhoneNumber("+6596876870"));   
+        var messageOptions = new CreateMessageOptions(new PhoneNumber(phone));   
         messageOptions.MessagingServiceSid = "MG7d7cd6b53ca04365964a61a99448d3e0";  
-        messageOptions.Body = msgbody;   
+        messageOptions.Body = msgBody;   
  
         var message = MessageResource.Create(messageOptions); 
-        Console.WriteLine(message.Body); 
-    
+        Console.WriteLine(message.Body);
+    }
+
+    /*Send Email to an address, details are defined in the domain services*/
+    public async Task SendTextToEmail(string email, string msgTitle, string msgBody)
+    {
+        await _emailSender.SendEmailAsync(email, msgTitle, msgBody);
     }
 }

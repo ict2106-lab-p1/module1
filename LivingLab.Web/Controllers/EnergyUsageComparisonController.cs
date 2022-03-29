@@ -31,25 +31,25 @@ public class EnergyUsageComparisonController : Controller
     }
 
     //need to implement the return type and implementation 
-    public IActionResult GetLabEnergyUsageDetailTable(string listOfLabId, DateTime start, DateTime end)
-    {
-        return View();
-    }
-
-    public IActionResult GetLabEnergyUsageDetailGraph(string listOfLabId, DateTime start, DateTime end)
-    {
-        return View();
-    }
-
-    public IActionResult GetDeviceEnergy(string listOfDeviceType, DateTime start, DateTime end)
-    {
-        return View();
-    }
-
-    public IActionResult GetLabLocationOrDeviceType(string type)
-    {
-        return View();
-    }
+    // public IActionResult GetLabEnergyUsageDetailTable(string listOfLabId, DateTime start, DateTime end)
+    // {
+    //     return View();
+    // }
+    //
+    // public IActionResult GetLabEnergyUsageDetailGraph(string listOfLabId, DateTime start, DateTime end)
+    // {
+    //     return View();
+    // }
+    //
+    // public IActionResult GetDeviceEnergy(string listOfDeviceType, DateTime start, DateTime end)
+    // {
+    //     return View();
+    // }
+    //
+    // public IActionResult GetLabLocationOrDeviceType(string type)
+    // {
+    //     return View();
+    // }
     // end of skeleton code
     
 

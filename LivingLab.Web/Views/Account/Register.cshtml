@@ -5,68 +5,93 @@
 @{
     ViewData["Title"] = "Register";
 }
-<h1>@ViewData["Title"]</h1>
-
 <div class="row">
     <div class="col-md-4">
         <form id="registerForm" method="post" asp-controller="Account" asp-action="Register">
-            <h2>Create a new account.</h2>
-            <hr />
-            @* <div asp-validation-summary="ModelOnly" class="text-danger"></div> *@
-            <div class="form-floating">
-                <label asp-for="Email"></label>
-                <input asp-for="Email" class="form-control" autocomplete="email" aria-required="true"/>
-                <span asp-validation-for="Email" class="text-danger"></span>
+            <div class="bg-white shadow p-12  mb-12  rounded-lg">
+                <p class="text-xl font-semibold">Basic Information </p>
+                <div class="mt-6">
+                    <p>
+                        <label asp-for="Role" class="font-semibold"></label>
+                    </p>
+                    <select class="select select-bordered w-full max-w-xs" name="role" asp-for="Role">
+                        <option disabled selected>Select Role</option>
+                        <option value=User>USER</option>
+                        <option value="Labtech">LABTECH</option>
+                        <option value="Admin">ADMIN</option>
+                    </select>
+                </div>
+                <div class="mt-6">
+                    <p>
+                        <label asp-for="Email" class="font-semibold"></label>
+                    </p>
+                    <input asp-for="Email" type="text" placeholder="Enter your Email" class="input input-bordered w-full max-w-xs">
+                </div>
+                <div class="mt-6">
+                    <p>
+                        <label asp-for="FirstName" class="font-semibold"></label>
+                    </p> <input asp-for="FirstName" type="text" placeholder="Enter your First Name" class="input input-bordered w-full max-w-xs">
+                </div>
+                <div class="mt-6">
+                    <p>
+                        <label asp-for="LastName" class="font-semibold"></label>
+                    </p> <input asp-for="LastName" type="text" placeholder="Enter your Last Name" class="input input-bordered w-full max-w-xs">
+                </div>
+                <div class="mt-6">
+                    <p>
+                        <label asp-for="PhoneNumber" class="font-semibold"></label>
+                    </p> <input asp-for="PhoneNumber" type="text" placeholder="Enter your Phone Number" class="input input-bordered w-full max-w-xs">
+                </div>
+                <div class="mt-6">
+                    <p>
+                        <label asp-for="Faculty" class="font-semibold"></label>
+                    </p>
+                    <select class="select select-bordered w-full max-w-xs" name="faculty" asp-for="Faculty">
+                        <option disabled selected>Select Faculty</option>
+                        <option value="SE">SE</option>
+                        <option value="ICT">ICT</option>
+                        <option value="MDME">MDME</option>
+                        <option value="CSC">CSC</option>
+                    </select>
+                </div>
+                <div class="mt-6">
+                    <p>
+                        <label asp-for="Password" class="font-semibold"></label>
+                    </p>
+                    <input asp-for="Password" type="password" placeholder="Enter your Password" class="input input-bordered w-full max-w-xs">
+                </div>
+                <div class="mt-6">
+                    <p>
+                        <label asp-for="ConfirmPassword" class="font-semibold"></label>
+                    </p> <input asp-for="ConfirmPassword" type="password" placeholder="Enter your Password" class="input input-bordered w-full max-w-xs">
+                </div>
+
+                <div class="mt-4 mb-4">
+                    <p>
+                        <span asp-validation-for="Email" class="text-sm text-red-500"></span>
+                    </p>
+                    <p>
+                        <span asp-validation-for="FirstName" class="text-sm text-red-500"></span>
+                    </p>
+                    <p>
+                        <span asp-validation-for="LastName" class="text-sm text-red-500"></span>
+                    </p>
+                    <p>
+                        <span asp-validation-for="PhoneNumber" class="text-sm text-red-500"></span>
+                    </p>
+                    <p>
+                        <span asp-validation-for="Faculty" class="text-sm text-red-500"></span>
+                    </p>
+                    <p>
+                        <span asp-validation-for="Password" class="text-sm text-red-500"></span>
+                    </p>
+                    <p>
+                        <span asp-validation-for="ConfirmPassword" class="text-sm text-red-500"></span>
+                    </p>
+                </div>
+                <button id="registerSubmit" type="submit" class="btn text-center mt-4">Create Account</button>
             </div>
-            <div class="form-floating">
-                <label asp-for="FirstName"></label>
-                <input asp-for="FirstName" class="form-control" autocomplete="firstname" aria-required="true"/>
-                <span asp-validation-for="FirstName" class="text-danger"></span>
-            </div>
-            <div class="form-floating">
-                <label asp-for="LastName"></label>
-                <input asp-for="LastName" class="form-control" autocomplete="lastname" aria-required="true"/>
-                <span asp-validation-for="LastName" class="text-danger"></span>
-            </div>
-            <div class="form-floating">
-                <label asp-for="PhoneNumber"></label>
-                <input asp-for="PhoneNumber" class="form-control" autocomplete="phone" aria-required="true"/>
-                <span asp-validation-for="PhoneNumber" class="text-danger"></span>
-            </div>
-            <div class="form-floating">
-                @* <label asp-for="Faculty"></label>
-                <input asp-for="Faculty" class="form-control" autocomplete="faculty" aria-required="true"/>
-                                <span asp-validation-for="Faculty" class="text-danger"></span> *@
-                <select name="faculty" asp-for="Faculty"> 
-                     <option value="SE">SE</option> 
-                    <option value="ICT">ICT</option> 
-                     <option value="MDME">MDME</option>
-                     <option value="CSC">CSC</option> 
-                </select>
-            </div>
-            <div class="form-floating mt-4 mb-4">
-                <span style="white-space: pre-line">
-                <label asp-for="IsSMS"></label>
-                    @Html.CheckBoxFor(model => model.IsSMS)sms
-                    @Html.CheckBoxFor(model => model.IsGoogleAuth)google authentication
-                </span>
-            </div>
-            <div class="form-floating">
-                <label asp-for="Password"></label>
-                <input asp-for="Password" type="password" hidden class="form-control" autocomplete="new-password" aria-required="true"/>
-                <span asp-validation-for="Password" class="text-danger"></span>
-            </div>
-            <div class="form-floating">
-                <label asp-for="ConfirmPassword"></label>
-                <input asp-for="ConfirmPassword" type="password" hidden class="form-control" autocomplete="confirm-password" aria-required="true"/>
-                <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
-            </div>
-            <button id="registerSubmit" class="w-100 btn btn-lg btn-primary" >Register</button>
         </form>
     </div>
-    
-</div>
 
-@section Scripts {
-    <partial name="_ValidationScriptsPartial" />
-}
+</div>

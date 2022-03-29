@@ -11,5 +11,7 @@ namespace LivingLab.Core.Interfaces.Services;
 /// </remarks>
 public interface ILabProfileDomainService
 {
+    Task<List<Lab>> ViewLabs();
+    Task<Lab> ViewLabDetails(int id);
     Task<Lab?> NewLab(Lab labinput);
 }

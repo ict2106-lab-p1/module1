@@ -21,11 +21,29 @@ public class DeviceRepository : Repository<Device>, IDeviceRepository
     {
         var device = await _context.Devices
             .Where(t => t.Status.ToLower().Equals("available")
-                        && t.Lab.LabLocation.Equals("labLocation"))
+                        && t.Lab.LabLocation.Equals(labLocation))
             .ToListAsync();
         return device;
     }
 
+    public async void UpdateDeviceStatus(string deviceId, string deviceReviewStatus)
+    {
+        Device device = (await _context.Devices.Where(d => d.Id == Convert.ToInt32(deviceId)).FirstOrDefaultAsync())!;
+        if (device.ReviewStatus != deviceReviewStatus)
+        {
+            device.ReviewStatus = deviceReviewStatus;
+        }
+        await _context.SaveChangesAsync();
+    }
+
+    public async Task<List<Device>> GetAllDevicesForReview(string labLocation)
+    {
+        var device = await _context.Devices
+            .Where(t => t.Lab.LabLocation.Equals(labLocation))
+            .ToListAsync();
+        return device;
+    }
+    
     public async Task<List<ViewDeviceTypeDTO>> GetViewDeviceType(string labLocation)
     {
         var deviceGroup = await _context.Devices
@@ -44,7 +62,7 @@ public class DeviceRepository : Repository<Device>, IDeviceRepository
         }
         return deviceTypeDtos;
     }
-
+    
     public async Task<List<Device>> GetAllDevicesByType(string deviceType, string labLocation)
     { 
         List<Device> deviceList = await _context.Devices

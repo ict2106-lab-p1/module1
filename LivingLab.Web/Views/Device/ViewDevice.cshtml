@@ -29,6 +29,8 @@
         <th>Description</th>
         <th>Serial Num</th>
         <th>Last Updated</th>
+        <th>Status</th>
+        <th>Threshold</th>
         <th></th>
         <th></th>
     </tr>
@@ -41,7 +43,9 @@
             <td>@device.Name</td>
             <td>@device.Description</td>
             <td>@device.SerialNo</td>
-            <td>@device.LastUpdated.ToString("MM/dd/yyyy")</td>
+            <td>@device.LastUpdated.ToString("dd/MM/yyyy")</td>
+            <td>@device.Status</td>
+            <td>@device.Threshold</td>
             <td data-id="@device.Id" class="editDeviceBtn"></td>
             <td data-id="@device.Id" class="deleteDeviceBtn"></td>
         </tr>

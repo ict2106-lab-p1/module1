@@ -2,7 +2,6 @@ Refer to WORKFLOW.md for instructions on the development flow.
 
 ## Development Workflow
 ```master```: Only codes that are ready to deploy will be merged here
-<br>
 ```dev```: This is where completed features are being merged
 
 ## Getting started

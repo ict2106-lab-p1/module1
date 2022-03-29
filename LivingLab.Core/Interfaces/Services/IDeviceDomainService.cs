@@ -15,6 +15,8 @@ public interface IDeviceDomainService
     * by injecting this IDeviceDomainService in your UI's lab service.
     */
     Task<List<Device>> GetDevicesForLabProfile(string labLocation);
+    void UpdateDeviceStatus(string deviceId, string deviceReviewStatus);
+    Task<List<Device>> GetAllDevicesForReview(string labLocation);
     Task<List<ViewDeviceTypeDTO>> ViewDeviceType(string labLocation);
     Task<Device> ViewDeviceDetails(int id);
     Task<Device> GetDeviceLastRow();
