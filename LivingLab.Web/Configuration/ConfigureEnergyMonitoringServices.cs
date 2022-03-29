@@ -1,4 +1,5 @@
 using LivingLab.Core.Interfaces.Services.EnergyUsageInterfaces;
+using LivingLab.Web.UIServices.EnergyLog;
 using LivingLab.Web.UIServices.EnergyUsage;
 using LivingLab.Web.UIServices.ManualLogs;
 

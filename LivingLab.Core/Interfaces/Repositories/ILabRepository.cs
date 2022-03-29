@@ -6,4 +6,6 @@ namespace LivingLab.Core.Interfaces.Repositories;
 /// </remarks>
 public interface ILabRepository : IRepository<Lab>
 {
+    Task SetLabEnergyBenchmark(int labId, double energyBenchmark);
+    Task<double> GetLabEnergyBenchmark(int labId);
 }

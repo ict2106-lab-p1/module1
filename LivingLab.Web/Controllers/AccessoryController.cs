@@ -4,7 +4,6 @@ using Microsoft.AspNetCore.Mvc;
 using LivingLab.Web.Models.ViewModels;
 using LivingLab.Web.Models.ViewModels.Accessory;
 using LivingLab.Web.UIServices.Accessory;
-using LivingLab.Web.UIServices.Device;
 
 namespace LivingLab.Web.Controllers;
 /// <remarks>
@@ -56,14 +55,29 @@ public class AccessoryController : Controller
         return accessoryDetails;
     }
 
+
+    [Route("AddAccessoryDetails")]
+    public async Task<AccessoryDetailsViewModel> AddAccessoryDetails()
+    {
+        //retrieve data from db
+        AccessoryDetailsViewModel accessoryDetails = await _accessoryService.AddAccessoryDetails();
+        return accessoryDetails;
+    }
+
+    [Route("GetEditDetails/{id}")]
+    public async Task<AccessoryDetailsViewModel> EditAccessoryDetails(int id)
+    {
+        //retrieve data from db
+        AccessoryDetailsViewModel accessoryDetails = await _accessoryService.EditAccessoryDetails(id);
+        return accessoryDetails;
+    }
+
     [Route("GetDeleteDetails/{id}")]
     public async Task<AccessoryViewModel> GetDeleteDetails(int id)
     {
         AccessoryViewModel accessoryViewModel = await _accessoryService.GetAccessory(id);
         return accessoryViewModel;
     }
-    
-    [HttpGet]
     [HttpPost("CreateAccessory")]
     public async Task<IActionResult> CreateAccessory(AccessoryDetailsViewModel viewModel)
     {

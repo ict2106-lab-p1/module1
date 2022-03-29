@@ -1,8 +1,6 @@
 /* <remarks>*/
 
-
 /* Author: Team P1-3*/
-
 
 /* </remarks>*/
 
@@ -71,12 +69,12 @@ th:not(:last-child) {
 }
 
 @media (min-width: 768px) {
-    table {
-        display: inline-table !important;
-    }
-    thead tr:not(:first-child) {
-        display: none;
-    }
+  table {
+    display: inline-table !important;
+  }
+  thead tr:not(:first-child) {
+    display: none;
+  }
 }
 
 @media only screen and (max-width: 1023px) {

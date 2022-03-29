@@ -1,3 +1,5 @@
+using System.ComponentModel.DataAnnotations;
+
 using LivingLab.Web.Models.ViewModels.Device;
 
 namespace LivingLab.Web.Models.ViewModels.EnergyUsage;
@@ -7,7 +9,8 @@ namespace LivingLab.Web.Models.ViewModels.EnergyUsage;
 /// </remarks>
 public class EnergyBenchmarkViewModel
 {
-    public double EnergyUsage { get; set; }
-    public EnergyUsageLabViewModel Lab { get; set; }
-    public DeviceViewModel Device { get; set; }
+    public int LabId { get; set; }
+    
+    [Display(Name = "Lab Energy Usage Benchmark")]
+    public double EnergyUsageBenchmark { get; set; }
 }

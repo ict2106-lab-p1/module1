@@ -1,4 +1,5 @@
 using LivingLab.Web.Models.ViewModels;
+using LivingLab.Web.Models.ViewModels.EnergyUsage;
 
 namespace LivingLab.Web.UIServices.ManualLogs;
 

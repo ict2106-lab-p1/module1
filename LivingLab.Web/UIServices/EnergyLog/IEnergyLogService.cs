@@ -1,4 +1,4 @@
-using LivingLab.Core.Entities;
+using LivingLab.Web.Models.DTOs;
 
 namespace LivingLab.Web.UIServices.EnergyLog;
 
@@ -7,5 +7,5 @@ namespace LivingLab.Web.UIServices.EnergyLog;
 /// </remarks>
 public interface IEnergyLogService
 {
-    Task Log(EnergyUsageLog log);
+    Task Log(EnergyUsageLogDTO log);
 }

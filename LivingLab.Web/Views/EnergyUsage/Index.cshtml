@@ -1,3 +1,28 @@
 @{
-    ViewData["Title"] = "Energy Usage";
+    ViewData["Title"] = "View Energy Usage";
+}
+
+@section Styles
+{
+    <link rel="stylesheet" href="~/lib/jquery-ui-1.13.1/jquery-ui.min.css"/>
+}
+
+<h2 class="font-bold text-3xl text-slate-900">Lab @ViewBag.LabId Energy Usage</h2>
+
+<div class="w-full h-1/2 mt-6">
+    <input type="hidden" id="labId" value="@ViewBag.LabId"/>
+    <div class="flex mb-5">
+        <input type="text" id="start" class="input input-bordered" placeholder="Start date"/>
+        <input type="text" id="end" class="input input-bordered ml-4" placeholder="End date"/>
+        <input type="button" id="filter" class="bg-slate-900 hover:bg-slate-700 text-white font-bold py-2 px-4 rounded trigger-swal ml-4" value="Filter"/>
+    </div>
+    <canvas id="lineChart"></canvas>
+</div>
+
+
+@section Scripts
+{ 
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@3.7.1/dist/chart.min.js"></script>
+    <script src="~/lib/jquery-ui-1.13.1/jquery-ui.min.js"></script>
+    <script src="~/js/viewEnergyUsage.js"></script>
 }
