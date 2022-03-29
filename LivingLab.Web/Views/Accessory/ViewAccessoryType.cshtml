@@ -14,16 +14,16 @@
         <h3 class="text-lg"> NYP-SR7C </h3>
         <h1 class="text-2xl"> Manage Accessory</h1>
     </div>
-    <div class="justify-self-end">
+    @*<div class="justify-self-end">
         <button id="addAccessoryBtn" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-8 rounded" type="button">
             Add Accessory
         </button>
-    </div>
+    </div>*@
 </div>
 
 <hr class="mb-4"/>
 
-<div class="container my-4 mx-auto px-4 md:px-8">
+<div class="container my-4 mx-auto">
     <div class="flex flex-wrap -mx-1 lg:-mx-4">
         @foreach (var accessory in Model.accessoryTypeList)
         {
@@ -36,7 +36,7 @@
                     <h2 class="card-title">@accessory.Type</h2>
                     <p>Quantity: @accessory.Quantity</p>
                     <div class="card-actions text-center">
-                        <button id="viewMoreBtn" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline my-8 viewMoreBtn" type="button">View More</button>
+                        <button id="viewMoreBtn" class="btn btn-outline btn-primary mt-2 viewMoreBtn" type="button">View More</button>
                     </div>
                 </div>
             </div>

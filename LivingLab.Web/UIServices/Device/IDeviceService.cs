@@ -11,6 +11,7 @@ public interface IDeviceService
     Task<DeviceViewModel> ViewDeviceDetails(int id);
     Task<DeviceViewModel> AddDevice(DeviceViewModel deviceViewModel);
     Task<DeviceViewModel> ViewAddDetails();
+    Task<Boolean> SendReviewerEmail(string url);
     Task<DeviceViewModel> EditDevice(DeviceViewModel deviceViewModel);
     Task<DeviceViewModel> DeleteDevice(DeviceViewModel deviceViewModel);
 }
