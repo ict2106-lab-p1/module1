@@ -61,6 +61,8 @@ public class AccessoryController : Controller
         AccessoryViewModel accessoryViewModel = await _accessoryService.GetAccessory(id);
         return accessoryViewModel;
     }
+    
+    [HttpGet]
     [HttpPost("CreateAccessory")]
     public async Task<IActionResult> CreateAccessory(AccessoryDetailsViewModel viewModel)
     {
