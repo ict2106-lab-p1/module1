@@ -24,7 +24,7 @@ public class UserManagementController : Controller
     
 
     [Route("index")]
-    public async Task<IActionResult> UserBookings(string userId)
+    public async Task<IActionResult> UserAccounts(string userId)
     {
         ViewUserManagementViewModel viewUserManagementViewModel = await _userManagementService.GetAllAccounts();
         return View("Index", viewUserManagementViewModel); 
