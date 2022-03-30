@@ -15,6 +15,7 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     public DbSet<Todo> Todos { get; set; }
     public DbSet<Lab> Labs { get; set; }
     public DbSet<Device> Devices { get; set; }
+    
     public DbSet<EnergyUsageLog> EnergyUsageLogs { get; set; }
     public DbSet<EnergyUsagePredictionLog> EnergyUsagePredictions { get; set; }
     public DbSet<PowerGenerationMix> PowerGenerationMix { get; set; }
@@ -26,6 +27,10 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     public DbSet<AccessoryType> AccessoryTypes { get; set; }
     public DbSet<Booking> Bookings { get; set; }
     public DbSet<LabAccess> LabAccesses { get; set; }
+    public DbSet<Lab> LabProfile { get; set; }
+
+    public DbSet<ApplicationUser> Users { get; set; }
+
 
     public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
     {
@@ -55,6 +60,24 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
         modelBuilder.Entity<IdentityUserToken<string>>().ToTable("UserToken");
 
         modelBuilder.Seed();
+
+        modelBuilder.Entity<Device>(entity =>
+        {
+            entity.HasOne(d => d.Lab)
+            .WithMany(l => l.Devices)
+            .HasForeignKey("LabId");
+        });
+
+        modelBuilder.Entity<Accessory>(entity =>
+        {
+            entity.HasOne(a => a.Lab)
+            .WithMany(l => l.Accessories)
+            .HasForeignKey("LabId");
+            entity.HasOne(a => a.AccessoryType)
+            .WithMany(l => l.Accessories)
+            .HasForeignKey("AccessoryTypeId");
+        });
+
     }
 
 }

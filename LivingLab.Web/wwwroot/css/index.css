@@ -1,8 +1,6 @@
 /* <remarks>*/
 
-
 /* Author: Team P1-3*/
-
 
 /* </remarks>*/
 
@@ -23,7 +21,7 @@
 
 body {
     font-family: "Nunito Sans", sans-serif;
-    @apply bg-gray-100;
+    @apply bg-inherit;
 }
 
 body::-webkit-scrollbar {
@@ -46,13 +44,14 @@ th:not(:last-child) {
     @apply font-bold py-2 px-4 rounded;
 }
 
-.btn-blue {
+
+/*.btn-blue {
     @apply bg-denim-600 text-white;
 }
 
 .btn-blue:hover {
     @apply bg-blue-700;
-}
+}*/
 
 @media only screen and (max-width: 1023px) {
     .overlay:after {
@@ -70,12 +69,12 @@ th:not(:last-child) {
 }
 
 @media (min-width: 768px) {
-    table {
-        display: inline-table !important;
-    }
-    thead tr:not(:first-child) {
-        display: none;
-    }
+  table {
+    display: inline-table !important;
+  }
+  thead tr:not(:first-child) {
+    display: none;
+  }
 }
 
 @media only screen and (max-width: 1023px) {

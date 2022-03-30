@@ -10,17 +10,18 @@ public class Lab
 {
     [Key]
     public int LabId { get; set; }
-
-    [Required]
+    
     public string? LabLocation { get; set; }
 
-    [Required]
     public string? LabStatus { get; set; }
 
     public string? LabInCharge { get; set; }
 
-    [Required]
     public int? Capacity { get; set; }
+    
+    public int? Area { get; set; }
+    
+    public Double? EnergyUsageBenchmark { get; set; }
 
     public List<Booking> Bookings { get; set; }
 
