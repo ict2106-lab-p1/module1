@@ -38,19 +38,18 @@ public class AccessoryController : Controller
         ViewAccessoryTypeViewModel viewAccessories = await _accessoryService.ViewAccessoryType(labLocation);
         return View("ViewAccessoryType", viewAccessories);
     }
-    
-    
+
     [Route("AddAccessoryDetails")]
     public async Task<AccessoryDetailsViewModel> AddAccessoryDetails()
-    { 
+    {
         //retrieve data from db
         AccessoryDetailsViewModel accessoryDetails = await _accessoryService.AddAccessoryDetails();
         return accessoryDetails;
     }
-    
+
     [Route("GetEditDetails/{id}")]
     public async Task<AccessoryDetailsViewModel> EditAccessoryDetails(int id)
-    { 
+    {
         //retrieve data from db
         AccessoryDetailsViewModel accessoryDetails = await _accessoryService.EditAccessoryDetails(id);
         return accessoryDetails;
@@ -62,8 +61,6 @@ public class AccessoryController : Controller
         AccessoryViewModel accessoryViewModel = await _accessoryService.GetAccessory(id);
         return accessoryViewModel;
     }
-    
-    [HttpGet]
     [HttpPost("CreateAccessory")]
     public async Task<IActionResult> CreateAccessory(AccessoryDetailsViewModel viewModel)
     {

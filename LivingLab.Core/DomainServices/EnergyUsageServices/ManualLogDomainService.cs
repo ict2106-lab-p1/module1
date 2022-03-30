@@ -1,8 +1,8 @@
 using LivingLab.Core.Constants;
 using LivingLab.Core.Entities;
+using LivingLab.Core.Entities.DTO.EnergyUsageDTOs;
 using LivingLab.Core.Interfaces.Repositories;
 using LivingLab.Core.Interfaces.Services.EnergyUsageInterfaces;
-using LivingLab.Core.Models;
 
 using Microsoft.AspNetCore.Http;
 
@@ -22,7 +22,7 @@ public class ManualLogDomainService : IManualLogDomainService
         _repository = repository;
     }
 
-    public List<EnergyUsageCsvModel> UploadLogs(IFormFile file)
+    public List<EnergyUsageCsvDTO> UploadLogs(IFormFile file)
     {
         return _csvParser.Parse(file).ToList();
     }
