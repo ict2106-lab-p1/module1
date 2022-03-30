@@ -1,6 +1,7 @@
 using System.Diagnostics;
 
 using LivingLab.Web.Models.ViewModels;
+using LivingLab.Web.Models.ViewModels.EnergyUsage;
 using LivingLab.Web.UIServices.ManualLogs;
 
 using Microsoft.AspNetCore.Mvc;
@@ -52,10 +53,12 @@ public class ManualLogsController : Controller
     }
 
     [HttpPost]
-    public async Task<IActionResult> Save(List<LogItemViewModel> logs)
+    public async Task<IActionResult> Save([FromBody] List<LogItemViewModel> logs)
     {
         try
         {
+            if (logs.Count == 0) return Error();
+            
             await _manualLogService.SaveLogs(logs);
             return Ok();
         }

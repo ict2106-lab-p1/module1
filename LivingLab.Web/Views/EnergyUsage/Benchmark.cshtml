@@ -1,0 +1,24 @@
+@model LivingLab.Web.Models.ViewModels.EnergyUsage.EnergyBenchmarkViewModel
+
+@{
+    ViewData["Title"] = "Benchmark";
+}
+
+<h2 class="font-bold text-3xl text-slate-900">Lab @Model.LabId Energy Usage Benchmark</h2>
+
+<form class="mt-5" asp-action="SetBenchmark">
+    <input type="hidden" name="LabId" value="@Model.LabId" />
+    <div class="mt-5 w-1/2 flex flex-col bg-white p-5 shadow-lg rounded gap-4">
+        <h3 class="text-center text-gray-600 m-auto lg:m-0">@Html.DisplayNameFor(m => m.EnergyUsageBenchmark)</h3>
+        <input id="benchmarkInput" class="input input-bordered" type="number" asp-for="EnergyUsageBenchmark" value="@Model.EnergyUsageBenchmark"/>
+    </div>
+
+    <div class="flex justify-between mt-5">
+        <input type="submit" id="btnSave" value="Save" class="bg-dark hover:bg-slate-700 text-white font-bold py-2 px-4 rounded trigger-swal align-end">
+    </div>
+</form>
+
+@* @section Scripts *@
+@* { *@
+@*     <script src="~/js/energyBenchmark.js"></script> *@
+@* } *@

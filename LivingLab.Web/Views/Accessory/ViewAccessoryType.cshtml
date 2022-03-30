@@ -15,7 +15,7 @@
         <h1 class="text-2xl"> Manage Accessory</h1>
     </div>
     <div class="justify-self-end">
-        <button id="addAccessoryBtn" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-8 rounded" type="button">
+        <button id="addAccessoryBtn" class="btn btn-primary font-bold rounded" type="button">
             Add Accessory
         </button>
     </div>
@@ -23,20 +23,53 @@
 
 <hr class="mb-4"/>
 
-<div class="container my-4 mx-auto px-4 md:px-8">
+<div class="container my-4 mx-auto">
     <div class="flex flex-wrap -mx-1 lg:-mx-4">
         @foreach (var accessory in Model.accessoryTypeList)
         {
             <div class="card w-64 bg-base-100 shadow-xl m-4">
                 <figure>
-                    <img src="https://ak.picdn.net/shutterstock/videos/3820817/thumb/1.jpg?ip=x480"
-                         alt="">
+                                   @if (@accessory.Type.Contains("Buzzer"))
+                                   {
+                                       <img src="/images/Buzzer.jpg" alt="Buzzer">
+                                   }
+                                   else if (@accessory.Type.Contains("Humidity Sensor"))
+                                   {
+                                       <img src="/images/Temperature & Humidity Sensor.jpg" alt="Humidity Sensor">
+                                   }
+                                   else if (@accessory.Type.Contains("IR Sensor"))
+                                   {
+                                       <img src="/images/IR Sensor.jpg" alt="IR Sensor">
+                                   }
+                                   else if (@accessory.Type.Contains("LED Lights"))
+                                   {
+                                       <img src="/images/LED Lights.png" alt="Led Lights">
+                                   }
+                                   else if (@accessory.Type.Contains("Camera"))
+                                   {
+                                       <img src="/images/camera.png" alt="Camera">
+                                   }
+                                   else if (@accessory.Type.Contains("Proximity Sensor"))
+                                   {
+                                       <img src="/images/Proximity Sensor.jpg" alt="Proximity Sensor">
+                                   }
+                                   else if (@accessory.Type.Contains("Ultrasonic Sensor"))
+                                   {
+                                       <img src="/images/Ultrasonic Sensor.jpg" alt="Ultrasonic Sensor">
+                                   }
+                                   else if (@accessory.Type.Contains("pressure Sensor"))
+                                   {
+                                       <img src="/images/Pressure Sensor.jpg" alt="Pressure Sensor">
+                                   }
+                                   else {
+                                      <img src="/images/Unknown.jpg" alt="Unknown">
+                                   }
                 </figure>
                 <div class="card-body items-center text-center">
                     <h2 class="card-title">@accessory.Type</h2>
                     <p>Quantity: @accessory.Quantity</p>
                     <div class="card-actions text-center">
-                        <button id="viewMoreBtn" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline my-8 viewMoreBtn" type="button">View More</button>
+                        <button id="viewMoreBtn" class="btn btn-outline btn-primary mt-2 viewMoreBtn" type="button">View More</button>
                     </div>
                 </div>
             </div>
@@ -72,7 +105,7 @@
                     <button id="cancelBtn" type="button" class="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded">
                         Cancel
                     </button>
-                    <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" type="submit">
+                    <button id="addBtn" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" type="submit">
                         Add
                     </button>
                 </div>

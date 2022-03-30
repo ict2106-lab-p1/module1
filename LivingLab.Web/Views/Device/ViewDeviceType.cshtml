@@ -15,23 +15,45 @@
         <h1 class="text-2xl"> Manage Devices</h1>
 
     </div>
-
+    @*
     <div class="justify-self-end">
         <button id="addDeviceBtn" class="btn btn-primary font-bold rounded">
             Add new device
         </button>
-    </div>
+    </div>*@
 </div>
 <hr class="mb-4"/>
 
-<div class= "container my-4 mx-auto px-4 md:px-8 ">
+<div class= "container my-4 mx-auto">
         <div class= "flex flex-wrap -mx-1 lg:-mx-4">
         @foreach (var device in Model.ViewDeviceTypeDtos)
         {
             <div class="card w-64 bg-base-100 shadow-xl m-4">
                 <figure>
-                    <img src="https://ak.picdn.net/shutterstock/videos/3820817/thumb/1.jpg?ip=x480"
-                            alt="">
+                    @if (@device.Type.Contains("Humidity Sensor"))
+                    {
+                        <img src="/images/Temperature & Humidity Sensor.jpg" alt="Humidity Sensor">
+                    }
+                    else if (@device.Type.Contains("Temperature Sensor"))
+                    {
+                        <img src="/images/Temperature & Humidity Sensor.jpg" alt="Temperature Sensor">
+                    }
+                    else if (@device.Type.Contains("Light Sensor"))
+                    {
+                        <img src="/images/Light Sensor.jpg" alt="Light Sensor">
+                    }
+                    else if (@device.Type.Contains("Camera"))
+                    {
+                        <img src="/images/Surveillance Camera.jpg" alt="Surveillance Camera">
+                    }
+                    else if (@device.Type.Contains("Proximity Sensor"))
+                    {
+                        <img src="/images/Light Control.jpg" alt="VR">
+                    }
+                    else {
+                       <img src="/images/Unknown.jpg" alt="Unknown">
+                    }
+
                 </figure>
                 <div class="card-body items-center text-center">
                     <h2 class="card-title">@device.Type</h2>
@@ -64,13 +86,13 @@
         <div>
             <p class="text-md-start">NYP-SR7C </p>
         </div>
-                <div class="mt-4">
-                    <form class="w-full max-w-lg" method="post" enctype="multipart/form-data" asp-controller="Device" asp-action="AddDevice">
-                        @{
-                            @await Html.PartialAsync("_AddDevice", new DeviceViewModel());
-                        }
-                    </form>
-                </div>
+            <div class="mt-4">
+                <form class="w-full max-w-lg" method="post" enctype="multipart/form-data" asp-controller="Device" asp-action="AddDevice">
+                    @{
+                        @await Html.PartialAsync("_AddDevice", new DeviceViewModel());
+                    }
+                </form>
+            </div>
     </div>
 </div>
 

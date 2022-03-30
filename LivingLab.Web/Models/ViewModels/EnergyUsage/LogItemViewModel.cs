@@ -1,13 +1,13 @@
 using System.ComponentModel.DataAnnotations;
 
-namespace LivingLab.Web.Models.ViewModels;
+namespace LivingLab.Web.Models.ViewModels.EnergyUsage;
 
 /// <remarks>
 /// Author: Team P1-1
 /// </remarks>
 public class LogItemViewModel
 {
-    public string? DeviceCategory { get; set; }
+    public string? DeviceType { get; set; }
     
     [Display(Name = "Serial No.")]
     public string? DeviceSerialNo { get; set; }

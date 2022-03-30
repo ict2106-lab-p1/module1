@@ -12,14 +12,14 @@ $(document).ready(function () {
         overlay.classList.toggle('flex')
     }
 
-    $(document).on('click', '#close-modal', function () {
+    $(document).on('click', '#close-modal', function() {
         toggleModal()
     });
-    $(document).on('click', '#addAccessoryBtn', function () {
+    $(document).on('click', '#addAccessoryBtn', function() {
         clickAdd(this)
         toggleModal()
     });
-    $(document).on('click', "#cancelBtn", function () {
+    $(document).on('click', "#cancelBtn", function() {
         toggleModal()
     });
 
@@ -32,7 +32,7 @@ $(document).ready(function () {
             document.postAccessoryType.submit();
     }
     viewMoreBtns.forEach(btn => btn.addEventListener('click', viewwMoreEventHandler))
-    $('#AccessoryTypeId').change(function () {
+    $('#accessoryType').change(function () {
         console.log('click')
         var selectedValue = jQuery(this).val()
         if (selectedValue === "Others") {

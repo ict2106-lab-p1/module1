@@ -1,8 +1,6 @@
 /* <remarks>*/
 
-
 /* Author: Team P1-3*/
-
 
 /* </remarks>*/
 
@@ -10,7 +8,7 @@
 @tailwind components;
 @tailwind utilities;
 .dataTables_wrapper .myfilter .dataTables_filter {
-    float: left
+  float: left;
 }
 
 .disabled {

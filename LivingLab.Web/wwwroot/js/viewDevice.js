@@ -96,12 +96,22 @@ function clickAdd(e) {
         console.log("ViewAddDetails: " + data);
         console.log("Last row Id: " + data.id);
         document.getElementById("add-device-id").value = data.id + 1;
-        document.getElementById("labId").value = data.accessory.lab.labId
-        document.getElementById("labLocation").value = data.accessory.lab.labLocation
+        document.getElementById("add-labId").value = data.lab.labId
+        document.getElementById("add-labLocation").value = data.lab.labLocation
     });
-    /*
-              $.get('/Device/ViewType',
-                  function (data) {
+
+/*
+    var select = document.getElementById("selectNumber");
+    var options = [data.deviceType];
+
+    for(var i = 0; i < options.length; i++) {
+        var opt = options[i];
+        var el = document.createElement("option");
+        el.textContent = opt;
+        el.value = opt;
+        select.appendChild(el);
+    }*/
+              $.get('/Device/ViewType/{labLocation}',function (data) {
                       console.log("View all: " + data)
                       var deviceTypeDDL = document.getElementById("add-device-type")
                       if (deviceTypeDDL.length === 0) {
@@ -112,7 +122,7 @@ function clickAdd(e) {
                               deviceTypeDDL.appendChild(element)
                           }
                       }
-                  })*/
+                  })
 }
 
 function clickEdit(e) {

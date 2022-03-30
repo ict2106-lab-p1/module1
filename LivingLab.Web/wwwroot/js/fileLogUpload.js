@@ -32,7 +32,7 @@ const template = `<div class="log-div mt-5 flex flex-col bg-white p-5 shadow-lg 
 $(document).ready(function (){
     $("#btnAdd").click(appendRow);
     $(this).on('click', '.delete', deleteRow);
-    $("#btnSave").click(save);
+    $(".btnSave").click(save);
 
 })
 
@@ -66,11 +66,14 @@ function deleteRow() {
 function save(e) {
     e.preventDefault();
     const data = getData();
+    console.log(data);
     
     $.ajax({
         url: "/ManualLogs/Save",
         type: "POST",
-        data: {logs: data},
+        data: JSON.stringify(data),
+        contentType: "application/json; charset=utf-8",
+        // data: {logs: data},
         success: function(response) {
             Swal.fire({
                 title: "Success!",
@@ -101,6 +104,7 @@ function getData() {
     const $form = $("#fileUploadForm");
     const $rows = $form.find("div.log-div");
     const serialNumber = $("#deviceSerialNumber").val(); 
+    const deviceType = $("#deviceType").val();
     
     $rows.each(function () {
         const energyUsage = $(this).find("input.energyUsage").val();
@@ -108,9 +112,10 @@ function getData() {
         const loggedAt = $(this).find("input.loggedAt").val();
 
         data.push({
+            DeviceType: deviceType,
             DeviceSerialNo: serialNumber,
             EnergyUsage: parseFloat(energyUsage),
-            Interval: parseFloat(interval),
+            Interval: parseInt(interval),
             LoggedDate: loggedAt
         })
     })

@@ -1,5 +1,4 @@
 using LivingLab.Core.Entities;
-using LivingLab.Core.Entities.DTO;
 using LivingLab.Core.Entities.DTO.Device;
 using LivingLab.Core.Interfaces.Repositories;
 using LivingLab.Infrastructure.Data;
@@ -43,7 +42,6 @@ public class DeviceRepository : Repository<Device>, IDeviceRepository
             .ToListAsync();
         return device;
     }
-    
     public async Task<List<ViewDeviceTypeDTO>> GetViewDeviceType(string labLocation)
     {
         var deviceGroup = await _context.Devices
@@ -62,15 +60,14 @@ public class DeviceRepository : Repository<Device>, IDeviceRepository
         }
         return deviceTypeDtos;
     }
-    
+
     public async Task<List<Device>> GetAllDevicesByType(string deviceType, string labLocation)
-    { 
+    {
         List<Device> deviceList = await _context.Devices
             .Include(l => l.Lab)
             .Where(t => deviceType.Contains(t.Type) && t.Lab.LabLocation == labLocation).ToListAsync();
         return deviceList;
     }
-    
     public async Task<Device> GetDeviceDetails(int id)
     {
         // retrieve device db together with device type details using include to join entities
@@ -86,7 +83,6 @@ public class DeviceRepository : Repository<Device>, IDeviceRepository
             .OrderByDescending(d => d.Id).FirstOrDefaultAsync();
         return device;
     }
-    
     public async Task<Device> AddDevice(Device addedDevice)
     {
         addedDevice.LabId = addedDevice.Lab.LabId;
@@ -98,7 +94,6 @@ public class DeviceRepository : Repository<Device>, IDeviceRepository
         await _context.SaveChangesAsync();
         return addedDevice;
     }
-    
     public async Task<Device> EditDeviceDetails(Device editedDevice)
     {
         // retrieve device db together with device type details using include to join entities
@@ -111,10 +106,10 @@ public class DeviceRepository : Repository<Device>, IDeviceRepository
         currentDevice.Threshold = editedDevice.Threshold;
         currentDevice.LastUpdated = DateTime.Today;
         await _context.SaveChangesAsync();
-            
+
         return editedDevice;
     }
-    
+
     public async Task<Device> DeleteDevice(Device deleteDevice)
     {
         // retrieve device db together with device type details using include to join entities
@@ -122,7 +117,6 @@ public class DeviceRepository : Repository<Device>, IDeviceRepository
         _context.Devices.Remove(currentDevice);
         await _context.SaveChangesAsync();
         Console.WriteLine("Delete Succ");
-            
         return deleteDevice;
     }
 }
