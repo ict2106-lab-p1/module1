@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace LivingLab.Infrastructure.Migrations
 {
-    public partial class AddEntities : Migration
+    public partial class CreateInitialDB : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -225,9 +225,12 @@ namespace LivingLab.Infrastructure.Migrations
                 {
                     LabId = table.Column<int>(type: "INTEGER", nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
-                    LabLocation = table.Column<string>(type: "TEXT", nullable: false),
-                    LabStatus = table.Column<string>(type: "TEXT", nullable: false),
-                    LabInCharge = table.Column<string>(type: "TEXT", nullable: true)
+                    LabLocation = table.Column<string>(type: "TEXT", nullable: true),
+                    LabStatus = table.Column<string>(type: "TEXT", nullable: true),
+                    LabInCharge = table.Column<string>(type: "TEXT", nullable: true),
+                    Capacity = table.Column<int>(type: "INTEGER", nullable: true),
+                    Area = table.Column<int>(type: "INTEGER", nullable: true),
+                    EnergyUsageBenchmark = table.Column<double>(type: "REAL", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -602,8 +605,8 @@ namespace LivingLab.Infrastructure.Migrations
 
             migrationBuilder.InsertData(
                 table: "Labs",
-                columns: new[] { "LabId", "LabInCharge", "LabLocation", "LabStatus" },
-                values: new object[] { 1, "DefaultAdmin1", "NYP-SR7C", "Available" });
+                columns: new[] { "LabId", "Area", "Capacity", "EnergyUsageBenchmark", "LabInCharge", "LabLocation", "LabStatus" },
+                values: new object[] { 1, null, 20, null, "DefaultAdmin1", "NYP-SR7C", "Available" });
 
             migrationBuilder.InsertData(
                 table: "UserRole",

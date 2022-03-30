@@ -791,15 +791,22 @@ namespace LivingLab.Infrastructure.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
+                    b.Property<int?>("Area")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int?>("Capacity")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<double?>("EnergyUsageBenchmark")
+                        .HasColumnType("REAL");
+
                     b.Property<string>("LabInCharge")
                         .HasColumnType("TEXT");
 
                     b.Property<string>("LabLocation")
-                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.Property<string>("LabStatus")
-                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.HasKey("LabId");
@@ -812,6 +819,7 @@ namespace LivingLab.Infrastructure.Migrations
                         new
                         {
                             LabId = 1,
+                            Capacity = 20,
                             LabInCharge = "DefaultAdmin1",
                             LabLocation = "NYP-SR7C",
                             LabStatus = "Available"

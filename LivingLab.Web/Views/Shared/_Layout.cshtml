@@ -56,6 +56,37 @@
         <ul class="relative">
         @if (SignInManager.IsSignedIn(User) && User.IsInRole("Admin"))
         {
+            <div class="mt-16">
+        <span class="text-gray-400 px-5">Account Management</span>
+        <hr class="mt-2 mb-4 border-gray-600"/>
+        <li class="@Html.ActiveClass("", "") relative hover:bg-highlight hover:text-gray-700 ease-in duration-300">
+            <a
+                class="hover:translate-x-2 transition-transform ease-in duration-300 w-full flex items-center h-10 pl-4 cursor-pointer"
+              asp-controller="UserManagement" asp-action="UserBookings">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 mr-2" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M21.21 15.89A10 10 0 1 1 8 2.83"></path>
+                    <path d="M22 12A10 10 0 0 0 12 2v10z"></path>
+                </svg>
+                <span >
+                    Manage Users
+                </span>            
+            </a>
+        </li>
+        <li class="@Html.ActiveClass("", "") relative hover:bg-highlight hover:text-gray-700 ease-in duration-300">
+            <a
+                class="hover:translate-x-2 transition-transform ease-in duration-300 w-full flex items-center h-10 pl-4 cursor-pointer"
+                 asp-controller="LabProfile" asp-action="ViewLab">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 mr-2" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M21.21 15.89A10 10 0 1 1 8 2.83"></path>
+                    <path d="M22 12A10 10 0 0 0 12 2v10z"></path>
+                </svg>
+                <span >
+                    Lab Profile
+                </span>
+            </a>
+        </li>
+        </div>
+         
             <li class="@Html.ActiveClass("", "") relative hover:bg-highlight hover:text-gray-700 ease-in duration-300">
                 <a
                     class="mt-14 hover:translate-x-2 transition-transform ease-in duration-300 w-full flex items-center h-10 pl-4 cursor-pointer"
@@ -63,43 +94,34 @@
                     <span>Settings</span>
                 </a>
             </li>
-            <li tabindex="0" class="text-white">
-                <a class="justify-between"  asp-controller="UserManagement" asp-action="UserBookings">
-                    Manage Users
-                </a>
-            </li>
-            <li tabindex="0" class="text-white">
-                <a class="justify-between" asp-controller="LabProfile" asp-action="ViewLab">
-                    Lab Profile
-                </a>
-            </li>
+          
         }
-            <li class="@Html.ActiveClass("", "") relative hover:bg-highlight hover:text-gray-700 ease-in duration-300">
-                <a
-                    class="mt-14 hover:translate-x-2 transition-transform ease-in duration-300 w-full flex items-center h-10 pl-4 cursor-pointer"
-                    asp-controller="Account" asp-action="Register">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 mr-2" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <rect x="2" y="2" width="20" height="8" rx="2" ry="2"></rect>
-                        <rect x="2" y="14" width="20" height="8" rx="2" ry="2"></rect>
-                        <line x1="6" y1="6" x2="6.01" y2="6"></line>
-                        <line x1="6" y1="18" x2="6.01" y2="18"></line>
-                    </svg>
-                    <span>Register Lab Users</span>
-                </a>
-            </li>
-            <li class="@Html.ActiveClass("", "") relative hover:bg-highlight hover:text-gray-700 ease-in duration-300">
-                <a
-                    class="mt-14 hover:translate-x-2 transition-transform ease-in duration-300 w-full flex items-center h-10 pl-4 cursor-pointer"
-                    asp-controller="LabProfile" asp-action="LabRegister">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 mr-2" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <rect x="2" y="2" width="20" height="8" rx="2" ry="2"></rect>
-                        <rect x="2" y="14" width="20" height="8" rx="2" ry="2"></rect>
-                        <line x1="6" y1="6" x2="6.01" y2="6"></line>
-                        <line x1="6" y1="18" x2="6.01" y2="18"></line>
-                    </svg>
-                    <span>Register Labs</span>
-                </a>
-            </li>
+            @* <li class="@Html.ActiveClass("", "") relative hover:bg-highlight hover:text-gray-700 ease-in duration-300"> *@
+            @*     <a *@
+            @*         class="mt-14 hover:translate-x-2 transition-transform ease-in duration-300 w-full flex items-center h-10 pl-4 cursor-pointer" *@
+            @*         asp-controller="Account" asp-action="Register"> *@
+            @*         <svg xmlns="http://www.w3.org/2000/svg" class="h-6 mr-2" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"> *@
+            @*             <rect x="2" y="2" width="20" height="8" rx="2" ry="2"></rect> *@
+            @*             <rect x="2" y="14" width="20" height="8" rx="2" ry="2"></rect> *@
+            @*             <line x1="6" y1="6" x2="6.01" y2="6"></line> *@
+            @*             <line x1="6" y1="18" x2="6.01" y2="18"></line> *@
+            @*         </svg> *@
+            @*         <span>Register Lab Users</span> *@
+            @*     </a> *@
+            @* </li> *@
+            @* <li class="@Html.ActiveClass("", "") relative hover:bg-highlight hover:text-gray-700 ease-in duration-300"> *@
+            @*     <a *@
+            @*         class="mt-14 hover:translate-x-2 transition-transform ease-in duration-300 w-full flex items-center h-10 pl-4 cursor-pointer" *@
+            @*         asp-controller="LabProfile" asp-action="LabRegister"> *@
+            @*         <svg xmlns="http://www.w3.org/2000/svg" class="h-6 mr-2" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"> *@
+            @*             <rect x="2" y="2" width="20" height="8" rx="2" ry="2"></rect> *@
+            @*             <rect x="2" y="14" width="20" height="8" rx="2" ry="2"></rect> *@
+            @*             <line x1="6" y1="6" x2="6.01" y2="6"></line> *@
+            @*             <line x1="6" y1="18" x2="6.01" y2="18"></line> *@
+            @*         </svg> *@
+            @*         <span>Register Labs</span> *@
+            @*     </a> *@
+            @* </li> *@
             <!--Dashboard Team 2-->
             <div class="mt-16">
                 <span class="text-gray-400 px-5">Dashboard</span>
@@ -128,32 +150,32 @@
             <!--Dashboard Team2 End-->
 
             <!--All Labs-->
-            <div class="mt-16">
-                            <span class="text-gray-400 px-5">All Labs</span>
-                            <hr class="mt-2 mb-4 border-gray-600"/>
-                            <li class="@Html.ActiveClass("", "") relative hover:bg-highlight hover:text-gray-700 ease-in duration-300">
-                                <a
-                                    class="hover:translate-x-2 transition-transform ease-in duration-300 w-full flex items-center h-10 pl-4 cursor-pointer"
-                                    asp-controller="" asp-action="">
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 mr-2" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                        <path d="M21.21 15.89A10 10 0 1 1 8 2.83"></path>
-                                        <path d="M22 12A10 10 0 0 0 12 2v10z"></path>
-                                    </svg>
-                                    <span>SIT-LAB1A</span>
-                                </a>
-                            </li>
-                            <li class="@Html.ActiveClass("", "") relative hover:bg-highlight hover:text-gray-700 ease-in duration-300">
-                                <a
-                                    class="hover:translate-x-2 transition-transform ease-in duration-300 w-full flex items-center h-10 pl-4 cursor-pointer"
-                                    asp-controller="" asp-action="">
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 mr-2" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                        <path d="M21.21 15.89A10 10 0 1 1 8 2.83"></path>
-                                        <path d="M22 12A10 10 0 0 0 12 2v10z"></path>
-                                    </svg>
-                                    <span>SIT-LAB2A</span>
-                                </a>
-                            </li>
-                        </div>
+        <div class="mt-16">
+            <span class="text-gray-400 px-5">All Labs</span>
+            <hr class="mt-2 mb-4 border-gray-600"/>
+            <li class="@Html.ActiveClass("", "") relative hover:bg-highlight hover:text-gray-700 ease-in duration-300">
+                <a
+                    class="hover:translate-x-2 transition-transform ease-in duration-300 w-full flex items-center h-10 pl-4 cursor-pointer"
+                    asp-controller="" asp-action="">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 mr-2" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M21.21 15.89A10 10 0 1 1 8 2.83"></path>
+                        <path d="M22 12A10 10 0 0 0 12 2v10z"></path>
+                    </svg>
+                    <span>SIT-LAB1A</span>
+                </a>
+            </li>
+            <li class="@Html.ActiveClass("", "") relative hover:bg-highlight hover:text-gray-700 ease-in duration-300">
+                <a
+                    class="hover:translate-x-2 transition-transform ease-in duration-300 w-full flex items-center h-10 pl-4 cursor-pointer"
+                    asp-controller="" asp-action="">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 mr-2" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M21.21 15.89A10 10 0 1 1 8 2.83"></path>
+                        <path d="M22 12A10 10 0 0 0 12 2v10z"></path>
+                    </svg>
+                    <span>SIT-LAB2A</span>
+                </a>
+            </li>
+        </div>
             <!--All Labs End-->
             <!--Logs-->
             <div class="mt-16">
