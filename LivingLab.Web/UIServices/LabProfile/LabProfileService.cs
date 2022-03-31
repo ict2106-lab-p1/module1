@@ -43,16 +43,16 @@ public class LabProfileService : ILabProfileService
 
 
     /*Create lab profiles by admins*/
-    public async Task<Lab?> NewLab(LabProfileViewModel labinput)
+    public async Task<Lab?> NewLab(LabRegisterViewModel labinput)
     {
         var labWrapper = new Lab
         {
             LabLocation = labinput.LabLocation,
             LabStatus = labinput.LabStatus,
             LabInCharge = labinput.LabInCharge,
-            // Area = labinput.Area,
-            // Capacity = labinput.Capacity,
-            // EnergyUsageBenchmark = labinput.EnergyUsageBenchmark
+            Area = labinput.Area,
+            Capacity = labinput.Capacity,
+            EnergyUsageBenchmark = labinput.EnergyUsageBenchmark
         };
         return await _labProfileDomainService.NewLab(labWrapper);
     }

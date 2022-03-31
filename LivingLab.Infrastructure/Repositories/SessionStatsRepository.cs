@@ -20,4 +20,6 @@ public class SessionStatsRepository : Repository<SessionStats>, ISessionStatsRep
         List<SessionStats> sessionStats = await _context.SessionStats.ToListAsync();
         return sessionStats;
     }
+    
+    
 }

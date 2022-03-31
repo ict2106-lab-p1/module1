@@ -5,6 +5,8 @@
 }
 
 <div class="flex flex-wrap -mx-3 mb-6">
+<input type="hidden" id="add-labId" name="Lab.LabId"/>
+<input type="hidden" id="add-labLocation" name="Lab.LabLocation"/>
     <div class="w-full md:w-1/2 px-3md:w-1/2 px-3">
         <label class="tracking-wide text-gray-700 text-xs font-bold mb-2" for="add-device-id">
             Device ID
@@ -15,7 +17,7 @@
         <label class="tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-serialnum">
             Serial Number
         </label>
-        <input class="appearance-none block w-full bg-white text-gray-900 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-serialnum" name="SerialNo" type="text" placeholder="A12345678E">
+        <input class="appearance-none block w-full bg-white text-gray-900 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-serialnum" name="SerialNo" type="text" placeholder="S1001">
     </div>
 </div>
 
@@ -24,7 +26,7 @@
         <label class="tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-name">
             Name
         </label>
-        <input class="appearance-none block w-full bg-white text-gray-900 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-name" name="Name" type="text" placeholder="A12345678E">
+        <input class="appearance-none block w-full bg-white text-gray-900 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-name" name="Name" type="text" placeholder="Name">
     </div>
     <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
         <label class="tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-device-type">

@@ -2,6 +2,7 @@ using AutoMapper;
 
 using LivingLab.Core.Entities;
 using LivingLab.Core.Entities.DTO.Accessory;
+using LivingLab.Core.Entities.Identity;
 using LivingLab.Core.Interfaces.Services;
 using LivingLab.Web.Models.ViewModels.Accessory;
 
@@ -16,11 +17,13 @@ public class AccessoryService : IAccessoryService
 {
     private readonly IMapper _mapper;
     private readonly IAccessoryDomainService _accessoryDomainService;
+    private readonly IAccountDomainService _accountDomainService;
 
-    public AccessoryService(IMapper mapper, IAccessoryDomainService accessoryDomainService)
+    public AccessoryService(IMapper mapper, IAccessoryDomainService accessoryDomainService, IAccountDomainService accountDomainService)
     {
         _mapper = mapper;
         _accessoryDomainService = accessoryDomainService;
+        _accountDomainService = accountDomainService;
     }
 
     public async Task<ViewAccessoryViewModel> ViewAccessory(string accessoryType, string labLocation)
@@ -57,8 +60,7 @@ public class AccessoryService : IAccessoryService
         List<AccessoryTypeViewModel> accessoryTypeList =
             _mapper.Map<List<Core.Entities.AccessoryType>, List<AccessoryTypeViewModel>>(
                 accessoryDetails.AccessoryTypes);
-        AccessoryDetailsViewModel accessoryVM =
-            _mapper.Map<AccessoryDetailsDTO, AccessoryDetailsViewModel>(accessoryDetails);
+
         return new AccessoryDetailsViewModel {Accessory = accessory, AccessoryTypes = accessoryTypeList};
     }
 
@@ -73,7 +75,13 @@ public class AccessoryService : IAccessoryService
                 accessoryDetails.AccessoryTypes);
         AccessoryDetailsViewModel accessoryVM =
             _mapper.Map<AccessoryDetailsDTO, AccessoryDetailsViewModel>(accessoryDetails);
-        return new AccessoryDetailsViewModel {Accessory = accessory, AccessoryTypes = accessoryTypeList};
+        var labUserListDB = await _accountDomainService.ViewAccounts();
+        List<string?> userList = new List<string?>();
+        foreach (var users in labUserListDB)
+        {
+            userList.Add(users.FirstName);
+        }
+        return new AccessoryDetailsViewModel {Accessory = accessory, AccessoryTypes = accessoryTypeList, LabUsers = userList};
     }
 
     public async Task<ViewAccessoryViewModel> AddAccessory(AccessoryDetailsViewModel viewModelInput)

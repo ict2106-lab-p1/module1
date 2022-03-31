@@ -47,5 +47,4 @@ public class EquipmentService: IEquipmentService
     {
         _accessoryDomainService.UpdateAccessoryStatus(accessoryId, accessoryReviewStatus);
     }
-
 }

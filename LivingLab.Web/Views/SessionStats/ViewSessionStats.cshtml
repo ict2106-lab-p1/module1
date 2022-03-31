@@ -14,12 +14,27 @@
     </div>
 
     <div class="justify-self-end">
-        <button id="exportBtn" class="bg-purple-500 hover:bg-purple-700 text-white font-bold py-2 px-8 rounded">
-            Export
-        </button>
+    @*<form asp-controller="SessionStats" asp-action="Export" method="get">*@
+    <button id="exportBtn" type="button" class="btn btn-primary font-bold rounded">
+        Export
+    </button>
+    @*</form>*@
     </div>
+    
+<div class="chartCard mt-4 w-100 h-full flex items-center justify-center">
+        <div class="chartBox w-full p-2 rounded-lg border-4 bg-white">
+            <canvas id="durationLoggedChart"></canvas>
+        </div>
+    </div>
+    
+        <div class="chartCard mt-4 w-100 h-full flex items-center justify-center">
+            <div class="chartBox w-full p-2 rounded-lg border-4 bg-white">
+                <canvas id="dataUploadedChart"></canvas>
+            </div>
+        </div>
 </div>
-<hr class="mb-4"/>
+
+<hr class="mb-8"/>
 
 <table id="table_id" class="display">
     <thead>
@@ -28,17 +43,19 @@
         <th>DATE</th>
         <th>LOG IN</th>
         <th>LOG OUT</th>
+        <th>DURATION (hrs)</th>
         <th>DATA UPLOADED</th>
     </tr>
     </thead>
     <tbody>
     @foreach (var report in Model.SessionStatsList) {
         <tr>
-            <td> @report.Lab </td>
-            <td> @report.Date.ToString("MM/dd/yyyy") </td>
-            <td> @report.LoginTime.ToString("h:mm:ss tt") </td>
-            <td> @report.LogoutTime.ToString("h:mm:ss tt") </td>
-            <td> @report.DataUploaded  </td>
+            <td class="Id"> @report.Id </td>
+            <td class="date"> @report.Date.ToString("MM/dd/yyyy") </td>
+            <td class="login"> @report.LoginTime.ToString("MM/dd/yyyy h:mm:ss tt") </td>
+            <td class="logout"> @report.LogoutTime.ToString("MM/dd/yyyy h:mm:ss tt") </td>
+            <td class="duration"> @report.LogoutTime </td>
+            <td class="dataUploaded"> @report.DataUploaded  </td>
         </tr>
     }
     </tbody>
@@ -47,4 +64,27 @@
 @section Scripts
 {
     <script src="~/js/viewSessionStats.js"></script>
+    <script src="~/js/exportToCsv.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        const dataTable = document.getElementById("table_id");
+        const exportBtn = document.getElementById("exportBtn");
+    
+        exportBtn.addEventListener("click", () => {
+            const exporter = new ExportToCSV(dataTable);
+            const csvOutput = exporter.convertToCSV();
+            const csvBlob = new Blob([csvOutput], { type: "text/csv" });
+            const blobUrl = URL.createObjectURL(csvBlob);
+            const anchorElement = document.createElement("a");
+    
+            anchorElement.href = blobUrl;
+            anchorElement.download = "Session Statistics.csv";
+            anchorElement.click();
+    
+            setTimeout(() => {
+                URL.revokeObjectURL(blobUrl);
+            }, 500);
+        });
+    </script>
+    <script src="~/js/viewSessionStatsCharts.js"></script>
 }

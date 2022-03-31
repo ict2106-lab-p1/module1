@@ -1,4 +1,8 @@
-using LivingLab.Core.Entities.DTO;
+using System.Diagnostics;
+
+using LivingLab.Core.Entities;
+using LivingLab.Core.Entities.DTO.EnergyUsageDTOs;
+using LivingLab.Web.Models.ViewModels;
 using LivingLab.Web.Models.ViewModels.SessionStats;
 using LivingLab.Web.UIServices.SessionStats;
 
@@ -20,10 +24,10 @@ public class SessionStatsController : Controller
         _logger = logger;
         _sessionStatsService = sessionStatsService;
     }
-    
     public async Task<IActionResult> ViewSessionStats()
     {
         ViewSessionStatsViewModel viewSessionStats = await _sessionStatsService.ViewSessionStats();
         return View("ViewSessionStats", viewSessionStats);
     }
+    
 }

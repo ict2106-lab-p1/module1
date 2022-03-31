@@ -68,11 +68,19 @@ public class DeviceController : Controller
         return View("ViewDevice", viewDevices);
     }
     
+    [HttpGet]
     [HttpPost("ViewAdd")]
     public async Task<IActionResult> AddDevice(DeviceViewModel addedDevice)
     {
         await _deviceService.AddDevice(addedDevice);
         ViewDeviceViewModel viewDevices = await _deviceService.ViewDevice(addedDevice.Type, addedDevice.Lab.LabLocation);
+        
+        // Send email to labTech in charge for approval
+        string scheme = this.Request.Scheme;
+        string host = this.Request.Host.ToString();
+        string url = scheme + "://" + host;
+        await _deviceService.SendReviewerEmail(url);
+        
         return Redirect($"ViewType/{addedDevice.Lab.LabLocation}");
     }
 

@@ -69,6 +69,17 @@ $(document).ready(function() {
         } else {
             $("#forNewType").addClass("hidden");
         }
+<<<<<<< HEAD
+    });
+
+    // Edit Overlay
+    const editOverlay = document.querySelector("#editOverlay");
+    const toggleEditModal = () => {
+        editOverlay.classList.toggle("hidden");
+        editOverlay.classList.toggle("flex");
+    };
+    $(document).on("click", ".closeEditModal", function() {
+=======
     });
 
     // Edit Overlay
@@ -80,11 +91,19 @@ $(document).ready(function() {
     $(document).on("click", ".closeEditModal", function() {
         toggleEditModal();
     });
+    $(document).on("click", ".cancelEditBtn", function() {
+>>>>>>> 5b141044963b93d42f188e3562dc8090c95eea28
+        toggleEditModal();
+    });
     $(document).on("click", ".editAccessoryBtn", function() {
         clickEdit(this);
         toggleEditModal();
     });
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> 5b141044963b93d42f188e3562dc8090c95eea28
     // Delete Overlay
     const deleteOverlay = document.querySelector("#deleteOverlay");
     const toggleDeleteModal = () => {
@@ -130,6 +149,10 @@ function clickEdit(e) {
             document.getElementById("editAccessoryId").value = data.accessory.id;
             document.getElementById("AccessoryId").value = data.accessory.id;
             var accessoryTypeDDL = document.getElementById("editAccessoryType");
+<<<<<<< HEAD
+=======
+            // populate accessoryType ddl
+>>>>>>> 5b141044963b93d42f188e3562dc8090c95eea28
             if (accessoryTypeDDL.length === 0) {
                 // populate the dropdown list
                 for (var i = 0; i < data.accessoryTypes.length; i++) {
@@ -146,6 +169,21 @@ function clickEdit(e) {
                     option.selected = true;
                 }
             }
+<<<<<<< HEAD
+=======
+            
+            //populate borrowers ddl
+            var borrowerDDL = document.getElementById("editLabUser");
+            if (borrowerDDL.length === 0) {
+                // populate the dropdown list
+                for (var i = 0; i < data.labUsers.length; i++) {
+                    var element = document.createElement("option");
+                    element.textContent = data.labUsers[i];
+                    element.value = data.labUsers[i];
+                    borrowerDDL.appendChild(element);
+                }
+            }
+>>>>>>> 5b141044963b93d42f188e3562dc8090c95eea28
             document.getElementById("AccessoryType").value =
                 accessoryTypeDDL.options[accessoryTypeDDL.selectedIndex].textContent;
             document.getElementById("editAccessoryName").value =
@@ -156,6 +194,21 @@ function clickEdit(e) {
             document.getElementById("editDueDate").value = data.accessory.dueDate;
             document.getElementById("editLabUser").value = data.accessory.labUserId;
             document.getElementById("editLabLocation").value = data.accessory.lab.labLocation
+<<<<<<< HEAD
+=======
+            if (data.accessory.accessoryType.borrowable == false)
+            {
+                document.getElementById("editDueDate").disabled = true;
+                document.getElementById("editLabUser").disabled = true;
+                document.getElementById("editDueDate").classList.add("bg-gray-100");
+                document.getElementById("editLabUser").classList.add("bg-gray-100");
+            } else {
+                document.getElementById("editDueDate").disabled = false;
+                document.getElementById("editLabUser").disabled = false;
+                document.getElementById("editDueDate").classList.remove("bg-gray-100");
+                document.getElementById("editLabUser").classList.remove("bg-gray-100");        
+            }
+>>>>>>> 5b141044963b93d42f188e3562dc8090c95eea28
         }
     );
 }
