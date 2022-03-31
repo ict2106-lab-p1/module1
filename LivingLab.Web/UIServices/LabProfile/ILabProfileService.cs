@@ -11,5 +11,5 @@ public interface ILabProfileService
 {
     Task<ViewLabProfileViewModel> GetAllLabAccounts();
     Task<LabProfileViewModel> ViewLabDetails(int id);
-    Task<Lab?> NewLab(LabProfileViewModel labinput);
+    Task<Lab?> NewLab(LabRegisterViewModel labinput);
 }

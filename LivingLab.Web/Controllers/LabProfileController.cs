@@ -38,10 +38,10 @@ public class LabProfileController: Controller
         return View("LabRegister");
     }
 
-    [Authorize(Roles="Admin")]
+    // [Authorize(Roles="Admin")]
     [HttpPost]
     /*Create labs by admins*/
-    public async Task<IActionResult> LabRegister(LabProfileViewModel labModel)
+    public async Task<IActionResult> LabRegisterPost(LabRegisterViewModel labModel)
     {
         if (ModelState.IsValid)
         {

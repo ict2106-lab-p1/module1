@@ -2,20 +2,24 @@ using AutoMapper;
 
 using LivingLab.Core.Interfaces.Repositories;
 using LivingLab.Web.Models.ViewModels.Device;
-using LivingLab.Web.UIServices.Identity;
+using LivingLab.Web.Models.ViewModels.LivingLabDashboard;
+using LivingLab.Web.UIServices.LabBooking;
+using LivingLab.Web.UIServices.LabProfile;
 
-namespace LivingLab.Web.UIServices.Identity;
+namespace LivingLab.Web.UIServices.LivingLabDashboard;
 /// <remarks>
 /// Author: Team P1-5
 /// </remarks>
-public class IdentityService : IIdentityService
+public class LivingLabDashboardService : ILivingLabDashboardService
 {
     private readonly  IMapper _mapper;
     private readonly IDeviceRepository _deviceRepository;
+    private readonly ILabRepository _labRepository;
 
-    public IdentityService(IDeviceRepository deviceRepository, IMapper mapper)
+    public LivingLabDashboardService(IDeviceRepository deviceRepository, IMapper mapper, ILabRepository labRepository)
     {
         _deviceRepository = deviceRepository;
+        _labRepository = labRepository;
         _mapper = mapper;
     }
 
@@ -31,6 +35,18 @@ public class IdentityService : IIdentityService
         ViewDeviceViewModel viewDevices = new ViewDeviceViewModel();
         viewDevices.DeviceList = devices;
         return viewDevices;
+    }
+    
+    public async Task<LivingLabDashboardViewModel> GetAllLabs()
+    {
+        List<Core.Entities.Lab> labList = await _labRepository.GetAllLabs();
+        Console.WriteLine("test");
+
+        LivingLabDashboardViewModel viewLabs = new LivingLabDashboardViewModel
+        {
+            LabList = labList
+        };
+        return viewLabs;
     }
     
 }
