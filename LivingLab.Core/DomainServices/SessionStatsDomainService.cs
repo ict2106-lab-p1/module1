@@ -17,4 +17,5 @@ public class SessionStatsDomainService : ISessionStatsDomainService
     {
         return _sessionStatsRepository.GetSessionStatsView();
     }
+    
 }
