@@ -15,11 +15,11 @@ public class LabRepository : Repository<Lab>, ILabRepository
         _context = context;
     }
 
-    //public async Task<string?> GetTodoTitle(int id)
-    //{
-    //    var todo = await _context.Todos.FirstOrDefaultAsync(t => t.ID == id);
-    //    return todo?.Title;
-    //}
+    public async Task<List<Lab>> GetAllLabs()
+    {
+        var labs = await _context.Labs.ToListAsync();
+        return labs;
+    }
 
     #region Added by P1-1
     public Task SetLabEnergyBenchmark(int labId, double energyBenchmark)

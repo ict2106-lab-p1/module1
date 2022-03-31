@@ -1,3 +1,5 @@
+using LivingLab.Core.Entities;
+
 namespace LivingLab.Core.Interfaces.Services;
 /// <summary>
 /// Interfaces for the domain services should
@@ -6,7 +8,7 @@ namespace LivingLab.Core.Interfaces.Services;
 /// <remarks>
 /// Author: Team P1-5
 /// </remarks>
-public class ILivingLabDashboardDomainService
+public interface ILivingLabDashboardDomainService
 {
-    
+    Task<List<Lab>> ViewLabs();
 }

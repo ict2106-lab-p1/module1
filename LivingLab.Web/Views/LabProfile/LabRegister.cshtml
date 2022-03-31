@@ -1,4 +1,4 @@
-@model LivingLab.Web.Models.ViewModels.LabProfile.LabProfileViewModel
+@model LivingLab.Web.Models.ViewModels.LabProfile.LabRegisterViewModel
 @* /// <remarks> *@
 @* /// Author: Team P1-5 *@
 @* /// </remarks> *@
@@ -9,7 +9,7 @@
 
 <div class="row">
     <div class="col-md-4">
-        <form id="registerLab" method="post" asp-controller="LabProfile" asp-action="LabRegister">
+        <form id="registerLab" method="post" asp-controller="LabProfile" asp-action="LabRegisterPost">
             <h2>Create a new Lab.</h2>
             <hr />
             @* <div asp-validation-summary="ModelOnly" class="text-danger"></div> *@

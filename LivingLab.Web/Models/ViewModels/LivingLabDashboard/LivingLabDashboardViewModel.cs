@@ -8,5 +8,5 @@ namespace LivingLab.Web.Models.ViewModels.LivingLabDashboard;
 /// </remarks>
 public class LivingLabDashboardViewModel
 {
-
+    public List<Core.Entities.Lab> LabList { get; set; }
 }
