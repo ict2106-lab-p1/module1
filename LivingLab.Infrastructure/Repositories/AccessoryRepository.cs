@@ -103,12 +103,16 @@ public class AccessoryRepository : Repository<Accessory>, IAccessoryRepository
     }
     public async Task<AccessoryDetailsDTO> EditAccessory(AccessoryDetailsDTO accessoryDetailsDto)
     {
-        Accessory accessory = (_context.Accessories.Include(d => d.AccessoryType)
-            .SingleOrDefault(d => d.Id == accessoryDetailsDto.Accessory.Id))!;
+        Accessory accessory = (await _context.Accessories.Include(d => d.AccessoryType)
+            .SingleOrDefaultAsync(d => d.Id == accessoryDetailsDto.Accessory.Id))!;
+        // if (accessory.AccessoryType.Borrowable)
+        accessory.AccessoryTypeId = accessoryDetailsDto.Accessory.AccessoryType.Id;
         accessory.Name = accessoryDetailsDto.Accessory.Name;
-        accessory.AccessoryType.Type = accessoryDetailsDto.Accessory.AccessoryType.Type;
-        accessory.AccessoryType.Borrowable = accessoryDetailsDto.BorrowableValue == "1";
+        accessory.AccessoryType.Borrowable = accessoryDetailsDto.Accessory.AccessoryType.Borrowable;
+        
         accessory.DueDate = accessoryDetailsDto.Accessory.DueDate;
+        accessory.AccessoryType.Description = accessoryDetailsDto.Accessory.AccessoryType.Description;
+        accessory.Status = accessoryDetailsDto.Accessory.Status;
         await _context.SaveChangesAsync();
         return accessoryDetailsDto;
     }
