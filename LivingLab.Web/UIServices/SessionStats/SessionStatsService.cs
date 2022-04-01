@@ -18,10 +18,10 @@ public class SessionStatsService : ISessionStatsService
         _mapper = mapper;
     }
 
-    public async Task<ViewSessionStatsViewModel> ViewSessionStats()
+    public async Task<ViewSessionStatsViewModel> ViewSessionStats(string labLocation)
     {
         //retrieve data from db
-        List<Core.Entities.SessionStats> sessionStatsList = await _sessionStatsDomainService.ViewSessionStats();
+        List<Core.Entities.SessionStats> sessionStatsList = await _sessionStatsDomainService.ViewSessionStats(labLocation);
 
         //map entity model to view model
         List<SessionStatsViewModel> sessionstats = _mapper.Map<List<Core.Entities.SessionStats>, List<SessionStatsViewModel>>(sessionStatsList);

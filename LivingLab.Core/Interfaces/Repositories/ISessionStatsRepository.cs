@@ -7,6 +7,6 @@ namespace LivingLab.Core.Interfaces.Repositories;
 /// </remarks>
 public interface ISessionStatsRepository : IRepository<SessionStats>
 {
-    Task<List<SessionStats>> GetSessionStatsView();
+    Task<List<SessionStats>> GetSessionStatsView(string labLocation);
     
 }
