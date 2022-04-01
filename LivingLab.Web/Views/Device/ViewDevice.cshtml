@@ -16,7 +16,7 @@
     </div>
     <div class="justify-self-end">
         <button id="addDeviceBtn" class="btn btn-primary font-bold rounded">
-            Add new device
+            Add device
         </button>
     </div>
 </div>
@@ -29,6 +29,8 @@
         <th>Description</th>
         <th>Serial Num</th>
         <th>Last Updated</th>
+        <th>Status</th>
+        <th>Threshold</th>
         <th></th>
         <th></th>
     </tr>
@@ -41,7 +43,9 @@
             <td>@device.Name</td>
             <td>@device.Description</td>
             <td>@device.SerialNo</td>
-            <td>@device.LastUpdated.ToString("MM/dd/yyyy")</td>
+            <td>@device.LastUpdated.ToString("dd/MM/yyyy")</td>
+            <td>@device.Status</td>
+            <td>@device.Threshold</td>
             <td data-id="@device.Id" class="editDeviceBtn"></td>
             <td data-id="@device.Id" class="deleteDeviceBtn"></td>
         </tr>
@@ -50,7 +54,7 @@
 </table>
 
 @* Edit Device Modal *@
-<div class="bg-black bg-opacity-50 absolute inset-0 justify-center items-center hidden" id="editOverlay">
+<div class="bg-black bg-opacity-50 fixed inset-0 justify-center vh-100 items-center hidden" id="editOverlay">
     <div class="bg-white max-w-lg py-4 px-4 rounded shadow-xl text-gray-800 mx-auto my-32">
         <div class="flex justify-between items-center">
             <h4 class="text-lg font-bold">Edit Device</h4>
@@ -83,7 +87,7 @@
 </div>
 
 @* Add Device Modal *@
-<div class="bg-black bg-opacity-50 absolute inset-0 justify-center items-center hidden" id="addOverlay">
+<div class="bg-black bg-opacity-50 fixed inset-0 justify-center vh-100 items-center hidden" id="addOverlay">
     <div class="bg-white max-w-lg py-4 px-4 rounded shadow-xl text-gray-800 mx-auto my-32">
         <div class="flex justify-between items-center">
             <h4 class="text-lg font-bold">Add Device</h4>
@@ -109,7 +113,7 @@
 </div>
 
 @* Delete Device Modal *@
-<div class="bg-black bg-opacity-50 absolute inset-0 justify-center items-center hidden" id="deleteOverlay">
+<div class="bg-black bg-opacity-50 fixed inset-0 justify-center vh-100 items-center hidden" id="deleteOverlay">
     <div class="bg-white max-w-lg py-4 px-4 rounded shadow-xl text-gray-800 mx-auto my-32">
         <div class="flex justify-between items-center">
             <h4 class="text-lg font-bold">Delete Device</h4>
@@ -129,7 +133,7 @@
                     @* <button class="bg-transparent hover:bg-purple-500 text-purple-700 font-semibold hover:text-white py-2 px-4 border border-purple-500 hover:border-transparent rounded closeAddModal"> *@
                     @*     Cancel *@
                     @* </button> *@
-                    <button class="btn btn-error" id="delBtn" type="submit">
+                    <button class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded disabled" id="delBtn" type="submit">
                         Delete device
                     </button>
                 </div>

@@ -1,6 +1,8 @@
 /* <remarks>*/
 
+
 /* Author: Team P1-3*/
+
 
 /* </remarks>*/
 
@@ -8,9 +10,15 @@
 @tailwind components;
 @tailwind utilities;
 @layer components {
-  .z-100 {
-    z-index: 100;
-  }
+    .z-100 {
+        z-index: 100;
+    }
+}
+
+@layer components {
+    .z-100 {
+        z-index: 100;
+    }
 }
 
 @layer components {
@@ -69,25 +77,25 @@ th:not(:last-child) {
 }
 
 @media (min-width: 768px) {
-  table {
-    display: inline-table !important;
-  }
-  thead tr:not(:first-child) {
-    display: none;
-  }
+    table {
+        display: inline-table !important;
+    }
+    thead tr:not(:first-child) {
+        display: none;
+    }
 }
 
 @media only screen and (max-width: 1023px) {
-  .overlay:after {
-    content: " ";
-    z-index: 29;
-    display: block;
-    height: 100%;
-    top: 80px;
-    left: 0;
-    right: 0;
-    background: rgba(0, 0, 0, 0.5);
-    pointer-events: none;
-    position: fixed;
-  }
+    .overlay:after {
+        content: " ";
+        z-index: 29;
+        display: block;
+        height: 100%;
+        top: 80px;
+        left: 0;
+        right: 0;
+        background: rgba(0, 0, 0, 0.5);
+        pointer-events: none;
+        position: fixed;
+    }
 }

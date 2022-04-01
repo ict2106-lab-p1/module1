@@ -1,7 +1,7 @@
 using System.Text;
 
 using LivingLab.Core.Entities.DTO.EnergyUsageDTOs;
-using LivingLab.Core.Interfaces.Services.EnergyUsageInterfaces;
+using LivingLab.Core.Interfaces.Services.CsvParser;
 
 
 using Microsoft.AspNetCore.Http;
@@ -52,6 +52,7 @@ public class EnergyUsageLogCsvParser : IEnergyUsageLogCsvParser
         {
             list.Add(new EnergyUsageCsvDTO
             {
+                LabLocation = item.Result.LabLocation,
                 DeviceType = item.Result.DeviceType,
                 DeviceSerialNo = item.Result.DeviceSerialNo,
                 Interval = item.Result.Interval,

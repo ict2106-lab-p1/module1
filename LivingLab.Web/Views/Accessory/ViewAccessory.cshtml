@@ -15,14 +15,13 @@
         <h1 class="text-2xl"> Manage Accessory</h1>
     </div>
     <div class="justify-self-end">
-        <button id="addAccessoryBtn" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-8 rounded"
-            type="button">
+        <button id="addAccessoryBtn" class="btn btn-primary font-bold rounded" type="button">
             Add Accessory
         </button>
     </div>
 </div>
 
-<hr class="mb-4" />
+<hr class="mb-4"/>
 
 <table id="table_id" class="display">
     <thead>
@@ -48,11 +47,11 @@
             <td>@accessory.Name</td>
             <td>@accessory.AccessoryType.Type</td>
             <td>@accessory.AccessoryType.Description</td>
-            <td>@accessory.LastUpdated.ToString("MM/dd/yyyy")</td>
+            <td>@accessory.LastUpdated.ToString("dd/MM/yyyy")</td>
             <td>@accessory.Status</td>
             <td>@accessory.AccessoryType.Borrowable</td>
             <td>@accessory.LabUserId</td>
-            <td>@accessory.DueDate?.ToString("MM/dd/yyyy")</td>
+            <td>@accessory.DueDate?.ToString("dd/MM/yyyy")</td>
             <td data-id="@accessory.Id" class="editAccessoryBtn"></td>
             <td data-id="@accessory.Id" class="deleteAccessoryBtn"></td>
         </tr>
@@ -60,12 +59,11 @@
     </tbody>
 </table>
 
-<div class="bg-black bg-opacity-50 absolute inset-0 hidden justify-center items-center" id="overlay">
+<div class="bg-black bg-opacity-50 fixed inset-0 justify-center vh-100 items-center hidden" id="overlay">
     <div class="bg-white max-w-lg py-4 px-4 rounded shadow-xl text-gray-800">
         <div class="flex justify-between items-center">
             <h4 class="text-lg font-bold">Add Accessory</h4>
-            <svg class="h-8 w-8 cursor-pointer p-1 hover:bg-gray-300 rounded-full" id="close-modal" fill="currentColor"
-                viewBox="0 0 20 20">
+            <svg class="h-8 w-8 cursor-pointer p-1 hover:bg-gray-300 rounded-full" id="close-modal" fill="currentColor" viewBox="0 0 20 20">
                 <path fill-rule="evenodd"
                     d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
                     clip-rule="evenodd">
@@ -81,11 +79,10 @@
                     @await Html.PartialAsync("_AddAccessoryDetails", new AccessoryDetailsViewModel())
                 }
                 <div class="mt-3 flex justify-end space-x-3">
-                    <button id="cancelBtn" type="button"
-                        class="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded">
+                    <button id="cancelBtn" type="button" class="btn btn-outline">
                         Cancel
                     </button>
-                    <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" type="submit">
+                    <button class="btn btn-primary" type="submit">
                         Add
                     </button>
                 </div>
@@ -94,12 +91,11 @@
     </div>
 </div>
 @* edit accessory modal *@
-<div class="bg-black bg-opacity-50 absolute inset-0 hidden justify-center items-center" id="editOverlay">
+<div class="bg-black bg-opacity-50 fixed inset-0 justify-center vh-100 items-center hidden" id="editOverlay">
     <div class="bg-white max-w-lg py-4 px-4 rounded shadow-xl text-gray-800">
         <div class="flex justify-between items-center">
             <h4 class="text-lg font-bold">Edit Accessory</h4>
-            <svg class="h-8 w-8 cursor-pointer p-1 hover:bg-gray-300 rounded-full closeEditModal" fill="currentColor"
-                viewBox="0 0 20 20">
+            <svg class="h-8 w-8 cursor-pointer p-1 hover:bg-gray-300 rounded-full closeEditModal" fill="currentColor" viewBox="0 0 20 20">
                 <path fill-rule="evenodd"
                     d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
                     clip-rule="evenodd">
@@ -115,12 +111,11 @@
                     @await Html.PartialAsync("_EditAccessoryDetails", new AccessoryDetailsViewModel())
                 }
                 <div class="mt-3 flex justify-end space-x-3">
-                    <button id="cancelEditBtn" type="button"
-                        class="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded">
+                    <button id="cancelEditBtn" type="button" class="btn btn-outline cancelEditBtn">
                         Cancel
                     </button>
-                    <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" type="submit">
-                        Edit
+                    <button class="btn btn-primary" type="submit">
+                        Save changes
                     </button>
                 </div>
             </form>
@@ -128,12 +123,11 @@
     </div>
 </div>
 @* Delete Accessory Modal *@
-<div class="bg-black bg-opacity-50 absolute inset-0 justify-center items-center hidden" id="deleteOverlay">
+<div class="bg-black bg-opacity-50 fixed inset-0 justify-center vh-100 items-center hidden" id="deleteOverlay">
     <div class="bg-white max-w-lg py-4 px-4 rounded shadow-xl text-gray-800 mx-auto my-32">
         <div class="flex justify-between items-center">
             <h4 class="text-lg font-bold">Delete Accessory</h4>
-            <svg class="h-8 w-8 cursor-pointer p-1 hover:bg-gray-300 rounded-full closeDeleteModal" fill="currentColor"
-                viewBox="0 0 20 20">
+            <svg class="h-8 w-8 cursor-pointer p-1 hover:bg-gray-300 rounded-full closeDeleteModal" fill="currentColor" viewBox="0 0 20 20">
                 <path fill-rule="evenodd"
                     d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
                     clip-rule="evenodd">
@@ -141,19 +135,16 @@
             </svg>
         </div>
         <div class="mt-4">
-            <form class="w-full max-w-lg" method="post" enctype="multipart/form-data" asp-controller="Accessory"
-                asp-action="DeleteAccessory">
+            <form class="w-full max-w-lg" method="post" enctype="multipart/form-data" asp-controller="Accessory" asp-action="DeleteAccessory">
                 @{
                     @await Html.PartialAsync("_DeleteAccessory", new AccessoryViewModel())
                     ;
                 }
                 <div class="mt-3 flex justify-end space-x-3">
-                    @* <button class="bg-transparent hover:bg-purple-500 text-purple-700 font-semibold hover:text-white
-                        py-2 px-4 border border-purple-500 hover:border-transparent rounded closeAddModal"> *@
-                    @* Cancel *@
+                    @* <button class="bg-transparent hover:bg-purple-500 text-purple-700 font-semibold hover:text-white py-2 px-4 border border-purple-500 hover:border-transparent rounded closeAddModal"> *@
+                    @*     Cancel *@
                     @* </button> *@
-                    <button class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded disabled"
-                        id="delBtn" type="submit">
+                    <button class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded disabled"  id="delBtn" type="submit">
                         Delete
                     </button>
                 </div>
@@ -163,5 +154,5 @@
 </div>
 
 @section Scripts {
-<script src="~/js/viewAccessory.js"></script>
+    <script src="~/js/viewAccessory.js"></script>
 }

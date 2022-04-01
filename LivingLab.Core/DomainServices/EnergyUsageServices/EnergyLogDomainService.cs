@@ -11,21 +11,31 @@ public class EnergyLogDomainService : IEnergyLogDomainService
 {
     private readonly IEnergyUsageRepository _energyUsageRepository;
     private readonly IDeviceRepository _deviceRepository;
-    private readonly ILabRepository _labRepository;
-    
-    public EnergyLogDomainService(IEnergyUsageRepository energyUsageRepository, IDeviceRepository deviceRepository, ILabRepository labRepository)
+    private readonly ILabProfileRepository _labRepository;
+
+    public EnergyLogDomainService(IEnergyUsageRepository energyUsageRepository, IDeviceRepository deviceRepository, ILabProfileRepository labRepository)
     {
         _energyUsageRepository = energyUsageRepository;
         _deviceRepository = deviceRepository;
         _labRepository = labRepository;
-    } 
-    
-    public Task<EnergyUsageLog> Log(EnergyUsageLog log)
+    }
+
+    public async Task<EnergyUsageLog> Log(EnergyUsageLog log)
     {
         var device = _deviceRepository.GetDeviceBySerialNo(log.Device.SerialNo).Result;
-        var lab = _labRepository.GetByIdAsync(log.Lab.LabId).Result;
+        var lab = await _labRepository.GetLabByLocation(log.Lab.LabLocation);
         log.Device = device;
         log.Lab = lab;
-        return _energyUsageRepository.AddAsync(log);
+        return _energyUsageRepository.AddAsync(log).Result;
+    }
+
+    public Task CheckThreshold(int deviceId)
+    {
+        throw new NotImplementedException();
+    }
+
+    private void Notify()
+    {
+        throw new NotImplementedException();
     }
 }

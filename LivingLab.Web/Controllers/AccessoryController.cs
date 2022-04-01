@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using LivingLab.Web.Models.ViewModels;
 using LivingLab.Web.Models.ViewModels.Accessory;
 using LivingLab.Web.UIServices.Accessory;
+using LivingLab.Web.UIServices.Device;
 
 namespace LivingLab.Web.Controllers;
 /// <remarks>
@@ -14,11 +15,13 @@ public class AccessoryController : Controller
 {
     private readonly ILogger<AccessoryController> _logger;
     private readonly IAccessoryService _accessoryService;
+    private readonly IDeviceService _deviceService;
 
-    public AccessoryController(ILogger<AccessoryController> logger, IAccessoryService accessoryService)
+    public AccessoryController(ILogger<AccessoryController> logger, IAccessoryService accessoryService, IDeviceService deviceService)
     {
         _logger = logger;
         _accessoryService = accessoryService;
+        _deviceService = deviceService;
     }
 
     // detailed view
@@ -35,7 +38,6 @@ public class AccessoryController : Controller
         ViewAccessoryTypeViewModel viewAccessories = await _accessoryService.ViewAccessoryType(labLocation);
         return View("ViewAccessoryType", viewAccessories);
     }
-
 
     [Route("AddAccessoryDetails")]
     public async Task<AccessoryDetailsViewModel> AddAccessoryDetails()
@@ -59,14 +61,22 @@ public class AccessoryController : Controller
         AccessoryViewModel accessoryViewModel = await _accessoryService.GetAccessory(id);
         return accessoryViewModel;
     }
-
+    
+    [HttpGet]
     [HttpPost("CreateAccessory")]
     public async Task<IActionResult> CreateAccessory(AccessoryDetailsViewModel viewModel)
     {
         await _accessoryService.AddAccessory(viewModel);
+
+        // Send email to labTech in charge for approval
+        string scheme = this.Request.Scheme;
+        string host = this.Request.Host.ToString();
+        string url = scheme + "://" + host;
+        await _deviceService.SendReviewerEmail(url);
+
         return Redirect($"ViewAccessoryType/{viewModel.Accessory.Lab.LabLocation}");
     }
-
+    
     [HttpPost("EditAccessory")]
     public async Task<IActionResult> EditAccessory(AccessoryDetailsViewModel viewModel)
     {
@@ -75,12 +85,12 @@ public class AccessoryController : Controller
         ViewAccessoryViewModel viewAccessory = await _accessoryService.ViewAccessory(viewModel.Accessory.AccessoryType.Type, viewModel.Accessory.Lab.LabLocation);
         return View("ViewAccessory", viewAccessory);
     }
-
+    
     [HttpPost("View/Delete")]
     public async Task<IActionResult> DeleteAccessory(AccessoryViewModel deleteAccessory)
     {
-        await _accessoryService.DeleteAccessory(deleteAccessory);
-
+        await _accessoryService.DeleteAccessory(deleteAccessory); 
+        
         // Temp - To display ViewAll after editing
         ViewAccessoryViewModel viewAccessory = await _accessoryService.ViewAccessory(deleteAccessory.AccessoryType.Type, deleteAccessory.Lab.LabLocation);
         return View("ViewAccessory", viewAccessory);

@@ -3,6 +3,7 @@ using System.Diagnostics;
 using LivingLab.Web.Models.ViewModels;
 using LivingLab.Web.Models.ViewModels.EnergyUsage;
 using LivingLab.Web.UIServices.EnergyUsage;
+using LivingLab.Web.UIServices.LabProfile;
 
 using Microsoft.AspNetCore.Mvc;
 
@@ -15,22 +16,28 @@ public class EnergyUsageController : Controller
 {
     private readonly IEnergyUsageService _energyUsageService;
     private readonly ILogger<EnergyUsageController> _logger;
-    
+
     public EnergyUsageController(IEnergyUsageService energyUsageService, ILogger<EnergyUsageController> logger)
     {
         _energyUsageService = energyUsageService;
         _logger = logger;
     }
 
-    [HttpGet("/EnergyUsage/Lab/{labId?}")]
-    public IActionResult Index(int? labId = 1)
+    public async Task<IActionResult> Index()
     {
-        ViewBag.LabId = labId;
+        var labs = await _energyUsageService.GetAllLabs();
+        return View(labs.labList);
+    }
+
+    public IActionResult Lab(int? LabId = 1)
+    {
+        ViewBag.LabId = LabId;
         return View();
     }
 
+
     [HttpPost]
-    public async Task<IActionResult> ViewUsage([FromBody] EnergyUsageFilterViewModel filter)
+    public async Task<IActionResult> GetLabUsage([FromBody] EnergyUsageFilterViewModel filter)
     {
         try
         {
@@ -57,7 +64,7 @@ public class EnergyUsageController : Controller
             _logger.Log(LogLevel.Error, e.Message);
             return Error();
         }
-        
+
     }
 
     [HttpPost]
@@ -65,8 +72,8 @@ public class EnergyUsageController : Controller
     {
         try
         {
-           await _energyUsageService.SetLabEnergyBenchmark(benchmark);
-           return RedirectToAction(nameof(Index), new {labId = benchmark.LabId});
+            await _energyUsageService.SetLabEnergyBenchmark(benchmark);
+            return RedirectToAction(nameof(Index), new { labId = benchmark.LabId });
         }
         catch (Exception e)
         {
@@ -74,7 +81,7 @@ public class EnergyUsageController : Controller
             return RedirectToAction(nameof(Benchmark));
         }
     }
-    
+
     [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
     public IActionResult Error()
     {

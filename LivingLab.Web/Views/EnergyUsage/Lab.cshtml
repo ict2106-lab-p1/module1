@@ -1,0 +1,54 @@
+@{
+    ViewData["Title"] = "View Energy Usage";
+}
+
+@section Styles
+{
+    <link rel="stylesheet" href="~/lib/jquery-ui-1.13.1/jquery-ui.min.css"/>
+}
+
+<h2 class="font-bold text-3xl text-slate-900">Lab <span id="labLocation"></span> Energy Usage</h2>
+
+<div class="w-full h-1/2 mt-6">
+    <input type="hidden" id="labId" value="@ViewBag.LabId"/>
+    <div class="flex justify-between mb-5">
+        <div class="flex items-end">
+            <input type="text" id="start" class="input input-bordered" placeholder="Start date"/>
+            <input type="text" id="end" class="input input-bordered ml-4" placeholder="End date"/>
+            <input type="button" id="filter" class="btn btn-primary text-white ml-4" value="Filter"/>
+            <input type="button" id="resetFilter" class="btn btn-outline btn-error ml-4" value="Reset"/>
+        </div>
+        <div class="card w-72 bg-neutral text-neutral-content bg-primary">
+            <div class="card-body items-center text-center">
+                <h2 class="card-title">Median Energy Usage</h2>
+                <p><span id="median">0</span> Watts</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="flex justify-center">
+        <svg id="spinner" class="mr-2 w-8 h-8 text-gray-200 animate-spin dark:text-gray-600 fill-blue-600" viewBox="0 0 100 101" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M100 50.5908C100 78.2051 77.6142 100.591 50 100.591C22.3858 100.591 0 78.2051 0 50.5908C0 22.9766 22.3858 0.59082 50 0.59082C77.6142 0.59082 100 22.9766 100 50.5908ZM9.08144 50.5908C9.08144 73.1895 27.4013 91.5094 50 91.5094C72.5987 91.5094 90.9186 73.1895 90.9186 50.5908C90.9186 27.9921 72.5987 9.67226 50 9.67226C27.4013 9.67226 9.08144 27.9921 9.08144 50.5908Z" fill="currentColor"></path>
+                <path d="M93.9676 39.0409C96.393 38.4038 97.8624 35.9116 97.0079 33.5539C95.2932 28.8227 92.871 24.3692 89.8167 20.348C85.8452 15.1192 80.8826 10.7238 75.2124 7.41289C69.5422 4.10194 63.2754 1.94025 56.7698 1.05124C51.7666 0.367541 46.6976 0.446843 41.7345 1.27873C39.2613 1.69328 37.813 4.19778 38.4501 6.62326C39.0873 9.04874 41.5694 10.4717 44.0505 10.1071C47.8511 9.54855 51.7191 9.52689 55.5402 10.0491C60.8642 10.7766 65.9928 12.5457 70.6331 15.2552C75.2735 17.9648 79.3347 21.5619 82.5849 25.841C84.9175 28.9121 86.7997 32.2913 88.1811 35.8758C89.083 38.2158 91.5421 39.6781 93.9676 39.0409Z" fill="currentFill"></path>
+        </svg>
+    </div>
+    <canvas id="lineChart"></canvas>
+    <div class="flex flex-col text-center mt-5">
+        <span class="text-xs font-bold text-gray-600">Scroll to zoom in/out. Drag to pan.</span>
+    </div>
+    <div class="flex mt-5 space-x-2">
+        <a class="btn btn-outline btn-primary" 
+                                               asp-action="Index">Back</a>
+            <button id="resetZoom" class="btn btn-primary text-white">Reset Zoom</button>
+    </div>
+</div>
+
+
+@section Scripts
+{ 
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@3.7.1/dist/chart.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/hammerjs@2.0.8"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/chartjs-plugin-zoom/1.2.1/chartjs-plugin-zoom.min.js" integrity="sha512-klQv6lz2YR+MecyFYMFRuU2eAl8IPRo6zHnsc9n142TJuJHS8CG0ix4Oq9na9ceeg1u5EkBfZsFcV3U7J51iew==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="~/lib/jquery-ui-1.13.1/jquery-ui.min.js"></script>
+    <script src="~/js/viewLabEnergyUsage.js"></script>
+}

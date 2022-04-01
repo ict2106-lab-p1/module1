@@ -80,10 +80,14 @@ $(document).ready(function() {
     $(document).on("click", ".closeEditModal", function() {
         toggleEditModal();
     });
+    $(document).on("click", ".cancelEditBtn", function() {
+        toggleEditModal();
+    });
     $(document).on("click", ".editAccessoryBtn", function() {
         clickEdit(this);
         toggleEditModal();
     });
+
 
     // Delete Overlay
     const deleteOverlay = document.querySelector("#deleteOverlay");
@@ -130,6 +134,7 @@ function clickEdit(e) {
             document.getElementById("editAccessoryId").value = data.accessory.id;
             document.getElementById("AccessoryId").value = data.accessory.id;
             var accessoryTypeDDL = document.getElementById("editAccessoryType");
+            // populate accessoryType ddl
             if (accessoryTypeDDL.length === 0) {
                 // populate the dropdown list
                 for (var i = 0; i < data.accessoryTypes.length; i++) {
@@ -146,6 +151,18 @@ function clickEdit(e) {
                     option.selected = true;
                 }
             }
+
+            //populate borrowers ddl
+            var borrowerDDL = document.getElementById("editLabUser");
+            if (borrowerDDL.length === 0) {
+                // populate the dropdown list
+                for (var i = 0; i < data.labUsers.length; i++) {
+                    var element = document.createElement("option");
+                    element.textContent = data.labUsers[i];
+                    element.value = data.labUsers[i];
+                    borrowerDDL.appendChild(element);
+                }
+            }
             document.getElementById("AccessoryType").value =
                 accessoryTypeDDL.options[accessoryTypeDDL.selectedIndex].textContent;
             document.getElementById("editAccessoryName").value =
@@ -156,6 +173,17 @@ function clickEdit(e) {
             document.getElementById("editDueDate").value = data.accessory.dueDate;
             document.getElementById("editLabUser").value = data.accessory.labUserId;
             document.getElementById("editLabLocation").value = data.accessory.lab.labLocation
+            if (data.accessory.accessoryType.borrowable == false) {
+                document.getElementById("editDueDate").disabled = true;
+                document.getElementById("editLabUser").disabled = true;
+                document.getElementById("editDueDate").classList.add("bg-gray-100");
+                document.getElementById("editLabUser").classList.add("bg-gray-100");
+            } else {
+                document.getElementById("editDueDate").disabled = false;
+                document.getElementById("editLabUser").disabled = false;
+                document.getElementById("editDueDate").classList.remove("bg-gray-100");
+                document.getElementById("editLabUser").classList.remove("bg-gray-100");
+            }
         }
     );
 }

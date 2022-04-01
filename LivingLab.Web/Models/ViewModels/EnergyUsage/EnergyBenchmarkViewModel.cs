@@ -10,7 +10,9 @@ namespace LivingLab.Web.Models.ViewModels.EnergyUsage;
 public class EnergyBenchmarkViewModel
 {
     public int LabId { get; set; }
-    
-    [Display(Name = "Lab Energy Usage Benchmark")]
+    public string LabLocation { get; set; }
+    public int Capacity { get; set; }
+
+    [Display(Name = "Energy Usage Benchmark (watts/day)")]
     public double EnergyUsageBenchmark { get; set; }
 }

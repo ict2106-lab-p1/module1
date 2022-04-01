@@ -1,6 +1,6 @@
 using LivingLab.Core.Entities.DTO.EnergyUsageDTOs;
 
-namespace LivingLab.Core.Interfaces.Services.EnergyUsageInterfaces;
+namespace LivingLab.Core.Interfaces.Services.CsvParser;
 
 /// <remarks>
 /// Author: Team P1-1

@@ -2,6 +2,7 @@ using LivingLab.Core.DomainServices;
 using LivingLab.Core.DomainServices.EnergyUsageServices;
 using LivingLab.Core.Interfaces.Repositories;
 using LivingLab.Core.Interfaces.Services;
+using LivingLab.Core.Interfaces.Services.CsvParser;
 using LivingLab.Core.Interfaces.Services.EnergyUsageInterfaces;
 using LivingLab.Infrastructure.InfraServices.CsvParser;
 using LivingLab.Infrastructure.Repositories;
@@ -33,7 +34,6 @@ public static class ConfigureEnergyMonitoringServices
 
         // Services
         services.AddTransient<IEnergyUsageLogCsvParser, EnergyUsageLogCsvParser>();
-        services.AddTransient<IEnergyUsageLogDomainService, EnergyUsageLogDomainService>();
         services.AddTransient<IManualLogDomainService, ManualLogDomainService>();
         services.AddTransient<INotificationDomainService, NotificationDomainService>();
         services.AddTransient<IEnergyLogDomainService, EnergyLogDomainService>();

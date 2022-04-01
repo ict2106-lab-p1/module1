@@ -26,4 +26,11 @@ $(document).ready(function () {
         "bInfo": false
     });
 
+<<<<<<< HEAD
 });
+=======
+    
+
+});
+  
+>>>>>>> 5b141044963b93d42f188e3562dc8090c95eea28

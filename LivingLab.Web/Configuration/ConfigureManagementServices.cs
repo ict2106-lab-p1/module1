@@ -2,10 +2,10 @@ using LivingLab.Web.UIServices.Accessory;
 using LivingLab.Web.UIServices.Account;
 using LivingLab.Web.UIServices.Device;
 using LivingLab.Web.UIServices.Equipment;
-using LivingLab.Web.UIServices.Identity;
 using LivingLab.Web.UIServices.LabAccess;
 using LivingLab.Web.UIServices.LabBooking;
 using LivingLab.Web.UIServices.LabProfile;
+using LivingLab.Web.UIServices.LivingLabDashboard;
 using LivingLab.Web.UIServices.ManualLogs;
 using LivingLab.Web.UIServices.NotificationManagement;
 using LivingLab.Web.UIServices.SessionStats;
@@ -33,10 +33,10 @@ public static class ConfigureManagementServices
         services.AddTransient<INotificationManagementService, NotificationManagementService>();
         services.AddTransient<ILabBookingService, LabBookingService>();
         services.AddTransient<ILabProfileService, LabProfileService>();
-        services.AddTransient<IIdentityService, IdentityService>();
         services.AddTransient<ILabAccessService, LabAccessService>();
         services.AddTransient<ISessionStatsService, SessionStatsService>();
         services.AddTransient<IEquipmentService, EquipmentService>();
+        services.AddTransient<ILivingLabDashboardService, LivingLabDashboardService>();
 
         return services;
     }
