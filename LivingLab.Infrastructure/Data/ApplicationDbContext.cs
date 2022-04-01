@@ -17,7 +17,6 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     public DbSet<Device> Devices { get; set; }
     
     public DbSet<EnergyUsageLog> EnergyUsageLogs { get; set; }
-    public DbSet<EnergyUsagePredictionLog> EnergyUsagePredictions { get; set; }
     public DbSet<PowerGenerationMix> PowerGenerationMix { get; set; }
     public DbSet<CarbonFootprintEstimation> CarbonFootprintEstimations { get; set; }
     public DbSet<SmsLog> SmsLogs { get; set; }
