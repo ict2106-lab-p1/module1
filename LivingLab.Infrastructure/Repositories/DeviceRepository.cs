@@ -16,6 +16,11 @@ public class DeviceRepository : Repository<Device>, IDeviceRepository
         _context = context;
     }
 
+    public async Task<Device> GetDeviceBySerialNo(string serialNo)
+    {
+        return await _context.Devices.FirstOrDefaultAsync(d => d.SerialNo == serialNo);
+    }
+
     public async Task<List<Device>> GetDevicesForLabProfile(string labLocation)
     {
         var device = await _context.Devices

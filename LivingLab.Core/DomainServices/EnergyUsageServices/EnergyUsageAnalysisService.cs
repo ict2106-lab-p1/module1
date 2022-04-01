@@ -29,7 +29,8 @@ public class EnergyUsageAnalysisService : IEnergyUsageAnalysisService
         List<EnergyUsageLog> result = _repository.GetDeviceEnergyUsageByDateTime(start,end).Result;
         //temporary list to store data
         List<string> uniqueDevice = new List<string>();
-        List<int> DeviceEU = new List<int>();
+        List<int> DeviceEUJoules = new List<int>();
+        List<int> DeviceEUWatt = new List<int>();
         List<int> DeviceUsageTime = new List<int>();
         List<string> DeviceType = new List<string>();
         List<int> DeviceEUPerHour = new List<int>();
@@ -42,7 +43,7 @@ public class EnergyUsageAnalysisService : IEnergyUsageAnalysisService
             if (!uniqueDevice.Contains(item.Device.SerialNo))
             {
                 uniqueDevice.Add(item.Device.SerialNo);
-                DeviceEU.Add(0);
+                DeviceEUJoules.Add(0);
                 DeviceUsageTime.Add(0);
                 DeviceType.Add(item.Device.Name);
             }
@@ -55,7 +56,7 @@ public class EnergyUsageAnalysisService : IEnergyUsageAnalysisService
             {
                 if (item.Device.SerialNo == uniqueDevice[i])
                 {
-                    DeviceEU[i] += (int)item.EnergyUsage;
+                    DeviceEUJoules[i] += (int)item.EnergyUsage;
                     DeviceUsageTime[i] += item.Interval.Minutes;
                 }
             }
@@ -65,8 +66,8 @@ public class EnergyUsageAnalysisService : IEnergyUsageAnalysisService
         // calculate the cost and EU/hour
         for (int i = 0; i < uniqueDevice.Count; i++)
         {
-            DeviceEUPerHour.Add(_calculator.CalculateEnergyUsagePerHour(DeviceEU[i],DeviceUsageTime[i]));
-            DeviceEUCost.Add(_calculator.CalculateEnergyUsageCost(cost,DeviceEU[i],DeviceUsageTime[i]));
+            DeviceEUWatt.Add(_calculator.CalculateEnergyUsageInWatt(DeviceEUJoules[i],DeviceUsageTime[i]));
+            DeviceEUCost.Add(_calculator.CalculateEnergyUsageCost(cost,DeviceEUWatt[i]));
         }
 
         // append the list of data to DeviceEnergyUsageDTO
@@ -75,9 +76,8 @@ public class EnergyUsageAnalysisService : IEnergyUsageAnalysisService
             DeviceEUList.Add(new DeviceEnergyUsageDTO{
                 DeviceSerialNo = uniqueDevice[i],
                 DeviceType = DeviceType[i],
-                TotalEnergyUsage = DeviceEU[i],
-                EnergyUsageCost = DeviceEUCost[i],
-                EnergyUsagePerHour = DeviceEUPerHour[i]
+                TotalEnergyUsage = DeviceEUWatt[i],
+                EnergyUsageCost = DeviceEUCost[i]
                 });
 
         }

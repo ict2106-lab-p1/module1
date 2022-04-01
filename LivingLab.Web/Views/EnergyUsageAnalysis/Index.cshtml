@@ -29,9 +29,6 @@
                                 Total Energy Usage
                             </th>
                             <th scope="col" class="py-3 px-6 text-s font-medium tracking-wider text-gray-700 uppercase dark:text-gray-400">
-                                Energy Usage Per Hour
-                            </th>
-                            <th scope="col" class="py-3 px-6 text-s font-medium tracking-wider text-gray-700 uppercase dark:text-gray-400">
                                 Energy Usage Cost
                             </th>
                         </tr>
@@ -47,10 +44,7 @@
                                 @item.DeviceType
                             </td>
                             <td class="py-4 px-6 text-sm text-gray-900 whitespace-nowrap dark:text-gray-400">
-                                @item.TotalEnergyUsage kW
-                            </td>
-                            <td class="py-4 px-6 text-sm text-gray-900 whitespace-nowrap dark:text-gray-400">
-                                @item.EnergyUsagePerHour kW/h
+                                @item.TotalEnergyUsage Wh
                             </td>
                             <td class="py-4 px-6 text-sm text-gray-900 whitespace-nowrap dark:text-gray-400">
                                 $ @item.EnergyUsageCost
