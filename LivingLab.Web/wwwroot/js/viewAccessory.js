@@ -151,7 +151,6 @@ function clickEdit(e) {
                     option.selected = true;
                 }
             }
-            
             //populate borrowers ddl
             var borrowerDDL = document.getElementById("editLabUser");
             if (borrowerDDL.length === 0) {
@@ -173,8 +172,7 @@ function clickEdit(e) {
             document.getElementById("editDueDate").value = data.accessory.dueDate;
             document.getElementById("editLabUser").value = data.accessory.labUserId;
             document.getElementById("editLabLocation").value = data.accessory.lab.labLocation
-            if (data.accessory.accessoryType.borrowable == false)
-            {
+            if (data.accessory.accessoryType.borrowable == false) {
                 document.getElementById("editDueDate").disabled = true;
                 document.getElementById("editLabUser").disabled = true;
                 document.getElementById("editDueDate").classList.add("bg-gray-100");
@@ -183,7 +181,7 @@ function clickEdit(e) {
                 document.getElementById("editDueDate").disabled = false;
                 document.getElementById("editLabUser").disabled = false;
                 document.getElementById("editDueDate").classList.remove("bg-gray-100");
-                document.getElementById("editLabUser").classList.remove("bg-gray-100");        
+                document.getElementById("editLabUser").classList.remove("bg-gray-100");
             }
         }
     );

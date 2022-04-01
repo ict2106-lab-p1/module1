@@ -2,6 +2,7 @@ using LivingLab.Core.Constants;
 using LivingLab.Core.Entities;
 using LivingLab.Core.Entities.DTO.EnergyUsageDTOs;
 using LivingLab.Core.Interfaces.Repositories;
+using LivingLab.Core.Interfaces.Services.CsvParser;
 using LivingLab.Core.Interfaces.Services.EnergyUsageInterfaces;
 
 using Microsoft.AspNetCore.Http;
@@ -29,9 +30,6 @@ public class ManualLogDomainService : IManualLogDomainService
 
     public Task SaveLogs(List<EnergyUsageLog> data)
     {
-        // var loggedUser = await _userManager.GetUserAsync(User);
-        var loggedUser = DummyUser.INSTANCE;
         return  _repository.BulkInsertAsync(data);
-        // await _repository.BulkInsertAsyncByUser(data, loggedUser);
     }
 }

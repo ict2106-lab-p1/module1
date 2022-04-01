@@ -16,7 +16,7 @@ $(document).ready(function() {
 
     // addBtn.addEventListener('click', toggleModal)
 
-    $(document).on('click', '#addDeviceBtn', function () {
+    $(document).on('click', '#addDeviceBtn', function() {
         clickAdd(this)
         toggleModal()
     });
@@ -45,7 +45,7 @@ $(document).ready(function() {
 });
 
 function clickAdd(e) {
-    $.get("/Device/ViewAddDetails", function (data) {
+    $.get("/Device/ViewAddDetails", function(data) {
         console.log("ViewAddDetails: " + data);
         console.log("Last row Id: " + data.id);
         document.getElementById("add-device-id").value = data.id + 1;

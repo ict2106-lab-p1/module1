@@ -36,6 +36,13 @@
 
   <ItemGroup>
     <_ContentIncludedByDefault Remove="Views\ManualLogExample\Index.cshtml" />
+    <_ContentIncludedByDefault Remove="Views\P1_5\Appointment.cshtml" />
+    <_ContentIncludedByDefault Remove="Views\P1_5\CreateLabAccount.cshtml" />
+    <_ContentIncludedByDefault Remove="Views\P1_5\CreateLabTechAccount.cshtml" />
+    <_ContentIncludedByDefault Remove="Views\P1_5\Dashboard.cshtml" />
+    <_ContentIncludedByDefault Remove="Views\P1_5\LabProfile.cshtml" />
+    <_ContentIncludedByDefault Remove="Views\P1_5\ManageLabBooking.cshtml" />
+    <_ContentIncludedByDefault Remove="Views\P1_5\ManageLabUsers.cshtml" />
   </ItemGroup>
 
 </Project>

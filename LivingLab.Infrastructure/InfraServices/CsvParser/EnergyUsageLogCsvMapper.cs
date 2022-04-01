@@ -11,10 +11,11 @@ public class EnergyUsageLogCsvMapper : CsvMapping<EnergyUsageCsvDTO>
 {
     public EnergyUsageLogCsvMapper()
     {
-        MapProperty(0, x => x.DeviceType);
-        MapProperty(1, x => x.DeviceSerialNo);
-        MapProperty(2, x => x.EnergyUsage);
-        MapProperty(3, x => x.Interval);
-        MapProperty(4, x => x.LoggedDate);
+        MapProperty(0, x => x.LabLocation);
+        MapProperty(1, x => x.DeviceType);
+        MapProperty(2, x => x.DeviceSerialNo);
+        MapProperty(3, x => x.EnergyUsage);
+        MapProperty(4, x => x.Interval);
+        MapProperty(5, x => x.LoggedDate);
     }
 }

@@ -82,7 +82,7 @@ public class LoginController : Controller
                     }
                     else
                     {
-                        return RedirectToAction("Dashboard", "Home");
+                        return RedirectToAction("Dashboard", "LivingLabDashboard");
                     }
                 }
                 else
@@ -120,7 +120,7 @@ public class LoginController : Controller
         var result = await _accountService.VerifyCode(user.Id, inputDetails);
         if (result)
         {
-            return RedirectToAction("Dashboard", "Home");
+            return RedirectToAction("Dashboard", "LivingLabDashboard");
         }
         else
         {
@@ -163,7 +163,7 @@ public class LoginController : Controller
         var result = await _accountService.VerifyCode(user.Id, inputDetails);
         if (result)
         {
-            return RedirectToAction("Dashboard", "Home");
+            return RedirectToAction("Dashboard", "LivingLabDashboard");
         }
         else
         {

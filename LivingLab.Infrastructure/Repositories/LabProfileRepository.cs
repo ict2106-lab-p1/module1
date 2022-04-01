@@ -18,7 +18,7 @@ public class LabProfileRepository : Repository<Lab>, ILabProfileRepository
         _context = context;
     }
 
-  
+
     public async Task<List<Lab>> GetAllLabs()
     {
         var labGroup = await _context.LabProfile.ToListAsync();
@@ -29,7 +29,32 @@ public class LabProfileRepository : Repository<Lab>, ILabProfileRepository
         Lab user = (await _context.LabProfile.SingleOrDefaultAsync(d => d.LabId == id))!;
         return user;
     }
-    
+
+    // Added by Team P1-1
+    public Task SetLabEnergyBenchmark(int labId, double energyBenchmark)
+    {
+        var lab = _context.Labs.FirstOrDefault(l => l.LabId == labId);
+        if (lab != null)
+        {
+            lab.EnergyUsageBenchmark = energyBenchmark;
+            _context.Labs.Update(lab);
+        }
+        return _context.SaveChangesAsync();
+    }
+
+    // Added by P1-1
+    public Task<double> GetLabEnergyBenchmark(int labId)
+    {
+        var lab = _context.Labs.FirstOrDefault(l => l.LabId == labId);
+        return Task.FromResult(lab != null ? lab.EnergyUsageBenchmark!.Value : 0.0);
+    }
+
+    // Added by P1-1
+    public Task<Lab> GetLabByLocation(string location)
+    {
+        return _context.Labs.FirstOrDefaultAsync(l => l.LabLocation == location);
+    }
+
     // public async Task<Lab> EditUserDetail(Lab editUser)
     // {
     //     ApplicationUser currentUser = (await _context.LabProfile.SingleOrDefaultAsync(d => d.Id == editUser.Id))!;

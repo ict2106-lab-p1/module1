@@ -60,16 +60,8 @@ public class AccessoryService : IAccessoryService
         List<AccessoryTypeViewModel> accessoryTypeList =
             _mapper.Map<List<Core.Entities.AccessoryType>, List<AccessoryTypeViewModel>>(
                 accessoryDetails.AccessoryTypes);
-        AccessoryDetailsViewModel accessoryVM =
-            _mapper.Map<AccessoryDetailsDTO, AccessoryDetailsViewModel>(accessoryDetails);
 
-        var labUserListDB = await _accountDomainService.ViewAccounts();
-        List<string?> userList = new List<string?>();
-        foreach (var users in labUserListDB)
-        {
-            userList.Add(users.FirstName);
-        }
-        return new AccessoryDetailsViewModel {Accessory = accessory, AccessoryTypes = accessoryTypeList, LabUsers = userList};
+        return new AccessoryDetailsViewModel {Accessory = accessory, AccessoryTypes = accessoryTypeList};
     }
 
     public async Task<AccessoryDetailsViewModel> EditAccessoryDetails(int id)
@@ -83,7 +75,13 @@ public class AccessoryService : IAccessoryService
                 accessoryDetails.AccessoryTypes);
         AccessoryDetailsViewModel accessoryVM =
             _mapper.Map<AccessoryDetailsDTO, AccessoryDetailsViewModel>(accessoryDetails);
-        return new AccessoryDetailsViewModel {Accessory = accessory, AccessoryTypes = accessoryTypeList};
+        var labUserListDB = await _accountDomainService.ViewAccounts();
+        List<string?> userList = new List<string?>();
+        foreach (var users in labUserListDB)
+        {
+            userList.Add(users.FirstName);
+        }
+        return new AccessoryDetailsViewModel {Accessory = accessory, AccessoryTypes = accessoryTypeList, LabUsers = userList};
     }
 
     public async Task<ViewAccessoryViewModel> AddAccessory(AccessoryDetailsViewModel viewModelInput)
