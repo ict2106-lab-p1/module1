@@ -9,4 +9,5 @@ public interface ISessionStatsRepository : IRepository<SessionStats>
 {
     Task<List<SessionStats>> GetSessionStatsView(string labLocation);
     
+    
 }

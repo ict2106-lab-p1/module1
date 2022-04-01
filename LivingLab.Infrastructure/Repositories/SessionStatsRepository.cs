@@ -31,6 +31,7 @@ public class SessionStatsRepository : Repository<SessionStats>, ISessionStatsRep
         {
             device.DataUploaded = fileSize;
         }
+        
         await _context.SaveChangesAsync();
     }
     

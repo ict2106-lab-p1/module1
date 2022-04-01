@@ -12,6 +12,7 @@ public class SessionStatsService : ISessionStatsService
     private readonly  IMapper _mapper;
     private readonly ISessionStatsDomainService _sessionStatsDomainService;
 
+    
     public SessionStatsService(ISessionStatsDomainService sessionStatsService, IMapper mapper)
     {
         _sessionStatsDomainService = sessionStatsService;

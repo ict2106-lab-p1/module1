@@ -24,6 +24,7 @@ public class SessionStatsController : Controller
         _logger = logger;
         _sessionStatsService = sessionStatsService;
     }
+    
     public async Task<IActionResult> ViewSessionStats(string labLocation)
     {
         ViewSessionStatsViewModel viewSessionStats = await _sessionStatsService.ViewSessionStats(labLocation);
