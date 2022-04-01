@@ -27,10 +27,10 @@ public class LabRepository : Repository<Lab>, ILabRepository
         var lab = _context.Labs.FirstOrDefault(l => l.LabId == labId);
         if (lab != null)
         {
-            lab.EnergyUsageBenchmark = energyBenchmark;        
+            lab.EnergyUsageBenchmark = energyBenchmark;
             _context.Labs.Update(lab);
         }
-        return _context.SaveChangesAsync();    
+        return _context.SaveChangesAsync();
     }
 
     public Task<double> GetLabEnergyBenchmark(int labId)

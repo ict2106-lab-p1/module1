@@ -38,17 +38,17 @@ public class ManualLogsController : Controller
     }
 
     [HttpPost]
-    public IActionResult Upload(IFormFile file)
+    public async Task<IActionResult> Upload(IFormFile file)
     {
         try
         {
-            var viewModel = _manualLogService.UploadLogs(file);
-            return View(nameof(FileUpload), viewModel);
+            var count = await _manualLogService.UploadLogs(file);
+            return Ok(count);
         }
         catch (Exception e)
         {
             _logger.LogError(e.Message);
-            return View(nameof(FileUpload));
+            return BadRequest(e.Message);
         }
     }
 

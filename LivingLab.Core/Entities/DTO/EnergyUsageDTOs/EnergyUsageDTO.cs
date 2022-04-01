@@ -7,4 +7,5 @@ public class EnergyUsageDTO
 {
     public List<EnergyUsageLog> Logs { get; set; }
     public Lab Lab { get; set; }
+    public double Median { get; set; }
 }

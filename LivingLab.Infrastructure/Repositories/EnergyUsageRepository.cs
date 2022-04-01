@@ -23,9 +23,8 @@ public class EnergyUsageRepository : Repository<EnergyUsageLog>, IEnergyUsageRep
     {
         foreach (var log in logs)
         {
-            // TODO: Change to repo method
             log.Device = await _context.Devices.FirstOrDefaultAsync(d => d.SerialNo == log.Device.SerialNo);
-            log.Lab = await _context.Labs.FirstOrDefaultAsync(l => l.LabId == 1);
+            log.Lab = await _context.Labs.FirstOrDefaultAsync(l => l.LabLocation == log.Lab.LabLocation);
             await _context.AddAsync(log);
         }
 

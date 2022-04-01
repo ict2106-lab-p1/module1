@@ -20,10 +20,14 @@ Refer to WORKFLOW.md for instructions on the development flow.
 
 ## Updates to DB 
 ### Migrations
-`dotnet ef migrations add CreateInitialDB -s LivingLab.Web -p LivingLab.Infrastructure`
+```
+dotnet ef migrations add CreateInitialDB -s LivingLab.Web -p LivingLab.Infrastructure
+```
 
 ### Populating / Update Values
-`dotnet ef database update -s LivingLab.Web -p LivingLab.Infrastructure`
+```
+dotnet ef database update -s LivingLab.Web -p LivingLab.Infrastructure
+```
 
 ## Structure
 Items that belongs to each layer:

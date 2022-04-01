@@ -3,7 +3,6 @@ using System.Security.Policy;
 using AutoMapper;
 
 using LivingLab.Core.Entities;
-using LivingLab.Core.Entities.DTO;
 using LivingLab.Core.Entities.DTO.Device;
 using LivingLab.Core.Entities.Identity;
 using LivingLab.Core.Interfaces.Services;

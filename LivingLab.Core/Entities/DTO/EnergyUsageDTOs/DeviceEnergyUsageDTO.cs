@@ -10,7 +10,5 @@ public class DeviceEnergyUsageDTO
 
     public int TotalEnergyUsage { get; set;}
 
-    public int EnergyUsagePerHour { get; set;}
-
     public double EnergyUsageCost { get; set;}
 }

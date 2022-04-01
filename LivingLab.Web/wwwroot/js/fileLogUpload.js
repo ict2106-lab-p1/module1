@@ -24,17 +24,33 @@ const template = `<div class="log-div mt-5 flex flex-col bg-white p-5 shadow-lg 
                             <input class="loggedAt input input-bordered w-full max-w-xs" name="Logged At" type="datetime-local" value="" placeholder="Enter Logged At Datetime" required/>
                         </div>
                     </div>
-                </div>`
+                </div>`;
 
 /**
  * When DOM is ready for JS code to execute.
  */
-$(document).ready(function (){
+$(document).ready(function() {
+    $("#fileUpload").change(fileChange);
     $("#btnAdd").click(appendRow);
-    $(this).on('click', '.delete', deleteRow);
+    $(this).on("click", ".delete", deleteRow);
     $(".btnSave").click(save);
+    $("#btn-submit").click(submit);
+});
 
-})
+/**
+ * File upload on change event.
+ *
+ * 1. Hide svg icon
+ * 2. Replace file upload text with file name
+ * 3. Show upload button
+ *
+ * @param e
+ */
+function fileChange(e) {
+    const fileName = e.target.files[0].name;
+    $("#attachmentText").text(fileName);
+    $("#btn-submit").show();
+}
 
 /**
  * Appends a new div for input.
@@ -42,12 +58,13 @@ $(document).ready(function (){
 function appendRow() {
     const $form = $("#fileUploadForm");
     const deviceSerialNumber = $("#deviceSerialNumber").val();
-    const updatedTemplate = template.replace("{deviceSerialNumber}", deviceSerialNumber)
-    
-    if ($form.find("div.log-div").length === 0)
-        $form.prepend(updatedTemplate);
-    else
-        $form.find("div.log-div:last").after(updatedTemplate);
+    const updatedTemplate = template.replace(
+        "{deviceSerialNumber}",
+        deviceSerialNumber
+    );
+
+    if ($form.find("div.log-div").length === 0) $form.prepend(updatedTemplate);
+    else $form.find("div.log-div:last").after(updatedTemplate);
 }
 
 /**
@@ -59,15 +76,53 @@ function deleteRow() {
 }
 
 /**
+ * Save the data to the database.
+ */
+function submit(e) {
+    e.preventDefault();
+    const $uploadBtn = $(this);
+    $uploadBtn.hide();
+    const file = $("#fileUpload")[0].files[0];
+    const formData = new FormData();
+    formData.append("file", file);
+
+    $.ajax({
+        url: "/ManualLogs/Upload",
+        type: "POST",
+        data: formData,
+        processData: false,
+        contentType: false,
+        success: function(count) {
+            Swal.fire({
+                title: "Success!",
+                text: `${count} logs saved successfully!`,
+                icon: "success",
+                confirmButtonColor: "#363740",
+            }).then(function() {
+                window.location.href = "/ManualLogs/FileUpload";
+            });
+        },
+        error: function(response) {
+            Swal.fire({
+                title: "Error!",
+                text: "Something went wrong!",
+                icon: "error",
+            });
+            $uploadBtn.show();
+        },
+    });
+}
+
+/**
  * Ajax call to save all logs into db.
- * 
+ *
  * @param e: Target button
  */
 function save(e) {
     e.preventDefault();
     const data = getData();
     console.log(data);
-    
+
     $.ajax({
         url: "/ManualLogs/Save",
         type: "POST",
@@ -79,34 +134,34 @@ function save(e) {
                 title: "Success!",
                 text: "Logs saved successfully!",
                 icon: "success",
-                confirmButtonColor: '#363740'
+                confirmButtonColor: "#363740",
             }).then(function() {
                 window.location.href = "/ManualLogs/FileUpload";
-            })
+            });
         },
         error: function(response) {
             Swal.fire({
                 title: "Error!",
                 text: "Something went wrong!",
-                icon: "error"
-            })
-        }
+                icon: "error",
+            });
+        },
     });
 }
 
 /**
  * Retrieve values from each row in the table.
- * 
+ *
  * @returns Array of objects containing the data.
  */
 function getData() {
     let data = [];
     const $form = $("#fileUploadForm");
     const $rows = $form.find("div.log-div");
-    const serialNumber = $("#deviceSerialNumber").val(); 
+    const serialNumber = $("#deviceSerialNumber").val();
     const deviceType = $("#deviceType").val();
-    
-    $rows.each(function () {
+
+    $rows.each(function() {
         const energyUsage = $(this).find("input.energyUsage").val();
         const interval = $(this).find("input.interval").val();
         const loggedAt = $(this).find("input.loggedAt").val();
@@ -116,8 +171,8 @@ function getData() {
             DeviceSerialNo: serialNumber,
             EnergyUsage: parseFloat(energyUsage),
             Interval: parseInt(interval),
-            LoggedDate: loggedAt
-        })
-    })
+            LoggedDate: loggedAt,
+        });
+    });
     return data;
 }

@@ -7,4 +7,5 @@ public class EnergyUsageViewModel
 {
     public List<EnergyUsageLogViewModel> Logs { get; set; }
     public EnergyUsageLabViewModel Lab { get; set; }
+    public double Median { get; set; }
 }
