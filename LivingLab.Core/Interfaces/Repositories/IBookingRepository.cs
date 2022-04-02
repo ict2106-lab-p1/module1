@@ -6,7 +6,7 @@ namespace LivingLab.Core.Interfaces.Repositories;
 /// </remarks>
 public interface IBookingRepository : IRepository<Booking>
 {
-    Task<List<Booking>?> GetAllBooking();
+    Task<List<Booking>> GetAllBooking();
     Task<Booking?> AddBooking(Booking booking);
     Task<int> DeleteBooking(int bookingId);
 }
