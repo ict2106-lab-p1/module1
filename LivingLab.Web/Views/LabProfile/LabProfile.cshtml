@@ -1,0 +1,105 @@
+@model LivingLab.Web.Models.ViewModels.LabProfile.MultiModel
+@* /// <remarks> *@
+@* /// Author: Team P1-5 *@
+@* /// </remarks> *@
+@{
+    ViewData["Title"] = "Lab Profile";
+}
+
+<div class="">
+    <div class="  ">
+        <div class="">
+            <p class="font-medium text-xl ml-12 mt-4">Overview</p>
+            <p class="font-semibold text-3xl ml-12 mb-4">Lab Profile</p>
+            <div class="bg-white m-12 p-4 rounded-lg">
+                <div class="flex mt-6">
+                    <div class=" w-full">
+                        <p class="font-semibold text-2xl ml-12 mb-4">@Html.Raw(Model.eachlab.LabLocation)</p>
+                    </div>
+                </div>
+                <div class="flex">
+                    <div>
+                        <p class="font-semibold text-base ml-12 mb-4">@Html.Raw(Model.eachlab.LabLocation)</p>
+                    </div>
+                    <div>
+                        <p class="font-semibold text-base ml-12 mb-4">@Html.Raw(Model.eachlab.LabInCharge)</p>
+                    </div>
+                    <div>
+                        <p class="font-semibold text-base ml-12 mb-4">@Html.Raw(Model.eachlab.Occupied) / @Html.Raw(Model.eachlab.Capacity) people</p>
+                    </div>
+
+                </div>
+
+
+                <div class="flex">
+                    <div class="w-6/12 flex flex-col">
+                        <p class="font-semibold text-xl ml-12 mb-2">Devices Available</p>
+                        <div class="flex-1 bg-white mx-12 mt-4 p-4 rounded-lg border border-gray-300">
+                            <div class="flex flex-wrap">
+
+                                @foreach (var name in Model.eachlab.deviceNames)
+                                {
+                                    <div class="rounded-full font-semibold bg-gray-200 px-5 py-2.5 text-center mr-2 mb-2 w-auto">@name</div>
+                                }
+                            </div>
+                        </div>
+
+
+                        <div class="flex justify-end mr-12">
+                            <a class="no-underline hover:underline" asp-controller="Device" asp-action="ViewType" asp-route-labLocation="@Model.eachlab.LabLocation">See more</a>
+                        </div>
+
+                    </div>
+                    <div class="w-6/12 flex flex-col">
+                        <p class="font-semibold text-xl ml-12 mb-2">Accessories Available</p>
+                        <div class="flex-1 bg-white mx-12 mt-4 p-4 rounded-lg border border-gray-300 ">
+                            <div class="flex flex-wrap">
+                                @foreach (var name in Model.eachlab.accessoriesNames)
+                                {
+                                    <div class="rounded-full font-semibold bg-gray-200 px-5 py-2.5 text-center mr-2 mb-2 w-auto">@name</div>
+                                }
+                            </div>
+                        </div>
+
+                        <div class="flex justify-end mr-12">
+                            <a class="no-underline hover:underline" asp-controller="Accessory" asp-action="ViewAccessoryType" asp-route-labLocation="@Model.eachlab.LabLocation">See more</a>
+                        </div>
+                    </div>
+                </div>
+                <p class="font-semibold text-xl ml-12 mt-8 mb-4">Logging</p>
+                <hr class="ml-12 mr-12"/>
+                <div class="flex">
+                    <div class="mt-4 mb-24 flex flex-col w-4/12">
+                        <div class="bg-gray-200 mx-12 mt-4 p-4 rounded-lg border border-gray-300 ">
+                             <p class="font-bold text-xl text-center">Lab User Usage</p>
+                        </div>
+                        <div class="flex justify-end mr-12">
+                            <a class=" no-underline hover:underline" asp-controller="LabProfile" asp-action="">See more</a>
+                        </div>
+
+                    </div>
+                    <div class="mt-4 mb-24 flex flex-col w-4/12">
+                        <div class="bg-gray-200 mx-12 mt-4 p-4 rounded-lg border border-gray-300 ">
+                             <p class="font-bold text-xl text-center">Lab Device Usage</p>
+                        </div>
+                        <div class="flex justify-end mr-12">
+                            <a class=" no-underline hover:underline" asp-controller="LabProfile" asp-action="">See more</a>
+                        </div>
+                    
+                    </div>
+                    <div class="mt-4 mb-24 flex flex-col w-4/12">
+                        <div class="bg-gray-200 mx-12 mt-4 p-4 rounded-lg border border-gray-300 ">
+                            <p class="font-bold text-xl text-center">Lab Energy Usage</p>
+                        </div>
+                        <div class="flex justify-end mr-12">
+                            <a class=" no-underline hover:underline" asp-controller="LabProfile" asp-action="">See more</a>
+                        </div>
+                                        
+                    </div>
+                    
+                    
+                    </div>
+            </div>
+        </div>
+    </div>
+</div>
