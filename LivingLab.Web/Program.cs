@@ -1,5 +1,7 @@
 
+
 using LivingLab.Core.Entities.Identity;
+using LivingLab.Core.Entities.Secrets;
 using LivingLab.Infrastructure;
 using LivingLab.Infrastructure.Configuration;
 using LivingLab.Infrastructure.Data;

@@ -1,5 +1,8 @@
+using System.Configuration;
+
 using LivingLab.Core.DomainServices;
 using LivingLab.Core.Entities.Identity;
+using LivingLab.Core.Entities.Secrets;
 using LivingLab.Core.Interfaces.Repositories;
 using LivingLab.Core.Interfaces.Services;
 using LivingLab.Infrastructure.Data;
@@ -7,7 +10,10 @@ using LivingLab.Infrastructure.InfraServices;
 using LivingLab.Infrastructure.Repositories;
 
 using Microsoft.AspNetCore.Identity;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+
+using ConfigurationManager = System.Configuration.ConfigurationManager;
 
 namespace LivingLab.Infrastructure.Configuration;
 
