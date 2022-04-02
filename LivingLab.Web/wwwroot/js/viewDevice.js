@@ -101,6 +101,27 @@ $(document).ready(function() {
         clickDelete(this);
         toggleDeleteModal();
     });
+
+    $("#del-cfm").on("input", function() {
+        if (this.value === $("#deviceName").text()) {
+            $("#delBtn").removeClass("disabled");
+        } else {
+            $("#delBtn").addClass("disabled");
+        }
+    });
+
+    $("#addForm").submit(function() {
+        alert("Device added successfully and is pending approval!");
+    });
+
+    $("#editForm").submit(function() {
+        alert("Device edited successfully!");
+    });
+
+    $("#delForm").submit(function() {
+        alert("Device deleted successfully!");
+    });
+    
 });
 
 function clickAdd(e) {
@@ -158,11 +179,3 @@ function clickDelete(e) {
         }
     );
 }
-
-$("#del-cfm").on("input", function() {
-    if (this.value === $("#deviceName").text()) {
-        $("#delBtn").removeClass("disabled");
-    } else {
-        $("#delBtn").addClass("disabled");
-    }
-});
