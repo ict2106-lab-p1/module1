@@ -29,7 +29,7 @@
     </div>
         <div class="bg-white shadow p-12 mb-12  rounded-lg w-full   ">
             <h2 class="font-semibold text-xl p-4">Lab Technician Accounts</h2>
-            <div class="flex ">
+            <div class="flex">
                 <div class="flex flex-col">
                     <table class=" divide-y divide-gray-200  ">
                         <thead class="bg-gray-50 ">
@@ -59,6 +59,7 @@
                                 <td class="px-6 py-4 text-sm text-gray-900">SIT-LAB2A</td>
                                 <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                                     <label for="edit-modal" class="btn modal-button editUserBtn" data-id="@user.Id">Edit</label>
+
                                 </td>
                                 <td class="px-12 py-4 whitespace-nowrap text-right text-sm font-medium">
                                     <label for="my-modal" class="btn modal-button deleteUserBtn" data-id="@user.Id">Delete</label>
@@ -72,8 +73,7 @@
             </div>
         </div>
         <div class="bg-white shadow p-12 mb-12  rounded-lg w-full   ">
-        
-        <h2 class="font-semibold text-xl p-4">Lab Users Accounts</h2>
+            <h2 class="font-semibold text-xl p-4">Lab Users Accounts</h2>
             <div class="flex ">
                 <div class="flex flex-col">
                     <table class=" divide-y divide-gray-200  ">
@@ -117,18 +117,31 @@
                             </tr>
                         }
                         <tr/>
-
                         </tbody>
                     </table>
-
-
-
-
-
                 </div>
             </div>
     </div>
-                        </div>
+</div>
+ <input type="checkbox" id="edit-modal" class="modal-toggle">
+ <div class="modal">
+   <div class="modal-box">
+       <div class="mt-4">
+           <form class="w-full max-w-lg" method="post" enctype="multipart/form-data" asp-controller="UserManagement" asp-action="EditUser">
+               @{
+                   @await Html.PartialAsync("_EditUser", new UserManagementViewModel())
+ 
+               }
+               <div class="mt-3 flex justify-end space-x-3">
+                   <button class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded disabled" id="editbtn" type="submit">
+                       Edit
+                   </button>
+                   
+               </div>
+           </form>
+       </div>
+   </div>
+ </div>
 <input type="checkbox" id="my-modal" class="modal-toggle">
  <div class="modal">
      <div class="modal-box">
@@ -140,7 +153,7 @@
                  }
                  <div class="mt-3 flex justify-end space-x-3">
                      <button class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded disabled" id="delBtn" type="submit">
-                         Edit
+                         Delete
                      </button>
                  </div>
              </form>
@@ -148,24 +161,7 @@
      </div>
  </div>
  
- <input type="checkbox" id="edit-modal" class="modal-toggle">
- <div class="modal">
-   <div class="modal-box">
-       <div class="mt-4">
-           <form class="w-full max-w-lg" method="post" enctype="multipart/form-data" asp-controller="UserManagement" asp-action="EditUser">
-               @{
-                   @await Html.PartialAsync("_UserDetails", new UserManagementViewModel())
- 
-               }
-               <div class="mt-3 flex justify-end space-x-3">
-                   <button class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded disabled" id="editbtn" type="submit">
-                       Edit
-                   </button>
-               </div>
-           </form>
-       </div>
-   </div>
- </div>
+
  @section Scripts
  {
      <script src="~/js/viewAccounts.js"></script>
