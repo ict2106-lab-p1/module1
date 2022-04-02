@@ -55,6 +55,12 @@ public class LabProfileRepository : Repository<Lab>, ILabProfileRepository
         return _context.Labs.FirstOrDefaultAsync(l => l.LabLocation == location);
     }
 
+    public async Task<Lab> GetLabProfileDetails(string labLocation)
+    {
+        Lab labInfo = (await _context.Labs.SingleOrDefaultAsync(l => l.LabLocation == labLocation))!;
+        return labInfo;
+    }
+
     // public async Task<Lab> EditUserDetail(Lab editUser)
     // {
     //     ApplicationUser currentUser = (await _context.LabProfile.SingleOrDefaultAsync(d => d.Id == editUser.Id))!;

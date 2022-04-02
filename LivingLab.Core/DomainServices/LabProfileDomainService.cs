@@ -39,4 +39,10 @@ public class LabProfileDomainService: ILabProfileDomainService
     {
         return await _labRepository.AddAsync(labinput);
     }
+
+    public async Task<Lab> GetLabProfileDetails(string labLocation)
+    {
+        _logger.LogInformation("Get the lab info from lab : " + labLocation);
+        return await _labRepository.GetLabProfileDetails(labLocation);
+    }
 }

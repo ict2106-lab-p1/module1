@@ -14,4 +14,5 @@ public interface ILabProfileDomainService
     Task<List<Lab>> ViewLabs();
     Task<Lab> ViewLabDetails(int id);
     Task<Lab?> NewLab(Lab labinput);
+    Task<Lab> GetLabProfileDetails(string labLocation);
 }

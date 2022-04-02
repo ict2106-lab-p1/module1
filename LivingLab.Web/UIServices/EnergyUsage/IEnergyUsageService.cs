@@ -11,5 +11,5 @@ public interface IEnergyUsageService
     Task<EnergyUsageViewModel> GetEnergyUsage(EnergyUsageFilterViewModel filter);
     Task<EnergyBenchmarkViewModel> GetLabEnergyBenchmark(int labId);
     Task SetLabEnergyBenchmark(EnergyBenchmarkViewModel benchmark);
-    Task<ViewLabProfileViewModel> GetAllLabs();
+    Task<List<LabInformationModel>?> GetAllLabs();
 }

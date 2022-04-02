@@ -2,6 +2,7 @@ using System.Diagnostics;
 
 using LivingLab.Web.Models.ViewModels;
 using LivingLab.Web.Models.ViewModels.EnergyUsage;
+using LivingLab.Web.Models.ViewModels.LabProfile;
 using LivingLab.Web.UIServices.EnergyUsage;
 using LivingLab.Web.UIServices.LabProfile;
 
@@ -25,7 +26,11 @@ public class EnergyUsageController : Controller
     public async Task<IActionResult> Index()
     {
         var labs = await _energyUsageService.GetAllLabs();
-        return View(labs.labList);
+        var newLabList = new ViewLabProfileViewModel()
+        {
+          labList  = labs
+        };
+        return View(newLabList.labList);
     }
 
     public IActionResult Lab(int? LabId = 1)
