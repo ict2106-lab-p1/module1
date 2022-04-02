@@ -2,6 +2,6 @@ namespace LivingLab.Web.Models.ViewModels.LabProfile;
 
 public class ViewLabProfileViewModel
 {
-    public List<LabProfileViewModel> labList { get; set; }
+    public List<LabInformationModel>? labList { get; set; }
 
 }

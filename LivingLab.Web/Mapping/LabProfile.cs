@@ -12,7 +12,6 @@ public class LabProfile : Profile
     public LabProfile()
     {
         CreateMap<Lab, EnergyUsageLabViewModel>().ReverseMap();
-        CreateMap<Lab, LabProfileViewModel>().ReverseMap();
         CreateMap<Lab, LabViewModel>().ReverseMap();
     }
 }

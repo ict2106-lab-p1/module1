@@ -86,13 +86,5 @@ public class HomeController : Controller
     //     Console.WriteLine("test");
     //     return View("Index", viewLabProfileViewModel); 
     // }
-    
-    [Route("View/{id}")]
-    public async Task<LabProfileViewModel> ViewLabDetails(int id)
-    { 
-        //retrieve data from db
-        LabProfileViewModel lab = await _labProfileService.ViewLabDetails(id);
-        return lab;
-    }
 
 }
