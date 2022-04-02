@@ -12,8 +12,8 @@ $(document).ready(function() {
             "<'sixteen wide column'tr>" +
             ">" +
             "<'row'" +
-            "<'seven wide column'i>" +
-            "<'eight wide column'l>" +
+            "<'seven wide column 'i>" +
+            "<'eight wide column 'l>" +
             "<'left aligned nine wide column'p>" +
             ">" +
             ">",
@@ -62,6 +62,19 @@ $(document).ready(function() {
         toggleAddModal();
     });
 
+    /***
+     * Display new type input when user choose others
+     */
+    $("#add-device-type").change(function() {
+        console.log("click");
+        var selectedValue = jQuery(this).val();
+        if (selectedValue === "Others") {
+            $(".newType").removeClass("hidden");
+        } else {
+            $(".newType").addClass("hidden");
+        }
+    });
+
     // Edit Overlay
     const editOverlay = document.querySelector("#editOverlay");
     const toggleEditModal = () => {
@@ -93,11 +106,24 @@ $(document).ready(function() {
 
 function clickAdd(e) {
     $.get("/Device/ViewAddDetails", function(data) {
-        console.log("ViewAddDetails: " + data);
-        console.log("Last row Id: " + data.id);
-        document.getElementById("add-device-id").value = data.id + 1;
-        document.getElementById("add-labId").value = data.lab.labId
-        document.getElementById("add-labLocation").value = data.lab.labLocation
+        console.log(data);
+        console.log("Last row Id: " + data.device.id);
+        document.getElementById("add-device-id").value = data.device.id + 1;
+        document.getElementById("add-labId").value = data.device.lab.labId
+        document.getElementById("add-labLocation").value = data.device.lab.labLocation
+        var deviceTypeDDL = document.getElementById("add-device-type")
+        if (deviceTypeDDL.length === 0) {
+            for (var i = 0; i < data.deviceTypes.length; i++) {
+                var element = document.createElement("option")
+                element.textContent = data.deviceTypes[i]
+                element.value = data.deviceTypes[i]
+                deviceTypeDDL.appendChild(element)
+            }
+            var last = document.createElement("option");
+            last.textContent = "Others";
+            last.value = "Others";
+            deviceTypeDDL.appendChild(last);
+        }
     });
 
     /*
@@ -110,18 +136,18 @@ function clickAdd(e) {
             el.value = opt;
             select.appendChild(el);
         }*/
-    $.get('/Device/ViewType/{labLocation}', function(data) {
-        console.log("View all: " + data)
-        var deviceTypeDDL = document.getElementById("add-device-type")
-        if (deviceTypeDDL.length === 0) {
-            for (var i = 0; i < data.type.length; i++) {
-                var element = document.createElement("option")
-                element.textContent = data.type
-                element.value = data.type
-                deviceTypeDDL.appendChild(element)
-            }
-        }
-    })
+    // $.get('/Device/ViewType/{labLocation}', function(data) {
+    //     console.log("View all: " + data)
+    //     var deviceTypeDDL = document.getElementById("add-device-type")
+    //     if (deviceTypeDDL.length === 0) {
+    //         for (var i = 0; i < data.type.length; i++) {
+    //             var element = document.createElement("option")
+    //             element.textContent = data.type
+    //             element.value = data.type
+    //             deviceTypeDDL.appendChild(element)
+    //         }
+    //     }
+    // })
 }
 
 function clickEdit(e) {

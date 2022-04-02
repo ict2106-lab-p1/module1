@@ -124,4 +124,12 @@ public class DeviceRepository : Repository<Device>, IDeviceRepository
         Console.WriteLine("Delete Succ");
         return deleteDevice;
     }
+
+    public async Task<List<String>> GetDeviceTypes()
+    {
+        return (await _context.Devices
+            .Select(t => t.Type)
+            .Distinct()
+            .ToListAsync());
+    }
 }

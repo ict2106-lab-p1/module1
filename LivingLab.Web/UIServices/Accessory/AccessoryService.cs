@@ -5,6 +5,7 @@ using LivingLab.Core.Entities.DTO.Accessory;
 using LivingLab.Core.Entities.Identity;
 using LivingLab.Core.Interfaces.Services;
 using LivingLab.Web.Models.ViewModels.Accessory;
+using LivingLab.Web.Models.ViewModels.UserManagement;
 
 using Microsoft.AspNetCore.Mvc.Rendering;
 
@@ -76,12 +77,9 @@ public class AccessoryService : IAccessoryService
         AccessoryDetailsViewModel accessoryVM =
             _mapper.Map<AccessoryDetailsDTO, AccessoryDetailsViewModel>(accessoryDetails);
         var labUserListDB = await _accountDomainService.ViewAccounts();
-        List<string?> userList = new List<string?>();
-        foreach (var users in labUserListDB)
-        {
-            userList.Add(users.FirstName);
-        }
-        return new AccessoryDetailsViewModel {Accessory = accessory, AccessoryTypes = accessoryTypeList, LabUsers = userList};
+        List<UserManagementViewModel> userList =
+            _mapper.Map<List<ApplicationUser>, List<UserManagementViewModel>>(labUserListDB);
+        return new AccessoryDetailsViewModel {Accessory = accessory, AccessoryTypes = accessoryTypeList, UserList = userList};
     }
 
     public async Task<ViewAccessoryViewModel> AddAccessory(AccessoryDetailsViewModel viewModelInput)
