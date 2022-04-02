@@ -124,38 +124,49 @@
     </div>
 </div>
  <input type="checkbox" id="edit-modal" class="modal-toggle">
- <div class="modal">
-   <div class="modal-box">
-       <div class="mt-4">
-           <form class="w-full max-w-lg" method="post" enctype="multipart/form-data" asp-controller="UserManagement" asp-action="EditUser">
-               @{
-                   @await Html.PartialAsync("_EditUser", new UserManagementViewModel())
- 
-               }
-               <div class="mt-3 flex justify-end space-x-3">
-                   <button class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded disabled" id="editbtn" type="submit">
-                       Edit
-                   </button>
-                   
-               </div>
-           </form>
-       </div>
-   </div>
+ <div class="modal  ">
+     <div class="modal-box ">
+        
+         <div class="mt-4">
+             <form class="w-full max-w-lg" method="post" enctype="multipart/form-data" asp-controller="UserManagement" asp-action="EditUser">
+                 @{
+                     @await Html.PartialAsync("_EditUser", new UserManagementViewModel())
+                 
+                 }
+                 <div class="flex pt-12 justify-end">
+                    
+                     <div class="mt-3 ml-4">
+                         <button class="btn btn-ghost ">Cancel</button>
+                     </div>
+                      <div class="mt-3 flex justify-end space-x-3">
+                          <button class="btn btn-primary" id="editbtn" type="submit">
+                              Edit
+                              </button>
+                          </div>
+                 </div>
+             </form>
+         </div>
+     </div>
  </div>
 <input type="checkbox" id="my-modal" class="modal-toggle">
  <div class="modal">
-     <div class="modal-box">
+     <div class="modal-box ">
          <div class="mt-4">
              <form class="w-full max-w-lg" method="post" enctype="multipart/form-data" asp-controller="UserManagement" asp-action="DeleteAccount">
                  @{
                      @await Html.PartialAsync("_DeleteUser", new UserManagementViewModel())
 
                  }
-                 <div class="mt-3 flex justify-end space-x-3">
-                     <button class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded disabled" id="delBtn" type="submit">
-                         Delete
-                     </button>
-                 </div>
+                 <div class="flex pt-12 justify-end">
+                     <div class="mt-3 ml-4">
+                         <button class="btn btn-ghost ">Cancel</button>
+                     </div>
+                     <div class="mt-3 flex justify-end space-x-3">
+                         <button class="btn btn-primary" id="delBtn" type="submit">
+                             Delete
+                             </button>
+                         </div>
+                     </div>
              </form>
          </div>
      </div>
