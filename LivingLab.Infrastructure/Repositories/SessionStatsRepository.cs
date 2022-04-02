@@ -15,11 +15,24 @@ public class SessionStatsRepository : Repository<SessionStats>, ISessionStatsRep
         _context = context;
     }
 
-    public async Task<List<SessionStats>> GetSessionStatsView()
+    public async Task<List<SessionStats>> GetSessionStatsView(string labLocation)
     {
-        List<SessionStats> sessionStats = await _context.SessionStats.ToListAsync();
+        List<SessionStats> sessionStats = await _context.SessionStats
+            .Include(l => l.Lab)
+            .Where(l => l.Lab!.LabLocation == labLocation)
+            .ToListAsync();
         return sessionStats;
     }
     
+    public async void LogFileUpload(string labId, double fileSize)
+    {
+        SessionStats device = (await _context.SessionStats.Where(s => s.Id == Convert.ToInt32(labId)).FirstOrDefaultAsync())!;
+        if (device.DataUploaded != fileSize)
+        {
+            device.DataUploaded = fileSize;
+        }
+        
+        await _context.SaveChangesAsync();
+    }
     
 }

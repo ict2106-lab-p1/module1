@@ -5,6 +5,5 @@ namespace LivingLab.Web.UIServices.SessionStats;
 
 public interface ISessionStatsService
 {
-    
-    Task<ViewSessionStatsViewModel> ViewSessionStats();
+    Task<ViewSessionStatsViewModel> ViewSessionStats(string labLocation);
 }
