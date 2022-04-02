@@ -5,23 +5,12 @@
 $(document).ready(function() {
 
     const overlay = document.querySelector('#overlay')
-    const addBtn = document.querySelector('#addDeviceBtn')
-    const closeBtn = document.querySelector('#close-modal')
     const viewMoreBtns = document.querySelectorAll('#viewMoreBtn')
 
     const toggleModal = () => {
         overlay.classList.toggle('hidden')
         overlay.classList.toggle('flex')
     }
-
-    // addBtn.addEventListener('click', toggleModal)
-
-    $(document).on('click', '#addDeviceBtn', function() {
-        clickAdd(this)
-        toggleModal()
-    });
-
-    closeBtn.addEventListener('click', toggleModal)
 
     const viewwMoreEventHandler = () => {
         console.log("View More Device");
@@ -43,13 +32,3 @@ $(document).ready(function() {
         })
     })
 });
-
-function clickAdd(e) {
-    $.get("/Device/ViewAddDetails", function(data) {
-        console.log("ViewAddDetails: " + data);
-        console.log("Last row Id: " + data.id);
-        document.getElementById("add-device-id").value = data.id + 1;
-        document.getElementById("add-labId").value = data.lab.labId
-        document.getElementById("add-labLocation").value = data.lab.labLocation
-    });
-}

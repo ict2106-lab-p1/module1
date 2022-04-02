@@ -67,20 +67,23 @@ public class DeviceService : IDeviceService
         return deviceVM;
     }
     
-    public async Task<DeviceViewModel> AddDevice(DeviceViewModel deviceViewModel)
+    public async Task<DeviceViewModel> AddDevice(AddDeviceViewModel deviceViewModel)
     {
-        //retrieve data from db
-        Core.Entities.Device addDevice = _mapper.Map<DeviceViewModel, Core.Entities.Device> (deviceViewModel);
+        if (deviceViewModel.NewType != "" || deviceViewModel.Device.Type.Equals("Others"))
+        {
+            deviceViewModel.Device.Type = deviceViewModel.NewType;
+        }
+        Core.Entities.Device addDevice = _mapper.Map<DeviceViewModel, Core.Entities.Device> (deviceViewModel.Device);
         await _deviceDomainService.AddDevice(addDevice);
-        return deviceViewModel;
+        return deviceViewModel.Device;
     }
     
-    public async Task<DeviceViewModel> ViewAddDetails()
+    public async Task<AddDeviceViewModel> ViewAddDetails()
     {
-        //retrieve data from db
         Core.Entities.Device device = await _deviceDomainService.GetDeviceLastRow();
         DeviceViewModel deviceVM = _mapper.Map<Core.Entities.Device, DeviceViewModel> (device);
-        return deviceVM;
+        List<String> deviceTypes = await _deviceDomainService.GetDeviceTypes();
+        return new AddDeviceViewModel {Device = deviceVM, DeviceTypes = deviceTypes};
     }
     
     // Send email to request approval for add device/accessory to lab in charge

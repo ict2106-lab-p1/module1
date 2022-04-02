@@ -19,6 +19,4 @@ public class AccessoryViewModel
     public DateTime? DueDate { get; set; }
     
     public string? ReviewStatus { get; set; }
-    
-    public string? ReviewedBy { get; set; }
 }

@@ -18,4 +18,5 @@ public interface IDeviceRepository : IRepository<Device>
     Task<Device> AddDevice(Device addedDevice);
     Task<Device> EditDeviceDetails(Device editedDevice);
     Task<Device> DeleteDevice(Device deleteDevice);
+    Task<List<String>> GetDeviceTypes();
 }

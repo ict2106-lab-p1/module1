@@ -109,7 +109,7 @@ public class AccessoryRepository : Repository<Accessory>, IAccessoryRepository
         accessory.AccessoryTypeId = accessoryDetailsDto.Accessory.AccessoryType.Id;
         accessory.Name = accessoryDetailsDto.Accessory.Name;
         accessory.AccessoryType.Borrowable = accessoryDetailsDto.Accessory.AccessoryType.Borrowable;
-        
+        accessory.LabUserId = accessoryDetailsDto.Accessory.LabUserId;
         accessory.DueDate = accessoryDetailsDto.Accessory.DueDate;
         accessory.AccessoryType.Description = accessoryDetailsDto.Accessory.AccessoryType.Description;
         accessory.Status = accessoryDetailsDto.Accessory.Status;

@@ -155,10 +155,10 @@ function clickEdit(e) {
             var borrowerDDL = document.getElementById("editLabUser");
             if (borrowerDDL.length === 0) {
                 // populate the dropdown list
-                for (var i = 0; i < data.labUsers.length; i++) {
+                for (var i = 0; i < data.userList.length; i++) {
                     var element = document.createElement("option");
-                    element.textContent = data.labUsers[i];
-                    element.value = data.labUsers[i];
+                    element.textContent = data.userList[i].firstName + " " + data.userList[i].lastName;
+                    element.value = data.userList[i].id;
                     borrowerDDL.appendChild(element);
                 }
             }
