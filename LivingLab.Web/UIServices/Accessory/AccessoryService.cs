@@ -19,12 +19,13 @@ public class AccessoryService : IAccessoryService
     private readonly IMapper _mapper;
     private readonly IAccessoryDomainService _accessoryDomainService;
     private readonly IAccountDomainService _accountDomainService;
-
-    public AccessoryService(IMapper mapper, IAccessoryDomainService accessoryDomainService, IAccountDomainService accountDomainService)
+    private readonly ILabProfileDomainService _labProfileDomainService;
+    public AccessoryService(IMapper mapper, IAccessoryDomainService accessoryDomainService, IAccountDomainService accountDomainService, ILabProfileDomainService labProfileDomainService)
     {
         _mapper = mapper;
         _accessoryDomainService = accessoryDomainService;
         _accountDomainService = accountDomainService;
+        _labProfileDomainService = labProfileDomainService;
     }
 
     public async Task<ViewAccessoryViewModel> ViewAccessory(string accessoryType, string labLocation)
@@ -88,6 +89,8 @@ public class AccessoryService : IAccessoryService
         ViewAccessoryViewModel viewAccessoryViewModel = new ViewAccessoryViewModel();
         AccessoryViewModel accessoryVM = new AccessoryViewModel();
 
+        var lab = await _labProfileDomainService.GetLabProfileDetails(viewModelInput.Accessory.Lab.LabLocation);
+        accessoryVM.LabId = lab.LabId;
         // Add new accessory Type
         if (addAccessoryDetails.NewAccessoryType != null)
         {
@@ -104,7 +107,6 @@ public class AccessoryService : IAccessoryService
         accessoryVM.Status = "Available";
         accessoryVM.LastUpdated = DateTime.Today;
         accessoryVM.ReviewStatus = "Pending";
-        accessoryVM.LabId = addAccessoryDetails.Accessory.Lab.LabId;
         
         // map view model back to accessory
         Core.Entities.Accessory newAccessory = _mapper.Map<AccessoryViewModel, Core.Entities.Accessory>(accessoryVM);

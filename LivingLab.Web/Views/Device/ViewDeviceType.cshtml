@@ -88,6 +88,7 @@
         </div>
         <div class="mt-4">
             <form class="w-full max-w-lg" method="post" enctype="multipart/form-data" asp-controller="Device" asp-action="AddDevice">
+                <input type="hidden" id="add-labLocation" name="Device.Lab.LabLocation" value="@Model.labLocation"/>
                 @{
                     @await Html.PartialAsync("_AddDevice", new AddDeviceViewModel());
                 }

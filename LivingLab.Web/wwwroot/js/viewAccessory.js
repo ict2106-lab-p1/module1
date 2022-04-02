@@ -142,8 +142,8 @@ function clickAdd(e) {
             last.value = "Others";
             accessoryTypeDDL.appendChild(last);
         }
-        document.getElementById("labId").value = data.accessory.labId
-        document.getElementById("labLocation").value = data.accessory.lab.labLocation
+        // document.getElementById("labId").value = data.accessory.labId
+        // document.getElementById("labLocation").value = data.accessory.lab.labLocation
     });
 }
 
