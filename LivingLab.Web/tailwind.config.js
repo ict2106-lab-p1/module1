@@ -24,6 +24,10 @@ module.exports = {
     ],
 
     theme: {
+        screens: {
+          'md':  '1056px',
+            'lg': '1664px',
+        },
         extend: {
             colors: {
                 dark: "#363740",
