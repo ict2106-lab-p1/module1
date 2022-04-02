@@ -3,7 +3,10 @@ namespace LivingLab.Infrastructure.Repositories;
 using LivingLab.Core.Entities;
 using LivingLab.Core.Interfaces.Repositories;
 using LivingLab.Infrastructure.Data;
+using LivingLab.Core.Entities.Identity;
 
+
+using Microsoft.EntityFrameworkCore;
 /// <remarks>
 /// Author: Team P1-5
 /// </remarks>
@@ -16,15 +19,21 @@ public class BookingRepository : Repository<Booking>, IBookingRepository
         _context = context;
     }
 
-    public async Task<List<Booking>?> GetAllBooking()
+    public async Task<List<Booking>> GetAllBooking()
     {
-        throw new NotImplementedException();
+           var labBooking = await _context.Bookings.ToListAsync();
+        return labBooking;
     }
 
-    public async Task<Booking> AddBooking(Booking booking)
+    public async Task<Booking?> AddBooking(Booking booking)
     {
         //Return booking that is stored
-        throw new NotImplementedException();
+         Booking currentUser = (await _context.Bookings.SingleOrDefaultAsync(d => d.BookingId == booking.BookingId))!;
+        currentUser.Description=booking.Description;
+        currentUser.LabId=booking.LabId;
+   
+        await _context.SaveChangesAsync();       
+        return booking;
     }
     
     public async Task<int> DeleteBooking(int bookingId)

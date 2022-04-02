@@ -69,7 +69,7 @@
             <p class="text-md-start">@Model.DeviceList[0].Lab.LabLocation  </p>
         </div>
         <div class="mt-4">
-            <form class="w-full max-w-lg" method="post" enctype="multipart/form-data" asp-controller="Device" asp-action="EditDevice">
+            <form class="w-full max-w-lg" method="post" enctype="multipart/form-data" asp-controller="Device" asp-action="EditDevice" id="editForm">
                 @{
                     @await Html.PartialAsync("_DeviceDetails", new DeviceViewModel());
                 }
@@ -126,7 +126,7 @@
             </svg>
         </div>
         <div class="mt-4">
-            <form class="w-full max-w-lg" method="post" enctype="multipart/form-data" asp-controller="Device" asp-action="DeleteDevice">
+            <form class="w-full max-w-lg" method="post" enctype="multipart/form-data" asp-controller="Device" asp-action="DeleteDevice" id="delForm">
                 @{
                     @await Html.PartialAsync("_DeleteDevice", new DeviceViewModel());
                 }

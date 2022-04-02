@@ -37,13 +37,13 @@ public class LabProfileController: Controller
     // [Authorize(Roles="Admin")]
     /*Redirect to lab view*/
     [Route("labregister")]
-    public async Task<IActionResult> LabRegister(LabRegisterViewModel labform)
+    public async Task<IActionResult> LabRegister()
     {
-        labform.LabICList = await _userManager.GetUsersInRoleAsync("labtech");
-        return View("LabRegister", labform);
+        /*var labform = new LabRegisterViewModel() {LabICList = await _userManager.GetUsersInRoleAsync("labtech")};*/
+        return View("LabRegister");
     }
 
-    [Authorize(Roles="Admin")]
+    /*[Authorize(Roles="Admin")]*/
     [HttpPost]
     /*Create labs by admins*/
     public async Task<IActionResult> LabRegisterPost(LabRegisterViewModel labModel)

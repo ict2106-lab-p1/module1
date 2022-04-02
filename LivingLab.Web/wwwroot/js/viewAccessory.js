@@ -102,6 +102,28 @@ $(document).ready(function() {
         clickDelete(this);
         toggleDeleteModal();
     });
+    
+    $("#del-cfm").on("input", function() {
+        console.log($("#del-cfm").val);
+        if (this.value === $("#accessory-name").text()) {
+            $("#delBtn").removeClass("disabled");
+        } else {
+            $("#delBtn").addClass("disabled");
+        }
+    });
+    
+    $("#addForm").submit(function() {
+        alert("Accessory added successfully and is pending approval!");
+    });
+
+    $("#editForm").submit(function() {
+        alert("Accessory edited successfully!");
+    });
+
+    $("#delForm").submit(function() {
+        alert("Accessory deleted successfully!");
+    });
+    
 });
 
 function clickAdd(e) {
@@ -206,11 +228,3 @@ function clickDelete(e) {
         }
     );
 }
-$("#del-cfm").on("input", function() {
-    console.log($("#del-cfm").val);
-    if (this.value === $("#accessory-name").text()) {
-        $("#delBtn").removeClass("disabled");
-    } else {
-        $("#delBtn").addClass("disabled");
-    }
-});

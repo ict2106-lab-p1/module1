@@ -1,0 +1,92 @@
+@using LivingLab.Web.Models.ViewModels.Booking
+@model LivingLab.Web.Models.ViewModels.Booking.BookingManagementViewModel
+
+@* /// <remarks> *@
+@* /// Author: Team P1-5 *@
+@* /// </remarks> *@
+
+
+@for ( int i = 0; i < Model.list.Count; i++ )
+{
+   
+   if ( i== 0 ){
+     
+         <div class="flex justify-start">
+     @if (i+2<Model.list.Count){
+         for( int x=i; x<=i+2;x++){
+         var item =Model.list[x];
+         <div class="pr-10">
+                      <figure><img src="https://api.lorem.space/image/shoes?w=300&h=150" alt="Shoes"></figure>
+            <div class="card-body bg-white">
+                          <h2 class="card-title font-bold text-xl">@item.LabNo</h2>
+                     <div class="badge badge-accent">@item.LabState</div>
+                          <p class="text-lg font-medium pt-2">@item.LabLocation</p>
+                          <p class="text-lg font-medium pt-2">@item.LabCurrentUser people</p>
+                          <div class="card-actions pt-12 text-center">
+                    <button class="btn btn-primary  bg-gray-700 border-gray-700">View More</button>
+                          </div>
+                      </div>
+                  </div>
+       
+     }}else{  for( int x=i; x<Model.list.Count;x++){
+         var item =Model.list[x];
+         <div class="pr-10">
+                      <figure><img src="https://api.lorem.space/image/shoes?w=300&h=150" alt="Shoes"></figure>
+            <div class="card-body bg-white">
+                          <h2 class="card-title font-bold text-xl">@item.LabNo</h2>
+                     <div class="badge badge-accent">@item.LabState</div>
+                          <p class="text-lg font-medium pt-2">@item.LabLocation</p>
+                          <p class="text-lg font-medium pt-2">@item.LabCurrentUser people</p>
+                          <div class="card-actions pt-12 text-center">
+                    <button class="btn btn-primary  bg-gray-700 border-gray-700">View More</button>
+                          </div>
+                      </div>
+                  </div>
+       
+     }
+         
+
+     }
+     </div> 
+   } else if(i%3==0&&i>2){
+         <p class="font-semibold text-3xl ml-12 mb-4 pt-12"></p>
+       <div class="flex justify-start">
+     @if (i+2<Model.list.Count){
+         for( int x=i; x<=i+2;x++){
+         var item =Model.list[x];
+         <div class="pr-10">
+                      <figure><img src="https://api.lorem.space/image/shoes?w=300&h=150" alt="Shoes"></figure>
+            <div class="card-body bg-white">
+                          <h2 class="card-title font-bold text-xl">@item.LabNo</h2>
+                     <div class="badge badge-accent">@item.LabState</div>
+                          <p class="text-lg font-medium pt-2">@item.LabLocation</p>
+                          <p class="text-lg font-medium pt-2">@item.LabCurrentUser people</p>
+                          <div class="card-actions pt-12 text-center">
+                    <button class="btn btn-primary  bg-gray-700 border-gray-700">View More</button>
+                          </div>
+                      </div>
+                  </div>
+       
+     }}else{  for( int x=i; x<Model.list.Count;x++){
+         var item =Model.list[x];
+         <div class="pr-10">
+                      <figure><img src="https://api.lorem.space/image/shoes?w=300&h=150" alt="Shoes"></figure>
+            <div class="card-body bg-white">
+                          <h2 class="card-title font-bold text-xl">@item.LabNo</h2>
+                     <div class="badge badge-accent">@item.LabState</div>
+                          <p class="text-lg font-medium pt-2">@item.LabLocation</p>
+                          <p class="text-lg font-medium pt-2">@item.LabCurrentUser people</p>
+                          <div class="card-actions pt-12 text-center">
+                    <button class="btn btn-primary  bg-gray-700 border-gray-700">View More</button>
+                          </div>
+                      </div>
+                  </div>
+       
+     }
+         
+
+     }
+     </div> 
+   }
+}
+      

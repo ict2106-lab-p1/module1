@@ -6,13 +6,12 @@ namespace LivingLab.Web.Models.ViewModels.LabProfile;
 
 public class LabRegisterViewModel
 {
-    public IList<ApplicationUser> LabICList { get; set; }
+    /*public IList<ApplicationUser> LabICList { get; set; }*/
     [Required]
     [Display(Name = "LabLocation")]
     public string LabLocation { get; set; }
     
-    [Display(Name = "LabStatus")]
-    public string LabStatus { get; set; } = "Available";
+    public string LabStatus = "Available";
 
     public int Occupied = 0;
     

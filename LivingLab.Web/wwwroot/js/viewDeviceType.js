@@ -4,7 +4,7 @@
 
 $(document).ready(function() {
     const viewMoreBtns = document.querySelectorAll('#viewMoreBtn')
-    // Add Overlay
+        // Add Overlay
     const addOverlay = document.querySelector("#addOverlay");
     const closeAddBtn = document.querySelector(".closeAddModal");
 

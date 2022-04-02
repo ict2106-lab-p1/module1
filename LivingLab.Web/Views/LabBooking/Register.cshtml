@@ -1,0 +1,41 @@
+@model LivingLab.Web.Models.ViewModels.Booking.BookFormModel
+@* /// <remarks> *@
+@* /// Author: Team P1-5 *@
+@* /// </remarks> *@
+@{
+    ViewData["Title"] = "Lab Register";
+}
+<h1>@ViewData["Title"]</h1>
+
+<div class="row">
+    <div class="col-md-4">
+        <form id="registerLab" method="post" asp-controller="LabBooking" asp-action="BookRegister">
+            <h2>Create a new Booking.</h2>
+            <hr />
+            @* <div asp-validation-summary="ModelOnly" class="text-danger"></div> *@
+            <div class="form-floating">
+                <label asp-for="LabId"></label>
+                <input asp-for="LabId" class="form-control" aria-required="true"/>
+                <span asp-validation-for="LabId" class="text-danger"></span>
+            </div>
+            <div class="form-floating">
+                <label asp-for="StartTime"></label>
+                <input asp-for="StartTime" class="form-control" aria-required="true"/>
+                <span asp-validation-for="StartTime" class="text-danger"></span>
+            </div>
+            <div class="form-floating">
+                <label asp-for="EndTime"></label>
+                <input asp-for="EndTime" class="form-control" aria-required="true"/>
+                <span asp-validation-for="EndTime" class="text-danger"></span>
+            </div>
+            <div class="form-floating">
+                <label asp-for="Description"></label>
+                <input asp-for="Description" class="form-control" aria-required="true"/>
+                <span asp-validation-for="Description" class="text-danger"></span>
+            </div>
+            <button id="labsubmit" type="submit" class="w-100 btn btn-lg btn-primary">New Book</button>
+        </form>
+    </div>
+    
+</div>
+
