@@ -1,3 +1,5 @@
+using LivingLab.Web.Models.ViewModels.UserManagement;
+
 namespace LivingLab.Web.Models.ViewModels.Accessory;
 
 public class AccessoryDetailsViewModel
@@ -6,5 +8,5 @@ public class AccessoryDetailsViewModel
     public string? BorrowableValue { get; set; }
     public AccessoryViewModel Accessory { get; set; }
     public List<AccessoryTypeViewModel> AccessoryTypes { get; set; }
-    public List<String> LabUsers { get; set; }
+    public List<UserManagementViewModel> UserList { get; set; }
 }

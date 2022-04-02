@@ -61,4 +61,9 @@ public class DeviceDomainService : IDeviceDomainService
     {
         return _deviceRepository.DeleteDevice(deletedDevice);
     }
+
+    public Task<List<String>> GetDeviceTypes()
+    {
+        return _deviceRepository.GetDeviceTypes();
+    }
 }

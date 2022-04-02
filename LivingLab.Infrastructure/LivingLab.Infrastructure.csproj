@@ -28,9 +28,4 @@
       <PackageReference Include="TinyCsvParser" Version="2.6.1" />
     </ItemGroup>
 
-    <ItemGroup>
-      <Folder Include="Migrations" />
-      <Folder Include="Migrations\" />
-    </ItemGroup>
-
 </Project>

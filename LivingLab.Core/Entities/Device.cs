@@ -27,6 +27,4 @@ public class Device : BaseEntity
     public double? Threshold { get; set; }
     
     public string? ReviewStatus { get; set; }
-    
-    public string? ReviewedBy { get; set; }
 }

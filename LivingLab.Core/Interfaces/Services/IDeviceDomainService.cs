@@ -22,4 +22,5 @@ public interface IDeviceDomainService
     Task<Device> AddDevice(Device addedDevice);
     Task<Device> EditDeviceDetails(Device editedDevice);
     Task<Device> DeleteDevice(Device deleteDevice);
+    Task<List<String>> GetDeviceTypes();
 }

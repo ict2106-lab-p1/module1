@@ -33,6 +33,4 @@ public class Accessory : BaseEntity
     public DateTime? DueDate { get; set; }
 
     public string? ReviewStatus { get; set; }
-
-    public string? ReviewedBy { get; set; }
 }

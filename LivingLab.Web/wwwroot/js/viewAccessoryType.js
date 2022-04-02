@@ -15,10 +15,6 @@ $(document).ready(function() {
     $(document).on('click', '#close-modal', function() {
         toggleModal()
     });
-    $(document).on('click', '#addAccessoryBtn', function() {
-        clickAdd(this)
-        toggleModal()
-    });
     $(document).on('click', "#cancelBtn", function() {
         toggleModal()
     });
@@ -43,27 +39,3 @@ $(document).ready(function() {
     })
 
 });
-
-function clickAdd(e) {
-    $.get('/Accessory/AddAccessoryDetails',
-        function(data) {
-            console.log("Hello!?")
-            console.log(data)
-            document.getElementById("accessoryId").value = data.accessory.id + 1
-            var accessoryTypeDDL = document.getElementById("accessoryType")
-            if (accessoryTypeDDL.length === 0) {
-                for (var i = 0; i < data.accessoryTypes.length; i++) {
-                    var element = document.createElement("option")
-                    element.textContent = data.accessoryTypes[i].type
-                    element.value = data.accessoryTypes[i].id
-                    accessoryTypeDDL.appendChild(element)
-                }
-                var last = document.createElement("option")
-                last.textContent = "Others"
-                last.value = "Others"
-                accessoryTypeDDL.appendChild(last)
-            }
-            document.getElementById("labId").value = data.accessory.lab.labId
-            document.getElementById("labLocation").value = data.accessory.lab.labLocation
-        })
-}
