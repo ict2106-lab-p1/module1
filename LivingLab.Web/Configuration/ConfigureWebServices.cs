@@ -1,4 +1,5 @@
 using LivingLab.Core.Entities.Identity;
+using LivingLab.Core.Entities.Secrets;
 using LivingLab.Infrastructure.Data;
 using LivingLab.Web.UIServices.EnergyUsage;
 using LivingLab.Web.UIServices.ManualLogs;
@@ -15,6 +16,7 @@ using LivingLab.Web.UIServices.Todo;
 using LivingLab.Web.UIServices.UserManagement;
 
 using Microsoft.AspNetCore.Identity;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace LivingLab.Web.Configuration;
 

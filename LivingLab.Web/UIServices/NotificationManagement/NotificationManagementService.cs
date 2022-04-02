@@ -36,17 +36,16 @@ public class NotificationManagementService : INotificationManagementService
     {
         // Find your Account SID and Auth Token at twilio.com/console
         // and set the environment variables. See http://twil.io/secure
-        string accountSid = _config["TWILIO_ACC_ID"];
-        string authToken = _config["TWILIO_AUTH_ID"];
+        string? accountSid = _config.GetSection("LivingLab:TWILIO_ACC_ID").Value;
+        string? authToken = _config.GetSection("LivingLab:TWILIO_AUTH_ID").Value;
 
         TwilioClient.Init(accountSid, authToken);
 
         var messageOptions = new CreateMessageOptions(new PhoneNumber(phone));   
-        messageOptions.MessagingServiceSid = "MG7d7cd6b53ca04365964a61a99448d3e0";  
+        messageOptions.MessagingServiceSid = _config.GetSection("LivingLab:TWILIO_MSG_SERVICE_ID").Value;;  
         messageOptions.Body = msgBody;   
  
-        var message = MessageResource.Create(messageOptions); 
-        Console.WriteLine(message.Body);
+        var message = MessageResource.Create(messageOptions);
     }
 
     /*Send Email to an address, details are defined in the domain services*/
