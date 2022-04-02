@@ -1,0 +1,63 @@
+@using LivingLab.Web.Models.ViewModels.Booking
+@model LivingLab.Web.Models.ViewModels.Booking.BookingTableManagementViewModel
+
+@* /// <remarks> *@
+@* /// Author: Team P1-5 *@
+@* /// </remarks> *@
+
+
+<div class="bg-white shadow p-12  mb-12  rounded-lg">
+                    <h2 class="font-semibold text-xl p-4">Booking</h2>
+                    <div class="flex flex flex-col justify-center items-center">
+                        <!-- This example requires Tailwind CSS v2.0+ -->
+                        <div class="flex flex-col">
+                            <div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
+                                <div class="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
+                                    <div class="overflow-hidden border-b border-gray-200 sm:rounded-lg">
+                                        <table class="min-w-full divide-y divide-gray-200">
+                                            <thead class="bg-gray-50">
+                                            <tr class="justify-evenly">
+                                                <th scope="col" class="px-12 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">BookID</th>
+                                                <th scope="col" class="px-12 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">StartTime</th>
+                                                <th scope="col" class="px-12 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">EndTime</th>
+                                                <th scope="col" class="px-12 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">LabID</th>
+                                                <th scope="col" class="px-12 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Description</th>
+
+                                                <th scope="col" class="relative px-12 py-3">
+                                                    <span class="sr-only">View Profile</span>
+                                                </th>
+                                            </tr>
+                                            </thead>
+                                            <tbody class="bg-white divide-y divide-gray-200">
+                                            <tr class="hover:bg-blue-100">
+                                            @foreach (var lab in Model.list)
+                                            {
+                                                <tr>
+                                                    <td class="px-12 py-4 whitespace-nowrap">
+                                                        <div class="flex items-center">
+                                                            <div class="">
+                                                                <div class="text-sm text-gray-900">@lab.BookId</div>
+                                                            </div>
+                                                        </div>
+                                                    </td>
+                                                    <td class="px-12 py-4 text-sm text-gray-900">@lab.StartTime</td>
+                                                    <td class="px-12 py-4 text-sm text-gray-900">@lab.EndTime</td>
+                                                    <td class="px-12 py-4 text-sm text-gray-900">@lab.LabNo</td>
+                                                    <td class="px-12 py-4 text-sm text-gray-900">@lab.Description</td>
+                                                    <td class="px-12 py-4 whitespace-nowrap text-right text-sm font-medium">
+                                                        <label class="btn"><a asp-controller="LabBooking" asp-action="DeleteBook" asp-route-bookingid="@lab.LabNo">Delete</a></label>
+                                                    </td>
+ 
+                                                </tr>
+                                            }
+                                            </tr>
+                                            </tbody>
+                                        </table>
+ 
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
