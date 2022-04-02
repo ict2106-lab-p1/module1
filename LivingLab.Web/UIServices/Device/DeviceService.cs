@@ -69,7 +69,7 @@ public class DeviceService : IDeviceService
     
     public async Task<DeviceViewModel> AddDevice(AddDeviceViewModel deviceViewModel)
     {
-        if (deviceViewModel.NewType != "" || deviceViewModel.Device.Type.Equals("Others"))
+        if (deviceViewModel.Device.Type.Equals("Others"))
         {
             deviceViewModel.Device.Type = deviceViewModel.NewType;
         }

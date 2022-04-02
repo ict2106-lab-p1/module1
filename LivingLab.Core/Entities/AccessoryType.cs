@@ -4,8 +4,10 @@ namespace LivingLab.Core.Entities;
 /// <remarks>
 /// Author: Team P1-3
 /// </remarks>
-public class AccessoryType : BaseEntity
+public class AccessoryType
 {
+    [Key]
+    public int Id { get; set; }
     [Required]
     public string Type { get; set; }
 

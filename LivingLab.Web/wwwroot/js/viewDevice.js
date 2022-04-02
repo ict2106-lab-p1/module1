@@ -42,7 +42,6 @@ $(document).ready(function() {
 
     // Add Overlay
     const addOverlay = document.querySelector("#addOverlay");
-    const addBtn = document.querySelector("#addDeviceBtn");
     const closeAddBtn = document.querySelector(".closeAddModal");
 
     const toggleAddModal = () => {
@@ -125,29 +124,6 @@ function clickAdd(e) {
             deviceTypeDDL.appendChild(last);
         }
     });
-
-    /*
-        var select = document.getElementById("selectNumber");
-        var options = [data.deviceType];
-        for(var i = 0; i < options.length; i++) {
-            var opt = options[i];
-            var el = document.createElement("option");
-            el.textContent = opt;
-            el.value = opt;
-            select.appendChild(el);
-        }*/
-    // $.get('/Device/ViewType/{labLocation}', function(data) {
-    //     console.log("View all: " + data)
-    //     var deviceTypeDDL = document.getElementById("add-device-type")
-    //     if (deviceTypeDDL.length === 0) {
-    //         for (var i = 0; i < data.type.length; i++) {
-    //             var element = document.createElement("option")
-    //             element.textContent = data.type
-    //             element.value = data.type
-    //             deviceTypeDDL.appendChild(element)
-    //         }
-    //     }
-    // })
 }
 
 function clickEdit(e) {
