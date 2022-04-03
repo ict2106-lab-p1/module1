@@ -1,7 +1,3 @@
-using System.Diagnostics;
-
-using LivingLab.Core.Entities;
-using LivingLab.Web.Models.ViewModels;
 using LivingLab.Web.Models.ViewModels.SessionStats;
 using LivingLab.Web.UIServices.SessionStats;
 

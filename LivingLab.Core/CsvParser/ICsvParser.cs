@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Http;
 
-namespace LivingLab.Core.CsvParser;
+namespace LivingLab.Core.Interfaces.Services.CsvParser;
 
 /// <remarks>
 /// Author: Team P1-1
