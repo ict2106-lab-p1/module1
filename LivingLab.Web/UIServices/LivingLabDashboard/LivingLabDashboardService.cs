@@ -1,10 +1,9 @@
 using AutoMapper;
 
-using LivingLab.Core.Interfaces.Repositories;
+using LivingLab.Core.DomainServices.Equipment.Device;
+using LivingLab.Core.DomainServices.Lab;
 using LivingLab.Web.Models.ViewModels.Device;
 using LivingLab.Web.Models.ViewModels.LivingLabDashboard;
-using LivingLab.Web.UIServices.LabBooking;
-using LivingLab.Web.UIServices.LabProfile;
 
 namespace LivingLab.Web.UIServices.LivingLabDashboard;
 /// <remarks>
@@ -13,20 +12,21 @@ namespace LivingLab.Web.UIServices.LivingLabDashboard;
 public class LivingLabDashboardService : ILivingLabDashboardService
 {
     private readonly  IMapper _mapper;
-    private readonly IDeviceRepository _deviceRepository;
-    private readonly ILabRepository _labRepository;
+    private readonly IDeviceDomainService _deviceDomainService;
+    private readonly ILabProfileDomainService _labProfileDomainService;
 
-    public LivingLabDashboardService(IDeviceRepository deviceRepository, IMapper mapper, ILabRepository labRepository)
+    public LivingLabDashboardService(IDeviceDomainService deviceDomainService, IMapper mapper,
+        ILabProfileDomainService labProfileDomainService)
     {
-        _deviceRepository = deviceRepository;
-        _labRepository = labRepository;
+        _deviceDomainService = deviceDomainService;
+        _labProfileDomainService = labProfileDomainService;
         _mapper = mapper;
     }
 
-    public async Task<ViewDeviceViewModel> viewDevice()
+    public async Task<ViewDeviceViewModel> ViewDevice()
     {
         //retrieve data from db
-        List<Core.Entities.Device> deviceList = await _deviceRepository.GetAllAsync();
+        List<Core.Entities.Device> deviceList = await _deviceDomainService.GetAllDevices();
                 
         //map entity model to view model
         List<DeviceViewModel> devices = _mapper.Map<List<Core.Entities.Device>, List<DeviceViewModel>> (deviceList);
@@ -39,8 +39,7 @@ public class LivingLabDashboardService : ILivingLabDashboardService
     
     public async Task<LivingLabDashboardViewModel> GetAllLabs()
     {
-        List<Core.Entities.Lab> labList = await _labRepository.GetAllLabs();
-        Console.WriteLine("test");
+        List<Core.Entities.Lab> labList = await _labProfileDomainService.ViewLabs();
 
         LivingLabDashboardViewModel viewLabs = new LivingLabDashboardViewModel
         {

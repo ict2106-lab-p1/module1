@@ -1,4 +1,4 @@
-using LivingLab.Core.Interfaces.Repositories;
+using LivingLab.Core.Repositories;
 using LivingLab.Infrastructure.Data;
 
 using Microsoft.EntityFrameworkCore;

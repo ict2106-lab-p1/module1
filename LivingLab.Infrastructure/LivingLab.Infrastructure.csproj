@@ -30,9 +30,6 @@
       <PackageReference Include="System.Configuration.ConfigurationManager" Version="7.0.0-preview.2.22152.2" />
       <PackageReference Include="TinyCsvParser" Version="2.6.1" />
     </ItemGroup>
-    <ItemGroup>
-      <Folder Include="Migrations" />
-    </ItemGroup>
 
 
 </Project>

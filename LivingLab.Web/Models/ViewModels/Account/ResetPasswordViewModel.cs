@@ -1,6 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 
-namespace LivingLab.Web.Models.ViewModels.Login;
+namespace LivingLab.Web.Models.ViewModels.Account;
 
 public class ResetPasswordViewModel
 {

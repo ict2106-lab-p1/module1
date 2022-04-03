@@ -1,9 +1,8 @@
 using AutoMapper;
 
+using LivingLab.Core.DomainServices.EnergyLog;
 using LivingLab.Core.Entities;
-using LivingLab.Core.Entities.DTO.EnergyUsageDTOs;
-using LivingLab.Core.Interfaces.Services.EnergyUsageInterfaces;
-
+using LivingLab.Core.Entities.DTO.EnergyUsage;
 using LivingLab.Web.Models.ViewModels.EnergyUsage;
 
 namespace LivingLab.Web.UIServices.ManualLogs;

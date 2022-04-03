@@ -81,7 +81,7 @@ async function getData(labId = 1) {
     const data = {
         labId: labId,
     }
-    
+
     try {
         return await $.ajax({
             url: "/EnergyUsage/GetLabUsage",

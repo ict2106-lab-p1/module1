@@ -1,8 +1,13 @@
 @model LivingLab.Web.Models.ViewModels.EnergyUsage.EnergyUsageAnalysisViewModel
-@{  
-    ViewBag.Title = "Index";  
-}  
-  
+
+@section Styles{
+    <link rel="stylesheet" href="~/lib/jquery-ui-1.13.1/jquery-ui.min.css"/>
+}
+
+@{
+    ViewData["Title"] = "View Energy Usage Analysis";
+}
+
 <div class="flex">
     <div class="flex-grow">
         <p class="text-4xl pb-3 flex items-center font-black">
@@ -14,6 +19,49 @@
         </p>
     </div>
 </div>
+
+@* <h2 class="font-bold text-3xl text-slate-900">Lab @Model?.SelectedLabEnergyUsage.Lab.LabLocation Energy Usage</h2> *@
+@* <h2 class="font-bold text-3xl text-slate-900">Lab @ViewBag.LabLocation Energy Usage</h2> *@
+<h2 class="font-bold text-3xl text-slate-900">Lab Energy Usage</h2>
+
+
+<div class="grid md:grid-cols-2 gap-4">
+    <div class="labDiv mt-10 bg-white p-5 shadow-lg rounded gap-4">
+        <input type="hidden" id="labLocation" value="NYP-SR7C"/>
+        <div class="flex justify-between mb-5">
+            <div class="flex items-end">
+                <div class="relative inline-flex">
+                    <select id="selectLabLocation" class="input-border border-gray-300 text-gray-600 h-10 pl-5 pr-10 bg-white hover:border-gray-400 focus:outline-none appearance-none">
+                        @* should for loop this part to get all avail (can see viewlabEU)  *@
+                        <option>NYP-SR7C</option>
+                        <option>NYP-SR2A</option>
+                    </select>
+                </div>
+                <input type="text" id="start" class="input input-bordered" placeholder="Start date"/>
+                <input type="text" id="end" class="input input-bordered ml-4" placeholder="End date"/>
+                <input type="button" id="filter" class="bg-slate-900 hover:bg-slate-700 text-white font-bold py-2 px-4 rounded trigger-swal ml-4" value="Filter"/>
+                <input type="button" id="resetFilter" class="bg-slate-900 hover:bg-slate-700 text-white font-bold py-2 px-4 rounded trigger-swal ml-4" value="Reset"/>
+            </div>
+        </div>
+        <canvas id="lineChart"></canvas>
+    </div>
+</div>
+
+<div class="grid md:grid-cols-2 gap-4">
+    <div class="labDiv mt-10 bg-white p-5 shadow-lg rounded gap-4">
+        @* <input type="hidden" id="labLocation" value="NYP-SR7C"/> *@
+        <div class="flex justify-between mb-5">
+            <div class="flex items-end">
+                <input type="text" id="startAllEnergyUsageTrend" class="input input-bordered" placeholder="Start date"/>
+                <input type="text" id="endAllEnergyUsageTrend" class="input input-bordered ml-4" placeholder="End date"/>
+                <input type="button" id="filterAllEnergyUsageTrend" class="bg-slate-900 hover:bg-slate-700 text-white font-bold py-2 px-4 rounded trigger-swal ml-4" value="Filter"/>
+                <input type="button" id="resetFilterAllEnergyUsageTrend" class="bg-slate-900 hover:bg-slate-700 text-white font-bold py-2 px-4 rounded trigger-swal ml-4" value="Reset"/>
+            </div>
+        </div>
+        <canvas id="lineChartAllEnergyUsageTrend"></canvas>
+    </div>
+</div>
+
 <a class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" asp-controller="EnergyUsageAnalysis" asp-action="Export">Export</a>
 <div class="flex flex-col">
     <div class="overflow-x-auto sm:-mx-6 lg:-mx-8">
@@ -98,14 +146,22 @@
                                 @item.EnergyUsageIntensity kW/m<sup>2</sup>
                             </td>
                         </tr>
-                        }
+                    }
                     </tbody>
                 </table>
             </div>
         </div>
     </div>
 </div>
-<script>
+
+@section Scripts
+{
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@3.7.1/dist/chart.min.js"></script>
+    <script src="~/lib/jquery-ui-1.13.1/jquery-ui.min.js"></script>
+    <script src="~/js/viewEnergyUsageTrendAllLab.js"></script>
+    <script src="~/js/viewEnergyUsageTrendSelectedLab.js"></script>
+
+    <script>
 $(document).ready(function() {
     $('#device').DataTable( {
         initComplete: function () {
@@ -153,3 +209,4 @@ $(document).ready(function() {
     } );
 } );
 </script>
+}

@@ -1,4 +1,5 @@
-using LivingLab.Core.Entities.DTO.EnergyUsageDTOs;
+using LivingLab.Core.Entities.DTO.EnergyUsage;
+
 namespace LivingLab.Web.Models.ViewModels.EnergyUsage;
 /// <remarks>
 /// Author: Team P1-2

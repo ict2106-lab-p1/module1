@@ -1,12 +1,17 @@
+using LivingLab.Core.CsvParser;
 using LivingLab.Core.DomainServices;
-using LivingLab.Core.DomainServices.EnergyUsageLogServices;
-using LivingLab.Core.DomainServices.EnergyUsageServices;
-using LivingLab.Core.Interfaces.Repositories;
-using LivingLab.Core.Interfaces.Services;
-using LivingLab.Core.Interfaces.Services.CsvParser;
-using LivingLab.Core.Interfaces.Services.EnergyUsageInterfaces;
+using LivingLab.Core.DomainServices.EnergyLog;
+using LivingLab.Core.DomainServices.EnergyUsage;
+using LivingLab.Core.DomainServices.EnergyUsage.EnergyUsageAnalysis;
+using LivingLab.Core.DomainServices.EnergyUsage.EnergyUsageBuilder;
+using LivingLab.Core.DomainServices.EnergyUsage.EnergyUsageComparison;
+using LivingLab.Core.DomainServices.Notifications;
+using LivingLab.Core.Repositories.EnergyUsage;
+using LivingLab.Core.Repositories.Notification;
 using LivingLab.Infrastructure.InfraServices.CsvParser;
 using LivingLab.Infrastructure.Repositories;
+using LivingLab.Infrastructure.Repositories.EnergyUsage;
+using LivingLab.Infrastructure.Repositories.Notification;
 
 using Microsoft.Extensions.DependencyInjection;
 
@@ -31,7 +36,6 @@ public static class ConfigureEnergyMonitoringServices
         services.AddTransient<IEnergyUsageRepository, EnergyUsageRepository>();
         services.AddTransient<ISmsRepository, SmsRepository>();
         services.AddTransient<IEmailRepository, EmailRepository>();
-        services.AddTransient<IPowerGenerationMixRepository, PowerGenerationMixRepository>();
 
         // Services
         services.AddTransient<IEnergyUsageLogCsvParser, EnergyUsageLogCsvParser>();

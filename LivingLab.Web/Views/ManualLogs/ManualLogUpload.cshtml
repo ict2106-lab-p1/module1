@@ -1,4 +1,4 @@
-﻿@model LivingLab.Web.Models.ViewModels.LabProfile.ViewLabProfileViewModel
+﻿@model List<LivingLab.Web.Models.ViewModels.LabProfile.LabInformationModel>
 
 @{
     ViewData["Title"] = "Manual Log Upload";
@@ -24,7 +24,7 @@
             <div class="flex flex-row lg:flex-col justify-center space-x-2 lg:space-y-2">
                 <h3 class="text-center text-gray-600 m-auto lg:m-0">Lab</h3>
                 <select class="labs select w-full max-w-xs select-bordered">
-                    @foreach (var lab in Model.labList)
+                    @foreach (var lab in Model)
                     {
                         <option>@lab.LabLocation</option>
                     }
@@ -73,7 +73,7 @@
 @section Scripts
 {
     <script>
-    let labs = @Html.Raw(Json.Serialize(Model.labList));
+    let labs = @Html.Raw(Json.Serialize(Model));
     </script>
     <script src="~/js/manualLogValidation.js"></script>
     <script src="~/js/manualLogUpload.js"></script>

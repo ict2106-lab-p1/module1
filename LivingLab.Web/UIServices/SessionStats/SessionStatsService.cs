@@ -2,7 +2,7 @@ using System.Text;
 
 using AutoMapper;
 
-using LivingLab.Core.Interfaces.Services;
+using LivingLab.Core.DomainServices.Account.Session;
 using LivingLab.Web.Models.ViewModels.SessionStats;
 
 namespace LivingLab.Web.UIServices.SessionStats;

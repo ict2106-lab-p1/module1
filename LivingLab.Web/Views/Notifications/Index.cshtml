@@ -1,3 +1,31 @@
+@using LivingLab.Core.Enums
+@model LivingLab.Web.Models.ViewModels.NotificationPrefViewModel
+@* <remarks> *@
+@*  Author: Team P1-1 *@
+@*  </remarks> *@
 @{
     ViewData["Title"] = "Notifications";
 }
+
+<div class="row">
+    <div class="col-md-4">
+        <form id="registerForm" method="post" asp-controller="Notifications" asp-action="UpdateNotificationPreference">
+            <div class="bg-white shadow p-12  mb-12  rounded-lg">
+                <p class="text-xl font-semibold">Preferred Notification Type</p>
+                <div class="mt-6">
+                    <p>
+                        <label asp-for="PreferredNotification" class="font-semibold"></label>
+                    </p>
+                    <select class="select select-bordered w-full max-w-xs" name="preferredNotification" asp-for="PreferredNotification">
+                        <option disabled selected>Select Role</option>
+                        <option value=@NotificationType.NONE>None</option>
+                        <option value=@NotificationType.EMAIL>Email</option>
+                        <option value=@NotificationType.SMS>SMS</option>
+                    </select>
+                </div>
+                <button id="registerSubmit" type="submit" class="btn text-center mt-4">Update Preferences</button>
+            </div>
+        </form>
+    </div>
+
+</div>
