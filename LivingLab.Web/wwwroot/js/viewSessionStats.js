@@ -2,7 +2,7 @@
 /* Author: Team P1-3*/
 /* </remarks>*/
 
-$(document).ready(function () {
+$(document).ready(function() {
     //$('#table_id').DataTable();
     var table = $('#table_id').DataTable({
         "dom": "<'ui stackable grid'" +
@@ -18,11 +18,10 @@ $(document).ready(function () {
             "<'left aligned nine wide column'p>" +
             ">" +
             ">",
-        "columnDefs": [
-            {
-                "targets": "_all",
-                "className": "dt-center"
-            }],
+        "columnDefs": [{
+            "targets": "_all",
+            "className": "dt-center"
+        }],
         "bInfo": false
     });
 

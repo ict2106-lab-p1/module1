@@ -1,10 +1,9 @@
 using AutoMapper;
 
+using LivingLab.Core.DomainServices.Account;
 using LivingLab.Core.Entities;
 using LivingLab.Core.Entities.DTO;
 using LivingLab.Core.Entities.Identity;
-using LivingLab.Core.Interfaces.Repositories;
-using LivingLab.Core.Interfaces.Services;
 using LivingLab.Web.Models.DTOs.Todo;
 using LivingLab.Web.Models.ViewModels.UserManagement;
 

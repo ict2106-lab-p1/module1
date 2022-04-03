@@ -22,7 +22,7 @@
     <div class="flex flex-col justify-center items-center ">
          <div class="bg-white shadow p-12  mb-12  rounded-lg">
                 <h2 class="font-semibold text-xl p-4">Lab Technician Accounts</h2>
-                <div class="flex ">
+                <div class="flex">
                     <!-- This example requires Tailwind CSS v2.0+ -->
                     <div class="flex flex-col">
                         <div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
@@ -31,7 +31,6 @@
                                     <table class="min-w-full divide-y divide-gray-200">
                                         <thead class="bg-gray-50">
                                         <tr class="justify-evenly">
-                                            <th scope="col" class="px-12 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">ID</th>
                                             <th scope="col" class="px-12 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Name</th>
                                             <th scope="col" class="px-12 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Email</th>
                                             <th scope="col" class="px-12 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Faculty</th>
@@ -44,13 +43,6 @@
                                         <tr class="hover:bg-blue-100">
                                             @foreach (var user in Model.userList) {
                                                 <tr>
-                                                    <td class="px-12 py-4 whitespace-nowrap">
-                                                        <div class="flex items-center">
-                                                            <div class="">
-                                                    <div class="text-sm text-gray-900">@user.Id</div>
-                                                            </div>
-                                                        </div>
-                                                    </td>
                                                     <td class="px-12 py-4 text-sm text-gray-900">@user.FirstName</td>
                                                     <td class="px-12 py-4 text-sm text-gray-900">@user.Email</td>
                                                     <td class="px-12 py-4 text-sm text-gray-900">@user.UserFaculty</td>
@@ -83,7 +75,6 @@
                                         <table class="min-w-full divide-y divide-gray-200">
                                             <thead class="bg-gray-50">
                                             <tr class="justify-evenly">
-                                                <th scope="col" class="px-12 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">ID</th>
                                                 <th scope="col" class="px-12 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Name</th>
                                                 <th scope="col" class="px-12 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Email</th>
                                                 <th scope="col" class="px-12 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Faculty</th>
@@ -101,13 +92,6 @@
                                             @foreach (var user in Model.userList)
                                             {
                                                 <tr>
-                                                    <td class="px-12 py-4 whitespace-nowrap">
-                                                        <div class="flex items-center">
-                                                            <div class="">
-                                                                <div class="text-sm text-gray-900">@user.Id</div>
-                                                            </div>
-                                                        </div>
-                                                    </td>
                                                     <td class="px-12 py-4 text-sm text-gray-900">@user.FirstName</td>
                                                     <td class="px-12 py-4 text-sm text-gray-900">@user.Email</td>
                                                     <td class="px-12 py-4 text-sm text-gray-900">@user.UserFaculty</td>

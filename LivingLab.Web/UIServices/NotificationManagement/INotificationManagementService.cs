@@ -1,4 +1,5 @@
 using LivingLab.Core.Entities.Identity;
+using LivingLab.Core.Enums;
 
 namespace LivingLab.Web.UIServices.NotificationManagement;
 
@@ -7,10 +8,10 @@ namespace LivingLab.Web.UIServices.NotificationManagement;
 /// </remarks>
 public interface INotificationManagementService
 {
-    Task SetNotificationPref();
+    Task SetNotificationPref(ApplicationUser currentUser, NotificationType preference);
 
     Task SendTextToPhone(string phone, string msgBody);
-
-    Task SendTextToEmail(string email, string msgTitle, string msgBody);
-
+    
+    // By Henry
+    Task SendTextToEmail(string email, string subject, string message);
 }

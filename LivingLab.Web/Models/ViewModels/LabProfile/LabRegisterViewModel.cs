@@ -1,20 +1,24 @@
 using System.ComponentModel.DataAnnotations;
 
+using LivingLab.Core.Entities.Identity;
+
 namespace LivingLab.Web.Models.ViewModels.LabProfile;
 
 public class LabRegisterViewModel
 {
+    /*public IList<ApplicationUser> LabICList { get; set; }*/
     [Required]
     [Display(Name = "LabLocation")]
     public string LabLocation { get; set; }
     
-    [Required]
-    [Display(Name = "LabStatus")]
-    public string LabStatus { get; set; }
+    public string LabStatus = "Available";
+
+    public int Occupied = 0;
     
     [Required]
     [Display(Name = "LabInCharge")]
     public string LabInCharge { get; set; }
+    
     
     [Required]
     [Display(Name = "Capacity")]

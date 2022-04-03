@@ -1,5 +1,4 @@
-﻿@using LivingLab.Web.Models.ViewModels
-@model List<LivingLab.Web.Models.ViewModels.EnergyUsage.LogItemViewModel>
+﻿@model List<LivingLab.Web.Models.ViewModels.EnergyUsage.LogItemViewModel>
 
 @{
     ViewData["Title"] = "File Log Upload";
@@ -19,90 +18,32 @@
                         class="flex flex-col w-full h-32 border-4 border-blue-200 border-dashed hover:bg-gray-100 hover:border-gray-300">
                         <div class="flex flex-col items-center justify-center pt-7">
                             <svg id="attachmentSvg" xmlns="http://www.w3.org/2000/svg"
-                                class="w-8 h-8 text-gray-400 group-hover:text-gray-600" fill="none" viewBox="0 0 24 24"
-                                stroke="currentColor">
+                                 class="w-8 h-8 text-gray-400 group-hover:text-gray-600" fill="none" viewBox="0 0 24 24"
+                                 stroke="currentColor">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12" />
+                                      d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12" />
                             </svg>
                             <p id="attachmentText"
-                                class="pt-1 text-sm tracking-wider text-gray-400 group-hover:text-gray-600">
+                               class="pt-1 text-sm tracking-wider text-gray-400 group-hover:text-gray-600">
                                 Attach a file</p>
                         </div>
                         <input class="opacity-0" id="fileUpload" type="file" name="file" itemtype="csv" />
                     </label>
                 </div>
             </div>
+            <div id="progressBarContainer" class="h-3 relative max-w-xl rounded-full mx-2 overflow-hidden hidden">
+                    <div class="w-full h-full bg-gray-200 absolute"></div>
+                    <div id="progressBar" class="transition-all ease-out duration-1000 h-full bg-green-500 relative w-0"></div>
+                </div>
             <div class="flex justify-center p-2">
                 <button type="button" id="btn-submit" hidden
-                    class="bg-dark hover:bg-slate-700 text-white font-bold w-full py-2 px-4 rounded trigger-swal">
+                    class="btn btn-primary w-full">
                     Upload
                 </button>
             </div>
         </form>
     </div>
 </div>
-}
-
-@if (Model?.Count > 0)
-{
-    <div class="flex justify-center">
-    <input id="deviceSerialNumber" hidden value="@Model[0].DeviceSerialNo" />
-    <input id="deviceType" hidden value="@Model[0].DeviceType" />
-    <form id="fileUploadForm" class="mt-5" asp-action="Save" method="post">
-        <div class="flex justify-between mt-5">
-            <input type="button" value="Save"
-                class="btnSave bg-dark hover:bg-slate-700 text-white font-bold py-2 px-4 rounded trigger-swal align-end">
-        </div>
-
-        @{
-                var index = 1; 
-            }
-            @foreach (var log in Model)
-            {
-                <div class="log-div max-w-3xl mt-5 flex flex-col bg-white p-5 shadow-lg rounded gap-4">
-                    <div class="flex justify-between mb-3">
-                        <span class="serial-no font-bold text-center">@log.DeviceSerialNo</span>
-                        <div class="justify-end">
-                            <button type="button"
-                        class="delete text-red-500 hover:bg-red-100 hover:scale-125 rounded-full p-2 ease-in-out duration-500">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                            fill="inherit" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                            stroke-linejoin="round">
-                                    <line x1="18" y1="6" x2="6" y2="18"></line>
-                                    <line x1="6" y1="6" x2="18" y2="18"></line>
-                                </svg>
-                            </button>
-                        </div>
-                    </div>
-                    <div class="flex flex-col lg:flex-row justify-center space-y-2 lg:space-x-3">
-                        <div class="flex flex-row lg:flex-col justify-center space-x-2 lg:space-y-2">
-                            <h3 class="text-center text-gray-600 m-auto lg:m-0">Energy Usage (J)</h3>
-                            <input class="energyUsage input input-bordered w-full max-w-xs" name="Energy Usage" type="number"
-                        value="@log.EnergyUsage" placeholder="Enter Energy Usage (J)" required />
-                        </div>
-                        <div class="flex flex-row lg:flex-col justify-center space-x-2 lg:space-y-2">
-                            <h3 class="text-center text-gray-600 m-auto lg:m-0">Interval (min)</h3>
-                            <input class="interval input input-bordered w-full max-w-xs" name="Interval" type="number"
-                        value="@log.Interval" placeholder="Enter Interval (min)" required />
-                        </div>
-                        <div class="flex flex-row lg:flex-col justify-center space-x-2 lg:space-y-2">
-                            <h3 class="text-center text-gray-600 m-auto lg:m-0">Logged At</h3>
-                            <input class="loggedAt input input-bordered w-full max-w-xs" name="Logged At" type="datetime-local"
-                        value="@log.LoggedDate.ToString("yyyy-MM-dd HH:mm:ss").Replace(' ', 'T')"
-                        placeholder="Enter Logged At Datetime" required />
-                        </div>
-                    </div>
-                </div>
-            }
-
-            <div class="flex justify-between mt-5">
-                <input type="button" value="Save"
-                class="btnSave bg-dark hover:bg-slate-700 text-white font-bold py-2 px-4 rounded trigger-swal align-end">
-                <button type="button" id="btnAdd"
-                class="bg-dark hover:bg-slate-700 text-white font-bold py-2 px-4 rounded trigger-swal">Add</button>
-            </div>
-        </form>
-    </div>
 }
 
 @section Scripts

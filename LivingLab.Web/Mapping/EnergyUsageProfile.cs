@@ -1,7 +1,9 @@
 using AutoMapper;
 
 using LivingLab.Core.Entities;
-using LivingLab.Core.Entities.DTO.EnergyUsageDTOs;
+using LivingLab.Core.Entities.DTO;
+using LivingLab.Core.Entities.DTO.EnergyUsage;
+using LivingLab.Core.Entities.DTO.Lab;
 using LivingLab.Web.Models.DTOs;
 using LivingLab.Web.Models.ViewModels.EnergyUsage;
 
@@ -19,9 +21,14 @@ public class EnergyUsageProfile : Profile
         CreateMap<EnergyUsageCsvDTO, LogItemViewModel>().ReverseMap();
         CreateMap<EnergyUsageFilterDTO, EnergyUsageFilterViewModel>().ReverseMap();
         CreateMap<Lab, EnergyBenchmarkViewModel>().ReverseMap();
+        CreateMap<LabDetailsDTO, EnergyBenchmarkViewModel>().ReverseMap();
         CreateMap<EnergyUsageLog, EnergyUsageLogViewModel>().ReverseMap();
         CreateMap<EnergyUsageDTO, EnergyUsageViewModel>().ReverseMap();
-
+        
+        // JOEY
+        CreateMap<MonthlyEnergyUsageDTO, EnergyUsageTrendAllLabViewModel>().ReverseMap();
+        CreateMap<IndividualLabMonthlyEnergyUsageDTO, EnergyUsageTrendSelectedLabViewModel>().ReverseMap();
+        
         CreateMap<EnergyUsageLog, EnergyUsageLogDTO>().ReverseMap()
             .ForMember(dest => dest.Lab,
                 opt => opt.MapFrom(src => new Lab { LabLocation = src.LabLocation }))
@@ -38,7 +45,6 @@ public class EnergyUsageProfile : Profile
             .ForMember(dest => dest.Interval,
                 opt => opt.MapFrom(src => TimeSpan.FromMinutes(src.Interval)));
     }
-
     class TimeSpanConverter : ITypeConverter<TimeSpan, double>
     {
         public double Convert(TimeSpan source, double destination, ResolutionContext context)

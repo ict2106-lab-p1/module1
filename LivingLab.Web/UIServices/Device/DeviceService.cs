@@ -2,10 +2,12 @@ using System.Security.Policy;
 
 using AutoMapper;
 
+using LivingLab.Core.DomainServices.Equipment.Device;
+using LivingLab.Core.DomainServices.Lab;
 using LivingLab.Core.Entities;
 using LivingLab.Core.Entities.DTO.Device;
 using LivingLab.Core.Entities.Identity;
-using LivingLab.Core.Interfaces.Services;
+using LivingLab.Core.Notifications;
 using LivingLab.Web.Models.ViewModels.Device;
 
 using Microsoft.AspNetCore.Identity;
@@ -19,11 +21,11 @@ public class DeviceService : IDeviceService
     private readonly IMapper _mapper;
     private readonly ILogger<DeviceService> _logger;
     private readonly IDeviceDomainService _deviceDomainService;
-    private readonly IEmailSender _emailSender;
+    private readonly IEmailNotifier _emailSender;
     private readonly ILabProfileDomainService _labProfileDomainService;
     private readonly UserManager<ApplicationUser> _userManager;
 
-    public DeviceService(IMapper mapper, ILogger<DeviceService> logger,IDeviceDomainService deviceService, IEmailSender emailSender,ILabProfileDomainService labProfileDomainService, UserManager<ApplicationUser> userManager)
+    public DeviceService(IMapper mapper, ILogger<DeviceService> logger,IDeviceDomainService deviceService, IEmailNotifier emailSender,ILabProfileDomainService labProfileDomainService, UserManager<ApplicationUser> userManager)
     {
         _mapper = mapper;
         _logger = logger;
@@ -67,48 +69,53 @@ public class DeviceService : IDeviceService
         return deviceVM;
     }
     
-    public async Task<DeviceViewModel> AddDevice(DeviceViewModel deviceViewModel)
+    public async Task<DeviceViewModel> AddDevice(AddDeviceViewModel deviceViewModel)
     {
-        //retrieve data from db
-        Core.Entities.Device addDevice = _mapper.Map<DeviceViewModel, Core.Entities.Device> (deviceViewModel);
+        if (deviceViewModel.Device.Type.Equals("Others"))
+        {
+            deviceViewModel.Device.Type = deviceViewModel.NewType;
+        }
+        var lab = await _labProfileDomainService.GetLabProfileDetails(deviceViewModel.Device.Lab.LabLocation);
+        deviceViewModel.Device.Lab.LabId = lab.LabId;
+        Core.Entities.Device addDevice = _mapper.Map<DeviceViewModel, Core.Entities.Device> (deviceViewModel.Device);
         await _deviceDomainService.AddDevice(addDevice);
-        return deviceViewModel;
+        return deviceViewModel.Device;
     }
     
-    public async Task<DeviceViewModel> ViewAddDetails()
+    public async Task<AddDeviceViewModel> ViewAddDetails()
     {
-        //retrieve data from db
         Core.Entities.Device device = await _deviceDomainService.GetDeviceLastRow();
         DeviceViewModel deviceVM = _mapper.Map<Core.Entities.Device, DeviceViewModel> (device);
-        return deviceVM;
+        List<String> deviceTypes = await _deviceDomainService.GetDeviceTypes();
+        return new AddDeviceViewModel {Device = deviceVM, DeviceTypes = deviceTypes};
     }
     
     // Send email to request approval for add device/accessory to lab in charge
-    public async Task<bool> SendReviewerEmail(string url)
+    public async Task<bool> SendReviewerEmail(string url, string labLocation)
     {
         try
         {
             var labTech = await _userManager.GetUsersInRoleAsync("labtech");
-            var labs = await _labProfileDomainService.ViewLabs();
-            foreach(ApplicationUser lt in labTech)
+            var lab = await _labProfileDomainService.GetLabProfileDetails(labLocation);
+            foreach (ApplicationUser lt in labTech)
             {
-                foreach(Lab lab in labs)
-                    if (lab.LabInCharge.Contains(lt.Id))
-                    {
-                        var link = url + "/Equipment/ReviewEquipment/" + lab.LabLocation;
-                        var msg = "<h3>["+ lab.LabLocation + "]<br> New Device/Accessory Added</h3>" +
-                                  "Hi " + lt.FirstName + ",<br>" +
-                                  "There is a new device/accessory added to <b>" + lab.LabLocation + "</b> that requires your review. <br>" +
-                                  "Please click <a href='"+ link + "'>here</a> " +
-                                  " to approve/decline, and to view other pending review requests.</br>";
-                        await _emailSender.SendEmailAsync(lt.Email, "New Device/Accessory Review Requested", msg);
-                        _logger.LogInformation("Email sent to labTech in charge");
-                    }
-                    else
-                    {
-                        _logger.LogInformation("LabTech in charge not found. Email not sent.");
-                        return false;
-                    }
+                if (lt.Id == lab.LabInCharge)
+                {
+                    var link = url + "/Equipment/ReviewEquipment/" + lab.LabLocation;
+                    var msg = "<h3>[" + lab.LabLocation + "]<br> New Device/Accessory Added</h3>" +
+                              "Hi " + lt.FirstName + ",<br>" +
+                              "There is a new device/accessory added to <b>" + lab.LabLocation +
+                              "</b> that requires your review. <br>" +
+                              "Please click <a href='" + link + "'>here</a> " +
+                              " to approve/decline, and to view other pending review requests.</br>";
+                    await _emailSender.SendEmailAsync(lt.Email, "New Device/Accessory Review Requested", msg);
+                    _logger.LogInformation("Email sent to labTech in charge");
+                }
+                else
+                {
+                    _logger.LogInformation("LabTech in charge not found. Email not sent.");
+                    return false;
+                }
             }
             return true;
         }

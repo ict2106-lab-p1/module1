@@ -11,7 +11,7 @@
 
 <div class="grid grid-cols-2 mb-2">
     <div>
-        <h3 class="text-lg"> NYP-SR7C </h3>
+        <h3 class="text-lg"> @Model.DeviceList[0].Lab.LabLocation </h3>
         <h1 class="text-2xl"> Manage Devices</h1>
     </div>
     <div class="justify-self-end">
@@ -66,10 +66,10 @@
             </svg>
         </div>
         <div>
-            <p class="text-md-start">NYP-SR7C </p>
+            <p class="text-md-start">@Model.DeviceList[0].Lab.LabLocation  </p>
         </div>
         <div class="mt-4">
-            <form class="w-full max-w-lg" method="post" enctype="multipart/form-data" asp-controller="Device" asp-action="EditDevice">
+            <form class="w-full max-w-lg" method="post" enctype="multipart/form-data" asp-controller="Device" asp-action="EditDevice" id="editForm">
                 @{
                     @await Html.PartialAsync("_DeviceDetails", new DeviceViewModel());
                 }
@@ -100,12 +100,13 @@
         </div>
         <div>
                 @*To pull LabId *@
-            <p class="text-md-start">NYP-SR7C </p>
+            <p class="text-md-start">@Model.DeviceList[0].Lab.LabLocation  </p>
         </div>
         <div class="mt-4">
             <form class="w-full max-w-lg" method="post" enctype="multipart/form-data" asp-controller="Device" asp-action="AddDevice">
+                <input type="hidden" id="add-labLocation" name="Device.Lab.LabLocation" value="@Model.DeviceList[0].Lab.LabLocation"/>
                 @{
-                    @await Html.PartialAsync("_AddDevice", new DeviceViewModel());
+                    @await Html.PartialAsync("_AddDevice", new AddDeviceViewModel());
                 }
             </form>
         </div>
@@ -125,7 +126,7 @@
             </svg>
         </div>
         <div class="mt-4">
-            <form class="w-full max-w-lg" method="post" enctype="multipart/form-data" asp-controller="Device" asp-action="DeleteDevice">
+            <form class="w-full max-w-lg" method="post" enctype="multipart/form-data" asp-controller="Device" asp-action="DeleteDevice" id="delForm">
                 @{
                     @await Html.PartialAsync("_DeleteDevice", new DeviceViewModel());
                 }

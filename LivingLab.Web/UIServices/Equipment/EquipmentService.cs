@@ -1,6 +1,7 @@
 using AutoMapper;
 
-using LivingLab.Core.Interfaces.Services;
+using LivingLab.Core.DomainServices.Equipment.Accessory;
+using LivingLab.Core.DomainServices.Equipment.Device;
 using LivingLab.Web.Models.ViewModels.Accessory;
 using LivingLab.Web.Models.ViewModels.Device;
 using LivingLab.Web.Models.ViewModels.Equipment;

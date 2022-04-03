@@ -11,16 +11,14 @@
 
 <div class="grid grid-cols-2 mb-2">
     <div>
-        <h3 class="text-lg"> NYP-SR7C </h3>
+        <h3 class="text-lg"> @Model.labLocation </h3>
         <h1 class="text-2xl"> Manage Devices</h1>
-
     </div>
-    @*
     <div class="justify-self-end">
         <button id="addDeviceBtn" class="btn btn-primary font-bold rounded">
-            Add new device
+            Add device
         </button>
-    </div>*@
+    </div>
 </div>
 <hr class="mb-4"/>
 
@@ -72,11 +70,12 @@
     <input type="hidden" name="labLocation" value="@Model.labLocation"/>
 </form>
 
-<div class="bg-black bg-opacity-50 absolute inset-0 hidden justify-center items-center" id="overlay">
-    <div class="bg-white max-w-lg py-4 px-4 rounded shadow-xl text-gray-800">
+@* Add Device Modal *@
+<div class="bg-black bg-opacity-50 fixed inset-0 justify-center vh-100 items-center hidden" id="addOverlay">
+    <div class="bg-white max-w-lg py-4 px-4 rounded shadow-xl text-gray-800 mx-auto my-32">
         <div class="flex justify-between items-center">
             <h4 class="text-lg font-bold">Add Device</h4>
-            <svg class="h-8 w-8 cursor-pointer p-1 hover:bg-gray-300 rounded-full" id="close-modal" fill="currentColor" viewBox="0 0 20 20">
+            <svg class="h-8 w-8 cursor-pointer p-1 hover:bg-gray-300 rounded-full closeAddModal" fill="currentColor" viewBox="0 0 20 20">
                 <path fill-rule="evenodd"
                       d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
                       clip-rule="evenodd">
@@ -84,15 +83,17 @@
             </svg>
         </div>
         <div>
-            <p class="text-md-start">NYP-SR7C </p>
+                @*To pull LabId *@
+            <p class="text-md-start">@Model.labLocation </p>
         </div>
-            <div class="mt-4">
-                <form class="w-full max-w-lg" method="post" enctype="multipart/form-data" asp-controller="Device" asp-action="AddDevice">
-                    @{
-                        @await Html.PartialAsync("_AddDevice", new DeviceViewModel());
-                    }
-                </form>
-            </div>
+        <div class="mt-4">
+            <form class="w-full max-w-lg" method="post" enctype="multipart/form-data" asp-controller="Device" asp-action="AddDevice">
+                <input type="hidden" id="add-labLocation" name="Device.Lab.LabLocation" value="@Model.labLocation"/>
+                @{
+                    @await Html.PartialAsync("_AddDevice", new AddDeviceViewModel());
+                }
+            </form>
+        </div>
     </div>
 </div>
 

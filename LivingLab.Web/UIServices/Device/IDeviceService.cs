@@ -9,9 +9,9 @@ public interface IDeviceService
     Task<ViewDeviceViewModel> ViewDevice(string deviceType, string labLocation);
     Task<ViewDeviceTypeViewModel> ViewDeviceType(string labLocation);
     Task<DeviceViewModel> ViewDeviceDetails(int id);
-    Task<DeviceViewModel> AddDevice(DeviceViewModel deviceViewModel);
-    Task<DeviceViewModel> ViewAddDetails();
-    Task<Boolean> SendReviewerEmail(string url);
+    Task<DeviceViewModel> AddDevice(AddDeviceViewModel addDeviceViewModel);
+    Task<AddDeviceViewModel> ViewAddDetails();
+    Task<Boolean> SendReviewerEmail(string url, string labId);
     Task<DeviceViewModel> EditDevice(DeviceViewModel deviceViewModel);
     Task<DeviceViewModel> DeleteDevice(DeviceViewModel deviceViewModel);
 }
