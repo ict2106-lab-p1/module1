@@ -1,23 +1,11 @@
-using System.Security.Policy;
-
-using AutoMapper;
-
-using LivingLab.Core.Entities;
+using LivingLab.Core.DomainServices.Account;
 using LivingLab.Core.Entities.Identity;
-using LivingLab.Core.Interfaces.Repositories;
-using LivingLab.Core.Interfaces.Services;
-using LivingLab.Web.Models.DTOs.Todo;
-using LivingLab.Web.Models.ViewModels.LabProfile;
+using LivingLab.Core.Notifications;
 using LivingLab.Web.Models.ViewModels.Login;
 using LivingLab.Web.UIServices.NotificationManagement;
-using LivingLab.Web.UIServices.Todo;
 
 using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Identity.UI.Services;
 
-using Twilio.Http;
-
-using IEmailSender = LivingLab.Core.Interfaces.Services.IEmailSender;
 
 namespace LivingLab.Web.UIServices.Account;
 /// <summary>
@@ -36,7 +24,7 @@ public class AccountService : IAccountService
     private readonly IUserStore<ApplicationUser> _userStore;
     private readonly IUserEmailStore<ApplicationUser> _emailStore;
     private readonly INotificationManagementService _notif;
-    private readonly IEmailSender _emailSender;
+    private readonly IEmailNotifier _emailSender;
     
     public AccountService(IUserStore<ApplicationUser> userStore, 
         UserManager<ApplicationUser> userManager, 
@@ -44,7 +32,7 @@ public class AccountService : IAccountService
         SignInManager<ApplicationUser> signInManager, 
         IAccountDomainService accountDomainService,
         INotificationManagementService notif,
-        IEmailSender emailSender)
+        IEmailNotifier emailSender)
     {
         _signInManager = signInManager;
         _accountDomainService = accountDomainService;

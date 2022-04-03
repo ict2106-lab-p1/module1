@@ -43,7 +43,7 @@ $(document).ready(function() {
             document.postAccessoryType.submit();
     }
     viewMoreBtns.forEach(btn => btn.addEventListener('click', viewwMoreEventHandler))
-    
+
 });
 
 function clickAdd(e) {

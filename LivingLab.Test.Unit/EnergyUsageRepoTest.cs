@@ -3,12 +3,13 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Diagnostics;
 using LivingLab.Core.Entities;
 using LivingLab.Core.Entities.Identity;
-using LivingLab.Core.Interfaces.Repositories;
 using LivingLab.Infrastructure.Data;
 using LivingLab.Infrastructure.Repositories;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+
+using LivingLab.Infrastructure.Repositories.EnergyUsage;
 
 namespace LivingLab.UnitTests;
 

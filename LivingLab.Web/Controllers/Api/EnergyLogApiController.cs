@@ -18,6 +18,7 @@ public class EnergyLogApiController : BaseApiController
         _energyLogService = energyLogService;
         _logger = logger;
     }
+    
     [HttpPost]
     public async Task<IActionResult> Log(EnergyUsageLogDTO usage)
     {

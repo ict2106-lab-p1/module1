@@ -8,6 +8,10 @@
                         </button>
                     </div>
                 <div class="flex flex-col lg:flex-row justify-between space-y-2 lg:space-x-3">
+                <div class="flex flex-row lg:flex-col justify-center space-x-2 lg:space-y-2">
+                <h3 class="text-center text-gray-600 m-auto lg:m-0">Lab</h3>
+                    <select class="labs select w-full max-w-xs select-bordered"></select>
+                    </div>
                     <div class="flex flex-row lg:flex-col justify-center space-x-2 lg:space-y-2">
                         <h3 class="text-center text-gray-600 m-auto lg:m-0">Device Category</h3>
                         <select class="deviceCategory select w-full max-w-xs select-bordered">
@@ -53,11 +57,15 @@ $(document).ready(function (){
  */
 function appendRow() {
     const $form = $("#manualLogForm");
-    
+    let labOptions = "";
+    for (let i = 0; i < labs.length; i++) {
+        labOptions += `<option>${labs[i].labLocation}</option>`
+    }
     if ($form.find("div.log-div").length === 0)
         $form.prepend(template);
     else 
         $form.find("div.log-div:last").after(template);
+    $form.find("div.log-div:last").find(".labs").append(labOptions)
 }
 
 /**
@@ -78,6 +86,7 @@ function save(e) {
     if (validate() === false) return
     
     const data = getData();
+    console.log(data);
 
     Swal.fire({
         title: 'Do you want to add this log?',
@@ -93,7 +102,8 @@ function save(e) {
             $.ajax({
                 url: "/ManualLogs/Save",
                 type: "POST",
-                data: {logs: data},
+                contentType: "application/json",
+                data: JSON.stringify(data),
                 success: function(response) {
                     Swal.fire({
                         title: 'Log Added',
@@ -137,6 +147,7 @@ function getData() {
     const $rows = $form.find("div.log-div");
 
     $rows.each(function () {
+        const labLocation = $(this).find("select.labs").find(":selected").text();
         const deviceCategory = $(this).find("select.deviceCategory").find(":selected").text();
         const deviceId = $(this).find("input.deviceId").val();
         const energyUsage = $(this).find("input.energyUsage").val();
@@ -144,6 +155,7 @@ function getData() {
         const loggedAt = $(this).find("input.loggedAt").val();
 
         data.push({
+            LabLocation: labLocation,
             DeviceCategory: deviceCategory,
             DeviceSerialNo: deviceId,
             Interval: parseFloat(interval),
