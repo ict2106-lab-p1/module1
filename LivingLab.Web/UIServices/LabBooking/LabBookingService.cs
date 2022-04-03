@@ -1,8 +1,7 @@
 using AutoMapper;
 
+using LivingLab.Core.DomainServices.Lab;
 using LivingLab.Core.Entities;
-using LivingLab.Core.Interfaces.Repositories;
-using LivingLab.Core.Interfaces.Services;
 using LivingLab.Web.Models.ViewModels.Booking;
 using LivingLab.Web.Models.ViewModels.Device;
 using LivingLab.Web.UIServices.LabProfile;

@@ -1,4 +1,3 @@
-using LivingLab.Core.Constants;
 using LivingLab.Core.Entities;
 using LivingLab.Core.Entities.Identity;
 using LivingLab.Core.Enums;
@@ -28,10 +27,11 @@ public static class DataSeeder
         // );
 
         modelBuilder.Entity<ApplicationUser>().HasData(
-            new { Id = "DefaultAdmin1", UserId = 3, FirstName = "Sexy", LastName = "Sotong", UserName = "nghanyi1997@gmail.com", NormalizedUserName = "nghanyi1997@gmail.com", NormalizedEmail = "nghanyi1997@gmail.com", PhoneNumber = "To Be Changed", Email = "nghanyi1997@gmail.com", TwoFactorEnabled = false, AuthenticationType = "None", PasswordHash = "testtesttest", SMSExpiry = new DateTime(2022, 7, 19, hour: 12, minute: 00, second: 00), UserFaculty = "SE", AccessFailedCount = 0, LockoutEnabled = true, EmailConfirmed = true, PhoneNumberConfirmed = false },
-            new { Id = "DefaultAdmin2", UserId = 1, FirstName = "Ji Pyeong", LastName = "Han", UserName = "mailstohenry@gmail.com", NormalizedUserName = "mailstohenry@gmail.com", NormalizedEmail = "mailstohenry@gmail.com", PhoneNumber = "To Be Changed", Email = "mailstohenry@gmail.com", TwoFactorEnabled = false, AuthenticationType = "None", PasswordHash = "AQAAAAEAACcQAAAAEPF/ZkpS1YqBmjggtOKOcWkB7pkkWoGKjEpKtlAXD8m9s3ZFaBBdP0kRgtY+H/z77Q==", SMSExpiry = new DateTime(2022, 7, 19, hour: 12, minute: 00, second: 00), UserFaculty = "SE", AccessFailedCount = 0, LockoutEnabled = true, EmailConfirmed = true, PhoneNumberConfirmed = false },
-            new { Id = "DefaultAdmin3", UserId = 2, FirstName = "Do San", LastName = "Nam", UserName = "shengyu98@hotmail.com", NormalizedUserName = "shengyu98@hotmail.com", NormalizedEmail = "shengyu98@hotmail.com", PhoneNumber = "To Be Changed", Email = "shengyu98@hotmail.com", TwoFactorEnabled = false, AuthenticationType = "None", PasswordHash = "testtesttest", SMSExpiry = new DateTime(2022, 7, 19, hour: 12, minute: 00, second: 00), UserFaculty = "SE", AccessFailedCount = 0, LockoutEnabled = true, EmailConfirmed = true, PhoneNumberConfirmed = false },
-            new { Id = "DefaultAdmin4", UserId = 3, FirstName = "Test", LastName = "Test", UserName = "test@gmail.com", NormalizedUserName = "test@gmail.com", PhoneNumber = "00000000", Email = "test@gmail.com", TwoFactorEnabled = false, AuthenticationType = "None", PasswordHash = "testtesttest", SMSExpiry = new DateTime(2022, 7, 19, hour: 12, minute: 00, second: 00), UserFaculty = "ICT", AccessFailedCount = 0, LockoutEnabled = true, EmailConfirmed = false, PhoneNumberConfirmed = false }
+
+            new { Id = "DefaultAdmin1", UserId = 3, FirstName = "Sexy", LastName = "Sotong", UserName = "nghanyi1997@gmail.com", NormalizedUserName = "nghanyi1997@gmail.com", NormalizedEmail = "nghanyi1997@gmail.com", PhoneNumber = "To Be Changed", Email = "nghanyi1997@gmail.com", TwoFactorEnabled = false, AuthenticationType = "None", PasswordHash = "testtesttest", SMSExpiry = new DateTime(2022, 7, 19, hour: 12, minute: 00, second: 00), UserFaculty = "SE", AccessFailedCount = 0, LockoutEnabled = true, EmailConfirmed = true, PhoneNumberConfirmed = false, PreferredNotification = NotificationType.EMAIL },
+            new { Id = "DefaultAdmin2", UserId = 1, FirstName = "Ji Pyeong", LastName = "Han", UserName = "mailstohenry@gmail.com", NormalizedUserName = "mailstohenry@gmail.com", NormalizedEmail = "mailstohenry@gmail.com", PhoneNumber = "To Be Changed", Email = "mailstohenry@gmail.com", TwoFactorEnabled = false, AuthenticationType = "None", PasswordHash = "testtesttest", SMSExpiry = new DateTime(2022, 7, 19, hour: 12, minute: 00, second: 00), UserFaculty = "SE", AccessFailedCount = 0, LockoutEnabled = true, EmailConfirmed = true, PhoneNumberConfirmed = false, PreferredNotification = NotificationType.NONE },
+            new { Id = "DefaultAdmin3", UserId = 2, FirstName = "Do San", LastName = "Nam", UserName = "shengyu98@hotmail.com", NormalizedUserName = "shengyu98@hotmail.com", NormalizedEmail = "shengyu98@hotmail.com", PhoneNumber = "To Be Changed", Email = "shengyu98@hotmail.com", TwoFactorEnabled = false, AuthenticationType = "None", PasswordHash = "testtesttest", SMSExpiry = new DateTime(2022, 7, 19, hour: 12, minute: 00, second: 00), UserFaculty = "SE", AccessFailedCount = 0, LockoutEnabled = true, EmailConfirmed = true, PhoneNumberConfirmed = false, PreferredNotification = NotificationType.NONE },
+            new { Id = "DefaultAdmin4", UserId = 3, FirstName = "Test", LastName = "Test", UserName = "test@gmail.com", NormalizedUserName = "test@gmail.com", PhoneNumber = "00000000", Email = "test@gmail.com", TwoFactorEnabled = false, AuthenticationType = "None", PasswordHash = "testtesttest", SMSExpiry = new DateTime(2022, 7, 19, hour: 12, minute: 00, second: 00), UserFaculty = "ICT", AccessFailedCount = 0, LockoutEnabled = true, EmailConfirmed = false, PhoneNumberConfirmed = false, PreferredNotification = NotificationType.NONE }
         );
 
         modelBuilder.Entity<IdentityRole>().HasData(
@@ -52,9 +52,9 @@ public static class DataSeeder
             );
 
         modelBuilder.Entity<Lab>().HasData(
-            new { LabId = 1, LabLocation = "NYP-SR7A", LabInCharge = "DefaultAdmin1", LabStatus = "Available", Capacity = 25, Occupied = 0 },
-            new { LabId = 2, LabLocation = "NYP-SR7B", LabInCharge = "DefaultAdmin1", LabStatus = "Available", Capacity = 30, Occupied = 0 },
-            new { LabId = 3, LabLocation = "NYP-SR7C", LabInCharge = "DefaultAdmin1", LabStatus = "Available", Capacity = 20, Occupied = 0}
+            new Lab { LabId = 1, LabLocation = "NYP-SR7A", LabInCharge = "DefaultAdmin1", LabStatus = "Available", Occupied = 0, Capacity = 25, EnergyUsageBenchmark = 98000 },
+            new Lab { LabId = 2, LabLocation = "NYP-SR7B", LabInCharge = "DefaultAdmin1", LabStatus = "Available", Occupied = 0, Capacity = 30, EnergyUsageBenchmark = 98000 },
+            new Lab { LabId = 3, LabLocation = "NYP-SR7C", LabInCharge = "DefaultAdmin1", LabStatus = "Available", Occupied = 0, Capacity = 20, EnergyUsageBenchmark = 98000 }
         );
 
         modelBuilder.Entity<LabAccess>().HasData(
@@ -114,5 +114,7 @@ public static class DataSeeder
                 new { Id = 2, Date = new DateTime(2021, 7, 4), LoginTime = new DateTime(2021, 7, 4, 10, 0, 0), LogoutTime = new DateTime(2021, 7, 4, 15, 0, 0), DataUploaded = 64.0, LabId = 1 },
                 new { Id = 3, Date = new DateTime(2021, 7, 5), LoginTime = new DateTime(2021, 7, 5, 13, 0, 0), LogoutTime = new DateTime(2021, 7, 5, 18, 0, 0), DataUploaded = 128.0, LabId = 1 }
         );
+        
+        modelBuilder.SeedEnergyLogs();
     }
 }

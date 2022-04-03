@@ -121,7 +121,7 @@ $(document).ready(function() {
     $("#delForm").submit(function() {
         alert("Device deleted successfully!");
     });
-    
+
 });
 
 function clickAdd(e) {

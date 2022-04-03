@@ -102,7 +102,7 @@ $(document).ready(function() {
         clickDelete(this);
         toggleDeleteModal();
     });
-    
+
     $("#del-cfm").on("input", function() {
         console.log($("#del-cfm").val);
         if (this.value === $("#accessory-name").text()) {
@@ -111,7 +111,7 @@ $(document).ready(function() {
             $("#delBtn").addClass("disabled");
         }
     });
-    
+
     $("#addForm").submit(function() {
         alert("Accessory added successfully and is pending approval!");
     });
@@ -123,7 +123,7 @@ $(document).ready(function() {
     $("#delForm").submit(function() {
         alert("Accessory deleted successfully!");
     });
-    
+
 });
 
 function clickAdd(e) {

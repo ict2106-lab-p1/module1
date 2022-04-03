@@ -1,9 +1,10 @@
 using AutoMapper;
 
+using LivingLab.Core.DomainServices.Equipment.Accessory;
+using LivingLab.Core.DomainServices.Equipment.Device;
+using LivingLab.Core.DomainServices.Lab;
 using LivingLab.Core.Entities;
 using LivingLab.Core.Entities.Identity;
-using LivingLab.Core.Interfaces.Repositories;
-using LivingLab.Core.Interfaces.Services;
 using LivingLab.Web.Models.ViewModels.Device;
 using LivingLab.Web.Models.ViewModels.LabProfile;
 using LivingLab.Web.Models.ViewModels.UserManagement;
