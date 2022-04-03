@@ -29,12 +29,12 @@ const template = `<div class="log-div mt-5 flex flex-col bg-white p-5 shadow-lg 
 /**
  * When DOM is ready for JS code to execute.
  */
-$(document).ready(function () {
-  $("#fileUpload").change(fileChange);
-  $("#btnAdd").click(appendRow);
-  $(this).on("click", ".delete", deleteRow);
-  $(".btnSave").click(save);
-  $("#btn-submit").click(submit);
+$(document).ready(function() {
+    $("#fileUpload").change(fileChange);
+    $("#btnAdd").click(appendRow);
+    $(this).on("click", ".delete", deleteRow);
+    $(".btnSave").click(save);
+    $("#btn-submit").click(submit);
 });
 
 /**
@@ -47,27 +47,27 @@ $(document).ready(function () {
  * @param e
  */
 function fileChange(e) {
-  const fileName = e.target.files[0].name;
-  const fileSizeBytes = e.target.files[0].size;
-  const fileSizeKb = fileSizeBytes / 1024;
+    const fileName = e.target.files[0].name;
+    const fileSizeBytes = e.target.files[0].size;
+    const fileSizeKb = fileSizeBytes / 1024;
 
-  $("#attachmentText").text(`${fileName} (${fileSizeKb.toFixed(2)} KB)`);
-  $("#btn-submit").show();
+    $("#attachmentText").text(`${fileName} (${fileSizeKb.toFixed(2)} KB)`);
+    $("#btn-submit").show();
 }
 
 /**
  * Appends a new div for input.
  */
 function appendRow() {
-  const $form = $("#fileUploadForm");
-  const deviceSerialNumber = $("#deviceSerialNumber").val();
-  const updatedTemplate = template.replace(
-    "{deviceSerialNumber}",
-    deviceSerialNumber
-  );
+    const $form = $("#fileUploadForm");
+    const deviceSerialNumber = $("#deviceSerialNumber").val();
+    const updatedTemplate = template.replace(
+        "{deviceSerialNumber}",
+        deviceSerialNumber
+    );
 
-  if ($form.find("div.log-div").length === 0) $form.prepend(updatedTemplate);
-  else $form.find("div.log-div:last").after(updatedTemplate);
+    if ($form.find("div.log-div").length === 0) $form.prepend(updatedTemplate);
+    else $form.find("div.log-div:last").after(updatedTemplate);
 }
 
 /**
@@ -75,7 +75,7 @@ function appendRow() {
  * and update the row number accordingly.
  */
 function deleteRow() {
-  $(this).closest("div.log-div").remove();
+    $(this).closest("div.log-div").remove();
 }
 
 /**
@@ -98,45 +98,45 @@ function enableUploadBtn() {
  * Save the data to the database.
  */
 function submit(e) {
-  e.preventDefault();
-  disableUploadBtn();
-  const file = $("#fileUpload")[0].files[0];
-  const formData = new FormData();
-  formData.append("file", file);
+    e.preventDefault();
+    disableUploadBtn();
+    const file = $("#fileUpload")[0].files[0];
+    const formData = new FormData();
+    formData.append("file", file);
 
-  $("#progressBarContainer").removeClass("hidden")
-  const $progressBar = $("#progressBar");
-  $progressBar.show();
-  
-  $.ajax({
-    url: "/ManualLogs/Upload",
-    type: "POST",
-    data: formData,
-    processData: false,
-    contentType: false,
-    success: function (count) {
-        $progressBar.removeClass("w-0");
-        $progressBar.addClass("w-full");
-        setTimeout(() => {
+    $("#progressBarContainer").removeClass("hidden")
+    const $progressBar = $("#progressBar");
+    $progressBar.show();
+
+    $.ajax({
+        url: "/ManualLogs/Upload",
+        type: "POST",
+        data: formData,
+        processData: false,
+        contentType: false,
+        success: function(count) {
+            $progressBar.removeClass("w-0");
+            $progressBar.addClass("w-full");
+            setTimeout(() => {
+                Swal.fire({
+                    title: "Success!",
+                    text: `${count} logs saved successfully!`,
+                    icon: "success",
+                    confirmButtonColor: "#363740",
+                }).then(function() {
+                    window.location.href = "/ManualLogs/FileUpload";
+                });
+            }, 1000)
+        },
+        error: function(response) {
             Swal.fire({
-            title: "Success!",
-            text: `${count} logs saved successfully!`,
-            icon: "success",
-            confirmButtonColor: "#363740",
-          }).then(function () {
-            window.location.href = "/ManualLogs/FileUpload";
-          });
-        }, 1000)
-    },
-    error: function (response) {
-      Swal.fire({
-        title: "Error!",
-        text: "Something went wrong!",
-        icon: "error",
-      });
-      enableUploadBtn()
-    },
-  });
+                title: "Error!",
+                text: "Something went wrong!",
+                icon: "error",
+            });
+            enableUploadBtn()
+        },
+    });
 }
 
 /**
@@ -145,34 +145,34 @@ function submit(e) {
  * @param e: Target button
  */
 function save(e) {
-  e.preventDefault();
-  const data = getData();
-  console.log(data);
+    e.preventDefault();
+    const data = getData();
+    console.log(data);
 
-  $.ajax({
-    url: "/ManualLogs/Save",
-    type: "POST",
-    data: JSON.stringify(data),
-    contentType: "application/json; charset=utf-8",
-    // data: {logs: data},
-    success: function (response) {
-      Swal.fire({
-        title: "Success!",
-        text: "Logs saved successfully!",
-        icon: "success",
-        confirmButtonColor: "#363740",
-      }).then(function () {
-        window.location.href = "/ManualLogs/FileUpload";
-      });
-    },
-    error: function (response) {
-      Swal.fire({
-        title: "Error!",
-        text: "Something went wrong!",
-        icon: "error",
-      });
-    },
-  });
+    $.ajax({
+        url: "/ManualLogs/Save",
+        type: "POST",
+        data: JSON.stringify(data),
+        contentType: "application/json; charset=utf-8",
+        // data: {logs: data},
+        success: function(response) {
+            Swal.fire({
+                title: "Success!",
+                text: "Logs saved successfully!",
+                icon: "success",
+                confirmButtonColor: "#363740",
+            }).then(function() {
+                window.location.href = "/ManualLogs/FileUpload";
+            });
+        },
+        error: function(response) {
+            Swal.fire({
+                title: "Error!",
+                text: "Something went wrong!",
+                icon: "error",
+            });
+        },
+    });
 }
 
 /**
@@ -181,24 +181,24 @@ function save(e) {
  * @returns Array of objects containing the data.
  */
 function getData() {
-  let data = [];
-  const $form = $("#fileUploadForm");
-  const $rows = $form.find("div.log-div");
-  const serialNumber = $("#deviceSerialNumber").val();
-  const deviceType = $("#deviceType").val();
+    let data = [];
+    const $form = $("#fileUploadForm");
+    const $rows = $form.find("div.log-div");
+    const serialNumber = $("#deviceSerialNumber").val();
+    const deviceType = $("#deviceType").val();
 
-  $rows.each(function () {
-    const energyUsage = $(this).find("input.energyUsage").val();
-    const interval = $(this).find("input.interval").val();
-    const loggedAt = $(this).find("input.loggedAt").val();
+    $rows.each(function() {
+        const energyUsage = $(this).find("input.energyUsage").val();
+        const interval = $(this).find("input.interval").val();
+        const loggedAt = $(this).find("input.loggedAt").val();
 
-    data.push({
-      DeviceType: deviceType,
-      DeviceSerialNo: serialNumber,
-      EnergyUsage: parseFloat(energyUsage),
-      Interval: parseInt(interval),
-      LoggedDate: loggedAt,
+        data.push({
+            DeviceType: deviceType,
+            DeviceSerialNo: serialNumber,
+            EnergyUsage: parseFloat(energyUsage),
+            Interval: parseInt(interval),
+            LoggedDate: loggedAt,
+        });
     });
-  });
-  return data;
+    return data;
 }

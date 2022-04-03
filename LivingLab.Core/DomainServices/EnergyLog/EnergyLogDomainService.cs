@@ -67,7 +67,7 @@ public class EnergyLogDomainService : IEnergyLogDomainService
     
     private void Notify(NotificationType preference, int deviceId, double? threshold)
     {
-        string message = $"Device ID {deviceId} has exceeded the set threshold of {threshold}.";;
+        string message = $"Device ID {deviceId} has exceeded the set threshold of {threshold}.";
         _notifierFactory.CreateNotifier(preference).Notify(message);
     }
 }
