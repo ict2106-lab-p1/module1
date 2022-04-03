@@ -19,12 +19,10 @@ public class LabProfileController: Controller
     private readonly ILabProfileService _labProfileService;
     private readonly ILogger<LabProfileController> _logger;
     private readonly IUserManagementService _accountService;
-    private readonly UserManager<ApplicationUser> _userManager;
 
     public LabProfileController(ILabProfileService labProfileService, ILogger<LabProfileController> logger, UserManager<ApplicationUser> userManager)
     {  _labProfileService = labProfileService;
         _logger = logger;
-        _userManager = userManager;
     }
     
     [Route("viewlab")]
@@ -73,7 +71,7 @@ public class LabProfileController: Controller
             deviceNames = devicestype,
             accessoriesNames = accessoriestype
         };
-        
+
         _logger.LogInformation("Lab ID is" + labModel.LabId);
         _logger.LogInformation("Lab Devices " + devicestype);
 
