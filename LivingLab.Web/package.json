@@ -9,5 +9,8 @@
         "daisyui": "^2.6.3",
         "postcss": "^8.4.6",
         "tailwindcss": "^3.0.18"
+    },
+    "dependencies": {
+        "chartjs-plugin-annotation": "^1.4.0"
     }
 }

@@ -11,5 +11,5 @@ namespace LivingLab.Core.Interfaces.Services.EnergyUsageInterfaces;
 public interface IManualLogDomainService
 {
     List<EnergyUsageCsvDTO> UploadLogs(IFormFile file);
-    Task SaveLogs(List<EnergyUsageLog> logs);
+    Task SaveLogs(List<EnergyUsageLog> logs, double? fileSizeBytes);
 }

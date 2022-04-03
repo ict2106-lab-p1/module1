@@ -1,4 +1,6 @@
-﻿@{
+﻿@model LivingLab.Web.Models.ViewModels.LabProfile.ViewLabProfileViewModel
+
+@{
     ViewData["Title"] = "Manual Log Upload";
 }
 
@@ -20,6 +22,16 @@
         </div>
         <div class="flex flex-col lg:flex-row justify-between space-y-2 lg:space-x-3">
             <div class="flex flex-row lg:flex-col justify-center space-x-2 lg:space-y-2">
+                <h3 class="text-center text-gray-600 m-auto lg:m-0">Lab</h3>
+                <select class="labs select w-full max-w-xs select-bordered">
+                    @foreach (var lab in Model.labList)
+                    {
+                        <option>@lab.LabLocation</option>
+                    }
+                </select>
+            </div>
+            
+            <div class="flex flex-row lg:flex-col justify-center space-x-2 lg:space-y-2">
                 <h3 class="text-center text-gray-600 m-auto lg:m-0">Device Category</h3>
                 <select class="deviceCategory select w-full max-w-xs select-bordered">
                     <option>Microprocessors</option>
@@ -35,7 +47,7 @@
                 <input class="deviceId input input-bordered w-full max-w-xs" name="Serial Number" id="deviceId" type="text" placeholder="Enter Device Serial No."/>
             </div>
             <div class="flex flex-row lg:flex-col justify-center space-x-2 lg:space-y-2">
-                <h3 class="text-center text-gray-600 m-auto lg:m-0">Energy Usage (J)</h3>
+                <h3 class="text-center text-gray-600 m-auto lg:m-0">Energy Usage (W)</h3>
                 <input class="energyUsage input input-bordered w-full max-w-xs" name="Energy Usage" type="number" value="energyUsage" placeholder="Enter Energy Usage (J)" required/>
             </div>
             <div class="flex flex-row lg:flex-col justify-center space-x-2 lg:space-y-2">
@@ -51,8 +63,8 @@
     <!--Log Input End-->
     <!--Buttons-->
     <div class="flex justify-between mt-5">
-        <input type="submit" id="btnSave" value="Upload Logs" class="bg-slate-900 hover:bg-slate-700 text-white font-bold py-2 px-4 rounded trigger-swal align-end">
-        <button type="button" id="btnAdd" class="bg-slate-900 hover:bg-slate-700 text-white font-bold py-2 px-4 rounded trigger-swal">Add</button>
+        <input type="submit" id="btnSave" value="Upload Logs" class="btn btn-primary">
+        <button type="button" id="btnAdd" class="btn btn-outline btn-primary">Add</button>
     </div>
     <!--Button End-->
 </form>
@@ -60,6 +72,9 @@
 
 @section Scripts
 {
+    <script>
+    let labs = @Html.Raw(Json.Serialize(Model.labList));
+    </script>
     <script src="~/js/manualLogValidation.js"></script>
     <script src="~/js/manualLogUpload.js"></script>
 }

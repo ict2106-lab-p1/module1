@@ -53,7 +53,7 @@ public static class ConfigureManagementServices
 
         return services;
     }
-
+    
     private static IServiceCollection AddSingletonServices(this IServiceCollection services)
     {
         // services.AddSingleton<ITodoRepository, TodoRepository>();

@@ -106,15 +106,16 @@ async function getData(labId = 1) {
 function getDates() {
     const dates = [];
     const today = new Date();
-    const month = today.getMonth();
-    const year = today.getFullYear();
-    for (let i = 1; i <= new Date(year, month + 1, 0).getDate(); i++) {
-        const date = new Date(year, month, i).toLocaleDateString('en-US', {
+    
+    // Get 30 days ago from today
+    const startDate = new Date(new Date().setDate(today.getDate() - 30));
+
+    while (startDate <= today) {
+        dates.push(startDate.toLocaleDateString('en-US', {
             day: 'numeric',
             month: 'short'
-        });
-        dates.push(date);
+        }));
+        startDate.setDate(startDate.getDate() + 1);
     }
-
     return dates;
 }

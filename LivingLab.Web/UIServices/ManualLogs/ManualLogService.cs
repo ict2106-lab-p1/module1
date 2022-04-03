@@ -26,13 +26,13 @@ public class ManualLogService : IManualLogService
     {
         var logs = _manualLogDomainService.UploadLogs(file);
         var logsVM = _mapper.Map<List<EnergyUsageCsvDTO>, List<LogItemViewModel>>(logs);
-        await SaveLogs(logsVM);
+        await SaveLogs(logsVM, file.Length);
         return logsVM.Count;
     }
 
-    public async Task SaveLogs(List<LogItemViewModel> logs)
+    public async Task SaveLogs(List<LogItemViewModel> logs, double? fileSizeBytes)
     {
         var data = _mapper.Map<List<LogItemViewModel>, List<EnergyUsageLog>>(logs);
-        await _manualLogDomainService.SaveLogs(data);
+        await _manualLogDomainService.SaveLogs(data, fileSizeBytes);
     }
 }

@@ -1,4 +1,5 @@
 using LivingLab.Core.Entities;
+//using LivingLab.Core.Entities.DTO.EnergyUsageDTOs;
 using LivingLab.Core.Interfaces.Repositories;
 using LivingLab.Infrastructure.Data;
 
@@ -15,6 +16,14 @@ public class LabRepository : Repository<Lab>, ILabRepository
         _context = context;
     }
 
+    //Hong Ying
+    public Task<List<Lab>> GetAllLabLocation()
+    {
+        return IncludeReferences(
+                _context.Labs
+            )
+            .ToListAsync();
+    }
     public async Task<List<Lab>> GetAllLabs()
     {
         var labs = await _context.Labs.ToListAsync();
@@ -27,10 +36,10 @@ public class LabRepository : Repository<Lab>, ILabRepository
         var lab = _context.Labs.FirstOrDefault(l => l.LabId == labId);
         if (lab != null)
         {
-            lab.EnergyUsageBenchmark = energyBenchmark;
+            lab.EnergyUsageBenchmark = energyBenchmark;        
             _context.Labs.Update(lab);
         }
-        return _context.SaveChangesAsync();
+        return _context.SaveChangesAsync();    
     }
 
     public Task<double> GetLabEnergyBenchmark(int labId)

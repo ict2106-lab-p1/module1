@@ -1,4 +1,5 @@
 using LivingLab.Core.DomainServices;
+using LivingLab.Core.DomainServices.EnergyUsageLogServices;
 using LivingLab.Core.DomainServices.EnergyUsageServices;
 using LivingLab.Core.Interfaces.Repositories;
 using LivingLab.Core.Interfaces.Services;
@@ -38,6 +39,7 @@ public static class ConfigureEnergyMonitoringServices
         services.AddTransient<INotificationDomainService, NotificationDomainService>();
         services.AddTransient<IEnergyLogDomainService, EnergyLogDomainService>();
         services.AddTransient<IEnergyUsageAnalysisService, EnergyUsageAnalysisService>();
+        services.AddTransient<IEnergyUsageBuilder, DeviceEnergyUsageBuilder>();
         services.AddTransient<IEnergyUsageComparisonService, EnergyUsageComparisonService>();
         services.AddTransient<IEnergyUsageDomainService, EnergyUsageDomainService>();
         

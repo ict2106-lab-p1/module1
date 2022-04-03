@@ -125,6 +125,15 @@ public class DeviceRepository : Repository<Device>, IDeviceRepository
         return deleteDevice;
     }
 
+    //Hong Ying
+    public Task<List<Device>> GetAllDeviceType()
+    {
+        return IncludeReferences(
+                _context.Devices
+            )
+            .ToListAsync();
+    }
+    
     public async Task<List<String>> GetDeviceTypes()
     {
         return (await _context.Devices

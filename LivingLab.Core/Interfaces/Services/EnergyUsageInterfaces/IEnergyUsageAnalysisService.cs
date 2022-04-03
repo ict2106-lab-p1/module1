@@ -6,7 +6,7 @@ namespace LivingLab.Core.Interfaces.Services.EnergyUsageInterfaces;
 /// </remarks>
 public interface IEnergyUsageAnalysisService 
 {
-    public byte[] Export();
+    public byte[] ExportDeviceEU(List<DeviceEnergyUsageDTO> DeviceEUList);
     public List<DeviceEnergyUsageDTO> GetDeviceEnergyUsageByDate(DateTime start, DateTime end);
     public List<LabEnergyUsageDTO> GetLabEnergyUsageByDate(DateTime start, DateTime end);
 
@@ -20,6 +20,5 @@ public interface IEnergyUsageAnalysisService
     public List<DeviceInLabDTO> GetEnergyUsageLabDistribution(DateTime start, DateTime end, int labId);
     public List<DeviceInLabDTO> GetEnergyUsageDeviceDistribution(DateTime start, DateTime end, string deviceType);
 
-    public List<EnergyUsageLog> test(DateTime start, DateTime end);
 
 }

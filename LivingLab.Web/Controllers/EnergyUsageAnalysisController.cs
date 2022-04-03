@@ -7,6 +7,7 @@ using LivingLab.Core.Interfaces.Repositories;
 using LivingLab.Core.Entities;
 using LivingLab.Web.Models.ViewModels;
 using LivingLab.Web.UIServices.EnergyUsage;
+using LivingLab.Web.Models.ViewModels.EnergyUsage;
 
 
 namespace LivingLab.Web.Controllers;
@@ -18,6 +19,7 @@ public class EnergyUsageAnalysisController : Controller
     private readonly ILogger<EnergyUsageAnalysisController> _logger;
     private readonly IEnergyUsageRepository _repository;
     private readonly IEnergyUsageAnalysisUIService _analysisService;
+    
     public EnergyUsageAnalysisController(ILogger<EnergyUsageAnalysisController> logger, IEnergyUsageRepository repository, IEnergyUsageAnalysisUIService analysisService)
     {
         _logger = logger;
@@ -27,18 +29,31 @@ public class EnergyUsageAnalysisController : Controller
 
     public IActionResult Index()
     {
-        // List<Log> Logs = logList();
-        List<DeviceEnergyUsageDTO> Logs = DeviceEUList1();
-        ViewBag.Logs = Logs;
-        // GetAll();
-        return View(Logs);
+        // // List<Log> Logs = logList();
+        // List<DeviceEnergyUsageDTO> Logs = DeviceEUList1();
+        // ViewBag.Logs = Logs;
+        // // GetAll();
+        // return View(Logs);
+
+        return View(data());
     }
-    
+
+    public IActionResult DMoreData()
+    {
+        ViewBag.Logs = "-";
+        return View();
+    }
+
+    public IActionResult LMoreData()
+    {
+        ViewBag.Logs = "-";
+        return View();
+    }
+
     [HttpGet]
     public IActionResult Export()
     {
-        List<DeviceEnergyUsageDTO> Logs = DeviceEUList();
-        byte [] content =  _analysisService.Export();
+        byte [] content =  _analysisService.Export(data().DeviceEUList);
         return File(content, "text/csv", "Device Energy Usage.csv");
     }
 
@@ -113,6 +128,18 @@ public class EnergyUsageAnalysisController : Controller
     {
         double Total = Math.Round((cost * (double)TotalEU * TotalEUTime),2);
         return Total;
+    }
+
+    public EnergyUsageAnalysisViewModel data() {
+        DateTime start = new DateTime(2015, 12, 25);
+        DateTime end = new DateTime(2022, 12, 25);
+        var deviceEUList = _analysisService.GetDeviceEnergyUsageByDate(start,end);
+        var labEUList = _analysisService.GetLabEnergyUsageByDate(start,end);
+        var viewModel = new EnergyUsageAnalysisViewModel {
+            DeviceEUList = deviceEUList,
+            LabEUList = labEUList
+        };
+        return viewModel;
     }
 
 

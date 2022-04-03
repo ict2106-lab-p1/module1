@@ -12,9 +12,9 @@ public class EnergyUsageAnalysisUIService : IEnergyUsageAnalysisUIService
     {
         _analysis = analysis;
     }
-    public byte[] Export()
+    public byte[] Export(List<DeviceEnergyUsageDTO> content)
     {
-        throw new NotImplementedException();
+        return _analysis.ExportDeviceEU(content);
     }
     public List<DeviceEnergyUsageDTO> GetDeviceEnergyUsageByDate(DateTime start, DateTime end)
     {
@@ -22,7 +22,7 @@ public class EnergyUsageAnalysisUIService : IEnergyUsageAnalysisUIService
     }
     public List<LabEnergyUsageDTO> GetLabEnergyUsageByDate(DateTime start, DateTime end)
     {
-        throw new NotImplementedException();
+        return _analysis.GetLabEnergyUsageByDate(start,end);
     }
     // joey
     public List<TopSevenLabEnergyUsageDTO> GetTopSevenLabEnergyUsage(DateTime start, DateTime end)

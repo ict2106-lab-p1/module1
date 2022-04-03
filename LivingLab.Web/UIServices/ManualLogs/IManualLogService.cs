@@ -9,5 +9,5 @@ namespace LivingLab.Web.UIServices.ManualLogs;
 public interface IManualLogService
 {
     Task<int> UploadLogs(IFormFile file);
-    Task SaveLogs(List<LogItemViewModel> logs);
+    Task SaveLogs(List<LogItemViewModel> logs, double? fileSizeBytes = null);
 }

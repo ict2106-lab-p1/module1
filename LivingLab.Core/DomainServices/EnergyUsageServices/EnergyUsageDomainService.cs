@@ -1,4 +1,5 @@
 using LivingLab.Core.Entities;
+using LivingLab.Core.Entities.DTO;
 using LivingLab.Core.Entities.DTO.EnergyUsageDTOs;
 using LivingLab.Core.Interfaces.Repositories;
 using LivingLab.Core.Interfaces.Services.EnergyUsageInterfaces;
@@ -12,7 +13,6 @@ public class EnergyUsageDomainService : IEnergyUsageDomainService
 {
     private readonly ILabProfileRepository _labRepository;
     private readonly IEnergyUsageRepository _energyUsageRepository;
-
     public EnergyUsageDomainService(ILabProfileRepository labRepository, IEnergyUsageRepository energyUsageRepository)
     {
         _labRepository = labRepository;
@@ -50,9 +50,17 @@ public class EnergyUsageDomainService : IEnergyUsageDomainService
         return dto;
     }
 
-    public Task<Lab> GetLabEnergyBenchmark(int labId)
+    public async Task<LabDetailsDTO> GetLabEnergyBenchmark(int labId)
     {
-        return _labRepository.GetByIdAsync(labId);
+        var lab = await _labRepository.GetLabDetails(labId);
+        return new LabDetailsDTO
+        {
+            LabId = lab.LabId,
+            LabLocation = lab.LabLocation,
+            Capacity = lab.Capacity.GetValueOrDefault(),
+            EnergyUsageBenchmark = lab.EnergyUsageBenchmark.GetValueOrDefault(),
+            NoOfDevices = lab.Devices.Count
+        };
     }
 
     /// <summary>

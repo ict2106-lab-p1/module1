@@ -1,7 +1,5 @@
-using LivingLab.Core.Constants;
 using LivingLab.Core.Entities;
 using LivingLab.Core.Entities.Identity;
-using LivingLab.Core.Enums;
 
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -52,9 +50,9 @@ public static class DataSeeder
             );
 
         modelBuilder.Entity<Lab>().HasData(
-            new { LabId = 1, LabLocation = "NYP-SR7A", LabInCharge = "DefaultAdmin1", LabStatus = "Available", Capacity = 25, Occupied = 0 },
-            new { LabId = 2, LabLocation = "NYP-SR7B", LabInCharge = "DefaultAdmin1", LabStatus = "Available", Capacity = 30, Occupied = 0 },
-            new { LabId = 3, LabLocation = "NYP-SR7C", LabInCharge = "DefaultAdmin1", LabStatus = "Available", Capacity = 20, Occupied = 0}
+            new Lab { LabId = 1, LabLocation = "NYP-SR7A", LabInCharge = "DefaultAdmin1", LabStatus = "Available", Capacity = 25, EnergyUsageBenchmark = 98000 },
+            new Lab { LabId = 2, LabLocation = "NYP-SR7B", LabInCharge = "DefaultAdmin1", LabStatus = "Available", Capacity = 30, EnergyUsageBenchmark = 98000 },
+            new Lab { LabId = 3, LabLocation = "NYP-SR7C", LabInCharge = "DefaultAdmin1", LabStatus = "Available", Capacity = 20, EnergyUsageBenchmark = 98000 }
         );
 
         modelBuilder.Entity<LabAccess>().HasData(
@@ -114,5 +112,7 @@ public static class DataSeeder
                 new { Id = 2, Date = new DateTime(2021, 7, 4), LoginTime = new DateTime(2021, 7, 4, 10, 0, 0), LogoutTime = new DateTime(2021, 7, 4, 15, 0, 0), DataUploaded = 64.0, LabId = 1 },
                 new { Id = 3, Date = new DateTime(2021, 7, 5), LoginTime = new DateTime(2021, 7, 5, 13, 0, 0), LogoutTime = new DateTime(2021, 7, 5, 18, 0, 0), DataUploaded = 128.0, LabId = 1 }
         );
+        
+        modelBuilder.SeedEnergyLogs();
     }
 }

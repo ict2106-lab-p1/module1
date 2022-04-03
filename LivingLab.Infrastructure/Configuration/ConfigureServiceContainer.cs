@@ -55,6 +55,4 @@ public static class ConfigureServiceContainer
 
         return services;
     }
-
-
 }

@@ -26,7 +26,9 @@ public class LabProfileRepository : Repository<Lab>, ILabProfileRepository
     }
     public async Task<Lab> GetLabDetails(int id)
     {
-        Lab user = (await _context.LabProfile.SingleOrDefaultAsync(d => d.LabId == id))!;
+        Lab user = (await _context.LabProfile
+            .Include(d => d.Devices)
+            .SingleOrDefaultAsync(d => d.LabId == id))!;
         return user;
     }
 

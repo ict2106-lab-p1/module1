@@ -6,6 +6,7 @@ using LivingLab.Web.Models.ViewModels.LabProfile;
 using LivingLab.Web.UIServices.EnergyUsage;
 using LivingLab.Web.UIServices.LabProfile;
 
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace LivingLab.Web.Controllers;
@@ -13,6 +14,7 @@ namespace LivingLab.Web.Controllers;
 /// <remarks>
 /// Author: Team P1-1
 /// </remarks>
+[Authorize(Roles = "Admin")]
 public class EnergyUsageController : Controller
 {
     private readonly IEnergyUsageService _energyUsageService;

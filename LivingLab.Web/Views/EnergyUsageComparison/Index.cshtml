@@ -4,12 +4,93 @@
     <div class="flex-grow">
         <p class="text-4xl pb-3 flex items-center font-black">
             <svg xmlns="http://www.w3.org/2000/svg" class="h-8 pr-2" viewBox="0 0 20 20" fill="currentColor">
-                <path d="M4 3a2 2 0 100 4h12a2 2 0 100-4H4z"/>
-                <path fill-rule="evenodd" d="M3 8h14v7a2 2 0 01-2 2H5a2 2 0 01-2-2V8zm5 3a1 1 0 011-1h2a1 1 0 110 2H9a1 1 0 01-1-1z" clip-rule="evenodd"/>
+                <path d="M4 3a2 2 0 100 4h12a2 2 0 100-4H4z" />
+                <path fill-rule="evenodd" d="M3 8h14v7a2 2 0 01-2 2H5a2 2 0 01-2-2V8zm5 3a1 1 0 011-1h2a1 1 0 110 2H9a1 1 0 01-1-1z" clip-rule="evenodd" />
             </svg>
             Comparison Dashboard
         </p>
     </div>
 </div>
+<div>
+    Compare by:
+    <select id="compare" onchange="selectComparisonType()" class="column-2">
+        <option value="DeviceType">Device Type</option>
+        <option value="Lab">Lab</option>
+
+    </select>
+    <br />
+    <br />
+        <div class="flex flex-col" style="white-space: nowrap;">
+        <table>
+            <tr> 
+                <td class="column-2">
+                    <h6 id="opt1"></h6> <select id="option1" onchange="removeChosenType()"></select>
+                   
+                </td>
+                <td class="column-2">
+                    <h6 id="opt2"></h6> <select id="option2" onchange="removeChosenType()"></select>
+                    
+                </td>
+                <td class="column-2">
+                    <h6 id="opt3"></h6> <select id="option3" onchange="removeChosenType()"></select>
+                   
+                </td>
+                <td class="column-2">
+                    <h6 id="opt4"></h6><select id="option4" onchange="removeChosenType()"></select>
+                    
+                </td>
+                <td class="column-2">
+                    <input type="button" class="bg-blue-500 text-white active:bg-blue-600 font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150" onclick="compareData()" value="Compare" />
+                </td>
+            </tr>
+            <tr>
+                <td class="column-2">Start Date:
+                    <br/>
+                    <input type="date" id="startDate" required></td>
+                <td class="column-2">End Date:
+                    <br/><input type="date" id="endDate" required></td>
+            </tr>
+        </table>
+    </div>
+    
+    <br/>
+    <br/>
+    <div id="datatable"></div>
+
+    <br />
+    <br />
+    <br />
+
+    <div id="displayGraph" class="chart-container">
+    </div>
+ </div>  
+
+<div class="fixed hidden inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full" id="errormodal-backdrop"></div>
+    <div class="hidden overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none justify-center items-center" id="errormodal">
+        <div class="relative w-auto my-6 mx-auto max-w-3xl">
+            <div class="border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none">
+                <div class="flex text-center p-5 border-b border-solid border-blueGray-200 rounded-t">
+                    <h1 class="text-3xl font-semibold">
+                        Error Message
+                    </h1>
+                </div>
+                <div class="p-6 pt-0 text-center">
+                    <svg class="mx-auto mb-4 w-14 h-14 text-gray-400 dark:text-gray-200" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                   
+                    <h2 class="mb-5 text-lg font-normal text-gray-500 dark:text-gray-400" id="errorMessage"></h2>
+                    
+                    <div class="flex items-center justify-end">
+                     <button type="button" class="text-gray-500 bg-C0C0C0 hover:bg-gray-100 focus:ring-4 focus:ring-gray-300 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600" onclick="toggleModal()">Cancel</button>
+                    </div>
+                 </div>
+            </div>
+        </div>
+    </div>
+
+
+@section Scripts
+{
+<script src="~/js/energyUsageComparison.js"></script>
+}
 
 

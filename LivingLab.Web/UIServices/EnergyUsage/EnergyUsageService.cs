@@ -1,6 +1,7 @@
 using AutoMapper;
 
 using LivingLab.Core.Entities;
+using LivingLab.Core.Entities.DTO;
 using LivingLab.Core.Entities.DTO.EnergyUsageDTOs;
 using LivingLab.Core.Interfaces.Services.EnergyUsageInterfaces;
 using LivingLab.Web.Models.ViewModels.EnergyUsage;
@@ -17,7 +18,6 @@ public class EnergyUsageService : IEnergyUsageService
     private readonly IMapper _mapper;
     private readonly IEnergyUsageDomainService _energyUsageDomainService;
     private readonly ILabProfileService _labProfileService;
-
     public EnergyUsageService(IMapper mapper, IEnergyUsageDomainService energyUsageDomainService, ILabProfileService labProfileService)
     {
         _mapper = mapper;
@@ -35,7 +35,7 @@ public class EnergyUsageService : IEnergyUsageService
     public async Task<EnergyBenchmarkViewModel> GetLabEnergyBenchmark(int labId)
     {
         var data = await _energyUsageDomainService.GetLabEnergyBenchmark(labId);
-        return _mapper.Map<Lab, EnergyBenchmarkViewModel>(data);
+        return _mapper.Map<LabDetailsDTO, EnergyBenchmarkViewModel>(data);
     }
 
     public Task SetLabEnergyBenchmark(EnergyBenchmarkViewModel benchmark)

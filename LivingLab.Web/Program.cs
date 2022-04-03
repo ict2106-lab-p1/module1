@@ -1,14 +1,9 @@
-
-
 using LivingLab.Core.Entities.Identity;
 using LivingLab.Core.Entities.Secrets;
 using LivingLab.Infrastructure;
 using LivingLab.Infrastructure.Configuration;
-using LivingLab.Infrastructure.Data;
 using LivingLab.Web;
 using LivingLab.Web.Configuration;
-
-using Microsoft.AspNetCore.Identity;
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -81,4 +76,5 @@ app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
 app.MapRazorPages();
+
 app.Run();
