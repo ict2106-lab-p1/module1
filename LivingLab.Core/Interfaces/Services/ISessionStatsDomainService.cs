@@ -4,5 +4,6 @@ namespace LivingLab.Core.Interfaces.Services;
 
 public interface ISessionStatsDomainService
 {
-   Task<List<SessionStats>> ViewSessionStats();
+   Task<List<SessionStats>> ViewSessionStats(string labLocation);
+   
 }

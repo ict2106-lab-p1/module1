@@ -1,3 +1,4 @@
+@using LivingLab.Core.Entities.Identity
 @model LivingLab.Web.Models.ViewModels.LabProfile.LabRegisterViewModel
 @* /// <remarks> *@
 @* /// Author: Team P1-5 *@
@@ -11,7 +12,7 @@
     <div class="col-md-4">
         <form id="registerLab" method="post" asp-controller="LabProfile" asp-action="LabRegisterPost">
             <h2>Create a new Lab.</h2>
-            <hr />
+            <hr/>
             @* <div asp-validation-summary="ModelOnly" class="text-danger"></div> *@
             <div class="form-floating">
                 <label asp-for="LabLocation"></label>
@@ -19,15 +20,19 @@
                 <span asp-validation-for="LabLocation" class="text-danger"></span>
             </div>
             <div class="form-floating">
-                <label asp-for="LabStatus"></label>
-                <input asp-for="LabStatus" class="form-control" aria-required="true"/>
-                <span asp-validation-for="LabStatus" class="text-danger"></span>
-            </div>
-            <div class="form-floating">
+                            <label asp-for="LabInCharge"></label>
+                            <input asp-for="LabInCharge" class="form-control" aria-required="true"/>
+                            <span asp-validation-for="LabInCharge" class="text-danger"></span>
+                        </div>
+            @*<p>
                 <label asp-for="LabInCharge"></label>
-                <input asp-for="LabInCharge" class="form-control" aria-required="true"/>
-                <span asp-validation-for="LabInCharge" class="text-danger"></span>
-            </div>
+            </p>
+            <select class="select select-bordered w-full max-w-xs" name="labincharge" asp-for="LabInCharge">
+                @foreach (var user in Model.LabICList)
+                                    {
+                                        <option value="@user.Id">@user.FirstName</option>
+                                    }
+                                </select>*@
             <div class="form-floating">
                 <label asp-for="Capacity"></label>
                 <input asp-for="Capacity" class="form-control" aria-required="true"/>
@@ -46,9 +51,5 @@
             <button id="labsubmit" class="w-100 btn btn-lg btn-primary">New Lab</button>
         </form>
     </div>
-    
-</div>
 
-@section Scripts {
-    <partial name="_ValidationScriptsPartial" />
-}
+</div>

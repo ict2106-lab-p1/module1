@@ -18,7 +18,6 @@ public class EnergyUsageDomainService : IEnergyUsageDomainService
         _labRepository = labRepository;
         _energyUsageRepository = energyUsageRepository;
     }
-
     /// <summary>
     /// 1. Call Energy Usage repo to get filtered energy usage data
     /// 2. Map logs to DTO

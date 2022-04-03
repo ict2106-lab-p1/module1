@@ -13,13 +13,11 @@ public class EnergyLogApiController : BaseApiController
 {
     private readonly IEnergyLogService _energyLogService;
     private readonly ILogger<EnergyLogApiController> _logger;
-
     public EnergyLogApiController(IEnergyLogService energyLogService, ILogger<EnergyLogApiController> logger)
     {
         _energyLogService = energyLogService;
         _logger = logger;
     }
-
     [HttpPost]
     public async Task<IActionResult> Log(EnergyUsageLogDTO usage)
     {

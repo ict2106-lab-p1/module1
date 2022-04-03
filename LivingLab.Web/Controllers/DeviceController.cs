@@ -47,10 +47,10 @@ public class DeviceController : Controller
     }
 
     [Route("ViewAddDetails")]
-    public async Task<DeviceViewModel> ViewAddDetails()
+    public async Task<AddDeviceViewModel> ViewAddDetails()
     {
         //retrieve data from db
-        DeviceViewModel device = await _deviceService.ViewAddDetails();
+        AddDeviceViewModel device = await _deviceService.ViewAddDetails();
 
         return device;
         // return View("_DeviceDetails", device);
@@ -70,18 +70,18 @@ public class DeviceController : Controller
     
     [HttpGet]
     [HttpPost("ViewAdd")]
-    public async Task<IActionResult> AddDevice(DeviceViewModel addedDevice)
+    public async Task<IActionResult> AddDevice(AddDeviceViewModel addedDevice)
     {
         await _deviceService.AddDevice(addedDevice);
-        ViewDeviceViewModel viewDevices = await _deviceService.ViewDevice(addedDevice.Type, addedDevice.Lab.LabLocation);
+        ViewDeviceViewModel viewDevices = await _deviceService.ViewDevice(addedDevice.Device.Type, addedDevice.Device.Lab.LabLocation);
         
         // Send email to labTech in charge for approval
         string scheme = this.Request.Scheme;
         string host = this.Request.Host.ToString();
         string url = scheme + "://" + host;
-        await _deviceService.SendReviewerEmail(url);
+        await _deviceService.SendReviewerEmail(url, addedDevice.Device.Lab.LabLocation);
         
-        return Redirect($"ViewType/{addedDevice.Lab.LabLocation}");
+        return Redirect($"ViewType/{addedDevice.Device.Lab.LabLocation}");
     }
 
     [HttpPost("View/Delete")]

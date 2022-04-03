@@ -5,6 +5,7 @@ using LivingLab.Core.Entities.DTO.Accessory;
 using LivingLab.Core.Entities.Identity;
 using LivingLab.Core.Interfaces.Services;
 using LivingLab.Web.Models.ViewModels.Accessory;
+using LivingLab.Web.Models.ViewModels.UserManagement;
 
 using Microsoft.AspNetCore.Mvc.Rendering;
 
@@ -18,12 +19,13 @@ public class AccessoryService : IAccessoryService
     private readonly IMapper _mapper;
     private readonly IAccessoryDomainService _accessoryDomainService;
     private readonly IAccountDomainService _accountDomainService;
-
-    public AccessoryService(IMapper mapper, IAccessoryDomainService accessoryDomainService, IAccountDomainService accountDomainService)
+    private readonly ILabProfileDomainService _labProfileDomainService;
+    public AccessoryService(IMapper mapper, IAccessoryDomainService accessoryDomainService, IAccountDomainService accountDomainService, ILabProfileDomainService labProfileDomainService)
     {
         _mapper = mapper;
         _accessoryDomainService = accessoryDomainService;
         _accountDomainService = accountDomainService;
+        _labProfileDomainService = labProfileDomainService;
     }
 
     public async Task<ViewAccessoryViewModel> ViewAccessory(string accessoryType, string labLocation)
@@ -76,12 +78,9 @@ public class AccessoryService : IAccessoryService
         AccessoryDetailsViewModel accessoryVM =
             _mapper.Map<AccessoryDetailsDTO, AccessoryDetailsViewModel>(accessoryDetails);
         var labUserListDB = await _accountDomainService.ViewAccounts();
-        List<string?> userList = new List<string?>();
-        foreach (var users in labUserListDB)
-        {
-            userList.Add(users.FirstName);
-        }
-        return new AccessoryDetailsViewModel {Accessory = accessory, AccessoryTypes = accessoryTypeList, LabUsers = userList};
+        List<UserManagementViewModel> userList =
+            _mapper.Map<List<ApplicationUser>, List<UserManagementViewModel>>(labUserListDB);
+        return new AccessoryDetailsViewModel {Accessory = accessory, AccessoryTypes = accessoryTypeList, UserList = userList};
     }
 
     public async Task<ViewAccessoryViewModel> AddAccessory(AccessoryDetailsViewModel viewModelInput)
@@ -90,6 +89,8 @@ public class AccessoryService : IAccessoryService
         ViewAccessoryViewModel viewAccessoryViewModel = new ViewAccessoryViewModel();
         AccessoryViewModel accessoryVM = new AccessoryViewModel();
 
+        var lab = await _labProfileDomainService.GetLabProfileDetails(viewModelInput.Accessory.Lab.LabLocation);
+        accessoryVM.LabId = lab.LabId;
         // Add new accessory Type
         if (addAccessoryDetails.NewAccessoryType != null)
         {
@@ -106,7 +107,6 @@ public class AccessoryService : IAccessoryService
         accessoryVM.Status = "Available";
         accessoryVM.LastUpdated = DateTime.Today;
         accessoryVM.ReviewStatus = "Pending";
-        accessoryVM.LabId = addAccessoryDetails.Accessory.Lab.LabId;
         
         // map view model back to accessory
         Core.Entities.Accessory newAccessory = _mapper.Map<AccessoryViewModel, Core.Entities.Accessory>(accessoryVM);

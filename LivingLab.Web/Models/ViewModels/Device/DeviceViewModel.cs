@@ -18,7 +18,5 @@ public class DeviceViewModel
 
     public string? ReviewStatus { get; set; }
     
-    public string? ReviewedBy { get; set; }
-    
     /*public List<DeviceTypeViewModel> ViewDeviceTypeDtos { get; set; }*/
 }

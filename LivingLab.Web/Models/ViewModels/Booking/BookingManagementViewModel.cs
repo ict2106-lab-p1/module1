@@ -10,5 +10,5 @@ namespace LivingLab.Web.Models.ViewModels.Booking;
 /// </remarks>
 public class BookingManagementViewModel
 {
-    public AuthenticationViewModel hello { get; set; }
+    public List<BookingDashboardViewModel> list { get; set; } 
 }

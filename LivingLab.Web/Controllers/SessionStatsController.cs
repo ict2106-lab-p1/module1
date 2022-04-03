@@ -13,7 +13,7 @@ using Microsoft.AspNetCore.Mvc;
 /// Author: Team P1-3
 /// </remarks>
 
-[Route("SessionStats")]
+[Route("SessionStats/{labLocation}")]
 public class SessionStatsController : Controller
 {
     private readonly ILogger<SessionStatsController> _logger;
@@ -24,9 +24,10 @@ public class SessionStatsController : Controller
         _logger = logger;
         _sessionStatsService = sessionStatsService;
     }
-    public async Task<IActionResult> ViewSessionStats()
+    
+    public async Task<IActionResult> ViewSessionStats(string labLocation)
     {
-        ViewSessionStatsViewModel viewSessionStats = await _sessionStatsService.ViewSessionStats();
+        ViewSessionStatsViewModel viewSessionStats = await _sessionStatsService.ViewSessionStats(labLocation);
         return View("ViewSessionStats", viewSessionStats);
     }
     

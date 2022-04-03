@@ -8,7 +8,7 @@
 
 <div class="grid grid-cols-2 mb-2">
     <div>
-        <h3 class="text-lg"> NYP-SR7C </h3>
+        <h3 class="text-lg"> @Model.SessionStatsList[0].Lab.LabLocation </h3>
         <h1 class="text-2xl"> View Session Statistics</h1>
 
     </div>
@@ -45,6 +45,7 @@
         <th>LOG OUT</th>
         <th>DURATION (hrs)</th>
         <th>DATA UPLOADED</th>
+        <th>LAB IN CHARGE</th>
     </tr>
     </thead>
     <tbody>
@@ -56,8 +57,10 @@
             <td class="logout"> @report.LogoutTime.ToString("MM/dd/yyyy h:mm:ss tt") </td>
             <td class="duration"> @report.LogoutTime </td>
             <td class="dataUploaded"> @report.DataUploaded  </td>
+            <td class="labInCharge"> @report.Lab.LabInCharge  </td>
         </tr>
     }
+    
     </tbody>
 </table>
 

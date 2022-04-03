@@ -102,6 +102,28 @@ $(document).ready(function() {
         clickDelete(this);
         toggleDeleteModal();
     });
+
+    $("#del-cfm").on("input", function() {
+        console.log($("#del-cfm").val);
+        if (this.value === $("#accessory-name").text()) {
+            $("#delBtn").removeClass("disabled");
+        } else {
+            $("#delBtn").addClass("disabled");
+        }
+    });
+
+    $("#addForm").submit(function() {
+        alert("Accessory added successfully and is pending approval!");
+    });
+
+    $("#editForm").submit(function() {
+        alert("Accessory edited successfully!");
+    });
+
+    $("#delForm").submit(function() {
+        alert("Accessory deleted successfully!");
+    });
+
 });
 
 function clickAdd(e) {
@@ -120,8 +142,8 @@ function clickAdd(e) {
             last.value = "Others";
             accessoryTypeDDL.appendChild(last);
         }
-        document.getElementById("labId").value = data.accessory.labId
-        document.getElementById("labLocation").value = data.accessory.lab.labLocation
+        // document.getElementById("labId").value = data.accessory.labId
+        // document.getElementById("labLocation").value = data.accessory.lab.labLocation
     });
 }
 
@@ -151,15 +173,14 @@ function clickEdit(e) {
                     option.selected = true;
                 }
             }
-
             //populate borrowers ddl
             var borrowerDDL = document.getElementById("editLabUser");
             if (borrowerDDL.length === 0) {
                 // populate the dropdown list
-                for (var i = 0; i < data.labUsers.length; i++) {
+                for (var i = 0; i < data.userList.length; i++) {
                     var element = document.createElement("option");
-                    element.textContent = data.labUsers[i];
-                    element.value = data.labUsers[i];
+                    element.textContent = data.userList[i].firstName + " " + data.userList[i].lastName;
+                    element.value = data.userList[i].id;
                     borrowerDDL.appendChild(element);
                 }
             }
@@ -207,11 +228,3 @@ function clickDelete(e) {
         }
     );
 }
-$("#del-cfm").on("input", function() {
-    console.log($("#del-cfm").val);
-    if (this.value === $("#accessory-name").text()) {
-        $("#delBtn").removeClass("disabled");
-    } else {
-        $("#delBtn").addClass("disabled");
-    }
-});

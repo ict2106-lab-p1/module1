@@ -44,7 +44,7 @@ public class EnergyUsageService : IEnergyUsageService
         return _energyUsageDomainService.SetLabEnergyBenchmark(lab);
     }
 
-    public Task<ViewLabProfileViewModel> GetAllLabs()
+    public Task<List<LabInformationModel>?> GetAllLabs()
     {
         return _labProfileService.GetAllLabAccounts();
     }

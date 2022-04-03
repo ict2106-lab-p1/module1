@@ -72,7 +72,7 @@ public class AccessoryController : Controller
         string scheme = this.Request.Scheme;
         string host = this.Request.Host.ToString();
         string url = scheme + "://" + host;
-        await _deviceService.SendReviewerEmail(url);
+        await _deviceService.SendReviewerEmail(url, viewModel.Accessory.Lab.LabLocation);
 
         return Redirect($"ViewAccessoryType/{viewModel.Accessory.Lab.LabLocation}");
     }

@@ -13,9 +13,10 @@ public class SessionStatsDomainService : ISessionStatsDomainService
         _sessionStatsRepository = sessionStatsRepository;
     }
     
-    public Task<List<SessionStats>> ViewSessionStats()
+    
+    public Task<List<SessionStats>> ViewSessionStats(string labLocation)
     {
-        return _sessionStatsRepository.GetSessionStatsView();
+        return _sessionStatsRepository.GetSessionStatsView(labLocation);
     }
     
 }
