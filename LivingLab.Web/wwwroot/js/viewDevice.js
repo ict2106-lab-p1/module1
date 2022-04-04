@@ -2,7 +2,6 @@
 /* Author: Team P1-3*/
 /* </remarks>*/
 $(document).ready(function() {
-    //$('#table_id').DataTable();
     var table = $("#table_id").DataTable({
         dom: "<'ui stackable grid'" +
             "<'row'" +
@@ -12,8 +11,8 @@ $(document).ready(function() {
             "<'sixteen wide column'tr>" +
             ">" +
             "<'row'" +
-            "<'seven wide column 'i>" +
-            "<'eight wide column 'l>" +
+            "<'seven wide column'i>" +
+            "<'eight wide column'l>" +
             "<'left aligned nine wide column'p>" +
             ">" +
             ">",
@@ -24,7 +23,6 @@ $(document).ready(function() {
             {
                 targets: -2,
                 data: null,
-                // onclick="window.location.href='/Device/View/'+parentElement.getAttribute('data-id');"
                 defaultContent: '<button class=\'hover:bg-sunset-400 font-large rounded-lg text-sm px-5 py-2.5 editBtn\'><svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor"> <path d="M13.586 3.586a2 2 0 112.828 2.828l-.793.793-2.828-2.828.793-.793zM11.379 5.793L3 14.172V17h2.828l8.38-8.379-2.83-2.828z" /> </svg></button>',
                 //"defaultContent": "<button class='text-white bg-gradient-to-br from-purple-600 to-blue-500 hover:bg-gradient-to-bl focus:ring-4 focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2'>Edit</i></button>"
             },
@@ -42,35 +40,28 @@ $(document).ready(function() {
 
     // Add Overlay
     const addOverlay = document.querySelector("#addOverlay");
-    const closeAddBtn = document.querySelector(".closeAddModal");
-
     const toggleAddModal = () => {
         addOverlay.classList.toggle("hidden");
         addOverlay.classList.toggle("flex");
     };
-    closeAddBtn.addEventListener("click", toggleAddModal);
 
-    $(document).on("click", "#cancelBtn", function() {
+    $("#addDeviceModalBtn").click(function() {
+        fillAddModal(this);
         toggleAddModal();
     });
-    $(document).on("click", "#addSubmitbtn", function() {
-        toggleAddModal();
-    });
-    $(document).on("click", "#addDeviceBtn", function() {
-        clickAdd(this);
+    $(".closeAddModal").click(function() {
         toggleAddModal();
     });
 
     /***
      * Display new type input when user choose others
      */
-    $("#add-device-type").change(function() {
-        console.log("click");
+    $("#addDeviceType").change(function() {
         var selectedValue = jQuery(this).val();
         if (selectedValue === "Others") {
-            $(".newType").removeClass("hidden");
+            $("#newDeviceType").removeClass("hidden");
         } else {
-            $(".newType").addClass("hidden");
+            $("#newDeviceType").addClass("hidden");
         }
     });
 
@@ -80,11 +71,11 @@ $(document).ready(function() {
         editOverlay.classList.toggle("hidden");
         editOverlay.classList.toggle("flex");
     };
-    $(document).on("click", ".closeEditModal", function() {
+    $(".editDeviceBtn").click(function() {
+        fillEditModal(this);
         toggleEditModal();
     });
-    $(document).on("click", ".editDeviceBtn", function() {
-        clickEdit(this);
+    $(".closeEditModal").click(function() {
         toggleEditModal();
     });
 
@@ -94,14 +85,14 @@ $(document).ready(function() {
         deleteOverlay.classList.toggle("hidden");
         deleteOverlay.classList.toggle("flex");
     };
-    $(document).on("click", ".closeDeleteModal", function() {
+    $(".deleteDeviceBtn").click(function() {
+        fillDeleteModal(this);
         toggleDeleteModal();
     });
-    $(document).on("click", ".deleteDeviceBtn", function() {
-        clickDelete(this);
+    $(".closeDeleteModal").click(function() {
         toggleDeleteModal();
     });
-
+    
     $("#del-cfm").on("input", function() {
         if (this.value === $("#deviceName").text()) {
             $("#delBtn").removeClass("disabled");
@@ -110,6 +101,7 @@ $(document).ready(function() {
         }
     });
 
+    // Misc Alerts
     $("#addForm").submit(function() {
         alert("Device added successfully and is pending approval!");
     });
@@ -124,7 +116,7 @@ $(document).ready(function() {
 
 });
 
-function clickAdd(e) {
+function fillAddModal(e) {
     $.get("/Device/ViewAddDetails", function(data) {
         console.log(data);
         console.log("Last row Id: " + data.device.id);
@@ -147,7 +139,7 @@ function clickAdd(e) {
     });
 }
 
-function clickEdit(e) {
+function fillEditModal(e) {
     $.get(
         "/Device/View/" + e.getAttribute("data-id"), // url
         function(data, textStatus, jqXHR) {
@@ -166,7 +158,7 @@ function clickEdit(e) {
     );
 }
 
-function clickDelete(e) {
+function fillDeleteModal(e) {
     $.get(
         "/Device/View/" + e.getAttribute("data-id"), // url
         function(data, textStatus, jqXHR) {
