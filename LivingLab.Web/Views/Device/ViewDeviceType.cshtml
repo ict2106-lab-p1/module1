@@ -87,11 +87,16 @@
             <p class="text-md-start">@Model.labLocation </p>
         </div>
         <div class="mt-4">
-            <form class="w-full max-w-lg" method="post" enctype="multipart/form-data" asp-controller="Device" asp-action="AddDevice">
+            <form class="w-full max-w-lg" method="post" enctype="multipart/form-data" asp-controller="Device" asp-action="AddDevice" id="addForm">
                 <input type="hidden" id="add-labLocation" name="Device.Lab.LabLocation" value="@Model.labLocation"/>
                 @{
                     @await Html.PartialAsync("_AddDevice", new AddDeviceViewModel());
                 }
+                <div class="mt-3 flex justify-end space-x-3">
+                    <button class="btn btn-primary" type="submit">
+                        Add device
+                    </button>
+                </div>
             </form>
         </div>
     </div>

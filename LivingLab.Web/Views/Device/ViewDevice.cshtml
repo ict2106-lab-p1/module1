@@ -70,7 +70,7 @@
             <p class="text-md-start">@Model.DeviceList[0].Lab.LabLocation  </p>
         </div>
         <div class="mt-4">
-            <form class="w-full max-w-lg" method="post" enctype="multipart/form-data" asp-controller="Device" asp-action="AddDevice">
+            <form class="w-full max-w-lg" method="post" enctype="multipart/form-data" asp-controller="Device" asp-action="AddDevice" id="addForm">
                 <input type="hidden" id="add-labLocation" name="Device.Lab.LabLocation" value="@Model.DeviceList[0].Lab.LabLocation"/>
                 @{
                     @await Html.PartialAsync("_AddDevice", new AddDeviceViewModel());

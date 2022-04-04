@@ -75,7 +75,7 @@
             <p class="text-md-start">@Model.AccessoryList[0].Lab.LabLocation</p>
         </div>
         <div class="mt-4">
-            <form class="w-full max-w-lg" asp-controller="Accessory" asp-action="CreateAccessory" method="post">
+            <form class="w-full max-w-lg" asp-controller="Accessory" asp-action="CreateAccessory" method="post"  id="addForm">
                 <input type="hidden" id="labLocation" name="Accessory.Lab.LabLocation" value="@Model.AccessoryList[0].Lab.LabLocation"/>
                 @{
                     @await Html.PartialAsync("_AddAccessoryDetails", new AccessoryDetailsViewModel())
