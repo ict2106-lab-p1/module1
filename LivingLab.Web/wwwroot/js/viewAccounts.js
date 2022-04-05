@@ -27,18 +27,21 @@ $(document).ready(function () {
 
     function clickEditUser(e) {
         $.get('/UserManagement/View/'+e.getAttribute('data-id'),  // url
-            function (data, textStatus, jqXHR) {  // success 
+            function (data, textStatus, jqXHR) {  // success
+                console.log(" data returned: ", data);
+                console.log("Faculty returned: ", data.userFaculty);
                 document.getElementById("user-id").value = data.id
                 document.getElementById("user-email").value = data.email
-                document.getElementById("user-faculty").value = data.faculty
-                document.getElementById("user-lab-access").value = data.LabAccess
+                document.getElementById("user-faculty").value = data.userFaculty
+                // document.getElementById("user-lab-access").value = data.labAccesses
+                
             });
     }
     function clickDelete(e) {
         $.get('/UserManagement/View/'+e.getAttribute('data-id'),  // url
             function (data, textStatus, jqXHR) {  // success callback
                 document.getElementById("del-user-id").value = data.id
-                // document.getElementById("userEmail").innerHTML = data.email
+                document.getElementById("userEmail").innerHTML = data.email
                 document.getElementById("del-user-email").value = data.email
             });
     }
