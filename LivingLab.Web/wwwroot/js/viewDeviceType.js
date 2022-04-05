@@ -66,7 +66,7 @@ function fillAddModal(e) {
         document.getElementById("add-device-id").value = data.device.id + 1;
         // document.getElementById("add-labId").value = data.device.lab.labId
         // document.getElementById("add-labLocation").value = data.device.lab.labLocation
-        var deviceTypeDDL = document.getElementById("add-device-type")
+        var deviceTypeDDL = document.getElementById("addDeviceType")
         if (deviceTypeDDL.length === 0) {
             for (var i = 0; i < data.deviceTypes.length; i++) {
                 var element = document.createElement("option")

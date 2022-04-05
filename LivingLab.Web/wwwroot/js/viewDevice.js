@@ -123,7 +123,7 @@ function fillAddModal(e) {
         document.getElementById("add-device-id").value = data.device.id + 1;
         // document.getElementById("add-labId").value = data.device.lab.labId
         // document.getElementById("add-labLocation").value = data.device.lab.labLocation
-        var deviceTypeDDL = document.getElementById("add-device-type")
+        var deviceTypeDDL = document.getElementById("addDeviceType")
         if (deviceTypeDDL.length === 0) {
             for (var i = 0; i < data.deviceTypes.length; i++) {
                 var element = document.createElement("option")
@@ -145,13 +145,13 @@ function fillEditModal(e) {
         function(data, textStatus, jqXHR) {
             // success callback
             console.log("Device data returned: ", data);
-            document.getElementById("grid-device-id").value = data.id;
-            document.getElementById("grid-serialnum").value = data.serialNo;
-            document.getElementById("grid-name").value = data.name;
-            document.getElementById("grid-device-type").value = data.type;
-            document.getElementById("grid-desc").value = data.description;
-            document.getElementById("grid-status").value = data.status;
-            document.getElementById("grid-threshold").value = data.threshold;
+            document.getElementById("edit-device-id").value = data.id;
+            document.getElementById("edit-serialnum").value = data.serialNo;
+            document.getElementById("edit-name").value = data.name;
+            document.getElementById("edit-device-type").value = data.type;
+            document.getElementById("edit-desc").value = data.description;
+            document.getElementById("edit-status").value = data.status;
+            document.getElementById("edit-threshold").value = data.threshold;
             document.getElementById("editLabLocation").value = data.lab.labLocation;
             console.log(document.getElementById("editLabLocation").value)
         }

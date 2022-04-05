@@ -119,7 +119,7 @@ $(document).ready(function() {
 function fillAddModal(e) {
     $.get("/Accessory/AddAccessoryDetails", function(data) {
         document.getElementById("accessoryId").value = data.accessory.id + 1;
-        var accessoryTypeDDL = document.getElementById("accessoryType");
+        var accessoryTypeDDL = document.getElementById("addAccessoryType");
         if (accessoryTypeDDL.length === 0) {
             for (var i = 0; i < data.accessoryTypes.length; i++) {
                 var element = document.createElement("option");
