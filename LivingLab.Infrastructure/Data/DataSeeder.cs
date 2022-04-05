@@ -112,7 +112,44 @@ public static class DataSeeder
         modelBuilder.Entity<SessionStats>().HasData(
                 new { Id = 1, Date = new DateTime(2021, 7, 3), LoginTime = new DateTime(2021, 7, 3, 9, 0, 0), LogoutTime = new DateTime(2021, 7, 3, 12, 0, 0), DataUploaded = 58.0, LabId = 1 },
                 new { Id = 2, Date = new DateTime(2021, 7, 4), LoginTime = new DateTime(2021, 7, 4, 10, 0, 0), LogoutTime = new DateTime(2021, 7, 4, 15, 0, 0), DataUploaded = 64.0, LabId = 1 },
-                new { Id = 3, Date = new DateTime(2021, 7, 5), LoginTime = new DateTime(2021, 7, 5, 13, 0, 0), LogoutTime = new DateTime(2021, 7, 5, 18, 0, 0), DataUploaded = 128.0, LabId = 1 }
+                new { Id = 3, Date = new DateTime(2021, 7, 5), LoginTime = new DateTime(2021, 7, 5, 13, 0, 0), LogoutTime = new DateTime(2021, 7, 5, 18, 0, 0), DataUploaded = 78.0, LabId = 1 },
+                new { Id = 4, Date = new DateTime(2021, 7, 6), LoginTime = new DateTime(2021, 7, 6, 9, 0, 0), LogoutTime = new DateTime(2021, 7, 6, 12, 0, 0), DataUploaded = 98.0, LabId = 1 },
+                new { Id = 5, Date = new DateTime(2021, 7, 7), LoginTime = new DateTime(2021, 7, 7, 10, 0, 0), LogoutTime = new DateTime(2021, 7, 7, 15, 0, 0), DataUploaded = 73.0, LabId = 1 },
+                new { Id = 6, Date = new DateTime(2021, 7, 8), LoginTime = new DateTime(2021, 7, 8, 13, 0, 0), LogoutTime = new DateTime(2021, 7, 8, 18, 0, 0), DataUploaded = 34.0, LabId = 1 },
+                new { Id = 7, Date = new DateTime(2021, 7, 9), LoginTime = new DateTime(2021, 7, 8, 9, 0, 0), LogoutTime = new DateTime(2021, 7, 9, 12, 0, 0), DataUploaded = 55.0, LabId = 1 },
+                new { Id = 8, Date = new DateTime(2021, 7, 10), LoginTime = new DateTime(2021, 7, 9, 10, 0, 0), LogoutTime = new DateTime(2021, 7, 10, 15, 0, 0), DataUploaded = 67.0, LabId = 1 },
+                new { Id = 9, Date = new DateTime(2021, 7, 11), LoginTime = new DateTime(2021, 7, 10, 13, 0, 0), LogoutTime = new DateTime(2021, 7, 11, 18, 0, 0), DataUploaded = 130.0, LabId = 1 },
+                new { Id = 10, Date = new DateTime(2021, 7, 12), LoginTime = new DateTime(2021, 7, 11, 9, 0, 0), LogoutTime = new DateTime(2021, 7, 12, 12, 0, 0), DataUploaded = 120.0, LabId = 1 },
+                new { Id = 11, Date = new DateTime(2021, 7, 13), LoginTime = new DateTime(2021, 7, 12, 10, 0, 0), LogoutTime = new DateTime(2021, 7, 13, 15, 0, 0), DataUploaded = 117.0, LabId = 1 },
+                new { Id = 12, Date = new DateTime(2021, 7, 14), LoginTime = new DateTime(2021, 7, 14, 13, 0, 0), LogoutTime = new DateTime(2021, 7, 14, 18, 0, 0), DataUploaded = 68.0, LabId = 1 },
+
+                
+                new { Id = 13, Date = new DateTime(2021, 7, 3), LoginTime = new DateTime(2021, 7, 3, 9, 0, 0), LogoutTime = new DateTime(2021, 7, 3, 12, 0, 0), DataUploaded = 58.0, LabId = 2 },
+                new { Id = 14, Date = new DateTime(2021, 7, 4), LoginTime = new DateTime(2021, 7, 4, 10, 0, 0), LogoutTime = new DateTime(2021, 7, 4, 15, 0, 0), DataUploaded = 64.0, LabId = 2 },
+                new { Id = 15, Date = new DateTime(2021, 7, 5), LoginTime = new DateTime(2021, 7, 5, 13, 0, 0), LogoutTime = new DateTime(2021, 7, 5, 18, 0, 0), DataUploaded = 78.0, LabId = 2 },
+                new { Id = 16, Date = new DateTime(2021, 7, 6), LoginTime = new DateTime(2021, 7, 6, 9, 0, 0), LogoutTime = new DateTime(2021, 7, 6, 12, 0, 0), DataUploaded = 98.0, LabId = 2 },
+                new { Id = 17, Date = new DateTime(2021, 7, 7), LoginTime = new DateTime(2021, 7, 7, 10, 0, 0), LogoutTime = new DateTime(2021, 7, 7, 15, 0, 0), DataUploaded = 73.0, LabId = 2 },
+                new { Id = 18, Date = new DateTime(2021, 7, 8), LoginTime = new DateTime(2021, 7, 8, 13, 0, 0), LogoutTime = new DateTime(2021, 7, 8, 18, 0, 0), DataUploaded = 34.0, LabId = 2 },
+                new { Id = 19, Date = new DateTime(2021, 7, 9), LoginTime = new DateTime(2021, 7, 8, 9, 0, 0), LogoutTime = new DateTime(2021, 7, 9, 12, 0, 0), DataUploaded = 55.0, LabId = 2 },
+                new { Id = 20, Date = new DateTime(2021, 7, 10), LoginTime = new DateTime(2021, 7, 9, 10, 0, 0), LogoutTime = new DateTime(2021, 7, 10, 15, 0, 0), DataUploaded = 67.0, LabId = 2 },
+                new { Id = 21, Date = new DateTime(2021, 7, 11), LoginTime = new DateTime(2021, 7, 10, 13, 0, 0), LogoutTime = new DateTime(2021, 7, 11, 18, 0, 0), DataUploaded = 130.0, LabId = 2 },
+                new { Id = 22, Date = new DateTime(2021, 7, 12), LoginTime = new DateTime(2021, 7, 11, 9, 0, 0), LogoutTime = new DateTime(2021, 7, 12, 12, 0, 0), DataUploaded = 120.0, LabId = 2 },
+                new { Id = 23, Date = new DateTime(2021, 7, 13), LoginTime = new DateTime(2021, 7, 12, 10, 0, 0), LogoutTime = new DateTime(2021, 7, 13, 15, 0, 0), DataUploaded = 117.0, LabId = 2 },
+                new { Id = 24, Date = new DateTime(2021, 7, 14), LoginTime = new DateTime(2021, 7, 14, 13, 0, 0), LogoutTime = new DateTime(2021, 7, 14, 18, 0, 0), DataUploaded = 68.0, LabId = 2 },
+
+                
+                new { Id = 25, Date = new DateTime(2021, 7, 3), LoginTime = new DateTime(2021, 7, 3, 9, 0, 0), LogoutTime = new DateTime(2021, 7, 3, 12, 0, 0), DataUploaded = 58.0, LabId = 3 },
+                new { Id = 26, Date = new DateTime(2021, 7, 4), LoginTime = new DateTime(2021, 7, 4, 10, 0, 0), LogoutTime = new DateTime(2021, 7, 4, 15, 0, 0), DataUploaded = 64.0, LabId = 3 },
+                new { Id = 27, Date = new DateTime(2021, 7, 5), LoginTime = new DateTime(2021, 7, 5, 13, 0, 0), LogoutTime = new DateTime(2021, 7, 5, 18, 0, 0), DataUploaded = 78.0, LabId = 3 },
+                new { Id = 28, Date = new DateTime(2021, 7, 6), LoginTime = new DateTime(2021, 7, 6, 9, 0, 0), LogoutTime = new DateTime(2021, 7, 6, 12, 0, 0), DataUploaded = 98.0, LabId = 3 },
+                new { Id = 29, Date = new DateTime(2021, 7, 7), LoginTime = new DateTime(2021, 7, 7, 10, 0, 0), LogoutTime = new DateTime(2021, 7, 7, 15, 0, 0), DataUploaded = 73.0, LabId = 3 },
+                new { Id = 30, Date = new DateTime(2021, 7, 8), LoginTime = new DateTime(2021, 7, 8, 13, 0, 0), LogoutTime = new DateTime(2021, 7, 8, 18, 0, 0), DataUploaded = 34.0, LabId = 3 },
+                new { Id = 31, Date = new DateTime(2021, 7, 9), LoginTime = new DateTime(2021, 7, 8, 9, 0, 0), LogoutTime = new DateTime(2021, 7, 9, 12, 0, 0), DataUploaded = 55.0, LabId = 3 },
+                new { Id = 32, Date = new DateTime(2021, 7, 10), LoginTime = new DateTime(2021, 7, 9, 10, 0, 0), LogoutTime = new DateTime(2021, 7, 10, 15, 0, 0), DataUploaded = 67.0, LabId = 3 },
+                new { Id = 33, Date = new DateTime(2021, 7, 11), LoginTime = new DateTime(2021, 7, 10, 13, 0, 0), LogoutTime = new DateTime(2021, 7, 11, 18, 0, 0), DataUploaded = 130.0, LabId = 3 },
+                new { Id = 34, Date = new DateTime(2021, 7, 12), LoginTime = new DateTime(2021, 7, 11, 9, 0, 0), LogoutTime = new DateTime(2021, 7, 12, 12, 0, 0), DataUploaded = 120.0, LabId = 3 },
+                new { Id = 35, Date = new DateTime(2021, 7, 13), LoginTime = new DateTime(2021, 7, 12, 10, 0, 0), LogoutTime = new DateTime(2021, 7, 13, 15, 0, 0), DataUploaded = 117.0, LabId = 3 },
+                new { Id = 36, Date = new DateTime(2021, 7, 14), LoginTime = new DateTime(2021, 7, 14, 13, 0, 0), LogoutTime = new DateTime(2021, 7, 14, 18, 0, 0), DataUploaded = 68.0, LabId = 3 }
         );
         
         modelBuilder.SeedEnergyLogs();

@@ -11,8 +11,6 @@ public interface ILabBookingService
 {
     Task<List<BookingDashboardViewModel>> RetrieveList();
     Task<List<BookingTableViewModel>> RetrieveBookTableList();
-
-     Task<Booking?> CreateBook(BookFormModel input, string userid);
-
-     Task<Booking?> DeleteBook(int bookid);
+    Task<Booking?> CreateBook(BookFormModel input, string userid);
+    Task<Booking?> DeleteBook(int bookid);
 }

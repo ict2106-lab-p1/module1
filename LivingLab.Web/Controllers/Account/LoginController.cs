@@ -11,7 +11,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
-namespace LivingLab.Web.Controllers;
+namespace LivingLab.Web.Controllers.Account;
 
 /// <remarks>
 /// Author: Team P1-5
@@ -79,7 +79,7 @@ public class LoginController : Controller
                     }
                     else
                     {
-                        return RedirectToAction("Dashboard", "LivingLabDashboard");
+                        return RedirectToAction("Dashboard", "Home");
                     }
                 }
                 else
@@ -115,7 +115,7 @@ public class LoginController : Controller
         var result = await _accountService.VerifyCode(user.Id, validationCode);
         if (result)
         {
-            return RedirectToAction("Dashboard", "LivingLabDashboard");
+            return RedirectToAction("Dashboard", "Home");
         }
         else
         {
@@ -154,7 +154,7 @@ public class LoginController : Controller
         var result = await _accountService.VerifyCode(user.Id, validationCode);
         if (result)
         {
-            return RedirectToAction("Dashboard", "LivingLabDashboard");
+            return RedirectToAction("Dashboard", "Home");
         }
         else
         {

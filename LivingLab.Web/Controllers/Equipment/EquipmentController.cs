@@ -11,6 +11,7 @@ namespace LivingLab.Web.Controllers;
 
 
 [Authorize(Roles = "Labtech")]
+[Route("Equipment")]
 public class EquipmentController: Controller
 {
     private readonly ILogger<EquipmentController> _logger;
