@@ -1,7 +1,9 @@
 using LivingLab.Core.Entities;
 
 namespace LivingLab.Web.Models.ViewModels.SessionStats;
-
+/// <remarks>
+/// Author: Team P1-3
+/// </remarks>
 public class SessionStatsViewModel
 {
     public int Id { get; set; }

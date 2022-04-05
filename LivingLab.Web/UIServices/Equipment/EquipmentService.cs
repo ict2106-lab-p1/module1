@@ -7,7 +7,9 @@ using LivingLab.Web.Models.ViewModels.Device;
 using LivingLab.Web.Models.ViewModels.Equipment;
 
 namespace LivingLab.Web.UIServices.Equipment;
-
+/// <remarks>
+/// Author: Team P1-3
+/// </remarks>
 public class EquipmentService: IEquipmentService
 {
     

@@ -32,7 +32,6 @@ public class AccountController: Controller
     }
     
     //TODO: Add [Authorize(Roles = "Admin")]
-    [Route("register")]
     /*Admin can see this page and register*/
     public IActionResult Register()
     {
@@ -41,7 +40,6 @@ public class AccountController: Controller
 
     
     [HttpPost]
-    [Route("register")]
     //TODO: Add [Authorize(Roles = "Admin")]
     /*Allow admin to register users*/
     public async Task<ViewResult> Register(RegisterViewModel registration)
@@ -69,7 +67,6 @@ public class AccountController: Controller
                         "Please confirm your account by clicking this link: <a href=\"" 
                         + callbackUrl + "\">link</a>");
                 }
-                
                 return View("_CheckEmail");
             }
             catch (Exception e)
@@ -86,7 +83,6 @@ public class AccountController: Controller
     }
 
     [HttpGet]
-    [Route("confirmemail")]
     [AllowAnonymous]
     /*Goes to confirm email page*/
     public async Task<IActionResult> ConfirmEmail(string? userId, string? token)
@@ -113,11 +109,11 @@ public class AccountController: Controller
         }
     }
 
-    [Authorize(Roles = "User,Labtech,Admin")]
-    [Route("settings")]
+    [Authorize(Roles = "User, Labtech, Admin")]
     /*Show the settings page with properties binding*/
-    public async Task<ViewResult> Settings(SettingsViewModel settingsViewModel)
+    public async Task<ViewResult> Settings()
     {
+        SettingsViewModel settingsViewModel = new SettingsViewModel();
         var user = await _userManager.GetUserAsync(User);
         settingsViewModel.Email = user.Email;
         settingsViewModel.PhoneNumber = user.PhoneNumber;

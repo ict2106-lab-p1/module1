@@ -4,10 +4,13 @@ using LivingLab.Web.Models.ViewModels;
 using LivingLab.Web.Models.ViewModels.Equipment;
 using LivingLab.Web.UIServices.Equipment;
 
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace LivingLab.Web.Controllers;
 
+
+[Authorize(Roles = "Labtech")]
 [Route("Equipment")]
 public class EquipmentController: Controller
 {

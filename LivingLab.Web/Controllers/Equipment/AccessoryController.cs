@@ -1,10 +1,14 @@
 using System.Diagnostics;
 
+using LivingLab.Core.Entities.Identity;
+
 using Microsoft.AspNetCore.Mvc;
 using LivingLab.Web.Models.ViewModels;
 using LivingLab.Web.Models.ViewModels.Accessory;
 using LivingLab.Web.UIServices.Accessory;
 using LivingLab.Web.UIServices.Device;
+
+using Microsoft.AspNetCore.Identity;
 
 namespace LivingLab.Web.Controllers;
 /// <remarks>
@@ -16,12 +20,14 @@ public class AccessoryController : Controller
     private readonly ILogger<AccessoryController> _logger;
     private readonly IAccessoryService _accessoryService;
     private readonly IDeviceService _deviceService;
+    private readonly UserManager<ApplicationUser> _userManager;
 
-    public AccessoryController(ILogger<AccessoryController> logger, IAccessoryService accessoryService, IDeviceService deviceService)
+    public AccessoryController(ILogger<AccessoryController> logger, IAccessoryService accessoryService, IDeviceService deviceService, UserManager<ApplicationUser> userManager)
     {
         _logger = logger;
         _accessoryService = accessoryService;
         _deviceService = deviceService;
+        _userManager = userManager;
     }
 
     // detailed view
@@ -72,7 +78,8 @@ public class AccessoryController : Controller
         string scheme = this.Request.Scheme;
         string host = this.Request.Host.ToString();
         string url = scheme + "://" + host;
-        await _deviceService.SendReviewerEmail(url, viewModel.Accessory.Lab.LabLocation);
+        var labTech = await _userManager.GetUserAsync(User);
+        await _deviceService.SendReviewerEmail(url, viewModel.Accessory.Lab.LabLocation, labTech);
 
         return Redirect($"ViewAccessoryType/{viewModel.Accessory.Lab.LabLocation}");
     }

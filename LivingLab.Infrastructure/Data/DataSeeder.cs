@@ -66,16 +66,16 @@ public static class DataSeeder
         );
 
         modelBuilder.Entity<Device>().HasData(
-                new { Id = 1, Name = "Surveillance Camera", LastUpdated = new DateTime(2020, 10, 10), SerialNo = "SC1001", LabId = 1, Status = "Available", Type = "Surveillance Camera", Description = "Its purpose is to detect situation in the laboratory", ReviewStatus = "Pending"},
+                new { Id = 1, Name = "Surveillance Camera", LastUpdated = new DateTime(2020, 10, 10), SerialNo = "SC1001", LabId = 1, Status = "Available", Type = "Surveillance Camera", Description = "Its purpose is to detect situation in the laboratory", ReviewStatus = "Approved"},
                 new { Id = 2, Name = "Temperature Sensor", LastUpdated = new DateTime(2020, 10, 11), SerialNo = "R1001", LabId = 2, Status = "Available", Type = "Temperature Sensor", Description = "Its purpose is to detect temperature in the laboratory", ReviewStatus = "Approved"},
                 new { Id = 3, Name = "Humidity Sensor", LastUpdated = new DateTime(2020, 9, 9), SerialNo = "S1001", LabId = 2, Status = "Available", Type = "Humidity Sensor", Description = "Its purpose is to detect humidity in the laboratory", ReviewStatus = "Approved"},
                 new { Id = 4, Name = "Light Sensor", LastUpdated = new DateTime(2019, 8, 1), SerialNo = "SL1001", LabId = 3, Status = "Available", Type = "Light Sensor", Description = "Its purpose is to detect light in the laboratory", ReviewStatus = "Rejected"},
-                new { Id = 5, Name = "VR Light Controls", LastUpdated = new DateTime(2019, 7, 3), SerialNo = "VRL1001", LabId = 3, Status = "Unavailable", Type = "VR Light Controls", Description = "It is used to control brightness of the lights in the lab", ReviewStatus = "Pending"},
-                new { Id = 6, Name = "Surveillance Camera", LastUpdated = new DateTime(2020, 10, 10), SerialNo = "SC1001", LabId = 1, Status = "Available", Type = "Surveillance Camera", Description = "Its purpose is to detect situation in the laboratory", ReviewStatus = "Pending"},
+                new { Id = 5, Name = "VR Light Controls", LastUpdated = new DateTime(2019, 7, 3), SerialNo = "VRL1001", LabId = 3, Status = "Unavailable", Type = "VR Light Controls", Description = "It is used to control brightness of the lights in the lab", ReviewStatus = "Approved"},
+                new { Id = 6, Name = "Surveillance Camera", LastUpdated = new DateTime(2020, 10, 10), SerialNo = "SC1001", LabId = 1, Status = "Available", Type = "Surveillance Camera", Description = "Its purpose is to detect situation in the laboratory", ReviewStatus = "Approved"},
                 new { Id = 7, Name = "Temperature Sensor", LastUpdated = new DateTime(2020, 10, 11), SerialNo = "R1001", LabId = 2, Status = "Available", Type = "Temperature Sensor", Description = "Its purpose is to detect temperature in the laboratory", ReviewStatus = "Approved"},
                 new { Id = 8, Name = "Humidity Sensor", LastUpdated = new DateTime(2020, 9, 9), SerialNo = "S1001", LabId = 2, Status = "Available", Type = "Humidity Sensor", Description = "Its purpose is to detect humidity in the laboratory", ReviewStatus = "Approved"},
                 new { Id = 9, Name = "Light Sensor", LastUpdated = new DateTime(2019, 8, 1), SerialNo = "SL1001", LabId = 3, Status = "Available", Type = "Light Sensor", Description = "Its purpose is to detect light in the laboratory", ReviewStatus = "Rejected"},
-                new { Id = 10, Name = "VR Light Controls", LastUpdated = new DateTime(2019, 7, 3), SerialNo = "VRL1001", LabId = 3, Status = "Unavailable", Type = "VR Light Controls", Description = "It is used to control brightness of the lights in the lab", ReviewStatus = "Pending"}
+                new { Id = 10, Name = "VR Light Controls", LastUpdated = new DateTime(2019, 7, 3), SerialNo = "VRL1001", LabId = 3, Status = "Unavailable", Type = "VR Light Controls", Description = "It is used to control brightness of the lights in the lab", ReviewStatus = "Approved"}
         );
 
         // Accessory and Accessory Types
@@ -91,28 +91,65 @@ public static class DataSeeder
         );
 
         modelBuilder.Entity<Accessory>().HasData(
-                new { Id = 1, Name = "Sony A7 IV", Status = "Available", LastUpdated = new DateTime(2021, 10, 10), LabId = 1, AccessoryTypeId = 1, ReviewStatus = "Pending"},
-                new { Id = 2, Name = "Sony A8 IV", Status = "Borrowed", LastUpdated = new DateTime(2021, 10, 14), LabId = 1, AccessoryTypeId = 1, LabUserId = "DefaultAdmin1", DueDate = new DateTime(2022, 10, 14), ReviewStatus = "Pending"},
-                new { Id = 3, Name = "MA300D1-1", Status = "Available", LastUpdated = new DateTime(2021, 10, 17), LabId = 2, AccessoryTypeId = 2, ReviewStatus = "Pending" },
-                new { Id = 4, Name = "MA300D1-2", Status = "Available", LastUpdated = new DateTime(2021, 10, 21), LabId = 2, AccessoryTypeId = 2, ReviewStatus = "Pending"},
-                new { Id = 5, Name = "DHT22", Status = "Borrowed", LastUpdated = new DateTime(2021, 9, 9), LabId = 3, AccessoryTypeId = 3, LabUserId = "DefaultAdmin1", DueDate = new DateTime(2022, 9, 9), ReviewStatus = "Pending"},
-                new { Id = 6, Name = "DHT23", Status = "Available", LastUpdated = new DateTime(2021, 9, 5), LabId = 3, AccessoryTypeId = 3, ReviewStatus = "Pending"},
-                new { Id = 7, Name = "LEFOO LFT2000W", Status = "Available", LastUpdated = new DateTime(2021, 8, 1), LabId = 1, AccessoryTypeId = 4, ReviewStatus = "Pending"},
-                new { Id = 8, Name = "LEFO1 LFT2000W", Status = "Borrowed", LastUpdated = new DateTime(2021, 8, 10), LabId = 1, AccessoryTypeId = 4, LabUserId = "DefaultAdmin1", DueDate = new DateTime(2022, 9, 5), ReviewStatus = "Pending"},
-                new { Id = 9, Name = "RM1802", Status = "Available", LastUpdated = new DateTime(2021, 7, 3), LabId = 2, AccessoryTypeId = 5, ReviewStatus = "Pending"},
-                new { Id = 10, Name = "RM1803", Status = "Borrowed", LastUpdated = new DateTime(2021, 6, 24), LabId = 2, AccessoryTypeId = 5, LabUserId = "DefaultAdmin1", DueDate = new DateTime(2022, 10, 14), ReviewStatus = "Pending"},
-                new { Id = 11, Name = "HC-SR04", Status = "Available", LastUpdated = new DateTime(2021, 7, 25), LabId = 3, AccessoryTypeId = 6, ReviewStatus = "Pending"},
-                new { Id = 12, Name = "HC-SR05", Status = "Available", LastUpdated = new DateTime(2021, 4, 3), LabId = 3, AccessoryTypeId = 6, ReviewStatus = "Pending"},
-                new { Id = 13, Name = "EDGELEC 4Pin LED Diodes", Status = "Borrowed", LastUpdated = new DateTime(2021, 7, 19), LabId = 1, AccessoryTypeId = 7, LabUserId = "DefaultAdmin1", DueDate = new DateTime(2022, 7, 19), ReviewStatus = "Pending"},
-                new { Id = 14, Name = "EDGELEC 6Pin LED Diodes", Status = "Borrowed", LastUpdated = new DateTime(2021, 12, 14), LabId = 1, AccessoryTypeId = 7, LabUserId = "DefaultAdmin1", DueDate = new DateTime(2022, 12, 14), ReviewStatus = "Pending"},
-                new { Id = 15, Name = "TMB09A05", Status = "Available", LastUpdated = new DateTime(2021, 11, 12), LabId = 2, AccessoryTypeId = 8, ReviewStatus = "Pending"},
-                new { Id = 16, Name = "TMB09A06", Status = "Available", LastUpdated = new DateTime(2021, 7, 3), LabId = 2, AccessoryTypeId = 8, ReviewStatus = "Pending"}
+                new { Id = 1, Name = "Sony A7 IV", Status = "Available", LastUpdated = new DateTime(2021, 10, 10), LabId = 1, AccessoryTypeId = 1, ReviewStatus = "Approved"},
+                new { Id = 2, Name = "Sony A8 IV", Status = "Borrowed", LastUpdated = new DateTime(2021, 10, 14), LabId = 1, AccessoryTypeId = 1, LabUserId = "DefaultAdmin1", DueDate = new DateTime(2022, 10, 14), ReviewStatus = "Approved"},
+                new { Id = 3, Name = "MA300D1-1", Status = "Available", LastUpdated = new DateTime(2021, 10, 17), LabId = 2, AccessoryTypeId = 2, ReviewStatus = "Approved" },
+                new { Id = 4, Name = "MA300D1-2", Status = "Available", LastUpdated = new DateTime(2021, 10, 21), LabId = 2, AccessoryTypeId = 2, ReviewStatus = "Approved"},
+                new { Id = 5, Name = "DHT22", Status = "Borrowed", LastUpdated = new DateTime(2021, 9, 9), LabId = 3, AccessoryTypeId = 3, LabUserId = "DefaultAdmin1", DueDate = new DateTime(2022, 9, 9), ReviewStatus = "Approved"},
+                new { Id = 6, Name = "DHT23", Status = "Available", LastUpdated = new DateTime(2021, 9, 5), LabId = 3, AccessoryTypeId = 3, ReviewStatus = "Approved"},
+                new { Id = 7, Name = "LEFOO LFT2000W", Status = "Available", LastUpdated = new DateTime(2021, 8, 1), LabId = 1, AccessoryTypeId = 4, ReviewStatus = "Approved"},
+                new { Id = 8, Name = "LEFO1 LFT2000W", Status = "Borrowed", LastUpdated = new DateTime(2021, 8, 10), LabId = 1, AccessoryTypeId = 4, LabUserId = "DefaultAdmin1", DueDate = new DateTime(2022, 9, 5), ReviewStatus = "Approved"},
+                new { Id = 9, Name = "RM1802", Status = "Available", LastUpdated = new DateTime(2021, 7, 3), LabId = 2, AccessoryTypeId = 5, ReviewStatus = "Approved"},
+                new { Id = 10, Name = "RM1803", Status = "Borrowed", LastUpdated = new DateTime(2021, 6, 24), LabId = 2, AccessoryTypeId = 5, LabUserId = "DefaultAdmin1", DueDate = new DateTime(2022, 10, 14), ReviewStatus = "Approved"},
+                new { Id = 11, Name = "HC-SR04", Status = "Available", LastUpdated = new DateTime(2021, 7, 25), LabId = 3, AccessoryTypeId = 6, ReviewStatus = "Approved"},
+                new { Id = 12, Name = "HC-SR05", Status = "Available", LastUpdated = new DateTime(2021, 4, 3), LabId = 3, AccessoryTypeId = 6, ReviewStatus = "Approved"},
+                new { Id = 13, Name = "EDGELEC 4Pin LED Diodes", Status = "Borrowed", LastUpdated = new DateTime(2021, 7, 19), LabId = 1, AccessoryTypeId = 7, LabUserId = "DefaultAdmin1", DueDate = new DateTime(2022, 7, 19), ReviewStatus = "Approved"},
+                new { Id = 14, Name = "EDGELEC 6Pin LED Diodes", Status = "Borrowed", LastUpdated = new DateTime(2021, 12, 14), LabId = 1, AccessoryTypeId = 7, LabUserId = "DefaultAdmin1", DueDate = new DateTime(2022, 12, 14), ReviewStatus = "Approved"},
+                new { Id = 15, Name = "TMB09A05", Status = "Available", LastUpdated = new DateTime(2021, 11, 12), LabId = 2, AccessoryTypeId = 8, ReviewStatus = "Approved"},
+                new { Id = 16, Name = "TMB09A06", Status = "Available", LastUpdated = new DateTime(2021, 7, 3), LabId = 2, AccessoryTypeId = 8, ReviewStatus = "Approved"}
         );
 
         modelBuilder.Entity<SessionStats>().HasData(
                 new { Id = 1, Date = new DateTime(2021, 7, 3), LoginTime = new DateTime(2021, 7, 3, 9, 0, 0), LogoutTime = new DateTime(2021, 7, 3, 12, 0, 0), DataUploaded = 58.0, LabId = 1 },
                 new { Id = 2, Date = new DateTime(2021, 7, 4), LoginTime = new DateTime(2021, 7, 4, 10, 0, 0), LogoutTime = new DateTime(2021, 7, 4, 15, 0, 0), DataUploaded = 64.0, LabId = 1 },
-                new { Id = 3, Date = new DateTime(2021, 7, 5), LoginTime = new DateTime(2021, 7, 5, 13, 0, 0), LogoutTime = new DateTime(2021, 7, 5, 18, 0, 0), DataUploaded = 128.0, LabId = 1 }
+                new { Id = 3, Date = new DateTime(2021, 7, 5), LoginTime = new DateTime(2021, 7, 5, 13, 0, 0), LogoutTime = new DateTime(2021, 7, 5, 18, 0, 0), DataUploaded = 78.0, LabId = 1 },
+                new { Id = 4, Date = new DateTime(2021, 7, 6), LoginTime = new DateTime(2021, 7, 6, 9, 0, 0), LogoutTime = new DateTime(2021, 7, 6, 12, 0, 0), DataUploaded = 98.0, LabId = 1 },
+                new { Id = 5, Date = new DateTime(2021, 7, 7), LoginTime = new DateTime(2021, 7, 7, 10, 0, 0), LogoutTime = new DateTime(2021, 7, 7, 15, 0, 0), DataUploaded = 73.0, LabId = 1 },
+                new { Id = 6, Date = new DateTime(2021, 7, 8), LoginTime = new DateTime(2021, 7, 8, 13, 0, 0), LogoutTime = new DateTime(2021, 7, 8, 18, 0, 0), DataUploaded = 34.0, LabId = 1 },
+                new { Id = 7, Date = new DateTime(2021, 7, 9), LoginTime = new DateTime(2021, 7, 8, 9, 0, 0), LogoutTime = new DateTime(2021, 7, 9, 12, 0, 0), DataUploaded = 55.0, LabId = 1 },
+                new { Id = 8, Date = new DateTime(2021, 7, 10), LoginTime = new DateTime(2021, 7, 9, 10, 0, 0), LogoutTime = new DateTime(2021, 7, 10, 15, 0, 0), DataUploaded = 67.0, LabId = 1 },
+                new { Id = 9, Date = new DateTime(2021, 7, 11), LoginTime = new DateTime(2021, 7, 10, 13, 0, 0), LogoutTime = new DateTime(2021, 7, 11, 18, 0, 0), DataUploaded = 130.0, LabId = 1 },
+                new { Id = 10, Date = new DateTime(2021, 7, 12), LoginTime = new DateTime(2021, 7, 11, 9, 0, 0), LogoutTime = new DateTime(2021, 7, 12, 12, 0, 0), DataUploaded = 120.0, LabId = 1 },
+                new { Id = 11, Date = new DateTime(2021, 7, 13), LoginTime = new DateTime(2021, 7, 12, 10, 0, 0), LogoutTime = new DateTime(2021, 7, 13, 15, 0, 0), DataUploaded = 117.0, LabId = 1 },
+                new { Id = 12, Date = new DateTime(2021, 7, 14), LoginTime = new DateTime(2021, 7, 14, 13, 0, 0), LogoutTime = new DateTime(2021, 7, 14, 18, 0, 0), DataUploaded = 68.0, LabId = 1 },
+
+                
+                new { Id = 13, Date = new DateTime(2021, 7, 3), LoginTime = new DateTime(2021, 7, 3, 9, 0, 0), LogoutTime = new DateTime(2021, 7, 3, 12, 0, 0), DataUploaded = 58.0, LabId = 2 },
+                new { Id = 14, Date = new DateTime(2021, 7, 4), LoginTime = new DateTime(2021, 7, 4, 10, 0, 0), LogoutTime = new DateTime(2021, 7, 4, 15, 0, 0), DataUploaded = 64.0, LabId = 2 },
+                new { Id = 15, Date = new DateTime(2021, 7, 5), LoginTime = new DateTime(2021, 7, 5, 13, 0, 0), LogoutTime = new DateTime(2021, 7, 5, 18, 0, 0), DataUploaded = 78.0, LabId = 2 },
+                new { Id = 16, Date = new DateTime(2021, 7, 6), LoginTime = new DateTime(2021, 7, 6, 9, 0, 0), LogoutTime = new DateTime(2021, 7, 6, 12, 0, 0), DataUploaded = 98.0, LabId = 2 },
+                new { Id = 17, Date = new DateTime(2021, 7, 7), LoginTime = new DateTime(2021, 7, 7, 10, 0, 0), LogoutTime = new DateTime(2021, 7, 7, 15, 0, 0), DataUploaded = 73.0, LabId = 2 },
+                new { Id = 18, Date = new DateTime(2021, 7, 8), LoginTime = new DateTime(2021, 7, 8, 13, 0, 0), LogoutTime = new DateTime(2021, 7, 8, 18, 0, 0), DataUploaded = 34.0, LabId = 2 },
+                new { Id = 19, Date = new DateTime(2021, 7, 9), LoginTime = new DateTime(2021, 7, 8, 9, 0, 0), LogoutTime = new DateTime(2021, 7, 9, 12, 0, 0), DataUploaded = 55.0, LabId = 2 },
+                new { Id = 20, Date = new DateTime(2021, 7, 10), LoginTime = new DateTime(2021, 7, 9, 10, 0, 0), LogoutTime = new DateTime(2021, 7, 10, 15, 0, 0), DataUploaded = 67.0, LabId = 2 },
+                new { Id = 21, Date = new DateTime(2021, 7, 11), LoginTime = new DateTime(2021, 7, 10, 13, 0, 0), LogoutTime = new DateTime(2021, 7, 11, 18, 0, 0), DataUploaded = 130.0, LabId = 2 },
+                new { Id = 22, Date = new DateTime(2021, 7, 12), LoginTime = new DateTime(2021, 7, 11, 9, 0, 0), LogoutTime = new DateTime(2021, 7, 12, 12, 0, 0), DataUploaded = 120.0, LabId = 2 },
+                new { Id = 23, Date = new DateTime(2021, 7, 13), LoginTime = new DateTime(2021, 7, 12, 10, 0, 0), LogoutTime = new DateTime(2021, 7, 13, 15, 0, 0), DataUploaded = 117.0, LabId = 2 },
+                new { Id = 24, Date = new DateTime(2021, 7, 14), LoginTime = new DateTime(2021, 7, 14, 13, 0, 0), LogoutTime = new DateTime(2021, 7, 14, 18, 0, 0), DataUploaded = 68.0, LabId = 2 },
+
+                
+                new { Id = 25, Date = new DateTime(2021, 7, 3), LoginTime = new DateTime(2021, 7, 3, 9, 0, 0), LogoutTime = new DateTime(2021, 7, 3, 12, 0, 0), DataUploaded = 58.0, LabId = 3 },
+                new { Id = 26, Date = new DateTime(2021, 7, 4), LoginTime = new DateTime(2021, 7, 4, 10, 0, 0), LogoutTime = new DateTime(2021, 7, 4, 15, 0, 0), DataUploaded = 64.0, LabId = 3 },
+                new { Id = 27, Date = new DateTime(2021, 7, 5), LoginTime = new DateTime(2021, 7, 5, 13, 0, 0), LogoutTime = new DateTime(2021, 7, 5, 18, 0, 0), DataUploaded = 78.0, LabId = 3 },
+                new { Id = 28, Date = new DateTime(2021, 7, 6), LoginTime = new DateTime(2021, 7, 6, 9, 0, 0), LogoutTime = new DateTime(2021, 7, 6, 12, 0, 0), DataUploaded = 98.0, LabId = 3 },
+                new { Id = 29, Date = new DateTime(2021, 7, 7), LoginTime = new DateTime(2021, 7, 7, 10, 0, 0), LogoutTime = new DateTime(2021, 7, 7, 15, 0, 0), DataUploaded = 73.0, LabId = 3 },
+                new { Id = 30, Date = new DateTime(2021, 7, 8), LoginTime = new DateTime(2021, 7, 8, 13, 0, 0), LogoutTime = new DateTime(2021, 7, 8, 18, 0, 0), DataUploaded = 34.0, LabId = 3 },
+                new { Id = 31, Date = new DateTime(2021, 7, 9), LoginTime = new DateTime(2021, 7, 8, 9, 0, 0), LogoutTime = new DateTime(2021, 7, 9, 12, 0, 0), DataUploaded = 55.0, LabId = 3 },
+                new { Id = 32, Date = new DateTime(2021, 7, 10), LoginTime = new DateTime(2021, 7, 9, 10, 0, 0), LogoutTime = new DateTime(2021, 7, 10, 15, 0, 0), DataUploaded = 67.0, LabId = 3 },
+                new { Id = 33, Date = new DateTime(2021, 7, 11), LoginTime = new DateTime(2021, 7, 10, 13, 0, 0), LogoutTime = new DateTime(2021, 7, 11, 18, 0, 0), DataUploaded = 130.0, LabId = 3 },
+                new { Id = 34, Date = new DateTime(2021, 7, 12), LoginTime = new DateTime(2021, 7, 11, 9, 0, 0), LogoutTime = new DateTime(2021, 7, 12, 12, 0, 0), DataUploaded = 120.0, LabId = 3 },
+                new { Id = 35, Date = new DateTime(2021, 7, 13), LoginTime = new DateTime(2021, 7, 12, 10, 0, 0), LogoutTime = new DateTime(2021, 7, 13, 15, 0, 0), DataUploaded = 117.0, LabId = 3 },
+                new { Id = 36, Date = new DateTime(2021, 7, 14), LoginTime = new DateTime(2021, 7, 14, 13, 0, 0), LogoutTime = new DateTime(2021, 7, 14, 18, 0, 0), DataUploaded = 68.0, LabId = 3 }
         );
         
         modelBuilder.SeedEnergyLogs();

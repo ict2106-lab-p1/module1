@@ -91,24 +91,21 @@ public class DeviceService : IDeviceService
     }
     
     // Send email to request approval for add device/accessory to lab in charge
-    public async Task<bool> SendReviewerEmail(string url, string labLocation)
+    public async Task<bool> SendReviewerEmail(string url, string labLocation, ApplicationUser labTech)
     {
         try
         {
-            var labTech = await _userManager.GetUsersInRoleAsync("labtech");
             var lab = await _labProfileDomainService.GetLabProfileDetails(labLocation);
-            foreach (ApplicationUser lt in labTech)
-            {
-                if (lt.Id == lab.LabInCharge)
+                if (labTech.Id == lab.LabInCharge)
                 {
                     var link = url + "/Equipment/ReviewEquipment/" + lab.LabLocation;
                     var msg = "<h3>[" + lab.LabLocation + "]<br> New Device/Accessory Added</h3>" +
-                              "Hi " + lt.FirstName + ",<br>" +
+                              "Hi " + labTech.FirstName + ",<br>" +
                               "There is a new device/accessory added to <b>" + lab.LabLocation +
                               "</b> that requires your review. <br>" +
                               "Please click <a href='" + link + "'>here</a> " +
                               " to approve/decline, and to view other pending review requests.</br>";
-                    await _emailSender.SendEmailAsync(lt.Email, "New Device/Accessory Review Requested", msg);
+                    await _emailSender.SendEmailAsync(labTech.Email, "New Device/Accessory Review Requested", msg);
                     _logger.LogInformation("Email sent to labTech in charge");
                 }
                 else
@@ -116,8 +113,7 @@ public class DeviceService : IDeviceService
                     _logger.LogInformation("LabTech in charge not found. Email not sent.");
                     return false;
                 }
-            }
-            return true;
+                return true;
         }
         catch (Exception)
         {

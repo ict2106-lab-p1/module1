@@ -5,7 +5,9 @@ using LivingLab.Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 
 namespace LivingLab.Infrastructure.Repositories.Account;
-
+/// <remarks>
+/// Author: Team P1-3
+/// </remarks>
 public class SessionStatsRepository : Repository<SessionStats>, ISessionStatsRepository
 {
     private readonly ApplicationDbContext _context;

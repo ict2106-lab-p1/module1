@@ -73,7 +73,7 @@ public class LabProfileController: Controller
             deviceNames = devicestype,
             accessoriesNames = accessoriestype
         };
-        
+
         _logger.LogInformation("Lab ID is" + labModel.LabId);
         _logger.LogInformation("Lab Devices " + devicestype);
 
