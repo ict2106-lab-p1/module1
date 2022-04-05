@@ -6,11 +6,7 @@ $(document).ready(function () {
 
         clickDelete(this)
     });
-
-
-
-    // let closebtn2FA = document.getElementById("close-btn2FA");
-
+    
     $(document).on('click', '.modal-open', function () {
         document.write("clicked")
         let modal2FA = document.getElementById("modal-box");
@@ -27,7 +23,7 @@ $(document).ready(function () {
 
     function clickEditUser(e) {
         $.get('/UserManagement/View/'+e.getAttribute('data-id'),  // url
-            function (data, textStatus, jqXHR) {  // success
+            function (data, textStatus, jqXHR) {  
                 console.log(" data returned: ", data);
                 console.log("Faculty returned: ", data.userFaculty);
                 document.getElementById("user-id").value = data.id
@@ -38,7 +34,7 @@ $(document).ready(function () {
     }
     function clickDelete(e) {
         $.get('/UserManagement/View/'+e.getAttribute('data-id'),  // url
-            function (data, textStatus, jqXHR) {  // success callback
+            function (data, textStatus, jqXHR) {  
                 document.getElementById("del-user-id").value = data.id
                 document.getElementById("userEmail").innerHTML = data.email
                 document.getElementById("del-user-email").value = data.email
