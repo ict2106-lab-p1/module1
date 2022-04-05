@@ -54,11 +54,12 @@
                     </p>
                     <select class="select select-bordered w-full max-w-xs" name="faculty" asp-for="Faculty">
                         <option disabled selected>Faculty</option>
-                        <option value="ICT">Information Technology and Media</option>
+                        <option value="SE">SE</option>
+                        <option value="ICT">ICT</option>
                         <option value="ENG">Engineering</option>
-                        <option value="Business">Business, Media</option>
                         <option value="Science">Science</option>
                     </select>
+ 
                 </div>
                 <div class="flex">
                     <div class="mt-6">
@@ -90,7 +91,6 @@
                         <span asp-validation-for="Password" class="text-sm text-red-500"></span>
                     </p>
                     <p>
-                        <span asp-validation-for="ConfirmPassword" class="text-sm text-red-500"></span>
                     </p>
                 </div>
             </div>

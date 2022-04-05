@@ -130,7 +130,7 @@
                           </div>
              <form class="w-full max-w-lg" method="post" enctype="multipart/form-data" asp-controller="UserManagement" asp-action="EditUser">
                  @{
-                     @await Html.PartialAsync("_EditUser")
+                     @await Html.PartialAsync("_EditUser",new UserManagementViewModel())
 
                  }
                  <div class="modal-action flex pt-12 justify-end">
