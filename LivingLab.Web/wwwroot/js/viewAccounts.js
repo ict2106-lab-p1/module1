@@ -34,7 +34,7 @@ $(document).ready(function () {
         $.get('/UserManagement/View/'+e.getAttribute('data-id'),  // url
             function (data, textStatus, jqXHR) {  
                 document.getElementById("del-user-id").value = data.id
-                // document.getElementById("userEmail").innerHTML = data.email
+                document.getElementById("userEmail").innerHTML = data.email
                 document.getElementById("del-user-email").value = data.email
             });
     }
