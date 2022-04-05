@@ -2,7 +2,9 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace LivingLab.Core.Entities;
-
+/// <remarks>
+/// Author: Team P1-3
+/// </remarks>
 public abstract class Equipment
 {
     [Required]

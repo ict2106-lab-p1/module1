@@ -159,7 +159,9 @@ function getZoomOptions() {
         },
         zoom: {
             wheel: {
-                enabled: true
+                enabled: true,
+                modifierKey: 'ctrl',
+                speed: 0.02 ,
             },
             pinch: {
                 enabled: true
@@ -239,7 +241,7 @@ async function getData(labId = 1, start = null, end = null) {
 
 /**
  * Get all dates within a date range.
- * If start and end are not provided, return all dates for the current month.
+ * If start and end are not provided, return all dates 30 days before today.
  * 
  * @param {String} start
  * @param {String} end
@@ -248,15 +250,18 @@ function getDates(start = null, end = null) {
     const dates = [];
     if (!start && !end) {
         const today = new Date();
-        const month = today.getMonth();
-        const year = today.getFullYear();
-        for (let i = 1; i <= new Date(year, month + 1, 0).getDate(); i++) {
-            const date = new Date(year, month, i).toLocaleDateString('en-US', {
+        
+        // Get 30 days ago from today
+        const startDate = new Date(new Date().setDate(today.getDate() - 30));
+        
+        while (startDate <= today) {
+            dates.push(startDate.toLocaleDateString('en-US', {
                 day: 'numeric',
                 month: 'short'
-            });
-            dates.push(date);
+            }));
+            startDate.setDate(startDate.getDate() + 1);
         }
+        
     } else {
         for (let i = new Date(start); i <= new Date(end); i.setDate(i.getDate() + 1)) {
             const date = i.toLocaleDateString('en-US', {

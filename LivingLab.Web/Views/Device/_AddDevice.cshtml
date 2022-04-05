@@ -1,10 +1,15 @@
-﻿@model LivingLab.Web.Models.ViewModels.Device.AddDeviceViewModel
+﻿@* <remarks> *@
+@* Author: Team P1-3 *@
+@* </remarks> *@
+@model LivingLab.Web.Models.ViewModels.Device.AddDeviceViewModel
 
 @{
     ViewData["Title"] = "Add Device";
 }
 
 <div class="flex flex-wrap -mx-3 mb-6">
+<input type="hidden" id="add-labId" name="Lab.LabId"/>
+<input type="hidden" id="add-labLocation" name="Lab.LabLocation"/>
     <div class="w-full md:w-1/2 px-3md:w-1/2 px-3">
         <label class="tracking-wide text-gray-700 text-xs font-bold mb-2" for="add-device-id">
             Device ID
