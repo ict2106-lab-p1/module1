@@ -1,12 +1,20 @@
 /* <remarks>*/
 
+
 /* Author: Team P1-3*/
+
 
 /* </remarks>*/
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+@layer components {
+    .z-100 {
+        z-index: 100;
+    }
+}
+
 @layer components {
     .z-100 {
         z-index: 100;
@@ -69,12 +77,12 @@ th:not(:last-child) {
 }
 
 @media (min-width: 768px) {
-  table {
-    display: inline-table !important;
-  }
-  thead tr:not(:first-child) {
-    display: none;
-  }
+    table {
+        display: inline-table !important;
+    }
+    thead tr:not(:first-child) {
+        display: none;
+    }
 }
 
 @media only screen and (max-width: 1023px) {

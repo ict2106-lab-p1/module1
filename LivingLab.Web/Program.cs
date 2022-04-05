@@ -1,12 +1,7 @@
-
-using LivingLab.Core.Entities.Identity;
 using LivingLab.Infrastructure;
 using LivingLab.Infrastructure.Configuration;
-using LivingLab.Infrastructure.Data;
 using LivingLab.Web;
 using LivingLab.Web.Configuration;
-
-using Microsoft.AspNetCore.Identity;
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -22,25 +17,7 @@ builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 builder.Services.AddControllersWithViews().AddNewtonsoftJson(options =>
         options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
-builder.Services.AddRazorPages().AddRazorPagesOptions(ops =>
-{
-    ops.Conventions.AuthorizeAreaFolder("Home", "/", "RequireAdmins");
-    ops.Conventions.AuthorizeFolder("/", "RequireAdmins");
-    ops.Conventions.AllowAnonymousToAreaPage("Login", "/");
-});
-builder.Services.AddAuthorization(ops =>
-{
-    ops.AddPolicy("RequireAdmins", policy => policy.RequireRole("Admins"));
-});
-builder.Services.AddScoped<XCookieAuthEvents>();
 
-// optional: customize cookie expiration time
-builder.Services.ConfigureApplicationCookie(ops =>
-{
-    ops.EventsType = typeof(XCookieAuthEvents);
-    ops.ExpireTimeSpan = TimeSpan.FromMinutes(30);
-    ops.SlidingExpiration = true;
-});
 builder.Services.AddDistributedMemoryCache();
 builder.Services.AddSession(options =>
 {
@@ -50,6 +27,11 @@ builder.Services.AddSession(options =>
 });
 builder.Services.AddHttpContextAccessor();
 builder.Services.AddControllersWithViews();
+builder.Services.ConfigureApplicationCookie(opts =>
+{
+    opts.LoginPath = "/Login/Index";
+    opts.AccessDeniedPath = "/Home/AccessDenied";
+});
 
 var app = builder.Build();
 
@@ -79,4 +61,5 @@ app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
 app.MapRazorPages();
+
 app.Run();

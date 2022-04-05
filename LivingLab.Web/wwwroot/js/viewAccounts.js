@@ -27,9 +27,7 @@ $(document).ready(function () {
 
     function clickEditUser(e) {
         $.get('/UserManagement/View/'+e.getAttribute('data-id'),  // url
-            function (data, textStatus, jqXHR) {  // success
-                console.log(" data returned: ", data);
-                console.log("Faculty returned: ", data.userFaculty);
+            function (data, textStatus, jqXHR) {  // success 
                 document.getElementById("user-id").value = data.id
                 document.getElementById("user-email").value = data.email
                 document.getElementById("user-faculty").value = data.userFaculty
@@ -41,10 +39,9 @@ $(document).ready(function () {
         $.get('/UserManagement/View/'+e.getAttribute('data-id'),  // url
             function (data, textStatus, jqXHR) {  // success callback
                 document.getElementById("del-user-id").value = data.id
-                document.getElementById("userEmail").innerHTML = data.email
+                // document.getElementById("userEmail").innerHTML = data.email
                 document.getElementById("del-user-email").value = data.email
             });
     }
 
-   
 })

@@ -1,4 +1,12 @@
-@* @model List<LivingLab.Core.Models.DeviceEnergyUsageModel> *@
+@model LivingLab.Web.Models.ViewModels.EnergyUsage.EnergyUsageAnalysisViewModel
+
+@section Styles{
+    <link rel="stylesheet" href="~/lib/jquery-ui-1.13.1/jquery-ui.min.css"/>
+}
+
+@{
+    ViewData["Title"] = "View Energy Usage Analysis";
+}
 
 <div class="flex">
     <div class="flex-grow">
@@ -11,12 +19,55 @@
         </p>
     </div>
 </div>
+
+@* <h2 class="font-bold text-3xl text-slate-900">Lab @Model?.SelectedLabEnergyUsage.Lab.LabLocation Energy Usage</h2> *@
+@* <h2 class="font-bold text-3xl text-slate-900">Lab @ViewBag.LabLocation Energy Usage</h2> *@
+<h2 class="font-bold text-3xl text-slate-900">Lab Energy Usage</h2>
+
+
+<div class="grid md:grid-cols-2 gap-4">
+    <div class="labDiv mt-10 bg-white p-5 shadow-lg rounded gap-4">
+        <input type="hidden" id="labLocation" value="NYP-SR7C"/>
+        <div class="flex justify-between mb-5">
+            <div class="flex items-end">
+                <div class="relative inline-flex">
+                    <select id="selectLabLocation" class="input-border border-gray-300 text-gray-600 h-10 pl-5 pr-10 bg-white hover:border-gray-400 focus:outline-none appearance-none">
+                        @* should for loop this part to get all avail (can see viewlabEU)  *@
+                        <option>NYP-SR7C</option>
+                        <option>NYP-SR2A</option>
+                    </select>
+                </div>
+                <input type="text" id="start" class="input input-bordered" placeholder="Start date"/>
+                <input type="text" id="end" class="input input-bordered ml-4" placeholder="End date"/>
+                <input type="button" id="filter" class="bg-slate-900 hover:bg-slate-700 text-white font-bold py-2 px-4 rounded trigger-swal ml-4" value="Filter"/>
+                <input type="button" id="resetFilter" class="bg-slate-900 hover:bg-slate-700 text-white font-bold py-2 px-4 rounded trigger-swal ml-4" value="Reset"/>
+            </div>
+        </div>
+        <canvas id="lineChart"></canvas>
+    </div>
+</div>
+
+<div class="grid md:grid-cols-2 gap-4">
+    <div class="labDiv mt-10 bg-white p-5 shadow-lg rounded gap-4">
+        @* <input type="hidden" id="labLocation" value="NYP-SR7C"/> *@
+        <div class="flex justify-between mb-5">
+            <div class="flex items-end">
+                <input type="text" id="startAllEnergyUsageTrend" class="input input-bordered" placeholder="Start date"/>
+                <input type="text" id="endAllEnergyUsageTrend" class="input input-bordered ml-4" placeholder="End date"/>
+                <input type="button" id="filterAllEnergyUsageTrend" class="bg-slate-900 hover:bg-slate-700 text-white font-bold py-2 px-4 rounded trigger-swal ml-4" value="Filter"/>
+                <input type="button" id="resetFilterAllEnergyUsageTrend" class="bg-slate-900 hover:bg-slate-700 text-white font-bold py-2 px-4 rounded trigger-swal ml-4" value="Reset"/>
+            </div>
+        </div>
+        <canvas id="lineChartAllEnergyUsageTrend"></canvas>
+    </div>
+</div>
+
 <a class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" asp-controller="EnergyUsageAnalysis" asp-action="Export">Export</a>
 <div class="flex flex-col">
     <div class="overflow-x-auto sm:-mx-6 lg:-mx-8">
         <div class="inline-block py-2 min-w-full sm:px-6 lg:px-8">
             <div class="overflow-hidden shadow-md sm:rounded-lg">
-                <table class="min-w-full">
+                <table class="min-w-full" id="device">
                     <thead class="bg-gray-50 dark:bg-gray-700 text-center">
                         <tr>
                             <th scope="col" class="py-3 px-6 text-s font-medium tracking-wider text-gray-700 uppercase dark:text-gray-400">
@@ -29,28 +80,22 @@
                                 Total Energy Usage
                             </th>
                             <th scope="col" class="py-3 px-6 text-s font-medium tracking-wider text-gray-700 uppercase dark:text-gray-400">
-                                Energy Usage Per Hour
-                            </th>
-                            <th scope="col" class="py-3 px-6 text-s font-medium tracking-wider text-gray-700 uppercase dark:text-gray-400">
                                 Energy Usage Cost
                             </th>
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach (var item in @ViewBag.Logs)
+                        @foreach (var item in @Model.DeviceEUList)
                         {
                         <tr class="border-b odd:bg-white even:bg-gray-50 odd:dark:bg-gray-800 even:dark:bg-gray-700 dark:border-gray-600 text-center">
                             <td class="py-4 px-6 text-sm text-gray-900 whitespace-nowrap dark:text-white">
-                                @item.DeviceSerialNo
+                                <a asp-controller= "EnergyUsageAnalysis" asp-action= "DMoreData" > @item.DeviceSerialNo </a>
                             </td>
                             <td class="py-4 px-6 text-sm text-gray-900 whitespace-nowrap dark:text-gray-400">
                                 @item.DeviceType
                             </td>
                             <td class="py-4 px-6 text-sm text-gray-900 whitespace-nowrap dark:text-gray-400">
-                                @item.TotalEnergyUsage kW
-                            </td>
-                            <td class="py-4 px-6 text-sm text-gray-900 whitespace-nowrap dark:text-gray-400">
-                                @item.EnergyUsagePerHour kW/h
+                                @item.TotalEnergyUsage Wh
                             </td>
                             <td class="py-4 px-6 text-sm text-gray-900 whitespace-nowrap dark:text-gray-400">
                                 $ @item.EnergyUsageCost
@@ -63,3 +108,105 @@
         </div>
     </div>
 </div>
+<div class="flex flex-col">
+    <div class="overflow-x-auto sm:-mx-6 lg:-mx-8">
+        <div class="inline-block py-2 min-w-full sm:px-6 lg:px-8">
+            <div class="overflow-hidden shadow-md sm:rounded-lg">
+                <table class="min-w-full" id= "lab">
+                    <thead class="bg-gray-50 dark:bg-gray-700 text-center">
+                        <tr>
+                            <th scope="col" class="py-3 px-6 text-s font-medium tracking-wider text-gray-700 uppercase dark:text-gray-400">
+                                Lab Location
+                            </th>
+                            <th scope="col" class="py-3 px-6 text-s font-medium tracking-wider text-gray-700 uppercase dark:text-gray-400">
+                                Total Energy Usage
+                            </th>
+                            <th scope="col" class="py-3 px-6 text-s font-medium tracking-wider text-gray-700 uppercase dark:text-gray-400">
+                                Energy Usage Cost
+                            </th>
+                            <th scope="col" class="py-3 px-6 text-s font-medium tracking-wider text-gray-700 uppercase dark:text-gray-400">
+                                Energy Usage Intensity
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in @Model.LabEUList)
+                        {
+                        <tr class="border-b odd:bg-white even:bg-gray-50 odd:dark:bg-gray-800 even:dark:bg-gray-700 dark:border-gray-600 text-center">
+                            <td class="py-4 px-6 text-sm text-gray-900 whitespace-nowrap dark:text-white">
+								<a asp-controller= "EnergyUsageAnalysis" asp-action= "LMoreData" > @item.LabLocation </a>
+                            </td>
+                            <td class="py-4 px-6 text-sm text-gray-900 whitespace-nowrap dark:text-gray-400">
+                                @item.TotalEnergyUsage kWh
+                            </td>
+                            <td class="py-4 px-6 text-sm text-gray-900 whitespace-nowrap dark:text-gray-400">
+                                $ @item.EnergyUsageCost
+                            </td>
+                            <td class="py-4 px-6 text-sm text-gray-900 whitespace-nowrap dark:text-gray-400">
+                                @item.EnergyUsageIntensity kW/m<sup>2</sup>
+                            </td>
+                        </tr>
+                    }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts
+{
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@3.7.1/dist/chart.min.js"></script>
+    <script src="~/lib/jquery-ui-1.13.1/jquery-ui.min.js"></script>
+    <script src="~/js/viewEnergyUsageTrendAllLab.js"></script>
+    <script src="~/js/viewEnergyUsageTrendSelectedLab.js"></script>
+
+    <script>
+$(document).ready(function() {
+    $('#device').DataTable( {
+        initComplete: function () {
+            this.api().columns().every( function () {
+                var column = this;
+                var select = $('<select><option value=""></option></select>')
+                    .appendTo( $(column.footer()).empty() )
+                    .on( 'change', function () {
+                        var val = $.fn.dataTable.util.escapeRegex(
+                            $(this).val()
+                        );
+ 
+                        column
+                            .search( val ? '^'+val+'$' : '', true, false )
+                            .draw();
+                    } );
+ 
+                column.data().unique().sort().each( function ( d, j ) {
+                    select.append( '<option value="'+d+'">'+d+'</option>' )
+                } );
+            } );
+        }
+    } );
+    $('#lab').DataTable( {
+        initComplete: function () {
+            this.api().columns().every( function () {
+                var column = this;
+                var select = $('<select><option value=""></option></select>')
+                    .appendTo( $(column.footer()).empty() )
+                    .on( 'change', function () {
+                        var val = $.fn.dataTable.util.escapeRegex(
+                            $(this).val()
+                        );
+ 
+                        column
+                            .search( val ? '^'+val+'$' : '', true, false )
+                            .draw();
+                    } );
+ 
+                column.data().unique().sort().each( function ( d, j ) {
+                    select.append( '<option value="'+d+'">'+d+'</option>' )
+                } );
+            } );
+        }
+    } );
+} );
+</script>
+}

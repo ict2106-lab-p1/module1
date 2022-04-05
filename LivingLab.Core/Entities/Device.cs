@@ -5,14 +5,10 @@ namespace LivingLab.Core.Entities;
 /// <remarks>
 /// Author: Team P1-3
 /// </remarks>
-public class Device : BaseEntity
-{
-    [Required]
-    [DataType(DataType.Date)]
-    [Column(TypeName = "Date")]
-    public DateTime LastUpdated { get; set; }
-    [Required]
-    public string Name { get; set; }
+public class Device : Equipment
+{    
+    [Key]
+    public int Id { get; set; }
     [Required]
     public string? SerialNo { get; set; }
     [Required]
@@ -20,13 +16,7 @@ public class Device : BaseEntity
     [Required]
     public int LabId { get; set; }
     [Required]
-    public string Status { get; set; }
-    [Required]
     public string Type { get; set; }
     public string? Description { get; set; }
     public double? Threshold { get; set; }
-    
-    public string? ReviewStatus { get; set; }
-    
-    public string? ReviewedBy { get; set; }
 }

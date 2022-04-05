@@ -1,9 +1,13 @@
 using AutoMapper;
 
+using LivingLab.Core.DomainServices.EnergyUsage;
 using LivingLab.Core.Entities;
-using LivingLab.Core.Entities.DTO.EnergyUsageDTOs;
-using LivingLab.Core.Interfaces.Services.EnergyUsageInterfaces;
+using LivingLab.Core.Entities.DTO;
+using LivingLab.Core.Entities.DTO.EnergyUsage;
+using LivingLab.Core.Entities.DTO.Lab;
 using LivingLab.Web.Models.ViewModels.EnergyUsage;
+using LivingLab.Web.Models.ViewModels.LabProfile;
+using LivingLab.Web.UIServices.LabProfile;
 
 namespace LivingLab.Web.UIServices.EnergyUsage;
 
@@ -14,13 +18,14 @@ public class EnergyUsageService : IEnergyUsageService
 {
     private readonly IMapper _mapper;
     private readonly IEnergyUsageDomainService _energyUsageDomainService;
-    
-    public EnergyUsageService(IMapper mapper, IEnergyUsageDomainService energyUsageDomainService)
+    private readonly ILabProfileService _labProfileService;
+    public EnergyUsageService(IMapper mapper, IEnergyUsageDomainService energyUsageDomainService, ILabProfileService labProfileService)
     {
         _mapper = mapper;
         _energyUsageDomainService = energyUsageDomainService;
+        _labProfileService = labProfileService;
     }
-    
+
     public async Task<EnergyUsageViewModel> GetEnergyUsage(EnergyUsageFilterViewModel filter)
     {
         var energyUsageFilter = _mapper.Map<EnergyUsageFilterViewModel, EnergyUsageFilterDTO>(filter);
@@ -31,12 +36,17 @@ public class EnergyUsageService : IEnergyUsageService
     public async Task<EnergyBenchmarkViewModel> GetLabEnergyBenchmark(int labId)
     {
         var data = await _energyUsageDomainService.GetLabEnergyBenchmark(labId);
-        return _mapper.Map<Lab, EnergyBenchmarkViewModel>(data);
+        return _mapper.Map<LabDetailsDTO, EnergyBenchmarkViewModel>(data);
     }
 
     public Task SetLabEnergyBenchmark(EnergyBenchmarkViewModel benchmark)
     {
         var lab = _mapper.Map<EnergyBenchmarkViewModel, Lab>(benchmark);
         return _energyUsageDomainService.SetLabEnergyBenchmark(lab);
+    }
+
+    public Task<List<LabInformationModel>?> GetAllLabs()
+    {
+        return _labProfileService.GetAllLabAccounts();
     }
 }

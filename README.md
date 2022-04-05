@@ -20,10 +20,14 @@ Refer to WORKFLOW.md for instructions on the development flow.
 
 ## Updates to DB 
 ### Migrations
-`dotnet ef migrations add CreateInitialDB -s LivingLab.Web -p LivingLab.Infrastructure`
+```
+dotnet ef migrations add CreateInitialDB -s LivingLab.Web -p LivingLab.Infrastructure
+```
 
 ### Populating / Update Values
-`dotnet ef database update -s LivingLab.Web -p LivingLab.Infrastructure`
+```
+dotnet ef database update -s LivingLab.Web -p LivingLab.Infrastructure
+```
 
 ## Structure
 Items that belongs to each layer:
@@ -82,7 +86,7 @@ It's "safe" to ignore warnings on startup about nullables. These are scaffolded 
 Alternatively, run the web app and let dotnet run migrations automatically. If you encounter an exception page, click on "Run migrations" and refresh.
 
 #### Clean state
-- Remove `livinglab.sqlite`, rerun migrations.
+Remove `livinglab.sqlite`, rerun migrations.
 
 ## Github ID
 ### P1-01 Student ID & Name & Github ID

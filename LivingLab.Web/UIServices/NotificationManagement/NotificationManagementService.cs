@@ -1,5 +1,9 @@
+using LivingLab.Core.DomainServices.Notifications;
 using LivingLab.Core.Entities.Identity;
-using LivingLab.Core.Interfaces.Services;
+using LivingLab.Core.Enums;
+using LivingLab.Core.Notifications;
+
+using Microsoft.AspNetCore.Identity.UI.Services;
 
 using Twilio;
 using Twilio.Rest.Api.V2010.Account;
@@ -14,44 +18,33 @@ public class NotificationManagementService : INotificationManagementService
 {
     private readonly INotificationDomainService _notificationDomainService;
     private readonly ILogger<NotificationManagementService> _logger;
+    private readonly IEmailNotifier _emailNotifier;
+    private readonly ISmsNotifier _smsNotifier;
     private readonly IConfiguration _config;
-    private readonly IEmailSender _emailSender;
-
     
-    public NotificationManagementService(IEmailSender emailSender, IConfiguration config, INotificationDomainService notificationDomainService, ILogger<NotificationManagementService> logger)
+    public NotificationManagementService(IEmailNotifier emailNotifier, ISmsNotifier smsNotifier,IConfiguration config, INotificationDomainService notificationDomainService, ILogger<NotificationManagementService> logger)
     {
         _notificationDomainService = notificationDomainService;
         _logger = logger;
         _config = config;
-        _emailSender = emailSender;
+        _emailNotifier = emailNotifier;
+        _smsNotifier = smsNotifier;
     }
     
-    public Task SetNotificationPref()
+    public Task SetNotificationPref(ApplicationUser currentUser, NotificationType preference)
     {
-        return _notificationDomainService.SetNotificationPref();
+        return _notificationDomainService.SetNotificationPref(currentUser, preference);
     }
 
-    /*Send a normal SMS to the user*/
     public async Task SendTextToPhone(string phone, string msgBody)
     {
-        // Find your Account SID and Auth Token at twilio.com/console
-        // and set the environment variables. See http://twil.io/secure
-        string accountSid = _config["TWILIO_ACC_ID"];
-        string authToken = _config["TWILIO_AUTH_ID"];
-
-        TwilioClient.Init(accountSid, authToken);
-
-        var messageOptions = new CreateMessageOptions(new PhoneNumber(phone));   
-        messageOptions.MessagingServiceSid = "MG7d7cd6b53ca04365964a61a99448d3e0";  
-        messageOptions.Body = msgBody;   
- 
-        var message = MessageResource.Create(messageOptions); 
-        Console.WriteLine(message.Body);
+        await _smsNotifier.SendSmsAsync(phone, msgBody);
+        
     }
-
+    
     /*Send Email to an address, details are defined in the domain services*/
-    public async Task SendTextToEmail(string email, string msgTitle, string msgBody)
+    public async Task SendTextToEmail(string email, string title, string message)
     {
-        await _emailSender.SendEmailAsync(email, msgTitle, msgBody);
+        await _emailNotifier.SendEmailAsync(email, title, htmlMessage: message);
     }
 }

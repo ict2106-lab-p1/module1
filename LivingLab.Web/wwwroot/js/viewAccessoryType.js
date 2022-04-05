@@ -1,26 +1,35 @@
 /* <remarks>*/
 /* Author: Team P1-3*/
 /* </remarks>*/
-$(document).ready(function () {
+$(document).ready(function() {
 
     //Add Overlay
-    const overlay = document.querySelector('#overlay')
     const viewMoreBtns = document.querySelectorAll('#viewMoreBtn')
-    const toggleModal = () => {
-        console.log('click')
-        overlay.classList.toggle('hidden')
-        overlay.classList.toggle('flex')
-    }
 
-    $(document).on('click', '#close-modal', function() {
-        toggleModal()
+    const addOverlay = document.querySelector("#addOverlay");
+    const toggleAddModal = () => {
+        addOverlay.classList.toggle("hidden");
+        addOverlay.classList.toggle("flex");
+    };
+
+    $("#addAccessoryModalBtn").click(function() {
+        fillAddModal(this);
+        toggleAddModal();
     });
-    $(document).on('click', '#addAccessoryBtn', function() {
-        clickAdd(this)
-        toggleModal()
+    $(".closeAddModal").click(function() {
+        toggleAddModal();
     });
-    $(document).on('click', "#cancelBtn", function() {
-        toggleModal()
+
+    /***
+     * Display new type input when user choose others
+     */
+    $("#addAccessoryType").change(function() {
+        const selectedValue = jQuery(this).val();
+        if (selectedValue === "Others") {
+            $("#forNewType").removeClass("hidden");
+        } else {
+            $("#forNewType").addClass("hidden");
+        }
     });
 
     const viewwMoreEventHandler = () => {
@@ -32,38 +41,30 @@ $(document).ready(function () {
             document.postAccessoryType.submit();
     }
     viewMoreBtns.forEach(btn => btn.addEventListener('click', viewwMoreEventHandler))
-    $('#accessoryType').change(function () {
-        console.log('click')
-        var selectedValue = jQuery(this).val()
-        if (selectedValue === "Others") {
-            $("#forNewType").removeClass('hidden')
-        } else {
-            $("#forNewType").addClass('hidden')
-        }
-    })
 
+    // Misc Alerts
+    $("#addForm").submit(function() {
+        alert("Accessory added successfully and is pending approval!");
+    });
 });
 
-function clickAdd(e) {
-    $.get('/Accessory/AddAccessoryDetails',
-        function (data) {
-            console.log("Hello!?")
-            console.log(data)
-            document.getElementById("accessoryId").value = data.accessory.id + 1
-            var accessoryTypeDDL = document.getElementById("accessoryType")
-            if (accessoryTypeDDL.length === 0) {
-                for (var i = 0; i < data.accessoryTypes.length; i++) {
-                    var element = document.createElement("option")
-                    element.textContent = data.accessoryTypes[i].type
-                    element.value = data.accessoryTypes[i].id
-                    accessoryTypeDDL.appendChild(element)
-                }
-                var last = document.createElement("option")
-                last.textContent = "Others"
-                last.value = "Others"
-                accessoryTypeDDL.appendChild(last)
+function fillAddModal(e) {
+    $.get("/Accessory/AddAccessoryDetails", function(data) {
+        document.getElementById("accessoryId").value = data.accessory.id + 1;
+        var accessoryTypeDDL = document.getElementById("addAccessoryType");
+        if (accessoryTypeDDL.length === 0) {
+            for (var i = 0; i < data.accessoryTypes.length; i++) {
+                var element = document.createElement("option");
+                element.textContent = data.accessoryTypes[i].type;
+                element.value = data.accessoryTypes[i].id;
+                accessoryTypeDDL.appendChild(element);
             }
-            document.getElementById("labId").value = data.accessory.lab.labId
-            document.getElementById("labLocation").value = data.accessory.lab.labLocation
-        })
+            var last = document.createElement("option");
+            last.textContent = "Others";
+            last.value = "Others";
+            accessoryTypeDDL.appendChild(last);
+        }
+        document.getElementById("labId").value = data.accessory.labId
+        document.getElementById("labLocation").value = data.accessory.lab.labLocation
+    });
 }

@@ -23,9 +23,7 @@ $(document).ready(function() {
             {
                 targets: -2,
                 data: null,
-                defaultContent: '<button class=\'hover:bg-sunset-400 font-large rounded-lg text-sm px-5 py-2.5\'><svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">\n' +
-                    '  <path d="M13.586 3.586a2 2 0 112.828 2.828l-.793.793-2.828-2.828.793-.793zM11.379 5.793L3 14.172V17h2.828l8.38-8.379-2.83-2.828z" />\n' +
-                    "</svg></button>",
+                defaultContent: '<button class=\'hover:bg-sunset-400 font-large rounded-lg text-sm px-5 py-2.5\'><svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor"><path d="M13.586 3.586a2 2 0 112.828 2.828l-.793.793-2.828-2.828.793-.793zM11.379 5.793L3 14.172V17h2.828l8.38-8.379-2.83-2.828z" /></svg></button>',
                 //"defaultContent": "<button class='text-white bg-gradient-to-br from-purple-600 to-blue-500 hover:bg-gradient-to-bl focus:ring-4 focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2'>Edit</i></button>"
             },
             {
@@ -41,29 +39,25 @@ $(document).ready(function() {
     });
 
     //Add Overlay
-    const overlay = document.querySelector("#overlay");
-    const addBtn = document.querySelector("#addAccessoryBtn");
-    const closeBtn = document.querySelector("#close-modal");
-    const toggleModal = () => {
-        console.log("click");
-        overlay.classList.toggle("hidden");
-        overlay.classList.toggle("flex");
+    const addOverlay = document.querySelector("#addOverlay");
+    const toggleAddModal = () => {
+        addOverlay.classList.toggle("hidden");
+        addOverlay.classList.toggle("flex");
     };
 
-    $(document).on("click", "#close-modal", function() {
-        toggleModal();
+    $("#addAccessoryModalBtn").click(function() {
+        fillAddModal(this);
+        toggleAddModal();
     });
-    $(document).on("click", "#addAccessoryBtn", function() {
-        clickAdd(this);
-        toggleModal();
+    $(".closeAddModal").click(function() {
+        toggleAddModal();
     });
-    $(document).on("click", "#cancelBtn", function() {
-        toggleModal();
-    });
-
-    $("#accessoryType").change(function() {
-        console.log("click");
-        var selectedValue = jQuery(this).val();
+    
+    /***
+     * Display new type input when user choose others
+     */
+    $("#addAccessoryType").change(function() {
+        const selectedValue = jQuery(this).val();
         if (selectedValue === "Others") {
             $("#forNewType").removeClass("hidden");
         } else {
@@ -77,17 +71,13 @@ $(document).ready(function() {
         editOverlay.classList.toggle("hidden");
         editOverlay.classList.toggle("flex");
     };
-    $(document).on("click", ".closeEditModal", function() {
+    $(".editAccessoryBtn").click(function() {
+        fillEditModal(this);
         toggleEditModal();
     });
-    $(document).on("click", ".cancelEditBtn", function() {
+    $(".closeEditModal").click(function() {
         toggleEditModal();
     });
-    $(document).on("click", ".editAccessoryBtn", function() {
-        clickEdit(this);
-        toggleEditModal();
-    });
-
 
     // Delete Overlay
     const deleteOverlay = document.querySelector("#deleteOverlay");
@@ -95,19 +85,41 @@ $(document).ready(function() {
         deleteOverlay.classList.toggle("hidden");
         deleteOverlay.classList.toggle("flex");
     };
-    $(document).on("click", ".closeDeleteModal", function() {
+    $(".deleteAccessoryBtn").click(function() {
+        fillDeleteModal(this);
         toggleDeleteModal();
     });
-    $(document).on("click", ".deleteAccessoryBtn", function() {
-        clickDelete(this);
+    $(".closeDeleteModal").click(function() {
         toggleDeleteModal();
     });
+
+    $("#del-cfm").on("input", function() {
+        if (this.value === $("#accessory-name").text()) {
+            $("#delBtn").removeClass("disabled");
+        } else {
+            $("#delBtn").addClass("disabled");
+        }
+    });
+
+    // Misc Alerts
+    $("#addForm").submit(function() {
+        alert("Accessory added successfully and is pending approval!");
+    });
+
+    $("#editForm").submit(function() {
+        alert("Accessory edited successfully!");
+    });
+
+    $("#delForm").submit(function() {
+        alert("Accessory deleted successfully!");
+    });
+
 });
 
-function clickAdd(e) {
+function fillAddModal(e) {
     $.get("/Accessory/AddAccessoryDetails", function(data) {
         document.getElementById("accessoryId").value = data.accessory.id + 1;
-        var accessoryTypeDDL = document.getElementById("accessoryType");
+        var accessoryTypeDDL = document.getElementById("addAccessoryType");
         if (accessoryTypeDDL.length === 0) {
             for (var i = 0; i < data.accessoryTypes.length; i++) {
                 var element = document.createElement("option");
@@ -120,12 +132,12 @@ function clickAdd(e) {
             last.value = "Others";
             accessoryTypeDDL.appendChild(last);
         }
-        document.getElementById("labId").value = data.accessory.labId
-        document.getElementById("labLocation").value = data.accessory.lab.labLocation
+        // document.getElementById("labId").value = data.accessory.labId
+        // document.getElementById("labLocation").value = data.accessory.lab.labLocation
     });
 }
 
-function clickEdit(e) {
+function fillEditModal(e) {
     $.get(
         "/Accessory/GetEditDetails/" + e.getAttribute("data-id"), // url
         function(data, textStatus, jqXHR) {
@@ -134,6 +146,7 @@ function clickEdit(e) {
             document.getElementById("editAccessoryId").value = data.accessory.id;
             document.getElementById("AccessoryId").value = data.accessory.id;
             var accessoryTypeDDL = document.getElementById("editAccessoryType");
+            // populate accessoryType ddl
             if (accessoryTypeDDL.length === 0) {
                 // populate the dropdown list
                 for (var i = 0; i < data.accessoryTypes.length; i++) {
@@ -150,6 +163,17 @@ function clickEdit(e) {
                     option.selected = true;
                 }
             }
+            //populate borrowers ddl
+            var borrowerDDL = document.getElementById("editLabUser");
+            if (borrowerDDL.length === 0) {
+                // populate the dropdown list
+                for (var i = 0; i < data.userList.length; i++) {
+                    var element = document.createElement("option");
+                    element.textContent = data.userList[i].firstName + " " + data.userList[i].lastName;
+                    element.value = data.userList[i].id;
+                    borrowerDDL.appendChild(element);
+                }
+            }
             document.getElementById("AccessoryType").value =
                 accessoryTypeDDL.options[accessoryTypeDDL.selectedIndex].textContent;
             document.getElementById("editAccessoryName").value =
@@ -160,11 +184,22 @@ function clickEdit(e) {
             document.getElementById("editDueDate").value = data.accessory.dueDate;
             document.getElementById("editLabUser").value = data.accessory.labUserId;
             document.getElementById("editLabLocation").value = data.accessory.lab.labLocation
+            if (data.accessory.accessoryType.borrowable == false) {
+                document.getElementById("editDueDate").disabled = true;
+                document.getElementById("editLabUser").disabled = true;
+                document.getElementById("editDueDate").classList.add("bg-gray-100");
+                document.getElementById("editLabUser").classList.add("bg-gray-100");
+            } else {
+                document.getElementById("editDueDate").disabled = false;
+                document.getElementById("editLabUser").disabled = false;
+                document.getElementById("editDueDate").classList.remove("bg-gray-100");
+                document.getElementById("editLabUser").classList.remove("bg-gray-100");
+            }
         }
     );
 }
 
-function clickDelete(e) {
+function fillDeleteModal(e) {
     $.get(
         "/Accessory/GetDeleteDetails/" + e.getAttribute("data-id"), // url
         function(data, textStatus, jqXHR) {
@@ -183,11 +218,3 @@ function clickDelete(e) {
         }
     );
 }
-$("#del-cfm").on("input", function() {
-    console.log($("#del-cfm").val);
-    if (this.value === $("#accessory-name").text()) {
-        $("#delBtn").removeClass("disabled");
-    } else {
-        $("#delBtn").addClass("disabled");
-    }
-});

@@ -1,10 +1,14 @@
-@model LivingLab.Web.Models.ViewModels.LabProfile.LabProfileViewModel
+@using LivingLab.Core.Entities.Identity
+@using Microsoft.AspNetCore.Identity
+@model LivingLab.Web.Models.ViewModels.LabProfile.LabRegisterViewModel
+@inject UserManager<ApplicationUser> UserManager
+
 @* /// <remarks> *@
 @* /// Author: Team P1-5 *@
 @{
     ViewData["Title"] = "Lab Register";
+    var listofusers = await UserManager.GetUsersInRoleAsync("labtech");
 }
-
 <div class="row">
     <div class="col-md-4">
         <form id="registerLab" method="post" asp-controller="LabProfile" asp-action="LabRegister">
@@ -21,11 +25,17 @@
                         <label asp-for="LabLocation" class="font-semibold">Lab Location</label>
                     </p> <input asp-for="LabLocation" type="text" placeholder="Enter Lab Location" class="input input-bordered w-full max-w-xs">
                 </div>
-                @* <div class="form-floating"> *@
-                @*     <label asp-for="LabLocation"></label> *@
-                @*     <input asp-for="LabLocation" class="form-control" aria-required="true"/> *@
-                @*     <span asp-validation-for="LabLocation" class="text-danger"></span> *@
-                @* </div> *@
+                <div class="mt-6">
+                    <p>
+                        <label asp-for="LabInCharge" class="font-semibold">Lab In-Charge</label>
+                    </p>
+                    <select class="select select-bordered w-full max-w-xs" aria-required="true" asp-for="LabInCharge">
+                        @foreach (var user in @listofusers)
+                        {
+                            <option value="@user.Id">@user.FirstName</option>
+                        }
+                    </select>
+                </div>
                 <div class="mt-6">
                     <p>
                         <label asp-for="LabStatus" class="font-semibold">Lab Status</label>
@@ -33,14 +43,9 @@
                     <select class="select select-bordered w-full max-w-xs" name="faculty" asp-for="LabStatus">
                         <option disabled selected>Select Lab Status</option>
                         <option value="Available">Available</option>
-                        <option value="Semi-Occupied">Semi-Occupied</option>
-                        <option value="Occupied">Occupied</option>
+                        <option value="Not Available">Not Available</option>
+                        <option value="Under Construction">Under Construction</option>
                     </select>
-                </div>
-                <div class="mt-6">
-                    <p>
-                        <label asp-for="LabInCharge" class="font-semibold">Lab In-Charge</label>
-                    </p> <input asp-for="LabInCharge" type="text" placeholder="Enter Lab In-Charge" class="input input-bordered w-full max-w-xs">
                 </div>
                 <div class="mt-6">
                     <p>
@@ -57,38 +62,11 @@
                         <label asp-for="EnergyUsageBenchmark" class="font-semibold">Energy Usage Benchmark</label>
                     </p> <input asp-for="EnergyUsageBenchmark" type="text" placeholder="Enter Energy Usage" class="input input-bordered w-full max-w-xs">
                 </div>
-                <div class="mt-4 mb-4">
-                    <p>
-                        <span asp-validation-for="LabLocation" class="text-sm text-red-500"></span>
-                    </p>
-                    <p>
-                        <span asp-validation-for="LabStatus" class="text-sm text-red-500"></span>
-                    </p>
-                    <p>
-                        <span asp-validation-for="LabInCharge" class="text-sm text-red-500"></span>
-                    </p>
-                    <p>
-                        <span asp-validation-for="Capacity" class="text-sm text-red-500"></span>
-                    </p>
-                    <p>
-                        <span asp-validation-for="Area" class="text-sm text-red-500"></span>
-                    </p>
-                    <p>
-                        <span asp-validation-for="EnergyUsageBenchmark" class="text-sm text-red-500"></span>
-                    </p>
-
-                    <p>
-                    </p>
-                </div>
             </div>
-       
-                <div class="flex justify-center">
-                            <button id="labsubmit" type="submit" class="btn  w-6/12">Create Lab</button>
-                        </div>
+            <div class="flex justify-center">
+                <button id="registersubmit" type="submit" class="btn  w-6/12">Create Lab</button>
+            </div>
         </form>
     </div>
     
 </div>
-@section Scripts {
-    <partial name="_ValidationScriptsPartial" />
-}

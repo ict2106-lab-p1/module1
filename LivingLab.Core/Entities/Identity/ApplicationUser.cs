@@ -1,5 +1,7 @@
 using System.ComponentModel.DataAnnotations;
 
+using LivingLab.Core.Enums;
+
 using Microsoft.AspNetCore.Identity;
 
 namespace LivingLab.Core.Entities.Identity;
@@ -15,6 +17,7 @@ public class ApplicationUser : IdentityUser
     // so they have been made private
     private List<EmailLog> NotificationEmails { get; set; } = new List<EmailLog>();
     private List<SmsLog> NotificationSmses { get; set; } = new List<SmsLog>();
+    public NotificationType PreferredNotification { get; set; }
     public string? AuthenticationType { get; set; }
     public int? OTP { get; set; }
     [DataType(DataType.DateTime)]
