@@ -61,14 +61,6 @@ public class LabProfileRepository : Repository<Core.Entities.Lab>, ILabProfileRe
             )
             .ToListAsync();
     }
-    
-    public Task<List<Core.Entities.Lab>> GetAllLabLocation()
-    {
-        return IncludeReferences(
-                _context.Labs
-            )
-            .ToListAsync();
-    }
 
     // public async Task<Lab> EditUserDetail(Lab editUser)
     // {
