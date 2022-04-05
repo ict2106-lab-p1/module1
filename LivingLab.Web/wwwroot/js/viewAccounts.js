@@ -30,8 +30,8 @@ $(document).ready(function () {
             function (data, textStatus, jqXHR) {  // success 
                 document.getElementById("user-id").value = data.id
                 document.getElementById("user-email").value = data.email
-                // document.getElementById("user-faculty").value = data.faculty
-                // document.getElementById("user-lab-access").value = data.LabAccess
+                document.getElementById("user-faculty").value = data.faculty
+                document.getElementById("user-lab-access").value = data.LabAccess
             });
     }
     function clickDelete(e) {
