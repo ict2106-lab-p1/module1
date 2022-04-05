@@ -1,5 +1,7 @@
 namespace LivingLab.Web.Models.ViewModels.Accessory;
-
+/// <remarks>
+/// Author: Team P1-3
+/// </remarks>
 public class AccessoryTypeViewModel
 {
     public int Id { get; set; }

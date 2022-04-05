@@ -6,7 +6,9 @@ using LivingLab.Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 
 namespace LivingLab.Infrastructure.Repositories.Equipment;
-
+/// <remarks>
+/// Author: Team P1-3
+/// </remarks>
 public class AccessoryRepository : Repository<Accessory>, IAccessoryRepository
 {
     private readonly ApplicationDbContext _context;
@@ -54,7 +56,7 @@ public class AccessoryRepository : Repository<Accessory>, IAccessoryRepository
         List<Accessory> accessories = await _context.Accessories
             .Include(l=>l.Lab)
             .Include(a => a.AccessoryType)
-            .Where(t => accessoryType.Contains(t.AccessoryType!.Type) && t.Lab!.LabLocation==labLocation)
+            .Where(t => accessoryType.Contains(t.AccessoryType!.Type) && t.Lab!.LabLocation==labLocation && t.ReviewStatus!.Equals("Approved"))
             .ToListAsync();
         return accessories;
     }
@@ -71,7 +73,7 @@ public class AccessoryRepository : Repository<Accessory>, IAccessoryRepository
         var accessoryGroup = await _context.Accessories
             .Include(l=>l.Lab)
             .Include(a => a.AccessoryType)
-            .Where(l => l.Lab!.LabLocation == labLocation)
+            .Where(l => l.Lab!.LabLocation == labLocation && l.ReviewStatus!.Equals("Approved"))
             .GroupBy(t => t.AccessoryType!.Type)
             .Select(t => new { Key = t.Key, Count = t.Count() })
             .ToListAsync();

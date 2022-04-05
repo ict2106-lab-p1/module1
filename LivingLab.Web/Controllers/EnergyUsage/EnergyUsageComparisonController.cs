@@ -1,22 +1,19 @@
-using System.Diagnostics;
-
-using Microsoft.AspNetCore.Mvc;
-
-using LivingLab.Core.Entities;
-using LivingLab.Web.Models.ViewModels;
-using LivingLab.Web.UIServices.EnergyUsage;
 using System.Data;
+using System.Diagnostics;
 using System.Text.RegularExpressions;
 
 using LivingLab.Core.Entities.DTO.EnergyUsage;
+using LivingLab.Web.Models.ViewModels;
+using LivingLab.Web.UIServices.EnergyUsage;
 
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 
-namespace LivingLab.Web.Controllers;
+namespace LivingLab.Web.Controllers.EnergyUsage;
 /// <remarks>
 /// Author: Team P1-2
 /// </remarks>
-[Authorize(Roles = "Admin")]
+[Authorize(Roles = "Labtech")]
 public class EnergyUsageComparisonController : Controller
 {
     private readonly ILogger<EnergyUsageComparisonController> _logger;

@@ -1,6 +1,6 @@
 using AutoMapper;
 
-using LivingLab.Core.DomainServices.EnergyLog;
+using LivingLab.Core.DomainServices.EnergyLog.ManualLog;
 using LivingLab.Core.Entities;
 using LivingLab.Core.Entities.DTO.EnergyUsage;
 using LivingLab.Web.Models.ViewModels.EnergyUsage;

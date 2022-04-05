@@ -49,13 +49,13 @@ public class EnergyUsageComparisonService : IEnergyUsageComparisonService
 
         LabEUCost = _calculator.CalculateEnergyUsageCost(cost, LabEU);
         energyIntensity = _calculator.CalculateEnergyIntensity(LabArea, LabEU);
-
+        Console.WriteLine("eu = "+LabEU + " cost = "+LabEUCost);
 
         LabEUList.Add(new EnergyComparisonLabTableDTO
         {
             LabLocation = labName,
             TotalEnergyUsage = Math.Round((double)LabEU / 1000, 2),
-            EnergyUsageCost = Math.Round((double)LabEUCost / 1000, 2),
+            EnergyUsageCost = LabEUCost,
             EnergyUsageIntensity = Math.Round((double)energyIntensity / 1000, 2)
         });
 
@@ -135,7 +135,7 @@ public class EnergyUsageComparisonService : IEnergyUsageComparisonService
         {
             DeviceType = deviceType,
             TotalEnergyUsage = Math.Round((double)DeviceEU / 1000, 2),
-            EnergyUsageCost = Math.Round((double)DeviceEUCost / 1000, 2)
+            EnergyUsageCost = DeviceEUCost
         }) ;
         Console.WriteLine(DeviceEUList[0].TotalEnergyUsage);
 

@@ -1,13 +1,14 @@
 using System.Diagnostics;
 
-using LivingLab.Core.Entities;
-
-using Microsoft.AspNetCore.Mvc;
+using LivingLab.Core.Entities.Identity;
 using LivingLab.Web.Models.ViewModels;
 using LivingLab.Web.Models.ViewModels.Device;
 using LivingLab.Web.UIServices.Device;
 
-namespace LivingLab.Web.Controllers;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
+
+namespace LivingLab.Web.Controllers.Equipment;
 /// <remarks>
 /// Author: Team P1-3
 /// </remarks>
@@ -16,10 +17,12 @@ public class DeviceController : Controller
 {
     private readonly ILogger<DeviceController> _logger;
     private readonly IDeviceService _deviceService;
-    public DeviceController(ILogger<DeviceController> logger, IDeviceService deviceService)
+    private readonly UserManager<ApplicationUser> _userManager;
+    public DeviceController(ILogger<DeviceController> logger, IDeviceService deviceService, UserManager<ApplicationUser> userManager)
     {
         _logger = logger;
         _deviceService = deviceService;
+        _userManager = userManager;
     }
 
     [Route("ViewType/{labLocation}")]
@@ -79,7 +82,8 @@ public class DeviceController : Controller
         string scheme = this.Request.Scheme;
         string host = this.Request.Host.ToString();
         string url = scheme + "://" + host;
-        await _deviceService.SendReviewerEmail(url, addedDevice.Device.Lab.LabLocation);
+        var user = await _userManager.GetUserAsync(User);
+        await _deviceService.SendReviewerEmail(url, addedDevice.Device.Lab.LabLocation, user);
         
         return Redirect($"ViewType/{addedDevice.Device.Lab.LabLocation}");
     }

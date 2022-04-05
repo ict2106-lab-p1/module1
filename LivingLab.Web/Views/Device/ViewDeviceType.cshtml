@@ -1,8 +1,8 @@
-﻿@using LivingLab.Web.Models.ViewModels.Device
-@model LivingLab.Web.Models.ViewModels.Device.ViewDeviceTypeViewModel
-@*  <remarks> *@
+﻿@* <remarks> *@
 @*  Author: Team P1-3 *@
 @*  </remarks> *@
+@using LivingLab.Web.Models.ViewModels.Device
+@model LivingLab.Web.Models.ViewModels.Device.ViewDeviceTypeViewModel
 @{
     ViewData["Title"] = "Manage Device";
 }
@@ -15,7 +15,7 @@
         <h1 class="text-2xl"> Manage Devices</h1>
     </div>
     <div class="justify-self-end">
-        <button id="addDeviceBtn" class="btn btn-primary font-bold rounded">
+        <button id="addDeviceModalBtn" class="btn btn-primary font-bold rounded">
             Add device
         </button>
     </div>
@@ -87,11 +87,16 @@
             <p class="text-md-start">@Model.labLocation </p>
         </div>
         <div class="mt-4">
-            <form class="w-full max-w-lg" method="post" enctype="multipart/form-data" asp-controller="Device" asp-action="AddDevice">
+            <form class="w-full max-w-lg" method="post" enctype="multipart/form-data" asp-controller="Device" asp-action="AddDevice" id="addForm">
                 <input type="hidden" id="add-labLocation" name="Device.Lab.LabLocation" value="@Model.labLocation"/>
                 @{
                     @await Html.PartialAsync("_AddDevice", new AddDeviceViewModel());
                 }
+                <div class="mt-3 flex justify-end space-x-3">
+                    <button class="btn btn-primary" type="submit">
+                        Add device
+                    </button>
+                </div>
             </form>
         </div>
     </div>

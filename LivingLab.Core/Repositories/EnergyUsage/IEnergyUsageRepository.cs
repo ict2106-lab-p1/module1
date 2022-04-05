@@ -8,22 +8,11 @@ namespace LivingLab.Core.Repositories.EnergyUsage;
 /// </remarks>
 public interface IEnergyUsageRepository : IRepository<EnergyUsageLog>
 {
-    Task<List<EnergyUsageLog>> GetUsageByDeviceId(int id);
-    Task<List<EnergyUsageLog>> GetUsageByDeviceType(string deviceType);
-    Task<List<EnergyUsageLog>> GetUsageByLabId(int id);
-    /// <summary>Retrives all logs manually uploaded by user with userId</summary>
-    /// <remarks>if userId is null, retrieves logs manually uploaded by any user</remarks>
-    Task<List<EnergyUsageLog>> GetUsageByUser(ApplicationUser? user);
     Task BulkInsertAsync(ICollection<EnergyUsageLog> logs);
-    Task BulkInsertAsyncByUser(ICollection<EnergyUsageLog> logs, ApplicationUser loggedBy);
     Task<List<EnergyUsageLog>> GetDeviceEnergyUsageByDateTime(DateTime start, DateTime end);
     Task<List<EnergyUsageLog>> GetDeviceEnergyUsageByDeviceTypeAndDate(string deviceType, DateTime start, DateTime end);
     Task<List<EnergyUsageLog>> GetDeviceEnergyUsageByLabAndDate(int labId, DateTime? start, DateTime? end);
-    Task<List<EnergyUsageLog>> GetDistinctDeviceEnergyUsage();
-    Task<List<EnergyUsageLog>> GetDistinctLabEnergyUsage();
-    Task<List<EnergyUsageLog>> GetAllDeviceByLab();
     Task<List<EnergyUsageLog>> GetLabEnergyUsageByLocationAndDate(string labLocation, DateTime? start, DateTime? end);
     Task<List<EnergyUsageLog>> GetLabEnergyUsageByDate(DateTime? start, DateTime? end);
     Task<List<EnergyUsageLog>> GetLabEnergyUsageByLabNameAndDate(string labName, DateTime start, DateTime end);
-   
 }

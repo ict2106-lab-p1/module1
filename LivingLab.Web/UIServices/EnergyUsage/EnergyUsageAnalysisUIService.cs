@@ -35,35 +35,11 @@ public class EnergyUsageAnalysisUIService : IEnergyUsageAnalysisUIService
     {
         return _analysis.GetLabEnergyUsageByDate(start,end);
     }
-    // joey
-    // may nee to change to ENergyUsageFilterDto
-    // public List<TopSevenLabEnergyUsageDTO> GetTopSevenLabEnergyUsage(DateTime start, DateTime end)
-    // {
-    //     throw new NotImplementedException();
-    // }
-    // public List<MonthlyEnergyUsageDTO> GetEnergyUsageTrendAllLab(DateTime start, DateTime end)
-    // {
-    //     throw new NotImplementedException();
-    // }
-    // public List<IndividualLabMonthlyEnergyUsageDTO> GetEnergyUsageTrendSelectedLab(DateTime start, DateTime end, int labId)
-    // {
-    //     throw new NotImplementedException();
-    // }
-    
     public async Task<TopSevenLabEnergyUsageDTO> GetTopSevenLabEnergyUsage(DateTime start, DateTime end)
     {
         throw new NotImplementedException();
     }
-
-    public Task<MonthlyEnergyUsageDTO> GetEnergyUsageTrendAllLab(DateTime start, DateTime end)
-    {
-        throw new NotImplementedException();
-    }
-
-    public async Task<EnergyUsageTrendAllLabViewModel> GetEnergyUsageTrendAllLab(EnergyUsageFilterViewModel filter, int labId)
-    {
-        throw new NotImplementedException();
-    }
+    
     public async Task<EnergyUsageTrendSelectedLabViewModel> GetEnergyUsageTrendSelectedLab(EnergyUsageFilterViewModel filter)
     {
         var energyUsageFilter = _mapper.Map<EnergyUsageFilterViewModel, EnergyUsageFilterDTO>(filter);
@@ -79,8 +55,7 @@ public class EnergyUsageAnalysisUIService : IEnergyUsageAnalysisUIService
         return _mapper.Map<MonthlyEnergyUsageDTO, EnergyUsageTrendAllLabViewModel>(logs);
 
     }
-    
-    // JOEY ADDED
+
     public async Task<EnergyBenchmarkViewModel> GetLabEnergyBenchmark(int labId)
     {
         var data = await _analysis.GetLabEnergyBenchmark(labId);
@@ -93,7 +68,6 @@ public class EnergyUsageAnalysisUIService : IEnergyUsageAnalysisUIService
     }
 
     // weijie
-    // not sure what will be your DTO looks like may have to create in LivingLab.Core.Entities.DTO.EnergyUsageDTOs;
     public List<DeviceInLabDTO> GetEnergyUsageLabDistribution(DateTime start, DateTime end, string deviceType)
     {
         throw new NotImplementedException();

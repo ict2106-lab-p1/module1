@@ -6,6 +6,7 @@ namespace LivingLab.Core.Entities.DTO.EnergyUsage;
 public class EnergyUsageCsvDTO
 {
     public string LabLocation { get; set; }
+    
     public string? DeviceType { get; set; }
 
     public string? DeviceSerialNo { get; set; }

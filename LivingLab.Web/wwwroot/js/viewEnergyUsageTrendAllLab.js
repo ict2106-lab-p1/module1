@@ -147,7 +147,6 @@ async function getDataAllEnergyUsageTrend(start = null, end = null) {
 
     try {
         return await $.ajax({
-            // url: "/EnergyUsage/GetLabUsage",
             url: "/EnergyUsageAnalysis/ViewUsage",
             type: "POST",
             data: JSON.stringify(data),

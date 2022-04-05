@@ -1,4 +1,4 @@
-namespace LivingLab.Web.Models.ViewModels;
+namespace LivingLab.Web.Models.ViewModels.LabProfile;
 
 public class LabViewModel
 {

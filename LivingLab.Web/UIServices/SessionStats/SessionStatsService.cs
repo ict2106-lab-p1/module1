@@ -6,7 +6,9 @@ using LivingLab.Core.DomainServices.Account.Session;
 using LivingLab.Web.Models.ViewModels.SessionStats;
 
 namespace LivingLab.Web.UIServices.SessionStats;
-
+/// <remarks>
+/// Author: Team P1-3
+/// </remarks>
 public class SessionStatsService : ISessionStatsService
 {
     private readonly  IMapper _mapper;

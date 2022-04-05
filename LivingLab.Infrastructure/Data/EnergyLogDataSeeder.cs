@@ -13,11 +13,13 @@ public static class EnergyLogDataSeeder
     {
         var logs = new List<EnergyUsageLog>();
         var logId = 1;
+        var now = DateTime.Now;
+        var random = new Random();
 
         for (var labId = 1; labId <= 3; labId++)
         {
-            var startDate = DateTime.Now.AddDays(-30);
-            var endDate = DateTime.Now;
+            var startDate = now.AddDays(-30).Date + new TimeSpan(0, 0, 0);
+            var endDate = now.Date + new TimeSpan(23, 59, 59);
 
             var current = startDate;
             
@@ -28,7 +30,7 @@ public static class EnergyLogDataSeeder
                     Id = logId++,
                     DeviceId = 1,
                     LabId = labId,
-                    EnergyUsage = GetRandomUsage(current),
+                    EnergyUsage = GetRandomUsage(random, current),
                     Interval = TimeSpan.FromMinutes(10),
                     LoggedDate = current
                 });
@@ -41,15 +43,15 @@ public static class EnergyLogDataSeeder
     /// <summary>
     /// Generate a random number.
     ///
-    /// 700 to 1000 if peak hour
-    /// 400 to 699 if non peak hour
+    /// 900 to 1000 if peak hour
+    /// 600 to 699 if non peak hour
     /// </summary>
+    /// <param name="random">random instance</param>
     /// <param name="time">current time</param>
     /// <returns>randomly generated number</returns>
-    private static double GetRandomUsage(DateTime time)
+    private static double GetRandomUsage(Random random, DateTime time)
     {
-        var random = new Random();
-        var min = IsPeak(time.Hour) ? 700 : 400;
+        var min = IsPeak(time.Hour) ? 900 : 600;
         var max = IsPeak(time.Hour) ? 1000 : 699;
         return random.Next(min, max);
     }

@@ -17,11 +17,9 @@ public static class ConfigureWebServices
 {
     public static IServiceCollection AddWebServices(this IServiceCollection services)
     {
-
         services.AddEnergyMonitoringServices();
         services.AddManagementServices();
         services.AddTransient<IManualLogService, ManualLogService>();
-        // services.AddTransient<IExportToCSVService, ExportToCSVService>();
         services.AddTransient<IDeviceService, DeviceService>();
         services.AddTransient<IAccessoryService, AccessoryService>();
         services.AddTransient<IUserManagementService, UserManagementService>();

@@ -79,7 +79,7 @@ function getBenchmark(data) {
  */
 async function getData(labId = 1) {
     const data = {
-        labId: labId,
+        LabId: labId,
     }
     try {
         return await $.ajax({

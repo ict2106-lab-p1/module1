@@ -6,7 +6,9 @@ using LivingLab.Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 
 namespace LivingLab.Infrastructure.Repositories.Equipment;
-
+/// <remarks>
+/// Author: Team P1-3
+/// </remarks>
 public class DeviceRepository : Repository<Device>, IDeviceRepository
 {
     private readonly ApplicationDbContext _context;
@@ -51,7 +53,7 @@ public class DeviceRepository : Repository<Device>, IDeviceRepository
     {
         var deviceGroup = await _context.Devices
             .Include(l => l.Lab)
-            .Where(l => l.Lab!.LabLocation == labLocation)
+            .Where(l => l.Lab!.LabLocation == labLocation && l.ReviewStatus!.Equals("Approved"))
             .GroupBy(t => t.Type)
             .Select(t => new { Key = t.Key, Count = t.Count() })
             .ToListAsync();
@@ -70,7 +72,7 @@ public class DeviceRepository : Repository<Device>, IDeviceRepository
     {
         List<Device> deviceList = await _context.Devices
             .Include(l => l.Lab)
-            .Where(t => deviceType.Contains(t.Type) && t.Lab.LabLocation == labLocation).ToListAsync();
+            .Where(t => deviceType.Contains(t.Type) && t.Lab!.LabLocation == labLocation && t.ReviewStatus!.Equals("Approved")).ToListAsync();
         return deviceList;
     }
     public async Task<Device> GetDeviceDetails(int id)

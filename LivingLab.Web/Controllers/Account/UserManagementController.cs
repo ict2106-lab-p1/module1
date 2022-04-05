@@ -1,10 +1,9 @@
-using LivingLab.Web.Controllers.Api;
 using LivingLab.Web.Models.ViewModels.UserManagement;
 using LivingLab.Web.UIServices.UserManagement;
 
 using Microsoft.AspNetCore.Mvc;
 
-namespace LivingLab.Web.Controllers;
+namespace LivingLab.Web.Controllers.Account;
 /// <remarks>
 /// Author: Team P1-5
 /// </remarks>

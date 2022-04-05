@@ -5,7 +5,9 @@ using LivingLab.Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 
 namespace LivingLab.Infrastructure.Repositories.Account;
-
+/// <remarks>
+/// Author: Team P1-3
+/// </remarks>
 public class SessionStatsRepository : Repository<SessionStats>, ISessionStatsRepository
 {
     private readonly ApplicationDbContext _context;
@@ -19,6 +21,7 @@ public class SessionStatsRepository : Repository<SessionStats>, ISessionStatsRep
     {
         List<SessionStats> sessionStats = await _context.SessionStats
             .Include(l => l.Lab)
+            .Include(l => l.Lab.ApplicationUser)
             .Where(l => l.Lab!.LabLocation == labLocation)
             .ToListAsync();
         return sessionStats;

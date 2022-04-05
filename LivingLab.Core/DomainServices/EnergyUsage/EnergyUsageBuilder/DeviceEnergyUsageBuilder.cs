@@ -74,7 +74,7 @@ public class DeviceEnergyUsageBuilder: IEnergyUsageBuilder
             this._deviceEUList.Add(new DeviceEnergyUsageDTO{
                 DeviceSerialNo =  this._unqiueList[i],
                 DeviceType = this._deviceType[i],
-                TotalEnergyUsage = this._eUList[i],
+                TotalEnergyUsage = Math.Round((double)this._eUList[i]/1000,2),
                 EnergyUsageCost = this._totalCost[i]
                 });
         }

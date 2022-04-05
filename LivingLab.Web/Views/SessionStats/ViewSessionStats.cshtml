@@ -1,3 +1,6 @@
+@* <remarks> *@
+@*  Author: Team P1-3 *@
+@*  </remarks> *@
 @model LivingLab.Web.Models.ViewModels.SessionStats.ViewSessionStatsViewModel
 
 @{
@@ -57,7 +60,7 @@
             <td class="logout"> @report.LogoutTime.ToString("MM/dd/yyyy h:mm:ss tt") </td>
             <td class="duration"> @report.LogoutTime </td>
             <td class="dataUploaded"> @report.DataUploaded  </td>
-            <td class="labInCharge"> @report.Lab.LabInCharge  </td>
+            <td class="labInCharge"> @($"{report.Lab.ApplicationUser.FirstName} {report.Lab.ApplicationUser.LastName}")   </td>
         </tr>
     }
     

@@ -7,12 +7,12 @@
                             </svg>
                         </button>
                     </div>
-                <div class="flex flex-col lg:flex-row justify-between space-y-2 lg:space-x-3">
-                <div class="flex flex-row lg:flex-col justify-center space-x-2 lg:space-y-2">
-                <h3 class="text-center text-gray-600 m-auto lg:m-0">Lab</h3>
+                <div class="flex flex-col lg:flex-row lg:space-x-3">
+                <div class="flex flex-row lg:flex-col justify-center lg:space-y-2">
+                <h3 class="text-center text-gray-600 m-auto lg:m-0">Lab Location</h3>
                     <select class="labs select w-full max-w-xs select-bordered"></select>
                     </div>
-                    <div class="flex flex-row lg:flex-col justify-center space-x-2 lg:space-y-2">
+                    <div class="flex flex-row lg:flex-col justify-center lg:space-y-2">
                         <h3 class="text-center text-gray-600 m-auto lg:m-0">Device Category</h3>
                         <select class="deviceCategory select w-full max-w-xs select-bordered">
                             <option>Microprocessors</option>
@@ -23,19 +23,19 @@
                             <option>Others</option>
                         </select>
                     </div>
-                    <div class="flex flex-row lg:flex-col justify-center space-x-2 lg:space-y-2">
+                    <div class="flex flex-row lg:flex-col justify-center lg:space-y-2">
                         <h3 class="text-center text-gray-600 m-auto lg:m-0">Serial No.</h3>
                         <input class="deviceId input input-bordered w-full max-w-xs" name="Serial Number" id="deviceId" type="text" placeholder="Enter Device Serial No." />
                     </div>
-                    <div class="flex flex-row lg:flex-col justify-center space-x-2 lg:space-y-2">
-                        <h3 class="text-center text-gray-600 m-auto lg:m-0">Energy Usage (J)</h3>
-                        <input class="energyUsage input input-bordered w-full max-w-xs" name="Energy Usage" type="number" value="energyUsage" placeholder="Enter Energy Usage (J)" required/>
+                    <div class="flex flex-row lg:flex-col justify-center lg:space-y-2">
+                        <h3 class="text-center text-gray-600 m-auto lg:m-0">Energy Usage (W)</h3>
+                        <input class="energyUsage input input-bordered w-full max-w-xs" name="Energy Usage" type="number" value="energyUsage" placeholder="Enter Energy Usage (W)" required/>
                     </div>
-                    <div class="flex flex-row lg:flex-col justify-center space-x-2 lg:space-y-2">
-                        <h3 class="text-center text-gray-600 m-auto lg:m-0">Duration (min)</h3>
+                    <div class="flex flex-row lg:flex-col justify-center lg:space-y-2">
+                        <h3 class="text-center text-gray-600 m-auto lg:m-0">Interval (min)</h3>
                         <input class="interval input input-bordered w-full max-w-xs" name="Interval" type="number" value="interval" placeholder="Enter Interval (min)" required/>
                     </div>
-                    <div class="flex flex-row lg:flex-col justify-center space-x-2 lg:space-y-2">
+                    <div class="flex flex-row lg:flex-col justify-center lg:space-y-2">
                         <h3 class="text-center text-gray-600 m-auto lg:m-0">Logged At</h3>
                         <input class="loggedAt input input-bordered w-full max-w-xs" name="Logged At" type="datetime-local" value="loggedAt" placeholder="Enter Logged At Datetime" required/>
                     </div>
@@ -49,7 +49,6 @@ $(document).ready(function (){
     $("#btnAdd").click(appendRow);
     $(this).on('click', '.delete', deleteRow);
     $("#btnSave").click(save);
-
 })
 
 /**

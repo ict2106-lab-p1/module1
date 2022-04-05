@@ -13,7 +13,7 @@ namespace LivingLab.Web.Controllers;
 /// <remarks>
 /// Author: Team P1-1
 /// </remarks>
-[Authorize(Roles = "Admin")]
+[Authorize(Roles = "Labtech")]
 public class ManualLogsController : Controller
 {
     private readonly IManualLogService _manualLogService;
