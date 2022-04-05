@@ -27,6 +27,11 @@ builder.Services.AddSession(options =>
 });
 builder.Services.AddHttpContextAccessor();
 builder.Services.AddControllersWithViews();
+builder.Services.ConfigureApplicationCookie(opts =>
+{
+    opts.LoginPath = "/Login/Index";
+    opts.AccessDeniedPath = "/Home/AccessDenied";
+});
 
 var app = builder.Build();
 

@@ -8,7 +8,6 @@ public interface ILabProfileRepository : IRepository<Entities.Lab>
     Task<Entities.Lab> GetLabDetails(int id);
     Task SetLabEnergyBenchmark(int labId, double energyBenchmark);
     Task<double> GetLabEnergyBenchmark(int labId);
-    Task<Entities.Lab> GetLabByLocation(string location);
-    Task<Entities.Lab> GetLabProfileDetails(string labLocation);
+    Task<Entities.Lab?> GetLabByLocation(string location);
     Task<List<Entities.Lab>> GetAllLabLocation();
 }

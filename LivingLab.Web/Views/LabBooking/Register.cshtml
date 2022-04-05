@@ -2,16 +2,16 @@
 @* /// <remarks> *@
 @* /// Author: Team P1-5 *@
 @* /// </remarks> *@
-@{
-    ViewData["Title"] = "Lab Register";
-}
-<h1>@ViewData["Title"]</h1>
-
+<div class="flex">
+    <div class="flex-grow">
+        <p class="text-4xl pb-3 flex items-center font-black">
+            Add Booking
+        </p>
+    </div>
+</div>
 <div class="row">
     <div class="col-md-4">
         <form id="registerLab" method="post" asp-controller="LabBooking" asp-action="BookRegister">
-            <h2>Create a new Booking.</h2>
-            <hr />
             @* <div asp-validation-summary="ModelOnly" class="text-danger"></div> *@
             <div class="form-floating">
                 <label asp-for="LabId"></label>

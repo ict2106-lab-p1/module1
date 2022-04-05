@@ -2,7 +2,6 @@ using System.Diagnostics;
 
 using LivingLab.Core.Entities.Identity;
 using LivingLab.Core.Notifications;
-using LivingLab.Web.Controllers.Api;
 using LivingLab.Web.Models.ViewModels;
 using LivingLab.Web.Models.ViewModels.Account;
 using LivingLab.Web.Models.ViewModels.Login;
@@ -12,7 +11,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
-namespace LivingLab.Web.Controllers;
+namespace LivingLab.Web.Controllers.Account;
 /// <remarks>
 /// Author: Team P1-5
 /// </remarks>
@@ -20,15 +19,13 @@ public class AccountController: Controller
 {
     private readonly IAccountService _accountService;
     private readonly ILogger<AccountController> _logger;
-    private readonly SignInManager<ApplicationUser> _signInManager;
     private readonly UserManager<ApplicationUser> _userManager;
     private readonly IEmailNotifier _emailSender;
 
-    public AccountController( IEmailNotifier emailSender, IAccountService accountService, ILogger<AccountController> logger, SignInManager<ApplicationUser> signInManager, UserManager<ApplicationUser> userManager)
+    public AccountController( IEmailNotifier emailSender, IAccountService accountService, ILogger<AccountController> logger, UserManager<ApplicationUser> userManager)
     {
         _accountService = accountService;
         _logger = logger;
-        _signInManager = signInManager;
         _userManager = userManager;
         _emailSender = emailSender;
 
@@ -64,8 +61,11 @@ public class AccountController: Controller
 
                     await _userManager.AddToRoleAsync(model, registration.Role);
 
-                    await _emailSender.SendEmailAsync(model.Email, 
-                        "Confirm your account", 
+                    await _emailSender.SendEmailAsync(registration.Email, 
+                        "Confirm Living Lab Account", 
+                        "Dear "+registration.FirstName+", <br> (Admin) "+model.FirstName+" has registered an account on your behalf. <br>" +
+                        "Your username is: "+registration.Email+"<br>" +
+                        "Your password is: "+registration.Password+" <br>" +
                         "Please confirm your account by clicking this link: <a href=\"" 
                         + callbackUrl + "\">link</a>");
                 }
