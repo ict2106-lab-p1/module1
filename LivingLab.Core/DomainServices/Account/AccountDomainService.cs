@@ -41,7 +41,7 @@ public class AccountDomainService: IAccountDomainService
 
     public Task<ApplicationUser> EditAccount(ApplicationUser editAccount)
     {
-        return _accountRepository.AddAccount(editAccount);
+        return _accountRepository.EditAccount(editAccount);
     } 
     public Task<ApplicationUser> DeleteAccount(ApplicationUser deletedUser)
     {
@@ -95,4 +95,8 @@ public class AccountDomainService: IAccountDomainService
         return false;
     }
     
+    public async Task<ApplicationUser?> Save(ApplicationUser user)
+    {
+        return await _accountRepository.EditAccount(user);
+    }
 }

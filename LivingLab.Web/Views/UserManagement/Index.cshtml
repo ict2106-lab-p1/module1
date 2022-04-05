@@ -1,4 +1,4 @@
-﻿ @* /// <remarks> *@
+﻿@* /// <remarks> *@
 @* /// Author: Team P1-5 *@
  @* /// </remarks> *@
  @using LivingLab.Web.Models.ViewModels.UserManagement 
@@ -20,10 +20,10 @@
         </div>
         <div class="mb-10">
             <a asp-controller="LabProfile" asp-action="LabRegister">
-                    <button class="btn  rounded-full text-white hover:text-gray-600 hover:bg-gray-900">Add Lab</button>
+                    <button class="btn btn-outline btn-primary ">Add Lab</button>
                 </a>
                 <a asp-controller="Account" asp-action="Register">
-                    <button class="btn  rounded-full text-white hover:text-gray-600 hover:bg-gray-900">Add User</button>
+                    <button class="btn btn-outline btn-primary ">Add User</button>
                 </a>
         </div>
     </div>
@@ -38,7 +38,6 @@
                             <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Name</th>
                             <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Email</th>
                             <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Faculty</th>
-                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Lab Access</th>
                             <th scope="col" class=""><span class="sr-only">Edit</span></th>
                             <th scope="col" class=" "><span class="sr-only">Delete</span></th>
                         </tr>
@@ -55,14 +54,13 @@
                                 </td>
                                 <td class="px-6 py-4 text-sm text-gray-900">@user.FirstName</td>
                                 <td class="px-6 py-4 text-sm text-gray-900">@user.Email</td>
-                                <td class="px-6 py-4 text-sm text-gray-900">@user.UserFaculty</td>
-                                <td class="px-6 py-4 text-sm text-gray-900">SIT-LAB2A</td>
+                                <td class="px-6 py-4 text-sm text-gray-900" >@user.UserFaculty</td>
                                 <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                                    <label for="edit-modal" class="btn modal-button editUserBtn" data-id="@user.Id">Edit</label>
+                                    <label for="edit-modal" class="btn btn-primary modal-button editUserBtn" data-id="@user.Id">Edit</label>
 
                                 </td>
                                 <td class="px-12 py-4 whitespace-nowrap text-right text-sm font-medium">
-                                    <label for="my-modal-3" class="btn modal-button deleteUserBtn" data-id="@user.Id">Delete</label>
+                                    <label for="my-modal-3" class="btn btn-primary modal-button deleteUserBtn" data-id="@user.Id">Delete</label>
                                 </td>
                             </tr>
                         }
@@ -83,7 +81,6 @@
                             <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Name</th>
                             <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Email</th>
                             <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Faculty</th>
-                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Lab Access</th>
                             <th scope="col" class="relative px-12 py-3">
                                 <span class="sr-only">Edit</span>
                             </th>
@@ -107,12 +104,11 @@
                                 <td class="px-6 py-4 text-sm text-gray-900">@user.FirstName</td>
                                 <td class="px-6 py-4 text-sm text-gray-900">@user.Email</td>
                                 <td class="px-6 py-4 text-sm text-gray-900">@user.UserFaculty</td>
-                                <td class="px-6 py-4 text-sm text-gray-900">SIT-LAB2A</td>
                                 <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                                    <label for="edit-modal" class="btn modal-button editUserBtn" data-id="@user.Id">Edit</label>
+                                    <label for="edit-modal" class="btn btn-primary modal-button editUserBtn" data-id="@user.Id">Edit</label>
                                 </td>
                                 <td class="px-12 py-4 whitespace-nowrap text-right text-sm font-medium">
-                                    <label for="my-modal-3" class="btn modal-button deleteUserBtn" data-id="@user.Id">Delete</label>
+                                    <label for="my-modal-3" class="btn btn-primary modal-button deleteUserBtn" data-id="@user.Id">Delete</label>
                                 </td>
                             </tr>
                         }
@@ -127,11 +123,11 @@
      <div class="modal-box p-8 ">
          <div class="mt-4">
                <div class="text-right">
-                   <label for="edit-modal" class="btn btn-xs btn-circle  ">x</label>
+                   <label for="edit-modal" class="btn btn-2xl btn-circle  ">x</label>
                           </div>
              <form class="w-full max-w-lg" method="post" enctype="multipart/form-data" asp-controller="UserManagement" asp-action="EditUser">
                  @{
-                     @await Html.PartialAsync("_EditUser", new UserManagementViewModel())
+                     @await Html.PartialAsync("_EditUser",new UserManagementViewModel())
 
                  }
                  <div class="modal-action flex pt-12 justify-end">
@@ -151,7 +147,7 @@
      <div class="modal-box  ">
          <div class="mt-4 ">
              <div class="text-right">
-                  <label for="my-modal-3" class="btn btn-xs btn-circle  ">x</label>
+                  <label for="my-modal-3" class="btn btn-2xl btn-circle  ">x</label>
              </div>
              <form class="w-full max-w-lg" method="post" enctype="multipart/form-data" asp-controller="UserManagement" asp-action="DeleteAccount">
                  @{

@@ -1,47 +1,27 @@
-@model LivingLab.Web.Models.ViewModels.UserManagement.UserManagementViewModel
 @* /// <remarks> *@
 @* /// Author: Team P1-5 *@
 @{
     ViewData["Title"] = "Edit Profile";
 }
-<h3 class="text-2xl font-bold mb-8">Edit Profile</h3>
+
+ <h3 class="text-2xl font-bold mb-8">Edit Profile </h3>
 
 <div class="w-full md:w-1/2 px-3md:w-1/2 px-3 mb-8">
-    <label class="tracking-wide text-gray-700 text-xs font-bold mb-2" for="user-id">
-        ID
+    <label class="tracking-wide text-gray-700 text-xs font-bold mb-2" for="user-id">ID
     </label>
-    <input class="appearance-none block w-full bg-gray-100 text-gray-700 border border-gray-300 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="user-id" name="ID" type="text" placeholder="0">
+    <input class="appearance-none block w-full bg-gray-100 text-gray-700 border border-gray-300 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"  id="user-id" name="ID" type="text" placeholder="Enter ID">
 </div>
 <div class="w-full md:w-1/2 px-3md:w-1/2 px-3 mb-8">
     <label class="tracking-wide text-gray-700 text-xs font-bold mb-2" for="user-email">
         Email
     </label>
-    <input class="appearance-none block w-full bg-gray-100 text-gray-700 border border-gray-300 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="user-email" name="Email" type="text" placeholder="0">
+    <input class="appearance-none block w-full bg-gray-100 text-gray-700 border border-gray-300 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"  id="user-email" name="Email" 
+           type="text" placeholder="Enter email">
 </div>
 <div class="w-full md:w-1/2 px-3md:w-1/2 px-3 mb-8">
     <label class="tracking-wide text-gray-700 text-xs font-bold mb-2" for="user-faculty">
         Faculty
     </label>
-    <div class="relative">
-        <select class="block appearance-none w-full bg-white text-gray-900 border border-gray-200  py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="user-faculty" name="Faculty">
-            <option disabled selected>Select Faculty</option>
-            <option value="SE">SE</option>
-            <option value="ICT">ICT</option>
-            <option value="MDME">MDME</option>
-            <option value="CSC">CSC</option>
-        </select>
-    </div>
-</div>
-<div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
-    <label class="tracking-wide text-gray-700 text-xs font-bold mb-2" for="user-lab-access">
-        Lab Access Rights
-    </label>
-    <div class="relative">
-        <select class="block appearance-none w-full bg-white text-gray-900 border border-gray-200  py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="user-lab-access" name="LabAccess">
-            <option value="SIT-1A">SIT-1A</option>
-            <option value="SIT-2A">SIT-2A</option>
-            <option value="SIT-3A">SIT-3A</option>
-            <option value="SIT-4A">SIT-4A</option>
-        </select>
-    </div>
+    <input class="appearance-none block w-full bg-gray-100 text-gray-700 border border-gray-300 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"  id="user-faculty" name="Faculty" 
+           type="text" placeholder="Enter faculty">
 </div>

@@ -5,7 +5,6 @@
 
 @* /// <remarks> *@
 @* /// Author: Team P1-5 *@
-@* /// </remarks> *@
 @{
     ViewData["Title"] = "Lab Register";
     var listofusers = await UserManager.GetUsersInRoleAsync("labtech");
@@ -17,7 +16,7 @@
 
                 <div>
                     <h2 class="text-2xl font-bold">
-                        Register A New Lab
+                        Register Labs
                     </h2>
                     <p class="text-base mt-3 font-medium text-lg">Enter basic information </p>
                 </div>
@@ -55,8 +54,8 @@
                 </div>
                 <div class="mt-6">
                     <p>
-                        <label asp-for="Capacity" class="font-semibold">Area</label>
-                    </p> <input asp-for="Capacity" type="text" placeholder="Enter Area" class="input input-bordered w-full max-w-xs">
+                        <label asp-for="Area" class="font-semibold">Area</label>
+                    </p> <input asp-for="Area" type="text" placeholder="Enter Area" class="input input-bordered w-full max-w-xs">
                 </div>
                 <div class="mt-6">
                     <p>

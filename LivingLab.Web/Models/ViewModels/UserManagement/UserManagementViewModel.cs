@@ -16,14 +16,7 @@ public class UserManagementViewModel
     public string? FirstName { get; set; }
     public string? LastName { get; set; }
     public string? Email { get; set; }
-    private List<EmailLog> NotificationEmails { get; set; } = new List<EmailLog>();
-    private List<SmsLog> NotificationSmses { get; set; } = new List<SmsLog>();
-    public string? AuthenticationType { get; set; }
-    [DataType(DataType.DateTime)]
-    public DateTime SMSExpiry { get; set; }
+  
     public string? UserFaculty { get; set; }
-    public List<Core.Entities.Booking> Bookings { get; set; }
-    public List<Lab> Labs { get; set; }
-    public List<LabAccess> LabAccesses { get; set; }
 
 }

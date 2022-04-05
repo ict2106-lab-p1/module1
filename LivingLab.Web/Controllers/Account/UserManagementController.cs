@@ -23,7 +23,7 @@ public class UserManagementController : Controller
     }
     
 
-    [Route("Index")]
+    [Route("index")]
     public async Task<IActionResult> UserAccounts(string userId)
     {
         ViewUserManagementViewModel viewUserManagementViewModel = await _userManagementService.GetAllAccounts();
@@ -49,8 +49,13 @@ public class UserManagementController : Controller
     [HttpPost("View/Delete")]
     public async Task<IActionResult> DeleteAccount(UserManagementViewModel deleteAccount)
     {
-        await _userManagementService.DeleteAccount(deleteAccount);
-        ViewUserManagementViewModel viewAccounts = await _userManagementService.GetAllAccounts();
-        return View("Index", viewAccounts);
+
+        
+            await _userManagementService.DeleteAccount(deleteAccount);
+            ViewUserManagementViewModel viewAccounts = await _userManagementService.GetAllAccounts();
+            return View("Index", viewAccounts);
+        
+    
+       
     }
 }
