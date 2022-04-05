@@ -23,20 +23,4 @@ public class BookingRepository : Repository<Booking>, IBookingRepository
            var labBooking = await _context.Bookings.ToListAsync();
         return labBooking;
     }
-
-    public async Task<Booking?> AddBooking(Booking booking)
-    {
-        //Return booking that is stored
-         Booking currentUser = (await _context.Bookings.SingleOrDefaultAsync(d => d.BookingId == booking.BookingId))!;
-        currentUser.Description=booking.Description;
-        currentUser.LabId=booking.LabId;
-   
-        await _context.SaveChangesAsync();       
-        return booking;
-    }
-    
-    public async Task<int> DeleteBooking(int bookingId)
-    {
-        throw new NotImplementedException();
-    }
 }

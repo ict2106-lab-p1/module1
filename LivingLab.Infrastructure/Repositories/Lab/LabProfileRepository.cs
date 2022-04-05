@@ -49,17 +49,11 @@ public class LabProfileRepository : Repository<Core.Entities.Lab>, ILabProfileRe
     }
 
     // Added by P1-1
-    public Task<Core.Entities.Lab> GetLabByLocation(string location)
+    public Task<Core.Entities.Lab?> GetLabByLocation(string location)
     {
         return _context.Labs.FirstOrDefaultAsync(l => l.LabLocation == location);
     }
 
-    public async Task<Core.Entities.Lab> GetLabProfileDetails(string labLocation)
-    {
-        Core.Entities.Lab labInfo = (await _context.Labs.SingleOrDefaultAsync(l => l.LabLocation == labLocation))!;
-        return labInfo;
-    }
-    
     public Task<List<Core.Entities.Lab>> GetAllLabLocation()
     {
         return IncludeReferences(

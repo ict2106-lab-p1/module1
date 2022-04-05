@@ -9,7 +9,6 @@ namespace LivingLab.Core.DomainServices.Lab;
 public interface ILabProfileDomainService
 {
     Task<List<Entities.Lab>> ViewLabs();
-    Task<Entities.Lab> ViewLabDetails(int id);
     Task<Entities.Lab?> NewLab(Entities.Lab labinput);
     Task<Entities.Lab> GetLabProfileDetails(string labLocation);
 }

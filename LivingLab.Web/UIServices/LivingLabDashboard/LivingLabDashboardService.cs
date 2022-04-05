@@ -23,20 +23,6 @@ public class LivingLabDashboardService : ILivingLabDashboardService
         _mapper = mapper;
     }
 
-    public async Task<ViewDeviceViewModel> ViewDevice()
-    {
-        //retrieve data from db
-        List<Core.Entities.Device> deviceList = await _deviceDomainService.GetAllDevices();
-                
-        //map entity model to view model
-        List<DeviceViewModel> devices = _mapper.Map<List<Core.Entities.Device>, List<DeviceViewModel>> (deviceList);
-            
-        //add list of device view model to the view device view model
-        ViewDeviceViewModel viewDevices = new ViewDeviceViewModel();
-        viewDevices.DeviceList = devices;
-        return viewDevices;
-    }
-    
     public async Task<LivingLabDashboardViewModel> GetAllLabs()
     {
         List<Core.Entities.Lab> labList = await _labProfileDomainService.ViewLabs();

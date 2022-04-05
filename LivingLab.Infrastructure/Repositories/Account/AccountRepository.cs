@@ -23,12 +23,6 @@ public class AccountRepository : Repository<ApplicationUser>, IAccountRepository
         var accountGroup = await _context.Users.ToListAsync();
         return accountGroup;
     }
-    public async Task<ApplicationUser> GetAccountDetails(string id)
-    {
-        ApplicationUser user = (await _context.Users.SingleOrDefaultAsync(d => d.Id == id))!;
-        return user;
-        // return await _context.Set<ApplicationUser>().ToListAsync();
-    }
 
     /*Get the account by ID*/
     public async Task<ApplicationUser?> GetAccountById(string id)

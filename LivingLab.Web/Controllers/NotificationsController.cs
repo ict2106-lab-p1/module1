@@ -1,6 +1,5 @@
 using LivingLab.Core.Entities.Identity;
 using LivingLab.Web.Models.ViewModels;
-using LivingLab.Web.UIServices.Account;
 using LivingLab.Web.UIServices.NotificationManagement;
 
 using Microsoft.AspNetCore.Authorization;

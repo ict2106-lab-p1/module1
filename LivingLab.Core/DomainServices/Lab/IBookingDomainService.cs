@@ -12,6 +12,5 @@ public interface IBookingDomainService
 {
     Task<List<Booking>> ViewBooks();
     Task<Booking> NewBook(Booking book);
-
     Task<Booking> DeleteBook(int bookid);
 }

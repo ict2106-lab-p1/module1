@@ -35,7 +35,7 @@ public class AccountDomainService: IAccountDomainService
     
     public Task<ApplicationUser> ViewAccountDetails(string id)
     {
-        return _accountRepository.GetAccountDetails(id);
+        return _accountRepository.GetAccountById(id);
     }
 
 
@@ -46,12 +46,6 @@ public class AccountDomainService: IAccountDomainService
     public Task<ApplicationUser> DeleteAccount(ApplicationUser deletedUser)
     {
         return _accountRepository.DeleteAccount(deletedUser);
-    } 
-    
-
-    public async Task<ApplicationUser?> GetUser(string id)
-    {
-        return await _accountRepository.GetAccountById(id);
     }
 
     /*Function to update user information one by one*/
@@ -101,8 +95,4 @@ public class AccountDomainService: IAccountDomainService
         return false;
     }
     
-    public async Task<ApplicationUser?> Save(ApplicationUser user)
-    {
-        return await _accountRepository.AddAccount(user);
-    }
 }
