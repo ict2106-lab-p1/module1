@@ -23,14 +23,8 @@ public class LabProfileDomainService: ILabProfileDomainService
     public Task<List<Entities.Lab>> ViewLabs()
     {
         return _labRepository.GetAllLabs();
-    } 
- 
-    
-    public Task<Entities.Lab> ViewLabDetails(int id)
-    {
-        return _labRepository.GetLabDetails(id);
     }
-  
+
     /*Create new lab with lab details*/
     public async Task<Entities.Lab?> NewLab(Entities.Lab labinput)
     {
@@ -40,6 +34,6 @@ public class LabProfileDomainService: ILabProfileDomainService
     public async Task<Entities.Lab> GetLabProfileDetails(string labLocation)
     {
         _logger.LogInformation("Get the lab info from lab : " + labLocation);
-        return await _labRepository.GetLabProfileDetails(labLocation);
+        return await _labRepository.GetLabByLocation(labLocation);
     }
 }

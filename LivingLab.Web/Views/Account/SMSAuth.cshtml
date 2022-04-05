@@ -9,26 +9,23 @@
 
 <div class="row">
     <div>
+        <div class="pb-8">
+            <h2 class="text-2xl font-bold ">
+                      Settings
+                    </h2>
+                    <p class="text-base mt-3 font-medium text-lg">Configure your settings </p>
+                </div>
         <section>
-            <p class="font-semibold text-3xl ml-12 mb-4 pt-12">Mode of Authentication</p>
+            <p class="font-semibold text-xl mb-4 pt-8">Authentication Type</p>
             <div class="flex gap-3 justify-left items-left">
                 <button id="2FA-btn" class="block bg-white font-bold w-4/12 h-36 ml-4 mr-4 pt-8 pb-8 text-7xl rounded-lg transition  ease-in-out m-0 hover:bg-slate-600/10 hover:border-slate-600 hover:outline-none">
-                    2FA
+                    Email
                 </button>
                 <button id="SMS-btn" class="block bg-white font-bold w-4/12 h-36 ml-4 mr-4 pt-8 pb-8 text-7xl rounded-lg transition  ease-in-out m-0 hover:bg-slate-600/10 hover:border-slate-600 hover:outline-none">
                     SMS
                 </button>
             </div>
-
-            <p class="font-semibold text-3xl ml-12 mb-4 pt-12">Others</p>
-
-            <div class="flex gap-3 justify-left items-left">
-                <a asp-controller="Home" asp-action="Logout" class="block text-center bg-white font-bold w-4/12 h-36 ml-4 mr-4 pt-8 pb-8 text-7xl rounded-lg transition  ease-in-out m-0 hover:bg-slate-600/10 hover:border-slate-600 hover:outline-none">
-                    Logout
-                </a>
-            </div>
-
-            <!--Overlay Effect-->
+            
             <div
                 class="fixed hidden inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full"
                 id="my-modal">
@@ -102,9 +99,8 @@
                         <div
                             class="flex justify-between items center  py-3 mx-4 px-4 my-4">
                             <div class="flex items-center justify-center">
-                                <p class="text-2xl font-bold text-gray-800">Google Auth Set-Up</p>
+                                <p class="text-2xl font-bold text-gray-800">Email Auth Set-Up</p>
                             </div>
-
                             <div id="close-btn2FA"
                                  class="hover:bg-gray-500 cursor-pointer hover:text-gray-300 font-sans text-gray-500 w-8 h-8 flex items-center justify-center rounded-full">
                                 <svg viewPort="0 0 12 12"
@@ -134,7 +130,7 @@
 
                                 <div class="text-start my-2 mt-4">
                                     <label class="flex block ml-0 justify-start font-semibold">
-                                        Enable Google Authorization
+                                        Enable Email Authorization
                                     </label>
                                 </div>
 

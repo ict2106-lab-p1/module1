@@ -14,5 +14,7 @@ public class BookingDashboardViewModel
     
     public string? LabLocation { get; set;}
     
-    public int? LabCurrentUser { get; set;}
+    public int? LabOccupancy { get; set;}
+    
+    public int? LabTotalUser { get; set;}
 }

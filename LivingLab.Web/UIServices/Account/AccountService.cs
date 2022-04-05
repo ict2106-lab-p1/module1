@@ -60,6 +60,7 @@ public class AccountService : IAccountService
             user.UserFaculty = input.Faculty;
             user.LastName = input.LastName;
             user.FirstName = input.FirstName;
+            user.PreferredNotification = 0;
             if (input.IsGoogleAuth)
             {
                 user.AuthenticationType = "Email";

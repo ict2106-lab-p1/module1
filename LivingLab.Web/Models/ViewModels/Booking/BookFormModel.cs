@@ -24,7 +24,7 @@ public class BookFormModel
     public List<Core.Entities.Device>? Devices { get; set; }
 
     [Required]
-    [Display(Name = "LabId")]
+    [Display(Name = "Lab")]
     public int LabId { get; set; }
     
     [Required]
