@@ -9,57 +9,57 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
-namespace LivingLab.Web.Controllers;
+namespace LivingLab.Web.Controllers.Lab;
 /// <remarks>
 /// Author: Team P1-5
 /// </remarks>
-[Route("LabProfile")]
 public class LabProfileController: Controller
 {
     private readonly ILabProfileService _labProfileService;
     private readonly ILogger<LabProfileController> _logger;
     private readonly IUserManagementService _accountService;
-    private readonly UserManager<ApplicationUser> _userManager;
 
-    public LabProfileController(ILabProfileService labProfileService, ILogger<LabProfileController> logger, UserManager<ApplicationUser> userManager)
+    public LabProfileController(ILabProfileService labProfileService, ILogger<LabProfileController> logger)
     {  _labProfileService = labProfileService;
         _logger = logger;
-        _userManager = userManager;
     }
     
-    [Route("viewlab")]
+    [HttpGet]
+    [Authorize(Roles = "Users,Admin,Labtech")]
     public async Task<IActionResult> ViewLab(MultiModel model)
     {
         model.info = await _labProfileService.GetAllLabAccounts();
         return View("Index", model); 
     }
     
-    // [Authorize(Roles="Admin")]
+    
+    [Authorize(Roles="Admin")]
     /*Redirect to lab view*/
-    [Route("labregister")]
+    [HttpGet]
     public async Task<IActionResult> LabRegister()
     {
-        /*var labform = new LabRegisterViewModel() {LabICList = await _userManager.GetUsersInRoleAsync("labtech")};*/
         return View("LabRegister");
     }
 
-    /*[Authorize(Roles="Admin")]*/
     [HttpPost]
+    [Authorize(Roles="Admin")]
     /*Create labs by admins*/
-    public async Task<IActionResult> LabRegisterPost(LabRegisterViewModel labModel)
+    [HttpPost]
+    public async Task<IActionResult> LabRegister(LabRegisterViewModel labform)
     {
         if (ModelState.IsValid)
         {
-            await _labProfileService.NewLab(labModel);
+            await _labProfileService.NewLab(labform);
             return View("_CompleteRegister");
         }
-        return View(nameof(LabRegister));
-        
+        return View("LabRegister");
     }
     
-    [Route("view/{labLocation}")]
-    public async Task<ViewResult> LabProfile(MultiModel combinedModels, string labLocation)
+    [HttpGet]
+    [Route("ViewLab/{labLocation}")]
+    public async Task<ViewResult> LabProfile(string labLocation)
     {
+        MultiModel combinedModels = new MultiModel();
         var labModel = await _labProfileService.GetLabProfileDetails(labLocation);
         var devicestype = await _labProfileService.ViewDeviceType(labLocation);
         var accessoriestype = await _labProfileService.ViewAccessoryType(labLocation);

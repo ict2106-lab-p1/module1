@@ -1,55 +1,73 @@
 @using LivingLab.Core.Entities.Identity
+@using Microsoft.AspNetCore.Identity
 @model LivingLab.Web.Models.ViewModels.LabProfile.LabRegisterViewModel
+@inject UserManager<ApplicationUser> UserManager
+
 @* /// <remarks> *@
 @* /// Author: Team P1-5 *@
 @* /// </remarks> *@
 @{
     ViewData["Title"] = "Lab Register";
+    var listofusers = await UserManager.GetUsersInRoleAsync("labtech");
 }
-<h1>@ViewData["Title"]</h1>
-
 <div class="row">
     <div class="col-md-4">
-        <form id="registerLab" method="post" asp-controller="LabProfile" asp-action="LabRegisterPost">
-            <h2>Create a new Lab.</h2>
-            <hr/>
-            @* <div asp-validation-summary="ModelOnly" class="text-danger"></div> *@
-            <div class="form-floating">
-                <label asp-for="LabLocation"></label>
-                <input asp-for="LabLocation" class="form-control" aria-required="true"/>
-                <span asp-validation-for="LabLocation" class="text-danger"></span>
+        <form id="registerLab" method="post" asp-controller="LabProfile" asp-action="LabRegister">
+            <div class="bg-white shadow p-12  mb-12  rounded-lg">
+
+                <div>
+                    <h2 class="text-2xl font-bold">
+                        Register A New Lab
+                    </h2>
+                    <p class="text-base mt-3 font-medium text-lg">Enter basic information </p>
+                </div>
+                <div class="mt-6">
+                    <p>
+                        <label asp-for="LabLocation" class="font-semibold">Lab Location</label>
+                    </p> <input asp-for="LabLocation" type="text" placeholder="Enter Lab Location" class="input input-bordered w-full max-w-xs">
+                </div>
+                <div class="mt-6">
+                    <p>
+                        <label asp-for="LabInCharge" class="font-semibold">Lab In-Charge</label>
+                    </p>
+                    <select class="select select-bordered w-full max-w-xs" aria-required="true" asp-for="LabInCharge">
+                        @foreach (var user in @listofusers)
+                        {
+                            <option value="@user.Id">@user.FirstName</option>
+                        }
+                    </select>
+                </div>
+                <div class="mt-6">
+                    <p>
+                        <label asp-for="LabStatus" class="font-semibold">Lab Status</label>
+                    </p>
+                    <select class="select select-bordered w-full max-w-xs" name="faculty" asp-for="LabStatus">
+                        <option disabled selected>Select Lab Status</option>
+                        <option value="Available">Available</option>
+                        <option value="Not Available">Not Available</option>
+                        <option value="Under Construction">Under Construction</option>
+                    </select>
+                </div>
+                <div class="mt-6">
+                    <p>
+                        <label asp-for="Capacity" class="font-semibold">Lab Capacity</label>
+                    </p> <input asp-for="Capacity" type="text" placeholder="Enter Lab Capacity" class="input input-bordered w-full max-w-xs">
+                </div>
+                <div class="mt-6">
+                    <p>
+                        <label asp-for="Capacity" class="font-semibold">Area</label>
+                    </p> <input asp-for="Capacity" type="text" placeholder="Enter Area" class="input input-bordered w-full max-w-xs">
+                </div>
+                <div class="mt-6">
+                    <p>
+                        <label asp-for="EnergyUsageBenchmark" class="font-semibold">Energy Usage Benchmark</label>
+                    </p> <input asp-for="EnergyUsageBenchmark" type="text" placeholder="Enter Energy Usage" class="input input-bordered w-full max-w-xs">
+                </div>
             </div>
-            <div class="form-floating">
-                            <label asp-for="LabInCharge"></label>
-                            <input asp-for="LabInCharge" class="form-control" aria-required="true"/>
-                            <span asp-validation-for="LabInCharge" class="text-danger"></span>
-                        </div>
-            @*<p>
-                <label asp-for="LabInCharge"></label>
-            </p>
-            <select class="select select-bordered w-full max-w-xs" name="labincharge" asp-for="LabInCharge">
-                @foreach (var user in Model.LabICList)
-                                    {
-                                        <option value="@user.Id">@user.FirstName</option>
-                                    }
-                                </select>*@
-            <div class="form-floating">
-                <label asp-for="Capacity"></label>
-                <input asp-for="Capacity" class="form-control" aria-required="true"/>
-                <span asp-validation-for="Capacity" class="text-danger"></span>
+            <div class="flex justify-center">
+                <button id="registersubmit" type="submit" class="btn  w-6/12">Create Lab</button>
             </div>
-            <div class="form-floating">
-                <label asp-for="Area"></label>
-                <input asp-for="Area" class="form-control" aria-required="true"/>
-                <span asp-validation-for="Area" class="text-danger"></span>
-            </div>
-            <div class="form-floating">
-                <label asp-for="EnergyUsageBenchmark"></label>
-                <input asp-for="EnergyUsageBenchmark" class="form-control" aria-required="true"/>
-                <span asp-validation-for="EnergyUsageBenchmark" class="text-danger"></span>
-            </div>
-            <button id="labsubmit" class="w-100 btn btn-lg btn-primary">New Lab</button>
         </form>
     </div>
-
+    
 </div>

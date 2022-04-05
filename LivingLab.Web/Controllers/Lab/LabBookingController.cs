@@ -1,17 +1,15 @@
-using LivingLab.Web.Controllers.Api;
 using LivingLab.Core.Entities.Identity;
 using LivingLab.Web.Models.ViewModels.Booking;
 using LivingLab.Web.UIServices.LabBooking;
-using LivingLab.Web.UIServices.UserManagement;
 
-using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
 
-namespace LivingLab.Web.Controllers;
+namespace LivingLab.Web.Controllers.Lab;
 /// <remarks>
 /// Author: Team P1-5
 /// </remarks>
-[Route("labbooking")]
 public class LabBookingController: Controller
 {
     private readonly ILabBookingService _labBookingService;
@@ -30,32 +28,27 @@ public class LabBookingController: Controller
 
 
     }
-     [Route("register")]
+    [Authorize]
     /*Admin can see this page and register*/
-    public IActionResult Register()
+    public IActionResult Register(int labid = 0)
     {
-        return View("Register");
+        BookFormModel newForm = new BookFormModel() {LabId = labid};
+        return View("Register", newForm);
     }
     
-    /*http://localhost:5051/labbooking/viewall*/
+    [Authorize(Roles = "User,Admin,Labtech")]
     [HttpGet]
-    [Route("viewallLab")]
-    public async Task<IActionResult> GetTableInfo(BookingManagementViewModel listOfBookings)
+    public async Task<IActionResult> BookingsOverview(BookingManagementViewModel listOfBookings)
     {    
-         _logger.LogInformation("You are in labbooking gettableinfo()");
          var getList = await _labBookingService.RetrieveList();
          listOfBookings.list = getList;
-         _logger.LogInformation(listOfBookings.ToString());
-         
-        return View("Index", listOfBookings);
+         return View("Index", listOfBookings);
     }
-
-    /*http://localhost:5051/labbooking/viewall*/
+    
+    [Authorize(Roles = "User,Admin,Labtech")]
     [HttpGet]
-    [Route("viewallBooking")]
-    public async Task<IActionResult> GetTableInfo1(BookingTableManagementViewModel listOfBookings)
+    public async Task<IActionResult> ViewAllBookings(BookingTableManagementViewModel listOfBookings)
     {
-         _logger.LogInformation("You are in booking gettableinfo1()");
          var getList = await _labBookingService.RetrieveBookTableList();
          listOfBookings.list = getList;
          _logger.LogInformation(listOfBookings.ToString());
@@ -63,21 +56,18 @@ public class LabBookingController: Controller
         return View("ViewBooking", listOfBookings);
     }
 
+    [Authorize(Roles = "User,Admin,Labtech")]
     [HttpPost]
-    [Route("addBooking")]
        public async Task<IActionResult> BookRegister(BookFormModel labModel)
     {
-        Console.WriteLine("hello");
         var user = await _usermanager.GetUserAsync(User);
             await _labBookingService.CreateBook(labModel, user.Id);
-            _logger.LogInformation("Test Successful");
-            return View("Register", labModel);
+            return View("_CompleteBooking");
     }
         
        [Route("deletebooking/{bookingid}")]
          public async Task<IActionResult> DeleteBook(BookingTableManagementViewModel listOfBookings, int bookingid)
     {       
-        Console.WriteLine("hello here is controller");
         await _labBookingService.DeleteBook(bookingid);
         var getList = await _labBookingService.RetrieveBookTableList();
         listOfBookings.list = getList;

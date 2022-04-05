@@ -70,13 +70,12 @@ public class LabBookingService : ILabBookingService
             listOfLab.Add(new BookingDashboardViewModel()
             {
                 LabNo = lab.LabId,
-                LabCurrentUser = lab.Capacity,
+                LabTotalUser = lab.Capacity,
                 LabState = lab.LabStatus,
+                LabOccupancy = lab.Occupied,
                 LabLocation = lab.LabLocation
             });
-            Console.WriteLine(lab.LabLocation);
         }
-
         return listOfLab;
     }
 

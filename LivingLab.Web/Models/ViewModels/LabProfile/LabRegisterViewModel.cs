@@ -6,7 +6,6 @@ namespace LivingLab.Web.Models.ViewModels.LabProfile;
 
 public class LabRegisterViewModel
 {
-    /*public IList<ApplicationUser> LabICList { get; set; }*/
     [Required]
     [Display(Name = "LabLocation")]
     public string LabLocation { get; set; }
