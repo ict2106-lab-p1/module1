@@ -15,10 +15,4 @@ public class AccessoryTypeRepository : Repository<AccessoryType>, IAccessoryType
         _context = context;
     }
 
-    //public async Task<string?> GetTodoTitle(int id)
-    //{
-    //    var todo = await _context.Todos.FirstOrDefaultAsync(t => t.ID == id);
-    //    return todo?.Title;
-    //}
-
 }

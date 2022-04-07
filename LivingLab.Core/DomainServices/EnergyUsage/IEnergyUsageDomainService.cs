@@ -12,4 +12,4 @@ public interface IEnergyUsageDomainService
     Task<LabDetailsDTO> GetLabEnergyBenchmark(int labId);
     Task SetLabEnergyBenchmark(Entities.Lab lab);
 }
- 
+

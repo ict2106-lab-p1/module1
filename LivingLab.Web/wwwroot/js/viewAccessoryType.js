@@ -1,7 +1,12 @@
 /* <remarks>*/
 /* Author: Team P1-3*/
 /* </remarks>*/
-$(document).ready(function() {
+
+/*
+* Scripts for View Accessory DataTable by Accessory Type, Add Accessory Modal
+*/
+
+$(document).ready(function () {
 
     //Add Overlay
     const viewMoreBtns = document.querySelectorAll('#viewMoreBtn')
@@ -12,18 +17,18 @@ $(document).ready(function() {
         addOverlay.classList.toggle("flex");
     };
 
-    $("#addAccessoryModalBtn").click(function() {
+    $("#addAccessoryModalBtn").click(function () {
         fillAddModal(this);
         toggleAddModal();
     });
-    $(".closeAddModal").click(function() {
+    $(".closeAddModal").click(function () {
         toggleAddModal();
     });
 
     /***
      * Display new type input when user choose others
      */
-    $("#addAccessoryType").change(function() {
+    $("#addAccessoryType").change(function () {
         const selectedValue = jQuery(this).val();
         if (selectedValue === "Others") {
             $("#forNewType").removeClass("hidden");
@@ -43,13 +48,13 @@ $(document).ready(function() {
     viewMoreBtns.forEach(btn => btn.addEventListener('click', viewwMoreEventHandler))
 
     // Misc Alerts
-    $("#addForm").submit(function() {
+    $("#addForm").submit(function () {
         alert("Accessory added successfully and is pending approval!");
     });
 });
 
 function fillAddModal(e) {
-    $.get("/Accessory/AddAccessoryDetails", function(data) {
+    $.get("/Accessory/AddAccessoryDetails", function (data) {
         document.getElementById("accessoryId").value = data.accessory.id + 1;
         var accessoryTypeDDL = document.getElementById("addAccessoryType");
         if (accessoryTypeDDL.length === 0) {

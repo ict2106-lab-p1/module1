@@ -2,40 +2,43 @@
 @* /// <remarks> *@
 @* /// Author: Team P1-5 *@
 @* /// </remarks> *@
-<div class="flex">
-    <div class="flex-grow">
-        <p class="text-4xl pb-3 flex items-center font-black">
-            Add Booking
-        </p>
-    </div>
-</div>
-<div class="row">
+<div class="row" xmlns="http://www.w3.org/1999/html">
     <div class="col-md-4">
-        <form id="registerLab" method="post" asp-controller="LabBooking" asp-action="BookRegister">
+        <div class="bg-white shadow p-12 mb-12 rounded-lg">
+            <div>
+                <h2 class="text-2xl font-bold">
+                    Add New Lab Booking
+                </h2>
+                <p class="text-base mt-3 font-medium text-lg">Enter basic information </p>
+            </div>
+            
+            <form id="registerLab" method="post" asp-controller="LabBooking" asp-action="BookRegister">
             @* <div asp-validation-summary="ModelOnly" class="text-danger"></div> *@
-            <div class="form-floating">
-                <label asp-for="LabId"></label>
-                <input asp-for="LabId" class="form-control" aria-required="true"/>
+            <div class="form-floating mt-6">
+                <label asp-for="LabId" class="font-semibold"></label> <br>
+                <input asp-for="LabId" class="input input-bordered w-full max-w-xs" aria-required="true"/>
                 <span asp-validation-for="LabId" class="text-danger"></span>
             </div>
-            <div class="form-floating">
-                <label asp-for="StartTime"></label>
-                <input asp-for="StartTime" class="form-control" aria-required="true"/>
+            <div class="form-floating mt-6">
+                <label asp-for="StartTime" class="font-semibold"> Start Time</label> <br>
+                <input asp-for="StartTime" class="input input-bordered w-full max-w-xs" aria-required="true"/>
                 <span asp-validation-for="StartTime" class="text-danger"></span>
             </div>
-            <div class="form-floating">
-                <label asp-for="EndTime"></label>
-                <input asp-for="EndTime" class="form-control" aria-required="true"/>
+            <div class="form-floating mt-6">
+                <label asp-for="EndTime" class="font-semibold"> End Time</label> <br>
+                <input asp-for="EndTime" class="input input-bordered w-full max-w-xs" aria-required="true"/>
                 <span asp-validation-for="EndTime" class="text-danger"></span>
             </div>
-            <div class="form-floating">
-                <label asp-for="Description"></label>
-                <input asp-for="Description" class="form-control" aria-required="true"/>
+            <div class="form-floating mt-6">
+                <label asp-for="Description" class="font-semibold"></label> <br>
+                <input asp-for="Description" placeholder="Enter description" class="input input-bordered w-full max-w-xs" aria-required="true"/>
                 <span asp-validation-for="Description" class="text-danger"></span>
             </div>
-            <button id="labsubmit" type="submit" class="w-100 btn btn-lg btn-primary">New Book</button>
-        </form>
+            <div class="flex justify-center mt-12">
+                <button id="labsubmit" type="submit" class="btn btn-primary w-6/12">Submit booking</button>
+            </div> 
+            </form>
     </div>
-    
+    </div>
 </div>
 

@@ -11,7 +11,7 @@
 <head>
     <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <title>@ViewData["Title"] - Living Lab Dashboard</title>
+    <title>@ViewData["Title"] | Living Lab Dashboard</title>
 
     <link rel="stylesheet" href="~/dist/site.css" asp-append-version="true"/>
     <link
@@ -53,14 +53,16 @@
     class="z-100 side-bar w-60 lg:block bg-dark space-y-6 py-7 px-2 absolute inset-y-0 left-0 transform -translate-x-full md:relative md:translate-x-0 transition duration-200 ease-in-out">
 <div
     class="w-full flex px-4 pr-6 my-auto items-center justify-start ">
-    <img src="/images/logo.png" class="h-12 w-12"/>
-    <a class="font-semibold text-2xl text-gray-400 pl-4" asp-action="" asp-controller="Home">
-        Living Lab
+    @*<img src="/images/logo.png" class="h-12 w-12"/>*@
+    <a class="font-semibold text-2xl text-white" asp-action="" asp-controller="Home">
+        Living Lab Dashboard
     </a>
 </div>
 <ul class="relative">
-<li>
-    <div class="@Html.ActiveClass("Home", "Dashboard") collapse-title text-gray-400 px-5 font-medium  w-full flex items-center">
+@if (SignInManager.IsSignedIn(User))
+{
+    <li>
+    <div class="@Html.ActiveClass("", "") collapse-title text-gray-400 px-5 font-medium  w-full flex items-center">
         <a asp-controller="Home" asp-action="Dashboard">Dashboard</a>
         <hr class="border-gray-600"/>
     </div>
@@ -171,24 +173,14 @@
     <div tabindex="0" class="collapse collapse-arrow">
         <input type="checkbox">
         <div class="@Html.ActiveClass("", "") collapse-title text-gray-400 px-5 font-medium w-full flex items-center">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 mr-2" viewBox="0 0 24 24" fill="none"
-                 stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M21.21 15.89A10 10 0 1 1 8 2.83"></path>
-                <path d="M22 12A10 10 0 0 0 12 2v10z"></path>
-            </svg>
             <span>Energy Usage</span>
             <hr class="border-gray-600"/>
         </div>
         <div class="collapse-content text-gray-400">
             <ul>
-                <li class="@Html.ActiveClass("EnergyUsage", "Index") relative hover:bg-highlight hover:text-gray-700 ease-in duration-300">
+                <li class="@Html.ActiveClass("", "") relative hover:bg-highlight hover:text-gray-700 ease-in duration-300">
                     <a class="hover:translate-x-2 transition-transform ease-in duration-300 w-full flex items-center h-10 pl-4 cursor-pointer"
                        asp-controller="EnergyUsage" asp-action="Index">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 mr-2" viewBox="0 0 24 24" fill="none"
-                             stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <path d="M21.21 15.89A10 10 0 1 1 8 2.83"></path>
-                            <path d="M22 12A10 10 0 0 0 12 2v10z"></path>
-                        </svg>
                         <span>Energy Usage</span>
                     </a>
                 </li>
@@ -196,9 +188,6 @@
                     <a
                         class="hover:translate-x-2 transition-transform ease-in duration-300 w-full flex items-center h-10 pl-4 cursor-pointer"
                         asp-controller="EnergyUsageAnalysis" asp-action="Index">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582-4 8-4s8 1.79 8 4m0 5c0 2.21-3.582 4-8 4s-8-1.79-8-4"/>
-                        </svg>
                         <span>Analysis</span>
                     </a>
                 </li>
@@ -206,20 +195,21 @@
                     <a
                         class="hover:translate-x-2 transition-transform ease-in duration-300 w-full flex items-center h-10 pl-4 cursor-pointer"
                         asp-controller="EnergyUsageComparison" asp-action="Index">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582-4 8-4s8 1.79 8 4m0 5c0 2.21-3.582 4-8 4s-8-1.79-8-4"/>
-                        </svg>
                         <span>Comparison</span>
+                    </a>
+                </li>
+                <li class="@Html.ActiveClass("", "") relative hover:bg-highlight hover:text-gray-700 ease-in duration-300">
+                    <a
+                        class="hover:translate-x-2 transition-transform ease-in duration-300 w-full flex items-center h-10 pl-4 cursor-pointer"
+                        asp-controller="ManualLogs" asp-action="Index">
+                        <span>Logs</span>
                     </a>
                 </li>
                  <li class="@Html.ActiveClass("", "") relative hover:bg-highlight hover:text-gray-700 ease-in duration-300">
                     <a
                         class="hover:translate-x-2 transition-transform ease-in duration-300 w-full flex items-center h-10 pl-4 cursor-pointer"
-                        asp-controller="ManualLogs" asp-action="Index">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582-4 8-4s8 1.79 8 4m0 5c0 2.21-3.582 4-8 4s-8-1.79-8-4"/>
-                        </svg>
-                        <span>Upload Logs</span>
+                        asp-controller="Notifications" asp-action="Index">
+                        <span>Notification Preferences</span>
                     </a>
                 </li>
             </ul>
@@ -238,14 +228,14 @@
             <ul>
                 <li>
                     <a
-                        class="@Html.ActiveClass("UserManagement", "UserOverview") hover:translate-x-2 transition-transform ease-in duration-300 w-full flex items-center h-10 pl-4 cursor-pointer"
+                        class="@Html.ActiveClass("", "") hover:translate-x-2 transition-transform ease-in duration-300 w-full flex items-center h-10 pl-4 cursor-pointer"
                         asp-controller="UserManagement" asp-action="UserAccounts" asp-route-userId="@userId">
                         <span>Users Overview</span>
                     </a>
                 </li>
                 <li>
                     <a
-                        class="@Html.ActiveClass("Account", "Register") hover:translate-x-2 transition-transform ease-in duration-300 w-full flex items-center h-10 pl-4 cursor-pointer"
+                        class="@Html.ActiveClass("", "") hover:translate-x-2 transition-transform ease-in duration-300 w-full flex items-center h-10 pl-4 cursor-pointer"
                         asp-controller="Account" asp-action="Register">
                         <span>Add Users</span>
                     </a>
@@ -255,16 +245,31 @@
     </div>
 </li>
 
-@if (SignInManager.IsSignedIn(User))
-{
     <li>
         <div class="@Html.ActiveClass("", "") collapse-title text-gray-400 px-5 font-medium w-full flex items-center">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 mr-2" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M22 17H2a3 3 0 0 0 3-3V9a7 7 0 0 1 14 0v5a3 3 0 0 0 3 3zm-8.27 4a2 2 0 0 1-3.46 0"></path>
-            </svg>
             <span>
-                <a asp-controller="Account" asp-action="Settings">Notification Settings</a>
+                <a asp-controller="Account" asp-action="Settings">Settings</a>
             </span>
+            <hr class="border-gray-600"/>
+        </div>
+    </li>
+    <li>
+        <div class="@Html.ActiveClass("", "") collapse-title text-gray-400 px-5 font-medium  w-full flex items-center">
+            <a asp-controller="" asp-action="">Automations</a>
+            <hr class="border-gray-600"/>
+        </div>
+    </li>
+
+    <li>
+        <div class="@Html.ActiveClass("", "") collapse-title text-gray-400 px-5 font-medium  w-full flex items-center">
+            <a asp-controller="" asp-action="">Routines</a>
+            <hr class="border-gray-600"/>
+        </div>
+    </li>
+
+    <li>
+        <div class="@Html.ActiveClass("", "") collapse-title text-gray-400 px-5 font-medium  w-full flex items-center">
+            <a asp-controller="" asp-action="">Event Sources</a>
             <hr class="border-gray-600"/>
         </div>
     </li>
@@ -275,7 +280,15 @@
         </div>
     </li>
 }
-
+else
+{
+    <li>
+        <div class="@Html.ActiveClass("", "") collapse-title text-gray-400 px-5 font-medium  w-full flex items-center">
+            <a asp-controller="Login" asp-action="Index">Login</a>
+            <hr class="border-gray-600"/>
+        </div>
+    </li>
+}
 </ul>
 </div>
 <!-- end sidebar -->

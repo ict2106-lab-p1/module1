@@ -15,7 +15,7 @@ public class LabConfig : IEntityTypeConfiguration<Lab>
         builder.ToTable("Labs");
         builder.HasOne(l => l.ApplicationUser)
             .WithMany(a => a.Labs)
-            .HasForeignKey(l=>l.LabInCharge)
-            .HasPrincipalKey(a=>a.Id);
+            .HasForeignKey(l => l.LabInCharge)
+            .HasPrincipalKey(a => a.Id);
     }
 }

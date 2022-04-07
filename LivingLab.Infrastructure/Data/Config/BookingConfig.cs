@@ -19,7 +19,7 @@ public class BookingConfig : IEntityTypeConfiguration<Booking>
             .HasPrincipalKey("LabId");
         builder.HasOne(b => b.ApplicationUser)
             .WithMany(a => a.Bookings)
-            .HasForeignKey(b=>b.UserId)
-            .HasPrincipalKey(a=>a.Id);
+            .HasForeignKey(b => b.UserId)
+            .HasPrincipalKey(a => a.Id);
     }
 }

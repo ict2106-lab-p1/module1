@@ -1,10 +1,9 @@
 using LivingLab.Core.Entities;
-using LivingLab.Core.Entities.Identity;
 
 namespace LivingLab.Core.Repositories.EnergyUsage;
 
 /// <remarks>
-/// Author: Team P1-1
+/// Author: Team P1-5
 /// </remarks>
 public interface IEnergyUsageRepository : IRepository<EnergyUsageLog>
 {
@@ -15,4 +14,5 @@ public interface IEnergyUsageRepository : IRepository<EnergyUsageLog>
     Task<List<EnergyUsageLog>> GetLabEnergyUsageByLocationAndDate(string labLocation, DateTime? start, DateTime? end);
     Task<List<EnergyUsageLog>> GetLabEnergyUsageByDate(DateTime? start, DateTime? end);
     Task<List<EnergyUsageLog>> GetLabEnergyUsageByLabNameAndDate(string labName, DateTime start, DateTime end);
+    Task<List<EnergyUsageLog>> GetLatestLogs(int size);
 }

@@ -5,9 +5,9 @@ namespace LivingLab.Core.DomainServices.EnergyUsage.EnergyUsageBuilder;
 /// </remarks>
 public interface IEnergyUsageBuilder
 {
-    void BuildDistinctIdentifier ();
-    void BuildEUInWatt ();
-    void BuildEUCost ();
-    void BuildEUList ();
-    
+    void BuildDistinctIdentifier();
+    void BuildEUInWatt();
+    void BuildEUCost();
+    void BuildEUList();
+
 }

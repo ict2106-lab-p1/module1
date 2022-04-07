@@ -1,9 +1,9 @@
 let allEnergyUsageTrendChart;
 
-$(document).ready(async function() {
+$(document).ready(async function () {
     const data = await getDataAllEnergyUsageTrend();
     if (!data) return;
-    
+
     initLineChartAllEnergyUsageTrend(data);
     initDatepickerAllEnergyUsageTrend();
     $("#filterAllEnergyUsageTrend").click(filterAllEnergyUsageTrend);
@@ -24,7 +24,7 @@ function initDatepickerAllEnergyUsageTrend() {
         defaultDate: firstDayAllEnergyUsageTrend,
         minDate: oneMonthAgoAllEnergyUsageTrend,
         maxDate: todayAllEnergyUsageTrend,
-        onSelect: function(dateText) {
+        onSelect: function (dateText) {
             $endAllEnergyUsageTrend.datepicker("option", "minDate", dateText);
         }
     })
@@ -32,7 +32,7 @@ function initDatepickerAllEnergyUsageTrend() {
     $endAllEnergyUsageTrend.datepicker({
         defaultDate: todayAllEnergyUsageTrend,
         maxDate: todayAllEnergyUsageTrend,
-        onSelect: function(dateText) {
+        onSelect: function (dateText) {
             $startAllEnergyUsageTrend.datepicker("option", "maxDate", dateText);
         }
     });
@@ -131,7 +131,8 @@ function getLogsAllEnergyUsageTrend(data) {
 function getBenchmarkAllEnergyUsageTrend(data) {
     const benchmarkAllEnergyUsageTrend = [];
     for (let i = 0; i < getDatesAllEnergyUsageTrend().length; i++) {
-        benchmarkAllEnergyUsageTrend.push(data.allLabEnergyUsage.lab.energyUsageBenchmark);
+        benchmarkAllEnergyUsageTrend.push(1003);
+        // benchmarkAllEnergyUsageTrend.push(data.allLabEnergyUsage.lab.energyUsageBenchmark);
     }
     return benchmarkAllEnergyUsageTrend;
 }

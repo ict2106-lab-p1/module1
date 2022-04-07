@@ -14,21 +14,21 @@ public class Booking
     [Required]
     [DataType(DataType.DateTime)]
     public DateTime StartDateTime { get; set; }
-    
+
     [Required]
     [DataType(DataType.DateTime)]
     public DateTime EndDateTime { get; set; }
 
     public string? Description { get; set; }
-    
+
     [Required]
     public int LabId { get; set; }
-    
+
     public Lab? Lab { get; set; }
 
     [Required]
-    public string UserId { get; set; }
-    
+    public string? UserId { get; set; }
+
     public ApplicationUser? ApplicationUser { get; set; }
 
 }

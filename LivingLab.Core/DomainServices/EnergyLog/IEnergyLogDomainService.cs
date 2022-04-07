@@ -9,4 +9,5 @@ public interface IEnergyLogDomainService
 {
     Task<EnergyUsageLog> Log(EnergyUsageLog log);
     bool ExceedThreshold(int deviceId, double currentEnergyUsage);
+    Task<List<EnergyUsageLog>> GetLogs(int size);
 }

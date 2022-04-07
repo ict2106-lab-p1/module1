@@ -1,3 +1,10 @@
+/* <remarks>*/
+/* Author: Team P1-3*/
+/* </remarks>*/
+
+/*
+* Generate and view charts for Session Statistics
+*/
 
 const ctx = document.getElementById('durationLoggedChart');
 const ctx2 = document.getElementById('dataUploadedChart');
@@ -11,7 +18,6 @@ function getDuration(){
     const $rows = $table.find("tbody > tr");
 
     $rows.each(function () {
-        //const duration = $(this).find("td.duration").text();
         const login = $(this).find("td.login").text();
         const logout = $(this).find("td.logout").text();
 

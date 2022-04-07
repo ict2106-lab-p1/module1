@@ -10,6 +10,6 @@ public class EnergyUsageLogViewModel
     public double EnergyUsage { get; set; }
     public TimeSpan Interval { get; set; }
     public DateTime LoggedDate { get; set; }
-    public EnergyUsageLabViewModel Lab { get; set; }
-    public DeviceViewModel Device { get; set; }
+    public EnergyUsageLabViewModel? Lab { get; set; }
+    public DeviceViewModel? Device { get; set; }
 }

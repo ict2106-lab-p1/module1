@@ -8,7 +8,7 @@ namespace LivingLab.Infrastructure.Data.Config;
 /// <remarks>
 /// Author: Team P1-3
 /// </remarks>
-public class AccessoryConfig: IEntityTypeConfiguration<Accessory>
+public class AccessoryConfig : IEntityTypeConfiguration<Accessory>
 {
     public void Configure(EntityTypeBuilder<Accessory> builder)
     {

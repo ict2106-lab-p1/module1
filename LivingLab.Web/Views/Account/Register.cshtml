@@ -1,4 +1,4 @@
-@model LivingLab.Web.Models.ViewModels.Login.RegisterViewModel
+@model LivingLab.Web.Models.ViewModels.Account.RegisterViewModel
 @* /// <remarks> *@
 @* /// Author: Team P1-5 *@
 @* /// </remarks> *@
@@ -9,33 +9,40 @@
     <div class="col-md-4">
         <form id="registerForm" method="post" asp-controller="Account" asp-action="Register">
             <div class="bg-white shadow p-12  mb-12  rounded-lg">
-                <p class="text-xl font-semibold">Basic Information </p>
+                <div>
+                    <h2 class="text-2xl font-bold">
+                        Register Users
+                    </h2>
+                    <p class="text-base mt-3 font-medium text-lg">Enter basic information </p>
+                </div>
                 <div class="mt-6">
                     <p>
                         <label asp-for="Role" class="font-semibold"></label>
                     </p>
-                    <select class="select select-bordered w-full max-w-xs" name="role" asp-for="Role">
-                        <option disabled selected>Select Role</option>
-                        <option value="User">USER</option>
-                        <option value="Labtech">LABTECH</option>
-                        <option value="Admin">ADMIN</option>
+                    <select class="select select-bordered w-full max-w-xs"  name="role" asp-for="Role">
+                        <option disabled selected>User role</option>
+                        <option value="User">User</option> 
+                        <option value="Labtech">Lab Technician</option>
+                        <option value="Admin">Admin</option>                    
                     </select>
+                </div>
+                <div class="flex ">
+                    <div class="mt-6">
+                        <p>
+                            <label asp-for="FirstName" class="font-semibold"></label>
+                        </p> <input asp-for="FirstName" type="text" placeholder="Enter your First Name" class="input input-bordered w-full max-w-xs">
+                    </div>
+                    <div class="mt-6 ml-6">
+                        <p>
+                            <label asp-for="LastName" class="font-semibold"></label>
+                        </p> <input asp-for="LastName" type="text" placeholder="Enter your Last Name" class="input input-bordered w-full max-w-xs">
+                    </div>
                 </div>
                 <div class="mt-6">
                     <p>
                         <label asp-for="Email" class="font-semibold"></label>
                     </p>
                     <input asp-for="Email" type="text" placeholder="Enter your Email" class="input input-bordered w-full max-w-xs">
-                </div>
-                <div class="mt-6">
-                    <p>
-                        <label asp-for="FirstName" class="font-semibold"></label>
-                    </p> <input asp-for="FirstName" type="text" placeholder="Enter your First Name" class="input input-bordered w-full max-w-xs">
-                </div>
-                <div class="mt-6">
-                    <p>
-                        <label asp-for="LastName" class="font-semibold"></label>
-                    </p> <input asp-for="LastName" type="text" placeholder="Enter your Last Name" class="input input-bordered w-full max-w-xs">
                 </div>
                 <div class="mt-6">
                     <p>
@@ -47,25 +54,24 @@
                         <label asp-for="Faculty" class="font-semibold"></label>
                     </p>
                     <select class="select select-bordered w-full max-w-xs" name="faculty" asp-for="Faculty">
-                        <option disabled selected>Select Faculty</option>
+                        <option disabled selected>Faculty</option>
                         <option value="SE">SE</option>
                         <option value="ICT">ICT</option>
-                        <option value="MDME">MDME</option>
-                        <option value="CSC">CSC</option>
+                        <option value="ENG">Engineering</option>
+                        <option value="Science">Science</option>
                     </select>
+ 
                 </div>
-                <div class="mt-6">
-                    <p>
-                        <label asp-for="Password" class="font-semibold"></label>
-                    </p>
-                    <input asp-for="Password" type="password" placeholder="Enter your Password" class="input input-bordered w-full max-w-xs">
+                <div class="flex">
+                    <div class="mt-6">
+                        <p><label asp-for="Password" class="font-semibold"></label></p>
+                        <input asp-for="Password" type="password" placeholder="Enter your Password" class="input input-bordered w-full max-w-xs">
+                    </div>
+                    <div class="mt-6 ml-6">
+                        <p><label asp-for="ConfirmPassword" class="font-semibold"></label></p>
+                        <input asp-for="ConfirmPassword" type="password" placeholder="Enter your Password" class="input input-bordered w-full max-w-xs">
+                    </div>
                 </div>
-                <div class="mt-6">
-                    <p>
-                        <label asp-for="ConfirmPassword" class="font-semibold"></label>
-                    </p> <input asp-for="ConfirmPassword" type="password" placeholder="Enter your Password" class="input input-bordered w-full max-w-xs">
-                </div>
-
                 <div class="mt-4 mb-4">
                     <p>
                         <span asp-validation-for="Email" class="text-sm text-red-500"></span>
@@ -86,20 +92,12 @@
                         <span asp-validation-for="Password" class="text-sm text-red-500"></span>
                     </p>
                     <p>
-                        <span asp-validation-for="ConfirmPassword" class="text-sm text-red-500"></span>
                     </p>
                 </div>
             </div>
             <div class="flex justify-center">
-                <button id="registerSubmit" type="submit" class="btn  w-6/12">Create User</button>
-            </div>
-            <div class="flex justify-center">
-                <button id="registerSubmit" type="submit" class="btn  w-6/12">Create User</button>
-            </div>
-            <div class="flex justify-center">
-                <button id="registerSubmit" type="submit" class="btn  w-6/12">Create Lab</button>
+                <button id="registerSubmit" type="submit" class="btn btn-primary w-6/12">Create User</button>
             </div>
         </form>
     </div>
-
 </div>

@@ -5,7 +5,7 @@
 @* /// Author: Team P1-5 *@
 @* /// </remarks> *@
 <div class="flex">
-    <div class="flex-grow">
+    <div class="flex-grow mx-4 my-4">
         <p class="text-4xl pb-3 flex items-center font-black">
             View Lab Availability
         </p>
@@ -21,9 +21,9 @@
                 <div class="badge badge-accent">@item.LabState</div>
                 <p class="text-lg font-medium pt-2">@item.LabLocation</p>
                 <p class="text-lg font-medium pt-2">@item.LabOccupancy / @item.LabTotalUser people</p>
-                <div class="card-actions pt-12 text-center">
-                    <a class="btn btn-primary  bg-gray-700 border-gray-700" asp-controller="LabProfile" asp-action="LabProfile" asp-route-labLocation="@item.LabLocation">View More</a>
-                    <a class="btn btn-primary  bg-gray-700 border-gray-700" asp-controller="LabBooking" asp-action="Register" asp-route-labId="@item.LabNo">Book Now</a>
+                <div class="card-actions pt-12 text-center justify-center">
+                    <a class="btn btn-primary btn-outline" asp-controller="LabProfile" asp-action="LabProfile" asp-route-labLocation="@item.LabLocation">View lab details</a>
+                    <a class="btn btn-primary" asp-controller="LabBooking" asp-action="Register" asp-route-labId="@item.LabNo">Book Now</a>
                 </div>
             </div>
         </div>

@@ -16,7 +16,7 @@ public class AccessoryProfile : Profile
         CreateMap<Accessory, AccessoryViewModel>().ReverseMap();
         CreateMap<AccessoryDetailsDTO, AccessoryDetailsViewModel>().ReverseMap();
         CreateMap<AccessoryType, AccessoryTypeViewModel>().ReverseMap();
-        CreateMap<ViewAccessoryTypeDTO, AccessoryTypeViewModel>().ReverseMap();        
+        CreateMap<ViewAccessoryTypeDTO, AccessoryTypeViewModel>().ReverseMap();
         CreateMap<ViewAccessoryTypeDTO, OverallAccessoryTypeViewModel>().ReverseMap();
     }
 }

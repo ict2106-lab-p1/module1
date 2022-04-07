@@ -5,16 +5,16 @@ namespace LivingLab.Core.Entities;
 /// <remarks>
 /// Author: Team P1-3
 /// </remarks>
-public class Accessory: Equipment
-{   
+public class Accessory : Equipment
+{
     [Key]
     public int Id { get; set; }
     [Required]
-    public string? Status { get; set; }
+    public new string? Status { get; set; }
     [Required]
     public int LabId { get; set; }
 
-    [Required] 
+    [Required]
     public int AccessoryTypeId { get; set; }
 
     public Lab? Lab { get; set; }

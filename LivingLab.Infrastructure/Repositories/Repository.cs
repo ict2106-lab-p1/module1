@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore;
 namespace LivingLab.Infrastructure.Repositories;
 
 /// <remarks>
-/// Author: Team P1-1
+/// Author: Team P1-5
 /// </remarks>
 public class Repository<T> : IRepository<T> where T : class
 {
@@ -57,11 +57,15 @@ public class Repository<T> : IRepository<T> where T : class
         return entity;
     }
 
-    // Load referenced entities in query results.
-    // Default implementation returns query result as-is without loading anything extra.
+    /// <summary>
+    /// Load referenced entities in query results.
+    /// Default implementation returns query result as-is without loading anything extra.
+    /// </summary>
     protected virtual IQueryable<T> IncludeReferences(IQueryable<T> subset) => subset;
 
-    // Same as IncludeReferences, but for DbSet.Find operations
-    // Because for some reason, Entity Framework has a seperate API for it
+    /// <summary>
+    /// Same as IncludeReferences, but for DbSet.Find operations
+    /// Because for some reason, Entity Framework has a seperate API for it
+    /// </summary>
     protected virtual Task IncludeReferencesForFindAsync(T entity) => Task.CompletedTask;
 }

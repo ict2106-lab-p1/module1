@@ -2,9 +2,13 @@
 /* Author: Team P1-3*/
 /* </remarks>*/
 
-$(document).ready(function() {
+/*
+* Scripts for View Device DataTable by Device Type, Add Device Modal
+*/
+
+$(document).ready(function () {
     const viewMoreBtns = document.querySelectorAll('#viewMoreBtn')
-    
+
     const viewwMoreEventHandler = () => {
         console.log("View More Device");
         var deviceType = event.target.parentElement.parentElement.firstElementChild.textContent;
@@ -15,8 +19,8 @@ $(document).ready(function() {
 
     viewMoreBtns.forEach(btn => btn.addEventListener('click', viewwMoreEventHandler))
 
-    $('.btnViewMore').each(function() {
-        $(this).on('click', function(evt) {
+    $('.btnViewMore').each(function () {
+        $(this).on('click', function (evt) {
             $this = $(this);
             var dtRow = $this.parents('tr');
             document.postDeviceType.deviceType.value = dtRow[0].cells[0].innerHTML;
@@ -33,18 +37,18 @@ $(document).ready(function() {
         addOverlay.classList.toggle("flex");
     };
 
-    $("#addDeviceModalBtn").click(function() {
+    $("#addDeviceModalBtn").click(function () {
         fillAddModal(this);
         toggleAddModal();
     });
-    $(".closeAddModal").click(function() {
+    $(".closeAddModal").click(function () {
         toggleAddModal();
     });
 
     /***
      * Display new type input when user choose others
      */
-    $("#addDeviceType").change(function() {
+    $("#addDeviceType").change(function () {
         var selectedValue = jQuery(this).val();
         if (selectedValue === "Others") {
             $("#newDeviceType").removeClass("hidden");
@@ -54,18 +58,16 @@ $(document).ready(function() {
     });
 
     // Misc Alerts
-    $("#addForm").submit(function() {
+    $("#addForm").submit(function () {
         alert("Device added successfully and is pending approval!");
     });
 });
 
 function fillAddModal(e) {
-    $.get("/Device/ViewAddDetails", function(data) {
+    $.get("/Device/ViewAddDetails", function (data) {
         console.log(data);
         console.log("Last row Id: " + data.device.id);
         document.getElementById("add-device-id").value = data.device.id + 1;
-        // document.getElementById("add-labId").value = data.device.lab.labId
-        // document.getElementById("add-labLocation").value = data.device.lab.labLocation
         var deviceTypeDDL = document.getElementById("addDeviceType")
         if (deviceTypeDDL.length === 0) {
             for (var i = 0; i < data.deviceTypes.length; i++) {

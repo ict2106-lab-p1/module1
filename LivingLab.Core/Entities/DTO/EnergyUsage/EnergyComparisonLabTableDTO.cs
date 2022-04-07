@@ -1,8 +1,10 @@
 namespace LivingLab.Core.Entities.DTO.EnergyUsage;
 
+/// <remarks>
+/// Author: Team P1-2
+/// </remarks>
 public class EnergyComparisonLabTableDTO
 {
-
     public string? LabLocation { get; set; }
 
     public double TotalEnergyUsage { get; set; }
@@ -10,5 +12,4 @@ public class EnergyComparisonLabTableDTO
     public double EnergyUsageCost { get; set; }
 
     public double EnergyUsageIntensity { get; set; }
-
 }

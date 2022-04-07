@@ -1,6 +1,6 @@
 let chart;
 
-$(document).ready(async function() {
+$(document).ready(async function () {
     const labLocation = $("#labLocation").val();
     const data = await getData(labLocation);
     if (!data) return;
@@ -26,7 +26,7 @@ function initDatepicker() {
         defaultDate: firstDay,
         minDate: oneMonthAgo,
         maxDate: today,
-        onSelect: function(dateText) {
+        onSelect: function (dateText) {
             $end.datepicker("option", "minDate", dateText);
         }
     })
@@ -34,7 +34,7 @@ function initDatepicker() {
     $end.datepicker({
         defaultDate: today,
         maxDate: today,
-        onSelect: function(dateText) {
+        onSelect: function (dateText) {
             $start.datepicker("option", "maxDate", dateText);
         }
     });
@@ -146,6 +146,7 @@ function getBenchmark(data) {
     for (let i = 0; i < getDates().length; i++) {
         benchmark.push(data.selectedLabEnergyUsage.lab.energyUsageBenchmark);
     }
+    console.log(benchmark)
     return benchmark;
 }
 

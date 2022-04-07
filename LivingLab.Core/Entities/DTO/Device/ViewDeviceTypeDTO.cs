@@ -4,6 +4,6 @@ namespace LivingLab.Core.Entities.DTO.Device;
 /// </remarks>
 public class ViewDeviceTypeDTO
 {
-    public string Type;
+    public string? Type;
     public int Quantity;
 }

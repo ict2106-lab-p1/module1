@@ -4,18 +4,33 @@
 
 <div class="flex justify-between">
     <h2 class="font-bold text-3xl text-black">My Logs</h2>
-    <button onclick="showAlert()" class="bg-dark hover:bg-slate-700 text-white font-bold py-1 px-4 rounded-full trigger-swal">Upload Logs</button>
+    <button onclick="showAlert()" class="btn btn-primary trigger-swal">Upload Logs</button>
 </div>
-<br/>
-<section class="mx-auto pb-10">
-    <img class="mx-auto" src="/images/Women Power Mobile.png" alt="screenshot" >
-</section>
-<h3 class="text-2xl text-gray-800 text-center">You do not have any uploaded logs.</h3>
-<p class="text-lg text-gray-800 text-center">All uploaded logs will appear here.</p>
-<br/>
+@* <br/> *@
+@* <section class="mx-auto pb-10"> *@
+@*     <img class="mx-auto" src="/images/Women Power Mobile.png" alt="screenshot" > *@
+@* </section> *@
+@* <h3 class="text-2xl text-gray-800 text-center">You do not have any uploaded logs.</h3> *@
+@* <p class="text-lg text-gray-800 text-center">All uploaded logs will appear here.</p> *@
+@* <br/> *@
+
+<div class="mt-10">
+    <table id="logs" class="table table-zebra mt-10 w-full">
+        <thead>
+        <tr>
+            <th>Device Serial No.</th>
+            <th>Lab Location</th>
+            <th>Energy Usage</th>
+            <th>Logged At</th>
+        </tr>
+        </thead>
+    </table>
+</div>
+
 
 
 @section Scripts
 {
     <script src="~/js/confirmationModals.js"></script>
+    <script src="~/js/viewEnergyLogs.js"></script>
 }

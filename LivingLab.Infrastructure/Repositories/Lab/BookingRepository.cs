@@ -18,9 +18,14 @@ public class BookingRepository : Repository<Booking>, IBookingRepository
         _context = context;
     }
 
+    /// <summary>
+    /// Retrieve lab bookings
+    /// </summary>
+    /// <returns>List of bookings</returns>
     public async Task<List<Booking>> GetAllBooking()
     {
-           var labBooking = await _context.Bookings.ToListAsync();
+        var labBooking = await _context.Bookings.ToListAsync();
+        //extract all the Booking data from Book table
         return labBooking;
     }
 }

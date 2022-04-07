@@ -2,8 +2,12 @@
 /* Author: Team P1-3*/
 /* </remarks>*/
 
+/*
+* Scripts for Exporting of Session Statistics DataTable to .csv file
+*/
+
 class ExportToCSV {
-    constructor (table, includeHeaders = true) {
+    constructor(table, includeHeaders = true) {
         this.table = table;
         this.rows = Array.from(table.querySelectorAll("tr"));
 
@@ -12,7 +16,7 @@ class ExportToCSV {
         }
     }
 
-    convertToCSV () {
+    convertToCSV() {
         const lines = [];
         const numCols = this._findLongestRowLength();
 
@@ -33,11 +37,11 @@ class ExportToCSV {
         return lines.join("\n");
     }
 
-    _findLongestRowLength () {
+    _findLongestRowLength() {
         return this.rows.reduce((l, row) => row.childElementCount > l ? row.childElementCount : l, 0);
     }
 
-    static parseCell (tableCell) {
+    static parseCell(tableCell) {
         let parsedValue = tableCell.textContent;
 
         // Replace all double quotes with two double quotes

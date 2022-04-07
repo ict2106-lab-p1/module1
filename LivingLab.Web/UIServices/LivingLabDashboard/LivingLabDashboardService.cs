@@ -1,9 +1,4 @@
-using AutoMapper;
-
-using LivingLab.Core.DomainServices.Equipment.Device;
-using LivingLab.Core.DomainServices.Lab;
-using LivingLab.Web.Models.ViewModels.Device;
-using LivingLab.Web.Models.ViewModels.LivingLabDashboard;
+using LivingLab.Web.UIServices.EnergyLog;
 
 namespace LivingLab.Web.UIServices.LivingLabDashboard;
 /// <remarks>
@@ -11,27 +6,51 @@ namespace LivingLab.Web.UIServices.LivingLabDashboard;
 /// </remarks>
 public class LivingLabDashboardService : ILivingLabDashboardService
 {
-    private readonly  IMapper _mapper;
-    private readonly IDeviceDomainService _deviceDomainService;
-    private readonly ILabProfileDomainService _labProfileDomainService;
 
-    public LivingLabDashboardService(IDeviceDomainService deviceDomainService, IMapper mapper,
-        ILabProfileDomainService labProfileDomainService)
+    private readonly IEnergyLogService _energyLogService;
+
+    public LivingLabDashboardService(IEnergyLogService energyLogService)
     {
-        _deviceDomainService = deviceDomainService;
-        _labProfileDomainService = labProfileDomainService;
-        _mapper = mapper;
+        _energyLogService = energyLogService;
     }
 
-    public async Task<LivingLabDashboardViewModel> GetAllLabs()
+    /// <summary>
+    /// Get energy usage (yesterday, last week, last month)
+    /// </summary>
+    /// <returns>usages</returns>
+    public async Task<List<string>> GetUsages()
     {
-        List<Core.Entities.Lab> labList = await _labProfileDomainService.ViewLabs();
+        var usages = new List<string>();
 
-        LivingLabDashboardViewModel viewLabs = new LivingLabDashboardViewModel
+        DateTime previousMonth = DateTime.Now.AddDays(-30);
+        DateTime previousWeek = DateTime.Now.AddDays(-7);
+        DateTime previousDay = DateTime.Now.AddDays(-1);
+
+        var EnergyResult = await _energyLogService.GetLogs(1000);
+
+        Double totalUsageMonth = 0.0;
+        Double totalUsageWeek = 0.0;
+        Double totalUsageDay = 0.0;
+
+        foreach (var data in EnergyResult)
         {
-            LabList = labList
-        };
-        return viewLabs;
+            if (data.LoggedDate > previousMonth)
+            {
+                totalUsageMonth += data.EnergyUsage;
+            }
+            if (data.LoggedDate > previousWeek)
+            {
+                totalUsageWeek += data.EnergyUsage;
+            }
+            if (data.LoggedDate > previousDay)
+            {
+                totalUsageDay += data.EnergyUsage;
+            }
+        }
+
+        usages.Add(String.Format("{0:0.00}", totalUsageMonth / 1000));
+        usages.Add(String.Format("{0:0.00}", (totalUsageWeek / 1000) / 4));
+        usages.Add(String.Format("{0:0.00}", totalUsageDay / 1000));
+        return usages;
     }
-    
 }

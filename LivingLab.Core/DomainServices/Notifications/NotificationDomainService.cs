@@ -3,8 +3,6 @@ using LivingLab.Core.Entities.Identity;
 using LivingLab.Core.Enums;
 using LivingLab.Core.Repositories.Notification;
 
-using Microsoft.Extensions.Logging;
-
 namespace LivingLab.Core.DomainServices.Notifications;
 
 /// <remarks>
@@ -13,33 +11,34 @@ namespace LivingLab.Core.DomainServices.Notifications;
 public class NotificationDomainService : INotificationDomainService
 {
     private readonly IEmailRepository _emailRepository;
-    private readonly ISmsRepository _smsRepository;
     private readonly IAccountDomainService _accountDomainService;
-    private readonly ILogger<NotificationDomainService> _logger;
-    
-    public NotificationDomainService(IAccountDomainService accountDomainService, ILogger<NotificationDomainService> logger, IEmailRepository emailRepository, ISmsRepository smsRepository)
+
+    public NotificationDomainService(IAccountDomainService accountDomainService, IEmailRepository emailRepository)
     {
         _accountDomainService = accountDomainService;
-        _logger = logger;
         _emailRepository = emailRepository;
-        _smsRepository = smsRepository;
     }
+
+    /// <summary>
+    /// Set notification preference of a user.
+    /// </summary>
+    /// <param name="currentUser">Current logged in user</param>
+    /// <param name="preference">Notification preference</param>
+    /// <returns>Task</returns>
     public Task SetNotificationPref(ApplicationUser currentUser, NotificationType preference)
     {
         currentUser.PreferredNotification = preference;
         return _accountDomainService.UpdateUser(currentUser);
     }
 
-    /*
-     * Get list of technicians who chose Email as their preferred notification style
-     */
+
+    /// <summary>
+    /// Get list of technicians who chose Email as their preferred notification style
+    /// </summary>
+    /// <param name="preference">Notification preference</param>
+    /// <returns>List of users</returns>
     public Task<List<ApplicationUser>> GetAllTechniciansWithNotiPref(NotificationType preference)
     {
         return _emailRepository.GetAccountByNotiPref(preference);
     }
-
-    /*public Task<List<ApplicationUser>> GetAllTechniciansWithNotiPref(NotificationType preference)
-    {
-        return _smsRepository.GetAccountByNotiPref(preference);
-    }*/
 }

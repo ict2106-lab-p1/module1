@@ -3,14 +3,14 @@
 
 @using LivingLab.Web.Models.ViewModels.LabProfile
 @model LivingLab.Web.Models.ViewModels.LabProfile.MultiModel
-
-
 @inject SignInManager<ApplicationUser> SignInManager
 @inject UserManager<ApplicationUser> UserManager
-
-
+@* /// <remarks> *@
+@* /// Author: Team P1-5 *@
+@* /// </remarks> *@
 @{
     ViewData["Title"] = "Home Page";
+    var listofusers = await UserManager.GetUsersInRoleAsync("labtech");
 }
 <div class="bg-white shadow mb-12  rounded-lg">
                     <h2 class="font-semibold text-xl p-4">Labs</h2>
@@ -47,11 +47,17 @@
                                                         </div>
                                                     </td>
                                                     <td class="px-12 py-4 text-sm text-gray-900">@lab.LabLocation</td>
-                                                    <td class="px-12 py-4 text-sm text-gray-900">@lab.LabInCharge</td>
+                                                    <td class="px-12 py-4 text-sm text-gray-900">@foreach (var user in @listofusers)
+                                                                                                 {
+                                                                                                     @if (user.Id == lab.LabInCharge)
+                                                                                                     {
+                                                                                                         @user.Email
+                                                                                                     }
+                                                                                                 }</td>
                                                     <td class="px-12 py-4 text-sm text-gray-900">@lab.LabStatus</td>
                                                     <td class="px-12 py-4 text-sm text-gray-900">@lab.LabLocation</td>
                                                     <td class="px-12 py-4 whitespace-nowrap text-right text-sm font-medium">
-                                                        <label class="btn"><a asp-controller="LabProfile" asp-action="LabProfile" asp-route-labLocation="@lab.LabLocation">View Profile</a></label>
+                                                        <label class="btn btn-primary"><a asp-controller="LabProfile" asp-action="LabProfile" asp-route-labLocation="@lab.LabLocation">View Profile</a></label>
                                                     </td>
  
                                                 </tr>

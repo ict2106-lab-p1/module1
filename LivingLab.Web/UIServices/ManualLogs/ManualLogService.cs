@@ -21,6 +21,13 @@ public class ManualLogService : IManualLogService
         _manualLogDomainService = manualLogDomainService;
     }
 
+    /// <summary>
+    /// 1. Call Manual Log Domain Service to parse uploaded file into a list
+    /// 2. Map logs DTO to Log Item ViewModel
+    /// 3. Call SaveLogs to insert the logs into database
+    /// </summary>
+    /// <param name="file"></param>
+    /// <returns>Number of logs</returns>
     public async Task<int> UploadLogs(IFormFile file)
     {
         var logs = _manualLogDomainService.UploadLogs(file);
@@ -29,6 +36,11 @@ public class ManualLogService : IManualLogService
         return logsVM.Count;
     }
 
+    /// <summary>
+    /// 1. Map Log Item ViewModel to Energy Usage Log Entity
+    /// 2. Call Manual Log Domain Service to bulk insert the list of logs to database
+    /// </summary>
+    /// <param name="logs, fileSizeBytes"></param>
     public async Task SaveLogs(List<LogItemViewModel> logs, double? fileSizeBytes)
     {
         var data = _mapper.Map<List<LogItemViewModel>, List<EnergyUsageLog>>(logs);

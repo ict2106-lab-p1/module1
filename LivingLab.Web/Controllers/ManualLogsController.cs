@@ -28,22 +28,39 @@ public class ManualLogsController : Controller
         _logger = logger;
     }
 
+    /// <summary>
+    /// Route to Index
+    /// </summary>
+    /// <returns>Index View</returns>
     public IActionResult Index()
     {
         return View();
     }
 
+    /// <summary>
+    /// Route to File Upload
+    /// </summary>
+    /// <returns>FileUpload View</returns>
     public IActionResult FileUpload()
     {
         return View();
     }
 
+    /// <summary>
+    /// Route to Manual Log Upload
+    /// </summary>
+    /// <returns>labs model</returns>
     public async Task<IActionResult> ManualLogUpload()
     {
         var labs = await _labProfileService.GetAllLabAccounts();
         return View(labs);
     }
 
+    /// <summary>
+    /// Route to Manual Log via File Upload
+    /// </summary>
+    /// <param name="file"></param>
+    /// <returns>status 200</returns>
     [HttpPost]
     public async Task<IActionResult> Upload(IFormFile file)
     {
@@ -59,13 +76,18 @@ public class ManualLogsController : Controller
         }
     }
 
+    /// <summary>
+    /// Save the logs uploaded to the system
+    /// </summary>
+    /// <param name="logs"></param>
+    /// <returns>status 200</returns>
     [HttpPost]
     public async Task<IActionResult> Save([FromBody] List<LogItemViewModel> logs)
     {
         try
         {
             if (logs.Count == 0) return Error();
-            
+
             await _manualLogService.SaveLogs(logs);
             return Ok();
         }

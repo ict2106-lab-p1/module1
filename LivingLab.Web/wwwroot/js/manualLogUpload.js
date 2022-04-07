@@ -7,7 +7,7 @@
                             </svg>
                         </button>
                     </div>
-                <div class="flex flex-col lg:flex-row lg:space-x-3">
+                <div class="flex flex-col justify-between lg:flex-row lg:space-x-3">
                 <div class="flex flex-row lg:flex-col justify-center lg:space-y-2">
                 <h3 class="text-center text-gray-600 m-auto lg:m-0">Lab Location</h3>
                     <select class="labs select w-full max-w-xs select-bordered"></select>

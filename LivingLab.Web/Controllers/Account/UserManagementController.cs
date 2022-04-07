@@ -7,9 +7,6 @@ namespace LivingLab.Web.Controllers.Account;
 /// <remarks>
 /// Author: Team P1-5
 /// </remarks>
-///
-/// 
-
 [Route("userManagement")]
 public class UserManagementController : Controller
 {
@@ -20,36 +17,65 @@ public class UserManagementController : Controller
         _logger = logger;
         _userManagementService = userManagementService;
     }
-    
 
-    [Route("Index")]
-    public async Task<IActionResult> UserAccounts(string userId)
+    /// <summary>
+    /// 1. Get all user accounts
+    /// 2. Map to view model
+    /// 3. Return user accounts index
+    ///  <param name="userId">UserID</param>
+    ///  </summary>
+    [Route("index")]
+    public async Task<IActionResult> UserAccounts(string Id)
     {
-        ViewUserManagementViewModel viewUserManagementViewModel = await _userManagementService.GetAllAccounts();
-        return View("Index", viewUserManagementViewModel); 
+        ViewUserManagementViewModel ViewUserManagementVM = await _userManagementService.GetAllAccounts();
+        return View("Index", ViewUserManagementVM);
     }
+
+    /// <summary>
+    /// 1. View user details of selected user
+    /// 2. Map to view model
+    /// 3. Return user
+    ///  <param name="userId">UserID</param>
+    ///  </summary>
     [Route("View/{id}")]
-    public async Task<UserManagementViewModel> ViewUserDetails(string id)
-    { 
+    public async Task<UserManagementViewModel> ViewUserDetails(string Id)
+    {
         //retrieve data from db
-        UserManagementViewModel user = await _userManagementService.ViewUserDetails(id);
-        return user;
+        UserManagementViewModel User = await _userManagementService.ViewUserDetails(Id);
+        return User;
     }
-    
-    [HttpPost("View/Edit")]
-    public async Task<IActionResult> EditUser(UserManagementViewModel editAccount)
-    {
-        await _userManagementService.EditAccount(editAccount);
 
-        ViewUserManagementViewModel viewAccounts = await _userManagementService.GetAllAccounts();
-        return View("Index", viewAccounts);
-    }
-    
-    [HttpPost("View/Delete")]
-    public async Task<IActionResult> DeleteAccount(UserManagementViewModel deleteAccount)
+    /// <summary>
+    /// 1. Edit user details of selected user
+    /// 2. Map to view model
+    /// 3. Return user
+    ///  <param name="editAccount">Retrieve relevant attributes</param>
+    ///  </summary>
+    [HttpPost("View/Edit")]
+    public async Task<IActionResult> EditUser(UserManagementViewModel EditAccount)
     {
-        await _userManagementService.DeleteAccount(deleteAccount);
-        ViewUserManagementViewModel viewAccounts = await _userManagementService.GetAllAccounts();
-        return View("Index", viewAccounts);
+        await _userManagementService.EditAccount(EditAccount);
+
+        ViewUserManagementViewModel ViewAcconts = await _userManagementService.GetAllAccounts();
+        return View("Index", ViewAcconts);
+    }
+
+    /// <summary>
+    /// 1. Delete user details of selected user
+    /// 2. Map to view model
+    /// 3. Return user
+    ///  <param name="deleteAccount">Delete account</param>
+    ///  </summary>
+    [HttpPost("View/Delete")]
+    public async Task<IActionResult> DeleteAccount(UserManagementViewModel DeleteAccount)
+    {
+
+
+        await _userManagementService.DeleteAccount(DeleteAccount);
+        ViewUserManagementViewModel ViewAcconts = await _userManagementService.GetAllAccounts();
+        return View("Index", ViewAcconts);
+
+
+
     }
 }

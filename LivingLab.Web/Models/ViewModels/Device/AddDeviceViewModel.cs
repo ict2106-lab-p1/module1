@@ -4,7 +4,7 @@ namespace LivingLab.Web.Models.ViewModels.Device;
 /// </remarks>
 public class AddDeviceViewModel
 {
-    public String NewType { get; set; }
-    public DeviceViewModel Device { get; set; }
-    public List<String> DeviceTypes { get; set; }
+    public String? NewType { get; set; }
+    public DeviceViewModel? Device { get; set; }
+    public List<String>? DeviceTypes { get; set; }
 }

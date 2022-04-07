@@ -5,6 +5,9 @@ using LivingLab.Web.Models.ViewModels.UserManagement;
 
 namespace LivingLab.Web.Mapping;
 
+/// <remarks>
+/// Author: Team P1-5
+/// </remarks>
 public class UserProfile : Profile
 {
     public UserProfile()

@@ -1,5 +1,8 @@
 namespace LivingLab.Core.Entities.DTO.EnergyUsage;
 
+/// <remarks>
+/// Author: Team P1-2
+/// </remarks>
 public class EnergyComparisonGraphDTO
 {
     public string? LabLocation { get; set; }

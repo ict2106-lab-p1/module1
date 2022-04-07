@@ -1,4 +1,3 @@
-using LivingLab.Web.Models.ViewModels;
 using LivingLab.Web.Models.ViewModels.EnergyUsage;
 
 namespace LivingLab.Web.UIServices.ManualLogs;
@@ -9,6 +8,6 @@ namespace LivingLab.Web.UIServices.ManualLogs;
 public interface IManualLogService
 {
     Task<int> UploadLogs(IFormFile file);
-    
+
     Task SaveLogs(List<LogItemViewModel> logs, double? fileSizeBytes = null);
 }

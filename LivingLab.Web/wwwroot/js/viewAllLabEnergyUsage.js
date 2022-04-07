@@ -19,7 +19,7 @@ function initLineChart(ctx, data) {
         data: {
             labels: getDates(),
             datasets: [{
-                label: "Actual Usage",
+                label: "Actual Usage (kWh)",
                 data: getLogs(data),
                 fill: false,
                 borderColor: 'rgb(75, 192, 192)',

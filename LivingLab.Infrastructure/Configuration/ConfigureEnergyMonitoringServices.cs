@@ -19,6 +19,10 @@ namespace LivingLab.Infrastructure.Configuration;
 /// <summary>
 /// Team P1-1 & P1-2 to add dependency injections for mod 2 here.
 /// </summary>
+///
+/// <remarks>
+/// Author: Team P1-1
+/// </remarks>
 public static class ConfigureEnergyMonitoringServices
 {
     public static IServiceCollection AddEnergyMonitoringServices(this IServiceCollection services)
@@ -33,7 +37,6 @@ public static class ConfigureEnergyMonitoringServices
     {
         // Repositories
         services.AddTransient<IEnergyUsageRepository, EnergyUsageRepository>();
-        services.AddTransient<ISmsRepository, SmsRepository>();
         services.AddTransient<IEmailRepository, EmailRepository>();
 
         // Services
@@ -41,11 +44,11 @@ public static class ConfigureEnergyMonitoringServices
         services.AddTransient<IManualLogDomainService, ManualLogDomainService>();
         services.AddTransient<INotificationDomainService, NotificationDomainService>();
         services.AddTransient<IEnergyLogDomainService, EnergyLogDomainService>();
-        services.AddTransient<IEnergyUsageAnalysisService, EnergyUsageAnalysisService>();
+        services.AddTransient<IEnergyUsageAnalysisDomainService, EnergyUsageAnalysisDomainDomainService>();
         services.AddTransient<IEnergyUsageBuilder, DeviceEnergyUsageBuilder>();
         services.AddTransient<IEnergyUsageComparisonService, EnergyUsageComparisonService>();
         services.AddTransient<IEnergyUsageDomainService, EnergyUsageDomainService>();
-        
+
         return services;
     }
 
@@ -55,7 +58,7 @@ public static class ConfigureEnergyMonitoringServices
 
         return services;
     }
-    
+
     private static IServiceCollection AddSingletonServices(this IServiceCollection services)
     {
         // services.AddSingleton<ITodoRepository, TodoRepository>();

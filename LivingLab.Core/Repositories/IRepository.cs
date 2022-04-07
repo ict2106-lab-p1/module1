@@ -1,7 +1,7 @@
 namespace LivingLab.Core.Repositories;
 
 /// <remarks>
-/// Author: Team P1-1
+/// Author: Team P1-5
 /// </remarks>
 public interface IRepository<T> where T : class
 {

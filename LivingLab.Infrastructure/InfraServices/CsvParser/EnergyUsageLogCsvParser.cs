@@ -15,9 +15,11 @@ namespace LivingLab.Infrastructure.InfraServices.CsvParser;
 /// </remarks>
 public class EnergyUsageLogCsvParser : CsvParserTemplate<EnergyUsageCsvDTO>, IEnergyUsageLogCsvParser
 {
-    /**
-     * Create a temporary random file.
-     */
+    /// <summary>
+    /// save file temporarily on disk
+    /// </summary>
+    /// <param name="file">CSV file</param>
+    /// <returns>path to temporary location allocated by system</returns>
     protected override string SaveFile(IFormFile file)
     {
         var filePath = Path.GetTempFileName();
@@ -26,6 +28,11 @@ public class EnergyUsageLogCsvParser : CsvParserTemplate<EnergyUsageCsvDTO>, IEn
         return filePath;
     }
 
+    /// <summary>
+    /// read CSV file from disk and interpret as iterable objects
+    /// </summary>
+    /// <param name="filePath">path to CSV file on disk</param>
+    /// <returns>on-demand query that generates objects</returns>
     protected override ParallelQuery<CsvMappingResult<EnergyUsageCsvDTO>> ReadFile(string filePath)
     {
         var options = new CsvParserOptions(true, ',');
@@ -34,10 +41,12 @@ public class EnergyUsageLogCsvParser : CsvParserTemplate<EnergyUsageCsvDTO>, IEn
         var result = parser.ReadFromFile(filePath, Encoding.Default);
         return result;
     }
-    
-    /**
-     * Map processes data to Model.
-     */
+
+    /// <summary>
+    /// map all given CSV row objects to EnergyUsageCsvDTO objects
+    /// </summary>
+    /// <param name="result">query that generates CSV row objects</param>
+    /// <returns>iterable of EnergyUsageCsvDTO objects</returns>
     protected override IEnumerable<EnergyUsageCsvDTO> MapResult(ParallelQuery<CsvMappingResult<EnergyUsageCsvDTO>> result)
     {
         var list = new List<EnergyUsageCsvDTO>();

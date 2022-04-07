@@ -7,8 +7,8 @@ namespace LivingLab.Web.Models.ViewModels.EnergyUsage;
 /// </remarks>
 public class LogItemViewModel
 {
-    public string LabLocation { get; set; }
-    
+    public string? LabLocation { get; set; }
+
     public string? DeviceType { get; set; }
 
     [Display(Name = "Serial No.")]
@@ -17,6 +17,7 @@ public class LogItemViewModel
     [Display(Name = "Energy Usage")]
     public double EnergyUsage { get; set; }
 
+    // energy usage log period
     [Display(Name = "Interval (mins)")]
     public int Interval { get; set; }
 

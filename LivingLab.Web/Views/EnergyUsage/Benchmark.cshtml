@@ -13,7 +13,7 @@
             <div class="w-96 flex flex-col bg-white p-5 shadow-lg rounded gap-4">
                 <h3 class="text-center text-gray-600 m-auto lg:m-0">@Html.DisplayNameFor(m => m.EnergyUsageBenchmark)
                 </h3>
-                <input id="benchmarkInput" class="input input-bordered" type="number" asp-for="EnergyUsageBenchmark"
+                <input id="benchmarkInput" class="input input-bordered" type="decimal" asp-for="EnergyUsageBenchmark"
                     value="@Model.EnergyUsageBenchmark" />
             </div>
             <div class="card w-80 h-1/2 ml-12 bg-neutral text-neutral-content bg-primary">

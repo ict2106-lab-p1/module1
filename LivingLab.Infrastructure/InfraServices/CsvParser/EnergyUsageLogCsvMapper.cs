@@ -9,6 +9,10 @@ namespace LivingLab.Infrastructure.InfraServices.CsvParser;
 /// </remarks>
 public class EnergyUsageLogCsvMapper : CsvMapping<EnergyUsageCsvDTO>
 {
+    /// <summary>
+    /// configure mapper to indicate which CSV columns
+    /// correspond to which DTO fields
+    /// </summary>
     public EnergyUsageLogCsvMapper()
     {
         MapProperty(0, x => x.LabLocation);
