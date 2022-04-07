@@ -39,6 +39,5 @@ Global
 		{134BD811-277F-4CB3-BAA4-E746D5457D73}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{134BD811-277F-4CB3-BAA4-E746D5457D73}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{134BD811-277F-4CB3-BAA4-E746D5457D73}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{134BD811-277F-4CB3-BAA4-E746D5457D73}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

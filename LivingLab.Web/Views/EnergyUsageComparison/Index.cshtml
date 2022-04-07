@@ -1,15 +1,91 @@
 @* @model List<LivingLab.Core.Models.DeviceEnergyUsageModel> *@
 
 <div class="flex">
-    <div class="flex-grow">
+    <div class="flex-grow mb-4">
         <p class="text-4xl pb-3 flex items-center font-black">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-8 pr-2" viewBox="0 0 20 20" fill="currentColor">
-                <path d="M4 3a2 2 0 100 4h12a2 2 0 100-4H4z"/>
-                <path fill-rule="evenodd" d="M3 8h14v7a2 2 0 01-2 2H5a2 2 0 01-2-2V8zm5 3a1 1 0 011-1h2a1 1 0 110 2H9a1 1 0 01-1-1z" clip-rule="evenodd"/>
-            </svg>
-            Comparison Dashboard
+            Energy Usage Comparison Analysis
         </p>
     </div>
 </div>
+<div>
+    <span>Compare by:</span><br/>
+    <select id="compare" onchange="selectComparisonType()" class="select select-bordered w-full max-w-xs column-2">
+        <option value="DeviceType">Device Type</option>
+        <option value="Lab">Lab</option>
+    </select>
+    <br />
+    <br />
+        <div class="flex flex-col" style="white-space: nowrap;">
+        <table>
+            <tr> 
+                <td class="column-2">
+                    <h6 id="opt1" class="font-semibold ml-4"></h6> <select id="option1" class="select select-bordered w-full mx-2 max-w-xs" onchange="removeChosenType()"></select>
+                   
+                </td>
+                <td class="column-2">
+                    <h6 id="opt2" class="font-semibold ml-4"></h6> <select id="option2" class="select select-bordered w-full mx-2 max-w-xs" onchange="removeChosenType()"></select>
+                    
+                </td>
+                <td class="column-2">
+                    <h6 id="opt3" class="font-semibold ml-4"></h6> <select id="option3" class="select select-bordered w-full mx-2 max-w-xs" onchange="removeChosenType()"></select>
+                   
+                </td>
+                <td class="column-2">
+                    <h6 id="opt4" class="font-semibold ml-4"></h6><select id="option4" class="select select-bordered w-full mx-2 max-w-xs" onchange="removeChosenType()"></select>
+                    
+                </td>
+                <td class="column-2">
+                    <input type="button" class="ml-6 mt-6 btn btn-primary transition-all duration-150" onclick="compareData()" value="Compare" />
+                </td>
+            </tr>
+            <tr>
+                <td class="column-2 py-3 font-semibold ml-4">Start Date:
+                    <br/>
+                    <input type="date" id="startDate" class="input input-bordered w-full mx-2 max-w-xs" required></td>
+                <td class="column-2 font-semibold ml-4">End Date:
+                    <br/><input type="date" id="endDate" class="input input-bordered w-full mx-2 max-w-xs" required></td>
+            </tr>
+        </table>
+    </div>
+    
+    <br/>
+    <br/>
+    <div id="datatable"></div>
+
+    <br />
+    <br />
+    <br />
+
+    <div id="displayGraph" class="chart-container">
+    </div>
+ </div>  
+
+<div class="fixed hidden inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full" id="errormodal-backdrop"></div>
+    <div class="hidden overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none justify-center items-center" id="errormodal">
+        <div class="relative w-auto my-6 mx-auto max-w-3xl">
+            <div class="border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none">
+                <div class="flex text-center p-5 border-b border-solid border-blueGray-200 rounded-t">
+                    <h1 class="text-3xl font-semibold">
+                        Error Message
+                    </h1>
+                </div>
+                <div class="p-6 pt-0 text-center">
+                    <svg class="mx-auto mb-4 w-14 h-14 text-gray-400 dark:text-gray-200" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                   
+                    <h2 class="mb-5 text-lg font-normal text-gray-500 dark:text-gray-400" id="errorMessage"></h2>
+                    
+                    <div class="flex items-center justify-end">
+                     <button type="button" class="text-gray-500 bg-C0C0C0 hover:bg-gray-100 focus:ring-4 focus:ring-gray-300 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600" onclick="toggleModal()">Cancel</button>
+                    </div>
+                 </div>
+            </div>
+        </div>
+    </div>
+
+
+@section Scripts
+{
+<script src="~/js/energyUsageComparison.js"></script>
+}
 
 

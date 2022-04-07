@@ -1,14 +1,14 @@
-using Xunit;
+using System;
+using System.Threading.Tasks;
+
+using LivingLab.Core.Entities;
+using LivingLab.Infrastructure.Data;
+using LivingLab.Infrastructure.Repositories.EnergyUsage;
+
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Diagnostics;
-using LivingLab.Core.Entities;
-using LivingLab.Core.Entities.Identity;
-using LivingLab.Core.Interfaces.Repositories;
-using LivingLab.Infrastructure.Data;
-using LivingLab.Infrastructure.Repositories;
-using System;
-using System.Collections.Generic;
-using System.Threading.Tasks;
+
+using Xunit;
 
 namespace LivingLab.UnitTests;
 
@@ -35,12 +35,14 @@ public class EnergyUsageRepoTest
 
         // Insert test log entry
         Task.WhenAll(deviceTask, labTask)
-            .ContinueWith(_ => {
+            .ContinueWith(_ =>
+            {
                 testDevice = deviceTask.Result;
                 testLab = labTask.Result;
             })
             .ContinueWith(_ => context.AddAsync(
-                new EnergyUsageLog {
+                new EnergyUsageLog
+                {
                     EnergyUsage = 25,
                     LoggedDate = DateTime.Now,
                     Device = testDevice,
@@ -49,7 +51,7 @@ public class EnergyUsageRepoTest
             ))
             .ContinueWith(_ => context.SaveChangesAsync())
             .Wait();
-        
+
 
         // var getDeviceTask = context.Devices.ToListAsync();
         // getDeviceTask.Wait();
@@ -70,7 +72,8 @@ public class EnergyUsageRepoTest
         var repo = new EnergyUsageRepository(context);
 
         var logs = await repo.GetAllAsync();
-        if(logs.Count > 0) {
+        if (logs.Count > 0)
+        {
             Assert.NotNull(logs[0].Device);
         }
     }
@@ -82,7 +85,8 @@ public class EnergyUsageRepoTest
         var repo = new EnergyUsageRepository(context);
 
         var logs = await repo.GetUsageByDeviceId(testDevice.Id);
-        if(logs.Count > 0) {
+        if (logs.Count > 0)
+        {
             Assert.NotNull(logs[0].Device);
         }
     }
@@ -94,7 +98,8 @@ public class EnergyUsageRepoTest
         var repo = new EnergyUsageRepository(context);
 
         var logs = await repo.GetUsageByDeviceType(testDevice.Type);
-        if(logs.Count > 0) {
+        if (logs.Count > 0)
+        {
             Assert.NotNull(logs[0].Device);
         }
     }
@@ -106,7 +111,8 @@ public class EnergyUsageRepoTest
         var repo = new EnergyUsageRepository(context);
 
         var logs = await repo.GetUsageByLabId(testLab.LabId);
-        if(logs.Count > 0) {
+        if (logs.Count > 0)
+        {
             Assert.NotNull(logs[0].Lab);
         }
     }

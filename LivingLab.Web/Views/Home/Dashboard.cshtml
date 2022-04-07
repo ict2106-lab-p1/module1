@@ -1,0 +1,141 @@
+@* /// <remarks> *@
+@* /// Author: Team P1-5 *@
+@* /// </remarks> *@
+@using Microsoft.AspNetCore.Identity
+@using LivingLab.Core.Entities.Identity
+
+@model LivingLab.Web.Models.ViewModels.LivingLabDashboard.LivingLabDashboardViewModel
+
+@inject SignInManager<ApplicationUser> SignInManager
+@inject UserManager<ApplicationUser> UserManager
+
+@{
+    ViewData["Title"] = "Home Page";
+    var listofusers = await UserManager.GetUsersInRoleAsync("labtech");
+}
+
+
+<div class="m-0 overflow-hidden">
+    <div class="header sticky ">
+        <h1 class="text-4xl text-gray-600 font-semibold">Dashboard</h1>
+    </div>
+    <div class=" flex justify-evenly ">
+        <div class=" w-64 py-12 px-12 bg-white shadow-lg rounded-lg my-20 mr-4">
+            <div>
+                <h2 class="text-gray-800 text-xl font-semibold mt-4">Month's Energy Usage</h2>
+                <div class="flex">
+                    <p class="mt-2 text-3xl text-gray-600 font-semibold">@Model.Usages[0]</p>
+                    <p class="mt-2 text-gray-600  text-xl"> kw</p>
+                </div>
+            </div>
+            <div class=" mt-8 ml-2 ">
+                <a class="btn btn-primary text-sm font-medium" asp-controller="EnergyUsageAnalysis" asp-action="Index">View more</a>
+            </div>
+        </div>
+        <div class=" w-64 py-12 px-12 bg-white shadow-lg rounded-lg my-20 mr-4">
+            <div class="flex">
+
+            </div>
+            <div>
+                <h2 class="text-gray-800 text-xl font-semibold mt-4">Week's Energy Usage</h2>
+                <div class="flex">
+                    <p class="mt-2 text-3xl text-gray-600 font-semibold ">@Model.Usages[1]</p>
+                    <p class="mt-2 text-gray-600  text-xl"> kw</p>
+                </div>
+            </div>
+            <div class=" mt-8 ml-2 ">
+                <a class="btn btn-primary text-sm font-medium" asp-controller="EnergyUsage" asp-action="Index">View more</a>
+            </div>
+        </div>
+
+        <div class=" w-64 py-12 px-12 bg-white shadow-lg rounded-lg my-20 mr-4">
+            <div>
+                <h2 class="text-gray-800 text-xl font-semibold mt-4">Today's Energy Usages</h2>
+                <div class="flex">
+                    <p class="mt-2 text-3xl text-gray-600 font-semibold ">@Model.Usages[2]</p>
+                    <p class="mt-2 text-gray-600  text-xl"> kw</p>
+                </div>
+            </div>
+            <div class=" mt-8 ml-2 ">
+                <a class=" btn btn-primary text-sm font-medium" asp-controller="EnergyUsageAnalysis" asp-action="Index">View more</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+@if (Model.LabList.Any())
+{
+    <div class="bg-white shadow p-12  mb-12  rounded-lg">
+        <h2 class="font-semibold text-xl p-4">Lab Overview</h2>
+        <div class="flex flex flex-col justify-center items-center">
+            <!-- This example requires Tailwind CSS v2.0+ -->
+            <div class="flex flex-col">
+                <div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
+                    <div class="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
+                        <div class="overflow-hidden border-b border-gray-200 sm:rounded-lg">
+                            <table class="min-w-full divide-y divide-gray-200">
+                                <thead class="bg-gray-50">
+                                <tr class="justify-evenly">
+                                    <th scope="col" class="px-12 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">ID</th>
+                                    <th scope="col" class="px-12 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Location</th>
+                                    <th scope="col" class="px-12 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">In-Charge</th>
+                                    <th scope="col" class="px-12 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Status</th>
+                                    <th scope="col" class="relative px-12 py-3">
+                                        <span class="sr-only">View Profile</span>
+                                    </th>
+                                </tr>
+                                </thead>
+                                <tbody class="bg-white divide-y divide-gray-200">
+                                <tr class="hover:bg-blue-100">
+                                @foreach (var lab in Model.LabList)
+                                {
+                                    <tr>
+                                        <td class="px-12 py-4 whitespace-nowrap">
+                                            <div class="flex items-center">
+                                                <div class="">
+                                                    <div class="text-sm text-gray-900">Lab @lab.LabId</div>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td class="px-12 py-4 text-sm text-gray-900">@lab.LabLocation</td>
+                                        <td class="px-12 py-4 text-sm text-gray-900">
+                                            @foreach (var user in @listofusers)
+                                            {
+                                                @if (@user.Id == lab.LabInCharge)
+                                                {
+                                                    @user.Email
+                                                }
+                                            }
+                                        </td>
+                                        <td class="px-12 py-4 text-sm text-gray-900">
+                                            @if (lab.LabStatus == "Available")
+                                            {
+                                                <span class="rounded-full badge badge-xs badge-success"></span>
+                                                @lab.LabStatus
+                                            }
+                                            else
+                                            {
+                                                <span class="rounded-full badge badge-xs badge-error"></span>
+                                                @lab.LabStatus
+                                            }
+                                        </td>
+                                        <td class="px-12 py-4 whitespace-nowrap text-right text-sm font-medium">
+                                            <label class="btn btn-primary" data-id="@lab.LabId">
+                                                <a asp-controller="LabProfile" asp-action="ViewLab" asp-route-labLocation="@lab.LabLocation">
+                                                    View Profile
+                                                </a>
+                                            </label>
+                                        </td>
+                                    </tr>
+                                }
+                                <tr/>
+                                </tbody>
+                            </table>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}

@@ -17,6 +17,6 @@ public interface IAccessoryService
     Task<AccessoryDetailsViewModel> EditAccessory(AccessoryDetailsViewModel viewModelInput);
 
     Task<AccessoryDetailsViewModel> EditAccessoryDetails(int id);
-    
+
 
 }

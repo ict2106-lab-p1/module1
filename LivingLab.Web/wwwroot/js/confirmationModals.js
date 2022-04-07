@@ -11,8 +11,12 @@ function showAlert() {
         inputPlaceholder: 'Upload Type',
         showCancelButton: true,
         reverseButtons: true,
-        confirmButtonColor: '#363740',
+       confirmButtonColor: '#4B6BFB',
         cancelButtonColor: '#C0C0C0',
+        customClass: {
+            confirmButton: 'btn btn-primary',
+            cancelButton: 'btn btn-ghost'
+        },
         confirmButtonText: 'Submit',
     }).then(function (result) {
         if (result.value === "uploadfiles") {

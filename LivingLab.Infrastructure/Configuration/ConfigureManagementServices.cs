@@ -1,7 +1,14 @@
-using LivingLab.Core.DomainServices;
-using LivingLab.Core.Interfaces.Repositories;
-using LivingLab.Core.Interfaces.Services;
-using LivingLab.Infrastructure.Repositories;
+using LivingLab.Core.DomainServices.Account;
+using LivingLab.Core.DomainServices.Account.Session;
+using LivingLab.Core.DomainServices.Equipment.Accessory;
+using LivingLab.Core.DomainServices.Equipment.Device;
+using LivingLab.Core.DomainServices.Lab;
+using LivingLab.Core.Repositories.Account;
+using LivingLab.Core.Repositories.Equipment;
+using LivingLab.Core.Repositories.Lab;
+using LivingLab.Infrastructure.Repositories.Account;
+using LivingLab.Infrastructure.Repositories.Equipment;
+using LivingLab.Infrastructure.Repositories.Lab;
 
 using Microsoft.Extensions.DependencyInjection;
 
@@ -10,6 +17,10 @@ namespace LivingLab.Infrastructure.Configuration;
 /// <summary>
 /// Team P1-3 & P1-5 to add dependency injections for mod 1 here.
 /// </summary>
+///
+/// <remarks>
+/// Author: Team P1-5
+/// </remarks>
 public static class ConfigureManagementServices
 {
     public static IServiceCollection AddManagementServices(this IServiceCollection services)
@@ -27,7 +38,6 @@ public static class ConfigureManagementServices
         services.AddTransient<IAccessoryTypeRepository, AccessoryTypeRepository>();
         services.AddTransient<IDeviceRepository, DeviceRepository>();
         services.AddTransient<ISessionStatsRepository, SessionStatsRepository>();
-        services.AddTransient<ILabRepository, LabRepository>();
         services.AddTransient<IAccountRepository, AccountRepository>();
         services.AddTransient<ILabProfileRepository, LabProfileRepository>();
         services.AddTransient<IBookingRepository, BookingRepository>();
@@ -38,10 +48,7 @@ public static class ConfigureManagementServices
         services.AddTransient<IAccountDomainService, AccountDomainService>();
         services.AddTransient<ILabProfileDomainService, LabProfileDomainService>();
         services.AddTransient<IBookingDomainService, BookingDomainService>();
-        services.AddTransient<IIdentityDomainService, IdentityDomainService>();
-        services.AddTransient<ILabAccessDomainService, LabAccessDomainService>();
         services.AddTransient<ISessionStatsDomainService, SessionStatsDomainService>();
-
 
         return services;
     }

@@ -1,0 +1,121 @@
+@using LivingLab.Core.Entities.Identity
+@using Microsoft.AspNetCore.Identity
+@model LivingLab.Web.Models.ViewModels.LabProfile.MultiModel
+@* /// <remarks> *@
+@* /// Author: Team P1-5 *@
+@* /// </remarks> *@
+@{
+    ViewData["Title"] = "Lab Profile";
+    var listofusers = await UserManager.GetUsersInRoleAsync("labtech");
+}
+@inject UserManager<ApplicationUser> UserManager
+<div class="">
+    <div class="  ">
+        <div class="">
+            <p class="font-medium text-xl ml-12 mt-4">Overview</p>
+            <p class="font-semibold text-3xl ml-12 mb-4">Lab Profile</p>
+            <div class="bg-white m-12 p-4 rounded-lg">
+                <div class="flex mt-6">
+                    <div class=" w-full">
+                        <p class="font-semibold text-2xl ml-12 mb-4">@Html.Raw(Model.eachlab.LabLocation)</p>
+                    </div>
+                </div>
+                <div class="flex">
+                    <div class=" flex flex-column">
+                        <svg class="ml-12" xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" viewBox="0 0 24 24" version="1.2" baseProfile="tiny">
+                            <path d="M17.657 5.304c-3.124-3.073-8.189-3.073-11.313 0-3.124 3.074-3.124 8.057 0 11.13l5.656 5.565 5.657-5.565c3.124-3.073 3.124-8.056 0-11.13zm-5.657 8.195c-.668 0-1.295-.26-1.768-.732-.975-.975-.975-2.561 0-3.536.472-.472 1.1-.732 1.768-.732s1.296.26 1.768.732c.975.975.975 2.562 0 3.536-.472.472-1.1.732-1.768.732z"/>
+                        </svg>
+                        <p class="font-semibold text-base mb-4">@Html.Raw(Model.eachlab.LabLocation)</p>
+                    </div>
+                    <div class=" flex flex-column">
+                        <svg class="ml-12" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="22px" height="22px" x="0px" y="0px"
+                             viewBox="0 0 512 512" style="enable-background:new 0 0 512 512;" xml:space="preserve">
+                            <circle cx="256" cy="114.526" r="114.526"/>
+                            <path d="M256,256c-111.619,0-202.105,90.487-202.105,202.105c0,29.765,24.13,53.895,53.895,53.895h296.421
+                                            			c29.765,0,53.895-24.13,53.895-53.895C458.105,346.487,367.619,256,256,256z"/>
+
+                        </svg>
+                        <p class="font-semibold text-base mb-4">@Html.Raw(Model.eachlab.LabInCharge)</p>
+                        <p class="font-semibold text-base mb-4">
+                            @foreach (var user in @listofusers)
+                            {
+                                @if (@user.Id == Model.eachlab.LabInCharge)
+                                {
+                                    @user.Email
+                                }
+                            }
+                        </p>
+                    </div>
+                    <div class=" flex flex-column">
+                        <svg class="ml-12 " xmlns="http://www.w3.org/2000/svg" x="0px" y="0px"
+                             width="24px" height="24px" viewBox="0 0 52 52" enable-background="new 0 0 52 52" xml:space="preserve">
+                            <path d="M37.9,25c-6.7,0-12.1,5.5-12.1,12.2s5.4,12.1,12.1,12.1S50,43.8,50,37.2S44.6,25,37.9,25z M46.4,38.4h-8.8
+                                            	v-9.3c0,0,3.3-0.2,6.3,2.9S46.4,38.4,46.4,38.4z"/>
+                            <path d="M22.2,37.3c0-2.7,0.9-5.9,2.3-8.3c1.7-3,3.6-4.2,5.1-6.5c2.5-3.7,3-9.1,1.4-13.1c-1.6-4.1-5.4-6.5-9.9-6.4
+                                            	c-4.4,0.1-8.1,2.8-9.5,7c-1.6,4.5-0.9,10,2.7,13.4c1.5,1.4,2.9,3.6,2.1,5.8c-0.7,2-3.1,2.9-4.8,3.7c-3.9,1.7-8.7,4.1-9.5,8.8
+                                            	c-0.8,3.8,1.8,7.8,5.9,7.8h17.1c0.8,0,1.3-1,0.8-1.6C23.6,44.9,22.2,41.2,22.2,37.3z"/>
+                        </svg>
+                        <p class="font-semibold text-base mb-4">@Html.Raw(Model.eachlab.Occupied) / @Html.Raw(Model.eachlab.Capacity) people</p>
+                    </div>
+                </div>
+
+                <div class="flex">
+                    <div class="w-6/12 flex flex-col">
+                        <p class="font-semibold text-xl ml-12 mb-2">Devices Available</p>
+                        <div class="flex-1 bg-white mx-12 mt-4 p-4 rounded-lg border border-gray-300">
+                            <div class="flex flex-wrap">
+
+                                @foreach (var name in Model.eachlab.deviceNames)
+                                {
+                                    <div class="rounded-full font-semibold bg-gray-200 px-5 py-2.5 text-center mr-2 mb-2 w-auto">@name</div>
+                                }
+                            </div>
+                        </div>
+
+
+                        <div class="flex justify-end mr-12">
+                            <a class="no-underline hover:underline text-primary font-semibold mt-2" asp-controller="Device" asp-action="ViewType" asp-route-labLocation="@Model.eachlab.LabLocation">See more</a>
+                        </div>
+
+                    </div>
+                    <div class="w-6/12 flex flex-col">
+                        <p class="font-semibold text-xl ml-12 mb-2">Accessories Available</p>
+                        <div class="flex-1 bg-white mx-12 mt-4 p-4 rounded-lg border border-gray-300 ">
+                            <div class="flex flex-wrap">
+                                @foreach (var name in Model.eachlab.accessoriesNames)
+                                {
+                                    <div class="rounded-full font-semibold bg-gray-200 px-5 py-2.5 text-center mr-2 mb-2 w-auto">@name</div>
+                                }
+                            </div>
+                        </div>
+
+                        <div class="flex justify-end mr-12">
+                            <a class="no-underline hover:underline text-primary font-semibold mt-2" asp-controller="Accessory" asp-action="ViewAccessoryType" asp-route-labLocation="@Model.eachlab.LabLocation">See more</a>
+                        </div>
+                    </div>
+                </div>
+                <p class="font-semibold text-xl ml-12 mt-8 mb-4">Logging</p>
+                <hr class="ml-12 mr-12"/>
+                <div class="flex justify-center">
+                    <div class="mt-4 mb-24 flex flex-col w-full">
+                        <div class="bg-gray-200 mx-12 mt-4 p-4 rounded-lg border border-gray-300 ">
+                            <p class="font-bold text-xl text-center">Lab User Usage</p>
+                        </div>
+                        <div class="flex justify-center">
+                            <a class="no-underline hover:underline text-primary font-semibold mt-2" asp-controller="SessionStats" asp-action="ViewSessionStats" asp-route-labLocation="@Model.eachlab.LabLocation">See more</a>
+                        </div>
+
+                    </div>
+                    <div class="mt-4 mb-24 flex flex-col w-full">
+                        <div class="bg-gray-200 mx-12 mt-4 p-4 rounded-lg border border-gray-300 ">
+                            <p class="font-bold text-xl text-center">Lab Energy Usage</p>
+                        </div>
+                        <div class="flex justify-center">
+                            <a class="no-underline hover:underline text-primary font-semibold mt-2" asp-controller="EnergyUsage" asp-action="Lab" asp-route-LabId="@Model.eachlab.LabId">See more</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

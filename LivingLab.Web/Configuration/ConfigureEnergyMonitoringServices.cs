@@ -1,8 +1,8 @@
-using LivingLab.Core.Interfaces.Services.EnergyUsageInterfaces;
+using LivingLab.Web.UIServices.EnergyLog;
 using LivingLab.Web.UIServices.EnergyUsage;
 using LivingLab.Web.UIServices.ManualLogs;
 
-using IEnergyUsageComparisonService = LivingLab.Web.UIServices.EnergyUsage.IEnergyUsageComparisonService;
+using IEnergyUsageComparisonUIService = LivingLab.Web.UIServices.EnergyUsage.IEnergyUsageComparisonUIService;
 using IManualLogService = LivingLab.Web.UIServices.ManualLogs.IManualLogService;
 
 namespace LivingLab.Web.Configuration;
@@ -10,6 +10,10 @@ namespace LivingLab.Web.Configuration;
 /// <summary>
 /// Team P1-1 & P1-2 to add dependency injections for mod 2 here.
 /// </summary>
+///
+/// <remarks>
+/// Author: Team P1-1
+/// </remarks>
 public static class ConfigureEnergyMonitoringServices
 {
     public static IServiceCollection AddEnergyMonitoringServices(this IServiceCollection services)
@@ -24,8 +28,9 @@ public static class ConfigureEnergyMonitoringServices
     {
         services.AddTransient<IManualLogService, ManualLogService>();
         services.AddTransient<IEnergyUsageAnalysisUIService, EnergyUsageAnalysisUIService>();
-        services.AddTransient<IEnergyUsageComparisonService, EnergyUsageComparisonService>();
+        services.AddTransient<IEnergyUsageComparisonUIService, EnergyUsageComparisonUIService>();
         services.AddTransient<IEnergyUsageService, EnergyUsageService>();
+        services.AddTransient<IEnergyLogService, EnergyLogService>();
 
         return services;
     }

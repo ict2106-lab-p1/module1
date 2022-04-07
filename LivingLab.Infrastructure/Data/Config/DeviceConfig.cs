@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 namespace LivingLab.Infrastructure.Data.Config;
 
 /// <remarks>
-/// Author: Team P1-5
+/// Author: Team P1-3
 /// </remarks>
 public class DeviceConfig : IEntityTypeConfiguration<Device>
 {

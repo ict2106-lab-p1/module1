@@ -21,6 +21,12 @@
     }
 }
 
+@layer components {
+    .z-100 {
+        z-index: 100;
+    }
+}
+
 body {
     font-family: "Nunito Sans", sans-serif;
     @apply bg-inherit;

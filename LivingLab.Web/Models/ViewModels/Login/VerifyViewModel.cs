@@ -1,7 +1,8 @@
 using System.ComponentModel.DataAnnotations;
-
 namespace LivingLab.Web.Models.ViewModels.Login;
-
+/// <remarks>
+/// Author: Team P1-5
+/// </remarks>
 public class VerifyViewModel
 {
     [Required]
