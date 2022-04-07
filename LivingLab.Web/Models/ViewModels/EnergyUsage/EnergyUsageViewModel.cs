@@ -5,7 +5,9 @@ namespace LivingLab.Web.Models.ViewModels.EnergyUsage;
 /// </remarks>
 public class EnergyUsageViewModel
 {
-    public List<EnergyUsageLogViewModel> Logs { get; set; }
-    public EnergyUsageLabViewModel Lab { get; set; }
+    public List<EnergyUsageLogViewModel>? Logs { get; set; }
+    public EnergyUsageLabViewModel? Lab { get; set; }
+
+    // Median for Energy Usage Benchmark
     public double Median { get; set; }
 }

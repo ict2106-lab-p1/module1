@@ -1,8 +1,21 @@
-Refer to WORKFLOW.md for instructions on the development flow.
+# Living Lab Dashboard
+
+### Link to the hosted version of this project: [livinglab.amatsuka.me](http://livinglab.amatsuka.me)
+
+## Login Credentials
+### ADMIN:
+Email: `chuashengyu98@gmail.com`  
+Password: `P@ssw0rd`
+
+### LAB TECHNICIAN:
+Email: `hanyi.hyng@gmail.com`  
+Password: `P@ssw0rd`
+
+---
 
 ## Development Workflow
-```master```: Only codes that are ready to deploy will be merged here
-```dev```: This is where completed features are being merged
+Refer to WORKFLOW.md for instructions on the development flow.
+
 
 ## Getting started
 - Download .NET Core 6.0
@@ -123,6 +136,3 @@ Remove `livinglab.sqlite`, rerun migrations.
 - 2001632 | Yang Xiao        | 2000859YangXiao
 - 2000545 | Thomas Lee       | thomaslwk
 - 2001632 | Tan Yu Hui       | TanYuHui
----
-
-Credits: Thanks Percy for setting up the MVC skeleton + Tailwind integration.

@@ -18,25 +18,14 @@ public class BookingRepository : Repository<Booking>, IBookingRepository
         _context = context;
     }
 
+    /// <summary>
+    /// Retrieve lab bookings
+    /// </summary>
+    /// <returns>List of bookings</returns>
     public async Task<List<Booking>> GetAllBooking()
     {
-           var labBooking = await _context.Bookings.ToListAsync();
+        var labBooking = await _context.Bookings.ToListAsync();
+        //extract all the Booking data from Book table
         return labBooking;
-    }
-
-    public async Task<Booking?> AddBooking(Booking booking)
-    {
-        //Return booking that is stored
-         Booking currentUser = (await _context.Bookings.SingleOrDefaultAsync(d => d.BookingId == booking.BookingId))!;
-        currentUser.Description=booking.Description;
-        currentUser.LabId=booking.LabId;
-   
-        await _context.SaveChangesAsync();       
-        return booking;
-    }
-    
-    public async Task<int> DeleteBooking(int bookingId)
-    {
-        throw new NotImplementedException();
     }
 }

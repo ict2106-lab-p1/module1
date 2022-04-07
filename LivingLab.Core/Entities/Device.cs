@@ -1,12 +1,11 @@
 using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
 
 namespace LivingLab.Core.Entities;
 /// <remarks>
 /// Author: Team P1-3
 /// </remarks>
 public class Device : Equipment
-{    
+{
     [Key]
     public int Id { get; set; }
     [Required]
@@ -16,7 +15,7 @@ public class Device : Equipment
     [Required]
     public int LabId { get; set; }
     [Required]
-    public string Type { get; set; }
+    public string? Type { get; set; }
     public string? Description { get; set; }
     public double? Threshold { get; set; }
 }

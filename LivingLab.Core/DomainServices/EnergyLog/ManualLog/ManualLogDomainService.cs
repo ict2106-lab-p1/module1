@@ -6,7 +6,7 @@ using LivingLab.Core.Repositories.EnergyUsage;
 
 using Microsoft.AspNetCore.Http;
 
-namespace LivingLab.Core.DomainServices.EnergyLog;
+namespace LivingLab.Core.DomainServices.EnergyLog.ManualLog;
 
 /// <remarks>
 /// Author: Team P1-1
@@ -16,7 +16,7 @@ public class ManualLogDomainService : IManualLogDomainService
     private readonly IEnergyUsageLogCsvParser _csvParser;
     private readonly IEnergyUsageRepository _energyUsageRepo;
     private readonly ISessionStatsRepository _sessionStatsRepo;
-    
+
     public ManualLogDomainService(IEnergyUsageLogCsvParser csvParser, IEnergyUsageRepository energyUsageRepo,
         ISessionStatsRepository sessionStatsRepo)
     {
@@ -34,8 +34,8 @@ public class ManualLogDomainService : IManualLogDomainService
     {
         if (fileSizeBytes != null)
         {
-            // _sessionStatsRepo.LogFileUpload(data.First().Lab.LabId, fileSizeBytes.Value);
+            _sessionStatsRepo.LogFileUpload(data.First().Lab.LabId, fileSizeBytes.Value);
         }
-        return  _energyUsageRepo.BulkInsertAsync(data);
+        return _energyUsageRepo.BulkInsertAsync(data);
     }
 }

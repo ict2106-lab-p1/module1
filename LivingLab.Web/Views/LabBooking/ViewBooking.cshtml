@@ -5,7 +5,7 @@
 @* /// Author: Team P1-5 *@
 @* /// </remarks> *@
 
-<div class="bg-white shadow p-12  mb-12  rounded-lg">
+<div class="bg-white shadow mb-12  rounded-lg">
                     <h2 class="font-semibold text-xl p-4">Booking</h2>
                     <div class="flex flex flex-col justify-center items-center">
                         <!-- This example requires Tailwind CSS v2.0+ -->
@@ -44,7 +44,7 @@
                                                     <td class="px-12 py-4 text-sm text-gray-900">@lab.LabNo</td>
                                                     <td class="px-12 py-4 text-sm text-gray-900">@lab.Description</td>
                                                     <td class="px-12 py-4 whitespace-nowrap text-right text-sm font-medium">
-                                                        <label class="btn"><a asp-controller="LabBooking" asp-action="DeleteBook" asp-route-bookingid="@lab.LabNo">Delete</a></label>
+                                                        <label class="btn btn-error btn-primary"><a asp-controller="LabBooking" asp-action="DeleteBook" asp-route-bookingid="@lab.LabNo">Delete booking</a></label>
                                                     </td>
  
                                                 </tr>

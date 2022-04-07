@@ -19,7 +19,7 @@ function initLineChart(ctx, data) {
         data: {
             labels: getDates(),
             datasets: [{
-                label: "Actual Usage",
+                label: "Actual Usage (kWh)",
                 data: getLogs(data),
                 fill: false,
                 borderColor: 'rgb(75, 192, 192)',
@@ -79,7 +79,7 @@ function getBenchmark(data) {
  */
 async function getData(labId = 1) {
     const data = {
-        labId: labId,
+        LabId: labId,
     }
     try {
         return await $.ajax({

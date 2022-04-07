@@ -1,4 +1,5 @@
 using LivingLab.Web.Models.DTOs;
+using LivingLab.Web.Models.ViewModels.EnergyUsage;
 
 namespace LivingLab.Web.UIServices.EnergyLog;
 
@@ -8,4 +9,5 @@ namespace LivingLab.Web.UIServices.EnergyLog;
 public interface IEnergyLogService
 {
     Task Log(EnergyUsageLogDTO log);
+    Task<List<EnergyUsageLogViewModel>> GetLogs(int size);
 }

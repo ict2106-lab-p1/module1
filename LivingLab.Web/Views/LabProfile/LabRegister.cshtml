@@ -2,9 +2,9 @@
 @using Microsoft.AspNetCore.Identity
 @model LivingLab.Web.Models.ViewModels.LabProfile.LabRegisterViewModel
 @inject UserManager<ApplicationUser> UserManager
-
 @* /// <remarks> *@
 @* /// Author: Team P1-5 *@
+@* /// </remarks> *@
 @{
     ViewData["Title"] = "Lab Register";
     var listofusers = await UserManager.GetUsersInRoleAsync("labtech");
@@ -64,7 +64,7 @@
                 </div>
             </div>
             <div class="flex justify-center">
-                <button id="registersubmit" type="submit" class="btn  w-6/12">Create Lab</button>
+                <button id="registersubmit" type="submit" class="btn btn-primary w-6/12">Create Lab</button>
             </div>
         </form>
     </div>

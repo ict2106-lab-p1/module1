@@ -82,10 +82,10 @@ function initMedian(data) {
         duration: 1500,
         easing: 'linear',
         step: function() {
-            $median.text(Math.floor(this.countNum));
+            $median.text(Math.floor(this.countNum).toFixed(2));
         },
         complete: function() {
-            $median.text(median);
+            $median.text(median.toFixed(2));
         }
     });
 }
@@ -126,7 +126,7 @@ function getLineChart(data, start = null, end = null) {
         data: {
             labels: getDates(start, end),
             datasets: [{
-                label: "Actual Usage",
+                label: "Actual Usage (kWh)",
                 data: getLogs(data),
                 fill: false,
                 borderColor: 'rgb(75, 192, 192)',
@@ -141,8 +141,14 @@ function getLineChart(data, start = null, end = null) {
         },
         options: {
             plugins: {
-                zoom: getZoomOptions()
-            }
+                zoom: getZoomOptions(),
+                scales: {
+                    x: {
+                        min: 100
+                    }
+                }
+            },
+            responsive: true
         }
     })
 }
@@ -166,7 +172,7 @@ function getZoomOptions() {
             pinch: {
                 enabled: true
             },
-            mode: 'x'
+            mode: 'x',
         }
     }
 }

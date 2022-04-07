@@ -13,11 +13,13 @@ public class EnergyUsageDomainService : IEnergyUsageDomainService
 {
     private readonly ILabProfileRepository _labRepository;
     private readonly IEnergyUsageRepository _energyUsageRepository;
+    private const int OneThousand = 1000;
     public EnergyUsageDomainService(ILabProfileRepository labRepository, IEnergyUsageRepository energyUsageRepository)
     {
         _labRepository = labRepository;
         _energyUsageRepository = energyUsageRepository;
     }
+
     /// <summary>
     /// 1. Call Energy Usage repo to get filtered energy usage data
     /// 2. Map logs to DTO
@@ -33,7 +35,7 @@ public class EnergyUsageDomainService : IEnergyUsageDomainService
             .Select(log => new EnergyUsageLog
             {
                 LoggedDate = log.Key,
-                EnergyUsage = log.Sum(l => l.EnergyUsage),
+                EnergyUsage = log.Sum(l => l.EnergyUsage) / OneThousand,
                 Device = log.First().Device,
                 Lab = log.First().Lab
             })
@@ -50,6 +52,11 @@ public class EnergyUsageDomainService : IEnergyUsageDomainService
         return dto;
     }
 
+    /// <summary>
+    /// Retrieves energy usage benchmark for a given lab.
+    /// </summary>
+    /// <param name="labId">Lab Id</param>
+    /// <returns>LabDetailsDTO</returns>
     public async Task<LabDetailsDTO> GetLabEnergyBenchmark(int labId)
     {
         var lab = await _labRepository.GetLabDetails(labId);
@@ -64,16 +71,16 @@ public class EnergyUsageDomainService : IEnergyUsageDomainService
     }
 
     /// <summary>
-    /// Call Lab repo to set the current lab total energy benchmark
+    /// Call Lab repo to set the current lab total energy benchmark.
     /// </summary>
-    /// <param name="benchmark">Benchmark DTO object</param>
+    /// <param name="lab">Lab object</param>
     public Task SetLabEnergyBenchmark(Entities.Lab lab)
     {
         return _labRepository.SetLabEnergyBenchmark(lab.LabId, lab.EnergyUsageBenchmark!.Value);
     }
 
     /// <summary>
-    /// Find the median of the energy usage logs
+    /// Find the median of the energy usage logs.
     /// </summary>
     /// <param name="logs">Energy Usage Logs</param>
     /// <returns>Median</returns>

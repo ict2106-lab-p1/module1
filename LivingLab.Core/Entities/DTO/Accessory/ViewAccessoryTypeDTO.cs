@@ -4,6 +4,6 @@ namespace LivingLab.Core.Entities.DTO.Accessory;
 /// </remarks>
 public class ViewAccessoryTypeDTO
 {
-    public string Type;
+    public string? Type;
     public int Quantity;
 }

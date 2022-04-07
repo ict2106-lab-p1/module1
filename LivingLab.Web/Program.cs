@@ -1,6 +1,5 @@
 using LivingLab.Infrastructure;
 using LivingLab.Infrastructure.Configuration;
-using LivingLab.Web;
 using LivingLab.Web.Configuration;
 
 

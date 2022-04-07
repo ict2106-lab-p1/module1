@@ -12,7 +12,7 @@ public interface IDeviceService
     Task<DeviceViewModel> ViewDeviceDetails(int id);
     Task<DeviceViewModel> AddDevice(AddDeviceViewModel addDeviceViewModel);
     Task<AddDeviceViewModel> ViewAddDetails();
-    Task<Boolean> SendReviewerEmail(string url, string labId,  ApplicationUser labTech);
+    Task<Boolean> SendReviewerEmail(string url, string labId, ApplicationUser labTech);
     Task<DeviceViewModel> EditDevice(DeviceViewModel deviceViewModel);
     Task<DeviceViewModel> DeleteDevice(DeviceViewModel deviceViewModel);
 }

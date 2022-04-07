@@ -3,7 +3,7 @@ using LivingLab.Core.Entities.DTO.EnergyUsage;
 
 using Microsoft.AspNetCore.Http;
 
-namespace LivingLab.Core.DomainServices.EnergyLog;
+namespace LivingLab.Core.DomainServices.EnergyLog.ManualLog;
 
 /// <remarks>
 /// Author: Team P1-1

@@ -21,7 +21,7 @@
         <div class="card w-72 bg-neutral text-neutral-content bg-primary">
             <div class="card-body items-center text-center">
                 <h2 class="card-title">Median Energy Usage</h2>
-                <p><span id="median">0</span> Watts</p>
+                <p><span id="median">0</span>  kWatts</p>
             </div>
         </div>
     </div>
@@ -37,7 +37,7 @@
         <span class="text-xs font-bold text-gray-600">Ctrl + Scroll to zoom in/out. Drag to pan.</span>
     </div>
     <div class="flex mt-5 space-x-2">
-        <a class="btn btn-outline btn-primary" asp-action="Index">Back</a>
+        <a class="btn btn-outline btn-primary" href="javascript:history.go(-1)">Back</a>
             <button id="resetZoom" class="btn btn-primary text-white">Reset Zoom</button>
     </div>
 </div>

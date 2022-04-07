@@ -16,6 +16,10 @@ public class LabProfileRepository : Repository<Core.Entities.Lab>, ILabProfileRe
         _context = context;
     }
 
+    /// <summary>
+    /// Get all labs details and store it as a list
+    /// </summary>
+    /// <returns>List of lab details</returns>
     public async Task<List<Core.Entities.Lab>> GetAllLabs()
     {
         var labGroup = await _context.LabProfile.ToListAsync();
@@ -29,7 +33,14 @@ public class LabProfileRepository : Repository<Core.Entities.Lab>, ILabProfileRe
         return user;
     }
 
-    // Added by Team P1-1
+    /// <remarks>
+    /// Added by Team P1-1
+    /// </remarks>
+    /// <summary>
+    /// set the benchmark energy value of a lab for insight purposes
+    /// </summary>
+    /// <param name="labId">id of the lab to set</param>
+    /// <param name="energyBenchmark">benchmark energy usage value</param>
     public Task SetLabEnergyBenchmark(int labId, double energyBenchmark)
     {
         var lab = _context.Labs.FirstOrDefault(l => l.LabId == labId);
@@ -41,14 +52,24 @@ public class LabProfileRepository : Repository<Core.Entities.Lab>, ILabProfileRe
         return _context.SaveChangesAsync();
     }
 
-    // Added by P1-1
+    /// <remarks>Added by P1-1</remarks>
+    /// <summary>
+    /// get the benchmark energy value of a lab for insight purposes
+    /// </summary>
+    /// <param name="labId">id of the lab</param>
+    /// <returns>benchmark energy usage value</returns>
     public Task<double> GetLabEnergyBenchmark(int labId)
     {
         var lab = _context.Labs.FirstOrDefault(l => l.LabId == labId);
         return Task.FromResult(lab != null ? lab.EnergyUsageBenchmark!.Value : 0.0);
     }
 
-    // Added by P1-1
+    /// <remarks>Added by P1-1</remarks>
+    /// <summary>
+    /// get the lab that resides at a given location
+    /// </summary>
+    /// <param name="location">location of the lab</param>
+    /// <returns>the respective lab</returns>
     public Task<Core.Entities.Lab?> GetLabByLocation(string location)
     {
         return _context.Labs.FirstOrDefaultAsync(l => l.LabLocation == location);
@@ -61,21 +82,4 @@ public class LabProfileRepository : Repository<Core.Entities.Lab>, ILabProfileRe
             )
             .ToListAsync();
     }
-
-    // public async Task<Lab> EditUserDetail(Lab editUser)
-    // {
-    //     ApplicationUser currentUser = (await _context.LabProfile.SingleOrDefaultAsync(d => d.Id == editUser.Id))!;
-    //     currentUser.Email = editUser.Email;
-    //     currentUser.UserFaculty  = editUser.UserFaculty;
-    //     currentUser.LabAccesses  = editUser.LabAccesses;
-    //     await _context.SaveChangesAsync();       
-    //     return editUser;
-    // }
-    // public async Task<Lab> DeleteAccount(Lab deleteUser)
-    // {
-    //     ApplicationUser currentUser = (await _context.LabProfile.SingleOrDefaultAsync(d => d.Id == deleteUser.Id))!;
-    //     _context.Users.Remove(currentUser);
-    //     await _context.SaveChangesAsync();
-    //     return deleteUser;    
-    // }
 }

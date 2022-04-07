@@ -11,7 +11,7 @@ public interface INotificationManagementService
     Task SetNotificationPref(ApplicationUser currentUser, NotificationType preference);
 
     Task SendTextToPhone(string phone, string msgBody);
-    
+
     // By Henry
     Task SendTextToEmail(string email, string subject, string message);
 }

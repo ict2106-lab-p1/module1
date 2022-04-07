@@ -4,5 +4,5 @@ namespace LivingLab.Web.Models.ViewModels.SessionStats;
 /// </remarks>
 public class ViewSessionStatsViewModel
 {
-    public List<SessionStatsViewModel> SessionStatsList { get; set; }
+    public List<SessionStatsViewModel>? SessionStatsList { get; set; }
 }

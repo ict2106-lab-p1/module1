@@ -1,3 +1,4 @@
+using LivingLab.Core.DomainServices.Equipment.Device;
 using LivingLab.Core.Entities;
 using LivingLab.Core.Entities.DTO.Device;
 using LivingLab.Core.Repositories.Equipment;
@@ -18,11 +19,21 @@ public class DeviceRepository : Repository<Device>, IDeviceRepository
         _context = context;
     }
 
+    /// <summary>
+    /// Get device based on serial Number
+    /// </summary>
+    /// <param name="serialNo"></param>
+    /// <returns>device</returns>
     public async Task<Device> GetDeviceBySerialNo(string serialNo)
     {
         return await _context.Devices.FirstOrDefaultAsync(d => d.SerialNo == serialNo);
     }
 
+    /// <summary>
+    /// Function to get the list of devices based on lab location
+    /// <param name="labLocation"></param>
+    /// <returns>device</returns>
+    /// </summary>
     public async Task<List<Device>> GetDevicesForLabProfile(string labLocation)
     {
         var device = await _context.Devices
@@ -32,6 +43,11 @@ public class DeviceRepository : Repository<Device>, IDeviceRepository
         return device;
     }
 
+    /// <summary>
+    /// Function to update the device status based on device id and review status
+    /// <param name="deviceId">string deviceId</param>
+    /// <param name="deviceReviewStatus">string deviceReviewStatus</param>
+    /// </summary>
     public async void UpdateDeviceStatus(string deviceId, string deviceReviewStatus)
     {
         Device device = (await _context.Devices.Where(d => d.Id == Convert.ToInt32(deviceId)).FirstOrDefaultAsync())!;
@@ -42,6 +58,11 @@ public class DeviceRepository : Repository<Device>, IDeviceRepository
         await _context.SaveChangesAsync();
     }
 
+    /// <summary>
+    /// Function to get the list of devices for review based on lab location
+    /// </summary>
+    /// <param name="labLocation"></param>
+    /// <returns>device</returns>
     public async Task<List<Device>> GetAllDevicesForReview(string labLocation)
     {
         var device = await _context.Devices
@@ -49,25 +70,37 @@ public class DeviceRepository : Repository<Device>, IDeviceRepository
             .ToListAsync();
         return device;
     }
-    public async Task<List<ViewDeviceTypeDTO>> GetViewDeviceType(string labLocation)
+
+    /// <summary>
+    /// Function to get the list of devices type based on lab location
+    /// </summary>
+    /// <param name="labLocation"></param>
+    /// <returns>deviceTypeDtos</returns>
+    public async Task<DeviceCollection> GetViewDeviceType(string labLocation)
     {
         var deviceGroup = await _context.Devices
             .Include(l => l.Lab)
             .Where(l => l.Lab!.LabLocation == labLocation && l.ReviewStatus!.Equals("Approved"))
             .GroupBy(t => t.Type)
-            .Select(t => new { Key = t.Key, Count = t.Count() })
+            .Select(t => new ViewDeviceTypeDTO { Type = t.Key, Quantity = t.Count() })
             .ToListAsync();
-        List<ViewDeviceTypeDTO> deviceTypeDtos = new List<ViewDeviceTypeDTO>();
-        foreach (var group in deviceGroup)
+
+        var collection = new DeviceCollection();
+
+        foreach (var device in deviceGroup)
         {
-            ViewDeviceTypeDTO deviceTypeDto = new ViewDeviceTypeDTO();
-            deviceTypeDto.Type = group.Key;
-            deviceTypeDto.Quantity = group.Count;
-            deviceTypeDtos.Add(deviceTypeDto);
+            collection.AddDevice(device);
         }
-        return deviceTypeDtos;
+
+        return collection;
     }
 
+    /// <summary>
+    /// Function to get the list of devices based on lab location and device type
+    /// </summary>
+    /// <param name="deviceType">deviceType</param>
+    /// <param name="labLocation">labLocation</param>
+    /// <returns>deviceList</returns>
     public async Task<List<Device>> GetAllDevicesByType(string deviceType, string labLocation)
     {
         List<Device> deviceList = await _context.Devices
@@ -75,6 +108,12 @@ public class DeviceRepository : Repository<Device>, IDeviceRepository
             .Where(t => deviceType.Contains(t.Type) && t.Lab!.LabLocation == labLocation && t.ReviewStatus!.Equals("Approved")).ToListAsync();
         return deviceList;
     }
+
+    /// <summary>
+    /// Get device details based on device id
+    /// </summary>
+    /// <param name="id"></param>
+    /// <returns>device</returns>
     public async Task<Device> GetDeviceDetails(int id)
     {
         // retrieve device db together with device type details using include to join entities
@@ -83,6 +122,11 @@ public class DeviceRepository : Repository<Device>, IDeviceRepository
             .SingleOrDefaultAsync(d => d.Id == id))!;
         return device;
     }
+
+    /// <summary>
+    /// Get the device based on the last device id
+    /// </summary>
+    /// <returns></returns>
     public async Task<Device> GetLastRow()
     {
         var device = await _context.Devices
@@ -90,6 +134,12 @@ public class DeviceRepository : Repository<Device>, IDeviceRepository
             .OrderByDescending(d => d.Id).FirstOrDefaultAsync();
         return device;
     }
+
+    /// <summary>
+    /// Function to add the device
+    /// </summary>
+    /// <param name="addedDevice"></param>
+    /// <returns>addDevice</returns>
     public async Task<Device> AddDevice(Device addedDevice)
     {
         addedDevice.LabId = addedDevice.Lab.LabId;
@@ -101,6 +151,12 @@ public class DeviceRepository : Repository<Device>, IDeviceRepository
         await _context.SaveChangesAsync();
         return addedDevice;
     }
+
+    /// <summary>
+    /// Function to update the device
+    /// </summary>
+    /// <param name="editedDevice"></param>
+    /// <returns>editedDevice</returns>
     public async Task<Device> EditDeviceDetails(Device editedDevice)
     {
         // retrieve device db together with device type details using include to join entities
@@ -117,6 +173,11 @@ public class DeviceRepository : Repository<Device>, IDeviceRepository
         return editedDevice;
     }
 
+    /// <summary>
+    /// Function to delete the device
+    /// </summary>
+    /// <param name="deleteDevice"></param>
+    /// <returns>deleteDevice</returns>
     public async Task<Device> DeleteDevice(Device deleteDevice)
     {
         // retrieve device db together with device type details using include to join entities
@@ -127,6 +188,10 @@ public class DeviceRepository : Repository<Device>, IDeviceRepository
         return deleteDevice;
     }
 
+    /// <summary>
+    /// Function to get all devices type 
+    /// </summary>
+    /// <returns>device</returns>
     //Hong Ying
     public Task<List<Device>> GetAllDeviceType()
     {
@@ -135,7 +200,11 @@ public class DeviceRepository : Repository<Device>, IDeviceRepository
             )
             .ToListAsync();
     }
-    
+
+    /// <summary>
+    /// Function to get unique device type 
+    /// </summary>
+    /// <returns>device</returns>
     public async Task<List<String>> GetDeviceTypes()
     {
         return (await _context.Devices
@@ -143,4 +212,5 @@ public class DeviceRepository : Repository<Device>, IDeviceRepository
             .Distinct()
             .ToListAsync());
     }
+
 }

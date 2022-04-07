@@ -4,6 +4,6 @@ namespace LivingLab.Web.Models.ViewModels.Accessory;
 /// </remarks>
 public class OverallAccessoryTypeViewModel
 {
-    public string Type { get; set; }
+    public string? Type { get; set; }
     public int Quantity { get; set; }
 }

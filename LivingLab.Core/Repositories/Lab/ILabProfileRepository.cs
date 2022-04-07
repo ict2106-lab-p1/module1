@@ -1,4 +1,9 @@
 namespace LivingLab.Core.Repositories.Lab;
+
+/// <summary>
+/// Consist of Interfaces for lab profile repository
+/// </summary>
+/// 
 /// <remarks>
 /// Author: Team P1-5
 /// </remarks>

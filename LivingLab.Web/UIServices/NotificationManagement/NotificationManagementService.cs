@@ -3,12 +3,6 @@ using LivingLab.Core.Entities.Identity;
 using LivingLab.Core.Enums;
 using LivingLab.Core.Notifications;
 
-using Microsoft.AspNetCore.Identity.UI.Services;
-
-using Twilio;
-using Twilio.Rest.Api.V2010.Account;
-using Twilio.Types;
-
 namespace LivingLab.Web.UIServices.NotificationManagement;
 
 /// <remarks>
@@ -17,34 +11,41 @@ namespace LivingLab.Web.UIServices.NotificationManagement;
 public class NotificationManagementService : INotificationManagementService
 {
     private readonly INotificationDomainService _notificationDomainService;
-    private readonly ILogger<NotificationManagementService> _logger;
     private readonly IEmailNotifier _emailNotifier;
     private readonly ISmsNotifier _smsNotifier;
-    private readonly IConfiguration _config;
-    
-    public NotificationManagementService(IEmailNotifier emailNotifier, ISmsNotifier smsNotifier,IConfiguration config, INotificationDomainService notificationDomainService, ILogger<NotificationManagementService> logger)
+
+    public NotificationManagementService(IEmailNotifier emailNotifier, ISmsNotifier smsNotifier, INotificationDomainService notificationDomainService)
     {
         _notificationDomainService = notificationDomainService;
-        _logger = logger;
-        _config = config;
         _emailNotifier = emailNotifier;
         _smsNotifier = smsNotifier;
     }
-    
+
+    /// <summary>
+    /// Call Notification Domain Service to set the notification preference of the current user
+    /// </summary>
+    /// <param name="currentUser, preference"></param>
     public Task SetNotificationPref(ApplicationUser currentUser, NotificationType preference)
     {
         return _notificationDomainService.SetNotificationPref(currentUser, preference);
     }
 
+    /// <summary>
+    /// Call SMS Notifier to send SMS to phone number
+    /// </summary>
+    /// <param name="phone, msgBody"></param>
     public async Task SendTextToPhone(string phone, string msgBody)
     {
         await _smsNotifier.SendSmsAsync(phone, msgBody);
-        
+
     }
-    
-    /*Send Email to an address, details are defined in the domain services*/
-    public async Task SendTextToEmail(string email, string title, string message)
+
+    /// <summary>
+    /// Call Email Notifier to send Email to email address
+    /// </summary>
+    /// <param name="email, title, message"></param>
+    public async Task SendTextToEmail(string email, string title, string htmlMessage)
     {
-        await _emailNotifier.SendEmailAsync(email, title, htmlMessage: message);
+        await _emailNotifier.SendEmailAsync(email, title, htmlMessage);
     }
 }

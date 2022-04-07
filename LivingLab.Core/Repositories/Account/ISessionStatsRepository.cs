@@ -7,6 +7,6 @@ namespace LivingLab.Core.Repositories.Account;
 public interface ISessionStatsRepository : IRepository<SessionStats>
 {
     Task<List<SessionStats>> GetSessionStatsView(string labLocation);
-    
-    void LogFileUpload(string labId, double fileSize);
+
+    void LogFileUpload(int labId, double fileSize);
 }

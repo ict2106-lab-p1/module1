@@ -1,22 +1,17 @@
 @* @model List<LivingLab.Core.Models.DeviceEnergyUsageModel> *@
 
 <div class="flex">
-    <div class="flex-grow">
+    <div class="flex-grow mb-4">
         <p class="text-4xl pb-3 flex items-center font-black">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-8 pr-2" viewBox="0 0 20 20" fill="currentColor">
-                <path d="M4 3a2 2 0 100 4h12a2 2 0 100-4H4z" />
-                <path fill-rule="evenodd" d="M3 8h14v7a2 2 0 01-2 2H5a2 2 0 01-2-2V8zm5 3a1 1 0 011-1h2a1 1 0 110 2H9a1 1 0 01-1-1z" clip-rule="evenodd" />
-            </svg>
-            Comparison Dashboard
+            Energy Usage Comparison Analysis
         </p>
     </div>
 </div>
 <div>
-    Compare by:
-    <select id="compare" onchange="selectComparisonType()" class="column-2">
+    <span>Compare by:</span><br/>
+    <select id="compare" onchange="selectComparisonType()" class="select select-bordered w-full max-w-xs column-2">
         <option value="DeviceType">Device Type</option>
         <option value="Lab">Lab</option>
-
     </select>
     <br />
     <br />
@@ -24,31 +19,31 @@
         <table>
             <tr> 
                 <td class="column-2">
-                    <h6 id="opt1"></h6> <select id="option1" onchange="removeChosenType()"></select>
+                    <h6 id="opt1" class="font-semibold ml-4"></h6> <select id="option1" class="select select-bordered w-full mx-2 max-w-xs" onchange="removeChosenType()"></select>
                    
                 </td>
                 <td class="column-2">
-                    <h6 id="opt2"></h6> <select id="option2" onchange="removeChosenType()"></select>
+                    <h6 id="opt2" class="font-semibold ml-4"></h6> <select id="option2" class="select select-bordered w-full mx-2 max-w-xs" onchange="removeChosenType()"></select>
                     
                 </td>
                 <td class="column-2">
-                    <h6 id="opt3"></h6> <select id="option3" onchange="removeChosenType()"></select>
+                    <h6 id="opt3" class="font-semibold ml-4"></h6> <select id="option3" class="select select-bordered w-full mx-2 max-w-xs" onchange="removeChosenType()"></select>
                    
                 </td>
                 <td class="column-2">
-                    <h6 id="opt4"></h6><select id="option4" onchange="removeChosenType()"></select>
+                    <h6 id="opt4" class="font-semibold ml-4"></h6><select id="option4" class="select select-bordered w-full mx-2 max-w-xs" onchange="removeChosenType()"></select>
                     
                 </td>
                 <td class="column-2">
-                    <input type="button" class="bg-blue-500 text-white active:bg-blue-600 font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150" onclick="compareData()" value="Compare" />
+                    <input type="button" class="ml-6 mt-6 btn btn-primary transition-all duration-150" onclick="compareData()" value="Compare" />
                 </td>
             </tr>
             <tr>
-                <td class="column-2">Start Date:
+                <td class="column-2 py-3 font-semibold ml-4">Start Date:
                     <br/>
-                    <input type="date" id="startDate" required></td>
-                <td class="column-2">End Date:
-                    <br/><input type="date" id="endDate" required></td>
+                    <input type="date" id="startDate" class="input input-bordered w-full mx-2 max-w-xs" required></td>
+                <td class="column-2 font-semibold ml-4">End Date:
+                    <br/><input type="date" id="endDate" class="input input-bordered w-full mx-2 max-w-xs" required></td>
             </tr>
         </table>
     </div>
