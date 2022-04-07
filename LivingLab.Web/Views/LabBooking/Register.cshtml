@@ -1,4 +1,4 @@
-@model LivingLab.Web.Models.ViewModels.Booking.BookFormModel
+@model LivingLab.Web.Models.ViewModels.Booking.BookingTableViewModel
 @* /// <remarks> *@
 @* /// Author: Team P1-5 *@
 @* /// </remarks> *@
@@ -15,9 +15,9 @@
             <form id="registerLab" method="post" asp-controller="LabBooking" asp-action="BookRegister">
             @* <div asp-validation-summary="ModelOnly" class="text-danger"></div> *@
             <div class="form-floating mt-6">
-                <label asp-for="LabId" class="font-semibold"></label> <br>
-                <input asp-for="LabId" class="input input-bordered w-full max-w-xs" aria-required="true"/>
-                <span asp-validation-for="LabId" class="text-danger"></span>
+                <label asp-for="LabNo" class="font-semibold"></label> <br>
+                <input asp-for="LabNo" class="input input-bordered w-full max-w-xs" aria-required="true"/>
+                <span asp-validation-for="LabNo" class="text-danger"></span>
             </div>
             <div class="form-floating mt-6">
                 <label asp-for="StartTime" class="font-semibold"> Start Time</label> <br>

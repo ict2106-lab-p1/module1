@@ -71,14 +71,14 @@ public class LabBookingService : ILabBookingService
     }
     /*Function to insert a new booking in database*/
 
-    public async Task<Booking?> CreateBook(BookFormModel Book, string userid)
+    public async Task<Booking?> CreateBook(BookingTableViewModel Book, string userid)
     {
         var bookWrapper = new Booking
         {
-            StartDateTime = Book.StartTime,
-            EndDateTime = Book.EndTime,
+            StartDateTime = DateTime.Parse(Book.StartTime),
+            EndDateTime = DateTime.Parse(Book.EndTime),
             Description = Book.Description,
-            LabId = Book.LabId,
+            LabId = (int) Book.LabNo,
             UserId = userid
 
             //create new Booking object which is same as the schema in database to store data of user input 

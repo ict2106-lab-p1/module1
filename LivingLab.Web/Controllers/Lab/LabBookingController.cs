@@ -39,7 +39,7 @@ public class LabBookingController : Controller
     [Authorize]
     public IActionResult Register(int labid = 0)
     {
-        BookFormModel newForm = new BookFormModel() { LabId = labid };
+        BookingTableViewModel newForm = new BookingTableViewModel() { LabNo = labid };
 
         return View("Register", newForm);
     }
@@ -87,7 +87,7 @@ public class LabBookingController : Controller
     /// <returns>Successful booking message</returns>
     [Authorize(Roles = "User,Admin,Labtech")]
     [HttpPost]
-    public async Task<IActionResult> BookRegister(BookFormModel labModel)
+    public async Task<IActionResult> BookRegister(BookingTableViewModel labModel)
     {
         var user = await _usermanager.GetUserAsync(User);
         await _labBookingService.CreateBook(labModel, user.Id);
