@@ -25,7 +25,7 @@ public class LabProfileDomainService : ILabProfileDomainService
     /// Get Lab Information of all labs
     /// </summary>
     /// <returns>List of Lab Information for all labs</returns>
-    public Task<List<Entities.Lab>> ViewLabs()
+    public Task<LabProfileCollection> ViewLabs()
     {
         return _labRepository.GetAllLabs();
     }

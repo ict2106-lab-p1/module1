@@ -54,8 +54,9 @@ public class LabBookingService : ILabBookingService
         var listOfLabs = await _labProfileDomainService.ViewLabs();
         //Store the lab data list in the variable listofbook .
         List<BookingDashboardViewModel> listOfLab = new List<BookingDashboardViewModel>();
+        var iterator = listOfLabs.CreateIterator();
         //Create list of BookingDashboardViewModel object to store the data
-        foreach (Lab lab in listOfLabs)
+        for (var lab = iterator.First(); iterator.HasNext(); lab = iterator.Next())
         {
             listOfLab.Add(new BookingDashboardViewModel()
             {

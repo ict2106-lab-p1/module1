@@ -1,3 +1,4 @@
+using LivingLab.Core.DomainServices.Lab;
 using LivingLab.Core.Repositories.Lab;
 using LivingLab.Infrastructure.Data;
 
@@ -20,10 +21,15 @@ public class LabProfileRepository : Repository<Core.Entities.Lab>, ILabProfileRe
     /// Get all labs details and store it as a list
     /// </summary>
     /// <returns>List of lab details</returns>
-    public async Task<List<Core.Entities.Lab>> GetAllLabs()
+    public async Task<LabProfileCollection> GetAllLabs()
     {
         var labGroup = await _context.LabProfile.ToListAsync();
-        return labGroup;
+        var collection = new LabProfileCollection();
+        foreach (var lab in labGroup)
+        {
+            collection.AddLabProfile(lab);
+        }
+        return collection;
     }
     public async Task<Core.Entities.Lab> GetLabDetails(int id)
     {

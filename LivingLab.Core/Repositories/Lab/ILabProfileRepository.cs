@@ -1,3 +1,5 @@
+using LivingLab.Core.DomainServices.Lab;
+
 namespace LivingLab.Core.Repositories.Lab;
 
 /// <summary>
@@ -9,7 +11,7 @@ namespace LivingLab.Core.Repositories.Lab;
 /// </remarks>
 public interface ILabProfileRepository : IRepository<Entities.Lab>
 {
-    Task<List<Entities.Lab>> GetAllLabs();
+    Task<LabProfileCollection> GetAllLabs();
     Task<Entities.Lab> GetLabDetails(int id);
     Task SetLabEnergyBenchmark(int labId, double energyBenchmark);
     Task<double> GetLabEnergyBenchmark(int labId);

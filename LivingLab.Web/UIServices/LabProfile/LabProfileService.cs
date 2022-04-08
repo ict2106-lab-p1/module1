@@ -48,9 +48,12 @@ public class LabProfileService : ILabProfileService
     {
         var listOfLabs = await _labProfileDomainService.ViewLabs();
         List<LabInformationModel> labAccounts = new List<LabInformationModel>();
-        foreach (var lab in listOfLabs)
+        var iterator = listOfLabs.CreateIterator();
+        
+        List<LabInformationModel> labInformationModels = new List<LabInformationModel>();
+        for (var lab = iterator.First(); iterator.HasNext(); lab = iterator.Next())
         {
-            labAccounts.Add(new LabInformationModel()
+            labInformationModels.Add(new LabInformationModel()
             {
                 LabId = lab.LabId,
                 LabInCharge = lab.LabInCharge,
